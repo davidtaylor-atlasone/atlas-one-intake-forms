@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atlas One Solutions — Accounting, Bookkeeping & Payroll Request</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#23304D;--peri:#788DE3;--off:#FAFAF8;--soft:#DBE4ED;--navy-tint:#eef1f6;
+    --ink:#23304D;--muted:#5b6577;--line:#cdd8e6;--err:#b23b4e;
+    --radius:14px;--shadow:0 18px 50px -20px rgba(35,48,77,.35);
+    font-family:'DM Sans',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:radial-gradient(1200px 500px at 50% -200px, rgba(120,141,227,.20), transparent 60%),
+      linear-gradient(180deg,var(--soft) 0%, var(--off) 340px, var(--off) 100%);
+    color:var(--ink);min-height:100vh;-webkit-font-smoothing:antialiased;padding:28px 16px 60px;}
+  .wrap{max-width:780px;margin:0 auto}
+  .brandbar{background:linear-gradient(135deg,var(--navy) 0%, #2c3c60 100%);color:#fff;
+    border-radius:var(--radius) var(--radius) 0 0;padding:30px 34px 26px;position:relative;overflow:hidden;box-shadow:var(--shadow);}
+  .brandbar::after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;
+    background:radial-gradient(circle,rgba(120,141,227,.55),transparent 70%);}
+  .wordmark{display:flex;align-items:center;gap:14px;position:relative;z-index:1}
+  .mark{width:46px;height:46px;border-radius:12px;background:var(--peri);display:grid;place-items:center;
+    font-weight:700;font-size:22px;color:var(--navy);box-shadow:0 6px 16px -6px rgba(0,0,0,.5)}
+  .wm-text .name{font-weight:700;font-size:22px;letter-spacing:.5px;line-height:1}
+  .wm-text .name span{color:var(--peri)}
+  .wm-text .tag{font-size:12.5px;color:#c9d2ea;letter-spacing:.6px;margin-top:4px;text-transform:uppercase}
+  .brandbar h1{position:relative;z-index:1;margin:22px 0 6px;font-size:23px;font-weight:600;letter-spacing:.2px}
+  .brandbar p.lead{position:relative;z-index:1;margin:0;color:#c9d2ea;font-size:14.5px;max-width:560px;line-height:1.5}
+  form#intake{background:#fff;border-radius:0 0 var(--radius) var(--radius);box-shadow:var(--shadow);padding:8px 34px 30px;}
+  .section{padding:26px 0 6px;border-top:1px solid var(--navy-tint)}
+  .section:first-of-type{border-top:none}
+  .section > h2{font-size:15px;font-weight:700;color:var(--navy);margin:0 0 3px;padding-left:12px;
+    border-left:4px solid var(--peri);letter-spacing:.2px}
+  .section > .sub{color:var(--muted);font-size:13px;margin:0 0 18px;padding-left:16px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px 18px;margin-top:6px}
+  .grid .full{grid-column:1 / -1}
+  .field{display:flex;flex-direction:column;gap:6px;min-width:0}
+  label{font-size:13.5px;font-weight:600;color:var(--navy)}
+  label .req{color:var(--peri);font-weight:700}
+  .hint{font-size:12px;color:var(--muted);margin-top:-2px}
+  input[type=text],input[type=email],input[type=tel],input[type=number],select,textarea{
+    font-family:inherit;font-size:15px;color:var(--ink);background:var(--off);border:1.5px solid var(--line);
+    border-radius:10px;padding:11px 13px;width:100%;transition:border-color .15s, box-shadow .15s;outline:none}
+  textarea{min-height:84px;resize:vertical;line-height:1.5}
+  input:focus,select:focus,textarea:focus{border-color:var(--peri);box-shadow:0 0 0 3px rgba(120,141,227,.18);background:#fff}
+  input::placeholder,textarea::placeholder{color:#9aa4b5}
+  select{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235b6577' stroke-width='2.2'><path d='M6 9l6 6 6-6'/></svg>");
+    background-repeat:no-repeat;background-position:right 12px center;padding-right:38px;cursor:pointer}
+  .chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:4px}
+  .chip{position:relative;display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border:1.5px solid var(--line);
+    border-radius:999px;background:var(--off);cursor:pointer;font-size:13.5px;color:var(--navy);user-select:none;transition:all .14s}
+  .chip:hover{border-color:var(--peri)}
+  .chip input{position:absolute;opacity:0;pointer-events:none}
+  .chip .dot{width:16px;height:16px;border-radius:5px;border:1.5px solid var(--line);display:grid;place-items:center;transition:all .14s;flex:none}
+  .chip input:checked ~ .dot{background:var(--peri);border-color:var(--peri)}
+  .chip input:checked ~ .dot::after{content:"";width:8px;height:5px;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(-45deg);margin-top:-2px}
+  .chip:has(input:checked){background:rgba(120,141,227,.12);border-color:var(--peri);font-weight:600}
+  .radios{display:flex;flex-wrap:wrap;gap:9px;margin-top:4px}
+  .radios label{display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border:1.5px solid var(--line);
+    border-radius:10px;background:var(--off);cursor:pointer;font-size:13.5px;color:var(--navy);font-weight:500}
+  .radios label:has(input:checked){background:rgba(120,141,227,.12);border-color:var(--peri);font-weight:600}
+  .radios input{accent-color:var(--peri)}
+  .reveal{display:none;grid-column:1 / -1}
+  .reveal.on{display:block;animation:fade .25s ease}
+  .revealcard{background:var(--navy-tint);border:1px solid var(--soft);border-radius:12px;padding:6px 16px 18px;margin-top:12px}
+  .revealcard > h3{font-size:13.5px;color:var(--navy);margin:16px 0 2px}
+  .flagnote{display:none;margin-top:12px;background:rgba(120,141,227,.10);border:1px solid var(--peri);
+    border-radius:10px;padding:12px 14px;font-size:13.5px;color:var(--navy)}
+  .flagnote.on{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+  .consent{display:flex;gap:11px;align-items:flex-start;font-size:12.5px;color:var(--muted);line-height:1.5;margin-top:14px}
+  .consent input{margin-top:2px;width:17px;height:17px;accent-color:var(--peri);flex:none}
+  .actions{margin-top:28px;display:flex;flex-direction:column;gap:12px;align-items:center}
+  button.submit{font-family:inherit;background:linear-gradient(135deg,var(--navy),#2c3c60);color:#fff;border:none;
+    border-radius:12px;padding:16px 40px;font-size:16px;font-weight:600;cursor:pointer;width:100%;max-width:420px;
+    box-shadow:0 12px 26px -12px rgba(35,48,77,.7);transition:transform .1s, box-shadow .15s}
+  button.submit:hover{transform:translateY(-1px)}
+  .err-msg{color:var(--err);font-size:13px;font-weight:600;display:none;text-align:center}
+  .err-msg.on{display:block}
+  .req-error{border-color:var(--err) !important;box-shadow:0 0 0 3px rgba(178,59,78,.14) !important}
+  .foot{text-align:center;color:var(--muted);font-size:12.5px;margin-top:26px;line-height:1.6}
+  .foot strong{color:var(--navy)}
+  #thanks{display:none}
+  #thanks.on{display:block;animation:fade .3s ease}
+  .thanks-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:48px 34px;text-align:center}
+  .thanks-card .check{width:72px;height:72px;border-radius:50%;background:var(--peri);margin:0 auto 22px;display:grid;place-items:center}
+  .thanks-card .check svg{width:38px;height:38px}
+  .thanks-card h2{color:var(--navy);font-size:24px;margin:0 0 10px}
+  .thanks-card p{color:var(--muted);font-size:15px;line-height:1.6;max-width:460px;margin:0 auto 8px}
+  .thanks-card .tag{margin-top:22px;color:var(--peri);font-weight:700;letter-spacing:.5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div id="formview">
+    <div class="brandbar">
+      <div class="wordmark">
+        <div class="mark">A1</div>
+        <div class="wm-text"><div class="name">ATLAS ONE <span>SOLUTIONS</span></div>
+          <div class="tag">One Call Solves Everything</div></div>
+      </div>
+      <h1>Accounting, Bookkeeping &amp; Payroll — Service Request</h1>
+      <p class="lead">Tell us a little about your business and what you need. It takes about 3 minutes, and it's all we need to scope your quote and route you to the right solution.</p>
+    </div>
+
+    <form id="intake" novalidate>
+
+      <!-- 1. CONTACT -->
+      <div class="section">
+        <h2>Your Contact Information</h2>
+        <div class="grid">
+          <div class="field"><label>First Name <span class="req">*</span></label><input type="text" name="first_name" required></div>
+          <div class="field"><label>Last Name <span class="req">*</span></label><input type="text" name="last_name" required></div>
+          <div class="field"><label>Phone <span class="req">*</span></label><input type="tel" name="phone" placeholder="(555) 000-0000" required></div>
+          <div class="field"><label>Email <span class="req">*</span></label><input type="email" name="email" placeholder="you@company.com" required></div>
+          <div class="field full"><label>Best way to reach you</label>
+            <select name="best_contact"><option value="">Select…</option><option>Email</option><option>Phone call</option><option>Text message</option></select>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. BUSINESS -->
+      <div class="section">
+        <h2>Your Business</h2>
+        <div class="grid">
+          <div class="field full"><label>Company Legal Name <span class="req">*</span></label><input type="text" name="company" required></div>
+          <div class="field"><label>Website</label><input type="text" name="website" placeholder="yourbusiness.com"></div>
+          <div class="field"><label>Entity Type</label>
+            <select name="entity_type" id="entity_type"><option value="">Select…</option>
+              <option>Sole Proprietorship</option><option>Partnership</option><option>LLC — Single Member</option>
+              <option>LLC — Multi Member</option><option>S-Corporation</option><option>C-Corporation</option>
+              <option>Nonprofit</option><option>Not yet formed</option><option>Not sure</option></select>
+          </div>
+          <div class="field"><label>Approximate annual revenue</label>
+            <select name="annual_revenue"><option value="">Select…</option>
+              <option>Under $250K</option><option>$250K–$500K</option><option>$500K–$1M</option>
+              <option>$1–5M</option><option>$5–10M</option><option>Over $10M</option>
+              <option>Prefer not to say</option><option>Not yet operating</option></select>
+          </div>
+          <div class="field"><label>Number of W-2 employees</label>
+            <select name="w2_count"><option value="">Select…</option>
+              <option>0</option><option>1-5</option><option>6-20</option><option>21-50</option><option>51-100</option><option>More than 100</option></select>
+          </div>
+          <div class="field"><label>State(s) you operate in</label><input type="text" name="states" placeholder="e.g. UT, ID, NV"></div>
+        </div>
+      </div>
+
+      <!-- 3. WHAT YOU NEED -->
+      <div class="section">
+        <h2>What You Need Help With</h2>
+        <p class="sub">Pick everything that applies — we'll tailor the quote and route you to the right solution.</p>
+        <div class="field">
+          <label>What do you need help with? <span class="req">*</span></label>
+          <div class="chips" id="help_needed"></div>
+        </div>
+
+        <!-- A. Bookkeeping detail -->
+        <div class="reveal" id="bk_wrap"><div class="revealcard">
+          <h3>About your books</h3>
+          <div class="grid">
+            <div class="field full"><label>Monthly transaction volume <span class="req">*</span></label>
+              <select name="txn_volume" data-cond-req="bk"><option value="">Select…</option>
+                <option>Fewer than 100</option><option>100 to 300</option><option>300 to 600</option>
+                <option>600 to 1,000</option><option>More than 1,000</option><option>Not sure — I'd like help estimating</option></select>
+              <span class="hint">A transaction is any single deposit, payment, charge, or transfer. Best estimate is fine.</span>
+            </div>
+            <div class="field"><label>Current accounting software</label>
+              <select name="software"><option value="">Select…</option>
+                <option>QuickBooks Online</option><option>QuickBooks Desktop</option><option>Xero</option>
+                <option>Wave</option><option>FreshBooks</option><option>Spreadsheets only</option><option>None</option><option>Other</option></select>
+            </div>
+            <div class="field"><label>Are your books current?</label>
+              <div class="radios">
+                <label><input type="radio" name="books_current" value="Yes, fully current">Fully current</label>
+                <label><input type="radio" name="books_current" value="No, catch-up needed">Catch-up needed</label>
+                <label><input type="radio" name="books_current" value="Not sure">Not sure</label>
+              </div>
+            </div>
+            <div class="field full"><label>How would you like to give us access for an accurate quote?</label>
+              <div class="radios">
+                <label><input type="radio" name="access_method" value="Invite to QBO">Add us to your QuickBooks Online</label>
+                <label><input type="radio" name="access_method" value="Upload statements">Upload last 3 months of statements</label>
+                <label><input type="radio" name="access_method" value="Use estimate">Go with my volume estimate</label>
+              </div>
+            </div>
+          </div>
+          <div class="flagnote" id="qbo_note">Great — after you submit, add <strong>bookkeeping@atlasonesolutions.com</strong> as an accountant user in QuickBooks Online, and we'll build your quote from your real numbers.</div>
+          <div class="flagnote" id="upload_note">Perfect — you'll get an email with a secure link to upload your last 3 months of bank &amp; card statements.</div>
+        </div></div>
+
+        <!-- B. Payroll detail -->
+        <div class="reveal" id="pr_wrap"><div class="revealcard">
+          <h3>Payroll</h3>
+          <div class="grid">
+            <div class="field"><label>Pay frequency</label>
+              <select name="pay_frequency"><option value="">Select…</option>
+                <option>Weekly</option><option>Bi-weekly</option><option>Semi-monthly</option><option>Monthly</option><option>Not currently running payroll</option></select>
+            </div>
+            <div class="field"><label>States your employees physically work in</label><input type="text" name="payroll_states" placeholder="e.g. UT, ID"></div>
+          </div>
+        </div></div>
+
+        <!-- C. Formation detail -->
+        <div class="reveal" id="form_wrap"><div class="revealcard">
+          <h3>Formation &amp; tax registrations</h3>
+          <div class="grid">
+            <div class="field"><label>Have you formed your entity yet?</label>
+              <div class="radios">
+                <label><input type="radio" name="entity_formed" value="Yes">Yes</label>
+                <label><input type="radio" name="entity_formed" value="No, not yet">Not yet</label>
+                <label><input type="radio" name="entity_formed" value="In progress">In progress</label>
+              </div>
+            </div>
+            <div class="field"><label>Which states need tax accounts set up?</label><input type="text" name="tax_account_states" placeholder="e.g. UT, ID"></div>
+          </div>
+        </div></div>
+
+        <!-- D. Tax advisory -->
+        <div class="reveal" id="tax_wrap"><div class="revealcard">
+          <h3>Tax prep / advisory</h3>
+          <div class="field"><label>When would you like the introduction?</label>
+            <select name="tax_intro_when"><option value="">Select…</option>
+              <option>ASAP</option><option>Within a month</option><option>Before year end</option><option>Before next tax deadline</option><option>No rush</option></select>
+          </div>
+        </div></div>
+
+        <div class="grid" style="margin-top:20px">
+          <div class="field full"><label>When would you like to begin? <span class="req">*</span></label>
+            <select name="start_when" required><option value="">Select…</option>
+              <option>Immediately</option><option>Within 30 days</option><option>Next quarter</option>
+              <option>Start of next fiscal year</option><option>Just exploring</option></select>
+          </div>
+          <div class="field full"><label>Anything else we should know?</label><textarea name="notes" placeholder="Goals, pain points, deadlines, anything helpful"></textarea></div>
+        </div>
+      </div>
+
+      <!-- 4. CONSENT -->
+      <div class="section">
+        <h2>Consent</h2>
+        <label class="consent">
+          <input type="checkbox" name="consent" id="consent">
+          <span>I authorize <strong>Atlas One Solutions</strong> to contact me regarding this request by phone, text, or email. Message &amp; data rates may apply; reply STOP to opt out. <span class="req">*</span></span>
+        </label>
+      </div>
+
+      <div class="actions">
+        <div class="err-msg" id="errmsg">Please complete the required fields marked with *.</div>
+        <button type="submit" class="submit">Submit My Request →</button>
+        <div class="hint" style="text-align:center">Your information is used only to prepare your quote. We never sell your data.</div>
+      </div>
+    </form>
+
+    <div class="foot"><strong>Atlas One Solutions</strong> · One Call Solves Everything<br>
+      Bookkeeping, Payroll, Tax &amp; Formation for growing businesses.</div>
+  </div>
+
+  <div id="thanks">
+    <div class="thanks-card">
+      <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+      <h2>Thank you — request received.</h2>
+      <p>We'll review what you need and follow up shortly with next steps and your quote.</p>
+      <p id="thanks_extra"></p>
+      <div class="tag">ONE CALL SOLVES EVERYTHING</div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var HELP=["Monthly bookkeeping","Catch-up / clean-up of prior periods","Accounts Payable & Receivable",
+            "Payroll (W-2 / 1099)","Sales tax filings","Business formation & tax registrations",
+            "Tax prep / advisory","QuickBooks / software setup","Not sure — help me figure it out"];
+  var c=document.getElementById("help_needed");
+  HELP.forEach(function(v){
+    var l=document.createElement("label");l.className="chip";
+    var i=document.createElement("input");i.type="checkbox";i.name="help_needed";i.value=v;
+    var d=document.createElement("span");d.className="dot";var t=document.createElement("span");t.textContent=v;
+    l.appendChild(i);l.appendChild(d);l.appendChild(t);c.appendChild(l);
+    i.addEventListener("change",recompute);
+  });
+  document.getElementById("entity_type").addEventListener("change",recompute);
+
+  function checkedVals(name){return Array.prototype.map.call(document.querySelectorAll('input[name="'+name+'"]:checked'),function(i){return i.value;});}
+  function on(id,show){var e=document.getElementById(id);if(e)e.classList.toggle("on",!!show);}
+
+  function recompute(){
+    var h=checkedVals("help_needed"), ent=document.getElementById("entity_type").value;
+    var bk = h.indexOf("Monthly bookkeeping")>-1 || h.indexOf("Catch-up / clean-up of prior periods")>-1 || h.indexOf("Accounts Payable & Receivable")>-1;
+    var pr = h.indexOf("Payroll (W-2 / 1099)")>-1;
+    var fm = h.indexOf("Business formation & tax registrations")>-1 || ent==="Not yet formed";
+    var tx = h.indexOf("Tax prep / advisory")>-1;
+    on("bk_wrap",bk); on("pr_wrap",pr); on("form_wrap",fm); on("tax_wrap",tx);
+  }
+  // access-method notes
+  document.querySelectorAll('input[name="access_method"]').forEach(function(r){
+    r.addEventListener("change",function(){
+      on("qbo_note", r.value==="Invite to QBO");
+      on("upload_note", r.value==="Upload statements");
+    });
+  });
+
+  var WEBHOOK="https://services.leadconnectorhq.com/hooks/AzTPxnK2vSUj19jYoDmR/webhook-trigger/d96dfd5e-3f02-4472-baa4-d1a691f1e51d";
+  var form=document.getElementById("intake");
+  form.addEventListener("submit",function(e){
+    e.preventDefault();
+    var errEl=document.getElementById("errmsg");errEl.classList.remove("on");
+    var missing=false;
+    ["first_name","last_name","phone","email","company"].forEach(function(n){
+      var el=form.querySelector('[name="'+n+'"]');if(el){el.classList.remove("req-error");if(!el.value.trim()){el.classList.add("req-error");missing=true;}}
+    });
+    var help=checkedVals("help_needed"); if(!help.length) missing=true;
+    var sw=form.querySelector('[name="start_when"]'); sw.classList.remove("req-error"); if(!sw.value){sw.classList.add("req-error");missing=true;}
+    if(!document.getElementById("consent").checked) missing=true;
+    // conditional required: transaction volume when bookkeeping block shown
+    if(document.getElementById("bk_wrap").classList.contains("on")){
+      var tv=form.querySelector('[name="txn_volume"]');tv.classList.remove("req-error");if(!tv.value){tv.classList.add("req-error");missing=true;}
+    }
+    if(missing){errEl.classList.add("on");errEl.scrollIntoView({behavior:"smooth",block:"center"});return;}
+
+    var fd=new FormData(form),obj={};fd.forEach(function(v,k){obj[k]=v;});
+    obj.help_needed=help.join(", ");
+    obj.referral_flag = help.indexOf("Tax prep / advisory")>-1 ? "YES — Tax prep/advisory: intro Kris (Hoffman) / Kayden (Apex)" : "no";
+    var lines=[
+      "BOOKKEEPING / ACCOUNTING INTAKE — "+(obj.company||""),
+      "Contact: "+obj.first_name+" "+obj.last_name+" | "+obj.phone+" | "+obj.email+" | prefers "+(obj.best_contact||"—"),
+      "Business: "+(obj.entity_type||"—")+" | rev "+(obj.annual_revenue||"—")+" | W-2 "+(obj.w2_count||"—")+" | states "+(obj.states||"—")+" | web "+(obj.website||"—"),
+      "NEEDS: "+obj.help_needed,
+      "Books: volume "+(obj.txn_volume||"—")+" | software "+(obj.software||"—")+" | current? "+(obj.books_current||"—")+" | access "+(obj.access_method||"—"),
+      "Payroll: freq "+(obj.pay_frequency||"—")+" | states "+(obj.payroll_states||"—"),
+      "Formation: formed? "+(obj.entity_formed||"—")+" | tax-acct states "+(obj.tax_account_states||"—"),
+      "Tax advisory intro: "+(obj.tax_intro_when||"—"),
+      "Start: "+(obj.start_when||"—"),
+      "Notes: "+(obj.notes||"—"),
+      ">> REFERRAL: "+obj.referral_flag
+    ];
+    var payload={first_name:obj.first_name,last_name:obj.last_name,phone:obj.phone,email:obj.email,company:obj.company,
+      atlas_tool:"Bookkeeping / Accounting Intake Form",atlas_headline:"Bookkeeping intake: "+obj.company,
+      atlas_results_text:lines.join("\n"),atlas_source_url:location.href,atlas_generated_at:new Date().toISOString()};
+    for(var k in obj){if(obj.hasOwnProperty(k)&&!(k in payload))payload[k]=obj[k];}
+    try{fetch(WEBHOOK,{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});}catch(err){}
+
+    var extra=document.getElementById("thanks_extra");
+    if(obj.access_method==="Invite to QBO"){extra.innerHTML="Next step: add <strong>bookkeeping@atlasonesolutions.com</strong> as an accountant user in QuickBooks Online so we can quote from your real numbers.";}
+    else if(obj.access_method==="Upload statements"){extra.textContent="Watch your inbox — you'll get a secure link to upload your last 3 months of statements.";}
+    document.getElementById("formview").style.display="none";
+    document.getElementById("thanks").classList.add("on");
+    window.scrollTo({top:0,behavior:"smooth"});
+  });
+})();
+</script>
+</body>
+</html>
