@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atlas One Solutions — Quote & Onboarding Intake</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#23304D;
+    --peri:#788DE3;
+    --off:#FAFAF8;
+    --soft:#DBE4ED;
+    --navy-tint:#eef1f6;
+    --ink:#23304D;
+    --muted:#5b6577;
+    --line:#cdd8e6;
+    --err:#b23b4e;
+    --radius:14px;
+    --shadow:0 18px 50px -20px rgba(35,48,77,.35);
+    font-family:'DM Sans',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:
+      radial-gradient(1200px 500px at 50% -200px, rgba(120,141,227,.20), transparent 60%),
+      linear-gradient(180deg,var(--soft) 0%, var(--off) 340px, var(--off) 100%);
+    color:var(--ink);
+    min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+    padding:28px 16px 60px;
+  }
+  .wrap{max-width:780px;margin:0 auto}
+
+  /* ---- Header / brand ---- */
+  .brandbar{
+    background:linear-gradient(135deg,var(--navy) 0%, #2c3c60 100%);
+    color:#fff;border-radius:var(--radius) var(--radius) 0 0;
+    padding:30px 34px 26px;position:relative;overflow:hidden;
+    box-shadow:var(--shadow);
+  }
+  .brandbar::after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;
+    background:radial-gradient(circle,rgba(120,141,227,.55),transparent 70%);}
+  /* LOGO: to use your real logo, replace the .wordmark block below with:
+     <img src="https://YOURDOMAIN/atlas-one-logo.png" alt="Atlas One Solutions" style="height:52px"> */
+  .wordmark{display:flex;align-items:center;gap:14px;position:relative;z-index:1}
+  .mark{width:46px;height:46px;border-radius:12px;background:var(--peri);
+    display:grid;place-items:center;font-weight:700;font-size:22px;color:var(--navy);
+    box-shadow:0 6px 16px -6px rgba(0,0,0,.5)}
+  .wm-text .name{font-weight:700;font-size:22px;letter-spacing:.5px;line-height:1}
+  .wm-text .name span{color:var(--peri)}
+  .wm-text .tag{font-size:12.5px;color:#c9d2ea;letter-spacing:.6px;margin-top:4px;text-transform:uppercase}
+  .brandbar h1{position:relative;z-index:1;margin:22px 0 6px;font-size:23px;font-weight:600;letter-spacing:.2px}
+  .brandbar p.lead{position:relative;z-index:1;margin:0;color:#c9d2ea;font-size:14.5px;max-width:560px;line-height:1.5}
+
+  /* ---- Card ---- */
+  form#intake, .card{
+    background:#fff;border-radius:0 0 var(--radius) var(--radius);
+    box-shadow:var(--shadow);padding:8px 34px 30px;
+  }
+  .section{padding:26px 0 6px;border-top:1px solid var(--navy-tint)}
+  .section:first-of-type{border-top:none}
+  .section > h2{
+    font-size:15px;font-weight:700;color:var(--navy);margin:0 0 3px;
+    padding-left:12px;border-left:4px solid var(--peri);letter-spacing:.2px;
+    display:flex;align-items:center;gap:10px}
+  .section > .sub{color:var(--muted);font-size:13px;margin:0 0 18px;padding-left:16px}
+
+  /* ---- Grid & fields ---- */
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px 18px;margin-top:6px}
+  .grid .full{grid-column:1 / -1}
+  .grid .third{grid-column:span 1}
+  @media(min-width:620px){.grid.thirds{grid-template-columns:1fr 1fr 1fr}}
+  .field{display:flex;flex-direction:column;gap:6px;min-width:0}
+  label{font-size:13.5px;font-weight:600;color:var(--navy)}
+  label .req{color:var(--peri);font-weight:700}
+  .hint{font-size:12px;color:var(--muted);margin-top:-2px}
+  input[type=text],input[type=email],input[type=tel],input[type=number],select,textarea{
+    font-family:inherit;font-size:15px;color:var(--ink);
+    background:var(--off);border:1.5px solid var(--line);border-radius:10px;
+    padding:11px 13px;width:100%;transition:border-color .15s, box-shadow .15s;outline:none}
+  textarea{min-height:84px;resize:vertical;line-height:1.5}
+  input:focus,select:focus,textarea:focus{border-color:var(--peri);box-shadow:0 0 0 3px rgba(120,141,227,.18);background:#fff}
+  input::placeholder,textarea::placeholder{color:#9aa4b5}
+  select{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235b6577' stroke-width='2.2'><path d='M6 9l6 6 6-6'/></svg>");
+    background-repeat:no-repeat;background-position:right 12px center;padding-right:38px;cursor:pointer}
+
+  /* ---- Chips (multi-select) ---- */
+  .chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:4px}
+  .chip{position:relative;display:inline-flex;align-items:center;gap:8px;
+    padding:9px 14px;border:1.5px solid var(--line);border-radius:999px;
+    background:var(--off);cursor:pointer;font-size:13.5px;color:var(--navy);
+    user-select:none;transition:all .14s}
+  .chip:hover{border-color:var(--peri)}
+  .chip input{position:absolute;opacity:0;pointer-events:none}
+  .chip .dot{width:16px;height:16px;border-radius:5px;border:1.5px solid var(--line);
+    display:grid;place-items:center;transition:all .14s;flex:none}
+  .chip input:checked ~ .dot{background:var(--peri);border-color:var(--peri)}
+  .chip input:checked ~ .dot::after{content:"";width:8px;height:5px;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(-45deg);margin-top:-2px}
+  .chip:has(input:checked){background:rgba(120,141,227,.12);border-color:var(--peri);font-weight:600}
+
+  /* ---- Yes/No segmented ---- */
+  .seg{display:inline-flex;border:1.5px solid var(--line);border-radius:10px;overflow:hidden;background:var(--off);width:max-content}
+  .seg label{cursor:pointer;padding:9px 22px;font-size:14px;font-weight:600;color:var(--muted);position:relative}
+  .seg label:first-child{border-right:1.5px solid var(--line)}
+  .seg input{position:absolute;opacity:0}
+  .seg label:has(input:checked){background:var(--navy);color:#fff}
+
+  /* ---- Conditional reveal ---- */
+  .reveal{display:none;grid-column:1 / -1}
+  .reveal.on{display:block;animation:fade .25s ease}
+  .reveal .grid{margin-top:14px}
+  .revealcard{background:var(--navy-tint);border:1px solid var(--soft);border-radius:12px;padding:16px 16px 18px;margin-top:12px}
+  .flagnote{display:none;grid-column:1/-1;margin-top:12px;background:rgba(120,141,227,.10);
+    border:1px solid var(--peri);border-radius:10px;padding:12px 14px;font-size:13.5px;color:var(--navy)}
+  .flagnote.on{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+
+  /* ---- Consent + signature ---- */
+  .consent{display:flex;gap:11px;align-items:flex-start;font-size:12.5px;color:var(--muted);line-height:1.5;margin-top:14px}
+  .consent input{margin-top:2px;width:17px;height:17px;accent-color:var(--peri);flex:none}
+  .sigwrap{margin-top:8px}
+  .sigpad{border:1.5px dashed var(--line);border-radius:12px;background:var(--off);width:100%;height:150px;touch-action:none;display:block;cursor:crosshair}
+  .sigrow{display:flex;justify-content:space-between;align-items:center;margin-top:6px}
+  .sigclear{background:none;border:none;color:var(--peri);font-weight:600;font-size:13px;cursor:pointer;font-family:inherit}
+
+  /* ---- Submit ---- */
+  .actions{margin-top:28px;display:flex;flex-direction:column;gap:12px;align-items:center}
+  button.submit{font-family:inherit;background:linear-gradient(135deg,var(--navy),#2c3c60);color:#fff;
+    border:none;border-radius:12px;padding:16px 40px;font-size:16px;font-weight:600;cursor:pointer;
+    width:100%;max-width:420px;box-shadow:0 12px 26px -12px rgba(35,48,77,.7);transition:transform .1s, box-shadow .15s}
+  button.submit:hover{transform:translateY(-1px);box-shadow:0 16px 30px -12px rgba(35,48,77,.8)}
+  button.submit:active{transform:translateY(0)}
+  .err-msg{color:var(--err);font-size:13px;font-weight:600;display:none;text-align:center}
+  .err-msg.on{display:block}
+  .foot{text-align:center;color:var(--muted);font-size:12.5px;margin-top:26px;line-height:1.6}
+  .foot strong{color:var(--navy)}
+
+  /* ---- Thank you ---- */
+  #thanks{display:none}
+  #thanks.on{display:block;animation:fade .3s ease}
+  .thanks-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:48px 34px;text-align:center}
+  .thanks-card .check{width:72px;height:72px;border-radius:50%;background:var(--peri);margin:0 auto 22px;display:grid;place-items:center}
+  .thanks-card .check svg{width:38px;height:38px}
+  .thanks-card h2{color:var(--navy);font-size:24px;margin:0 0 10px}
+  .thanks-card p{color:var(--muted);font-size:15px;line-height:1.6;max-width:460px;margin:0 auto 8px}
+  .thanks-card .tag{margin-top:22px;color:var(--peri);font-weight:700;letter-spacing:.5px}
+  .req-error{border-color:var(--err) !important;box-shadow:0 0 0 3px rgba(178,59,78,.14) !important}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ============ FORM ============ -->
+  <div id="formview">
+    <div class="brandbar">
+      <div class="wordmark">
+        <div class="mark">A1</div>
+        <div class="wm-text">
+          <div class="name">ATLAS ONE <span>SOLUTIONS</span></div>
+          <div class="tag">One Call Solves Everything</div>
+        </div>
+      </div>
+      <h1>Quote &amp; Onboarding Intake</h1>
+      <p class="lead">A few quick details let us build your quote accurately and set you up cleanly the first time — no back-and-forth. Takes about 5 minutes.</p>
+    </div>
+
+    <form id="intake" novalidate>
+
+      <!-- 1. CONTACT -->
+      <div class="section">
+        <h2>Your Contact Information</h2>
+        <div class="grid">
+          <div class="field"><label>First Name <span class="req">*</span></label><input type="text" name="first_name" required></div>
+          <div class="field"><label>Last Name <span class="req">*</span></label><input type="text" name="last_name" required></div>
+          <div class="field"><label>Phone <span class="req">*</span></label><input type="tel" name="phone" placeholder="(555) 000-0000" required></div>
+          <div class="field"><label>Email <span class="req">*</span></label><input type="email" name="email" placeholder="you@company.com" required></div>
+          <div class="field full"><label>Best time / way to reach you</label><input type="text" name="best_time" placeholder="e.g. Weekday mornings, prefer a call"></div>
+        </div>
+      </div>
+
+      <!-- 2. BUSINESS -->
+      <div class="section">
+        <h2>Your Business</h2>
+        <div class="grid">
+          <div class="field full"><label>Legal Business Name <span class="req">*</span></label><input type="text" name="legal_business_name" required></div>
+          <div class="field"><label>DBA / Trade Name</label><input type="text" name="dba"></div>
+          <div class="field">
+            <label>Entity Type</label>
+            <select name="entity_type" id="entity_type">
+              <option value="">Select…</option>
+              <option>Sole Proprietor</option><option>LLC</option><option>S-Corp</option>
+              <option>C-Corp</option><option>Partnership</option><option>Non-Profit</option><option>Other</option>
+            </select>
+          </div>
+          <div class="reveal" id="entity_other_wrap"><div class="field full"><label>Please specify entity type</label><input type="text" name="entity_type_other"></div></div>
+          <div class="field"><label>FEIN / EIN</label><input type="text" name="fein" placeholder="00-0000000"></div>
+          <div class="field"><label>State(s) you operate in</label><input type="text" name="states" placeholder="e.g. UT, ID, NV"></div>
+          <div class="field full"><label>Industry / brief description of operations</label><textarea name="description" placeholder="What does the business do?"></textarea></div>
+        </div>
+      </div>
+
+      <!-- 3. WORKFORCE & PAYROLL -->
+      <div class="section">
+        <h2>Workforce &amp; Payroll</h2>
+        <div class="grid thirds">
+          <div class="field"><label># Full-time W-2 <span class="req">*</span></label><input type="number" min="0" name="ft_w2" required></div>
+          <div class="field"><label># Part-time W-2</label><input type="number" min="0" name="pt_w2"></div>
+          <div class="field"><label># 1099 Contractors</label><input type="number" min="0" name="contractors_1099"></div>
+        </div>
+        <div class="grid" style="margin-top:16px">
+          <div class="field"><label>Estimated Annual Gross Payroll ($)</label><input type="text" name="gross_payroll" placeholder="$"></div>
+          <div class="field"><label>Estimated Annual Gross Revenue ($)</label><input type="text" name="gross_revenue" placeholder="$"></div>
+          <div class="field"><label>Current Payroll Provider</label><input type="text" name="current_payroll_provider" placeholder="e.g. ADP, Gusto, none"></div>
+          <div class="field">
+            <label>Pay Period Frequency</label>
+            <select name="pay_frequency"><option value="">Select…</option><option>Weekly</option><option>Bi-weekly</option><option>Semi-monthly</option><option>Monthly</option></select>
+          </div>
+          <div class="field full">
+            <label>Are you on a PEO currently? <span class="req">*</span></label>
+            <div class="seg" data-cond="peo">
+              <label><input type="radio" name="on_peo" value="Yes" required>Yes</label>
+              <label><input type="radio" name="on_peo" value="No">No</label>
+            </div>
+          </div>
+          <div class="reveal" id="peo_wrap">
+            <div class="revealcard"><div class="grid">
+              <div class="field"><label>Current PEO provider</label><input type="text" name="current_peo"></div>
+              <div class="field"><label>What's prompting a change?</label><input type="text" name="peo_change_reason"></div>
+            </div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. COVERAGE & SERVICES -->
+      <div class="section">
+        <h2>What You'd Like Quoted</h2>
+        <p class="sub">Pick everything you want us to include — mix and match freely.</p>
+        <div class="field">
+          <label>Core services for your quote <span class="req">*</span></label>
+          <div class="chips" id="core_services">
+            <!-- filled by JS -->
+          </div>
+        </div>
+
+        <div class="grid" style="margin-top:20px">
+          <div class="field full">
+            <label>Do you currently have Workers' Comp coverage? <span class="req">*</span></label>
+            <div class="seg" data-cond="wc">
+              <label><input type="radio" name="wc_coverage" value="Yes" required>Yes</label>
+              <label><input type="radio" name="wc_coverage" value="No">No</label>
+            </div>
+          </div>
+          <div class="reveal" id="wc_yes_wrap"><div class="revealcard"><div class="grid">
+            <div class="field"><label>WC carrier</label><input type="text" name="wc_carrier"></div>
+            <div class="field"><label>WC policy expiration</label><input type="text" name="wc_expiration" placeholder="MM/YYYY"></div>
+          </div></div></div>
+          <div class="flagnote" id="wc_no_note">No problem — we can shop workers' comp for you as part of the quote.</div>
+
+          <div class="field full" style="margin-top:6px">
+            <label>Review or quote employee benefits (health)?</label>
+            <div class="seg" data-cond="ben">
+              <label><input type="radio" name="benefits_review" value="Yes">Yes</label>
+              <label><input type="radio" name="benefits_review" value="No">No</label>
+            </div>
+          </div>
+          <div class="reveal" id="ben_wrap"><div class="revealcard"><div class="grid">
+            <div class="field"><label>Current health carrier</label><input type="text" name="current_health_carrier" placeholder="or 'none'"></div>
+            <div class="field"><label># enrolled on benefits</label><input type="number" min="0" name="benefits_enrolled"></div>
+            <div class="field"><label>Renewal month</label><input type="text" name="benefits_renewal" placeholder="e.g. January"></div>
+          </div></div></div>
+
+          <div class="field full" style="margin-top:6px">
+            <label>Review or quote other business insurance?</label>
+            <div class="seg" data-cond="ins">
+              <label><input type="radio" name="insurance_review" value="Yes">Yes</label>
+              <label><input type="radio" name="insurance_review" value="No">No</label>
+            </div>
+          </div>
+          <div class="reveal" id="ins_wrap"><div class="revealcard">
+            <label style="font-size:13.5px;font-weight:600;color:var(--navy)">Which lines?</label>
+            <div class="chips" id="ins_lines" style="margin-top:8px"></div>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- 5. GAP FINDER -->
+      <div class="section">
+        <h2>What's Already in Place</h2>
+        <p class="sub">Check everything your business currently has. This shows us where you're covered — and where there may be gaps worth a conversation.</p>
+        <div class="chips" id="gap_finder"></div>
+      </div>
+
+      <!-- 6. CONSENT + SIGNATURE -->
+      <div class="section">
+        <h2>Consent &amp; Signature</h2>
+        <label class="consent">
+          <input type="checkbox" name="sms_service">
+          <span>By checking this box, I consent to receive non-marketing text messages from <strong>Atlas One Solutions</strong> about my quote, onboarding, and account. Message frequency varies; message &amp; data rates may apply. Text HELP for help, reply STOP to opt out.</span>
+        </label>
+        <label class="consent">
+          <input type="checkbox" name="sms_marketing">
+          <span>By checking this box, I consent to receive marketing messages — offers, updates and news — from <strong>Atlas One Solutions</strong> at the number provided. Frequency may vary; message &amp; data rates may apply. Text HELP for help, reply STOP to opt out.</span>
+        </label>
+
+        <div class="sigwrap">
+          <label style="font-size:13.5px;font-weight:600;color:var(--navy)">Signature</label>
+          <canvas class="sigpad" id="sigpad"></canvas>
+          <div class="sigrow">
+            <span class="hint">Sign above with your mouse or finger</span>
+            <button type="button" class="sigclear" id="sigclear">Clear</button>
+          </div>
+          <div class="field" style="margin-top:10px"><label>Type your full name to confirm</label><input type="text" name="signature_name" placeholder="Full name"></div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <div class="err-msg" id="errmsg">Please complete the required fields marked with *.</div>
+        <button type="submit" class="submit">Submit &amp; Start My Quote →</button>
+        <div class="hint" style="text-align:center">Your information is used only to prepare your quote and setup. We never sell your data.</div>
+      </div>
+    </form>
+
+    <div class="foot">
+      <strong>Atlas One Solutions</strong> · One Call Solves Everything<br>
+      Vendor-neutral PEO, HR, Payroll, Benefits &amp; Bookkeeping for growing businesses.
+    </div>
+  </div>
+
+  <!-- ============ THANK YOU ============ -->
+  <div id="thanks">
+    <div class="thanks-card">
+      <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+      <h2>Thank you — we've got it.</h2>
+      <p>Your intake is in. David will review it and get real numbers in front of you shortly.</p>
+      <p>If we're quoting benefits or reviewing coverage, watch your inbox — you'll get a secure link to upload your payroll report and any current policies.</p>
+      <div class="tag">ONE CALL SOLVES EVERYTHING</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- Multi-select chip groups ---------- */
+  var CORE = ["PEO / Co-employment","Payroll","HR Support","Employee Benefits (Health)","Workers' Comp","Business Insurance","Bookkeeping / Accounting","Retirement (401k)","Handbook / Compliance","Safety / OSHA"];
+  var INS  = ["General Liability","Property","Commercial Auto","Cyber","EPLI","D&O","Umbrella","Professional / E&O"];
+  var GAPS = ["Employee Handbook","Written Safety / OSHA Program","Workers' Comp Coverage","Health Benefits","Retirement Plan (401k)","HR Software / HRIS","Written HIPAA Safeguards","Business Liability Insurance","Dedicated Payroll Provider","PEO","Bookkeeping / Accounting Support","Compliance Calendar"];
+
+  function chip(group, val){
+    var l=document.createElement("label"); l.className="chip";
+    var i=document.createElement("input"); i.type="checkbox"; i.name=group; i.value=val;
+    var d=document.createElement("span"); d.className="dot";
+    var t=document.createElement("span"); t.textContent=val;
+    l.appendChild(i); l.appendChild(d); l.appendChild(t); return l;
+  }
+  function fill(id,group,arr){var c=document.getElementById(id);arr.forEach(function(v){c.appendChild(chip(group,v));});}
+  fill("core_services","core_services",CORE);
+  fill("ins_lines","insurance_lines",INS);
+  fill("gap_finder","have_in_place",GAPS);
+
+  /* ---------- Conditional reveals ---------- */
+  function on(el,show){ if(el) el.classList.toggle("on", !!show); }
+  document.getElementById("entity_type").addEventListener("change",function(e){
+    on(document.getElementById("entity_other_wrap"), e.target.value==="Other");
+  });
+  function bindSeg(name, fn){
+    document.querySelectorAll('input[name="'+name+'"]').forEach(function(r){
+      r.addEventListener("change",function(){ fn(r.value); });
+    });
+  }
+  bindSeg("on_peo", function(v){ on(document.getElementById("peo_wrap"), v==="Yes"); });
+  bindSeg("wc_coverage", function(v){
+    on(document.getElementById("wc_yes_wrap"), v==="Yes");
+    on(document.getElementById("wc_no_note"), v==="No");
+  });
+  bindSeg("benefits_review", function(v){ on(document.getElementById("ben_wrap"), v==="Yes"); });
+  bindSeg("insurance_review", function(v){ on(document.getElementById("ins_wrap"), v==="Yes"); });
+
+  /* ---------- Signature pad ---------- */
+  var canvas=document.getElementById("sigpad"), ctx=canvas.getContext("2d"), drawing=false, signed=false;
+  function sizeCanvas(){var r=canvas.getBoundingClientRect();canvas.width=r.width*2;canvas.height=r.height*2;ctx.scale(2,2);ctx.lineWidth=2;ctx.lineCap="round";ctx.strokeStyle="#23304D";}
+  setTimeout(sizeCanvas,60); window.addEventListener("resize",function(){var d=canvas.toDataURL();sizeCanvas();});
+  function pos(e){var r=canvas.getBoundingClientRect();var p=e.touches?e.touches[0]:e;return{x:p.clientX-r.left,y:p.clientY-r.top};}
+  function start(e){drawing=true;signed=true;var p=pos(e);ctx.beginPath();ctx.moveTo(p.x,p.y);e.preventDefault();}
+  function move(e){if(!drawing)return;var p=pos(e);ctx.lineTo(p.x,p.y);ctx.stroke();e.preventDefault();}
+  function end(){drawing=false;}
+  canvas.addEventListener("mousedown",start);canvas.addEventListener("mousemove",move);window.addEventListener("mouseup",end);
+  canvas.addEventListener("touchstart",start);canvas.addEventListener("touchmove",move);canvas.addEventListener("touchend",end);
+  document.getElementById("sigclear").addEventListener("click",function(){ctx.clearRect(0,0,canvas.width,canvas.height);signed=false;});
+
+  /* ---------- Submit ---------- */
+  var WEBHOOK="https://services.leadconnectorhq.com/hooks/AzTPxnK2vSUj19jYoDmR/webhook-trigger/d96dfd5e-3f02-4472-baa4-d1a691f1e51d";
+  var form=document.getElementById("intake");
+
+  function checkedVals(name){return Array.prototype.map.call(document.querySelectorAll('input[name="'+name+'"]:checked'),function(i){return i.value;});}
+
+  form.addEventListener("submit",function(e){
+    e.preventDefault();
+    var errEl=document.getElementById("errmsg"); errEl.classList.remove("on");
+    var missing=false;
+    ["first_name","last_name","phone","email","legal_business_name","ft_w2"].forEach(function(n){
+      var el=form.querySelector('[name="'+n+'"]'); if(el){el.classList.remove("req-error"); if(!el.value.trim()){el.classList.add("req-error");missing=true;}}
+    });
+    if(!form.querySelector('[name="on_peo"]:checked')) missing=true;
+    if(!form.querySelector('[name="wc_coverage"]:checked')) missing=true;
+    if(!checkedVals("core_services").length) missing=true;
+    if(missing){errEl.classList.add("on");errEl.scrollIntoView({behavior:"smooth",block:"center"});return;}
+
+    var fd=new FormData(form), obj={};
+    fd.forEach(function(v,k){ obj[k]=v; });
+    obj.core_services=checkedVals("core_services").join(", ");
+    obj.insurance_lines=checkedVals("insurance_lines").join(", ");
+    obj.have_in_place=checkedVals("have_in_place").join(", ");
+    obj.signature_provided = signed ? "Yes (drawn)" : (obj.signature_name? "Typed":"No");
+
+    // gaps = everything NOT checked in the gap finder (David's marketing targets)
+    var have=checkedVals("have_in_place");
+    obj.gaps_identified = GAPS.filter(function(g){return have.indexOf(g)===-1;}).join(", ");
+
+    // Human-readable summary that lands in GHL "Tool Result Summary"
+    var lines=[
+      "PEO / HR INTAKE — "+ (obj.legal_business_name||""),
+      "Contact: "+obj.first_name+" "+obj.last_name+" | "+obj.phone+" | "+obj.email,
+      "Best time: "+(obj.best_time||"—"),
+      "Entity: "+(obj.entity_type||"—")+(obj.entity_type_other?(" ("+obj.entity_type_other+")"):"")+" | DBA: "+(obj.dba||"—")+" | FEIN: "+(obj.fein||"—")+" | States: "+(obj.states||"—"),
+      "Ops: "+(obj.description||"—"),
+      "Workforce: FT "+(obj.ft_w2||"0")+" / PT "+(obj.pt_w2||"0")+" / 1099 "+(obj.contractors_1099||"0"),
+      "Payroll: gross $"+(obj.gross_payroll||"—")+" | revenue $"+(obj.gross_revenue||"—")+" | provider "+(obj.current_payroll_provider||"—")+" | freq "+(obj.pay_frequency||"—"),
+      "On PEO: "+(obj.on_peo||"—")+(obj.current_peo?(" ("+obj.current_peo+")"):"")+(obj.peo_change_reason?(" — change: "+obj.peo_change_reason):""),
+      "Wants quoted: "+obj.core_services,
+      "Workers' Comp: "+(obj.wc_coverage||"—")+(obj.wc_carrier?(" | "+obj.wc_carrier+" exp "+(obj.wc_expiration||"")):""),
+      "Benefits review: "+(obj.benefits_review||"—")+(obj.current_health_carrier?(" | carrier "+obj.current_health_carrier+" | enrolled "+(obj.benefits_enrolled||"")+" | renews "+(obj.benefits_renewal||"")):""),
+      "Other insurance: "+(obj.insurance_review||"—")+(obj.insurance_lines?(" | "+obj.insurance_lines):""),
+      "HAS in place: "+(obj.have_in_place||"none checked"),
+      ">> GAPS TO MARKET: "+(obj.gaps_identified||"none"),
+      "Signature: "+obj.signature_provided+(obj.signature_name?(" — "+obj.signature_name):""),
+      "SMS consent: service="+(obj.sms_service?"yes":"no")+", marketing="+(obj.sms_marketing?"yes":"no")
+    ];
+
+    var payload={
+      first_name:obj.first_name, last_name:obj.last_name, phone:obj.phone, email:obj.email,
+      company:obj.legal_business_name,
+      atlas_tool:"PEO / HR Intake Form",
+      atlas_headline:"PEO / HR Intake: "+obj.legal_business_name,
+      atlas_results_text:lines.join("\n"),
+      atlas_source_url:location.href,
+      atlas_generated_at:new Date().toISOString()
+    };
+    // include every raw field too, so David can map any of them into GHL later
+    for(var k in obj){ if(obj.hasOwnProperty(k) && !(k in payload)) payload[k]=obj[k]; }
+
+    // fire-and-forget; no-cors keeps it from throwing on the browser side
+    try{
+      fetch(WEBHOOK,{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
+    }catch(err){/* still thank them */}
+
+    document.getElementById("formview").style.display="none";
+    var t=document.getElementById("thanks"); t.classList.add("on");
+    window.scrollTo({top:0,behavior:"smooth"});
+  });
+})();
+</script>
+</body>
+</html>
