@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Health Insurance Quote — Census &amp; RFP Intake | Atlas One Solutions</title>
+<style>
+  /* ============================================================
+     Atlas One Solutions — Health Quote Census & RFP Intake
+     Fully self-contained. No external fonts / scripts / CDNs.
+     ============================================================ */
+  :root{
+    --periwinkle:#788DE3;
+    --dark-blue:#23304D;
+    --off-white:#FAFAF8;
+    --soft-blue:#DBE4ED;
+    --muted:#66708a;
+    --hairline:#e6e9f2;
+    --gold:#788DE3;
+    --periwinkle-tint:#eef1fb;
+    --shadow:0 6px 24px rgba(35,48,77,.08);
+    --shadow-sm:0 2px 8px rgba(35,48,77,.06);
+    --radius:16px;
+    --radius-sm:10px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    background:var(--off-white);
+    color:var(--dark-blue);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ---------- Layout shell ---------- */
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px 64px;}
+
+  /* ---------- Header ---------- */
+  header.site{
+    background:linear-gradient(135deg,var(--dark-blue) 0%,#2c3c5f 60%,#374a73 100%);
+    color:#fff;
+    padding:34px 0 30px;
+  }
+  .header-inner{max-width:920px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;}
+  .brand{display:flex;align-items:center;gap:14px;}
+  .logo-mark{
+    width:46px;height:46px;border-radius:12px;flex:none;
+    background:linear-gradient(135deg,var(--periwinkle),#9aa9ec);
+    display:flex;align-items:center;justify-content:center;
+    font-weight:700;font-size:20px;color:#fff;letter-spacing:.5px;
+    box-shadow:0 4px 14px rgba(120,141,227,.5);
+  }
+  .brand h1{font-size:19px;margin:0;font-weight:700;letter-spacing:.2px;}
+  .brand .sub{font-size:12.5px;color:#c7d0e6;margin-top:2px;letter-spacing:.3px;}
+  .book-btn{
+    background:var(--gold);color:#23304D;text-decoration:none;
+    font-weight:700;font-size:13.5px;padding:11px 18px;border-radius:999px;
+    box-shadow:0 4px 14px rgba(120, 141, 227,.35);transition:transform .12s ease, box-shadow .12s ease;
+    white-space:nowrap;
+  }
+  .book-btn:hover{transform:translateY(-1px);box-shadow:0 7px 20px rgba(120, 141, 227,.45);}
+
+  /* ---------- Title band ---------- */
+  .title-band{padding:30px 0 8px;}
+  .title-band h2{font-size:27px;margin:0 0 6px;letter-spacing:-.4px;}
+  .title-band p{color:var(--muted);margin:0;font-size:15px;max-width:640px;}
+
+  /* ---------- Progress ---------- */
+  .progress{
+    display:flex;gap:0;margin:26px 0 8px;position:relative;
+  }
+  .progress .step{
+    flex:1;text-align:center;position:relative;cursor:default;
+  }
+  .progress .step .dot{
+    width:34px;height:34px;border-radius:50%;margin:0 auto 8px;
+    background:#fff;border:2px solid var(--hairline);color:var(--muted);
+    display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;
+    position:relative;z-index:2;transition:all .2s ease;
+  }
+  .progress .step .lbl{font-size:11.5px;color:var(--muted);font-weight:600;letter-spacing:.2px;}
+  .progress .step::before{
+    content:"";position:absolute;top:17px;left:-50%;width:100%;height:2px;background:var(--hairline);z-index:1;
+  }
+  .progress .step:first-child::before{display:none;}
+  .progress .step.active .dot{background:var(--periwinkle);border-color:var(--periwinkle);color:#fff;box-shadow:0 4px 12px rgba(120,141,227,.4);}
+  .progress .step.active .lbl{color:var(--dark-blue);}
+  .progress .step.done .dot{background:var(--dark-blue);border-color:var(--dark-blue);color:#fff;}
+  .progress .step.done::before{background:var(--periwinkle);}
+  .progress .step.active::before{background:var(--periwinkle);}
+
+  /* ---------- Cards ---------- */
+  .card{
+    background:#fff;border:1px solid var(--hairline);border-radius:var(--radius);
+    box-shadow:var(--shadow);padding:30px 30px 26px;margin-top:22px;
+  }
+  .card h3{margin:0 0 4px;font-size:20px;letter-spacing:-.2px;}
+  .card .card-sub{color:var(--muted);font-size:14px;margin:0 0 22px;}
+  .step-panel{display:none;}
+  .step-panel.active{display:block;animation:fade .25s ease;}
+  @keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+
+  /* ---------- Form fields ---------- */
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px 18px;}
+  .grid.three{grid-template-columns:1fr 1fr 1fr;}
+  .field{display:flex;flex-direction:column;gap:6px;}
+  .field.full{grid-column:1/-1;}
+  label{font-size:13px;font-weight:600;color:var(--dark-blue);}
+  label .opt{color:var(--muted);font-weight:500;font-size:12px;}
+  .req{color:var(--periwinkle);}
+  input[type=text],input[type=email],input[type=tel],input[type=number],input[type=date],select,textarea{
+    font-family:inherit;font-size:14.5px;color:var(--dark-blue);
+    padding:11px 13px;border:1.5px solid var(--hairline);border-radius:var(--radius-sm);
+    background:#fff;transition:border-color .15s ease, box-shadow .15s ease;width:100%;
+  }
+  input:focus,select:focus,textarea:focus{
+    outline:none;border-color:var(--periwinkle);box-shadow:0 0 0 3px rgba(120,141,227,.15);
+  }
+  input.invalid,select.invalid{border-color:#23304D;box-shadow:0 0 0 3px rgba(35, 48, 77,.12);}
+  .hint{font-size:12px;color:var(--muted);}
+  .hint a{color:var(--periwinkle);}
+  textarea{resize:vertical;min-height:64px;}
+
+  /* ---------- Radio branch cards ---------- */
+  .branch{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .branch label{
+    border:1.5px solid var(--hairline);border-radius:var(--radius);padding:22px 22px;cursor:pointer;
+    display:block;transition:all .15s ease;background:#fff;position:relative;
+  }
+  .branch label:hover{border-color:var(--periwinkle);}
+  .branch input{position:absolute;opacity:0;}
+  .branch label.sel{border-color:var(--periwinkle);background:var(--periwinkle-tint);box-shadow:0 4px 14px rgba(120,141,227,.15);}
+  .branch .b-title{font-size:16px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:10px;}
+  .branch .b-title .tick{width:20px;height:20px;border-radius:50%;border:2px solid var(--hairline);flex:none;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;}
+  .branch label.sel .tick{background:var(--periwinkle);border-color:var(--periwinkle);}
+  .branch .b-desc{font-size:13px;color:var(--muted);}
+
+  /* ---------- Checkbox chips ---------- */
+  .chips{display:flex;flex-wrap:wrap;gap:10px;}
+  .chip{
+    border:1.5px solid var(--hairline);border-radius:999px;padding:9px 16px;cursor:pointer;
+    font-size:13.5px;font-weight:600;color:var(--dark-blue);display:flex;align-items:center;gap:8px;
+    transition:all .15s ease;user-select:none;background:#fff;
+  }
+  .chip:hover{border-color:var(--periwinkle);}
+  .chip input{position:absolute;opacity:0;width:0;height:0;}
+  .chip .box{width:16px;height:16px;border-radius:4px;border:2px solid var(--hairline);display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff;flex:none;}
+  .chip.sel{background:var(--periwinkle-tint);border-color:var(--periwinkle);}
+  .chip.sel .box{background:var(--periwinkle);border-color:var(--periwinkle);}
+
+  /* ---------- Section divider ---------- */
+  .section-label{
+    font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--periwinkle);
+    margin:26px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--hairline);
+  }
+  .section-label:first-child{margin-top:0;}
+
+  /* ---------- Conditional block ---------- */
+  .conditional{display:none;}
+  .conditional.show{display:block;}
+  .note-box{
+    background:var(--periwinkle-tint);border:1px solid #d5ddf7;border-radius:var(--radius-sm);
+    padding:12px 15px;font-size:13px;color:#3f4a68;margin-top:6px;
+  }
+  .note-box strong{color:var(--dark-blue);}
+
+  /* ---------- Census table ---------- */
+  .census-toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:16px;}
+  .table-scroll{overflow-x:auto;border:1px solid var(--hairline);border-radius:var(--radius-sm);}
+  table.census{border-collapse:collapse;width:100%;min-width:860px;font-size:13px;}
+  table.census th{
+    background:var(--soft-blue);color:var(--dark-blue);font-weight:700;text-align:left;
+    padding:10px 10px;font-size:11.5px;text-transform:uppercase;letter-spacing:.4px;white-space:nowrap;
+  }
+  table.census td{padding:6px 8px;border-top:1px solid var(--hairline);vertical-align:middle;}
+  table.census tr:nth-child(even) td{background:#fbfcfe;}
+  table.census input,table.census select{padding:8px 9px;font-size:13px;border-radius:8px;}
+  .cell-narrow{width:70px;}
+  .cell-mid{width:110px;}
+  .row-x{
+    background:#fff;border:1.5px solid var(--hairline);color:var(--muted);border-radius:8px;
+    width:30px;height:30px;cursor:pointer;font-size:16px;line-height:1;transition:all .15s ease;
+  }
+  .row-x:hover{border-color:#23304D;color:#23304D;background:#fdf2f2;}
+  .census-counter{font-size:13.5px;font-weight:700;color:var(--dark-blue);background:var(--periwinkle-tint);padding:7px 14px;border-radius:999px;}
+
+  /* ---------- Buttons ---------- */
+  .btn{
+    font-family:inherit;font-weight:700;font-size:14px;padding:12px 22px;border-radius:999px;cursor:pointer;
+    border:none;transition:transform .12s ease, box-shadow .12s ease, background .15s ease;text-decoration:none;display:inline-flex;align-items:center;gap:8px;
+  }
+  .btn-primary{background:var(--periwinkle);color:#fff;box-shadow:0 4px 14px rgba(120,141,227,.35);}
+  .btn-primary:hover{transform:translateY(-1px);box-shadow:0 7px 20px rgba(120,141,227,.45);}
+  .btn-ghost{background:#fff;color:var(--dark-blue);border:1.5px solid var(--hairline);}
+  .btn-ghost:hover{border-color:var(--periwinkle);color:var(--periwinkle);}
+  .btn-dark{background:var(--dark-blue);color:#fff;}
+  .btn-dark:hover{transform:translateY(-1px);box-shadow:var(--shadow-sm);}
+  .btn-gold{background:var(--gold);color:#23304D;box-shadow:0 4px 14px rgba(120, 141, 227,.3);}
+  .btn-gold:hover{transform:translateY(-1px);}
+  .btn-sm{padding:9px 15px;font-size:13px;}
+  .nav{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:26px;}
+  .nav .spacer{flex:1;}
+
+  .file-label{
+    display:inline-flex;align-items:center;gap:8px;cursor:pointer;
+    background:#fff;color:var(--dark-blue);border:1.5px dashed var(--periwinkle);border-radius:var(--radius-sm);
+    padding:10px 16px;font-size:13.5px;font-weight:600;transition:background .15s ease;
+  }
+  .file-label:hover{background:var(--periwinkle-tint);}
+  .file-label input{display:none;}
+
+  .csv-status{font-size:13px;color:var(--muted);margin-top:8px;}
+  .csv-status.ok{color:#788DE3;font-weight:600;}
+  .csv-status.err{color:#23304D;font-weight:600;}
+
+  /* ---------- Review summary ---------- */
+  .summary{border:1px solid var(--hairline);border-radius:var(--radius-sm);overflow:hidden;margin-top:6px;}
+  .summary h4{margin:0;padding:12px 16px;background:var(--soft-blue);font-size:13px;text-transform:uppercase;letter-spacing:.5px;color:var(--dark-blue);}
+  .summary-body{padding:16px;}
+  .summary-row{display:flex;gap:12px;padding:6px 0;font-size:14px;border-bottom:1px dashed var(--hairline);}
+  .summary-row:last-child{border-bottom:none;}
+  .summary-row .k{color:var(--muted);min-width:200px;font-weight:600;}
+  .summary-row .v{color:var(--dark-blue);flex:1;}
+  .summary-empty{color:var(--muted);font-style:italic;}
+
+  .actions-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:22px;}
+  .privacy-note{
+    display:flex;gap:10px;align-items:flex-start;margin-top:20px;
+    background:#f3f6fb;border:1px solid var(--hairline);border-radius:var(--radius-sm);padding:13px 16px;font-size:12.5px;color:var(--muted);
+  }
+  .privacy-note .ic{color:var(--periwinkle);font-size:15px;flex:none;}
+
+  .error-banner{
+    display:none;background:#fdf2f2;border:1px solid #f0c9c7;color:#23304D;
+    border-radius:var(--radius-sm);padding:11px 15px;font-size:13.5px;font-weight:600;margin-top:16px;
+  }
+  .error-banner.show{display:block;}
+
+  /* ---------- Footer ---------- */
+  footer.site{
+    background:var(--dark-blue);color:#c7d0e6;padding:30px 0;margin-top:10px;
+  }
+  .footer-inner{max-width:920px;margin:0 auto;padding:0 20px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;align-items:center;}
+  .footer-inner .tag{font-size:16px;font-weight:700;color:#fff;letter-spacing:.2px;}
+  .footer-inner .tag span{color:var(--gold);}
+  .footer-contact{font-size:13px;line-height:1.7;text-align:right;}
+  .footer-contact a{color:#c7d0e6;text-decoration:none;}
+  .footer-contact a:hover{color:#fff;}
+
+  .print-only{display:none;}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:680px){
+    .grid,.grid.three,.branch,.actions-grid{grid-template-columns:1fr;}
+    .card{padding:22px 18px;}
+    .title-band h2{font-size:22px;}
+    .progress .step .lbl{display:none;}
+    .footer-inner{flex-direction:column;text-align:center;}
+    .footer-contact{text-align:center;}
+    .header-inner{justify-content:center;text-align:center;}
+  }
+
+  /* ---------- Print ---------- */
+  @media print{
+    body{background:#fff;}
+    header.site{background:#23304D !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    .book-btn,.progress,.nav,.census-toolbar,.file-label,.actions-grid,.error-banner,.row-x{display:none !important;}
+    .card{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;margin-top:14px;}
+    .step-panel{display:block !important;}   /* show everything when printing */
+    .conditional{display:block !important;}
+    .print-only{display:block;}
+    .wrap{padding-bottom:12px;}
+    footer.site{background:#23304D !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    table.census{min-width:0;font-size:11px;}
+    .table-scroll{overflow:visible;}
+    @page{margin:14mm;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="header-inner">
+    <div class="brand">
+      <div class="logo-mark">A1</div>
+      <div>
+        <h1>Atlas One Solutions</h1>
+        <div class="sub">Employee Benefits &amp; Health Insurance</div>
+      </div>
+    </div>
+    <a class="book-btn" href="https://scheduler.zoom.us/david-taylor-qp71rc" target="_blank" rel="noopener">Book a call with David →</a>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="title-band">
+    <h2>Health Insurance Quote — Census &amp; RFP Intake</h2>
+    <p>A few quick steps and we can build your quote. Faster and simpler than a spreadsheet — everything stays in your browser until you download or email it.</p>
+  </div>
+
+  <!-- Progress -->
+  <div class="progress" id="progress">
+    <div class="step active" data-step="1"><div class="dot">1</div><div class="lbl">Group size</div></div>
+    <div class="step" data-step="2"><div class="dot">2</div><div class="lbl">Company</div></div>
+    <div class="step" data-step="3"><div class="dot">3</div><div class="lbl">Coverage</div></div>
+    <div class="step" data-step="4"><div class="dot">4</div><div class="lbl">Census</div></div>
+    <div class="step" data-step="5"><div class="dot">5</div><div class="lbl">Finish</div></div>
+  </div>
+
+  <form id="intakeForm" novalidate>
+
+  <!-- ===================== STEP 1 ===================== -->
+  <section class="card step-panel active" data-panel="1">
+    <h3>What size is the group?</h3>
+    <p class="card-sub">This just tailors which optional questions we ask you next.</p>
+    <div class="branch" id="branchGroup">
+      <label data-val="small">
+        <input type="radio" name="groupSize" value="small">
+        <div class="b-title"><span class="tick">✓</span> Under 50 employees</div>
+        <div class="b-desc">Small group. We'll keep it to the essentials and pull most rates from your census.</div>
+      </label>
+      <label data-val="large">
+        <input type="radio" name="groupSize" value="large">
+        <div class="b-title"><span class="tick">✓</span> 50+ / Level-Funded (10+)</div>
+        <div class="b-desc">Larger or level-funded group. We'll ask a few extra RFP items (rates, bill, claims) — optional and can come later.</div>
+      </label>
+    </div>
+    <div class="error-banner" data-error="1">Please choose a group size to continue.</div>
+    <div class="nav">
+      <div class="spacer"></div>
+      <button type="button" class="btn btn-primary" data-next>Next: Company info →</button>
+    </div>
+  </section>
+
+  <!-- ===================== STEP 2 ===================== -->
+  <section class="card step-panel" data-panel="2">
+    <h3>Company information</h3>
+    <p class="card-sub">Tell us about the business requesting coverage.</p>
+
+    <div class="section-label">Business</div>
+    <div class="grid">
+      <div class="field full">
+        <label>Company legal name <span class="req">*</span></label>
+        <input type="text" name="companyName" data-required placeholder="e.g., Summit Fabrication LLC">
+      </div>
+      <div class="field full">
+        <label>Street address <span class="opt">(optional)</span></label>
+        <input type="text" name="street" placeholder="123 Main St, Suite 200">
+      </div>
+      <div class="field">
+        <label>City <span class="opt">(optional)</span></label>
+        <input type="text" name="city">
+      </div>
+      <div class="field">
+        <label>State <span class="opt">(optional)</span></label>
+        <input type="text" name="state" maxlength="2" placeholder="UT" style="text-transform:uppercase">
+      </div>
+      <div class="field">
+        <label>ZIP <span class="req">*</span></label>
+        <input type="text" name="zip" data-required inputmode="numeric" maxlength="10" placeholder="84101">
+      </div>
+      <div class="field">
+        <label>Company Tax ID / EIN <span class="opt">(optional)</span></label>
+        <input type="text" name="ein" placeholder="12-3456789">
+      </div>
+      <div class="field full">
+        <label>Nature of business / SIC code <span class="opt">(optional)</span></label>
+        <input type="text" name="sic" placeholder="e.g., Metal fabrication — SIC 3441">
+        <div class="hint">Not sure? SIC lookup: <a href="https://www.osha.gov/data/sic-manual" target="_blank" rel="noopener">osha.gov/data/sic-manual</a></div>
+      </div>
+    </div>
+
+    <div class="section-label">Coverage basics</div>
+    <div class="grid">
+      <div class="field">
+        <label>Requested effective date <span class="req">*</span></label>
+        <input type="date" name="effectiveDate" data-required>
+      </div>
+      <div class="field">
+        <label>Eligible employees <span class="req">*</span></label>
+        <input type="number" name="eligible" data-required min="1" inputmode="numeric" placeholder="e.g., 24">
+      </div>
+      <div class="field">
+        <label>Expected participation % <span class="opt">(optional)</span></label>
+        <input type="text" name="participation" placeholder="e.g., 80%">
+      </div>
+      <div class="field">
+        <label>Employer contribution <span class="opt">(optional)</span></label>
+        <input type="text" name="contribution" placeholder="e.g., 50% of employee premium or $300">
+      </div>
+      <div class="field full">
+        <label>Other states with employees <span class="opt">(optional)</span></label>
+        <input type="text" name="otherStates" placeholder="e.g., ID, NV, AZ">
+      </div>
+    </div>
+
+    <div class="section-label">Current carrier (if any)</div>
+    <div class="grid three">
+      <div class="field">
+        <label>Medical <span class="opt">(optional)</span></label>
+        <input type="text" name="carrierMedical" placeholder="e.g., SelectHealth">
+      </div>
+      <div class="field">
+        <label>Dental <span class="opt">(optional)</span></label>
+        <input type="text" name="carrierDental">
+      </div>
+      <div class="field">
+        <label>Vision <span class="opt">(optional)</span></label>
+        <input type="text" name="carrierVision">
+      </div>
+    </div>
+
+    <div class="error-banner" data-error="2">Please complete the required fields marked with <span class="req">*</span>.</div>
+    <div class="nav">
+      <button type="button" class="btn btn-ghost" data-back>← Back</button>
+      <div class="spacer"></div>
+      <button type="button" class="btn btn-primary" data-next>Next: Coverage →</button>
+    </div>
+  </section>
+
+  <!-- ===================== STEP 3 ===================== -->
+  <section class="card step-panel" data-panel="3">
+    <h3>What coverage do you want quoted?</h3>
+    <p class="card-sub">Choose everything that applies.</p>
+
+    <div class="section-label">Lines of coverage <span class="req">*</span></div>
+    <div class="chips" id="coverageChips">
+      <label class="chip"><input type="checkbox" name="coverage" value="Medical"><span class="box">✓</span> Medical</label>
+      <label class="chip"><input type="checkbox" name="coverage" value="Dental"><span class="box">✓</span> Dental</label>
+      <label class="chip"><input type="checkbox" name="coverage" value="Vision"><span class="box">✓</span> Vision</label>
+      <label class="chip"><input type="checkbox" name="coverage" value="Life"><span class="box">✓</span> Life</label>
+      <label class="chip"><input type="checkbox" name="coverage" value="Disability"><span class="box">✓</span> Disability</label>
+      <label class="chip"><input type="checkbox" name="coverage" value="Accident/Ancillary"><span class="box">✓</span> Accident / Ancillary</label>
+    </div>
+
+    <div class="section-label">Plan preferences</div>
+    <div class="grid">
+      <div class="field">
+        <label>Desired medical deductible <span class="opt">(optional)</span></label>
+        <select name="medDeductible">
+          <option value="">No preference</option>
+          <option>$0</option>
+          <option>$500</option>
+          <option>$1,000</option>
+          <option>$1,500</option>
+          <option>$2,500</option>
+          <option>$3,500</option>
+          <option>$5,000</option>
+          <option>HSA-qualified / HDHP</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Desired dental deductible <span class="opt">(optional)</span></label>
+        <select name="dentalDeductible">
+          <option value="">No preference</option>
+          <option>$0</option>
+          <option>$50</option>
+          <option>$75</option>
+          <option>$100</option>
+          <option>$150</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Extra RFP items for large / level-funded -->
+    <div class="conditional" id="largeExtras">
+      <div class="section-label">Level-funded / 50+ RFP details <span class="opt">(optional)</span></div>
+      <div class="note-box" style="margin-bottom:16px;">
+        <strong>These are optional.</strong> If you don't have them handy, leave them blank — you can provide the bill, rates, and claims info later and it won't hold up your quote.
+      </div>
+      <div class="grid">
+        <div class="field">
+          <label>Current rates <span class="opt">(optional)</span></label>
+          <input type="text" name="currentRates" placeholder="e.g., $520 EE / $1,180 Family">
+        </div>
+        <div class="field">
+          <label>Renewal rates offered <span class="opt">(optional)</span></label>
+          <input type="text" name="renewalRates" placeholder="if you've received a renewal">
+        </div>
+        <div class="field full">
+          <label>Rate history <span class="opt">(optional)</span></label>
+          <input type="text" name="rateHistory" placeholder="prior-year increases, e.g., +8% 2024, +12% 2025">
+        </div>
+        <div class="field">
+          <label>Most recent bill available? <span class="opt">(optional)</span></label>
+          <select name="recentBill">
+            <option value="">Select…</option>
+            <option>Yes — can provide</option>
+            <option>Will send later</option>
+            <option>No</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Enrollment / membership count <span class="opt">(optional)</span></label>
+          <input type="text" name="enrollmentCount" placeholder="e.g., 42 enrolled of 55 eligible">
+        </div>
+        <div class="field">
+          <label>Broker commission <span class="opt">(optional)</span></label>
+          <input type="text" name="commission" placeholder="e.g., standard / PEPM / flat">
+        </div>
+        <div class="field full">
+          <label>Claims / large-claimant info <span class="opt">(optional)</span></label>
+          <textarea name="claimsInfo" placeholder="Any known large claimants or ongoing conditions (can be provided later)."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="error-banner" data-error="3">Please select at least one line of coverage.</div>
+    <div class="nav">
+      <button type="button" class="btn btn-ghost" data-back>← Back</button>
+      <div class="spacer"></div>
+      <button type="button" class="btn btn-primary" data-next>Next: Employee census →</button>
+    </div>
+  </section>
+
+  <!-- ===================== STEP 4 ===================== -->
+  <section class="card step-panel" data-panel="4">
+    <h3>Employee census</h3>
+    <p class="card-sub">Add a row per employee, or upload a CSV and we'll fill the table for you.</p>
+
+    <div class="census-toolbar">
+      <button type="button" class="btn btn-primary btn-sm" id="addRow">+ Add employee</button>
+      <label class="file-label">
+        ⬆ Upload census (CSV)
+        <input type="file" id="csvFile" accept=".csv,text/csv">
+      </label>
+      <a href="#" id="csvTemplate" class="btn btn-ghost btn-sm">⬇ Download blank CSV template</a>
+      <div class="spacer" style="flex:1"></div>
+      <div class="census-counter"><span id="empCount">0</span> employees entered</div>
+    </div>
+    <div class="csv-status" id="csvStatus"></div>
+
+    <div class="table-scroll">
+      <table class="census">
+        <thead>
+          <tr>
+            <th>First name</th>
+            <th>Last / ID</th>
+            <th>DOB or Age</th>
+            <th>Gender</th>
+            <th>Home ZIP</th>
+            <th>Coverage tier</th>
+            <th>Tobacco</th>
+            <th>Dep.</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="censusBody"><!-- rows injected by JS --></tbody>
+      </table>
+    </div>
+    <div class="note-box" style="margin-top:14px;">
+      <strong>CSV format:</strong> columns are <em>First, Last/ID, DOB or Age, Gender, ZIP, Tier, Tobacco, Dependents</em>. Tier accepts EE, EE+Spouse, EE+Child(ren), Family, or Waiving. Use the blank template above for a guaranteed match.
+    </div>
+
+    <div class="error-banner" data-error="4">Please add at least one employee (or upload a census) to continue.</div>
+    <div class="nav">
+      <button type="button" class="btn btn-ghost" data-back>← Back</button>
+      <div class="spacer"></div>
+      <button type="button" class="btn btn-primary" data-next>Next: Review &amp; finish →</button>
+    </div>
+  </section>
+
+  <!-- ===================== STEP 5 ===================== -->
+  <section class="card step-panel" data-panel="5">
+    <h3>Contact &amp; review</h3>
+    <p class="card-sub">Last step — how should David reach you, and a quick look at everything before you send.</p>
+
+    <div class="section-label">Your contact info</div>
+    <div class="grid three">
+      <div class="field">
+        <label>Contact name <span class="req">*</span></label>
+        <input type="text" name="contactName" data-required placeholder="Full name">
+      </div>
+      <div class="field">
+        <label>Email <span class="req">*</span></label>
+        <input type="email" name="contactEmail" data-required placeholder="you@company.com">
+      </div>
+      <div class="field">
+        <label>Phone <span class="opt">(optional)</span></label>
+        <input type="tel" name="contactPhone" placeholder="(385) 555-0123">
+      </div>
+    </div>
+
+    <div class="section-label">Review &amp; finish</div>
+    <button type="button" class="btn btn-ghost btn-sm" id="buildReview">↻ Refresh summary</button>
+    <div id="reviewOut" style="margin-top:16px;"></div>
+
+    <div class="actions-grid">
+      <button type="button" class="btn btn-dark" id="downloadCsv">⬇ Download my census (CSV)</button>
+      <button type="button" class="btn btn-ghost" id="printBtn">🖨 Print / Save as PDF</button>
+      <button type="button" class="btn btn-gold" id="emailBtn">✉ Email to David</button>
+    </div>
+
+    <div class="privacy-note">
+      <span class="ic">🔒</span>
+      <span>Your information is not stored on this page — it stays in your browser until you download or email it. Because email can't attach files automatically, please attach the CSV you downloaded when your email opens.</span>
+    </div>
+
+    <div class="error-banner" data-error="5">Please add your name and a valid email so David can send your quote.</div>
+    <div class="nav">
+      <button type="button" class="btn btn-ghost" data-back>← Back</button>
+      <div class="spacer"></div>
+      <a class="btn btn-primary" href="https://scheduler.zoom.us/david-taylor-qp71rc" target="_blank" rel="noopener">Prefer to talk it through? Book a call →</a>
+    </div>
+  </section>
+
+  </form>
+
+  <div class="print-only" style="margin-top:20px;font-size:12px;color:#66708a;text-align:center;">
+    Atlas One Solutions · david@AtlasOneSolutions.com · 385-213-7177 · atlasonesolutions.com · One Call Solves Everything
+  </div>
+
+</div><!-- /wrap -->
+
+<footer class="site">
+  <div class="footer-inner">
+    <div class="tag">One Call Solves <span>Everything</span></div>
+    <div class="footer-contact">
+      <a href="mailto:david@AtlasOneSolutions.com">david@AtlasOneSolutions.com</a><br>
+      <a href="tel:3852137177">385-213-7177</a> · <a href="https://atlasonesolutions.com" target="_blank" rel="noopener">atlasonesolutions.com</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------------------------------------------------------
+     State
+  --------------------------------------------------------- */
+  var TOTAL_STEPS = 5;
+  var current = 1;
+  var form = document.getElementById('intakeForm');
+  var panels = Array.prototype.slice.call(document.querySelectorAll('.step-panel'));
+  var progSteps = Array.prototype.slice.call(document.querySelectorAll('#progress .step'));
+
+  var CENSUS_HEADERS = ['First','Last/ID','DOB or Age','Gender','ZIP','Tier','Tobacco','Dependents'];
+  var TIERS = ['EE','EE+Spouse','EE+Child(ren)','Family','Waiving'];
+
+  /* ---------------------------------------------------------
+     Step navigation
+  --------------------------------------------------------- */
+  function showStep(n){
+    current = n;
+    panels.forEach(function(p){
+      p.classList.toggle('active', parseInt(p.getAttribute('data-panel'),10) === n);
+    });
+    progSteps.forEach(function(s){
+      var idx = parseInt(s.getAttribute('data-step'),10);
+      s.classList.toggle('active', idx === n);
+      s.classList.toggle('done', idx < n);
+    });
+    window.scrollTo({top:0, behavior:'smooth'});
+    if(n === 5){ buildReview(); }
+  }
+
+  function showError(step, on){
+    var b = document.querySelector('[data-error="'+step+'"]');
+    if(b){ b.classList.toggle('show', !!on); }
+  }
+
+  function clearInvalids(step){
+    var panel = document.querySelector('[data-panel="'+step+'"]');
+    if(!panel) return;
+    Array.prototype.forEach.call(panel.querySelectorAll('.invalid'), function(el){
+      el.classList.remove('invalid');
+    });
+  }
+
+  /* ---------------------------------------------------------
+     Validation per step
+  --------------------------------------------------------- */
+  function validateStep(step){
+    clearInvalids(step);
+    var ok = true;
+
+    if(step === 1){
+      var chosen = form.querySelector('input[name="groupSize"]:checked');
+      ok = !!chosen;
+    }
+    else if(step === 2 || step === 5){
+      var panel = document.querySelector('[data-panel="'+step+'"]');
+      var reqs = panel.querySelectorAll('[data-required]');
+      Array.prototype.forEach.call(reqs, function(el){
+        var val = (el.value || '').trim();
+        var bad = !val;
+        if(el.type === 'email' && val){
+          bad = !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+        }
+        if(bad){ ok = false; el.classList.add('invalid'); }
+      });
+    }
+    else if(step === 3){
+      var checked = form.querySelectorAll('input[name="coverage"]:checked');
+      ok = checked.length > 0;
+    }
+    else if(step === 4){
+      ok = countEmployees() > 0;
+    }
+
+    showError(step, !ok);
+    return ok;
+  }
+
+  /* ---------------------------------------------------------
+     Next / Back buttons
+  --------------------------------------------------------- */
+  Array.prototype.forEach.call(document.querySelectorAll('[data-next]'), function(btn){
+    btn.addEventListener('click', function(){
+      if(validateStep(current)){
+        showStep(Math.min(current + 1, TOTAL_STEPS));
+      }
+    });
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('[data-back]'), function(btn){
+    btn.addEventListener('click', function(){
+      showError(current, false);
+      showStep(Math.max(current - 1, 1));
+    });
+  });
+
+  /* ---------------------------------------------------------
+     Step 1 — branch selection UI + conditional extras
+  --------------------------------------------------------- */
+  var branchLabels = document.querySelectorAll('#branchGroup label');
+  Array.prototype.forEach.call(branchLabels, function(lab){
+    lab.addEventListener('click', function(){
+      Array.prototype.forEach.call(branchLabels, function(l){ l.classList.remove('sel'); });
+      lab.classList.add('sel');
+      var radio = lab.querySelector('input');
+      radio.checked = true;
+      showError(1, false);
+      toggleLargeExtras();
+    });
+  });
+  function toggleLargeExtras(){
+    var chosen = form.querySelector('input[name="groupSize"]:checked');
+    var isLarge = chosen && chosen.value === 'large';
+    document.getElementById('largeExtras').classList.toggle('show', !!isLarge);
+  }
+
+  /* ---------------------------------------------------------
+     Step 3 — chip selection UI
+  --------------------------------------------------------- */
+  Array.prototype.forEach.call(document.querySelectorAll('#coverageChips .chip'), function(chip){
+    var input = chip.querySelector('input');
+    if(!input) return;
+    // The checkbox sits INSIDE the <label class="chip">, so the browser already
+    // toggles it for any click anywhere on the chip. The previous version also
+    // flipped it by hand, so every click toggled it twice and it never appeared
+    // to check at all. Listen to the input's own change event and do nothing else.
+    input.addEventListener('change', function(){
+      chip.classList.toggle('sel', input.checked);
+      showError(3, false);
+    });
+    // keep the pill styling honest if the browser restores a checked state
+    chip.classList.toggle('sel', input.checked);
+  });
+
+  /* ---------------------------------------------------------
+     Step 4 — dynamic census rows
+  --------------------------------------------------------- */
+  var censusBody = document.getElementById('censusBody');
+  var empCountEl = document.getElementById('empCount');
+
+  function tierOptions(selected){
+    return TIERS.map(function(t){
+      var sel = (t === selected) ? ' selected' : '';
+      return '<option'+sel+'>'+t+'</option>';
+    }).join('');
+  }
+
+  function makeRow(data){
+    data = data || {};
+    var tr = document.createElement('tr');
+    tr.innerHTML =
+      '<td><input type="text" class="c-first" value="'+esc(data.first)+'" placeholder="Optional"></td>' +
+      '<td><input type="text" class="c-last" value="'+esc(data.last)+'" placeholder="Last or ID"></td>' +
+      '<td><input type="text" class="c-dob cell-mid" value="'+esc(data.dob)+'" placeholder="MM/DD/YYYY or age"></td>' +
+      '<td><select class="c-gender cell-mid">'+genderOptions(data.gender)+'</select></td>' +
+      '<td><input type="text" class="c-zip cell-narrow" value="'+esc(data.zip)+'" placeholder="ZIP" inputmode="numeric" maxlength="10"></td>' +
+      '<td><select class="c-tier">'+tierOptions(data.tier)+'</select></td>' +
+      '<td><select class="c-tobacco cell-narrow">'+ynOptions(data.tobacco)+'</select></td>' +
+      '<td><input type="text" class="c-dep cell-narrow" value="'+esc(data.dep)+'" placeholder="0" inputmode="numeric"></td>' +
+      '<td><button type="button" class="row-x" title="Remove">&times;</button></td>';
+    tr.querySelector('.row-x').addEventListener('click', function(){
+      tr.parentNode.removeChild(tr);
+      updateCount();
+    });
+    return tr;
+  }
+
+  function genderOptions(sel){
+    var opts = ['','Male','Female','Other'];
+    return opts.map(function(o){
+      var label = o === '' ? '—' : o;
+      var s = (o === sel) ? ' selected' : '';
+      return '<option value="'+o+'"'+s+'>'+label+'</option>';
+    }).join('');
+  }
+  function ynOptions(sel){
+    var opts = ['','N','Y'];
+    return opts.map(function(o){
+      var label = o === '' ? '—' : o;
+      var s = (o === sel) ? ' selected' : '';
+      return '<option value="'+o+'"'+s+'>'+label+'</option>';
+    }).join('');
+  }
+
+  function addRow(data){
+    censusBody.appendChild(makeRow(data));
+    updateCount();
+  }
+  function countEmployees(){ return censusBody.getElementsByTagName('tr').length; }
+  function updateCount(){
+    var n = countEmployees();
+    empCountEl.textContent = n;
+    if(n > 0){ showError(4, false); }
+  }
+
+  document.getElementById('addRow').addEventListener('click', function(){ addRow(); });
+
+  /* ---------------------------------------------------------
+     CSV parsing (handles quoted fields, commas, CRLF)
+  --------------------------------------------------------- */
+  function parseCSV(text){
+    var rows = [];
+    var row = [];
+    var field = '';
+    var inQuotes = false;
+    var i = 0, c, next;
+    // strip a UTF-8 BOM if present
+    if(text.charCodeAt(0) === 0xFEFF){ text = text.slice(1); }
+    while(i < text.length){
+      c = text[i];
+      if(inQuotes){
+        if(c === '"'){
+          next = text[i+1];
+          if(next === '"'){ field += '"'; i += 2; continue; }
+          inQuotes = false; i++; continue;
+        }
+        field += c; i++; continue;
+      } else {
+        if(c === '"'){ inQuotes = true; i++; continue; }
+        if(c === ','){ row.push(field); field=''; i++; continue; }
+        if(c === '\r'){ i++; continue; }
+        if(c === '\n'){ row.push(field); rows.push(row); row=[]; field=''; i++; continue; }
+        field += c; i++; continue;
+      }
+    }
+    // last field / row
+    if(field.length > 0 || row.length > 0){ row.push(field); rows.push(row); }
+    // drop fully-empty rows
+    return rows.filter(function(r){
+      return r.some(function(v){ return (v||'').trim() !== ''; });
+    });
+  }
+
+  var csvStatus = document.getElementById('csvStatus');
+  function setStatus(msg, cls){
+    csvStatus.textContent = msg;
+    csvStatus.className = 'csv-status' + (cls ? ' '+cls : '');
+  }
+
+  document.getElementById('csvFile').addEventListener('change', function(evt){
+    var file = evt.target.files && evt.target.files[0];
+    if(!file){ return; }
+    var reader = new FileReader();
+    reader.onload = function(e){
+      try{
+        var rows = parseCSV(String(e.target.result));
+        if(!rows.length){ setStatus('That CSV looked empty — nothing to import.', 'err'); return; }
+        // Detect + skip header row if first cell looks like a header
+        var first = (rows[0][0] || '').toLowerCase().trim();
+        var looksHeader = /first|name|last|id|dob|age|gender|zip|tier|coverage|tobacco|dep/.test(
+          rows[0].join(',').toLowerCase()
+        );
+        var startIdx = looksHeader ? 1 : 0;
+        var added = 0;
+        for(var r = startIdx; r < rows.length; r++){
+          var cols = rows[r];
+          addRow({
+            first:   (cols[0]||'').trim(),
+            last:    (cols[1]||'').trim(),
+            dob:     (cols[2]||'').trim(),
+            gender:  normGender((cols[3]||'').trim()),
+            zip:     (cols[4]||'').trim(),
+            tier:    normTier((cols[5]||'').trim()),
+            tobacco: normYN((cols[6]||'').trim()),
+            dep:     (cols[7]||'').trim()
+          });
+          added++;
+        }
+        if(added > 0){
+          setStatus('Imported ' + added + ' employee' + (added===1?'':'s') + ' from ' + file.name + '.', 'ok');
+        } else {
+          setStatus('No data rows found under the header.', 'err');
+        }
+      } catch(err){
+        setStatus('Sorry — we could not read that CSV. Try the blank template.', 'err');
+      }
+      // reset so re-selecting the same file fires change again
+      evt.target.value = '';
+    };
+    reader.onerror = function(){ setStatus('Could not read the file.', 'err'); };
+    reader.readAsText(file);
+  });
+
+  function normGender(v){
+    var s = (v||'').toLowerCase();
+    if(s.indexOf('m') === 0) return 'Male';
+    if(s.indexOf('f') === 0) return 'Female';
+    if(s) return 'Other';
+    return '';
+  }
+  function normYN(v){
+    var s = (v||'').toLowerCase();
+    if(s.indexOf('y') === 0 || s === 'true' || s === '1') return 'Y';
+    if(s.indexOf('n') === 0 || s === 'false' || s === '0') return 'N';
+    return '';
+  }
+  function normTier(v){
+    var s = (v||'').toLowerCase().replace(/\s+/g,'');
+    if(!s) return '';
+    if(s.indexOf('family') > -1) return 'Family';
+    if(s.indexOf('waiv') > -1 || s.indexOf('decline') > -1) return 'Waiving';
+    if(s.indexOf('spouse') > -1 || s === 'ee+s' || s.indexOf('ee+sp') > -1) return 'EE+Spouse';
+    if(s.indexOf('child') > -1 || s === 'ee+c' || s.indexOf('ee+ch') > -1) return 'EE+Child(ren)';
+    if(s === 'ee' || s === 'employee' || s.indexOf('employeeonly') > -1) return 'EE';
+    // fall back to exact match against known tiers
+    for(var i=0;i<TIERS.length;i++){
+      if(TIERS[i].toLowerCase().replace(/\s+/g,'') === s) return TIERS[i];
+    }
+    return 'EE';
+  }
+
+  /* ---------------------------------------------------------
+     CSV template (data: URI)
+  --------------------------------------------------------- */
+  function csvCell(v){
+    v = (v == null) ? '' : String(v);
+    if(/[",\n\r]/.test(v)){ return '"' + v.replace(/"/g,'""') + '"'; }
+    return v;
+  }
+  function rowsToCSV(rows){
+    return rows.map(function(r){ return r.map(csvCell).join(','); }).join('\r\n');
+  }
+  function dataUri(csv){
+    return 'data:text/csv;charset=utf-8,' + encodeURIComponent('﻿' + csv);
+  }
+
+  var templateLink = document.getElementById('csvTemplate');
+  (function(){
+    var csv = rowsToCSV([
+      CENSUS_HEADERS,
+      ['Jane','Doe','04/12/1985','Female','84101','EE+Spouse','N','1'],
+      ['','ID-2049','39','Male','84604','Family','N','3']
+    ]);
+    templateLink.setAttribute('href', dataUri(csv));
+    templateLink.setAttribute('download', 'atlas-one-census-template.csv');
+  })();
+
+  /* ---------------------------------------------------------
+     Gather all data
+  --------------------------------------------------------- */
+  function getField(name){
+    var el = form.querySelector('[name="'+name+'"]');
+    return el ? (el.value || '').trim() : '';
+  }
+  function getCoverage(){
+    return Array.prototype.map.call(
+      form.querySelectorAll('input[name="coverage"]:checked'),
+      function(c){ return c.value; }
+    );
+  }
+  function getCensusRows(){
+    var rows = [];
+    Array.prototype.forEach.call(censusBody.getElementsByTagName('tr'), function(tr){
+      rows.push({
+        first:   val(tr,'.c-first'),
+        last:    val(tr,'.c-last'),
+        dob:     val(tr,'.c-dob'),
+        gender:  val(tr,'.c-gender'),
+        zip:     val(tr,'.c-zip'),
+        tier:    val(tr,'.c-tier'),
+        tobacco: val(tr,'.c-tobacco'),
+        dep:     val(tr,'.c-dep')
+      });
+    });
+    return rows;
+  }
+  function val(scope, sel){ var e = scope.querySelector(sel); return e ? (e.value||'').trim() : ''; }
+
+  function collectData(){
+    var groupSel = form.querySelector('input[name="groupSize"]:checked');
+    return {
+      groupSize: groupSel ? groupSel.value : '',
+      company: {
+        name: getField('companyName'),
+        street: getField('street'),
+        city: getField('city'),
+        state: getField('state'),
+        zip: getField('zip'),
+        ein: getField('ein'),
+        sic: getField('sic'),
+        effectiveDate: getField('effectiveDate'),
+        eligible: getField('eligible'),
+        participation: getField('participation'),
+        contribution: getField('contribution'),
+        otherStates: getField('otherStates'),
+        carrierMedical: getField('carrierMedical'),
+        carrierDental: getField('carrierDental'),
+        carrierVision: getField('carrierVision')
+      },
+      coverage: getCoverage(),
+      plan: {
+        medDeductible: getField('medDeductible'),
+        dentalDeductible: getField('dentalDeductible')
+      },
+      rfp: {
+        currentRates: getField('currentRates'),
+        renewalRates: getField('renewalRates'),
+        rateHistory: getField('rateHistory'),
+        recentBill: getField('recentBill'),
+        enrollmentCount: getField('enrollmentCount'),
+        commission: getField('commission'),
+        claimsInfo: getField('claimsInfo')
+      },
+      contact: {
+        name: getField('contactName'),
+        email: getField('contactEmail'),
+        phone: getField('contactPhone')
+      },
+      census: getCensusRows()
+    };
+  }
+
+  /* ---------------------------------------------------------
+     Review summary
+  --------------------------------------------------------- */
+  function row(k, v){
+    var vv = (v && String(v).trim()) ? esc(v) : '<span class="summary-empty">—</span>';
+    return '<div class="summary-row"><div class="k">'+esc(k)+'</div><div class="v">'+vv+'</div></div>';
+  }
+  function section(title, inner){
+    return '<div class="summary"><h4>'+esc(title)+'</h4><div class="summary-body">'+inner+'</div></div>';
+  }
+
+  function buildReview(){
+    var d = collectData();
+    var out = document.getElementById('reviewOut');
+    var sizeLabel = d.groupSize === 'large' ? '50+ / Level-Funded (10+)' :
+                    d.groupSize === 'small' ? 'Under 50 employees (small group)' : '';
+
+    var html = '';
+
+    html += section('Group & company', [
+      row('Group size', sizeLabel),
+      row('Company', d.company.name),
+      row('Address', [d.company.street, d.company.city, d.company.state, d.company.zip].filter(Boolean).join(', ')),
+      row('EIN', d.company.ein),
+      row('Nature of business / SIC', d.company.sic),
+      row('Requested effective date', d.company.effectiveDate),
+      row('Eligible employees', d.company.eligible),
+      row('Participation %', d.company.participation),
+      row('Employer contribution', d.company.contribution),
+      row('Other states', d.company.otherStates),
+      row('Current carriers', [
+        d.company.carrierMedical && ('Medical: '+d.company.carrierMedical),
+        d.company.carrierDental && ('Dental: '+d.company.carrierDental),
+        d.company.carrierVision && ('Vision: '+d.company.carrierVision)
+      ].filter(Boolean).join(' · '))
+    ].join(''));
+
+    html += section('Coverage requested', [
+      row('Lines', d.coverage.join(', ')),
+      row('Medical deductible', d.plan.medDeductible),
+      row('Dental deductible', d.plan.dentalDeductible)
+    ].join(''));
+
+    if(d.groupSize === 'large'){
+      html += section('Level-funded / RFP details', [
+        row('Current rates', d.rfp.currentRates),
+        row('Renewal rates', d.rfp.renewalRates),
+        row('Rate history', d.rfp.rateHistory),
+        row('Most recent bill', d.rfp.recentBill),
+        row('Enrollment / membership', d.rfp.enrollmentCount),
+        row('Broker commission', d.rfp.commission),
+        row('Claims / large claimant', d.rfp.claimsInfo)
+      ].join(''));
+    }
+
+    // Census table preview
+    var censusInner = '';
+    if(d.census.length){
+      censusInner += '<div class="summary-row"><div class="k">Employees entered</div><div class="v"><strong>'+d.census.length+'</strong></div></div>';
+      censusInner += '<div class="table-scroll" style="margin-top:10px;"><table class="census"><thead><tr>' +
+        '<th>First</th><th>Last/ID</th><th>DOB/Age</th><th>Gender</th><th>ZIP</th><th>Tier</th><th>Tobacco</th><th>Dep.</th></tr></thead><tbody>';
+      d.census.forEach(function(e){
+        censusInner += '<tr>' +
+          '<td>'+esc(e.first||'—')+'</td>'+
+          '<td>'+esc(e.last||'—')+'</td>'+
+          '<td>'+esc(e.dob||'—')+'</td>'+
+          '<td>'+esc(e.gender||'—')+'</td>'+
+          '<td>'+esc(e.zip||'—')+'</td>'+
+          '<td>'+esc(e.tier||'—')+'</td>'+
+          '<td>'+esc(e.tobacco||'—')+'</td>'+
+          '<td>'+esc(e.dep||'—')+'</td>'+
+        '</tr>';
+      });
+      censusInner += '</tbody></table></div>';
+    } else {
+      censusInner = row('Employees entered', '');
+    }
+    html += section('Employee census', censusInner);
+
+    html += section('Contact', [
+      row('Name', d.contact.name),
+      row('Email', d.contact.email),
+      row('Phone', d.contact.phone)
+    ].join(''));
+
+    out.innerHTML = html;
+
+    // POST this JSON to the CRM inbound webhook to auto-create the lead.
+    // Example:
+    //   fetch(CRM_WEBHOOK_URL, {
+    //     method:'POST', headers:{'Content-Type':'application/json'},
+    //     body: JSON.stringify(collectData())
+    //   });
+  }
+
+  document.getElementById('buildReview').addEventListener('click', buildReview);
+
+  /* ---------------------------------------------------------
+     Download census CSV (company info + all rows)
+  --------------------------------------------------------- */
+  document.getElementById('downloadCsv').addEventListener('click', function(){
+    var d = collectData();
+    var lines = [];
+
+    // Company info block
+    lines.push(['Atlas One Solutions — Health Quote Census & RFP Intake']);
+    lines.push(['Generated', new Date().toLocaleString()]);
+    lines.push([]);
+    lines.push(['COMPANY INFORMATION']);
+    lines.push(['Group size', d.groupSize === 'large' ? '50+ / Level-Funded (10+)' : 'Under 50 (small group)']);
+    lines.push(['Company legal name', d.company.name]);
+    lines.push(['Street', d.company.street]);
+    lines.push(['City', d.company.city]);
+    lines.push(['State', d.company.state]);
+    lines.push(['ZIP', d.company.zip]);
+    lines.push(['EIN / Tax ID', d.company.ein]);
+    lines.push(['Nature of business / SIC', d.company.sic]);
+    lines.push(['Requested effective date', d.company.effectiveDate]);
+    lines.push(['Eligible employees', d.company.eligible]);
+    lines.push(['Participation %', d.company.participation]);
+    lines.push(['Employer contribution', d.company.contribution]);
+    lines.push(['Other states with employees', d.company.otherStates]);
+    lines.push(['Current carrier — Medical', d.company.carrierMedical]);
+    lines.push(['Current carrier — Dental', d.company.carrierDental]);
+    lines.push(['Current carrier — Vision', d.company.carrierVision]);
+    lines.push([]);
+    lines.push(['COVERAGE REQUESTED']);
+    lines.push(['Lines', d.coverage.join('; ')]);
+    lines.push(['Medical deductible', d.plan.medDeductible]);
+    lines.push(['Dental deductible', d.plan.dentalDeductible]);
+    if(d.groupSize === 'large'){
+      lines.push([]);
+      lines.push(['LEVEL-FUNDED / RFP DETAILS']);
+      lines.push(['Current rates', d.rfp.currentRates]);
+      lines.push(['Renewal rates', d.rfp.renewalRates]);
+      lines.push(['Rate history', d.rfp.rateHistory]);
+      lines.push(['Most recent bill', d.rfp.recentBill]);
+      lines.push(['Enrollment / membership count', d.rfp.enrollmentCount]);
+      lines.push(['Broker commission', d.rfp.commission]);
+      lines.push(['Claims / large-claimant info', d.rfp.claimsInfo]);
+    }
+    lines.push([]);
+    lines.push(['CONTACT']);
+    lines.push(['Name', d.contact.name]);
+    lines.push(['Email', d.contact.email]);
+    lines.push(['Phone', d.contact.phone]);
+    lines.push([]);
+    lines.push(['EMPLOYEE CENSUS ('+d.census.length+')']);
+    lines.push(CENSUS_HEADERS);
+    d.census.forEach(function(e){
+      lines.push([e.first, e.last, e.dob, e.gender, e.zip, e.tier, e.tobacco, e.dep]);
+    });
+
+    var csv = rowsToCSV(lines);
+    var fname = 'census-' + slug(d.company.name || 'atlas-one') + '.csv';
+    triggerDownload(dataUri(csv), fname);
+  });
+
+  function triggerDownload(uri, filename){
+    var a = document.createElement('a');
+    a.setAttribute('href', uri);
+    a.setAttribute('download', filename);
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
+  /* ---------------------------------------------------------
+     Print
+  --------------------------------------------------------- */
+  document.getElementById('printBtn').addEventListener('click', function(){
+    buildReview();
+    window.print();
+  });
+
+  /* ---------------------------------------------------------
+     Email to David (mailto)
+  --------------------------------------------------------- */
+  document.getElementById('emailBtn').addEventListener('click', function(){
+    if(!validateStep(5)){ return; }
+    var d = collectData();
+    var company = d.company.name || '(company)';
+    var subject = 'Health quote census — ' + company;
+    var body =
+      'Hi David,\n\n' +
+      'Our health insurance census is ready for a quote.\n\n' +
+      'Company: ' + company + '\n' +
+      'Group size: ' + (d.groupSize === 'large' ? '50+ / Level-Funded' : 'Under 50 (small group)') + '\n' +
+      'Eligible employees: ' + (d.company.eligible || '—') + '\n' +
+      'Requested effective date: ' + (d.company.effectiveDate || '—') + '\n' +
+      'Coverage: ' + (d.coverage.join(', ') || '—') + '\n' +
+      'Employees on census: ' + d.census.length + '\n\n' +
+      'Contact: ' + (d.contact.name || '') + ' · ' + (d.contact.email || '') + ' · ' + (d.contact.phone || '') + '\n\n' +
+      'NOTE: I used the "Download my census (CSV)" button — please find the CSV attached to this email ' +
+      '(mailto can\'t attach automatically, so I\'ve added it manually).\n\n' +
+      'Thanks!';
+    var href = 'mailto:david@AtlasOneSolutions.com?subject=' +
+      encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    window.location.href = href;
+  });
+
+  /* ---------------------------------------------------------
+     Helpers
+  --------------------------------------------------------- */
+  function esc(s){
+    if(s == null) return '';
+    return String(s)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
+  function slug(s){
+    return String(s).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,40) || 'atlas-one';
+  }
+
+  /* ---------------------------------------------------------
+     Init — seed 3 empty census rows for convenience
+  --------------------------------------------------------- */
+  addRow(); addRow(); addRow();
+  showStep(1);
+
+})();
+</script>
+
+<script id="a1-save-cfg">
+window.A1_SAVE_CFG = { kind:'census', title:'this census', mount:'.card' };
+</script>
+<!-- Atlas One — save & reload a build (added 2026-08-26) -->
+<style id="a1-save-css">
+.a1-save{display:flex;align-items:center;gap:10px;flex-wrap:wrap;border:1.5px solid #C8D2E4;
+  border-radius:10px;padding:11px 13px;margin:0 0 15px;background:#FAFAF8;
+  font-family:'DM Sans',system-ui,-apple-system,sans-serif}
+.a1-save .a1s-txt{flex:1 1 170px;min-width:150px}
+.a1-save .a1s-lab{display:block;font-weight:700;font-size:.82rem;color:#23304D;margin:0 0 2px}
+.a1-save .a1s-hint{font-size:.71rem;color:#5C6780;line-height:1.35}
+.a1-save button{background:#788DE3;color:#fff;border:none;border-radius:7px;padding:7px 13px;
+  font-family:inherit;font-size:.78rem;font-weight:700;cursor:pointer;white-space:nowrap}
+.a1-save button:hover{background:#6478d6}
+.a1-save button.ghost{background:#fff;color:#23304D;border:1px solid #C8D2E4;font-weight:600}
+.a1-save button.ghost:hover{border-color:#788DE3;color:#788DE3}
+.a1-save input[type=file]{display:none}
+.a1-save .a1s-acts{display:flex;gap:7px;flex:0 0 auto;margin-left:auto}
+.a1s-toast{position:fixed;left:50%;transform:translateX(-50%);bottom:26px;z-index:99999;
+  background:#23304D;color:#fff;padding:11px 18px;border-radius:9px;font-family:'DM Sans',system-ui,sans-serif;
+  font-size:.84rem;box-shadow:0 8px 28px rgba(35,48,77,.28);opacity:0;transition:opacity .18s}
+.a1s-toast.on{opacity:1}
+@media print{.a1-save{display:none!important}.a1s-toast{display:none!important}}
+</style>
+<script id="a1-save-js">
+/* =============================================================================
+   Save & reload a build.
+
+   Why a downloadable file and not browser storage: these tools are opened from
+   OneDrive, from the Portal, and off a USB stick, on whatever machine the client
+   happens to be at. Browser storage is tied to one browser on one machine and
+   silently disappears. A file is portable, backup-able, and can be emailed to
+   the client so THEY hold their own handbook and bring it back next year.
+
+   The file records every form control on the page by id/name, plus whatever
+   extra state the host tool registers. Reloading replays it and fires the same
+   events a human typing would, so the tool recomputes normally.
+   ========================================================================== */
+(function(){
+  var CFG = window.A1_SAVE_CFG || {};
+  var KIND = CFG.kind || 'atlas-build';
+  var TITLE = CFG.title || 'this build';
+  var MOUNT = CFG.mount || null;
+
+  function toast(msg){
+    var t=document.createElement('div');
+    t.className='a1s-toast'; t.textContent=msg;
+    document.body.appendChild(t);
+    requestAnimationFrame(function(){ t.classList.add('on'); });
+    setTimeout(function(){ t.classList.remove('on');
+      setTimeout(function(){ t.remove(); }, 250); }, 2600);
+  }
+  function key(el){
+    return el.id || el.name || '';
+  }
+  function controls(){
+    return Array.prototype.filter.call(
+      document.querySelectorAll('input,select,textarea'),
+      function(el){
+        if(el.type==='file') return false;
+        if(el.closest('.a1-save')) return false;
+        return !!key(el);
+      });
+  }
+  function collect(){
+    var data = { _kind:KIND, _version:1, _saved:new Date().toISOString(), fields:{}, extra:{} };
+    controls().forEach(function(el){
+      var k = key(el);
+      if(el.type==='checkbox'){
+        data.fields[k] = { t:'c', v: el.checked };
+      } else if(el.type==='radio'){
+        if(el.checked) data.fields['radio:'+el.name] = { t:'r', v: el.value };
+      } else {
+        data.fields[k] = { t:'v', v: el.value };
+      }
+    });
+    if(typeof CFG.save === 'function'){
+      try { data.extra = CFG.save() || {}; } catch(e){ }
+    }
+    return data;
+  }
+  function fire(el, types){
+    types.forEach(function(t){
+      el.dispatchEvent(new Event(t, {bubbles:true}));
+    });
+  }
+  function apply(data){
+    var applied = 0, missing = 0;
+    Object.keys(data.fields || {}).forEach(function(k){
+      var rec = data.fields[k];
+      if(rec.t === 'r'){
+        var name = k.slice(6);
+        var r = document.querySelector('input[type=radio][name="'+name+'"][value="'+
+                 String(rec.v).replace(/"/g,'\\"')+'"]');
+        if(r){ r.checked = true; fire(r,['change','click']); applied++; } else missing++;
+        return;
+      }
+      var el = document.getElementById(k) ||
+               document.querySelector('[name="'+String(k).replace(/"/g,'\\"')+'"]');
+      if(!el){ missing++; return; }
+      if(rec.t === 'c'){ el.checked = !!rec.v; fire(el,['change']); }
+      else { el.value = rec.v; fire(el,['input','change']); }
+      applied++;
+    });
+    if(typeof CFG.load === 'function'){
+      try { CFG.load(data.extra || {}); } catch(e){ }
+    }
+    return { applied:applied, missing:missing };
+  }
+  function stamp(){
+    var co = '';
+    ['f_company','companyName','co','sc_co','f_co'].some(function(id){
+      var e=document.getElementById(id);
+      if(e && e.value){ co = e.value; return true; }
+      return false;
+    });
+    var d=new Date();
+    var ymd = d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+    return ((co? co.replace(/[^\w]+/g,'_').replace(/^_+|_+$/g,'').slice(0,40)+'_' : '') + KIND + '_' + ymd);
+  }
+  function download(name, text){
+    try{
+      var blob=new Blob([text],{type:'application/json;charset=utf-8'});
+      var url=URL.createObjectURL(blob), a=document.createElement('a');
+      a.href=url; a.download=name; document.body.appendChild(a); a.click();
+      setTimeout(function(){ a.remove(); URL.revokeObjectURL(url); },0);
+    }catch(e){
+      var a2=document.createElement('a');
+      a2.href='data:application/json;charset=utf-8,'+encodeURIComponent(text);
+      a2.download=name; document.body.appendChild(a2); a2.click(); a2.remove();
+    }
+  }
+  function doSave(){
+    var data = collect();
+    var n = Object.keys(data.fields).length;
+    if(!n){ alert('There is nothing filled in yet to save.'); return; }
+    download(stamp()+'.a1build.json', JSON.stringify(data, null, 2));
+    toast('Saved. Keep this file — reopen it here to pick up where you left off.');
+  }
+  function doLoad(file){
+    var r = new FileReader();
+    r.onload = function(){
+      var data;
+      try { data = JSON.parse(r.result); }
+      catch(e){ alert('That file is not a saved build.\n\nIt should be the .a1build.json file this tool produced.'); return; }
+      if(!data || !data.fields){ alert('That file is not a saved build.'); return; }
+      if(data._kind && data._kind !== KIND){
+        if(!confirm('That file was saved from a different tool ('+data._kind+').\n\n'
+          +'Load it anyway? Anything that does not match will be ignored.')) return;
+      }
+      var res = apply(data);
+      var when = data._saved ? new Date(data._saved).toLocaleString() : 'an earlier session';
+      toast('Loaded ' + res.applied + ' answers from ' + when + '.');
+      if(res.missing > 4){
+        console.warn('[Atlas One] ' + res.missing + ' saved fields had no matching control on this page.');
+      }
+    };
+    r.readAsText(file);
+  }
+  function build(){
+    if(document.getElementById('a1SaveFile')) return;
+    var box=document.createElement('div');
+    box.className='a1-save no-print';
+    box.innerHTML =
+      '<input type="file" id="a1SaveFile" accept=".json,application/json">'
+     +'<div class="a1s-txt"><span class="a1s-lab">Save your work</span>'
+     +'<div class="a1s-hint">Download '+TITLE+' as a file. Reopen it here next time and every '
+     +'answer comes back &mdash; edit and reprint instead of starting over.</div></div>'
+     +'<div class="a1s-acts">'
+     +'<button type="button" id="a1SaveBtn">Save build</button>'
+     +'<button type="button" class="ghost" id="a1LoadBtn">Reopen a build</button>'
+     +'</div>';
+    var host = MOUNT ? document.querySelector(MOUNT) : null;
+    if(host){
+      var head = host.querySelector('h2,h3,.section-label,.panel-head');
+      if(head && head.parentNode === host) host.insertBefore(box, head.nextSibling);
+      else host.insertBefore(box, host.firstChild);
+    } else {
+      box.style.cssText += ';position:fixed;top:12px;right:12px;z-index:9998;max-width:430px;'
+        + 'background:#fff;box-shadow:0 8px 26px rgba(35,48,77,.20)';
+      document.body.appendChild(box);
+    }
+    document.getElementById('a1SaveBtn').addEventListener('click', doSave);
+    document.getElementById('a1LoadBtn').addEventListener('click', function(){
+      document.getElementById('a1SaveFile').click();
+    });
+    document.getElementById('a1SaveFile').addEventListener('change', function(e){
+      var f=e.target.files[0]; if(f) doLoad(f); e.target.value='';
+    });
+  }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', build);
+  else build();
+  window.A1Save = { save:doSave, collect:collect, apply:apply };
+})();
+</script>
+</body>
+</html>
