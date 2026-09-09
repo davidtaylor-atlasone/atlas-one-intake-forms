@@ -364,3 +364,104 @@ and W7 from scratch.
 8. Task **due date** is Value + Unit; "due today" is `0 Days`.
 9. Two freezes happened on Create workflow. Dashboard then Automation fixed one; a full
    reload of the location dashboard URL then Automation fixed the other.
+
+---
+
+# Run G part 3: build report (9 Sep 2026)
+
+Continues the part 2 report above. Same session rules: app.ridethehightide.com, one tab,
+everything Draft, nothing published.
+
+## Status after part 3
+
+| Workflow | State |
+|---|---|
+| W6 Suppression and caps | **Complete, Draft** |
+| W6b Sequence stalled | **Complete, Draft** |
+| W0 Set vertical lines | **Complete, Draft** |
+| **W1 Inbound speed to lead** | **Complete, Draft** (new in part 3) |
+| **W2 Warm referral** | **Partial**: settings, trigger, and the Cornerstone gate |
+| W3, W3a, W4, W5, W7 | **Not started** |
+
+Four of ten are finished. The fifth has its trigger and its most important structural
+piece. **W3, W3a, W4, W5 and W7 do not exist yet** and I am not going to imply otherwise.
+
+## Your three decisions, as applied
+
+1. **No SMS anywhere.** Every `Send SMS` and its `sms consent` If/Else is skipped. The two
+   skipped steps so far are **W1 step 6** and **W1 step 15**; W4 step 15 will be the third
+   when W4 is built. Sequences stay linear, which also removed the branch-duplication
+   problem entirely. Each skip is recorded in the checkpoint file.
+2. **Stop on response ON**, Goal steps skipped. Done on W1 and W2. Still to do on W3, W3a,
+   W4, W5, W7.
+3. **Form B** confirmed as `Atlas One, Accounting, Bookkeeping & Payroll, Service Request`.
+   No change was needed; W1's trigger already had it.
+
+Plus: **W6 keeps "All workflows except current workflow"** on its Remove From Workflow
+step, as you confirmed. Noted in checkpoint 2 and unchanged.
+
+## Your correction about the templates: verified
+
+I re-read the live template list in the Send Email picker rather than trusting the report.
+**The duplicates are gone.** `P-A-3` returns one row. `P-B-` returns one each of `P-B-1`,
+`P-B-120`, `P-B-2`, `P-B-3`, `P-B-4`. `P-C-0 Instant reply` exists and loads with the
+branded Atlas One wrapper. The stale "delete the duplicates first" warning in the part 2
+report and in the build sheet should be ignored; the live list is correct.
+
+## W1 Inbound speed to lead, as built
+
+Trigger: one `Form submitted` filtered **Form is is any of** Form A and Form B.
+Settings: re-entry OFF, Stop on response ON.
+
+Linear spine: Lead Lane = C Inbound, add `sequence active`, Last Touch Date = Current Date,
+then **If/Else "Suppressed?"**. The Suppressed branch (five OR'd tag conditions) creates
+the decide-by-hand task and ends. The None branch runs the whole sequence: P-C-0 Instant
+reply, the CALL NOW task, the app-push notification, a 4 hour business-hours wait, then
+**If/Else "Replied already?"** whose None branch carries Call 2 at 3 PM, wait 1 day, P-C-2,
+wait 2 days, Call 3, wait 3 days, P-C-3, add `cooling 30d`, remove `sequence active`,
+wait 30 days, remove `cooling 30d`.
+
+Full card-by-card detail is in checkpoint 5 of `_briefs/RUN-G-checkpoints.md`.
+
+## New deviations in part 3
+
+1. **"Due in 5 minutes" cannot be built.** Task due date is Value + Unit where Unit is only
+   Days / Weeks / Months / Years, plus an optional clock time. W1's CALL NOW task is
+   **0 Days** (today). The immediacy is carried by the Internal notification beside it.
+2. **`{{right_now.date}}` is not accepted by a date field.** Its value picker offers
+   Custom Date / **Current Date** / Specific Date. Current Date is used wherever the sheet
+   writes `{{right_now.date}}`.
+3. **Business hours are set on the Wait action itself**, not inherited from Business
+   Profile. W1's 4 hour wait uses **Advance window ON, Mon to Fri, 08:30 AM to 5:00 PM**.
+   That makes deferred item 3 (set Business Profile hours) less urgent than it looked,
+   though W4's time-window setting may still want it.
+
+## Still open
+
+1. **A2P status is still unread.** No SMS action exists in any workflow, so nothing is at
+   risk, but the status is unknown. When it reads Approved, texting goes in as the small
+   tag-triggered side workflows you described, not back into these sequences.
+2. **W7 still needs the Cornerstone sender decision honoured** the way you set it:
+   Internal Notification to David plus a task on the contact, **not** Send Email, because
+   GHL cannot send as Cornerstone until `david.taylor@cornerstonepeo.com` is verified.
+   Nothing is built for W7 yet.
+3. **W3 step 18** remains the simple always `Cooling 90d` version. Unbuilt.
+4. The Personal Line approval gate in W2, W3 and W5 will use the Wait type
+   **"Until specific conditions are met"** with a timeout; that wait type exists and was
+   seen in the menu, but has not been configured yet.
+
+## Where the next session picks up
+
+Open **W2**, click the `+` under the **None** branch of "Cornerstone gate", build actions
+2 to 23. Then W3, W3a, W4, W5, W7 from scratch. For every one: Settings first
+(re-entry per the sheet, **Stop on response ON**), then the trigger, then the actions with
+**no Goal step and no SMS steps**.
+
+The builder notes at the end of the part 2 report still apply, plus:
+- The `Contact changed` trigger has **Has changed** and **Has changed to**; the latter is
+  how you pin a dropdown value.
+- The **Wait** action opens in two different layouts. Always read the **Selected wait type**
+  line; use **Change type** if it is wrong, and re-set Time period and Unit afterwards
+  because changing type resets them to `0 minutes`.
+- Workflow **Settings toggles need one click each with a pause between**. Two toggle clicks
+  in one batch can land as on-then-off and net no change.
