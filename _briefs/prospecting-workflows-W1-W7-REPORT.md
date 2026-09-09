@@ -229,3 +229,138 @@ Two things that will save time:
    `P-A-1` and `P-A-2`.
 6. **The Monday batch:** 25 names, Lead Lane = D Cold, Vertical set, tag `Batch ready`.
    20 a day for the first two weeks of W4, then 25.
+
+---
+
+# Run G part 2: workflow build report (9 Sep 2026)
+
+Browser session at **app.ridethehightide.com**, location `AzTPxnK2vSUj19jYoDmR`, one tab,
+built by hand in the workflow builder. **Everything below is saved as Draft. Nothing is
+published. Every SMS action that exists is disabled; in fact no SMS action was reached.**
+
+## Status
+
+| Workflow | State |
+|---|---|
+| Tool hosting | **Done.** Pushed, all three URLs 200 on the first poll |
+| **W6 Suppression and caps** | **Built, complete, Draft** |
+| **W6b Sequence stalled** | **Built, complete, Draft** |
+| **W0 Set vertical lines** | **Built, complete, Draft**, all 21 values verified, live URLs |
+| **W1 Inbound speed to lead** | **Partial.** Settings, trigger and actions 1 to 3 of 21 |
+| W2, W3, W3a, W4, W5, W7 | **Not started** |
+
+Three of ten workflows are finished. The fourth is a quarter built. **I did not get to
+W2, W3, W3a, W4, W5 or W7, and I am not going to pretend otherwise** — the builder needs
+a screenshot round trip per click and the remaining six workflows are roughly 140 more
+action cards.
+
+## What is built
+
+### W6 Suppression and caps  `32015c79-5132-43ae-9aa2-09f2321a8426`
+Three triggers: Customer Replied (unfiltered, so any channel); Contact tag > Tag added
+`not interested`; Contact tag > Tag added `dnc`.
+Actions: Remove tag `sequence active` > Remove from workflow (**All workflows except
+current workflow**) > If/Else "Route by reason" with three branches.
+- **DNC**: clear `Next Touch Date` (action type **Clear field data**), END.
+- **Not interested**: add `hold 6m`, wait **180 days**, remove `hold 6m`, END.
+- **None (a reply)**: add `reply received`; task "Reply from {{contact.first_name}}
+  {{contact.last_name}}: read and respond" to David due today; Internal notification, type
+  **Notification** (app push), body `Reply from {{contact.company_name}}`, redirect
+  Conversation, to David. END.
+
+### W6b Sequence stalled  `3e30bb6d-29fd-4a00-99fd-9a25c1ec6ddc`
+Trigger: Contact tag > Tag added `sequence active`.
+Wait 5 days > If/Else "Touched recently?": branch `Last Touch Date` **Is not Before 5
+Days** ends; the **None** branch (so, last touched more than 5 days ago) creates
+"Sequence stalled: {{contact.company_name}}" for David, due today.
+
+### W0 Set vertical lines  `de389546-ad9f-42a2-9784-bc231014c8a0`
+Trigger: Contact changed, filter **Vertical has changed**.
+One If/Else "Route by vertical" with seven branches (six verticals plus None for Other and
+blank). Each branch holds **one** Update contact field action that sets **Vertical Opener,
+Vertical Proof and Vertical Tool together**. All 21 values are Appendix A verbatim with
+the real tool URLs substituted for `[link]`. Every one of the seven cards was reopened and
+read back after saving.
+
+### W1 Inbound speed to lead  `e50ddca0-1bc1-4a4b-a706-f2d02ba27259`  (partial)
+Allow re-entry OFF, Stop on response ON. One trigger, Form submitted, **Form is is any of**
+Form A and the Accounting/Bookkeeping/Payroll form. Actions 1 to 3 built: Lead Lane =
+C Inbound, add `sequence active`, Last Touch Date = **Current Date**. Actions 4 to 21 are
+not built.
+
+## Decisions I made, and why
+
+1. **W6 removes from "All workflows except current workflow", not "All workflows".**
+   "All workflows" includes W6 itself and would kill W6 at step 2, so the `hold 6m` branch,
+   the reply task and the notification would never run. Reverse only if you decide the
+   notification does not matter.
+2. **W6's Internal Notification sits inside the reply branch, not after the If/Else.**
+   Branches in this builder do not rejoin; each runs to its own END. Its body is
+   "Reply from ..." so the reply branch is where it belongs.
+3. **Notification channel is app push, not SMS**, because no SMS may be enabled before A2P.
+4. **W6b's condition is `Is not` + `Before 5 Days`** with the task in the None branch. GHL
+   has no "is within the last N days" operator; this is the same logic in the operators
+   that exist.
+5. **6 months is 180 days.** Wait units are only seconds, minutes, hours, days.
+6. **W0 uses one Update contact field per branch carrying three fields**, not three actions.
+7. **W1 uses one Form submitted trigger for both forms.** The Form filter is a multi-select
+   and saves as "is any of", which is the OR the sheet wanted from two triggers.
+8. **The Goal step does not exist in the form the sheet assumes.** No Customer Replied goal
+   type; "User Replied" means the staff user. Used **Settings > Stop on response** instead,
+   which ends the workflow when the contact responds to something it sent. Do the same on
+   W2, W3, W4, W5, W7.
+9. **`{{right_now.date}}` is not accepted by a date field.** Use the value picker's
+   **Current Date**.
+
+## Assumptions you should check
+
+1. **Form B is assumed to be `Atlas One — Accounting, Bookkeeping & Payroll — Service
+   Request`.** The build sheet never names it. This is the only field in W1 that is a guess.
+2. W6's `Customer Replied` trigger was left **unfiltered**, which is how "channel: Any" is
+   expressed.
+3. Task **Description** is a required field the runbook does not supply; I wrote a one line
+   description for each task I created.
+
+## Deferred questions, in priority order
+
+1. **The SMS consent gate cannot be built inline.** Branches do not rejoin, so
+   "If `sms consent` then Send SMS" followed by more steps forces the whole tail to be
+   duplicated into both branches. Pick one: (a) inline disabled SMS with the tag as the
+   enable time qualifier, (b) duplicate the tail, (c) move the SMS sends to the end of
+   their segment. Affects W1 steps 6 and 15 and W4 step 15. **Nothing was built for these
+   rather than guess.**
+2. **W3 step 18** was already settled as the simple always `Cooling 90d` version. That
+   still stands and is unbuilt.
+3. **A2P status is still unread.** Settings > Phone Numbers > Trust Center. No SMS action
+   exists yet anywhere, so nothing is at risk, but the status is still unknown.
+4. `Benefits Renewal Month` (Form A, a month name) and the new `Benefits Renewal Date` date
+   field are still not connected. W3a needs the date one.
+5. The duplicate templates (`P-A-3`, `P-B-1`, `P-B-2`) and the stray `New Template` are
+   **still not deleted**. The first Send Email step built will offer two identical names.
+   Delete them before building W1 step 12 onward.
+
+## Where to resume
+
+Open **W1** and continue at action 4 (the suppression If/Else). Structure it as: branch
+"Suppressed" = `Tags` **Includes** ... joined with **OR** across `cooling 30d`,
+`cooling 60d`, `cooling 90d`, `hold 6m`, `dnc` (Includes with several tags means ALL, so
+each tag needs its own segment joined by OR), that branch does the "decide by hand" task
+and ends; the **None** branch carries the rest of the sequence. Then W2, W3, W3a, W4, W5
+and W7 from scratch.
+
+## Builder notes that will save the next session hours
+
+1. The builder is a **cross origin iframe**; JavaScript, the accessibility tree and the
+   `find` tool cannot see inside it. Everything is coordinate clicks on screenshots.
+2. **Dropdown options need a double click**, or type then Down then Return. A single click
+   silently does nothing.
+3. **Name the action before picking a tag**; renaming afterwards clears the tag chip.
+4. Canvas zoom must be near **100%**; `+` buttons ignore clicks at 154% and 190%.
+5. Typing **`/`** in a value field opens the merge tag picker, which then covers Save.
+   Click another field to dismiss it.
+6. "Error while saving the workflow" is often transient. **Reopen the action and read it
+   back** before redoing anything.
+7. The panel X can open the Workflow AI sidebar; the sidebar toggle top left closes that.
+8. Task **due date** is Value + Unit; "due today" is `0 Days`.
+9. Two freezes happened on Create workflow. Dashboard then Automation fixed one; a full
+   reload of the location dashboard URL then Automation fixed the other.
