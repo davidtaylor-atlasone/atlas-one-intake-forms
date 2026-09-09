@@ -254,3 +254,77 @@ Two in a row while trying to open Create workflow > Start from Scratch after the
 checkpoint. Recovered per the runbook: Dashboard, then Automation in the left menu; when
 that was not enough, a full reload of the location dashboard URL followed by clicking
 Automation. Third attempt succeeded, so the counter reset. No checkpoint was lost.
+
+---
+
+## Checkpoint 4: W1 Inbound speed to lead (PARTIAL) and run stopped here
+
+### W1 Inbound speed to lead  (Draft, id e50ddca0-1bc1-4a4b-a706-f2d02ba27259)
+
+**Settings:** Allow re-entry **OFF** (turned off, verified). **Stop on response ON** (see
+the Goal decision below). Allow multiple opportunities left at its default ON.
+
+**Trigger (one, not two):** `Form submitted`, named "Form A or Form B submitted", filter
+**Form is** — is any of:
+- `Atlas One — PEO / Prospect Quote Request`  (Form A)
+- `Atlas One — Accounting, Bookkeeping & Payroll — Service Request`  (taken as Form B)
+
+**Deviation, logged:** the build sheet says Form A and Form B need **two separate
+triggers** because "filters inside a single trigger are ANDed". That is true of separate
+filter *rows*, but the **Form is** filter is itself a multi-select and the saved trigger
+reads `Form is is any of [...]` — an OR. One trigger is therefore exactly equivalent to
+the two the sheet asks for, with half the surface to maintain. The third form on the
+location, `Form 0`, was deliberately not included.
+
+**Assumption to confirm:** the build sheet never names Form B. The location has exactly
+three forms; `Atlas One — Accounting, Bookkeeping & Payroll — Service Request` is the only
+plausible second intake form, so it was used. **If Form B is meant to be something else,
+this filter is the one thing to change.**
+
+**Deviation, logged (the Goal step):** the sheet wants a Goal step "Event: Customer
+Replied, on match skip to end" at the top of every sequence workflow. GHL's **Goal event**
+action exists, but its goal types are: Received an Email Event, Clicked a trigger link,
+Added a contact Tag, Removed a contact Tag, Appointment status, Payment Received, Form
+Submitted, Document Status, Invoice paid, Review request clicked, **User Replied**, Task
+status. There is **no Customer Replied goal** — "User Replied" is the staff user, not the
+contact, so using it would have been wrong. Used instead: **Settings > Stop on response
+= ON**, whose own description is "Ends workflow for a contact if the contact responds to a
+message that is sent from this workflow". That is the Goal step's intent, enforced at the
+workflow level rather than as a canvas node. W6 remains the global backstop (Customer
+Replied removes the contact from all other workflows). **Apply the same setting to W2, W3,
+W4, W5 and W7 in place of their Goal steps.**
+
+**Actions built and saved (3 of 21):**
+
+| # | Card | Settings |
+|---|---|---|
+| 1 | Update contact field "Lead Lane C Inbound" | field `Lead Lane` = **C Inbound** |
+| 2 | Add contact tag "Add sequence active" | tag `sequence active` |
+| 3 | Update contact field "Stamp Last Touch Date" | field `Last Touch Date` = **Current Date** |
+
+**Finding 13.** A date field in Update contact field does not take `{{right_now.date}}`.
+Its value picker offers **Custom Date / Current Date / Specific Date**; **Current Date** is
+the native equivalent and is what was used. Use it everywhere the sheet writes
+`{{right_now.date}}`.
+
+### Actions 4 to 21 of W1 are NOT built
+Still to do, per the build sheet: the suppression If/Else and its task, the P-C-0 Instant
+reply send, the two SMS gates, the CALL NOW task and notification, the business hours wait,
+the reply check, and the rest of the cadence through `cooling 30d`.
+
+**Design problem to settle before building step 6 and step 15 (the SMS gates).**
+Branches in this builder **do not rejoin** (finding 6). The sheet's "If SMS consent then
+Send SMS" followed by more steps cannot be expressed inline: whatever follows the If/Else
+has to be duplicated into every branch. Three options, none free:
+1. Put the Send SMS inline and **disabled**, with no consent branch, and rely on the
+   `sms consent` tag being what qualifies a contact for SMS at enable time. Simplest, but
+   the gate is a procedure rather than a control.
+2. Build the branch and **duplicate the tail** of the sequence into both branches (15 steps
+   after step 6, 6 steps after step 15). Faithful, but doubles the maintenance surface.
+3. Move both SMS sends to the **end** of their segment so the tail to duplicate is empty.
+   Changes the cadence order slightly.
+**This needs David's call.** Nothing was built for steps 6 and 15 rather than guess.
+
+### Not started
+**W2, W3, W3a, W4, W5, W7 have not been created.** The run stopped here; see the report
+for exactly where to resume.
