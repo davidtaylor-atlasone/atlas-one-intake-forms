@@ -539,3 +539,64 @@ W5).
 verify. Their previews render correctly in the Send Email picker: the Atlas One wrapper,
 the periwinkle button, and `{{contact.referral_partner_name}}`, `{{contact.personal_line}}`
 and `{{contact.vertical_proof}}` all present as merge fields. Report item 2 is closed.
+
+---
+
+## Checkpoint 8: W3 Trigger sequence COMPLETE
+
+### W3 Trigger sequence  (Draft, id 5d02c838-41a3-47b1-be92-aa7c03ee74df)
+
+**Settings:** Allow re-entry **ON** (per the sheet, it runs once per trigger event),
+**Stop on response ON**.
+
+**Trigger:** `Contact changed` "Trigger Date set", filter `Trigger Date` **Has changed**
+(any value). Reads back as `Trigger Date has changed`.
+
+**Action 1: If/Else "DNC gate"**
+- Branch **DNC**: `Tags` **Includes** `dnc`. No steps, ENDs. DNC is absolute.
+- Branch **None** carries everything below.
+
+| # | Card | Settings |
+|---|---|---|
+| 3 | Add contact tag "Add sequence active" | `sequence active` |
+| 4 | Wait **"Gate: wait for Personal Line"** | Until specific conditions are met, `Personal Line` **Is not empty**, Timeout **2 days** |
+
+Gate branches:
+- **Time out**: Add task "Task: write the personal line", title
+  `Write the personal line for {{contact.company_name}}`, David, 0 Days. ENDs.
+- **Condition** carries the sequence:
+
+| # | Card | Settings |
+|---|---|---|
+| 5 | Add task "Task: Call plus voicemail" | `Call plus voicemail: {{contact.company_name}}, trigger {{contact.trigger_type}}`, David, **0 Days at 10:00 AM** |
+| 6 | Email "Email: P-B-1 Trigger Email 1" | linked template |
+| 7 | Update contact field "Stamp Last Touch Date" | `Last Touch Date` = **Current Date** |
+| 8 | Wait "Wait 2 days" | 2 days |
+| 9 | Email "Email: P-B-2 Trigger Email 2" | linked template |
+| 10 | Wait "Wait 2 days" | 2 days |
+| 11 | Add task "Task: Call no voicemail" | `Call, no voicemail: {{contact.company_name}}`, David, **0 Days at 4:00 PM** |
+| 12 | Wait "Wait 2 days" | 2 days |
+| 13 | Add task "Task: Call" | `Call: {{contact.company_name}}`, David, 0 Days |
+| 14 | Email "Email: P-B-3 Trigger Email 3" | linked template |
+| 15 | Wait "Wait 1 day" | 1 day |
+| 16 | Email "Email: P-B-4 Trigger close" | linked template |
+| 17 | Remove contact tag "Remove sequence active" | `sequence active` |
+| 18 | Add contact tag "Add cooling 90d" | `cooling 90d` |
+| 18 | Wait "Wait 90 days" | 90 days |
+| 18 | Remove contact tag "Remove cooling 90d" | `cooling 90d` |
+
+**Step 18 is the simple always `Cooling 90d` version**, per your decision. No
+`Lifted Suppression` field, no three-branch re-add.
+
+**Deviation, logged: the sheet's step 2 was dropped as a consequence.** Step 2 was an
+If/Else on the cooling/hold tags whose only job was to set
+`Lifted Suppression` = `Yes` so that step 18 could put the right tag back. With the simple
+step 18 that record is never read, so the If/Else would have been a no-op that fires and
+falls straight through. The behaviour is unchanged and intended: **a real trigger event
+runs the sequence even if the contact was cooling, and the contact ends on `cooling 90d`
+regardless of what they were on before.** The one cost, already noted in the sheet, is that
+a contact who was in `hold 6m` comes back after 90 days rather than serving the rest of
+the six months.
+
+**Also note:** the DNC branch is a hard stop, so a `dnc` contact never reaches the
+suppression logic at all, which is the intended precedence.
