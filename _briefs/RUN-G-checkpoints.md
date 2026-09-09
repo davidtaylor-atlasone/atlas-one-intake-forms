@@ -459,3 +459,83 @@ steps anywhere**.
 
 ### Freezes
 None in this segment. Two earlier (checkpoint 3), both recovered, never three in a row.
+
+---
+
+## Checkpoint 7: W2 Warm referral COMPLETE
+
+### W2 Warm referral  (Draft, id c5666735-0e74-4d95-a333-36bdf015d53b)
+
+**Settings:** Allow re-entry **OFF**, **Stop on response ON**.
+**Trigger:** `Contact changed` "Lead Lane set to A Referral", filter `Lead Lane`
+**Has changed to** `A Referral`.
+
+**Action 1: If/Else "Cornerstone gate"**
+- Branch **Cornerstone**: `Brand Identity` **Is** `Cornerstone`. No steps, ENDs. This is
+  the mirror of W7's gate and is what stops a contact running both.
+- Branch **None** carries everything below.
+
+**Action 2: If/Else "Suppressed?"**
+- Branch **Suppressed**: `Tags` **Includes** `cooling 30d` **OR** `cooling 60d` **OR**
+  `cooling 90d` **OR** `hold 6m` **OR** `dnc` (five OR'd conditions).
+  Inside: Add task "Task: suppressed referral, decide by hand", title
+  `Referral for a suppressed contact: {{contact.company_name}}. Decide by hand.`,
+  David, 0 Days. Then ENDs.
+- Branch **None** carries the sequence:
+
+| # | Card | Settings |
+|---|---|---|
+| 3 | Add contact tag "Add sequence active" | `sequence active` |
+| 4 | Update contact field "Sequence Step 1" | `Sequence Step` = `1` |
+| 5 | Add task "Task: reply-all to the intro" | title `Reply-all to the intro within 1 hour: {{contact.company_name}} (referred by {{contact.referral_partner_name}})`, David, 0 Days |
+| 6 | Wait **"Gate: wait for Personal Line"** | type **Until specific conditions are met**, segment `Personal Line` **Is not empty**, **Timeout ON = 2 days** |
+
+The gate produces two branches:
+
+- **Time out** (2 days, still no personal line): Add task "Task: write the personal line",
+  title `Write the personal line for {{contact.company_name}}`, David, 0 Days. Then ENDs.
+- **Condition** (personal line filled) carries the rest:
+
+| # | Card | Settings |
+|---|---|---|
+| 7 | Add task "Task: Call plus voicemail 1" | `Call plus voicemail 1: {{contact.company_name}}`, David, **0 Days at 10:00 AM** |
+| 8 | Email "Email: P-A-1 Referral Email 1" | linked template `P-A-1 Referral Email 1` |
+| 9 | Update contact field "Stamp Last Touch Date" | `Last Touch Date` = **Current Date** |
+| 10 | Wait "Wait 2 days" | 2 days |
+| 11 | Add task "Task: Call 2 different hour" | `Call 2, different hour: {{contact.company_name}}`, David, **0 Days at 4:00 PM** |
+| 12 | Wait "Wait 2 days" | 2 days |
+| 13 | Email "Email: P-A-2 Referral Email 2" | linked template `P-A-2 Referral Email 2` |
+| 14 | Update contact field "Stamp Last Touch Date" | `Last Touch Date` = Current Date |
+| 15 | Wait "Wait 3 days" | 3 days |
+| 16 | Add task "Task: Call plus voicemail 2" | `Call plus voicemail 2: {{contact.company_name}}`, David, 0 Days |
+| 17 | Wait "Wait 2 days" | 2 days |
+| 18 | Email "Email: P-A-3 Referral Email 3" | linked template `P-A-3 Referral Email 3` |
+| 19 | Add task "Task: tell the referrer" | `Tell {{contact.referral_partner_name}} you could not reach {{contact.company_name}}`, David, 0 Days |
+| 20 | Add contact tag "Add cooling 60d" | `cooling 60d` |
+| 21 | Remove contact tag "Remove sequence active" | `sequence active` |
+| 22 | Wait "Wait 60 days" | 60 days |
+| 23 | Remove contact tag "Remove cooling 60d" | `cooling 60d` |
+
+**No SMS steps** (W2 had none in the sheet anyway). **No Goal step**; Stop on response
+covers it.
+
+**Deviation, logged: the Personal Line gate does not loop.** The sheet's step 6a says
+"on timeout, create the task, then a second Wait on the same condition, timeout 2 days",
+i.e. nudge and keep waiting. Branches do not rejoin, so looping back into the sequence
+would mean duplicating all 17 remaining actions into the Time out branch. Built instead as
+a **hard stop**: the Time out branch raises the "write the personal line" task and ends.
+That is consistent with the sheet's own reasoning ("a referral email with a generic first
+line wastes the referral") but it does mean **David must act on that task, and the contact
+does not resume on its own**. If you want the resume, the options are the same three as
+before: duplicate the tail, or lengthen the timeout so the gate simply waits, or re-set
+`Lead Lane` on the contact to re-trigger (which needs Allow re-entry ON).
+
+**Finding 18.** The **Wait > Until specific conditions are met** type has its own
+**Timeout** toggle, and when it is on the action forks into a **Condition** branch and a
+**Time out** branch. That is the mechanism for every approval gate in this build (W2, W3,
+W5).
+
+**Finding 19.** `P-A-1` and `P-A-2` were the two templates the earlier report could not
+verify. Their previews render correctly in the Send Email picker: the Atlas One wrapper,
+the periwinkle button, and `{{contact.referral_partner_name}}`, `{{contact.personal_line}}`
+and `{{contact.vertical_proof}}` all present as merge fields. Report item 2 is closed.
