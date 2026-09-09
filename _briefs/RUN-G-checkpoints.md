@@ -419,3 +419,43 @@ decision 2.
     while the list is still loading and is swallowed.
 16. `{{contact.services_requested}}` resolves to a real field
     (`Contact.Custom Fields.Services Requested`), so the runbook's token is valid.
+
+---
+
+## Checkpoint 6: W2 Warm referral (PARTIAL) and run stopped here
+
+### W2 Warm referral  (Draft, id c5666735-0e74-4d95-a333-36bdf015d53b)
+
+**Settings:** Allow re-entry **OFF**, **Stop on response ON**. Both verified on screen.
+
+**Trigger:** `Contact changed`, named "Lead Lane set to A Referral", filter
+`Lead Lane` **Has changed to** `A Referral`. Reads back on the card as
+`Lead Lane is "A Referral"`.
+
+**Finding 17.** The `Contact changed` trigger's operators are **Has changed** and
+**Has changed to**. "Has changed to" then offers the dropdown's real values, which is how
+the sheet's "value **is** `A Referral`" is expressed. W0 used "Has changed" (any value);
+W2 uses "Has changed to".
+
+**Action 1 built: If/Else "Cornerstone gate"**
+- Branch **Cornerstone**: `Brand Identity` **Is** `Cornerstone`. **No steps, so it ENDs.**
+  This is the mirror of W7's gate and is what stops a contact running both.
+- Branch **None**: will carry actions 2 to 23.
+
+### Actions 2 to 23 of W2 are NOT built
+Still to do, from the build sheet with the SMS decision applied (W2 has no SMS steps
+anyway): the suppression If/Else and its task, `sequence active`, `Sequence Step` = 1, the
+reply-all task, the Personal Line approval gate, the three P-A emails with their calls and
+waits, the "tell the referrer" task, and the `cooling 60d` tail.
+
+### Not started
+**W3, W3a, W4, W5 and W7 have not been created.**
+
+### Where to resume
+Open **W2**, click the `+` under the **None** branch of "Cornerstone gate", and continue at
+action 2. Then W3, W3a, W4, W5, W7. Every one of them needs, in Settings:
+**Allow re-entry per the sheet** and **Stop on response ON**; and **no Goal step and no SMS
+steps anywhere**.
+
+### Freezes
+None in this segment. Two earlier (checkpoint 3), both recovered, never three in a row.
