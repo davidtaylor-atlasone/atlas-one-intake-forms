@@ -328,3 +328,94 @@ has to be duplicated into every branch. Three options, none free:
 ### Not started
 **W2, W3, W3a, W4, W5, W7 have not been created.** The run stopped here; see the report
 for exactly where to resume.
+
+---
+
+## Checkpoint 5: W1 Inbound speed to lead COMPLETE
+
+### David's decisions applied from here on (Run G part 3)
+1. **No SMS anywhere.** Every `Send SMS` step and its `sms consent` If/Else is skipped in
+   every workflow. Sequences stay linear. Texting will be added later as small
+   tag-triggered side workflows once A2P is approved.
+2. **Stop on response ON** in Settings for W1, W2, W3, W3a, W4, W5 and W7, in place of the
+   Goal: Customer Replied step, which is skipped everywhere.
+3. **Form B is `Atlas One, Accounting, Bookkeeping & Payroll, Service Request`** — the
+   earlier guess was right, no change needed.
+4. **W6 keeps Remove From Workflow = "All workflows except current workflow."** Confirmed,
+   see checkpoint 2 for why.
+
+### Template list re-read live (the old REPORT text was stale)
+Checked in the Send Email picker on 9 Sep 2026. **The duplicates are gone.** `P-A-3` returns
+exactly one row; `P-B-` returns exactly one each of `P-B-1`, `P-B-120`, `P-B-2`, `P-B-3`,
+`P-B-4`. `P-C-0 Instant reply` exists and carries the branded Atlas One wrapper. The live
+list is now the source of truth; deferred question 5 in the report is closed.
+
+### W1 Inbound speed to lead  (Draft, id e50ddca0-1bc1-4a4b-a706-f2d02ba27259)
+
+**Settings:** Allow re-entry **OFF**, **Stop on response ON**.
+
+**Trigger:** `Form submitted` "Form A or Form B submitted", filter **Form is** — is any of
+`Atlas One — PEO / Prospect Quote Request` and
+`Atlas One — Accounting, Bookkeeping & Payroll — Service Request`. Saves as
+`Form is is any of [...]`, an OR, so one trigger replaces the sheet's two.
+
+**Actions, in order:**
+
+| # | Card | Settings |
+|---|---|---|
+| 1 | Update contact field "Lead Lane C Inbound" | `Lead Lane` = **C Inbound** |
+| 2 | Add contact tag "Add sequence active" | `sequence active` |
+| 3 | Update contact field "Stamp Last Touch Date" | `Last Touch Date` = **Current Date** |
+| 4 | If/Else **"Suppressed?"** | branch `Suppressed`: `Tags` **Includes** `cooling 30d` **OR** `cooling 60d` **OR** `cooling 90d` **OR** `hold 6m` **OR** `dnc` (five separate OR conditions, because Includes with several tags means ALL) |
+
+Branch **Suppressed**: Add task "Task: suppressed inbound, decide by hand", title
+`Inbound from a suppressed contact: {{contact.company_name}}. Decide by hand.`, David,
+due 0 Days. Then END.
+
+Branch **None** carries the whole sequence:
+
+| # | Card | Settings |
+|---|---|---|
+| 5 | Email "Email: P-C-0 Instant reply" | linked template `P-C-0 Instant reply`, Subject left empty so it inherits the template's |
+| ~~6~~ | ~~If/Else SMS consent + Send SMS~~ | **SKIPPED per decision 1** |
+| 7 | Add task "Task: CALL NOW" | title `CALL NOW: {{contact.company_name}} {{contact.phone}}`, description carries `{{contact.services_requested}}` (resolved as a real custom field), David, due 0 Days |
+| 8 | Internal notification | type **Notification** (app push), title `CALL NOW inbound lead`, message `CALL NOW: {{contact.company_name}} {{contact.phone}}`, redirect **Contact**, to Particular user **David Taylor** |
+| 9 | Wait "Wait 4 hours (business hours)" | 4 hours, **Advance window ON**, Mon to Fri, **08:30 AM to 5:00 PM** |
+| 10 | If/Else **"Replied already?"** | branch `Reply received`: `Tags` **Includes** `reply received` |
+
+Branch **Reply received**: no steps, ENDs. Branch **None** continues:
+
+| # | Card | Settings |
+|---|---|---|
+| 10b | Add task "Task: Call 2 plus voicemail" | title `Call 2 plus voicemail: {{contact.company_name}}`, David, due **0 Days at 3:00 PM** |
+| 11 | Wait "Wait 1 day" | 1 day |
+| 12 | Email "Email: P-C-2 Inbound Email 2" | linked template `P-C-2 Inbound Email 2` |
+| 13 | Wait "Wait 2 days" | 2 days |
+| 14 | Add task "Task: Call 3" | title `Call 3: {{contact.company_name}}`, David, due 0 Days |
+| ~~15~~ | ~~If/Else SMS consent + Send SMS~~ | **SKIPPED per decision 1** |
+| 16 | Wait "Wait 3 days" | 3 days |
+| 17 | Email "Email: P-C-3 Inbound Email 3" | linked template `P-C-3 Inbound Email 3` |
+| 18 | Add contact tag "Add cooling 30d" | `cooling 30d` |
+| 19 | Remove contact tag "Remove sequence active" | `sequence active` |
+| 20 | Wait "Wait 30 days" | 30 days |
+| 21 | Remove contact tag "Remove cooling 30d" | `cooling 30d` |
+
+**Deviation, logged: "due in 5 minutes" is not expressible.** The task due date is
+Value + Unit where Unit is only Days / Weeks / Months / Years, plus an optional time of
+day. The CALL NOW task (step 7) is therefore **0 Days**, i.e. due today, which is the
+finest granularity the action offers. The Internal notification at step 8 is what actually
+delivers the immediacy.
+
+**Deviation, logged: Goal step skipped**, replaced by Settings > Stop on response, per
+decision 2.
+
+### More builder findings
+14. **The Wait action has two different layouts.** Sometimes it opens straight into
+    "For a set period of time"; sometimes it opens on a full menu of eight wait types and
+    a stray click lands on "Until the contact replies". Always read the **Selected wait
+    type** line and use **Change type** if it is wrong. After changing type the Time period
+    and Unit reset to `0 minutes`, so set both again.
+15. The tag picker sometimes needs the search text typed **twice**: the first `type` lands
+    while the list is still loading and is swallowed.
+16. `{{contact.services_requested}}` resolves to a real field
+    (`Contact.Custom Fields.Services Requested`), so the runbook's token is valid.
