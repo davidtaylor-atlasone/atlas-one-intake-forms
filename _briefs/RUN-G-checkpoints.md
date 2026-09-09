@@ -187,3 +187,70 @@ exist.
 ### Still open at this checkpoint
 - A2P status not yet read (Settings > Phone Numbers > Trust Center).
 - No SMS action exists yet; the first ones appear in W1 and W4 and will be built disabled.
+
+---
+
+## Checkpoint 3: W0 Set vertical lines
+
+### W0 Set vertical lines  (Draft, id de389546-ad9f-42a2-9784-bc231014c8a0)
+Allow re-entry ON (default).
+
+**Trigger:** `Contact changed`, named "Vertical changed", filter **Vertical has changed**.
+(The trigger type is called *Contact changed*, not "Contact Field Updated"; its operators
+are only **Has changed** and **Has changed to**. "Has changed" is the any-value form the
+build sheet asked for.)
+
+**Action 1: If/Else "Route by vertical"**, seven branches, each `Vertical` **Is** <value>:
+Audiology, Dental Ortho Optometry ENT, Construction, Technology, Hospitality,
+Professional Services, and the built-in **None** branch for Other and blank.
+
+**Inside each branch: one `Update contact field` action** (action type **Update field data**)
+carrying all three values at once, rather than three separate actions. GHL's update action
+takes a list of fields, so one card per branch is the same result with a third of the steps.
+
+| Branch | Action name | Fields set |
+|---|---|---|
+| Audiology | Set Audiology lines | Vertical Opener, Vertical Proof, Vertical Tool |
+| Dental Ortho Optometry ENT | Set Dental Ortho Optometry ENT lines | same three |
+| Construction | Set Construction lines | same three |
+| Technology | Set Technology lines | same three |
+| Hospitality | Set Hospitality lines | same three |
+| Professional Services | Set Professional Services lines | same three |
+| None | Set generic lines (Other and blank) | same three |
+
+All 21 values are the Appendix A text verbatim, **with the `[link]` placeholder replaced by
+the live URL**:
+
+| Branch | Vertical Tool value |
+|---|---|
+| Audiology | `Retention Cost calculator: https://forms.atlasonesolutions.com/tools/retention-cost/` |
+| Dental Ortho Optometry ENT | `Retention Cost calculator: https://forms.atlasonesolutions.com/tools/retention-cost/` |
+| Construction | `WC premium check: https://forms.atlasonesolutions.com/tools/wc-premium-check/` |
+| Technology | `Vendor Consolidation calculator: https://forms.atlasonesolutions.com/tools/vendor-consolidation/` |
+| Hospitality | `Retention Cost calculator: https://forms.atlasonesolutions.com/tools/retention-cost/` |
+| Professional Services | `Vendor Consolidation calculator: https://forms.atlasonesolutions.com/tools/vendor-consolidation/` |
+| None (generic) | `Vendor Consolidation calculator: https://forms.atlasonesolutions.com/tools/vendor-consolidation/` |
+
+**All seven action cards were reopened and read back** after saving; each shows Vertical
+Opener, Vertical Proof and Vertical Tool populated. Deferred question 5 in the report
+(placeholder links) is now closed for W0. **The Email 3 templates still merge
+`{{contact.vertical_tool}}`, so they pick the real URL up automatically; no template edit
+is needed.**
+
+### More builder findings
+9. **Typing `/` opens GHL's merge-tag picker** inside any value field. Every tool URL ends
+   in `/`, so the picker was left open over the Save button each time. Clicking another
+   field (or Escape then another field) closes it; only then does Save register.
+10. **"Error while saving the workflow"** appeared once on the last branch. It was
+    transient: reopening the action showed all three fields stored and the header read
+    Saved. Worth re-reading any action that throws it rather than redoing the work.
+11. The canvas **zoom must be near 100%** for the `+` buttons to respond. At 154% and 190%
+    clicks on `+` did nothing.
+12. Clicking the panel's **X can open the Workflow AI sidebar** instead of closing; the
+    left sidebar toggle (top left, next to Workflows list) closes that.
+
+### Freezes
+Two in a row while trying to open Create workflow > Start from Scratch after the W6b
+checkpoint. Recovered per the runbook: Dashboard, then Automation in the left menu; when
+that was not enough, a full reload of the location dashboard URL followed by clicking
+Automation. Third attempt succeeded, so the counter reset. No checkpoint was lost.
