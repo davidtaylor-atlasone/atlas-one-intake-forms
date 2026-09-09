@@ -77,3 +77,113 @@ footer match Run E exactly. Checked programmatically: zero em or en dashes in an
 the three W7 bodies contain no "Atlas One", no "atlasonesolutions", no "Hearvana", and no credit
 mechanics. W7 uses a Cornerstone text wordmark in the header because no Cornerstone logo asset
 exists in the source files (deferred question 2).
+
+---
+
+## Checkpoint 2: tool hosting verified, W6 and W6b built
+
+### Tools are live
+`git push origin main` put commit b8d8aaa on the remote. All three calculators returned
+**200 on the first poll**, so the `[link]` placeholders in Appendix A can be replaced with
+real URLs in W0:
+
+- https://forms.atlasonesolutions.com/tools/retention-cost/
+- https://forms.atlasonesolutions.com/tools/vendor-consolidation/
+- https://forms.atlasonesolutions.com/tools/wc-premium-check/
+
+### Builder findings that apply to every workflow in this run
+1. **The builder is a cross-origin iframe** (`client-app-automation-workflows.leadconnectorhq.com`).
+   JavaScript, the accessibility tree and the `find` tool cannot reach inside it. Everything
+   is coordinate clicks on screenshots.
+2. **Dropdown options need two clicks** (first hovers, second selects), or `type` then
+   `Down` then `Return`. A single click silently does nothing. Where both failed, opening the
+   dropdown and pressing `Return` on the highlighted first item worked.
+3. **Set the action NAME before selecting a tag.** Renaming the action after picking a tag
+   clears the tag chip.
+4. **Wait units are seconds / minutes / hours / days only.** There is no "months". 6 months
+   is built as **180 days**. Wait defaults to `0 minutes`, so both the number and the unit
+   have to be set every time.
+5. **Task due date is required** and is Value + Unit (Days/Weeks/Months/Years) + optional
+   time. "Due today" is `0 Days`. Task **Description is also required**; the runbook only
+   gives titles, so a one line description was written for each task.
+6. **If/Else branches do not rejoin.** Each branch runs to its own END. Anything the runbook
+   lists as a step "after" an If/Else has to be built *inside* the branch it belongs to.
+7. **Tag conditions:** operators are Includes / Does not include / Is not empty / Is empty.
+   Selecting several tags under **Includes means ALL of them (AND)**. The runbook's
+   "is one of" therefore needs one segment per tag joined with **OR**, not one Includes with
+   five tags. This affects W1 step 4, W2 step 2, W3 step 2 and W4 step 1.
+8. **Date field conditions:** operators are only Is / Is not / Is not empty / Is empty, but
+   the value side offers Today, Tomorrow, Yesterday, On, After, Before, After date,
+   Before date, and Before/After take a number plus Days/Weeks/Months/Years. There is no
+   single "within the last N days" operator.
+
+### W6 Suppression and caps  (Draft, id 32015c79-5132-43ae-9aa2-09f2321a8426)
+Allow re-entry ON (it is ON by default; not changed).
+
+Triggers, three:
+1. `Customer Replied`, no filters (no filter = any channel).
+2. `Contact tag` named "Tag added: not interested", filter Tag added includes `not interested`.
+3. `Contact tag` named "Tag added: dnc", filter Tag added includes `dnc`.
+
+Actions:
+| # | Card | Settings |
+|---|---|---|
+| 1 | Remove contact tag "Remove sequence active" | tag `sequence active` |
+| 2 | Remove from workflow "Remove from all other workflows" | **All workflows except current workflow** |
+| 3 | If/Else "Route by reason" | 3 branches |
+
+Branch **DNC** (`Tags` includes `dnc`): Update contact field "Clear Next Touch Date",
+action type **Clear field data**, field `Next Touch Date`. Then END.
+
+Branch **Not interested** (`Tags` includes `not interested`): Add contact tag `hold 6m`
+then Wait **180 days (6 months)** then Remove contact tag `hold 6m`. Then END.
+
+Branch **None** (the reply case): Add contact tag `reply received`; Add task
+"Task: read and respond" (title `Reply from {{contact.first_name}} {{contact.last_name}}: read and respond`,
+assigned David Taylor, due 0 Days); Internal notification, type **Notification** (app push),
+title `Reply received`, message `Reply from {{contact.company_name}}`, redirect page
+**Conversation**, to Particular user **David Taylor**. Then END.
+
+**Deviation, logged:** the build sheet says Remove From Workflow > **All workflows**.
+Chosen instead: **All workflows except current workflow**. "All workflows" includes W6
+itself, which ends W6's own execution at step 2, so the branch that adds `hold 6m`, the
+reply task and the notification would never run. Excluding the current workflow keeps the
+brake identical for every other sequence and preserves the notification. Reverse it only
+if you decide the notification does not matter.
+
+**Deviation, logged:** the build sheet puts Internal Notification as top level action 4,
+after the If/Else. Because branches do not rejoin (finding 6), and because its body is
+`Reply from {{contact.company_name}}`, it was built **inside the None (reply) branch**,
+next to the reply task. A DNC or Not interested tag therefore does not ping David, which
+matches the intent of the copy.
+
+**Deviation, logged:** notification channel is **Notification (app push)**, not SMS.
+The build sheet says "SMS or app push" and no SMS may be enabled before A2P is Approved.
+
+### W6b Sequence stalled  (Draft, id 3e30bb6d-29fd-4a00-99fd-9a25c1ec6ddc)
+Allow re-entry ON (default).
+
+Trigger: `Contact tag` named "Tag added: sequence active", filter Tag added includes
+`sequence active`.
+
+Actions:
+| # | Card | Settings |
+|---|---|---|
+| 1 | Wait "Wait 5 days" | set period of time, 5 days |
+| 2 | If/Else "Touched recently?" | see below |
+
+Branch **Touched in last 5 days**: `Last Touch Date` **Is not** **Before** **5 Days**.
+No steps, ends. Branch **None** (that is, the contact WAS last touched more than 5 days
+ago, so the sequence has stalled): Add task "Task: sequence stalled", title
+`Sequence stalled: {{contact.company_name}}`, assigned David Taylor, due 0 Days.
+
+**Deviation, logged:** the build sheet writes the condition as `Last Touch Date` **is
+within the last** 5 days with the task in the else. GHL has no "is within the last"
+operator (finding 8). The equivalent built is `Is not` + `Before 5 Days`, which is true
+when the contact HAS been touched inside the window, so the true branch ends and the
+**None** branch carries the stalled task. Same logic, expressed with the operators that
+exist.
+
+### Still open at this checkpoint
+- A2P status not yet read (Settings > Phone Numbers > Trust Center).
+- No SMS action exists yet; the first ones appear in W1 and W4 and will be built disabled.
