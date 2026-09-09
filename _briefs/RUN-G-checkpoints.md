@@ -600,3 +600,94 @@ the six months.
 
 **Also note:** the DNC branch is a hard stop, so a `dnc` contact never reaches the
 suppression logic at all, which is the intended precedence.
+
+---
+
+## Checkpoint 9: W3a Renewal calendar COMPLETE
+
+**Workflow:** `W3a Renewal calendar`, id `4ee0dbd6-51d2-4ba1-85b3-1c07ee0649fc`. **Draft.**
+
+**Settings:** Allow re-entry **ON**, Allow multiple opportunities ON, **Stop on response ON**
+(all three carried over from W3 and were verified, not re-toggled).
+
+**Triggers, both `Contact changed`:**
+
+| # | Name | Filter | Reads back on the card as |
+|---|---|---|---|
+| 1 | WC Renewal Date set | `WC Renewal Date` **Has changed** | WC Renewal Date has changed |
+| 2 | Benefits Renewal Date set | `Benefits Renewal Date` **Has changed** | Benefits Renewal Date has changed |
+
+**Action 1: If/Else `Which renewal date`**, three outputs:
+
+| Branch | Condition |
+|---|---|
+| WC renewal date set | `WC Renewal Date` **Is not empty** |
+| Benefits renewal date set | `Benefits Renewal Date` **Is not empty** |
+| None | falls through to END |
+
+**Inside the WC branch (8 actions), all saved:**
+
+| # | Action | Settings |
+|---|---|---|
+| 1 | Wait "Wait until WC renewal minus 120" | dynamic date `Contact.Custom Fields.WC Renewal Date`, **Before this date, 120 days** |
+| 2 | Email "Email P-B-120 Renewal heads up" | linked template `P-B-120 Renewal heads-up` |
+| 3 | Wait "Wait until WC renewal minus 90" | same field, **90 days before** |
+| 4 | Update contact field "Set Trigger Type WC renewal" | `Trigger Type` = `WC renewal` |
+| 5 | Update contact field "Set Trigger Date to WC renewal date" | `Trigger Date` = **Custom Date** `Contact.Custom Fields.WC Renewal Date` |
+| 6 | Wait "Wait until WC renewal minus 60" | same field, **60 days before** |
+| 7 | Add task "Task last window to quote" | title `Last window to quote: {{contact.company_name}}`, David Taylor, **0 Days** |
+| 8 | Email "Email P-B-60 Last window" | linked template `P-B-60 Last window` |
+
+**Inside the Benefits branch: the same 8 actions**, with `Benefits Renewal Date` as the
+wait and Trigger Date field, `Trigger Type` = `Benefits renewal`, and the two email
+templates and the task unchanged.
+
+### Builder findings worth keeping
+
+**1. A contact date field minus N days IS expressible.** This was the open question and the
+answer is yes, via a route that is not obvious. Wait action, wait type **"Until a specific
+date/time"**, then the **three dot menu to the right of the date field, set to `Dynamic`**.
+The field turns into "Enter custom variable" with a merge tag picker; pick
+`Contact > Custom Fields > <the date field>`. Then choose **"Before this date"** under "When
+should the contact proceed?" and put the offset in the **days** box. The panel confirms it in
+words: "Contact will proceed 120 days before the scheduled time." All five date relative
+waits in W3a are built this way. No deviation needed.
+
+**2. "If this date has already passed" was left at the GHL default**, which is *"Skip all
+outbound communication actions till next wait or event start date action"*. This is exactly
+what the sheet's test expects: set a test renewal date 100 days out and the minus 120 wait
+is already in the past, so its email is skipped and the contact moves on to the minus 90
+wait, which shows as scheduled 10 days from now.
+
+**3. Linking an email template needs the row clicked TWICE.** The first click ticks the row
+but does not link it, and saving then fails with a red **"Subject not found"** under the
+mandatory Subject box. Click the same row again and the panel redraws with the body preview
+and a **"Linked template: <name>"** line; save then succeeds and the subject is inherited
+from the template. Subject was left empty on both W3a emails, as in W1 and W2.
+
+**4. "Copy all actions from here" exists and works across branches.** The `...` menu on any
+action card offers Copy action / **Copy all actions from here** / Move / Delete / Notes.
+Copying from the first WC action put the whole eight action chain on the clipboard, and a
+**"Paste below"** icon then appears beside every `+` on the canvas; pasting under the
+Benefits branch cloned all eight in one click. Only five nodes then needed editing (the
+three waits, Trigger Type, Trigger Date); the two emails and the task were already correct.
+This is the fastest way to build any mirrored branch and is worth using again in W7.
+
+**5. Editing a pasted dynamic date field:** click into the chip field, `cmd+a`, Delete to
+clear the old chip, then reopen the tag picker and choose the new field. The days offset is
+preserved across the swap and does not need re-entering.
+
+### Assumption logged
+
+**A contact with BOTH renewal dates set only runs the WC branch.** GHL If/Else sends a
+contact down the *first* branch whose condition matches, so `Benefits Renewal Date` is never
+evaluated for a contact that also has a `WC Renewal Date`. The build sheet specifies this
+two branch shape, so it is built as written, but the consequence is worth knowing: such a
+contact gets the WC calendar only, and `Trigger Type` is stamped `WC renewal`. If both lanes
+should ever run for one contact, the fix is two separate workflows rather than two branches.
+
+### Task description was required
+
+The Add task panel makes **Description** mandatory, so the task carries the line
+*"The renewal is 60 days out. This is the last window to quote it."* The sheet did not
+specify one. No dashes.
