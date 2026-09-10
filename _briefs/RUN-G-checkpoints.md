@@ -799,3 +799,80 @@ scroll that column back up and click AM, check the text box reads e.g. `10:00 AM
 
 **8. Task Description is mandatory** on every Add task, so each of the six tasks carries a
 one line instruction. None of them contain a dash.
+
+---
+
+## Checkpoint 11: W5 Lost deal re-approach COMPLETE
+
+**Workflow:** `W5 Lost deal re-approach`, id `30d1fed8-590a-44b5-b326-0eb65366fc31`. **Draft.**
+
+**Settings:** Allow re-entry **ON** (it had carried over as OFF from W4 and was turned back
+on), Allow multiple opportunities ON, **Stop on response ON**. No time window.
+
+**Trigger:** `Opportunity status changed` named "Opportunity marked Lost", filter
+**Moved to status** = **Lost**. No pipeline filter, so it fires from any pipeline, which is
+what the sheet asked for. Reads back on the card as `Moved to status is "Lost"`.
+
+**Actions 1 and 2, before the gate:**
+
+| # | Action | Settings |
+|---|---|---|
+| 1 | Update contact field "Set Lead Lane E Lost" | `Lead Lane` = `E Lost` |
+| 2 | Add task "Task record the loss debrief" | `Record: provider chosen, reason, renewal date, the one thing they wanted: {{contact.company_name}}`, David Taylor, 0 Days |
+
+**Action 3, the Personal Line gate:** Wait "Gate wait for Personal Line", type **Until
+specific conditions are met**, segment `Personal Line` **Is not empty**, **Timeout ON, 2
+days**. This forks into a **Condition** branch and a **Time out** branch, exactly as in W1.
+
+**Time out branch (fires when Personal Line is still empty after 2 days):**
+Add task "Task write the personal line", title `Write the personal line: {{contact.company_name}}`,
+David, 0 Days, then **END**. Same hard stop decision as W1: the sheet says "then task, then
+wait again", but the branches never rejoin, so looping would mean duplicating the entire 12
+action tail inside the Time out branch. The task tells David to fill the field and re enrol
+the contact, and **Allow re-entry is ON in this workflow**, so re enrolling actually works
+here (which it did not in W4).
+
+**Condition branch, the sequence:**
+
+| # | Action | Settings |
+|---|---|---|
+| 4 | Email "Email P-E-0 Gracious close" | linked template `P-E-0 Gracious close` |
+| ~~5~~ | ~~Update `Next Touch Date` = today + 120 days~~ | **DROPPED, see deviation below** |
+| 6 | Wait "Wait 120 days four months" | 120 days |
+| 7 | Email "Email P-E-4 Month four" | linked template `P-E-4 Month four` |
+| 8 | Wait "Wait 90 days" | 90 days |
+| 9 | Email "Email P-E-Q1 Quarterly tool" | linked template `P-E-Q1 Quarterly tool` |
+| 10 | Wait "Wait 90 days" | 90 days |
+| 11 | Email "Email P-E-Q2 Quarterly law change" | linked template `P-E-Q2 Quarterly law change` |
+| 12 | Wait "Wait 90 days" | 90 days |
+| 13 | Email "Email P-E-Q3 Quarterly proof story" | linked template `P-E-Q3 Quarterly proof story` |
+| 14 | Wait "Wait 90 days" | 90 days |
+| 15 | Email "Email P-E-Q1 Quarterly tool repeat" | linked template `P-E-Q1 Quarterly tool` again |
+| 16 | END | four touches a year is the ceiling, as the sheet says |
+
+### Deviation: step 5 could not be built and was dropped
+
+**`Next Touch Date` = today plus 120 days is not expressible.** The Update contact field
+action offers exactly three date modes and none of them does arithmetic:
+
+- **Custom Date**, a free text or merge field box (this is how W3a's `Trigger Date` was set
+  from another contact date field), but merge fields carry a value, not a value plus an offset;
+- **Current Date**, today with no offset;
+- **Specific Date**, a fixed calendar picker, a hard date that would be wrong the day after.
+
+**Nothing was substituted.** Writing `Current Date` would have put a wrong and misleading
+date into a field David may filter or report on, which is worse than leaving it empty. The
+scheduling this step was meant to describe is already carried by **action 6, the 120 day
+wait**, so no behaviour is lost: the next touch still happens at day 120. Only the reporting
+field goes unpopulated.
+
+**Note the asymmetry, since it is confusing:** GHL *does* do relative date maths in two other
+places, the **Wait** action's "Before this date / After this date" offset (used all through
+W3a) and the **Add task** due date's "N Days" from now (used everywhere). It is only *Update
+contact field* that has no offset. If a `Next Touch Date` value is genuinely needed, the ways
+in are a small side workflow, a custom value, or GHL adding date maths to field updates.
+
+### Also noted
+
+**Wait has no "months" unit** (seconds, minutes, hours, days only), so the sheet's "4 months"
+is built as **120 days**, the same convention used for "6 months" as 180 days in W6b.
