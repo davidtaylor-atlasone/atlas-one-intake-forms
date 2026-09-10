@@ -1411,3 +1411,106 @@ W6 applies **`reply received`**, not `replied`. When the smart lists finally get
    and simply not converted, or lost entirely.
 3. **Five smart lists** still unbuilt.
 4. **P-C-0, the CALL NOW task and the notification bell** still unverified.
+
+---
+
+## Checkpoint 17: Run J part 4. Root cause found. Form A is NOT broken. Checkpoint 16 corrected
+
+### Root cause: GHL deduplicates form submissions on PHONE NUMBER
+
+**Form A works correctly. Checkpoint 16's "Form A drops submissions" conclusion was wrong and
+is retracted here.**
+
+What actually happened on 10 Sep at 14:19Z: Form A requires a phone, so the test used the
+reserved fictional number **(385) 555-0199**. That number was **already on an existing
+contact**: `david+seedb@atlasonesolutions.com`, the Sep 6 seed, itself created by a Form A
+submission. GHL matched the new submission to that contact by phone and **updated it**
+instead of creating a `david+testprospect@` contact.
+
+Evidence, all from the API on the seed contact `PKPX9APnAQlcrpER2Mr1`:
+
+- `dateUpdated` was **2026-09-10T14:19:11.982Z**, the exact submission minute
+- `firstName` / `lastName` had been overwritten from **Seed / RunB** to **Test / Prospect**
+- `phone` **+13855550199**, the number submitted
+- tags had gained **`sequence active`**, which only W1 adds
+- a task **`CALL NOW:  (385) 555-0199`** existed, created 14:19, assigned to David
+- Sites > Forms > Submissions shows the row **present**, 08:19 AM MDT, with a linked contact
+  avatar, alongside the Sep 6 seed rows
+
+So the submission was never dropped. It landed on the wrong contact because the test reused a
+phone number, and the search that "proved" it missing was looking for the wrong email.
+
+**Practical consequence for real use:** none. Real prospects have distinct phone numbers.
+**Consequence for testing:** every test submission needs a unique phone, not just a unique
+email. `field-ids.json` and the CSV convention should note that.
+
+### Part 1 diagnostics, for the record
+
+- **Form A field types:** the Submissions table renders **Email, First name, Last name,
+  Phone** as dedicated standard columns and every row carries a linked contact avatar, which
+  rules out the "email is a custom field" hypothesis. **No form edit was made, per the
+  Part 2 rule.**
+- **Seed contacts** `david+seedb@`, `seed-a@`, `seed-d@` all show
+  `source: Atlas One — PEO / Prospect Quote Request` and real phones, confirming Form A has
+  been creating contacts correctly since Sep 6.
+- **GHL status page:** *All services are online*, last updated Sep 10 8:40am MDT. **No
+  incident** in the 13:30Z to 15:00Z window. The blank UI is local to this account, not a
+  platform outage. Screenshot `08-status.jpg`.
+
+### The W1 chain actually PASSED, on the seed contact
+
+Because W1 really did run, this run finally verified the chain end to end:
+
+| Check | Result |
+|---|---|
+| **P-C-0 Instant reply** | **PASS.** Outbound at **08:19 AM** to `david+seedb@atlasonesolutions.com`, A1 Solutions branded wrapper, correct body copy, **no literal `[link]`**. Screenshot `03-instant-reply.jpg` |
+| **CALL NOW task** | **PASS.** `CALL NOW:  (385) 555-0199`, due 2026-09-10, assigned to David. Saved to `04-task.json` |
+| **Notification bell** | **not captured**, the UI degraded before it could be screenshotted |
+| **W6 suppression** | **PASS.** `not interested` at 14:52:46Z produced `hold 6m` by 14:52:51Z, about **5 seconds** |
+
+Note the CALL NOW title reads `CALL NOW:  (385) 555-0199` with a double space, because
+`{{contact.company_name}}` was empty on the seed contact. Cosmetic, and only because of the
+mismatched contact.
+
+### Side effect I caused on a seed contact, and what I did about it
+
+The submission overwrote a real seed record. Remediation done:
+
+1. **Name restored** from Test / Prospect back to **Seed / RunB** (API PUT, 200).
+2. **`sequence active` removed** via the Conversations contact panel, returning tags to the
+   original `intake-received`, `form-a-sent`.
+3. **W1 enrollment stopped.** W1 has **no Personal Line gate**, so left alone it would have
+   kept sending `P-C-2` at day 1 and `P-C-3` at about day 6 to `david+seedb@`, plus three
+   more tasks. Both the Contacts module and the workflow builder were blank, so the
+   enrollment could not be removed directly. Instead **`not interested` was added**, which
+   fires W6 and its Remove From Workflow step. Confirmed: `hold 6m` appeared 5 seconds later.
+
+**Residue left on `david+seedb@atlasonesolutions.com`, for David to clear when convenient:**
+
+- tags **`not interested`** and **`hold 6m`**. `hold 6m` self removes after 180 days; both are
+  safe to delete by hand.
+- the task **`CALL NOW:  (385) 555-0199`**, id `DQu5aianVjDqSgl4Xp1F`. It could not be
+  deleted: the API `DELETE` calls were refused by this session's own safety classifier, and
+  the Contacts and Tasks UI is blank.
+
+Nothing was touched on the real **David taylor** contact.
+
+### Parts that could not be run
+
+- **Part 3, the W0 Contact Created trigger: NOT DONE.** The workflow builder renders blank, so
+  W0 could not be edited. The underlying finding from checkpoint 16 stands and still needs
+  this fix: **W0 does not fire when a contact is created with Vertical already set**, only on
+  a later update. A CSV import or API create that sets Vertical in one shot will not run W0.
+- **Part 4, the five smart lists: SKIPPED.** Contacts is still blank after a fresh tab, a hard
+  reload and a 20 second settle.
+
+### UI health, narrowing further
+
+Working: Dashboard, Sites and Forms, Conversations, Settings > Custom Fields, and the whole
+API. Blank: **Contacts** (all tabs) and, newly today, **individual workflow pages** in
+Automation, though the Workflows list itself rendered earlier. Given GHL reports all services
+online, this looks account or sub account specific and is worth raising with High Tide.
+
+### Cleanup
+
+`testprospect` and `testcreate` both return **0 contacts**. No test contacts remain.
