@@ -1514,3 +1514,123 @@ online, this looks account or sub account specific and is worth raising with Hig
 ### Cleanup
 
 `testprospect` and `testcreate` both return **0 contacts**. No test contacts remain.
+
+---
+
+## Checkpoint 18: Run K. Seed cleaned, W0 now fires on create, seven smart lists
+
+Date: 2026-09-10. The Contacts module came back on its own, so the work blocked across Runs J
+part 2 to part 4 could finally be done.
+
+### Part 0, Contacts renders: PASS
+
+Fresh load of `/contacts/smart_list/All` painted the full grid, **2137 Contacts**, rows, the
+Add Contact button, Filters and Sort. No blank pane. The outage described in checkpoints 15 to
+17 is over. Nothing was changed to fix it.
+
+### Part 1, seed contact cleaned: PASS, with one item not verifiable
+
+`Seed RunB`, id `PKPX9APnAQlcrpER2Mr1`, `david+seedb@atlasonesolutions.com`.
+
+| Item | Result |
+|---|---|
+| Remove `not interested` | **Done**, via the X on the tag chip |
+| Remove `hold 6m` | **Done**, same way |
+| Tags left behind | `intake-received`, `form-a-sent`, exactly the original two. Panel reads **Tags (2)** |
+| Delete task `CALL NOW:  (385) 555-0199` | **Done.** Task ⋮ > Delete > confirmation dialog > Delete task. Tasks panel now reads **No tasks yet** |
+| Confirm no active workflows | **Could not verify.** This GHL build exposes no Automations or active-workflow view on the contact record. Checked every right-rail tab (Activity, Associations, Opportunities, Tasks, Documents) and the full left panel |
+
+Screenshot `_briefs/assets/run-K/01-seedb-clean.jpg`.
+
+The residue listed at the end of checkpoint 17 is now fully cleared.
+
+### Part 2, W0 Contact Created trigger: PASS. The checkpoint 16 gap is closed
+
+This is the fix for the standing finding that **W0 did not fire when a contact was created
+with Vertical already set, only on a later update**.
+
+**The filter could not be written as "Vertical is not empty".** The Contact created trigger's
+filter offers only the seven stored dropdown values (Audiology, Dental Ortho Optometry ENT,
+Construction, Technology, Hospitality, Professional Services, Other) and the value control is
+**single select**, confirmed by probing it. There is no "is not empty" operator on that
+trigger.
+
+**What was built instead: one Contact created trigger per vertical value, seven in total.**
+Set theoretically this is identical to "Vertical is not empty", and it avoids the alternative
+of an unfiltered Contact created trigger, which would enrol every new contact in the location.
+
+W0 now carries **eight triggers**:
+
+| # | Trigger | Filter |
+|---|---|---|
+| 1 | Contact changed, `Vertical changed` | Vertical has changed (pre-existing) |
+| 2 | Contact created, `Created with Vertical Construction` | Vertical is "Construction" |
+| 3 | Contact created, `Created with Vertical Audiology` | Vertical is "Audiology" |
+| 4 | Contact created, `Created with Vertical Dental Ortho Optometry ENT` | Vertical is "Dental Ortho Optometry ENT" |
+| 5 | Contact created, `Created with Vertical Technology` | Vertical is "Technology" |
+| 6 | Contact created, `Created with Vertical Hospitality` | Vertical is "Hospitality" |
+| 7 | Contact created, `Created with Vertical Professional Services` | Vertical is "Professional Services" |
+| 8 | Contact created, `Created with Vertical Other` | Vertical is "Other" |
+
+Saved and **Published**, verified after a full page reload: all eight triggers persist and the
+toggle reads Publish.
+
+Note on trigger 8: the Route by vertical If/Else has branches for the six named verticals plus
+a **None** branch that runs no action, so a contact created with Vertical = Other enrols and
+ends without writing anything. Harmless, and kept for exact parity with "is not empty".
+
+**Live test through the API: PASS.**
+
+- POST `/contacts/` at 09:34 MDT with firstName Test, lastName Create,
+  `david+testcreate@atlasonesolutions.com`, `+13855550142`, and `vertical = Construction`
+  **in the same request**. Contact id `lUccVrywU9nFZYKMwVqo`.
+- 95 seconds later, GET returned all three lane fields filled:
+  - **Vertical Opener** — "Your workers' comp renewal is the one window where a carrier will
+    actually compete for you…"
+  - **Vertical Proof** — "A 30 man electrical contractor had the expense constant charged in
+    both states…"
+  - **Vertical Tool** — `WC premium check: https://forms.atlasonesolutions.com/tools/wc-premium-check/`
+
+Compare with Run J part 4, where the same single-shot create left all three empty after 95
+seconds. **A CSV import or API create that sets Vertical in one shot now runs W0.**
+
+**Cleanup: PASS.** Contact deleted in the UI (Contacts > tick > Delete > type DELETE >
+Delete). API search for `testcreate` returns **total: 0**.
+
+### Part 3, five smart lists built, seven in total: PASS
+
+| Smart list | Definition as built | Count at build time |
+|---|---|---|
+| `Prospecting: Cooling` | Tag **Is** cooling 30d, cooling 60d, cooling 90d | 0 |
+| `Prospecting: Hold` | Tag **Is** hold 6m | 0 |
+| `Prospecting: DNC` | Tag **Is** dnc, not interested | 0 |
+| `Prospecting: Reply received` | Tag **Is** reply received | 1 |
+| `Prospecting: Batch ready` | Lead Lane **Is** `D Cold` **AND** Tag **Is not** cooling 30d, cooling 60d, cooling 90d, hold 6m, dnc, not interested **AND** Sequence Step **Is empty** | 0 |
+
+Plus the two from Run G: `Sequence Active` and `Stalled`. Manage smart lists reads
+**1 - 7 of 7**. Screenshot `_briefs/assets/run-K/02-smart-lists.jpg`.
+
+**The exact Lead Lane value is `D Cold`, not `Cold`.** The stored options are `A Referral`,
+`B Trigger`, `C Inbound`, `D Cold`, `E Lost`. This matches the earlier correction that
+Inbound is stored as `C Inbound`.
+
+### Two UI facts worth keeping
+
+- **Multi-value on a single filter row is OR.** `Tag Is a, b, c` means any of them, and
+  `Tag Is not a, b, c` means none of them. That is why Cooling and DNC each need only one
+  filter row, and why the six-tag exclusion in Batch ready is one row.
+- **A numeric custom field does have `Is empty`,** but it sits **below the fold** in the
+  operator dropdown, under Equals to, Does not equal, Between, Greater than, Greater than or
+  equal to, Less than, Less than or equal to. Scroll the dropdown to reach `Is not empty` and
+  `Is empty`.
+- **Creating a smart list from the Add smart list panel does not carry filters.** The reliable
+  sequence is: open the **All** list, set Filters, **Apply**, then **Unsaved changes > Save as
+  new smart list** and name it there.
+
+### Open items
+
+- **No active-workflow view on a contact record** in this build, so "is this contact enrolled
+  anywhere" cannot be answered from the contact. Enrollment history on each workflow is the
+  only route.
+- `Prospecting: Batch ready` returns 0 because no contact yet carries Lead Lane `D Cold`.
+  The definition is correct; it will populate when cold prospects are loaded.
