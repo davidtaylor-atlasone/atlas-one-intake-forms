@@ -1286,3 +1286,128 @@ built correctly when the module returns.
    different address, or say explicitly that the real `david@atlasonesolutions.com` contact
    should be used and then **not** deleted at the end.
 3. Everything else in the Run J part 2 script then runs as written.
+
+---
+
+## Checkpoint 16: Run J part 3. API live test. W0 and W6 PASS, Form A did not land, Contacts still down
+
+The API route worked and produced two real, verified passes. The browser route stayed broken
+and got worse during the run.
+
+### Part 0: Contacts did NOT recover
+
+`/v2/location/.../contacts/` still paints its header and tab strip and **nothing below**,
+after a fresh tab plus `Cmd+Shift+R` plus a 20 second settle. Part 3 smart lists were
+therefore **skipped**, as instructed.
+
+One useful discovery: **Settings > Custom Fields renders fine** even though Contacts does
+not. That is where the field names and keys below came from.
+
+**Late in the run the whole CRM UI went blank**, Automation included. The W1 enrollment
+history check could not be done for that reason. The API stayed healthy throughout.
+
+### The Private Integration key is contacts scope only
+
+| Endpoint | Result |
+|---|---|
+| `GET /contacts/` , `POST /contacts/` , `PUT` , `DELETE` , `/contacts/{id}/tasks` , `/contacts/{id}/tags` | **200 / 201, all fine** |
+| `GET /locations/{id}/customFields` | **401 not authorized for this scope** |
+| `GET /locations/{id}` , `/locations/{id}/tags` , `/workflows/` | **401 same** |
+
+So the Part 1 step 1 id map could not be pulled from `customFields`. It was rebuilt instead
+from **Settings > Custom Fields** (names, keys, types) cross referenced with **ids observed on
+live contact payloads**, and written to `_briefs/assets/run-J/field-ids.json`. Five ids are
+confirmed by value matching; `Sequence Step` and `Trigger Type` are recorded with keys but
+`null` ids, because this run never wrote to them.
+
+### Two corrections to the brief
+
+1. **There is no "Vertical Pain" field.** The three fields W0 writes are **Vertical Opener,
+   Vertical Proof, Vertical Tool**. Confirmed in Settings > Custom Fields and in the live
+   payload.
+2. **Lead Lane's inbound value is `C Inbound`,** not `Inbound`.
+
+### Finding: W0 does not fire on contact creation, only on update
+
+This matters for anyone bulk importing.
+
+- `POST /contacts/` with `Vertical = Construction` in the same call created the contact at
+  **14:08:41Z**. Waited 95 seconds. **The three vertical fields stayed empty.**
+- A follow up `PUT` changing Vertical to `Technology` at **14:10:53Z** populated all three by
+  **14:12:28Z**, inside 95 seconds.
+- A second `PUT` back to `Construction` at **14:12:43Z** repopulated with the Construction
+  copy by **14:14:18Z**.
+
+W0's trigger is `Contact changed` with filter `Vertical has changed`, and GHL evidently does
+not count "set during creation" as a change. **A CSV import or API create that sets Vertical
+in one shot will not run W0.** The lane values have to be written as a second step.
+
+### PASS: W0 wrote the right Construction copy, with the real URL
+
+Saved to `_briefs/assets/run-J/02-w0-fields.json`:
+
+- **Vertical Opener** = "Your workers' comp renewal is the one window where a carrier will
+  actually compete for you..."
+- **Vertical Proof** = "A 30 man electrical contractor had the expense constant charged in
+  both states, three guys on the wrong class code..."
+- **Vertical Tool** = `WC premium check: https://forms.atlasonesolutions.com/tools/wc-premium-check/`
+
+**No `[link]` placeholder**, a real live URL. That independently confirms checkpoint 14's
+conclusion from the other direction: W0 writes the URL, and the templates render
+`{{contact.vertical_tool}}`.
+
+### FAIL: Form A submitted successfully but produced no contact
+
+Form A is **"Atlas One — PEO / Prospect Quote Request"**, form id `Cxqawj85qg4ULUl64nMc`,
+public URL `https://api.leadconnectorhq.com/widget/form/Cxqawj85qg4ULUl64nMc`.
+
+Submitted at about **14:19Z** with Test / Prospect / david+testprospect@atlasonesolutions.com
+/ Test Co. **Phone is a required field on Form A**, so the reserved fictional number
+`(385) 555-0199` was used; both SMS consent boxes were deliberately left unchecked. The form
+returned its real thank you page: "Thank you — your request has been received."
+
+**Nothing reached the CRM.** Checked repeatedly over the following minutes:
+
+- the test contact's `dateUpdated` stayed at **14:12:45Z**, my own last PUT
+- `phone` stayed null, so the form's phone never landed
+- **no duplicate contact was created**: queries for `testprospect`, `Test Co`, `Prospect` and
+  `5550199` returned only my API contact and one unrelated Sep 6 seed
+- **zero tasks** on the contact
+
+So **W1 never triggered**, and with it the `P-C-0 Instant reply`, the CALL NOW task and the
+internal notification are all **unverified**. This is almost certainly the same platform
+problem as the blank UI, which set in around the same minute.
+
+### PASS: W6 fired, and fast
+
+`POST /contacts/{id}/tags` with `["not interested"]` at **14:24:32Z**. Re-read at
+**14:24:36Z**: tags were **`["not interested", "hold 6m"]`**.
+
+W6's Not interested branch added `hold 6m` in about **four seconds**. Saved to
+`06-w6-contact.json`. This also proves the **workflow engine was healthy the whole time**,
+which is what makes the Form A failure a form or ingestion problem rather than an automation
+one. W6's `Remove sequence active` step had nothing to remove because W1 never ran, so that
+half of the check is untested rather than failed.
+
+### Cleanup: clean
+
+Zero tasks to delete. `DELETE /contacts/{id}` returned 200 `succeeded: true`. Verified twice:
+the `testprospect` query returns **0 matches**, and a direct GET of the id returns
+**400 Contact not found**. The real **David taylor** contact was never touched, and neither
+was the unrelated `david+seedb@` seed from Sep 6.
+
+### The reply-received tag, again
+
+W6 applies **`reply received`**, not `replied`. When the smart lists finally get built,
+"Prospecting: Reply received" must filter on `Tag is reply received`.
+
+### Still open
+
+1. **Contacts module down**, now accompanied by intermittent whole-UI blanking. Worth raising
+   with High Tide or GHL. Automation and the API are fine, so it is not a full outage.
+2. **Form A ingestion.** A submission that returns a thank you page but creates no contact is
+   the more serious of the two, because it would silently drop real leads. Worth checking the
+   form's own Submissions tab once the UI is back, to see whether the submission was recorded
+   and simply not converted, or lost entirely.
+3. **Five smart lists** still unbuilt.
+4. **P-C-0, the CALL NOW task and the notification bell** still unverified.

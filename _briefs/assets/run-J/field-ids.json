@@ -1,0 +1,18 @@
+{
+  "_note": "Atlas One Solutions, location AzTPxnK2vSUj19jYoDmR. Prospecting custom fields. No secrets in this file.",
+  "_source": "ids observed on live contact payloads via API; keys and names read from Settings > Custom Fields (the Contacts module itself is down)",
+  "_caveat": "ids below were confirmed by value-matching on the Run J test contact. Fields never written during this run have no id recorded, because the locations/customFields endpoint is out of scope for the Private Integration key.",
+  "fields": {
+    "Vertical":        { "key": "vertical",        "id": "gZn8B7wJU1zXDuKYrNoi", "type": "Dropdown",  "confirmed": true },
+    "Lead Lane":       { "key": "lead_lane",       "id": "YbLcue8QPrTO26FgMF6G", "type": "Dropdown",  "confirmed": true },
+    "Vertical Opener": { "key": "vertical_opener", "id": "E27OvZqGhafjorcJbMYr", "type": "Multi line", "confirmed": true },
+    "Vertical Proof":  { "key": "vertical_proof",  "id": "6gbQnLnsB59q9wV1jrSn", "type": "Multi line", "confirmed": true },
+    "Vertical Tool":   { "key": "vertical_tool",   "id": "7603vozyUN1KIxZkj7Mj", "type": "Single line", "confirmed": true },
+    "Sequence Step":   { "key": "sequence_step",   "id": null, "type": "Number",   "confirmed": false },
+    "Trigger Type":    { "key": "trigger_type",    "id": null, "type": "Dropdown", "confirmed": false }
+  },
+  "corrections": {
+    "Vertical Pain": "does not exist. The third W0 field is Vertical Opener. Verified in Settings > Custom Fields.",
+    "Lead Lane Inbound": "the stored dropdown value is 'C Inbound', not 'Inbound'."
+  }
+}
