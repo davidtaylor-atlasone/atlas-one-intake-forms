@@ -876,3 +876,107 @@ in are a small side workflow, a custom value, or GHL adding date maths to field 
 
 **Wait has no "months" unit** (seconds, minutes, hours, days only), so the sheet's "4 months"
 is built as **120 days**, the same convention used for "6 months" as 180 days in W6b.
+
+---
+
+## Checkpoint 12: W7 WSA handoff (Cornerstone) COMPLETE
+
+**Workflow:** `W7 WSA handoff (Cornerstone)`, id `04e13657-82b9-4c96-8367-0bcfde1e79ee`.
+**Draft.** Built as the sheet says, by **duplicating W2** from the workflows list, then
+changing only what is listed below. Everything else is exactly as W2 built it.
+
+**How the duplicate was made:** workflows list, the `...` on `W2 Warm referral`,
+**Duplicate workflow**. GHL asks for the new name in the dialog itself, so
+`W7 WSA handoff (Cornerstone)` was typed there and no rename was needed afterwards. The copy
+arrives as a **Draft** with the trigger, both If/Else gates, the Personal Line gate and all
+23 actions intact.
+
+**Settings:** inherited from W2 unchanged, so Allow re-entry **OFF**, Allow multiple
+opportunities ON, **Stop on response ON**. Correct for W7 as specified.
+
+**Trigger:** unchanged from W2, `Contact changed` "Lead Lane set to A Referral", filter
+`Lead Lane` **Has changed to** `A Referral`.
+
+### Change 1: the Cornerstone gate, inverted
+
+W2's action 1 branch was `Brand Identity` **Is** `Cornerstone` and it **ended**; the None
+branch carried the sequence. W7 needs the opposite. Rather than move 20 actions between
+branches, the **branch condition itself was inverted**:
+
+| | W2 | W7 |
+|---|---|---|
+| Branch name | Cornerstone | **Not Cornerstone** |
+| Condition | `Brand Identity` **Is** `Cornerstone` | `Brand Identity` **Is not** `Cornerstone` |
+| That branch | ENDs | **ENDs** |
+| None branch | carries the sequence | carries the sequence |
+
+The result is what the sheet asked for: **W7 runs only when `Brand Identity` is
+`Cornerstone`**, because the None branch is reached only when "is not Cornerstone" is false.
+It also means a contact with an **empty** Brand Identity ends at action 1, which is the safe
+direction: W7 should never fire for a contact whose brand is unknown. W2 and W7 remain exact
+mirrors, so a contact runs one or the other and never both.
+
+**Note on the operator swap:** changing `Is` to `Is not` **clears the value**, so
+`Cornerstone` had to be re-selected afterwards. Check the value box after any operator change.
+
+### Change 2: the four task titles
+
+| # | New title | Action name |
+|---|---|---|
+| 5 | `WSA: reply-all to Zak's intro within 1 hour: {{contact.company_name}}` | Task WSA reply-all to Zak intro |
+| 7 | `WSA: call + voicemail 1: {{contact.company_name}}` | Task WSA call plus voicemail 1 |
+| 11 | `WSA: call, different hour: {{contact.company_name}}` | Task WSA call different hour |
+| 16 | `WSA: call + voicemail 2: {{contact.company_name}}` | Task WSA call plus voicemail 2 |
+| 19 | `Tell Zak Call at WSA you could not reach {{contact.company_name}}` | Task tell Zak at WSA |
+
+Each description was also reworded for the Cornerstone channel (for example task 5 now reads
+"Warm referral from Zak at WSA. Reply-all to the introduction within the hour, as
+Cornerstone."). Times and assignees were left exactly as W2 had them.
+
+### Change 3: the three Send Email steps replaced, per your decision
+
+**Your instruction was "W7 uses Internal Notification plus a task on the contact instead of
+Send Email, GHL never sends as Cornerstone."** So W2's actions 8, 13 and 18 (`P-A-1`,
+`P-A-2`, `P-A-3`) were **deleted** and each replaced by a **pair**:
+
+| Replaces | Internal notification | Add task |
+|---|---|---|
+| action 8 | "Notify David send WSA Email 1", type **Email**, to particular user **David Taylor**, subject `Send WSA Email 1 as Cornerstone` | "Task send WSA Email 1", title `WSA: send Email 1 as Cornerstone: {{contact.company_name}}`, David, 0 Days |
+| action 13 | "Notify David send WSA Email 2", same shape, subject `Send WSA Email 2 as Cornerstone` | "Task send WSA Email 2", title `WSA: send Email 2 as Cornerstone: {{contact.company_name}}` |
+| action 18 | "Notify David send WSA Email 3", same shape, subject `Send WSA Email 3 as Cornerstone` | "Task send WSA Email 3", title `WSA: send Email 3 as Cornerstone: {{contact.company_name}}` |
+
+Every one of the six carries the same instruction and the same guardrail, worded as:
+
+> Send WSA Email N to this contact from david.taylor@cornerstonepeo.com. Use the P-W7-N WSA
+> Email N wording. Cornerstone identity only, PEO scope only, present the credit total only.
+
+**Consequences worth stating plainly:**
+
+- **W7 now sends nothing to the prospect automatically.** All three touches are handed to
+  David to send by hand from the Cornerstone mailbox. That is the intended trade: it removes
+  any chance of GHL sending Atlas One branding into the Cornerstone channel.
+- The `P-W7-1`, `P-W7-2` and `P-W7-3` templates are **not linked to any action** in W7. They
+  remain in the template library as the wording David copies from.
+- The sheet's "From name / From address = David Taylor, Cornerstone PEO /
+  david.taylor@cornerstonepeo.com on all three Send Email cards" no longer applies, since
+  there are no Send Email cards. **Appendix B item 2, verifying that address as an additional
+  sender, is therefore no longer a blocker for W7 to run** (it stays on the list only if you
+  later want GHL to send these directly).
+- **Stop on response is ON**, so if the prospect replies to David's manual email from the
+  Cornerstone mailbox, GHL will not see it and will not stop the workflow. The remaining
+  touches keep firing as tasks until David marks them done or removes the contact. Worth
+  knowing before publishing.
+
+### Builder findings
+
+**Editing a task inside a duplicated workflow is where the panel bites.** Twice the typed
+Action name landed in the Title and vice versa, and once an extra Company Name chip was
+appended. Two causes, both avoidable:
+
+1. **The panel is still loading** for a second or two after the card is clicked. Type nothing
+   until a screenshot shows the populated fields.
+2. **Clicking the Title at its centre lands on a merge chip**, which opens the tag browser
+   instead of focusing the text. **Click the Title at its far left (about x=830), where the
+   plain text is**, then `cmd+a` and Delete to clear chips and text together.
+
+Do the fields **one at a time with a screenshot between**, never in one long batch.
