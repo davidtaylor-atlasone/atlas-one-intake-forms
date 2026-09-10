@@ -980,3 +980,112 @@ appended. Two causes, both avoidable:
    plain text is**, then `cmd+a` and Delete to clear chips and text together.
 
 Do the fields **one at a time with a screenshot between**, never in one long batch.
+
+---
+
+## Checkpoint 13: Run I, Cowork audit fixes applied and all ten workflows PUBLISHED
+
+Two fixes from the Cowork audit, then the publish pass. Everything below is live.
+
+### Fix 1: the Personal Line gate can now restart itself
+
+The audit was right: the gate was a dead end. The Time out branch raised a task and ended,
+and in W2 and W7 re-entry was OFF, so filling the field in afterwards did nothing. Fixed in
+all four workflows that carry the gate.
+
+| Workflow | Allow re-entry | Clear step added in the Time out branch | Restart is triggered by |
+|---|---|---|---|
+| **W2 Warm referral** | **turned ON** (was OFF) | Update contact field, **Clear field data**, `Lead Lane` | David setting `Lead Lane` back to `A Referral` |
+| **W7 WSA handoff** | **turned ON** (was OFF) | Update contact field, **Clear field data**, `Lead Lane` | David setting `Lead Lane` back to `A Referral` |
+| **W3 Trigger sequence** | already ON | Update contact field, **Clear field data**, `Trigger Type` | David writing `Trigger Date` again |
+| **W5 Lost deal re-approach** | already ON | **none**, as instructed; the trigger is the opportunity status | David setting the opportunity back to **Lost** |
+
+The Time out branch in each now reads: **nudge task, then the clear step, then END.**
+
+**Task titles, as set:**
+
+- W2 and W7: `Write the personal line, then set Lead Lane back to A Referral to restart`
+- W3: `Write the personal line, then set Trigger Type and Trigger Date again to restart`
+- W5: `Write the personal line, then set the opportunity back to Lost to restart`
+
+Each task description now spells out the loop: what was cleared, what to write, and what to
+set to fire the trigger again. Every action was renamed
+`Task write the personal line and restart` so the card says what it does.
+
+**Why the field has to be cleared:** GHL's `Contact changed` triggers fire on a *change*.
+Setting `Lead Lane` to `A Referral` when it already reads `A Referral` is not a change, so
+nothing fires. Emptying it on the way out is what makes David's re-entry a real change.
+
+**W3 and W5 wordings differ from W2 and W7 by necessity.** W3's trigger is
+`Trigger Date has changed`, not Trigger Type, so clearing Trigger Type alone would not
+restart it; the task says to set **both** and notes that writing Trigger Date is the part
+that fires. W5 has no field to clear at all, so it only got the wording.
+
+### Builder finding: there is a purpose built "Clear field data"
+
+The Update contact field action's **ACTION TYPE** dropdown has three modes, and the third is
+exactly what was needed:
+
+- **Update field data**, replaces the current value
+- **Add to field data**, adds without removing
+- **Clear field data**, *empties the field*
+
+With Clear selected the panel drops the value box entirely and just asks which field or
+fields to empty. No blank-value trick required.
+
+### Fix 2: W3 now has the same suppression gate as W1 and W4
+
+Added immediately after the DNC gate: If/Else **"Suppression check"**, branch **Suppressed**
+= `Tags` **Includes** `cooling 30d` **OR** `cooling 60d` **OR** `cooling 90d` **OR**
+`hold 6m` **OR** `dnc`, five separate OR'd conditions, the same shape as W1, W2, W4 and W7.
+
+- **Suppressed branch:** Add task "Task skipped suppressed", title
+  `Skipped, suppressed: {{contact.company_name}}`, David Taylor, **0 Days**, then **END**.
+- **None branch:** everything that used to follow the DNC gate, starting at
+  `Add sequence active` and running through the whole lane B sequence.
+
+**Important builder behaviour, worth knowing before anyone repeats this.** Inserting an
+If/Else into the middle of an existing chain does **not** leave the downstream actions after
+the If/Else, and it does not put them in the None branch either. GHL attaches the entire
+downstream chain to the **first branch**, which here was Suppressed, and leaves None empty.
+That is exactly backwards from what was wanted.
+
+The fix is the `...` menu's **Move all actions from here**. Clicking it on the first
+downstream action turns every insertion point on the canvas into a **"Move here"** target
+(and marks the illegal ones **"Not allowed"**, so it will not let you drop a chain inside
+itself). Clicking the target under the **None** branch relocated all 20 or so actions in one
+move. Verified afterwards: Suppressed ends at the task, None carries the sequence.
+
+### The publish pass
+
+Published in the order given, each confirmed **Published** in the Status column before moving
+on. The workflows list `...` menu carries **Publish workflow** with a confirm dialog, which is
+faster than opening each one and flipping the Draft toggle.
+
+| # | Workflow | Status |
+|---|---|---|
+| 1 | W6 Suppression and caps | **Published** |
+| 2 | W6b Sequence stalled | **Published** |
+| 3 | W0 Set vertical lines | **Published** |
+| 4 | W1 Inbound speed to lead | **Published** |
+| 5 | W5 Lost deal re-approach | **Published** |
+| 6 | W4 Cold cadence | **Published** |
+| 7 | W3a Renewal calendar | **Published** |
+| 8 | W3 Trigger sequence | **Published** |
+| 9 | W2 Warm referral | **Published** |
+| 10 | W7 WSA handoff (Cornerstone) | **Published** |
+
+Confirmed a final time on one screen with the list set to 50 per page: all ten read
+Published, all ten show 0 total enrolled and 0 active enrolled, so nothing has fired yet.
+
+### Still true after this run
+
+- **No SMS** anywhere, so A2P is not a blocker.
+- **W7 sends nothing automatically**; its three touches are David's to send from the
+  Cornerstone mailbox. Stop on response cannot see a reply to a manually sent email, so the
+  later W7 tasks keep firing until David clears them.
+- **W5 step 5** (`Next Touch Date` = today plus 120 days) is still dropped; GHL has no date
+  arithmetic in field updates.
+- **The `[link]` placeholder** still needs replacing in the Email 3 templates.
+- Part 10 is still untouched: no smart lists, old shells left alone, no test contacts, A2P
+  status not read.
