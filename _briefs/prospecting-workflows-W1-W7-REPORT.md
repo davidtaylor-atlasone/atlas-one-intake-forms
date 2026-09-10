@@ -465,3 +465,144 @@ The builder notes at the end of the part 2 report still apply, plus:
   because changing type resets them to `0 minutes`.
 - Workflow **Settings toggles need one click each with a pause between**. Two toggle clicks
   in one batch can land as on-then-off and net no change.
+
+---
+
+# Run G part 4: final report, all ten workflows built
+
+All ten prospecting workflows now exist in the Atlas One Solutions sub account
+(`AzTPxnK2vSUj19jYoDmR`) at app.ridethehightide.com. **Every one is saved as Draft. Nothing
+is published and nothing can send.** Publishing is a deliberate act you take after the tests
+in the build sheet and after the two blockers in "What is still on you" below.
+
+## The ten workflows
+
+| Workflow | id | Trigger | Settings that differ from default |
+|---|---|---|---|
+| **W0 Vertical router** | see checkpoint 3 | Contact changed, `Vertical` has changed | re-entry ON |
+| **W1 Inbound speed to lead** | see checkpoint 5 | Form submitted, either intake form | re-entry OFF, Stop on response ON |
+| **W2 Warm referral** | `c5666735-0e74-4d95-a333-36bdf015d53b` | Contact changed, `Lead Lane` has changed to `A Referral` | re-entry OFF, Stop on response ON |
+| **W3 Trigger sequence** | see checkpoint 8 | Contact changed, `Trigger Date` has changed | re-entry ON, Stop on response ON |
+| **W3a Renewal calendar** | `4ee0dbd6-51d2-4ba1-85b3-1c07ee0649fc` | Contact changed, `WC Renewal Date` has changed; **and** `Benefits Renewal Date` has changed | re-entry ON, Stop on response ON |
+| **W4 Cold cadence** | `b4b3c3ba-7b15-4c1e-b541-21c894c48849` | Contact tag, tag added `batch ready` | re-entry **OFF**, Stop on response ON, **time window Mon to Fri 08:00 to 17:00 account timezone** |
+| **W5 Lost deal re-approach** | `30d1fed8-590a-44b5-b326-0eb65366fc31` | Opportunity status changed, moved to status **Lost** | re-entry **ON**, Stop on response ON |
+| **W6 Suppression** | see checkpoint 2 | Customer replied | see checkpoint 2 |
+| **W6b Stalled watchdog** | see checkpoint 2 | see checkpoint 2 | see checkpoint 2 |
+| **W7 WSA handoff (Cornerstone)** | `04e13657-82b9-4c96-8367-0bcfde1e79ee` | Contact changed, `Lead Lane` has changed to `A Referral` | re-entry OFF, Stop on response ON |
+
+Full action by action listings for every workflow are in
+`_briefs/RUN-G-checkpoints.md`, checkpoints 2 through 12.
+
+## The decisions you made, and where they landed
+
+1. **No SMS anywhere.** Three SMS steps and their consent If/Else branches were skipped: two
+   in W1 and one in W4 (step 15). Every sequence runs linear. Nothing in any of the ten
+   workflows sends, references or is gated on SMS, so **A2P approval is not a blocker for
+   publishing any of them.** Texting can be added later as small tag triggered side
+   workflows, exactly as you described.
+2. **Stop on response instead of a Goal step.** There is no "Customer Replied" Goal type in
+   this builder (only "User Replied", which means a staff user). **Stop on response is ON in
+   W1, W2, W3, W3a, W4, W5 and W7**, and every "Goal: Customer Replied" step in the sheet was
+   skipped. Its description is exactly the intent: "Ends workflow for a contact if the
+   contact responds to a message that is sent from this workflow."
+3. **W3 step 18 is the simple always `Cooling 90d` version**, and as a direct consequence the
+   sheet's step 2 (the `Lifted Suppression` If/Else) was dropped, because with the simple
+   step 18 nothing ever reads that field. Behaviour is unchanged. Reasoning in checkpoint 8.
+4. **W7 uses Internal Notification plus a task instead of Send Email**, so GHL never sends as
+   Cornerstone. Detail and consequences in checkpoint 12.
+5. **Task due dates are 0 Days** wherever the sheet said minutes, since the units are only
+   Days, Weeks, Months, Years. Where the sheet gave a clock time, the time is set (10:00 AM
+   and 4:00 PM tasks in W2, W3, W4, W7).
+6. **Current Date** is used for every "today" stamp, since `{{right_now.date}}` is rejected by
+   date fields.
+7. **Advance window is ON** on the business hours waits in W4, Mon to Fri, 08:00 to 17:00.
+8. **"All workflows except current"** kept on the W6 Remove From Workflow step, as you asked.
+   "All workflows" would kill W6's own execution.
+
+## Things the builder cannot do, and what was built instead
+
+| The sheet asked for | GHL reality | What was built |
+|---|---|---|
+| **Goal: Customer Replied** | no such Goal type | Stop on response ON, per your decision |
+| **Contact date field minus N days** (W3a) | not obvious, but it **does exist** | Wait, "Until a specific date/time", the date field's three dot menu set to **Dynamic**, merge field picked, then **"Before this date"** with the offset in days. All five W3a waits are built this way. **No deviation.** |
+| **`Next Touch Date` = today + 120 days** (W5 step 5) | Update contact field offers only Custom Date, Current Date, Specific Date. **No offset arithmetic.** | **Step dropped, nothing substituted.** Writing Current Date would put a wrong value in a field you may report on. The 120 day wait that follows already does the scheduling, so no behaviour is lost. Note the asymmetry: Wait actions and task due dates *do* take relative offsets, only field updates do not. |
+| **"Send with a random delay"** on W4's first email | does not exist; the Wait action takes a fixed number only, so the sheet's own fallback is not buildable either | **Nothing substituted.** A fixed wait delays everyone equally and would not spread the batch at all. Mitigation stays what the sheet already says: tag `batch ready` in small batches, 20 a day for two weeks then 25, inside the 8 to 5 window. |
+| **"Send as reply to previous email"** | not offered | nothing needed; `P-D-2`'s own subject carries the `Re:` treatment, as the sheet anticipated |
+| **"is one of" for tags** | `Includes` with several tags means **ALL of them** (AND) | every suppression gate is **one condition per tag joined with OR**: `cooling 30d` OR `cooling 60d` OR `cooling 90d` OR `hold 6m` OR `dnc`. Used in W1, W2, W3 and W4. |
+| **"is within the last N days"** for a date field (W6b) | does not exist | `Last Touch Date` **Is not** **Before 5 Days**, putting the stalled contact in the None branch |
+| **months as a wait unit** | units are seconds, minutes, hours, days | 4 months built as **120 days**, 6 months as **180 days** |
+| **The Personal Line gate looping** ("task, then wait again") in W1, W2, W3 and W5 | **branches never rejoin**, so a loop means duplicating the whole remaining sequence into the Time out branch | built as a **hard stop**: the Time out branch raises the "write the personal line" task and ENDs. See below. |
+
+## The one behaviour you should decide on before publishing
+
+**The Personal Line gate does not resume by itself.** In W1, W2, W3 and W5, if
+`Personal Line` is still empty after 2 days the contact gets a task telling David to write it,
+and then the workflow **ends for that contact**. It does not pick the sequence back up when
+the field is later filled.
+
+- In **W5 this is recoverable**, because Allow re-entry is ON: filling the field and
+  re triggering (marking the opportunity Lost again) re enrols the contact.
+- In **W1, W2 and W7 it is not**, because Allow re-entry is OFF as the sheet specifies. The
+  contact is out of that sequence for good unless you re enrol by hand.
+
+Three ways to change it, if you want to: duplicate the tail into the Time out branch (ugly,
+but exact); lengthen the timeout so the gate simply waits longer instead of giving up; or turn
+Allow re-entry ON in W2 and W7 so re setting `Lead Lane` puts the contact back in. **I have
+not chosen for you.** As built, the gate protects the thing the sheet says matters, which is
+that a referral email never goes out with a generic first line.
+
+## What is still on you
+
+The Appendix B list, updated for what this run changed:
+
+1. **A2P 10DLC registration.** **No longer blocks anything**, since no workflow contains SMS.
+   Do it when you want texting; the side workflows come after.
+2. **Verify david.taylor@cornerstonepeo.com as an additional sender.** **No longer blocks W7**,
+   because W7 does not send as Cornerstone any more; David sends those three by hand. Only
+   needed if you later want GHL to send them directly.
+3. **Business hours in Settings > Business Profile**, Mon to Fri, if they are empty. W1 step 9
+   depends on them. W4's window is set on the workflow itself and does not.
+4. **The three calculator URLs.** All three return **200** and are live:
+   `https://forms.atlasonesolutions.com/tools/retention-cost/`, `/tools/vendor-consolidation/`
+   and `/tools/wc-premium-check/`. They are in W0's Vertical Tool values. The **`[link]`
+   placeholder still needs replacing in the Email 3 templates**, or Email 3 goes out with a
+   bracket in it.
+5. **The Monday batch**: 25 names, `Lead Lane` = `D Cold`, set `Vertical`, add `Batch ready` in
+   bulk. 20 a day for the first two weeks, then 25.
+
+## Not done, and deliberately so
+
+These are Part 10 of the build sheet and were outside the ordered list you gave me:
+
+- **The two smart lists** (Sequence Active, Stalled) are not created.
+- **The old shells** `Missing-Info Follow-up` and `Tool-Lead Nurture` are untouched, neither
+  deleted nor renamed. `Won - Pay Referral Partner` and `Post-Presentation Email` were not
+  opened, as instructed.
+- **Nothing is published** and **no test contacts were created**, so no execution log has been
+  exercised. The per workflow tests in the sheet are all still to run.
+- **A2P status in Trust Center** was not read.
+
+Say the word and I will do any of those in the next run.
+
+## The builder lessons, in one place
+
+Anyone editing these by hand should know:
+
+1. **Dropdown options need two clicks.** One click highlights, the second commits. `double_click`
+   is not a substitute: in the If/Else field list its second click falls through to the row
+   underneath and silently rewrites a different condition.
+2. **Do not dismiss a picker in the same breath as choosing from it.** Selecting a tag then
+   immediately pressing Escape reverts the chip.
+3. **Set the AND/OR joiner before adding the next condition.** The "And"/"Or" text printed
+   between rows is a static label, not a control.
+4. **Linking an email template needs the row clicked twice**; until the "Linked template:" line
+   appears, saving fails with "Subject not found".
+5. **Copy action / Copy all actions from here / Paste below** is the fastest way to build
+   anything repeated. It cloned W3a's whole eight action branch, all five of W4's business
+   hours waits, and W5's four 90 day waits.
+6. **Duplicate workflow** (the `...` menu in the workflows list) copies triggers, branches and
+   every action, and asks for the new name in the dialog. That is how W7 was built.
+7. **In a task panel, click the Title at its far left**, where the plain text is; clicking the
+   middle lands on a merge chip and opens the tag browser instead.
+8. **The task time picker's AM/PM column scrolls when you pick an hour**, so AM often becomes
+   PM. Check the text box reads what you meant before pressing OK.
