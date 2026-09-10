@@ -1089,3 +1089,111 @@ Published, all ten show 0 total enrolled and 0 active enrolled, so nothing has f
 - **The `[link]` placeholder** still needs replacing in the Email 3 templates.
 - Part 10 is still untouched: no smart lists, old shells left alone, no test contacts, A2P
   status not read.
+
+---
+
+## Checkpoint 14: Run J. Placeholder audit, smart lists, live test BLOCKED
+
+### 1. The `[link]` placeholders: nothing to change, the chain is already correct
+
+All seven named templates were opened in the code editor and read end to end, body and
+signature. **Not one contains `[link]` or `[tool]`. No template was edited.**
+
+| Template | What its body actually holds | Changed |
+|---|---|---|
+| `P-A-3 Referral Email 3` | no tool line at all, CTA is the Back Office Audit booking button | no |
+| `P-B-3 Trigger Email 3` | "Here is the tool I mentioned: **{{contact.vertical_tool}}**" | no |
+| `P-D-3 Cold Email 3` | same line, **{{contact.vertical_tool}}** | no |
+| `P-E-Q1 Quarterly tool` | same line, **{{contact.vertical_tool}}** | no |
+| `P-E-Q2 Quarterly law change` | no tool line, CTA is the booking button | no |
+| `P-E-Q3 Quarterly proof story` | `{{contact.vertical_proof}}`, CTA is the booking button | no |
+| `P-W7-3 WSA Email 3` | no tool line, CTA is the Zoom scheduler link | no |
+
+**The carry forward note in the Run G report was wrong and is now retired.** It said "the
+`[link]` placeholder still needs replacing in the Email 3 templates". That came from the
+build sheet's Appendix A, which used `[link]` as a placeholder **in the W0 vertical values**,
+not in the templates. W0 was built in Run G part 2 with the real URLs, per your instruction
+at the time, so the placeholder never reached the CRM.
+
+**Verified end to end:** W0's Construction branch, action "Set Construction lines", holds
+`Vertical Tool` = `WC premium check: https://forms.atlasonesolutions.com/tools/w...`, a real
+live URL. The three tool emails render `{{contact.vertical_tool}}`. So W0 writes the URL and
+the reader sees the URL. **Nothing to fix.**
+
+### 2. Smart lists: the two the sheet names
+
+Part 10 of the build sheet names **two** smart lists and both are built:
+
+| Name | Filters | Count now |
+|---|---|---|
+| **Sequence Active** | `Tag` **Is** `sequence active` | 0 |
+| **Stalled** | `Tag` **Is** `sequence active` **AND** `Last Touch Date` **Is** **More than 5 Days Ago** | 0 |
+
+Both read 0 because no contact has ever been enrolled, which is correct.
+
+**Discrepancy with the Run J instruction, flagged rather than guessed at.** The instruction
+named six lists in its parenthetical: Sequence active, Cooling, Hold, DNC, Reply received,
+Batch ready. **The sheet names none of Cooling, Hold, DNC, Reply received or Batch ready**,
+and it *does* name **Stalled**, which the parenthetical omits. The instruction's own rule was
+"build the ones the sheet names, skip anything the sheet does not name", so the sheet won:
+Sequence Active and Stalled built, the other five skipped. Say the word and the five tag
+lists take about a minute each.
+
+### Builder findings
+
+**Smart list filters are OR by default and the OR pill is not a toggle.** Two top level
+filters are joined with **OR** and clicking the pill does nothing. **AND** comes from
+**"Add nested filter"** *inside* an existing filter block, which prints AND between the rows.
+That is how Stalled is built.
+
+**Date fields have no "before" operator.** The operator list is only Is / Is not / Is empty /
+Is not empty. The relative comparison lives in the **value** dropdown: Between, More than,
+After date, Less than, Before date, In the next, In the last, then a number, a unit, and
+**Ago** or **From now**. "Is before 5 days ago" is therefore built as
+**Is → More than → 5 → Days → Ago**. Same shape as the W6b workaround from Run G.
+
+### 3. The live test could not be run. Add Contact is broken in this session.
+
+**The test never started, because the test contact could not be created.**
+
+`Contacts > Add Contact` opens its panel and **accepts typing normally**: First name `Test`,
+Last name `Prospect`, Email `david@atlasonesolutions.com` all entered and visible. But
+**every button in that panel is dead**. Save does nothing, and neither does Cancel, the X in
+the corner, or the trash icon on the phone row. No error, no toast, no network response, no
+validation message. The panel just sits there.
+
+Tried, in this order:
+1. Save. Nothing.
+2. Waited, re-checked all fields were valid including the required First name. Save. Nothing.
+3. Full page reload, re-entered everything from scratch. Save. Nothing.
+4. Blurred the focused field and pressed Escape first in case a dropdown had focus. Save.
+   Nothing.
+5. Deleted the empty phone row, on the theory that a blank phone with no type selected was
+   failing validation silently. **The trash icon was dead too**, which is what showed the
+   problem is the whole panel, not the form contents.
+
+After the fifth attempt I stopped rather than keep hammering a dead control.
+
+**Confirmed no mess was left behind.** Searched contacts for "Test Prospect" after a fresh
+page load: **no contacts found.** Nothing was half created, so there is nothing to delete and
+step 4's cleanup is a no op.
+
+**Everything downstream of contact creation is therefore untested and unclaimed:**
+- W0 filling Vertical Opener, Vertical Proof and Vertical Tool: **not tested**
+- Form A submission: **not attempted**
+- W1 firing, `P-C-0 Instant reply` arriving with the branded wrapper: **not tested**
+- The CALL NOW task and the notification bell: **not tested**
+- W6 on the `not interested` tag removing `sequence active`, adding `hold 6m`, and pulling the
+  contact out of W1: **not tested**
+
+`_briefs/assets/run-J/` holds the two screenshots that were actually earned:
+`01-smart-lists-created.jpg` (Stalled and Sequence Active in the tab bar) and
+`02-no-test-contact-clean-state.jpg` (the search proving no test contact exists). No
+screenshots exist for the W0, W1 or W6 confirmations because those confirmations never
+happened.
+
+**What unblocks it:** most likely a stale front end. A hard reload of the CRM in a fresh tab,
+or a different browser session, usually revives a panel whose buttons have stopped binding.
+Creating the contact by CSV import, or from the Conversations pane, would also sidestep the
+Add Contact panel entirely. Once one contact called Test Prospect exists with
+`Vertical` = `Construction`, the rest of the Run J step 3 script runs as written.
