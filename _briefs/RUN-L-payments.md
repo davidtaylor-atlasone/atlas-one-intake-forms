@@ -95,3 +95,82 @@ built and no live payment surface was changed:
 - **Part 6**: this file plus the commit.
 
 **Payments > Integrations was never opened**, as instructed.
+
+---
+
+# Run L part 2
+
+## Part 0. Verification sweep: PASS, no further defects
+
+Every price reopened and read back. **All seven previously unverified recurring prices were
+already correct**, and no stray Track Inventory or Add Margin box was found on any of the 20
+products.
+
+| Product | Price | Type | Billing period | Track Inventory | Add Margin |
+|---|---|---|---|---|---|
+| Atlas One Membership: Essential | $99 | Recurring | Monthly | off | off |
+| Atlas One Membership: Professional | $399 | Recurring | Monthly | off | off |
+| Atlas One Membership: Concierge / Fractional COO | $1,900 | Recurring | Monthly | off | off |
+| Atlas One Membership: Enterprise | $999 | Recurring | Monthly | off | off |
+| Atlas One Membership: Enterprise, "Annual, setup waived" | $11,988 | Recurring | **Yearly** | off | off |
+| AI Task Agent | $199 | Recurring | Monthly | off | off |
+| AI Task Agent, "Bundled with Email Assistant" | $99 | Recurring | Monthly | off | off |
+| Handbook annual update | $250 | Recurring | **Yearly** | off | off |
+| Safety manual annual refresh | $300 | Recurring | **Yearly** | off | off |
+| AI Email Assistant: Essentials | $249 | Recurring | Monthly | off | off | (fixed in part 1) |
+| AI Email Assistant: Professional | $499 | Recurring | Monthly | off | off | (fixed in part 1) |
+| AI Email Assistant: extra mailbox | $75 | Recurring | Monthly | off | off | (fixed in part 1) |
+| AI Email Assistant: setup | $750 + $999 "Complex" | Onetime | n/a | off | off |
+| Setup: Professional | $495 | Onetime | n/a | off | off |
+| Setup: Enterprise | $995 | Onetime | n/a | off | off |
+| Setup: Concierge | $1,500 | Onetime | n/a | off | off |
+| AI Task Agent: setup | $500 | Onetime | n/a | off | off |
+| Employee Handbook Builder (bilingual, 50-state) | $950 | Onetime | n/a | off | off |
+| Safety Manual Builder (OSHA, bilingual) | $1,200 | Onetime | n/a | off | off |
+| Agreement build (contractor, W-2 at-will, or NDA) | $450 | Onetime | n/a | off | off |
+| Agreement bundle (all three) | $1,200 | Onetime | n/a | off | off |
+| HR policy or document design | $175 | Onetime | n/a | off | off |
+
+So the silent-Onetime defect hit exactly three prices, all three in the AI Email Assistant
+family, all three fixed in Run L part 1. Everything else was built correctly first time.
+
+Incidental confirmation: each product shows a **Stripe TEST and a Stripe LIVE product id**
+under Additional Information, so the catalogue is syncing to Stripe.
+
+## Part 1. Payment links: PARTIAL, 4 of 14 built
+
+Stopped here when Run Q was handed over. **Every link that exists is complete and Active;
+nothing is half built.**
+
+| Product | Price | Link id (path) | Status |
+|---|---|---|---|
+| Setup: Professional | $495 | `/6aa31729e9a073174b3b5aff` | Active |
+| Setup: Enterprise | $995 | `/6aa317aae9a073174b3b5b03` | Active |
+| Setup: Concierge | $1,500 | `/6aa31824e9a073174b3b5b08` | Active |
+| AI Task Agent: setup | $500 | `/6aa31880e9a073174b3b5b0c` | Active |
+
+Each is set to **Payment Mode: Live**, collects **First name, Last name, Email and Phone**
+(phone via "Require customers to add a phone number"), branding on, call to action "Pay".
+
+**Still to build (10):** AI Email Assistant: setup $750, Employee Handbook Builder $950,
+Safety Manual Builder $1,200, Agreement build $450, Agreement bundle $1,200, HR policy or
+document design $175, and the four membership tiers monthly (Essential $99, Professional
+$399, Enterprise $999, Concierge $1,900).
+
+### Three things the payment link builder will not do
+
+1. **No company field.** The checkout collects First name, Last name, Email, and optionally
+   Phone and a postal address. There is no company or business name field, so "collect
+   company" cannot be satisfied on a payment link. Company would have to come from a form or
+   be filled in by David afterwards.
+2. **No after-payment message.** The only post payment option is "Enable redirection to
+   custom URL". The line "Thank you. Watch your inbox, your next step is on its way." cannot
+   be shown on the GHL confirmation screen. Two ways to deliver it instead: put it on a thank
+   you page and use the redirect, or send it as the first email of the pay-then-deliver
+   workflow.
+3. **No card versus ACH switch on the link.** The builder has no payment method selector, so
+   which methods appear is inherited from the Stripe account configuration, which lives in
+   Payments > Integrations. That screen is David's and was not opened.
+
+The full public URL is not printed in the list; it is produced by the **copy icon** next to
+each Link Url. The ids above are the stable part.
