@@ -1197,3 +1197,92 @@ or a different browser session, usually revives a panel whose buttons have stopp
 Creating the contact by CSV import, or from the Conversations pane, would also sidestep the
 Add Contact panel entirely. Once one contact called Test Prospect exists with
 `Vertical` = `Construction`, the rest of the Run J step 3 script runs as written.
+
+---
+
+## Checkpoint 15: Run J part 2. Blocked. The Contacts module is down, and the test email was already taken
+
+Nothing in Run J part 2 could be completed. Two separate problems, one of them a real finding
+about the data rather than the UI.
+
+### Finding 1: `david@atlasonesolutions.com` already belongs to a real contact
+
+The Run J part 1 mystery is solved. Add Contact was not broken then; **GHL was silently
+refusing a duplicate email.** Searching that address in the Conversations contact picker
+returns an existing contact:
+
+> **David taylor | david@atlasonesolutions.com**
+
+That is David's own record, not test data. The Run J part 2 script would have had this run
+end by **deleting** it, after tagging it `not interested` and pushing it through W6. That is
+an irreversible production action on a real contact, so it was not done.
+
+**Substitution made, and it needs your sign off:** the test email was changed to
+**`david+testprospect@atlasonesolutions.com`**. Plus addressing still delivers to the same
+inbox, so the branded `P-C-0` check would still have been verifiable, but it creates a
+distinct record that is safe to tag, sequence and delete. This matches the convention already
+in the CRM, which holds `david+seedb@atlasonesolutions.com` and `seed-a@` / `seed-d@`
+records from earlier test rounds. `_briefs/assets/run-J/test-prospect.csv` is written with
+that address, ready for the import when the UI comes back.
+
+### Finding 2: the Contacts module will not render
+
+**Contacts is the only broken module.** Verified by elimination in the same session and the
+same tab:
+
+| Module | State |
+|---|---|
+| **Automation > Workflows list** | renders fully, all ten workflows and their statuses |
+| **Conversations** | renders fully, inbox, threads, message history |
+| **Contacts (list, smart lists, Add Contact, Import)** | **body renders completely empty** |
+| **Contact Details panel inside Conversations** | rendered once, then went blank on reload |
+
+The Contacts page paints its header and the Smart Lists / Bulk Actions / Custom Fields /
+Tasks / Companies tab strip, and **nothing below it**. No toolbar, no Add Contact button, no
+Import control, no contact rows, no smart list tabs. Screenshot:
+`_briefs/assets/run-J/03-contacts-module-down.jpg`.
+
+**This is not a stale front end.** Tried, all with 20 to 30 second settles:
+a brand new tab; `Cmd+Shift+R` hard reload on `/contacts/`; a second hard reload on
+`/contacts/smart_list/All`; and in between, navigating away to Automation and Conversations
+(both fine) and back. The blank state survived every one. The Contact Details panel in
+Conversations going blank on a later load points at the **contact data layer**, not a cached
+bundle.
+
+### All three contact creation paths were tried and all three are blocked
+
+| Path | Result |
+|---|---|
+| **A. Contacts > Add Contact** | the module does not render, so there is no Add Contact button to click. In Run J part 1 the panel did open and its Save was dead, which Finding 1 now explains as the duplicate email block. |
+| **B. Conversations > new conversation** | the compose modal opens (slowly, about 30 seconds) and offers Message Contacts, but its picker **only selects contacts that already exist**. This GHL build has no create a new contact option inside it, so path B cannot create anything. |
+| **C. CSV import** | Import lives inside the same non rendering Contacts module. The CSV is written and waiting; there is no upload control to feed it to. |
+
+### Consequently, unattempted
+
+Every remaining item depends on a contact record or on the Contacts module:
+
+- **Part 1** test contact, Vertical = Construction, Lead Lane = Inbound: **not created**
+- **Part 2** W0 filling the vertical line fields; Form A submission; `P-C-0 Instant reply`
+  and its branded wrapper; the CALL NOW task; the notification bell; W6 on `not interested`:
+  **all unattempted**, no enrollment history to record because nothing was ever enrolled
+- **Part 3** the five remaining smart lists: **not built.** Smart Lists is a tab inside the
+  broken module. The two from Run J part 1, **Sequence Active** and **Stalled**, were created
+  before the outage and should still exist; they could not be re-verified today.
+- **Part 4** cleanup: **nothing to clean up**, since nothing was created. The real
+  David taylor contact was left untouched.
+
+### One useful thing was confirmed for Part 3
+
+The reply tag W6 actually applies is **`reply received`**, not `replied`. So
+"Prospecting: Reply received" must filter on `Tag is reply received`. Noted so the list is
+built correctly when the module returns.
+
+### To resume
+
+1. Confirm the Contacts module renders again. If it is still blank, it is worth raising with
+   High Tide or GHL support, since Automation and Conversations are healthy, which points at
+   something location specific rather than a general outage.
+2. Decide on the email. Either approve `david+testprospect@atlasonesolutions.com`, or name a
+   different address, or say explicitly that the real `david@atlasonesolutions.com` contact
+   should be used and then **not** deleted at the end.
+3. Everything else in the Run J part 2 script then runs as written.
