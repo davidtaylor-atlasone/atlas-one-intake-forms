@@ -691,3 +691,111 @@ should ever run for one contact, the fix is two separate workflows rather than t
 The Add task panel makes **Description** mandatory, so the task carries the line
 *"The renewal is 60 days out. This is the last window to quote it."* The sheet did not
 specify one. No dashes.
+
+---
+
+## Checkpoint 10: W4 Cold cadence COMPLETE
+
+**Workflow:** `W4 Cold cadence`, id `b4b3c3ba-7b15-4c1e-b541-21c894c48849`. **Draft.**
+
+**Settings:** Allow re-entry **OFF** (turned off, it defaults on), Allow multiple opportunities
+ON, **Stop on response ON**. **Time window: Specific time ON, 08:00 AM to 5:00 PM, Mon to Fri**
+(Sun and Sat unchecked). Timezone left on **Account timezone**, which is the Lehi UT account,
+so Mountain. Every one of those was already the GHL default once "Specific time" was switched
+on, so nothing but the toggle itself had to be set.
+
+**Trigger:** `Contact tag` named "Batch ready tag added", filter **Tag added** `batch ready`.
+Reads back on the card as `Tag added includes "batch ready"`.
+
+**Action 1: If/Else `Suppression check`**, branch **Suppressed** =
+`Tags` **Includes** `cooling 30d` **OR** `cooling 60d` **OR** `cooling 90d` **OR** `hold 6m`
+**OR** `dnc` (five separate conditions joined with OR, the same shape as W1, W2 and W3),
+plus the **None** branch that carries the whole cadence.
+
+**Suppressed branch (2 actions, then END):**
+
+| # | Action | Settings |
+|---|---|---|
+| 1a | Remove contact tag "Remove batch ready" | `batch ready` |
+| 1b | Add task "Task skipped suppressed" | `Skipped, suppressed: {{contact.company_name}}`, David Taylor, 0 Days |
+
+**None branch, the cadence (22 actions, all saved):**
+
+| # | Action | Settings |
+|---|---|---|
+| 2 | Remove contact tag "Remove batch ready" | `batch ready` |
+| 3 | Add contact tag "Add sequence active" | `sequence active` |
+| 4 | Update contact field "Set Sequence Step 1" | `Sequence Step` = `1` |
+| 5 | Add task "Task Call plus VM1 10 AM" | `Call + VM1 10 AM: {{contact.company_name}}`, David, **0 Days at 10:00 AM** |
+| 6 | Email "Email P-D-1 Cold Email 1" | linked template `P-D-1 Cold Email 1` |
+| 7 | Update contact field "Stamp Last Touch Date" | `Last Touch Date` = **Current Date** |
+| 8 | Wait "Wait 2 days" | 2 days, **Advance window ON**, Mon to Fri, 08:00 AM to 5:00 PM |
+| 9 | Email "Email P-D-2 Cold Email 2" | linked template `P-D-2 Cold Email 2` |
+| 10 | Wait "Wait 2 days" | same as 8 |
+| 11 | Add task "Task Call no VM 4 PM" | `Call, no VM, 4 PM: {{contact.company_name}}`, David, **0 Days at 4:00 PM** |
+| 12 | Wait "Wait 2 days" | same as 8 |
+| 13 | Add task "Task Call plus VM2 10 AM" | `Call + VM2, 10 AM: {{contact.company_name}}`, David, **0 Days at 10:00 AM** |
+| 14 | Email "Email P-D-3 Cold Email 3" | linked template `P-D-3 Cold Email 3` |
+| ~~15~~ | ~~Send SMS + its If/Else on `SMS consent`~~ | **SKIPPED per your instruction. No SMS anywhere.** |
+| 16 | Wait "Wait 2 days" | same as 8 |
+| 17 | Add task "Task LinkedIn note or card" | `LinkedIn note or handwritten card (top accounts only): {{contact.company_name}}`, David, 0 Days |
+| 18 | Wait "Wait 2 days" | same as 8 |
+| 19 | Add task "Task Call 3 last live attempt" | `Call 3, 4 PM, last live attempt: {{contact.company_name}}`, David, **0 Days at 4:00 PM** |
+| 20 | Wait "Wait 3 days" | 3 days, Advance window ON, same window |
+| 21 | Email "Email P-D-4 Cold breakup" | linked template `P-D-4 Cold breakup` |
+| 22 | Add contact tag "Add cooling 90d" | `cooling 90d` |
+| 23 | Remove contact tag "Remove sequence active" | `sequence active` |
+| 24 | Wait "Wait 90 days" | 90 days, **no** advance window (a rest, not a touch) |
+| 25 | Remove contact tag "Remove cooling 90d" | `cooling 90d` |
+
+**Skipped step, logged as instructed:** the sheet's **step 15** was a `SMS consent` If/Else
+with a disabled Send SMS inside it. Both the branch and the SMS are gone and the sequence
+runs straight from Email 3 to the 2 day wait. This is the third and last SMS step in the
+whole build (W1 had two); nothing in any workflow now sends or references SMS.
+
+### Deviations found in the builder
+
+**1. "Send with a random delay" does not exist.** The Send Email action's **Additional
+settings** offers only *Track clicks*, *UTM tracking* and *Add tags*. There is no random or
+jittered send option, and the Wait action's "For a set period of time" takes a fixed number
+only, so the sheet's fallback ("a Wait of 1 to 60 minutes, random") cannot be built either.
+**Nothing was substituted**, because a fixed wait would delay every contact by the same
+amount and so would not spread the batch at all. The practical mitigation is the one already
+in the sheet: David tags `batch ready` in small batches, and the 8 to 5 window plus the 20 a
+day warm up cap keeps the volume low. Worth revisiting if GHL adds jitter.
+
+**2. "Send as reply to previous email" is not offered either.** The sheet anticipated this;
+the `P-D-2` template's own subject carries the `Re:` treatment, so nothing was needed.
+
+### Builder findings worth keeping
+
+**3. Dropdown options need TWO clicks.** This is the single most useful thing learned in this
+workflow. In tag pickers, operator lists, field lists, the Assign to list, the Unit list and
+the date value list, one click only highlights the row; **a second click on the same row
+commits it**. `double_click` is NOT a safe substitute: in the If/Else field dropdown the
+second half of a double click falls through to the row underneath and silently rewrites a
+different condition (it turned condition 1 into "Company name" once and had to be rebuilt).
+Click, wait, click again, then screenshot to confirm the chip.
+
+**4. Do not press Escape in the same batch as a tag selection.** Clicking the option then
+immediately sending Escape reverts the pending chip. Take a screenshot (or click a neutral
+part of the panel) between the selection and any dismissal.
+
+**5. The OR joiner has to be set BEFORE adding the next condition.** The AND/OR dropdown at
+the bottom of a branch governs the joiner for the row that gets added next; the "And"/"Or"
+label printed between existing rows is static text and is not clickable. Set the dropdown to
+OR (two clicks), confirm the label between the rows flips to "Or", then press the `+`.
+
+**6. Copy and paste is the way to build repeated actions.** One "Wait 2 days" was built with
+its Advance window, then **Copy action** put it on the clipboard and a **Paste below** icon
+appeared beside every `+` on the canvas; steps 10, 12, 16 and 18 are one click each, and step
+20 is that same paste with the period edited from 2 to 3. The clipboard survives across many
+other actions, so copy once and paste all the way down. The same trick cloned "Remove batch
+ready" from the Suppressed branch into the None branch.
+
+**7. The task time picker needs care.** It is three scrolling columns (hour, minute, AM/PM)
+with an OK button. Choosing an hour scrolls the AM/PM column, so **AM often ends up as PM**;
+scroll that column back up and click AM, check the text box reads e.g. `10:00 AM`, then OK.
+
+**8. Task Description is mandatory** on every Add task, so each of the six tasks carries a
+one line instruction. None of them contain a dash.
