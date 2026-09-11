@@ -8,7 +8,8 @@ Every contact in location `AzTPxnK2vSUj19jYoDmR`, pulled by API with `POST /cont
 paged 100 at a time using `searchAfter`. **2,136 contacts**, which matches the `total` the API
 reports and the figure in the brief.
 
-Written to `_briefs/assets/run-O/contacts-review.xlsx` and copied to OneDrive at:
+Written to `_briefs/assets/run-O/contacts-review.xlsx` (git ignored, the repo is public and
+the sheet holds real client emails and phones) and copied to OneDrive at:
 
 ```
 ~/Library/CloudStorage/OneDrive-AtlasOneSolutions/2. A1 Official Docs/2. Atlas 1 Solutions Marketing/HR_Docs/Atlas_One_Master_Kit/_BUILD-LOG/2026-09-11-contacts-review.xlsx
