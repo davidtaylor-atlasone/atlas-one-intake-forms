@@ -79,26 +79,10 @@ Margin), which then silently turns on.
 
 ---
 
-## Parts 2 to 6: NOT DONE
-
-Part 1 alone took the whole session. Nothing in Parts 2 to 6 was started, so nothing is half
-built and no live payment surface was changed:
-
-- **Part 2, payment links**: none created.
-- **Part 3, invoice defaults**: Payments > Invoices > Settings never opened. Business name,
-  phone, billing email, logo, terms, payment methods, default note and the four reminders are
-  all still at their previous values.
-- **Part 4, workflows**: W-PAY-1, W-PAY-2 and W-PAY-3 do not exist. The `Membership tier`
-  custom field was not created. The three email templates (`P-MEMBER-WELCOME`,
-  `P-BUILDER-DELIVERY`, `P-PAY-FAILED`) were not written.
-- **Part 5, test invoice**: no test contact, no test product, no invoice. Nothing to clean up.
-- **Part 6**: this file plus the commit.
-
-**Payments > Integrations was never opened**, as instructed.
 
 ---
 
-# Run L part 2
+# Run L parts 2 and 3
 
 ## Part 0. Verification sweep: PASS, no further defects
 
@@ -137,40 +121,98 @@ family, all three fixed in Run L part 1. Everything else was built correctly fir
 Incidental confirmation: each product shows a **Stripe TEST and a Stripe LIVE product id**
 under Additional Information, so the catalogue is syncing to Stripe.
 
-## Part 1. Payment links: PARTIAL, 4 of 14 built
+## Part 1. Payment links: PASS, 14 of 14 built
 
-Stopped here when Run Q was handed over. **Every link that exists is complete and Active;
-nothing is half built.**
+All fourteen are **Active** and in **Live** payment mode. Each collects **First name, Last
+name, Email and Phone** (phone via "Require customers to add a phone number"), branding on,
+call to action "Pay". The four recurring membership links also carry GHL's automatic
+subscription terms and conditions.
 
-| Product | Price | Link id (path) | Status |
-|---|---|---|---|
-| Setup: Professional | $495 | `/6aa31729e9a073174b3b5aff` | Active |
-| Setup: Enterprise | $995 | `/6aa317aae9a073174b3b5b03` | Active |
-| Setup: Concierge | $1,500 | `/6aa31824e9a073174b3b5b08` | Active |
-| AI Task Agent: setup | $500 | `/6aa31880e9a073174b3b5b0c` | Active |
+**Public URL pattern: `https://link.fastpaydirect.com/payment-link/<id>`**
 
-Each is set to **Payment Mode: Live**, collects **First name, Last name, Email and Phone**
-(phone via "Require customers to add a phone number"), branding on, call to action "Pay".
+| Product | Price | Payment link |
+|---|---|---|
+| Setup: Professional | $495 one time | https://link.fastpaydirect.com/payment-link/6aa31729e9a073174b3b5aff |
+| Setup: Enterprise | $995 one time | https://link.fastpaydirect.com/payment-link/6aa317aae9a073174b3b5b03 |
+| Setup: Concierge | $1,500 one time | https://link.fastpaydirect.com/payment-link/6aa31824e9a073174b3b5b08 |
+| AI Task Agent: setup | $500 one time | https://link.fastpaydirect.com/payment-link/6aa31880e9a073174b3b5b0c |
+| AI Email Assistant: setup | $750 one time | https://link.fastpaydirect.com/payment-link/6aa34222e9a073174b3b5b7e |
+| Employee Handbook Builder | $950 one time | https://link.fastpaydirect.com/payment-link/6aa3426ee9a073174b3b5b7f |
+| Safety Manual Builder | $1,200 one time | https://link.fastpaydirect.com/payment-link/6aa34311ceb12d9fc1a8c3f4 |
+| Agreement build | $450 one time | https://link.fastpaydirect.com/payment-link/6aa3436ee9a073174b3b5b81 |
+| Agreement bundle | $1,200 one time | https://link.fastpaydirect.com/payment-link/6aa343c2ceb12d9fc1a8c3f6 |
+| HR policy or document design | $175 one time | https://link.fastpaydirect.com/payment-link/6aa34410ceb12d9fc1a8c3f9 |
+| Membership: Essential monthly | $99 / month | https://link.fastpaydirect.com/payment-link/6aa3445ee9a073174b3b5b82 |
+| Membership: Professional monthly | $399 / month | https://link.fastpaydirect.com/payment-link/6aa344c8e9a073174b3b5b84 |
+| Membership: Enterprise monthly | $999 / month | https://link.fastpaydirect.com/payment-link/6aa34520e9a073174b3b5b85 |
+| Membership: Concierge monthly | $1,900 / month | https://link.fastpaydirect.com/payment-link/6aa34566ceb12d9fc1a8c3fb |
 
-**Still to build (10):** AI Email Assistant: setup $750, Employee Handbook Builder $950,
-Safety Manual Builder $1,200, Agreement build $450, Agreement bundle $1,200, HR policy or
-document design $175, and the four membership tiers monthly (Essential $99, Professional
-$399, Enterprise $999, Concierge $1,900).
+The Enterprise link deliberately uses the **$999 monthly** price, not the $11,988 annual one.
+The AI Email Assistant setup link uses the **$750 standard** price, not the $999 Complex one.
+If David wants links for those two alternates as well, they are two more links on the same
+products.
 
-### Three things the payment link builder will not do
+### Four things to know about these links
 
-1. **No company field.** The checkout collects First name, Last name, Email, and optionally
-   Phone and a postal address. There is no company or business name field, so "collect
-   company" cannot be satisfied on a payment link. Company would have to come from a form or
-   be filled in by David afterwards.
-2. **No after-payment message.** The only post payment option is "Enable redirection to
-   custom URL". The line "Thank you. Watch your inbox, your next step is on its way." cannot
-   be shown on the GHL confirmation screen. Two ways to deliver it instead: put it on a thank
-   you page and use the redirect, or send it as the first email of the pay-then-deliver
-   workflow.
-3. **No card versus ACH switch on the link.** The builder has no payment method selector, so
-   which methods appear is inherited from the Stripe account configuration, which lives in
-   Payments > Integrations. That screen is David's and was not opened.
+1. **No company field.** Checkout collects first name, last name, email, phone and
+   optionally a postal address. Company is not offered, so it cannot be captured here.
+2. **No after-payment message.** The only post payment control is "Enable redirection to
+   custom URL". "Thank you. Watch your inbox, your next step is on its way." has to be
+   delivered another way: a thank you page behind the redirect, or the first email of the
+   pay-then-deliver workflow.
+3. **ACH is not appearing on the live page.** The rendered checkout at
+   `link.fastpaydirect.com` offers **card only** (plus the Stripe Link saved card widget).
+   The payment link builder has no method selector, so which methods appear is decided in the
+   Stripe account, which lives behind **Payments > Integrations**. That screen is David's and
+   was not opened. To get ACH on links and invoices, ACH Direct Debit has to be enabled on the
+   Stripe account.
+4. **The public domain is `link.fastpaydirect.com`, not an Atlas One domain.** That is the
+   payment domain the HighTide reseller provides. If David wants links to read
+   `pay.atlasonesolutions.com` or similar, that is a custom payment domain setting.
 
-The full public URL is not printed in the list; it is produced by the **copy icon** next to
-each Link Url. The ids above are the stable part.
+Cosmetic note: the checkout heading repeats the product name, for example "AI Email
+Assistant: setup AI Email Assistant: setup @ 750". That is because GHL auto-names each price
+`<Product> @ <amount>` and then prints product name plus price name together. Renaming each
+price to something short, for example "Standard", removes the repetition.
+
+## Part 2. Invoice defaults: MOSTLY PASS, two items GHL would not allow
+
+All of this lives at **Payments > Invoices & Estimates > All Invoices > Settings**, not at
+Payments > Settings. Payments > Integrations was never opened.
+
+| Setting | Target | Result |
+|---|---|---|
+| Business name | Atlas One Solutions LLC | **Done** |
+| Phone | 385-213-7177 | **Done** (was +13852137177) |
+| Logo | `a1-logomark-fullcolor-transparent.png` | **Done.** Uploaded to Media Storage and set as Business Logo. The periwinkle laptop mark, not the old globe and not the namemark |
+| Billing email | Billing@AtlasOneSolutions.com | **Done**, as Communications > From Email. From Name set to Atlas One Solutions LLC |
+| Default terms | due on receipt | **Done.** Payment Settings > "Invoice due after X days" changed from 14 to **0** |
+| Default note | "Pay by bank (ACH) or card. Questions: reply to this email or call or text 385-213-7177." | **Done**, in Title, Terms and Layout > Invoice Terms/Notes |
+| ACH and card both on | both | **Done at the GHL layer.** Payment Settings > Manage opens "Allow my customers to pay via" with exactly two choices, **All Valid Payment Methods** and **Only Bank Transfers**. All Valid Payment Methods is on, which admits every method Stripe has enabled |
+| No late fees | off | **Confirmed off.** Allow Partial Payments and Allow Tip Payments are also off |
+| Accent #23304D | if offered | **Not offered.** Invoice settings has no brand or accent colour field. The only styling control is "Customize Layout", which rearranges blocks, not colours |
+| Reminders 3 before, due date, 3 after, 7 after | four reminders | **BLOCKED.** Reminder Settings shows only an "Add another reminder" button and no rows. The button highlights on click but never adds a reminder row. Tried three times, different click points, 15 second waits. Nothing was saved, so the screen is untouched and still shows zero reminders |
+
+Two things for David:
+
+1. **The reminder builder appears broken on this sub account.** Worth raising with High Tide.
+   Until it works, invoice reminders can be done as a workflow instead, on the Invoice sent
+   trigger with waits of 3 days and so on.
+2. **ACH still will not appear to customers until it is enabled on the Stripe account.** The
+   live payment link checkout currently offers card only. The GHL side is set correctly; the
+   remaining switch is ACH Direct Debit in Stripe, which is behind Payments > Integrations,
+   David's screen.
+
+
+## Parts 3 and 4: NOT STARTED
+
+Stopped cleanly at the Part 2 boundary. Nothing is half built and no workflow was published.
+
+- **Part 3, workflows.** W-PAY-1, W-PAY-2 and W-PAY-3 do not exist. The `Membership tier`
+  custom field was not created. The three email templates `P-MEMBER-WELCOME`,
+  `P-BUILDER-DELIVERY` and `P-PAY-FAILED` were not written. **Which trigger fires for a
+  subscription payment is therefore still unanswered**; that test was part of building W-PAY-1.
+- **Part 4, the $1 test invoice.** No test contact, no "TEST do not buy" product, no invoice.
+  Nothing to clean up.
+
+Payments > Integrations and Settings > Integrations were never opened in any part of this run.
