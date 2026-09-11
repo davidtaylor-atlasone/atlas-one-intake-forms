@@ -204,7 +204,58 @@ Two things for David:
    David's screen.
 
 
-## Parts 3 and 4: NOT STARTED
+# Run L part 4: stopped early, GHL logged the session out
+
+## Part 0. Price name cleanup: 1 of 23 done
+
+The rename works and is cheap once you have the variant URL:
+`/payments/products/<productId>/variants/<variantId>` opens straight onto **Pricing Name**.
+Rename, scroll to the bottom, Save. About three steps per price.
+
+| Product | Price renamed | New name | Confirmed |
+|---|---|---|---|
+| Atlas One Membership: Essential | `6aa2fca0eeafa52989063117` | **Standard** | Yes, reopened and the left rail now reads "Standard" |
+
+The other 22 prices are untouched and still carry the auto-generated
+`<Product> @ <amount>` names.
+
+**A note on cost.** This is 23 prices at roughly three steps each. It is not a quick fix, and
+doing it first would consume the session that Parts 1 to 3 need. The order to run next time is
+Parts 1, 2 and 3 first, then this cleanup with whatever is left.
+
+**Variant ids already known**, so these need no discovery step:
+
+| Product | Variant id |
+|---|---|
+| Membership: Professional | `6aa2fd1f97fe7f62966dab6c` |
+| Membership: Concierge | `6aa2ff8f3b4b7ff298dfbd4c` |
+| Membership: Enterprise, monthly | `6aa30346d32deabb4805a7b6` |
+| Membership: Enterprise, annual | `6aa30346d32deabb4805a7be` |
+| AI Email Assistant: Essentials | `6aa2ffe7b44c1caf34be9bce` |
+| AI Email Assistant: Professional | `6aa3003bb6ce5fd64aa5c273` |
+| AI Email Assistant: extra mailbox | `6aa300a95b87e7538bce525a` |
+| AI Task Agent, standalone | `6aa302b2118a37828837099b` |
+| AI Task Agent, bundled | `6aa302b2118a3782883709a3` |
+| Handbook annual update | `6aa301545b87e7538bce5ef0` |
+| Safety manual annual refresh | `6aa301e15b87e7538bce68a1` |
+
+The variant id is **not** reliably derivable from the product id, so the remaining ten need
+one extra step each: open the product, click the price row, read the id from the URL.
+
+## Why part 4 stopped
+
+`Settings > Custom Fields` would not finish loading. It sat on the spinner through two 18
+second waits and then offered "If you having issues loading the app, click here to refresh."
+**That refresh logged the GHL session out**, landing on the sign in screen at
+`app.ridethehightide.com/?logout=true`.
+
+I do not enter passwords, so the run stops here. David signs back in and the next run picks
+up at Part 1.
+
+**Nothing was left half built.** No workflow was created, so nothing is half published. The
+one price rename is complete and saved.
+
+## Parts 1 to 4 of run part 4: NOT STARTED
 
 Stopped cleanly at the Part 2 boundary. Nothing is half built and no workflow was published.
 
