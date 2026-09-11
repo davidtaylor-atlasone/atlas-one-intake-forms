@@ -52,42 +52,75 @@ Footer carries **One Call Solves Everything.** and the 15 minute intro link
 
 Commit `174d262`.
 
-## Part B. "Call: not now" workflow: BLOCKED at step one
+## Part B. "Call: not now" workflow: BLOCKED, cause found
 
-**The workflow was not created.** Automation > Workflows > **Create workflow will not open its
-menu**. The button highlights on click but the dropdown (Start from Scratch, Build Using AI,
-Select from Template, Import from a campaign, Company based workflow) never renders.
+### Root cause: the Chrome window is hidden, so mouse clicks never reach GHL
 
-Tried, all with the same result:
+Every GHL screen renders inside an **out of process iframe**. The workflows list is
+`client-app-automation-workflows.leadconnectorhq.com` inside `app.ridethehightide.com`; the
+builder is the same frame; the email editor is another one nested inside that.
 
-1. Click at several points across the button.
-2. Hover first, then click, so a `mouseenter` fires before `mousedown`.
-3. Click with no wait, 1 s, 2 s, 3 s, 4 s, 6 s and 8 s before the screenshot.
-4. Full page navigation back to the workflows list, twice.
-5. The Dashboard round trip prescribed for this run, then straight back to Automation.
-6. Window resize to 1440 wide (the captured viewport stayed 1317, so the app never reflowed).
-7. Click then **Down then Return**, in case the menu was rendering clipped and only the
-   keyboard could reach it.
+The page reports:
 
-`find` cannot see the button in the accessibility tree either: the workflows list renders
-inside a nested frame and only generic regions are exposed, which is consistent with the menu
-being rendered into a portal that is clipped or detached.
+```
+document.hasFocus()        true
+document.visibilityState   "hidden"
+document.hidden            true
+```
 
-**The same menu worked about an hour earlier in this session**, at viewport width 1372, when
-the scratch workflow for W-PAY-3 was created. Nothing about the account changed in between.
-GHL's "click here to refresh" link was never used, per the run rules.
+A hidden page still runs script and still accepts **keyboard** events, because those go to
+whatever frame holds focus. It does not produce compositor hit test data, and browser side
+mouse routing into an out of process iframe depends on that hit test data. So every click
+aimed at a GHL screen is swallowed silently. Clicks on the **outer** page still work, which is
+why collapsing the left sidebar worked all along and made this look like a GHL bug.
 
-**I did not use the workarounds that were available**, because each leaves debris in a live
-account: cloning a Booking workflow and gutting it, or repurposing the unfinished W-PAY-3
-draft. Neither is worth doing without David saying so.
+Proved it four ways, all on the workflows list, all no ops:
+
+| Test | Expected | Actual |
+|---|---|---|
+| Click the row checkbox | ticks | nothing |
+| Click a workflow name | opens the builder | nothing |
+| Click the Search box and type | filters the list | nothing typed |
+| Scroll the list | list scrolls | nothing |
+
+And the outer page is fine: a probe overlay on the parent document recorded clicks at
+(615,79), (200,400), (1300,700) exactly as sent, so the coordinates are right and the events
+are real. They just stop at the iframe boundary.
+
+**The fix is one click by David: bring the Chrome window to the front.** It is minimised or
+fully covered. I cannot do it myself, `osascript` and `open` are off limits for this session.
+
+### What the keyboard route did achieve
+
+Keyboard still reaches the frame, so the escalation ladder was worked to the end:
+
+1. Fresh tab, straight to Automation > Workflows, one click on Create workflow: **failed** (as
+   above, no click reaches the frame).
+2. Direct builder URL with a fresh UUID: **failed**, "Workflow not found". There is no blank
+   builder URL, the id has to exist first.
+3. Clone "Booking: no show" from the row menu: **failed**, the row menu is a click too.
+
+Then, driving the frame by keyboard only (focus the iframe from the parent with
+`iframe.contentWindow.focus()`, then Tab and Return):
+
+- **The Create workflow menu is not broken.** Tab six times from the top of the frame lands on
+  it; Return opens it and all five items render. Down then Return picked **Start from Scratch**.
+- That created a real blank workflow: **`ff950be3-829d-4a51-8f9a-825db660796e`**, named
+  `New Workflow : 1789164293568`, status Draft, saved.
+- The Add trigger panel opens the same way and its search box accepts typing.
+
+**This one empty draft is the only thing left behind.** Nothing was cloned, renamed or
+deleted. It becomes "Call: not now" as soon as the window is visible; if David would rather
+start clean it is a one line delete from the workflows list.
+
+Building the rest blind, by counting Tab presses through a canvas, five action dropdowns and a
+nested cross origin email editor that needs a clipboard paste into a code pane, is not worth
+the risk of a wrongly configured live automation. Stopping here.
 
 ### What did get done
 
 **The `not-now` tag exists.** Created at Settings > Tags on 11 Sep 2026 01:52 PM and confirmed
-in the list. Tag count went 25 to 26. That screen's Create button works normally, which is
-what makes the workflows page failure look specific rather than account wide.
-
-`not-now` has been added to the tag list in `_briefs/RUN-G-checkpoints.md`.
+in the list. Tag count went 25 to 26, and it is recorded in `_briefs/RUN-G-checkpoints.md`.
 
 ### Still to do, all of it
 
