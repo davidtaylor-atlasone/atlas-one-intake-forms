@@ -1,0 +1,4 @@
+
+# Run O contact export: real client data, never in the public repo
+_briefs/assets/run-O/*.xlsx
+.DS_Store
