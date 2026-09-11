@@ -52,6 +52,53 @@ Footer carries **One Call Solves Everything.** and the 15 minute intro link
 
 Commit `174d262`.
 
-## Part B. "Call: not now" workflow
+## Part B. "Call: not now" workflow: BLOCKED at step one
 
-_in progress_
+**The workflow was not created.** Automation > Workflows > **Create workflow will not open its
+menu**. The button highlights on click but the dropdown (Start from Scratch, Build Using AI,
+Select from Template, Import from a campaign, Company based workflow) never renders.
+
+Tried, all with the same result:
+
+1. Click at several points across the button.
+2. Hover first, then click, so a `mouseenter` fires before `mousedown`.
+3. Click with no wait, 1 s, 2 s, 3 s, 4 s, 6 s and 8 s before the screenshot.
+4. Full page navigation back to the workflows list, twice.
+5. The Dashboard round trip prescribed for this run, then straight back to Automation.
+6. Window resize to 1440 wide (the captured viewport stayed 1317, so the app never reflowed).
+7. Click then **Down then Return**, in case the menu was rendering clipped and only the
+   keyboard could reach it.
+
+`find` cannot see the button in the accessibility tree either: the workflows list renders
+inside a nested frame and only generic regions are exposed, which is consistent with the menu
+being rendered into a portal that is clipped or detached.
+
+**The same menu worked about an hour earlier in this session**, at viewport width 1372, when
+the scratch workflow for W-PAY-3 was created. Nothing about the account changed in between.
+GHL's "click here to refresh" link was never used, per the run rules.
+
+**I did not use the workarounds that were available**, because each leaves debris in a live
+account: cloning a Booking workflow and gutting it, or repurposing the unfinished W-PAY-3
+draft. Neither is worth doing without David saying so.
+
+### What did get done
+
+**The `not-now` tag exists.** Created at Settings > Tags on 11 Sep 2026 01:52 PM and confirmed
+in the list. Tag count went 25 to 26. That screen's Create button works normally, which is
+what makes the workflows page failure look specific rather than account wide.
+
+`not-now` has been added to the tag list in `_briefs/RUN-G-checkpoints.md`.
+
+### Still to do, all of it
+
+Workflow **"Call: not now"**, trigger Contact Tag Added `not-now`, then: send the branded email
+(subject `Thanks for the time today, {{contact.first_name}}`, body as specified, no dashes,
+text signature, from David@AtlasOneSolutions.com), add tag `hold 6m`, remove tags `booked` and
+`sequence active`, update Opportunity stage to Closed Lost with reason "Not now" if one exists,
+wait 90 days, create the check in task for David. Then publish and run the live test with the
+wait temporarily set to 1 minute.
+
+The email body is already written in the run brief and the branded wrapper technique is
+recorded in `RUN-L-payments.md`: clone `P-C-0 Instant reply`, then replace the body by putting
+the HTML on the clipboard with `navigator.clipboard.writeText` and pasting into the code pane,
+because the editor is a cross origin iframe.

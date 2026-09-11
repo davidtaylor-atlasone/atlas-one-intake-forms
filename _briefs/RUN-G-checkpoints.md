@@ -51,6 +51,10 @@ type after creation, so it was deleted and rebuilt as Multi line. Key survived u
 sms consent, cell verified, cooling 30d, cooling 60d, cooling 90d, hold 6m, dnc,
 sequence active, batch ready, reply received, not interested.
 
+**Added later:** `member active`, `builder purchased`, `payment failed` (Run L part 5, for the
+payment workflows) and **`not-now`** (Run M part B, the trigger tag for the "Call: not now"
+stay in touch workflow). Tag count is now 26.
+
 **GHL lowercases every tag name on save.** The runbook's capitalisation (`SMS consent`,
 `Sequence Active`, `DNC`) cannot be preserved. Workflow steps will reference the lowercase forms.
 No contact has been tagged `sms consent` and none will be.
