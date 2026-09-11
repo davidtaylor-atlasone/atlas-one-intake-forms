@@ -267,3 +267,106 @@ Stopped cleanly at the Part 2 boundary. Nothing is half built and no workflow wa
   Nothing to clean up.
 
 Payments > Integrations and Settings > Integrations were never opened in any part of this run.
+
+---
+
+# Run L part 5
+
+## Part 1. Custom field and tags: PASS
+
+**`Membership Tier` already existed and was already correct**, so it was reused rather than
+duplicated. Dropdown (single) on Contact, key `{{contact.membership_tier}}`, options **None,
+Essential, Professional, Enterprise, Concierge**, created 27 Aug 2026. Its description already
+carries the pricing.
+
+One deviation from the brief: it sits in folder **Additional Info**, not Billing, and **GHL
+disables the Folder field once a field exists**, so it cannot be moved. Creating a second
+`Membership tier` in a Billing folder would have left two near identical fields for workflows
+to write to, which is worse than the wrong folder.
+
+Tags created and each confirmed by search: **member active**, **builder purchased**,
+**payment failed**. Tag count went 22 to 25.
+
+## Part 2. Email templates: PASS, all three
+
+Built by **cloning `P-C-0 Instant reply`**, which carries the branded wrapper, then replacing
+the body. The wrapper is preserved exactly: A1 Solutions header image, `#23304D` body text,
+the David Taylor signature block with real `tel:`, `mailto:`, site and booking links, ONE CALL
+SOLVES EVERYTHING, and the "Atlas One Solutions LLC, Lehi, Utah" footer.
+
+| Template | Id | Body |
+|---|---|---|
+| `P-MEMBER-WELCOME` | `6aa37036a813792f409bf1a9` | Thanks them, welcome call within one business day, intake link comes on that call, self serve booking link, reply or call or text |
+| `P-BUILDER-DELIVERY` | `6aa370697919774ef2ed8f30` | Thanks them, builder file within one business day, books the 20 minute walkthrough |
+| `P-PAY-FAILED` | `6aa371c107aac9f9aa6a4e75` | One short friendly paragraph, fresh link today, nothing else changes |
+
+No dashes in any prose. Every URL real:
+`https://api.leadconnectorhq.com/widget/groups/book-david` and
+`https://api.leadconnectorhq.com/widget/bookings/atlas-one-15-minute-intro-call-hoswp`.
+
+**Two notes.** `P-BUILDER-DELIVERY` says "your document builder" rather than a product merge
+field, which is the fallback the brief allowed, because no product name merge field is exposed
+to a workflow email. `P-MEMBER-WELCOME` describes the intake link as something David sends on
+the welcome call rather than linking it, because no intake URL exists yet and the rule is no
+placeholder URLs.
+
+**Technique worth keeping:** the email builder is a cross origin iframe, so the HTML cannot be
+read or written with JavaScript and typing into it risks auto indent. What works is
+`navigator.clipboard.writeText(html)` on the parent page, then click into the code pane,
+cmd+a, cmd+v. Clean paste every time. The parent page must have focus first or writeText
+throws "Document is not focused".
+
+## Part 3. THE TRIGGER ANSWER, which is what the next build needs
+
+| Question | Answer |
+|---|---|
+| Which trigger fires for a **subscription** payment? | **Payment received.** "Activates when a payment record posts successfully." A subscription renewal posts a payment record, so it fires on every renewal |
+| Which trigger fires for a **one time payment link** payment? | **Payment received.** The same trigger. There is no separate one time versus recurring payment trigger |
+| What is the **Subscription** trigger then? | Lifecycle only. "Runs when a new subscription is created or subscription status changes." Use it to catch a new subscription or a move to past due, not to catch each payment |
+| Is there a **payment failed** trigger? | **No.** Searching the trigger list for "fail" returns no results. Failed payments are caught as **Payment received with filter Payment status Is Failed** |
+
+**Payment received filter fields** are only three: **Global product**, **Payment status**,
+**Source**.
+
+- **Global product** operators are **Is / Is not** only, and the value is a **single select
+  product picker**. There is no "contains" text operator.
+- **Payment status** operators are Is / Is not, values **Failed** and **Success**.
+
+**This breaks the filter design in the brief.** "Product name contains Membership" and
+"contains Builder OR Agreement OR policy" cannot be expressed. The working pattern is the same
+one W0 uses for verticals: **one Payment received trigger per product**, each with
+`Global product Is <that product>`. So W-PAY-1 needs four triggers, one per membership tier,
+and W-PAY-2 needs six, one per builder or agreement or policy product.
+
+### W-PAY-3 Payment failed: BUILT BUT NOT PUBLISHED
+
+Workflow id `6985e8a9-a45c-4f0b-845b-e55f0f412a23`, status **Draft**, deliberately not
+published because it is not finished.
+
+Done: trigger **Payment received** named "Payment failed" with `Payment status is "Failed"`;
+**Add Tag** `payment failed`; **Internal Notification** type Notification, title "Payment
+failed", message `Payment failed for {{contact.name}}. Send a fresh link today.`, to All users,
+redirect page Contact.
+
+Still to add before publishing: **task** "Payment failed, send a fresh link" due 0 days, and
+**send email** `P-PAY-FAILED`.
+
+Note: the Notification type has a **required Redirect page field**, which is not obvious. It
+must be set to Contact or Conversation or the action will not save.
+
+### W-PAY-1 and W-PAY-2: NOT STARTED
+
+Nothing was created for either, so nothing is half built.
+
+## Part 4. Test invoice: NOT STARTED
+
+No test contact, no "TEST do not buy" product, no invoice. Nothing to clean up.
+
+## Where the next run should start
+
+1. Finish W-PAY-3, two actions, then publish.
+2. W-PAY-1 with four Payment received triggers, one per membership tier, then tag, the four
+   way If/Else on product to set Membership Tier, notification, task, email.
+3. W-PAY-2 with six triggers, one per builder or agreement or policy product.
+4. Part 4 test invoice.
+5. The 22 remaining price renames.
