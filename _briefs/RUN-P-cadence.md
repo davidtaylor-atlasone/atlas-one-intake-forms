@@ -157,9 +157,27 @@ Hi {{contact.first_name}}, if you want a January 1 start on payroll, benefits or
     If/Else and both `Stage - Closed Lost` actions under it.
   - Added `Tag quiet` (Add contact tag = quiet) in its place.
   - Added `Wait 4 days (before LT-1)`.
-  - Added `Gate 1` (If/Else). Branch **Suppressed** = Tags Includes `reply received` OR `booked` OR `client-current`
-    OR `do-not-prospect` OR `partner` OR `dnc`; the Suppressed branch is left empty so those contacts end the workflow.
-    Branch **None** carries the rest of the chain.
+  - Built `Gate 1` (If/Else). Branch **Suppressed** = Tags Includes `reply received` OR `booked` OR `client-current`
+    OR `do-not-prospect` OR `partner` OR `dnc`. It saved and published cleanly once.
+  - **Gate 1 was then removed again and is NOT in the workflow now.** See "Where it stopped" below.
+
+### Where it stopped and why (read this first)
+Part way through adding the LT-1 email I opened the `</>` source dialog, and the triple click that is supposed to put the
+caret inside the dialog's textarea landed outside it. The following `cmd+a` selected the whole canvas instead of the
+textarea's contents and `cmd+v` pasted the Gate action that was sitting in GHL's action clipboard, creating a second
+`Gate 1` nested inside the first. Deleting that duplicate also tore the branch structure off the original `Gate 1`, which
+then failed publish validation with "1 issue needs to be resolved: yes".
+
+Nothing bad reached the live workflow: every attempt to save the broken state was refused by GHL's own publish
+validation, so the saved version never contained the damage. I deleted the damaged `Gate 1`, saved, and confirmed
+"Saved!". Right after that the GHL builder stopped rendering entirely (blank canvas past 20 seconds, still blank after
+an in-app Dashboard round trip), which is the same dead UI seen in Runs L and M, so I stopped rather than keep pushing
+edits into an unresponsive builder holding a published workflow.
+
+**"Post-Presentation Email" is live and coherent right now:**
+`... Email 4 - Re-engage -> #2 Task - Call about open quote -> Wait -> Tag quiet -> Wait 4 days (before LT-1) -> END`
+Contacts who used to be marked Closed Lost now get the `quiet` tag instead and then stop. No emails were added, so
+nothing can go out that should not. The workflow is still Published.
 
 ### Opportunity stage note (decision, needs David's eye)
 The brief asked to move the opportunity to stage **Quiet**. "Post-Presentation Email" is triggered by pipeline stage
@@ -180,8 +198,8 @@ pipeline-stage trigger instead.
 - `cmd+a` inside an action panel selects the whole page and wipes the field you were editing. Never use it there.
 
 ### Still to do
-- Part A: LT-1..LT-5 emails with Last Touch Date + `recent-touch` after each, gates 2..6, waits 4/4/14/14/3 days,
-  ending with Add tag `not-now`.
+- Part A: rebuild `Gate 1` (paste it back or rebuild the six OR conditions), then LT-1..LT-5 emails with Last Touch Date
+  + `recent-touch` after each, gates 2..6, waits 4/4/14/14/3 days, ending with Add tag `not-now`.
 - Part B: Last Touch Date + `recent-touch` after E0, 45-A, 45-B, 45-C in "Call: not now"; add `client-current`, `quiet`
   and `dnc` to its suppression gate.
 - Part C: "Touch cooldown" workflow and the single chained "Seasonal touches 2026-27" workflow (Step 0 answer 1 decided
@@ -192,3 +210,12 @@ pipeline-stage trigger instead.
 ### Annual maintenance
 Every December the seasonal dates in "Seasonal touches 2026-27" have to be advanced one year. Put it on the Claude Code
 task list for the first week of December.
+
+### Two more GHL findings worth keeping
+- **"Copy action" works and is the cheap way to build the five remaining gates.** The node three dots menu has
+  Copy action; it says "Action copied to clipboard. Paste it into any workflow." and every `+` on the canvas then shows
+  a paste icon beside it. Build one gate, copy it, paste it at the other five points. Do NOT use `cmd+v` for this, only
+  the on canvas paste icon: `cmd+v` pastes the copied action wherever the canvas has focus.
+- **The `</>` source dialog is the dangerous step.** Take a screenshot after the dialog opens, confirm the caret is
+  inside the textarea (the dialog shifts ~7px after it renders, so coordinates from the screenshot that opened it are
+  stale), and only then use cmd+a. If the caret is not in the textarea, cmd+a selects the whole builder.
