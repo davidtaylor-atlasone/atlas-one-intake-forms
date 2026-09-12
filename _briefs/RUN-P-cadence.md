@@ -211,6 +211,42 @@ pipeline-stage trigger instead.
 Every December the seasonal dates in "Seasonal touches 2026-27" have to be advanced one year. Put it on the Claude Code
 task list for the first week of December.
 
+### Resume attempt, 2026-09-12 (terminal A) — blocked before any edits
+
+Reloaded the GHL tab per instructions before starting. The Workflows list itself loads (rows, pagination, search box all
+visible), but **the entire main content area stopped responding to clicks**: clicking the search box, pagination ("2",
+"Next"), or a workflow row name did nothing (no focus ring, no navigation), while the left sidebar nav links (Automation,
+Marketing, etc.) worked normally the whole time. `read_page` (accessibility snapshot) turned up why: a leftover, invisible
+`dialog` node (`snapshots.loadSnapshotsTemplate.selectSnapshotTemplate`, a "load snapshot template" modal, presumably from
+some other, unrelated GHL flow) was present in the DOM sitting over the page. Clicking its own "Close modal" button emptied
+the dialog's content but did not remove the dialog wrapper, and clicks on the main content area were still swallowed
+afterward. Also tried: a brand new tab (same result), direct deep link to the workflow builder URL by id
+(`.../automation/workflows/304a9fa4-...`) which hung on a blank page and then showed the "click here to refresh" prompt
+that we are told never to click, so that path was abandoned per the rules.
+
+**Nothing was touched.** No clicks landed on anything in the workflow list or builder, so "Post-Presentation Email" is
+still exactly as the previous session left it (Published, `... Wait -> Tag quiet -> Wait 4 days (before LT-1) -> END`,
+Gate 1 not present). This looks like the same class of "dead UI" problem noted in Runs L, M and the previous stop in this
+run, just manifesting earlier (on the list, not the builder canvas) and traced this time to a stuck modal rather than a
+blank canvas. Stopping here rather than guessing further at browser-side workarounds; a real page reload from the address
+bar (not the in app "click here to refresh" link) or a fresh Chrome profile/window is probably what actually clears it,
+but that is outside what the automation tools here can do safely without risking a bigger mess.
+
+### Resume attempt #2, 2026-09-12 (terminal A) — still blocked, stopped per instruction
+
+Opened the Workflows list fresh (new tab). It rendered normally (rows, pagination, search box). Tried one low-stakes
+click — the row for "Call: not now" — before touching anything else, per instruction. Nothing happened: no navigation,
+no focus change. Did exactly **one** Cmd+R reload (a real browser reload, not GHL's in-app "click here to refresh"
+link), waited for the list to finish re-rendering, and tried the same click again. Still nothing. Per the explicit
+instruction for this attempt ("if clicks do not land after one Cmd+R reload, STOP... do not thrash"), stopped here
+without any further retries, new tabs, or workarounds.
+
+**Nothing was touched.** No click landed on anything in the workflow list this attempt, so both "Post-Presentation
+Email" and "Call: not now" are exactly as the prior session left them. This is the third time this run has hit this
+class of dead-UI problem (Runs L, M, and twice now in Run P), and a same-session Cmd+R reload does not clear it — it
+most likely needs an actual Chrome restart (quit and reopen the app, not just reload the tab) or a fresh profile/window,
+done by a person, before another attempt.
+
 ### Two more GHL findings worth keeping
 - **"Copy action" works and is the cheap way to build the five remaining gates.** The node three dots menu has
   Copy action; it says "Action copied to clipboard. Paste it into any workflow." and every `+` on the canvas then shows
