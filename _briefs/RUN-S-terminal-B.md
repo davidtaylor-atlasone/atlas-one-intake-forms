@@ -132,3 +132,4 @@ Do not start Run O part 2 (the contacts review sheet is not finished).
 ## Progress log (terminal B)
 
 - 2026-09-12: brief copied into the repo. Starting Job 1.
+- Job 1 done: tools/assets/retention-sample-25ee.png (1200x507, 104 KB). Calculator inputs: salary 52000, team 25, turnover 8% (2 of 25). Calculator output: $52,000 per departure, $104,000 a year, 2 people lost, ~5.2 months to a productive replacement.
