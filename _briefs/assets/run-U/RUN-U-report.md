@@ -61,7 +61,7 @@ Files changed (all in `06 Calculators and Tools (NEW Aug 2026)/`):
 
 ## Job 5: this report
 
-- Master Hub: 156 cards, every file card resolves on disk; Tools Hub 28 tools, all resolve.
+- Master Hub: 154 cards, every file card resolves on disk; Tools Hub 28 tools, all resolve.
 - Repo commits on main: brief, job 1, job 2 (with the deck scripts), job 3, job 4 (with the changed files table), report. Each pushed.
 
 ## Assumptions
