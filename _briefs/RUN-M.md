@@ -52,86 +52,101 @@ Footer carries **One Call Solves Everything.** and the 15 minute intro link
 
 Commit `174d262`.
 
-## Part B. "Call: not now" workflow: BLOCKED, cause found
+## Part B. "Call: not now": BUILT, PUBLISHED, TESTED
 
-### Root cause: the Chrome window is hidden, so mouse clicks never reach GHL
+Workflow **`Call: not now`**, id `ff950be3-829d-4a51-8f9a-825db660796e`, **Published**.
+Built on 11 Sep 2026 with the 45 day loop that replaced the single 90 day wait.
 
-Every GHL screen renders inside an **out of process iframe**. The workflows list is
-`client-app-automation-workflows.leadconnectorhq.com` inside `app.ridethehightide.com`; the
-builder is the same frame; the email editor is another one nested inside that.
+### Why the first attempt failed
 
-The page reports:
+Mouse clicks never reached GHL. Every GHL screen is an out of process iframe; while the tab
+reported `document.hidden = true` (it was a background tab behind the Stripe tab) Chrome
+produced no compositor hit test data for that frame, so clicks stopped at the iframe boundary
+while keyboard events still got through. Nothing was wrong with GHL. Making the GHL tab the
+active tab fixed it instantly.
+
+### Tags
+
+Three created at Settings > Tags and confirmed in the list: **`hold-45`**, **`partner`**,
+**`do-not-prospect`** (11 Sep 2026). `not-now`, `booked`, `sequence active`, `reply received`,
+`client-current` and `dnc` already existed. Tag count is now **36**.
+
+### Structure as built
 
 ```
-document.hasFocus()        true
-document.visibilityState   "hidden"
-document.hidden            true
+TRIGGER  Contact tag > Tag added includes "not-now"
+
+Suppressed?            If/Else. Branch "Suppressed" = Tags includes client-current
+                       OR do-not-prospect OR partner OR dnc  -> END
+                       None branch -> everything below
+Email: thanks for the time   subject: Thanks for the time today, {{contact.first_name}}
+Add tag hold-45
+Remove booked and sequence active
+Opportunity to Closed Lost   Status = Lost, Lost Reason = "Not the Right Time"
+Wait 45 days (1)
+Replied or booked? (1)   Branch "Stop" = Tags includes reply received OR booked -> END
+Email 45-A               subject: Quick one, {{contact.first_name}}
+#1 Task 45-A             "45-day check-in call: {{contact.name}}", David, due 1 day 9:00 AM
+Wait 45 days (2)
+Replied or booked? (2)   same two branches
+Email 45-B               subject: A number most owners never add up, {{contact.first_name}}
+#2 Task 45-B
+Wait 45 days (3)
+Replied or booked? (3)   same two branches
+Email 45-C               subject: What the people who left actually cost, {{contact.first_name}}
+#3 Task 45-C
+Remove not-now (re-arm)
+Add not-now (loop restart)   -> re-fires the trigger, loop starts again
 ```
 
-A hidden page still runs script and still accepts **keyboard** events, because those go to
-whatever frame holds focus. It does not produce compositor hit test data, and browser side
-mouse routing into an out of process iframe depends on that hit test data. So every click
-aimed at a GHL screen is swallowed silently. Clicks on the **outer** page still work, which is
-why collapsing the left sidebar worked all along and made this look like a GHL bug.
+**Allow re-entry was already on** in Workflow settings, which the loop needs. Confirmed before
+publishing.
 
-Proved it four ways, all on the workflows list, all no ops:
+The trigger only fires on tags added **after** publishing, per GHL's own note on the trigger.
 
-| Test | Expected | Actual |
+### Emails
+
+All four use the shared branded wrapper and the same hosted logo the other 16 emails use
+(`.../form/Cxqawj85qg4ULUl64nMc/header-image/923a20f4-...png`, verified 200, 26,800 b). Sender
+David Taylor / David@AtlasOneSolutions.com on every one. Copy is in
+`_briefs/assets/run-M/emails.md`, no dashes anywhere except the phone number and URLs.
+
+### Test: PASS
+
+New contact `RunM LoopTest 202543`, id `pq1ZkuaYm2xu3Pq0Ajpp`, unique phone `+13855553118`,
+plus addressed email `david+runm202543@atlasonesolutions.com`. Tag `not-now` added by API at
+20:25:51 with the three waits temporarily set to **1 minute**.
+
+| Step | Status | Time |
 |---|---|---|
-| Click the row checkbox | ticks | nothing |
-| Click a workflow name | opens the builder | nothing |
-| Click the Search box and type | filters the list | nothing typed |
-| Scroll the list | list scrolls | nothing |
+| Email: thanks for the time | Executed | 8:25:54 pm |
+| Add tag hold-45 | Executed | 8:25:55 pm |
+| Remove booked and sequence active | Executed | 8:25:55 pm |
+| Opportunity to Closed Lost | **Skipped** | 8:25:57 pm |
+| Wait 45 days (1) | Waiting then Wait Finished | 8:25:58 to 8:26:58 pm |
+| Replied or booked? (1) -> None | Executed | 8:26:58 pm |
+| Email 45-A | Executed | 8:27:00 pm |
+| #1 Task 45-A | Executed | 8:27:02 pm |
+| Wait 45 days (2) | Waiting | 8:27:02 pm |
 
-And the outer page is fine: a probe overlay on the parent document recorded clicks at
-(615,79), (200,400), (1300,700) exactly as sent, so the coordinates are right and the events
-are real. They just stop at the iframe boundary.
+### Two things that need David
 
-**The fix is one click by David: bring the Chrome window to the front.** It is minimised or
-fully covered. I cannot do it myself, `osascript` and `open` are off limits for this session.
+1. **The opportunity step is skipped.** GHL's plain "Update opportunity" only touches the
+   opportunity that triggered the workflow, and a tag trigger carries none, so it no ops. The
+   fix is a "Find opportunity" action in front of it, but Find forks the canvas into
+   "Opportunity Found" and "Opportunity Not Found" branches and the whole 45 day loop would have
+   to be duplicated under both. Left as a no op rather than doubling the workflow. Say the word
+   and I will either duplicate the loop or move the opportunity close into its own small
+   workflow on the same trigger.
+2. **The lost reason is a fixed picklist.** There is no "Not now" option. Closest is
+   **"Not the Right Time"**, which is what is set. The list is No response, Other, Benefits not
+   competitive, We didn't offer a service they needed, Out of business, Too many services, Not
+   the Right Time, Too expensive, Went with competitor.
 
-### What the keyboard route did achieve
+### One cosmetic difference
 
-Keyboard still reaches the frame, so the escalation ladder was worked to the end:
-
-1. Fresh tab, straight to Automation > Workflows, one click on Create workflow: **failed** (as
-   above, no click reaches the frame).
-2. Direct builder URL with a fresh UUID: **failed**, "Workflow not found". There is no blank
-   builder URL, the id has to exist first.
-3. Clone "Booking: no show" from the row menu: **failed**, the row menu is a click too.
-
-Then, driving the frame by keyboard only (focus the iframe from the parent with
-`iframe.contentWindow.focus()`, then Tab and Return):
-
-- **The Create workflow menu is not broken.** Tab six times from the top of the frame lands on
-  it; Return opens it and all five items render. Down then Return picked **Start from Scratch**.
-- That created a real blank workflow: **`ff950be3-829d-4a51-8f9a-825db660796e`**, named
-  `New Workflow : 1789164293568`, status Draft, saved.
-- The Add trigger panel opens the same way and its search box accepts typing.
-
-**This one empty draft is the only thing left behind.** Nothing was cloned, renamed or
-deleted. It becomes "Call: not now" as soon as the window is visible; if David would rather
-start clean it is a one line delete from the workflows list.
-
-Building the rest blind, by counting Tab presses through a canvas, five action dropdowns and a
-nested cross origin email editor that needs a clipboard paste into a code pane, is not worth
-the risk of a wrongly configured live automation. Stopping here.
-
-### What did get done
-
-**The `not-now` tag exists.** Created at Settings > Tags on 11 Sep 2026 01:52 PM and confirmed
-in the list. Tag count went 25 to 26, and it is recorded in `_briefs/RUN-G-checkpoints.md`.
-
-### Still to do, all of it
-
-Workflow **"Call: not now"**, trigger Contact Tag Added `not-now`, then: send the branded email
-(subject `Thanks for the time today, {{contact.first_name}}`, body as specified, no dashes,
-text signature, from David@AtlasOneSolutions.com), add tag `hold 6m`, remove tags `booked` and
-`sequence active`, update Opportunity stage to Closed Lost with reason "Not now" if one exists,
-wait 90 days, create the check in task for David. Then publish and run the live test with the
-wait temporarily set to 1 minute.
-
-The email body is already written in the run brief and the branded wrapper technique is
-recorded in `RUN-L-payments.md`: clone `P-C-0 Instant reply`, then replace the body by putting
-the HTML on the clipboard with `navigator.clipboard.writeText` and pasting into the code pane,
-because the editor is a cross origin iframe.
+45-A uses the same filled periwinkle button as the other emails. 45-B and 45-C had to be pasted
+as rich HTML rather than through the source dialog (GHL's source dialog closes itself between
+tool calls), and the editor stripped the inline button styling, so their call to action renders
+as a bold underlined link instead of a filled button. Everything else matches. Easy to fix by
+hand in the two actions.
