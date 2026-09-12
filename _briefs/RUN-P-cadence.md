@@ -137,3 +137,58 @@ Hi {{contact.first_name}}, this is the last week to start the paperwork and stil
 
 YE-4 subject: Start the paperwork now, go live January 1
 Hi {{contact.first_name}}, if you want a January 1 start on payroll, benefits or insurance, the paperwork has to be in motion this week. It is mostly signatures and a census; my team does the rest. Reply "go" and I will send the short list of what I need. David
+
+---
+
+## Build log (Run P, terminal A, 2026-09-11 / 12)
+
+### Done
+- **Step 0 answers recorded above.** Throwaway workflow built, tested, drafted and deleted. Test contact deleted.
+  Scratch tags `zz-step0` and `zz-done` deleted (note: single tag delete silently does nothing in Settings > Tags; the
+  working path is to tick the rows and use the bulk **Delete tags** button, which asks you to type DELETE).
+- **Tags:** `quiet` and `recent-touch` created and verified. `client-current` already existed.
+- **Field:** reusing the existing custom DATE field **"Last Touch Date"** (Date picker, folder Prospecting) rather than
+  creating a second "Last touch" field.
+- **Part D stage:** stage **"Quiet"** added to the **Sales / Setup** pipeline (id 2WMB5ZfbHxOvE6hb0Ann), probability 5%,
+  saved and re-read after a full reload. Note: the stage editor drops everything you typed if an empty stage row is left
+  behind; remove the trailing blank row first, then Save becomes enabled.
+- **Part A, "Post-Presentation Email" (304a9fa4-a256-4015-b767-031070f4186f):**
+  - Deleted the whole Closed Lost block: the `Opportunity - Closed Lost (no response)` action, the `Which pipeline?`
+    If/Else and both `Stage - Closed Lost` actions under it.
+  - Added `Tag quiet` (Add contact tag = quiet) in its place.
+  - Added `Wait 4 days (before LT-1)`.
+  - Added `Gate 1` (If/Else). Branch **Suppressed** = Tags Includes `reply received` OR `booked` OR `client-current`
+    OR `do-not-prospect` OR `partner` OR `dnc`; the Suppressed branch is left empty so those contacts end the workflow.
+    Branch **None** carries the rest of the chain.
+
+### Opportunity stage note (decision, needs David's eye)
+The brief asked to move the opportunity to stage **Quiet**. "Post-Presentation Email" is triggered by pipeline stage
+changes in **two** pipelines (Sales / Setup and PEO & Benefits), and the old Closed Lost step handled that with a
+`Which pipeline?` fork. Moving the stage automatically would mean re-introducing that fork and then duplicating the whole
+five email Long Tail chain under both branches, which the brief explicitly forbids. So the workflow now sets the tag
+`quiet` linearly instead, and the Quiet **stage** is available in Sales / Setup for David (or Run O part 2) to move from
+the "Quiet / long tail" smart list. If you want it automated later, the clean way is a separate small workflow triggered
+by the `quiet` tag, but Run M proved that opportunity actions silently skip on a tag trigger, so it would need a
+pipeline-stage trigger instead.
+
+### GHL UI notes learned this run (for future runs)
+- Dropdown options often ignore the first click because the list re-renders after the screenshot. The reliable pattern is
+  click the field, wait, then click the option twice, or use the keyboard: open the list, then **Up/Down + Return**.
+- The If/Else operator list is ordered Includes / Does not include / Is not empty / Is empty. From a fresh field,
+  **Down + Return** lands on "Does not include"; **Up + Return** corrects it to "Includes".
+- Tags "Includes" with two or more tags means **ALL of them**. OR needs one condition per tag joined with the OR selector.
+- `cmd+a` inside an action panel selects the whole page and wipes the field you were editing. Never use it there.
+
+### Still to do
+- Part A: LT-1..LT-5 emails with Last Touch Date + `recent-touch` after each, gates 2..6, waits 4/4/14/14/3 days,
+  ending with Add tag `not-now`.
+- Part B: Last Touch Date + `recent-touch` after E0, 45-A, 45-B, 45-C in "Call: not now"; add `client-current`, `quiet`
+  and `dnc` to its suppression gate.
+- Part C: "Touch cooldown" workflow and the single chained "Seasonal touches 2026-27" workflow (Step 0 answer 1 decided
+  the single workflow design).
+- Part D: smart lists "Quiet / long tail" and "Seasonal audience".
+- Both tests, restore waits, delete test contacts.
+
+### Annual maintenance
+Every December the seasonal dates in "Seasonal touches 2026-27" have to be advanced one year. Put it on the Claude Code
+task list for the first week of December.
