@@ -127,9 +127,43 @@ plus addressed email `david+runm202543@atlasonesolutions.com`. Tag `not-now` add
 | Replied or booked? (1) -> None | Executed | 8:26:58 pm |
 | Email 45-A | Executed | 8:27:00 pm |
 | #1 Task 45-A | Executed | 8:27:02 pm |
-| Wait 45 days (2) | Waiting | 8:27:02 pm |
+| Wait 45 days (2) | Waiting then Wait Finished | 8:27:02 to 8:28:04 pm |
+| Email 45-B | Executed | 8:28:04 pm |
+| #2 Task 45-B | Executed | 8:28:06 pm |
+| Wait 45 days (3) | Waiting then Wait Finished | 8:28:06 to 8:29:07 pm |
+| Email 45-C | Executed | 8:29:08 pm |
+| #3 Task 45-C | Executed | 8:29:11 pm |
+| Remove not-now (re-arm) | Executed | 8:29:11 pm |
+| Add not-now (loop restart) | Executed | 8:29:12 pm |
+| Removed by End Of Workflow | Finished | 8:29:12 pm |
 
-### Two things that need David
+Every step fired in order and every branch took the None path, as it should for a contact with
+none of the stop tags. **The loop did not restart**, see below.
+
+After the test the three waits were set back to **45 days** and each one was reopened and
+confirmed. Workflow saved and still Published. The test contact was deleted.
+
+### The loop does not re-arm: the one thing still open
+
+The re-arm fires but GHL ignores it. From the Allow re-entry help text: "If the Contact attempts
+to re-enter while it is still enrolled in this workflow, it will get skipped." The Add tag runs
+as the last action, so the contact is still enrolled at that instant and the new enrollment is
+dropped. The log shows Add not-now at 8:29:12 and End Of Workflow at 8:29:12, and nothing after.
+
+A wait between the remove and the add does not help, because the contact is still enrolled
+during a wait too. The tag has to be re-added **after** the contact leaves the workflow, which
+one workflow cannot do on its own. Two ways to fix it, your call:
+
+1. **A second small workflow.** "Loop: re-arm not-now", trigger Tag added = `loop-restart`,
+   actions: wait 1 minute, remove `loop-restart`, add `not-now`. The main workflow's last action
+   becomes Add `loop-restart` instead of Add `not-now`. Clean, and the only reliable way inside
+   GHL.
+2. **Drop the loop.** Three touches at 45, 90 and 135 days and then stop, and you re-add
+   `not-now` by hand for anyone worth another round.
+
+As it stands the workflow runs the full 135 day sequence correctly and then stops.
+
+### Two other things that need David
 
 1. **The opportunity step is skipped.** GHL's plain "Update opportunity" only touches the
    opportunity that triggered the workflow, and a tag trigger carries none, so it no ops. The
