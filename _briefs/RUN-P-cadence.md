@@ -23,6 +23,44 @@ no dashes anywhere in email copy. Build everything end to end, then report. Batc
 2. Can an If/Else compare a custom DATE field to "today minus N days" (relative date)? If not, use the cooldown-tag pattern below.
 Record both answers in RUN-P-cadence.md before going further; they decide the design of Part C.
 
+### Step 0 ANSWERS (tested 2026-09-11, throwaway workflow "ZZ Step 0 test (delete me)" c3498a76-49fe-93ec-1096f471f5d1 (full id c3498a76-49fe-93ec-1096f471f5d1), deleted after the test)
+
+**Answer 1: a past specific date does NOT hold the contact, and GHL DOES give you a skip option.**
+The Wait action, wait type "Until a specific date/time", exposes two setting groups:
+- "When should the contact proceed?" = On this date and time / Before this date / After this date
+- "If this date has already passed" = Continue to next action / Exit contact from automation / Go to specific step /
+  **Skip all outbound communication actions till next wait or event start date action** (Email, SMS, call & voicemail). This
+  last one is the GHL default.
+
+Live test: workflow trigger tag zz-step0, then Wait until 2026-09-11 09:40:00 PM (one hour in the past, default
+"Skip all outbound communication" selected), then Email, then Add tag zz-done. Test contact "ZZ Step0 Probe" was tagged
+at 10:49:47 pm Mountain. Execution log:
+
+| Time (MDT) | Action | Status |
+|---|---|---|
+| 10:49:48 pm | Add to workflow | Added To Workflow |
+| 10:49:48 pm | Wait | Wait Finished |
+| 10:49:49 pm | Email | **Skipped** |
+| 10:49:49 pm | Add Tag | Executed |
+| 10:49:50 pm | Removed by  End Of Workflow | Finished |
+
+So the wait releases instantly on a past date, the outbound email is suppressed, and non communication actions still run.
+**Design consequence: build Part C as ONE chained workflow** ("Seasonal touches 2026-27"), waits in date order, default
+"Skip all outbound communication actions till next wait or event start date action" on every date wait. A contact enrolled
+in, say, March 2027 walks past every date that has already gone by without receiving those emails, and stops at the next
+future date. No seven workflow fan out, and no need for a "Date added to workflow" guard.
+
+**Answer 2: NO. An If/Else cannot compare a custom DATE field to a relative date.**
+In If/Else, choosing the custom DATE field "Last Touch Date" offers exactly four operators: Is, Is not, Is not empty,
+Is empty. There is no greater than, no less than, and no "today minus N days".
+**Design consequence: use the cooldown TAG pattern** for Part C (tag recent-touch plus the "Touch cooldown" workflow that
+strips it after 10 days). The date field is still written on every send so a human can read the last touch date on the
+contact record, but no automation branches on it.
+
+**Field note:** a custom DATE field named **"Last Touch Date"** already exists (Date picker, folder Prospecting). Reusing
+it rather than creating a second "Last touch" field.
+
+
 ## Part A: Long Tail loop (change Post-Presentation Email)
 After Email 4, delete the Closed Lost action. Instead:
 - Try to move the opportunity to a new stage "Quiet" in the Sales / Setup pipeline (create the stage if missing). If the
