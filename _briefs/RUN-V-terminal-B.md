@@ -52,3 +52,4 @@ what was looked at, assumptions, skipped items, questions at the end. Commit and
 ## Progress log (terminal B)
 
 - 2026-09-12: brief copied. Starting Job 1.
+- Job 1 done: slide 25 of Atlas_One_General_Deck_LIGHT.pptx now Essential $99 (setup waived) / Professional $399 (setup $495, often waived) / Enterprise $999 (setup $995, waived on annual), three columns kept, cards tightened by 0.2 in, one line note "Concierge, your fractional COO, $1,900 a month." under the cards, headline "Three Tiers" changed to "Four Tiers". Before copy in _to_delete/superseded-2026-09-12/partner-deck-v9-light-before-slide25/. Rendered slide 25 and the full contact sheet (refreshed beside the deck) and looked. Room cut untouched (slide 25 stays out). Script: _briefs/assets/run-V/slide25.py.
