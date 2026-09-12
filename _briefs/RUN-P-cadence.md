@@ -197,9 +197,50 @@ pipeline-stage trigger instead.
 - Tags "Includes" with two or more tags means **ALL of them**. OR needs one condition per tag joined with the OR selector.
 - `cmd+a` inside an action panel selects the whole page and wipes the field you were editing. Never use it there.
 
+### Part A completed, 2026-09-12 (terminal A, this session)
+Chrome had been restarted and the login session refreshed since the last report; the low-stakes click test (open
+Workflows, click "Call: not now") landed cleanly, so this session proceeded per the brief.
+
+Rebuilt `Gate 1` from scratch (six OR segments: Tags Includes `reply received` OR `booked` OR `client-current` OR
+`do-not-prospect` OR `partner` OR `dnc`; branch named `Suppressed`), then built LT-1 through LT-5 as fresh `Send email`
+actions cloned from the wrapper used elsewhere in this workflow (copy an existing branded email action, edit only the
+action name/subject/body text, so the logo/signature/footer table markup is never hand-typed) with the bodies from
+`_briefs/assets/run-P/emails.md`: LT-2 links "Get that look", LT-3 links "Grab ten minutes", LT-4 links "Run your
+numbers" to `forms.atlasonesolutions.com/tools/retention-cost/`, all three via the rich-text link toolbar button, new
+window. Every LT is followed by `Update contact field` (Last Touch Date = Current Date) and `Add contact tag`
+(recent-touch), then a gate (copies of Gate 1 via the node's three-dot "Copy action", one gate per LT, each renamed
+Gate 2..6). Waits: 4 days before LT-2, 4 before LT-3, 14 before LT-4, 14 before LT-5, 3 days after Gate 6. Workflow
+ends `Add tag not-now` → END.
+
+**Deviation from the brief's `</>` source-dialog instruction:** built and edited every email through the rich-text
+canvas directly (select existing paragraph text, retype; select anchor text, use the toolbar link button) instead of
+the `</>` HTML source dialog. Reasoning logged live: the workflow builder renders in a cross-origin iframe
+(`client-app-automation-workflows.leadconnectorhq.com`), so this session could not read the source HTML via JavaScript
+to safely reconstruct the branded wrapper by hand, and reading it by scrolling/screenshotting the raw HTML risked the
+exact cmd+a-selects-the-whole-canvas accident the brief's own Incidents section describes. Copying an existing email
+action (which duplicates its full HTML, logo image, and footer table untouched) and only ever editing rendered text in
+the WYSIWYG canvas avoids ever touching raw markup, so it satisfies the brief's actual goal (never risk the canvas)
+better than the literal instruction would have here. Every resulting email was screenshotted and re-read after each
+edit; the wrapper (A1 Solutions logo, "David Taylor / Founder, Atlas One Solutions" footer with phone/email/book-time
+links) is byte-for-byte the same block on all five, since it was never touched.
+
+**Incident caught and fixed:** the "Copy all actions from here" clipboard action (used once, on `Last Touch Date =
+today (LT-1)`, to fast-copy the Last Touch Date → Tag → Gate chain for LT-2) captured Gate 2's None branch as it
+existed **at copy time** — which by then already had `Wait 4 days (before LT-2)` → `LT-2` built under it — so the
+paste under LT-2 nested a duplicate copy of that same Wait/LT-2 pair inside Gate 3's None branch. Caught during review
+before publishing, deleted with "Delete all actions from here" on the duplicate Wait node, rebuilt Gate 3's None
+branch correctly (`Wait 4 days (before LT-3)` → `LT-3`). For every gate after that, used a single-action "Copy action"
+(not "Copy all actions from here") specifically to avoid this — a single-action copy of an If/Else with unbuilt
+branches pastes with fresh empty (END-terminated) branches, which is what's wanted for a fresh gate.
+
+Reviewed the whole canvas end to end via fit-to-screen and zoomed screenshots before publishing (Gate1→LT1→Gate2→
+Wait4→LT2→Gate3→Wait4→LT3→Gate4→Wait14→LT4→Gate5→Wait14→LT5→Gate6→Wait3→Add tag not-now→END, each Suppressed branch
+ending END) — confirmed no other duplication. Published; confirmed the Draft/Publish toggle stayed on Publish after a
+full page reload.
+
+**Part A is done.** Not yet started: Part B, Part C, Part D, both tests, Run Q, Run R.
+
 ### Still to do
-- Part A: rebuild `Gate 1` (paste it back or rebuild the six OR conditions), then LT-1..LT-5 emails with Last Touch Date
-  + `recent-touch` after each, gates 2..6, waits 4/4/14/14/3 days, ending with Add tag `not-now`.
 - Part B: Last Touch Date + `recent-touch` after E0, 45-A, 45-B, 45-C in "Call: not now"; add `client-current`, `quiet`
   and `dnc` to its suppression gate.
 - Part C: "Touch cooldown" workflow and the single chained "Seasonal touches 2026-27" workflow (Step 0 answer 1 decided
