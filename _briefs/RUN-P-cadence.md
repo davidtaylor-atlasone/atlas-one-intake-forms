@@ -240,9 +240,18 @@ full page reload.
 
 **Part A is done.** Not yet started: Part B, Part C, Part D, both tests, Run Q, Run R.
 
+### Part B completed, 2026-09-12 (terminal A, this session)
+Checked the "Suppressed?" gate at the top of "Call: not now": `client-current`, `do-not-prospect`, `partner`, and `dnc`
+were already there from an earlier run; only `quiet` was missing, so added it as a fifth OR segment (Tags Includes
+`quiet`). Then inserted `Update contact field` (Last Touch Date = Current Date) + `Add contact tag` (recent-touch)
+immediately after each of the four sends: `Email: thanks for the time` (E0), `Email 45-A`, `Email 45-B`, `Email 45-C` —
+each pair placed between the send and the task/next-step node that already followed it, so nothing else in the
+45-day loop structure (the `Replied or booked?` gates, the tasks, the waits) was touched. Reviewed each insertion by
+screenshot before saving. Published; confirmed the toggle stayed on Publish after a full page reload.
+
+**Part B is done.**
+
 ### Still to do
-- Part B: Last Touch Date + `recent-touch` after E0, 45-A, 45-B, 45-C in "Call: not now"; add `client-current`, `quiet`
-  and `dnc` to its suppression gate.
 - Part C: "Touch cooldown" workflow and the single chained "Seasonal touches 2026-27" workflow (Step 0 answer 1 decided
   the single workflow design).
 - Part D: smart lists "Quiet / long tail" and "Seasonal audience".
