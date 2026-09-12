@@ -2,6 +2,11 @@
 
 ## Progress log
 
+- **2026-09-12, Run P complete.** Fixed Test 1's methodology (intake-received tag routed to the wrong branch),
+  reran both Test 1 and Test 2 successfully, restored all 8 shrunk waits and both seasonal test dates, deleted all
+  4 test contacts (ZZ TestP1-4 Probe), committed and pushed (`2751cdf`). Wrote
+  `<Master_Kit>/_BUILD-LOG/RUN-P-report.md` with full detail and 3 batched questions for David. Moving on to Run R
+  (service intake forms).
 - **2026-09-12, Run Q complete.** All 8 numbered items done and verified (see entries below for detail). All three
   touched workflows ("Call: not now", "Post-Presentation Email", "Seasonal touches 2026-27") reloaded fresh and
   confirmed still Published. Committed and pushed (`f6da8d6`). Wrote
