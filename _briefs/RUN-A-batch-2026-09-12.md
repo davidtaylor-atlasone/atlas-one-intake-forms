@@ -2,6 +2,15 @@
 
 ## Progress log
 
+- **2026-09-12, Run R stopped before any edits ("needs Chrome restart").** Navigated to Sites > Forms to start
+  Form C1; the Sites module never finished loading (spinner, then "click here to refresh," never clicked).
+  Re-confirmed the rest of the app was healthy (Workflows list and the "Call: not now" builder both loaded and
+  responded to clicks normally), then did the one allowed real reload on Sites > Forms specifically — it went fully
+  blank and stayed that way. Per the dead UI rule, stopped without further workarounds. Did read-only research
+  first (Form B's field list and design settings, the Onboarding Tracker Schema, existing reusable custom fields)
+  so the next session can resume Run R quickly once Sites is responsive again. Wrote
+  `<Master_Kit>/_BUILD-LOG/RUN-R-report.md` with the research and next steps. Run P and Run Q remain fully done and
+  committed (see their own progress log entries above); nothing else in this batch needs to be redone.
 - **2026-09-12, Run P complete.** Fixed Test 1's methodology (intake-received tag routed to the wrong branch),
   reran both Test 1 and Test 2 successfully, restored all 8 shrunk waits and both seasonal test dates, deleted all
   4 test contacts (ZZ TestP1-4 Probe), committed and pushed (`2751cdf`). Wrote
