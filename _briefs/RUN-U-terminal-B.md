@@ -53,3 +53,4 @@ Commit and push the repo side; OneDrive side is in place.
 ## Progress log (terminal B)
 
 - 2026-09-12: brief copied. Starting Job 1.
+- Job 1 done: Financial Services division sheet rebuilt as HTML + PDF in A1_Sales/Atals 1 Financial Services/ (old June PDF, which did open here, moved to _to_delete/superseded-2026-09-12/division-sheet-financial-old/). Layout matched to the Consulting sheet side by side. Hub card.
