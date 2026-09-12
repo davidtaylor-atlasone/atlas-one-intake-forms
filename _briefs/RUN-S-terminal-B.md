@@ -133,3 +133,4 @@ Do not start Run O part 2 (the contacts review sheet is not finished).
 
 - 2026-09-12: brief copied into the repo. Starting Job 1.
 - Job 1 done: tools/assets/retention-sample-25ee.png (1200x507, 104 KB). Calculator inputs: salary 52000, team 25, turnover 8% (2 of 25). Calculator output: $52,000 per departure, $104,000 a year, 2 people lost, ~5.2 months to a productive replacement.
+- Job 2 done: tools/self-assessment/index.html (412 KB, fonts embedded). Copy in Master Kit 06 folder as Atlas_One_Back_Office_Self_Assessment.html. Registered in build_portal.py (Calculators & Diagnostics), Tools Hub (Diagnostics & Savings, tag new), Master Hub (Sell & Pitch), and tools/index.html (fourth card). Test submission through the page: webhook returned 200 (email muddybudmods+runs5363335@gmail.com, phone 8015553335). Scoring: 10 = holding, 0 = leaking; each option carries time/money/risk points lost, score = 10 x (1 - lost / max possible).
