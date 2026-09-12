@@ -1,5 +1,16 @@
 # TERMINAL A BATCH (GHL browser UI only): Run P finish, Run Q copy edits, Run R service intake forms
 
+## Progress log
+
+- **2026-09-12, session start.** Chrome had just been restarted per the user's message. Navigated to
+  `app.ridethehightide.com/workflows` to do the brief's low-stakes click test. The page never finished loading (stuck
+  on GHL's own spinner past 20s, then the "click here to refresh" screen — not clicked), so per the dead UI rule did
+  one real Cmd+R. After the reload the page went fully blank for 20+ seconds with zero interactive elements in the
+  DOM. Console showed `FirebaseError: Missing or insufficient permissions` from GHL's app bundle, suggesting an
+  auth/session issue rather than the leftover-modal cause from the prior report's Incident 2. **Stopped the whole
+  batch per the rule** before any click landed and before Run Q or Run R were started. Full detail and next steps in
+  `<Master_Kit>/_BUILD-LOG/RUN-P-report.md` (overwritten, "needs Chrome restart" at top).
+
 Written by Cowork 2026-09-12 evening. David is away. Do all three runs in order, end to end, without asking questions.
 Batch questions at the end of each report. Same rules as every GHL run: app.ridethehightide.com only, one tab, Chrome in
 front, never click "click here to refresh", type email bodies through the </> source dialog (triple click inside the
