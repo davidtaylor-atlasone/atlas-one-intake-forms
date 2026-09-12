@@ -23,7 +23,7 @@ no dashes anywhere in email copy. Build everything end to end, then report. Batc
 2. Can an If/Else compare a custom DATE field to "today minus N days" (relative date)? If not, use the cooldown-tag pattern below.
 Record both answers in RUN-P-cadence.md before going further; they decide the design of Part C.
 
-### Step 0 ANSWERS (tested 2026-09-11, throwaway workflow "ZZ Step 0 test (delete me)" c3498a76-49fe-93ec-1096f471f5d1 (full id c3498a76-49fe-93ec-1096f471f5d1), deleted after the test)
+### Step 0 ANSWERS (tested 2026-09-11, throwaway workflow "ZZ Step 0 test (delete me)" c3498a76-a36b-49fe-93ec-1096f471f5d1, deleted after the test)
 
 **Answer 1: a past specific date does NOT hold the contact, and GHL DOES give you a skip option.**
 The Wait action, wait type "Until a specific date/time", exposes two setting groups:
