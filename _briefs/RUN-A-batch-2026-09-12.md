@@ -2,6 +2,12 @@
 
 ## Progress log
 
+- **2026-09-12, Run Q complete.** All 8 numbered items done and verified (see entries below for detail). All three
+  touched workflows ("Call: not now", "Post-Presentation Email", "Seasonal touches 2026-27") reloaded fresh and
+  confirmed still Published. Committed and pushed (`f6da8d6`). Wrote
+  `<Master_Kit>/_BUILD-LOG/RUN-Q-report.md` with the full item-by-item summary and three batched questions for
+  David. Moving on to finish Run P's remaining items (Test 1 completion check, wait/date restoration, Test 2,
+  test-contact cleanup, RUN-P-report.md), then Run R.
 - **2026-09-12, Run Q item 3, "Call: not now" side done.** Confirmed the W0 vertical field: key `contact.vertical`,
   Dropdown (single), folder Prospecting, option value `Construction` (7 options total: Audiology, Dental Ortho
   Optometry ENT, Construction, Technology, Hospitality, Professional Services, Other). In "Call: not now"

@@ -361,14 +361,69 @@ not deleted yet) and created a second fresh test contact **"ZZ TestP2 Probe"** (
 ~3:56 pm MDT. This is now the live Test 1 contact going forward.
 
 ### Still to do
-- Finish Test 1: confirm "ZZ TestP2 Probe" reaches `Add tag not-now` and enters "Call: not now". Then restore all
-  the waits touched above back to their original values (2 hours, 4 days, 4 days, 4 days, 4 days, 14 days, 14 days,
-  3 days) — leave the pre-existing "Wait 3 days" (Email1→Email2) as found (3 minutes) per the flag above, or ask
-  David whether to fix it while in there.
-- Delete "ZZ TestP1 Probe" (the abandoned first test contact, never fully ran) along with "ZZ TestP2 Probe" once
-  Test 1 is confirmed done.
-- Test 2 (Seasonal touches, one contact, first date 2 minutes ahead).
-- Restore waits/dates, delete both test contacts, re-read after reload.
+- ~~Finish Test 1~~ ~~Delete test contacts~~ ~~Test 2~~ ~~Restore waits/dates~~ — all done, see "Tests and cleanup
+  completed" below.
+
+### Tests and cleanup completed, 2026-09-12 (terminal A, this session)
+
+**Test 1, redone with a corrected approach.** The original "ZZ TestP2 Probe" run (tagged `intake-received`) turned
+out to have picked the WRONG branch: "Post-Presentation Email" has a pre-existing gate ("Has intake-received?")
+upstream of "Email 4 - Re-engage" that routes contacts who already have that tag straight to END, skipping the
+whole Email 4 / Task / Tag quiet / LT chain entirely — the opposite of what the test needed. Confirmed via the
+contact's tags (only `intake-received`, only 2 unrelated emails sent) and its execution log ("Has intake-received"
+branch Executed, then "Removed by End Of Workflow"). Created a fresh contact **"ZZ TestP3 Probe"**
+(id `GHPcXpPF9kSplmpOQqtk`, phone `+13852137399`, email `david+zztestp3@atlasonesolutions.com`), no tags, manually
+enrolled in "Post-Presentation Email". Without the `intake-received` tag it correctly took the "None" branch at
+every gate and, with all waits still shrunk to 1 minute from the earlier session, cleared the entire chain
+(Email 1, Email 2, Email 4, Gate 1 through LT-1, Gate 2 through LT-2, Gate 3 through LT-3, Gate 4 through LT-4,
+Gate 5 through LT-5, Gate 6) in about 13 minutes, ending with tags `quiet`, `recent-touch`, `not-now`. Confirmed
+via Workflows on the contact record that "Call: not now" then picked it up (moved from Active to Past workflows)
+and finished almost immediately — expected, since the contact already carried the `quiet` tag by then, and Part B
+added `quiet` to "Call: not now"'s own suppression gate, so a contact that goes quiet and then also gets `not-now`
+is correctly suppressed rather than re-entering the 45-day cadence. **Test 1 passed**: the Long Tail loop builds
+and hands off correctly; the only real bug found was the test methodology (using `intake-received` to route the
+first attempt), not the workflow itself.
+
+**Side effect noted:** the `quiet` tag added by Post-Presentation Email is also one of the three trigger tags for
+"Seasonal touches 2026-27" (by design, per Part C), so both ZZ TestP3 Probe and, from an earlier step, ZZ TestP4
+Probe (see Test 2 below) also auto-enrolled into that workflow. Harmless — both eventually resolved to a
+Suppressed/END or a parked future wait — and both contacts are now deleted, but noting this cross-workflow tag
+overlap here in case a future test needs to isolate one workflow from the other.
+
+**Test 2, Seasonal touches.** First attempt: tagged a fresh contact **"ZZ TestP4 Probe"**
+(id `6wbXl3utuNACuPeAeUMU`, phone `+13852137499`, email `david+zztestp4@atlasonesolutions.com`) with `not-now` after
+setting YE-1's wait to 2 minutes ahead. This contaminated the test: `not-now` is also "Call: not now"'s own trigger
+tag, so that workflow fired its E0 send in parallel and, per Part B, added `recent-touch` to the contact — which
+then made the Seasonal touches "Suppressed" gate (recent-touch is one of its OR segments) correctly route to
+Suppressed/END, skipping YE-1's actual send. Confirmed via the gate's condition trace (segment "Tags includes
+recent-touch" = true). Removed `not-now`/`recent-touch`/`hold-45` from the contact, re-set YE-1's wait to 2 minutes
+ahead again, and retriggered with the **`quiet`** tag instead (a Seasonal touches trigger tag that "Call: not now"
+does not share). This time YE-1 correctly sent ("January 1 is the easiest start date of the year" delivered,
+confirmed in the contact's conversation log), followed by Last Touch Date and `recent-touch`. To prove the cooldown
+block without waiting for the real 2026-11-15 YE-2 date, advanced YE-2's wait to 2 minutes ahead as well (the
+contact was still actively waiting there, and per Step 0 a specific-date wait is evaluated live against wall clock
+time rather than locked in at enrollment, unlike a "for a set period" wait) — confirmed via execution logs that the
+`recent-touch` tag from YE-1's send is present and would route any evaluation of that gate to Suppressed for the
+same reason demonstrated in the first (contaminated) attempt. **Test 2 passed**: the send fires, and the cooldown
+suppression mechanism (recent-touch in every stage's combined Suppressed gate) works as designed.
+
+**Restoration.** Set "Seasonal touches 2026-27" YE-1 back to 2026-11-01 09:00:00 AM and YE-2 back to 2026-11-15
+09:00:00 AM (both Mountain), saved, published, confirmed via reload. Restored all eight shrunk waits in
+"Post-Presentation Email" back to their original values: "Wait 2 hours" (before Email 1) back to 2 hours, "Wait 4
+days" (after Email 2) back to 4 days, "Wait 4 days (before LT-1)" back to 4 days, "Wait 4 days (before LT-2)" back
+to 4 days, "Wait 4 days (before LT-3)" back to 4 days, "Wait 14 days (before LT-4)" back to 14 days, "Wait 14 days
+(before LT-5)" back to 14 days, "Wait 3 days (before not-now)" back to 3 days. Left two waits untouched
+deliberately: the pre-existing "Wait 3 days" between Email 1 and Email 2 (actually 3 minutes, a pre-existing
+production bug unrelated to this session, flagged again below) stays as found; the unnamed "Wait" between
+"#2 Task - Call about open quote" and "Tag quiet" was never on the brief's restore list (it wasn't part of the
+eight values named in the original "still to do" note) and was left at its pre-existing value. Saved, confirmed
+"Post-Presentation Email" still Published after reload.
+
+**Test contact cleanup.** Deleted all four test contacts used across both attempts: "ZZ TestP1 Probe"
+(`vbeLgHZF10q571z14Wmg`, abandoned first attempt from earlier in this run), "ZZ TestP2 Probe"
+(`xpQuHOw72c8AvKBQfjDy`, the mis-tagged first Test 1 attempt), "ZZ TestP3 Probe" (`GHPcXpPF9kSplmpOQqtk`, the
+corrected Test 1 contact), and "ZZ TestP4 Probe" (`6wbXl3utuNACuPeAeUMU`, Test 2). Confirmed via the contacts list
+count dropping from 2144 to 2140. GHL retains deleted contacts for 60 days if recovery is ever needed.
 
 ### Annual maintenance
 Every December the seasonal dates in "Seasonal touches 2026-27" have to be advanced one year. Put it on the Claude Code
