@@ -143,44 +143,76 @@ none of the stop tags. **The loop did not restart**, see below.
 After the test the three waits were set back to **45 days** and each one was reopened and
 confirmed. Workflow saved and still Published. The test contact was deleted.
 
-### The loop does not re-arm: the one thing still open
+### The loop: solved with a second workflow
 
-The re-arm fires but GHL ignores it. From the Allow re-entry help text: "If the Contact attempts
-to re-enter while it is still enrolled in this workflow, it will get skipped." The Add tag runs
-as the last action, so the contact is still enrolled at that instant and the new enrollment is
-dropped. The log shows Add not-now at 8:29:12 and End Of Workflow at 8:29:12, and nothing after.
+GHL skips re-entry while a contact is still enrolled ("If the Contact attempts to re-enter while
+it is still enrolled in this workflow, it will get skipped"), so the original last action, adding
+`not-now` back, was dropped every time. The tag has to be re-added **after** the contact leaves,
+which one workflow cannot do. Fixed with a small second workflow.
 
-A wait between the remove and the add does not help, because the contact is still enrolled
-during a wait too. The tag has to be re-added **after** the contact leaves the workflow, which
-one workflow cannot do on its own. Two ways to fix it, your call:
+**`Loop: re-arm not-now`**, id **`89c10a95-1b5c-41c8-bc6a-b6b492197196`**, Published, re-entry on.
 
-1. **A second small workflow.** "Loop: re-arm not-now", trigger Tag added = `loop-restart`,
-   actions: wait 1 minute, remove `loop-restart`, add `not-now`. The main workflow's last action
-   becomes Add `loop-restart` instead of Add `not-now`. Clean, and the only reliable way inside
-   GHL.
-2. **Drop the loop.** Three touches at 45, 90 and 135 days and then stop, and you re-add
-   `not-now` by hand for anyone worth another round.
+```
+TRIGGER  Contact tag > Tag added includes "loop-restart"
+1  Wait 2 minutes
+2  Remove not-now
+3  Add not-now          -> fires "Call: not now" again
+4  Remove loop-restart
+```
 
-As it stands the workflow runs the full 135 day sequence correctly and then stops.
+`Call: not now` now ends with a single action, **Add loop-restart (hand off to re-arm)**, in place
+of the old remove and re-add pair. New tag **`loop-restart`** created 11 Sep 2026 09:08 PM. Tag
+count is now 37.
 
-### Two other things that need David
+### Second test: re-entry PROVEN
 
-1. **The opportunity step is skipped.** GHL's plain "Update opportunity" only touches the
-   opportunity that triggered the workflow, and a tag trigger carries none, so it no ops. The
-   fix is a "Find opportunity" action in front of it, but Find forks the canvas into
-   "Opportunity Found" and "Opportunity Not Found" branches and the whole 45 day loop would have
-   to be duplicated under both. Left as a no op rather than doubling the workflow. Say the word
-   and I will either duplicate the loop or move the opportunity close into its own small
-   workflow on the same trigger.
-2. **The lost reason is a fixed picklist.** There is no "Not now" option. Closest is
-   **"Not the Right Time"**, which is what is set. The list is No response, Other, Benefits not
-   competitive, We didn't offer a service they needed, Out of business, Too many services, Not
-   the Right Time, Too expensive, Went with competitor.
+New contact `RunM LoopTest2 212510`, id `FMv37QRnmCn0azG9XOut`, phone `+1385554962`, email
+`david+runm2212510@atlasonesolutions.com`. Tag `not-now` added by API at **21:25:11** with the
+three waits at 1 minute.
 
-### One cosmetic difference
+| Step | Status | Time |
+|---|---|---|
+| First pass, Email: thanks for the time through #3 Task 45-C | all Executed | 9:25 to 9:28:30 pm |
+| Add loop-restart (hand off to re-arm) | Executed | 9:28:31 pm |
+| Removed by End Of Workflow | Finished | 9:28:32 pm |
+| "Loop: re-arm not-now" runs its 2 minute wait then swaps the tags | tags confirmed by API | by 9:30:49 pm |
+| **Add to workflow** | **Added To Workflow** | **9:30:57 pm** |
+| Suppression gate, None branch | Executed | 9:30:57 pm |
+| Email: thanks for the time (second pass) | Executed | 9:30:59 pm |
+| Add tag hold-45 | Executed | 9:30:59 pm |
+| Remove booked and sequence active | Executed | 9:31:00 pm |
+| Email 45-A, #1 Task 45-A (second pass) | Executed | 9:32:02, 9:32:05 pm |
+| Email 45-B, #2 Task 45-B (second pass) | Executed | 9:33:07, 9:33:09 pm |
 
-45-A uses the same filled periwinkle button as the other emails. 45-B and 45-C had to be pasted
-as rich HTML rather than through the source dialog (GHL's source dialog closes itself between
-tool calls), and the editor stripped the inline button styling, so their call to action renders
-as a bold underlined link instead of a filled button. Everything else matches. Easy to fix by
-hand in the two actions.
+**The "Add to workflow" row at 9:30:57 pm is the proof**: the contact re-entered "Call: not now"
+on its own, 2 minutes and 26 seconds after leaving it. The workflows list confirmed it
+independently, Total enrolled went 1 to 3 with Active enrolled 1.
+
+Afterwards the three waits were set back to **45 days**, the workflow saved and re-published, and
+each Wait was reopened after a full page reload and read back as 45 days. The test contact was
+deleted.
+
+### The opportunity step is gone
+
+`Opportunity to Closed Lost` has been deleted from "Call: not now". It silently skipped on every
+run (a tag trigger carries no opportunity, and GHL's plain Update opportunity only touches the one
+that triggered the workflow), and a permanently skipped step misleads anyone auditing the log.
+**Opportunity stage handling moves to Run P (Quiet stage).**
+
+The lost reason question is moot here now, but for the record the picklist has no "Not now"; the
+closest is "Not the Right Time".
+
+### The 45-B and 45-C buttons: retried, still stripped
+
+Both were re-pasted through the `</>` source code dialog, the correct HTML confirmed sitting in the
+textarea before saving, then saved, the workflow saved, the page reloaded and the action reopened
+and re-read. 45-C was retried with the body cleared to empty first, exactly how E0 and 45-A were
+originally built. **The editor strips the inline button styling on save either way.** After reload
+both render the call to action as a bold underlined link rather than a filled periwinkle button.
+
+Everything else in those two emails is correct: wrapper, logo, colours, signature, copy, links.
+E0 and 45-A still carry the filled button. Leaving the text link in 45-B and 45-C.
+
+The trick that does make the source dialog usable, for the record: **triple click** inside the
+textarea before cmd+a. A single click does not move focus into it and cmd+a then selects the whole
+page instead.

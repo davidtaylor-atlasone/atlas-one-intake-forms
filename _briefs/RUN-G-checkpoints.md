@@ -55,8 +55,9 @@ sequence active, batch ready, reply received, not interested.
 payment workflows) and **`not-now`** (Run M part B, the trigger tag for the "Call: not now"
 stay in touch workflow). Then **`hold-45`**, **`partner`** and **`do-not-prospect`** (Run M part
 B, for the 45 day loop and its suppression gate). Others arrived from other runs in between
-(`client-current`, `portal-admin`, `portal-seed`, the four `service-` tags). **Tag count is now
-36**, counted on the Settings > Tags list on 11 Sep 2026.
+(`client-current`, `portal-admin`, `portal-seed`, the four `service-` tags). Then **`loop-restart`** (Run M part B follow up, the hand off tag between "Call: not now" and
+"Loop: re-arm not-now"). **Tag count is now 37**, counted on the Settings > Tags list on
+11 Sep 2026.
 
 **GHL lowercases every tag name on save.** The runbook's capitalisation (`SMS consent`,
 `Sequence Active`, `DNC`) cannot be preserved. Workflow steps will reference the lowercase forms.
