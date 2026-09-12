@@ -1,0 +1,19 @@
+{
+ "Atlas One Business Tools (17 generators).html": "aria-labels on every line item and timesheet input; Print / Save as PDF button beside Download PDF; print stylesheet (preview only). Help text already present (toolDesc).",
+ "Atlas One Calculators (53 tools).html": "aria-labels on the six paired S-Corp inputs that had only placeholders; Print / Save as PDF button in every calculator header with a print stylesheet (active calculator only). Help text already present on all 53.",
+ "Business Infrastructure Audit (Atlas One).html": "Print / Save as PDF button (in the header bar) plus print stylesheet; help text already present.",
+ "Business Infrastructure Audit (Espanol).html": "Print / Save as PDF button (in the header bar) plus print stylesheet; help text already present.",
+ "Business Value Diagnostic (Atlas One).html": "Print / Save as PDF button (in the header bar) plus print stylesheet; help text already present.",
+ "Business Value Diagnostic (Espanol).html": "Print / Save as PDF button (in the header bar) plus print stylesheet; help text already present.",
+ "Vendor Consolidation Savings (Atlas One).html": "Print / Save as PDF button (in the header bar) plus print stylesheet; help text already present.",
+ "Vendor Consolidation Savings (Espanol).html": "Print / Save as PDF button (in the header bar) plus print stylesheet; help text already present.",
+ "Retention Cost Calculator (Atlas One).html": "Print / Save as PDF button (in the header bar) plus print stylesheet; help text already present.",
+ "Retention Cost Calculator (Espanol).html": "Print / Save as PDF button (in the header bar) plus print stylesheet; help text already present.",
+ "Retention Scorecard (Atlas One).html": "Print / Save as PDF button (under the title) plus print stylesheet; help text already present.",
+ "Retention Scorecard (Espanol).html": "Print / Save as PDF button (under the title) plus print stylesheet; help text already present.",
+ "COI to Workers Comp Premium Estimator (Atlas One).html": "Print / Save as PDF button (under the title) plus print stylesheet; help text already present.",
+ "Compliance Risk Scorecard (Atlas One).html": "Print / Save as PDF button (under the title) plus print stylesheet; help text already present.",
+ "Cost of a Compliance Mistake (Atlas One).html": "Print / Save as PDF button (under the title) plus print stylesheet; help text already present.",
+ "Health Comparison Builder (Atlas One).html": "Print / Save as PDF button (under the title) plus print stylesheet; help text already present.",
+ "Atlas_One_Back_Office_Self_Assessment.html": "Print / Save as PDF button (in the header bar) plus print stylesheet; help text already present."
+}
