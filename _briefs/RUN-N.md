@@ -31,6 +31,8 @@ five client pages and the admin page.
 
 ### Why Supabase is not in the stack
 
+**Confirmed by David on 11 Sep: keep the GHL sent link, fewer accounts is right.**
+
 The brief named Supabase for the magic link. Two facts changed that decision during the build:
 
 1. No starter had magic link auth to reuse, so the auth layer had to be written either way.
@@ -86,6 +88,7 @@ import filled `businessName`, the forms fill `companyName`). Admin = the emails 
 | Requests | three forms (COI, question, change). Each writes a note on the contact and a task for David (`assignedTo` his user id `vTV2wRivyR9f9XWNook3`, due next day) | 06, 09 |
 | Book a call | iframe of `https://api.leadconnectorhq.com/widget/groups/book-david` with GHL's resize script; renders all four calendars | 07 |
 | Pay | the 14 links from Run L. With a Membership Tier set: that tier's membership and setup plus every add on. Without: all 14 | 08 |
+| Partners | `src/config/partners.json`, no GHL call. Ramp live (official press kit lockup, headline and one line as specified, button opens `https://ramp.com/partners/atlasone` in a new tab). QuickBooks, Jotform and Deel as greyed "Coming soon" placeholders until David pastes each tracked link and flips `live`. Link out only, no form | 12 |
 | Admin (David only) | every contact tagged `client-current`, grouped by company, search, "View as" impersonation with a banner and Stop viewing. Requests sent while viewing are filed on the client's record and marked as sent by David | 10, 11 |
 
 **Custom field ids** were discovered by writing values by key on a probe contact and reading
@@ -109,7 +112,16 @@ GHL accepted `client-current` on the seed contacts by API. Whether it now shows 
 Tags could not be checked (the tags endpoint is out of scope for the key); Run O part 2
 should look before creating it.
 
-**Playwright**: 10 of 10 pass (5 tests, mobile and desktop), 42 seconds, against the built
+**Test mode, no email.** The first suite runs sent sixteen real sign in links to David's
+inbox. Now `PORTAL_TEST_MODE=1` (set by the Playwright config, ignored on Vercel) writes each
+link to `.test-mail/outbox.jsonl` and the console instead of calling GHL. The test helper
+refuses to continue unless the server confirms test mode, so a mis-started server fails the
+suite before any email could go out. Verified on the commit `da8d426` run: outbound email
+count on the four test contacts in GHL was 14 before and 14 after a full run, with 8 links in
+the local outbox. Real sends remain only for the manual seed client check (`pnpm start`,
+sign in as a seed client).
+
+**Playwright**: 12 of 12 pass (6 tests, mobile and desktop), 33 seconds, against the built
 app on one origin exactly as on Vercel:
 
 1. Unknown email gets the polite refusal.
@@ -121,6 +133,9 @@ app on one origin exactly as on Vercel:
    Harbor Dental Group` and an open task with that title.
 5. Admin login as the plus addressed test admin, all three companies listed, View as Mateo
    shows the banner, his home page and his Essential pay links, Stop viewing returns to Admin.
+6. Partners: Ramp card live with the exact `https://ramp.com/partners/atlasone` href and
+   `target="_blank"`, the three placeholders greyed with Coming soon and a disabled button,
+   and exactly one outbound link on the page.
 
 The test COI notes and tasks were deleted afterwards so David's task list stays clean. A
 contact "Atlas One Admin" (`david+portal-admin@atlasonesolutions.com`, tag `portal-admin`)
@@ -152,8 +167,12 @@ Nothing here needs a password typed by anyone but David.
 5. **Real clients** appear the moment Run O part 2 tags them `client-current`. Contacts with
    no email in GHL cannot sign in; 1,237 of the 2,136 have none.
 
-## 4. Phase 2
+## 4. Phase 2 (v2 backlog)
 
+- **Ramp live data (balances, spend) via the Ramp API, with client consent.** Not built. The
+  Partners page links out only; nothing about a client's Ramp account is collected or shown.
+- Partner links for QuickBooks, Jotform and Deel: paste each tracked URL into
+  `src/config/partners.json` and set `live` to true.
 - **NowCerts COI pull**: replace the COI request note with a live certificate generated from
   NowCerts and dropped into Documents; needs the NowCerts API key and the policy to client
   mapping.
