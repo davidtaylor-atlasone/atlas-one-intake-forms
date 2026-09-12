@@ -251,11 +251,124 @@ screenshot before saving. Published; confirmed the toggle stayed on Publish afte
 
 **Part B is done.**
 
+### Part C, "Touch cooldown" completed, 2026-09-12 (terminal A, this session)
+Built the small workflow fresh: Workflows list → Create workflow → Start from Scratch, renamed "Touch cooldown"
+(id `d67589e0-823b-4d65-8243-ce2def163f51`). Trigger: Contact tag, filter "Tag added" includes `recent-touch`.
+Settings tab confirmed "Allow re-entry" already defaults ON for a new workflow, no change needed. Canvas:
+trigger → `Wait 10 days` (wait type "For a set period of time", unit days) → `Remove Tag` (Remove contact tag =
+recent-touch) → END. Published; confirmed the Draft/Publish toggle stayed on Publish after a full reload and zoomed
+screenshot (first click briefly showed a greyed mid-state, same as the earlier gotcha with other workflows in this
+run — a reload confirmed it was actually on).
+
+### Part C, "Seasonal touches 2026-27" in progress, 2026-09-12 (terminal A, this session)
+New workflow (id `52f414cb-b63e-4425-80c9-adea42a210e3`), three triggers: Contact tag "Tag added" includes `hold-45`,
+`not-now`, `quiet` (one trigger each). Settings: "Allow re-entry" already ON by default, left as is.
+
+**Deviation from the brief's literal cooldown design, logged for David's review:** the brief says "before each send:
+suppression gate ... then cooldown check (skip the send if tag recent-touch present)" as two separate steps. GHL's
+If/Else has no way to have a "skip this one action, then rejoin the same downstream chain" branch — a Yes branch either
+ends the workflow or forks the entire remainder (confirmed by how the six Part A gates work: each Yes branch is a
+dead-end). Building a true skip-one-continue would require duplicating the entire remaining chain at every stage
+(2^7 leaf paths by the last send) which isn't buildable by hand and isn't what "Copy action" produces anyway. Instead,
+each stage uses ONE combined If/Else ("Suppressed" branch, OR segments: `client-current`, `do-not-prospect`, `partner`,
+`dnc`, `booked`, `recent-touch`; "None" branch continues) — folding recent-touch into the same permanent-suppression
+gate. Practical effect: a contact who happens to have `recent-touch` present exactly at a scheduled seasonal send date
+is dropped from the REST of the seasonal chain, not just skipped for that one send. Since `recent-touch` normally
+clears in 10 days (via "Touch cooldown") and seasonal sends are 14+ days apart, this only bites in the rare case
+another cadence email landed very close to a seasonal date. Flagged as a question in the eventual report.
+
+Built so far, in order: Wait until 2026-11-01 (YE-1) → Gate (combined Suppressed/None, 6 OR segments) → YE-1 send
+(copied from an existing branded email action and edited, same method as Part A — email body from
+`_briefs/assets/run-P/emails.md`, "My calendar is open here" linked to the 15-minute intro booking URL, assumption
+logged: brief's spec section didn't give YE-1 a link, used the same 15-minute-intro link as YE-2/Q-1 since the
+call-to-action is the same) → Last Touch Date = today (YE-1) → Add tag recent-touch (YE-1) → Wait until 2026-11-15
+(YE-2) → Gate (copied via node-level "Copy action", not "Copy all actions from here" — confirmed this pastes with
+fresh empty Suppressed/None branches even though the source gate's branches were already built, exactly as found in
+Part A) → YE-2 send (copied from YE-1 email, subject/body edited, "Book fifteen minutes" linked to the 15-minute
+intro booking URL) → Last Touch Date = today (YE-2) → Add tag recent-touch (YE-2). Each stage's Suppressed branch
+ends END; each None branch continues to the next Wait.
+
+YE-3 (2026-12-01, "Last clean cutover date") and YE-4 (2026-12-15, "Start the paperwork now, go live January 1")
+built the same way: Wait → Gate (copied) → Send (copied from prior stage, subject/body edited, link re-pointed to the
+15-minute intro booking URL where the source body has one) → Last Touch Date = today → Add tag recent-touch, each
+named for its own stage.
+
+Q-1 built three times (2027-03-01, 2027-06-01, 2027-09-01) reusing the same Q-1 email content per the batch brief,
+each with its own Wait→Gate→Send→LastTouchDate→Tag block named "(Q-1 #1)", "(Q-1 #2)", "(Q-1 #3)" to keep the nodes
+distinguishable. Full chain now: YE-1 (2026-11-01) → YE-2 (2026-11-15) → YE-3 (2026-12-01) → YE-4 (2026-12-15) →
+Q-1 #1 (2027-03-01) → Q-1 #2 (2027-06-01) → Q-1 #3 (2027-09-01) → END. Reviewed the whole chain via reload and
+zoomed screenshots — no duplicate or orphaned nodes, every Suppressed branch ends END, every None branch continues.
+Published; confirmed the Draft/Publish toggle stayed on Publish after a full reload.
+
+**Note for Run Q:** batch brief item 5 says the "A number most owners never add up" (Vendor Consolidation) email may
+need to replace the 2027-06-01 Q-1 send — that edit is Run Q's job, not done here.
+
+**Part C bulk-add checked:** the existing smart list is named "Prospecting: Hold" (not "Hold"). Opened it —
+0 contacts currently. Nothing to bulk-add; the trigger tags (hold-45, not-now, quiet) will pick up contacts as they're
+tagged going forward, so no action needed here.
+
+**Also caught while publishing:** clicking the Draft/Publish toggle a second time (attempting to open the Hold smart
+list from a link that hadn't finished loading) accidentally flipped a just-published workflow back to Draft.
+Caught immediately via the toggle color/label, re-published, confirmed blue/on after reload. Logged as a reminder:
+this toggle takes a single click to flip either direction, so always screenshot after clicking it, never click twice.
+
+### Part D completed, 2026-09-12 (terminal A, this session)
+Built both smart lists under Contacts > Smart Lists:
+- **"Quiet / long tail"**: Tag Is `quiet` OR Opportunity pipeline "Sales / Setup" Stage Is `Quiet`. 0 contacts currently
+  (expected — nothing has been tagged quiet or moved to that stage yet).
+- **"Seasonal audience"**: Tag "Is any of" (`hold-45`, `not-now`, `quiet`) AND Tag "Is not" (`client-current`,
+  `do-not-prospect`, `partner`, `dnc`, `booked`) — built as a single filter group with the exclusion as a nested AND
+  filter (the smart list builder only supports one OR tier at the top level; nesting was the way to get AND-of-OR).
+  0 contacts currently.
+
+**Part D is done.**
+
+### Test 1 in progress, 2026-09-12 (terminal A, this session)
+Created test contact **"ZZ TestP1 Probe"** (id `vbeLgHZF10q571z14Wmg`, phone `+13852137199`, email
+`david+zztestp1@atlasonesolutions.com`), tagged `intake-received` (needed so it follows the "Has intake-received"
+branch of "Post-Presentation Email" toward Email 4 and the Long Tail loop, since it's a manually-created contact with
+no pipeline/opportunity and no `intake-received` tag by default). Manually enrolled it in "Post-Presentation Email"
+via Contact > Actions > Workflows > Active workflows > +.
+
+**Important discovery:** changing a Wait node's duration in the builder does NOT retroactively change the wait time
+for a contact already sitting at that step — GHL locks in the wait duration at the moment the contact entered it.
+First enrollment attempt got stuck honoring the original "Wait 2 hours" even after editing the node to 1 minute.
+Fixed by removing the contact from the workflow (Enrollment history > red remove icon) and re-adding it fresh after
+all waits below were already shrunk.
+
+**Critical finding for the report (unrelated pre-existing issue, not caused by this session):** the wait node named
+"Wait 3 days" between Email 1 and Email 2 was already configured for **3 minutes**, not 3 days, before this session
+touched it. Confirmed twice independently by opening the node and reading Time period/Unit. This means real
+prospects have been getting Email 2 about 3 minutes after Email 1, not 3 days after. Left it at 3 minutes (harmless
+for this test, and correcting a live customer-facing sequence isn't part of Run P's scope) but flagging this loudly
+as a question/urgent fix for David.
+
+Shrunk every other wait in the workflow to 1 minute for the test run: "Wait 2 hours" (before Email 1), "Wait 4 days"
+(after Email 2, before the "Still not moved?" gate), the "Wait" before "Tag quiet", "Wait 4 days (before LT-1)",
+"Wait 4 days (before LT-2)", "Wait 4 days (before LT-3)", "Wait 14 days (before LT-4)", "Wait 14 days (before LT-5)",
+and "Wait 3 days (before not-now)". Saved and re-verified each one via the builder panel before moving to the next.
+Test contact re-enrolled at approximately 2026-09-12 3:4x pm MDT; expect it to clear the whole chain (10 waits,
+~1 minute each plus the one 3-minute wait ≈ 13 minutes) and land tagged `not-now`, which should trigger
+"Call: not now" to pick it up via its own tag-added trigger.
+
+**Second important discovery:** removing a manually-added contact from a workflow via Enrollment History's remove
+icon does NOT allow that same contact to be manually re-added to the same workflow afterward — every retry (tried
+twice, ~12 and ~28 minutes after removal) was silently **Skipped** ("Contact is already part of this workflow and
+can not be added again", visible in Execution logs > View details). This looks like a permanent per-contact/workflow
+lock, not a timing issue. **Fix:** abandoned "ZZ TestP1 Probe" for this test (left it in Past workflows, untouched,
+not deleted yet) and created a second fresh test contact **"ZZ TestP2 Probe"** (id `xpQuHOw72c8AvKBQfjDy`, phone
+`+13852137299`, email `david+zztestp2@atlasonesolutions.com`, tagged `intake-received`), enrolled cleanly at
+~3:56 pm MDT. This is now the live Test 1 contact going forward.
+
 ### Still to do
-- Part C: "Touch cooldown" workflow and the single chained "Seasonal touches 2026-27" workflow (Step 0 answer 1 decided
-  the single workflow design).
-- Part D: smart lists "Quiet / long tail" and "Seasonal audience".
-- Both tests, restore waits, delete test contacts.
+- Finish Test 1: confirm "ZZ TestP2 Probe" reaches `Add tag not-now` and enters "Call: not now". Then restore all
+  the waits touched above back to their original values (2 hours, 4 days, 4 days, 4 days, 4 days, 14 days, 14 days,
+  3 days) — leave the pre-existing "Wait 3 days" (Email1→Email2) as found (3 minutes) per the flag above, or ask
+  David whether to fix it while in there.
+- Delete "ZZ TestP1 Probe" (the abandoned first test contact, never fully ran) along with "ZZ TestP2 Probe" once
+  Test 1 is confirmed done.
+- Test 2 (Seasonal touches, one contact, first date 2 minutes ahead).
+- Restore waits/dates, delete both test contacts, re-read after reload.
 
 ### Annual maintenance
 Every December the seasonal dates in "Seasonal touches 2026-27" have to be advanced one year. Put it on the Claude Code

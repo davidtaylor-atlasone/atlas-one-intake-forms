@@ -2,6 +2,94 @@
 
 ## Progress log
 
+- **2026-09-12, Run Q item 3, "Call: not now" side done.** Confirmed the W0 vertical field: key `contact.vertical`,
+  Dropdown (single), folder Prospecting, option value `Construction` (7 options total: Audiology, Dental Ortho
+  Optometry ENT, Construction, Technology, Hospitality, Professional Services, Other). In "Call: not now"
+  (`ff950be3-829d-4a51-8f9a-825db660796e`), inserted an If/Else "Vertical construction check" (branches "Construction"
+  / "None") directly above the existing 45-B send. Used "Move all actions from here" (three dot menu on the 45-B node)
+  to relocate the existing 45-B send and everything downstream of it (Last Touch Date, tag, etc.) onto the "None"
+  branch (everyone who is not construction keeps it unchanged). Then used "Copy action" (single node, not "copy all")
+  on 45-B and pasted it onto the "Construction" branch, renamed the copy "The $70,000 audit (construction)", and
+  rewrote its subject and body (kept the branded wrapper, logo, and David Taylor signature block from the existing
+  send; replaced only the message paragraph) to match the brief: no COI collection means the auditor charges premium
+  on every uninsured sub's payroll, the $70,000 recovery example, the sub waiver line, the two questions ("Have you
+  ever had a non compliant audit?" / "Do you like doing your insurance audits?"), and a 15 minute booking link (text
+  "calendar", href `https://api.leadconnectorhq.com/widget/groups/book-david`, same booking widget already used by
+  the signature's "Book time with me" link). No dashes used (wrote "non compliant" instead of "non-compliant").
+  Construction branch ends after the new send (matches the brief: this replaces the 45-B send for construction
+  contacts, it does not also get everything downstream of 45-B). Saved and confirmed still Published.
+  **Finding, not yet resolved:** while doing this, found that the existing "Email 45-B" node (the one just moved onto
+  the "None" branch) already contains the item 5 "A number most owners never add up" Vendor Consolidation copy, not
+  whatever 45-B originally was, and there is no separate "45-B-2" node anywhere in this workflow. The progress log
+  below has no earlier entry recording that item 5 was done. Assumption: item 5 is already satisfied by this existing
+  state, so nothing further was done for item 5 in "Call: not now". Flagging for David to confirm this was
+  intentional (an earlier session or David himself may have already swapped 45-B's content) and was not an accidental
+  overwrite of the original 45-B content.
+  **Item 3 now fully done, including the "Post-Presentation Email" side.** In `304a9fa4-a256-4015-b767-031070f4186f`,
+  inserted the same "Vertical construction check (LT-2)" If/Else directly above the existing "LT-2" send. Structural
+  note: the gate had to sit ABOVE the pre-existing "Wait 4 days (before LT-2)" node (shared by both branches, so
+  everyone still waits the same 4 days before their version of the touch), with the fork happening only at the send
+  itself. Used "Move action" to relocate the Wait above the gate, then "Move all actions from here" on the original
+  LT-2 chain (LT-2 send, Last Touch Date, Tag recent-touch, Gate 3 onward) onto the "None" (non-construction) branch
+  so everyone else's chain continues exactly as before. Built the Construction branch by copying the LT-2 send
+  (single "Copy action", not "Copy all"), renamed it "The $70,000 audit (construction, LT-2)", rewrote subject and
+  body identically to the "Call: not now" version (same wording, same booking link), then added its own "Last Touch
+  Date = today" and "Add tag recent-touch" actions (built fresh rather than copied, since the paste-icon target was
+  unreliable at this zoom/scroll position) so construction contacts still get Last Touch Date and cooldown tracking.
+  Construction branch ends after those two actions (does not continue into Gate 3 onward) — same branch-cannot-merge
+  limitation as everywhere else in this batch: a construction contact who reaches LT-2 gets the audit email once and
+  falls out of the Post-Presentation cadence at that point rather than continuing to LT-3/LT-4/LT-5. Flagging this as
+  a product question: is it acceptable that construction contacts get fewer total touches after this slot, or should
+  a future pass duplicate the remaining Gate3-6/LT-3-5 chain into the Construction branch too?
+  **Editor quirk hit while writing the audit email body:** triple-clicking on the merge-tag chip inside the Subject
+  field (rather than on plain text) opened the chip's "Default text" popup and the subsequent typed text landed
+  IN THE SUBJECT FIELD, not the body, corrupting the subject to a mix of both texts. Caught immediately via screenshot
+  before saving, fixed by clicking at the actual end of the subject field (via a plain-text click + `End` key, never
+  directly on the chip) and reinserting the merge tag through the field's own tag-picker button instead of typing
+  `{{...}}` again. No corrupted state was ever saved. Root cause is the same "never click directly on a merge-tag
+  chip" quirk logged earlier in Run P, now confirmed to also apply inside single-line fields like Subject, not just
+  the rich-text body.
+  Saved and confirmed both workflows remain Published after this item.
+- **2026-09-12, Run Q item 4 done.** In "Seasonal touches 2026-27" (`52f414cb-b63e-4425-80c9-adea42a210e3`): added the
+  home by five line to YE-1 (after the existing "Happy to walk you through..." paragraph, before "Talk soon,") and
+  fixed an unrelated pre-existing typo found while there ("Davidd" sign-off, now "David"). Added the time line ("About
+  a third of an owner's week goes to admin, 88 days a year...") plus a "See the calculator here" link to all three
+  Q-1 sends (2027-03-01, 2027-06-01, 2027-09-01), using the same Retention Cost Calculator URL as the "Time and Cost
+  Savings calculator" assumption logged earlier (`forms.atlasonesolutions.com/tools/retention-cost/`). Saved,
+  confirmed still Published.
+- **2026-09-12, Run Q item 6 done.** Added a Back Office Self-Assessment line and link
+  (`https://forms.atlasonesolutions.com/tools/self-assessment/`, confirmed 200 earlier) to LT-4 in "Post-Presentation
+  Email" (before the existing "Run your numbers" retention-cost CTA) and to all three Q-1 sends in "Seasonal touches
+  2026-27" (before the existing "Fifteen minutes here" booking line). Same wording each time: "If you want the fuller
+  picture, the Back Office Self Assessment takes about two minutes. Take the assessment here." with "here" linked.
+  Saved, confirmed both workflows still Published.
+- **2026-09-12, Run Q item 7 done.** Inserted the retention sample image above "See the real cost" in Email 45-C in
+  "Call: not now": plain img tag, width 560, alt "Sample retention cost result", src
+  `https://forms.atlasonesolutions.com/tools/assets/retention-sample-25ee.png` (confirmed 200 earlier). Verified the
+  image rendered correctly in the WYSIWYG preview before saving. Saved, confirmed still Published.
+- **2026-09-12, Run Q item 8 done.** Found the field: "Referral Partner", Dropdown (single), folder "Opportunity
+  Details" (not Prospecting/Sales as the brief guessed), key `opportunity.referral_partner`, object Opportunity.
+  Existing options: None / Direct, Website or Tool, Hoffman and Company (Kris), Apex Tax Services (Kayden), Other.
+  Added Ramp, Jotform, Deel, QuickBooks, Big Red Jelly. Saved, then reopened the field and read the page text to
+  confirm all 5 new options persisted (per the brief's warning that dropdown options can silently fail to land) — all
+  10 options present. Note: there is a separate single-line "Referral Partner Name" field in the Prospecting folder;
+  left that one untouched since it is a plain text field, not the dropdown the brief describes.
+  All of Run Q's numbered items (1 through 8) are now done. Item 9 remains: final publish/reload/re-read pass across
+  every edited email, commit, push, and write RUN-Q-report.md.
+- **2026-09-12, Run Q started (terminal A, this session), while Run P's Test 1 runs in the background.** Checked
+  both conditional resource URLs first: `forms.atlasonesolutions.com/tools/self-assessment/` and
+  `.../tools/assets/retention-sample-25ee.png` both return HTTP 200, so items 6 and 7 go ahead.
+  **Assumption logged:** the brief's "Time and Cost Savings calculator" does not exist as a separate tool in the
+  repo's `tools/` folder or live site — the closest and only match is the existing **Retention Cost Calculator**
+  at `forms.atlasonesolutions.com/tools/retention-cost/` (already used in LT-4 with time-and-cost framing: hiring
+  time, manager hours, ramp up). Used that URL everywhere the brief says "Time and Cost Savings calculator". Flagging
+  this for David to confirm or point me at the right tool if a separate one exists.
+  - **Item 2 (E0) done:** added links "Time and Cost Savings calculator" → retention-cost tool and "Vendor
+    Consolidation calculator" → `.../tools/vendor-consolidation/`, one line offering the bilingual employee handbook
+    builder as a member tool, and a closing home-by-five line, right before "Talk soon, David". No safety manual
+    added. Edited directly in the rendered WYSIWYG canvas (same deviation from the brief's `</>` source-dialog
+    instruction as Part A, same reasoning: cross-origin iframe blocks reading raw HTML safely). Published, reload
+    pending re-verification.
 - **2026-09-12, session start.** Chrome had just been restarted per the user's message. Navigated to
   `app.ridethehightide.com/workflows` to do the brief's low-stakes click test. The page never finished loading (stuck
   on GHL's own spinner past 20s, then the "click here to refresh" screen — not clicked), so per the dead UI rule did
