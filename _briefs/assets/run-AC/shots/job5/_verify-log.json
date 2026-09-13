@@ -1,0 +1,155 @@
+[
+ {
+  "file": "Atlas_One_Compliance_Calendar.html",
+  "desktop": {
+   "width": 1440,
+   "bodyFamily": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+   "sw": 1440,
+   "bsw": 1440,
+   "sh": 1030,
+   "title": "Atlas One: HR and Payroll Compliance Calendar",
+   "dmCheck": true,
+   "bodyRendered": "DM Sans 9pt:2",
+   "dmAsked": 4,
+   "dmRendered": 4,
+   "horasAsked": 2,
+   "horasRendered": 2,
+   "serif": 0,
+   "errors": [],
+   "nonFileRequests": [],
+   "samples": [
+    {
+     "i": 0,
+     "tag": "span",
+     "family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+     "weight": "700",
+     "text": "A",
+     "rendered": "DM Sans 9pt:2"
+    },
+    {
+     "i": 1,
+     "tag": "b",
+     "family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+     "weight": "900",
+     "text": "1",
+     "rendered": "DM Sans 9pt:1"
+    },
+    {
+     "i": 2,
+     "tag": "button",
+     "family": "\"DM Sans\"",
+     "weight": "600",
+     "text": "Export .ics",
+     "rendered": "DM Sans 9pt:11"
+    },
+    {
+     "i": 3,
+     "tag": "h1",
+     "family": "Horas, \"DM Sans\", serif",
+     "weight": "500",
+     "text": "HR and payroll compliance cale",
+     "rendered": "Horas Med:34"
+    },
+    {
+     "i": 4,
+     "tag": "p",
+     "family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+     "weight": "400",
+     "text": "Pick the states you have emplo",
+     "rendered": "DM Sans 9pt:234"
+    },
+    {
+     "i": 5,
+     "tag": "h2",
+     "family": "Horas, \"DM Sans\", serif",
+     "weight": "500",
+     "text": "Your business",
+     "rendered": "Horas Med:13"
+    },
+    {
+     "i": 6,
+     "tag": "label",
+     "family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+     "weight": "600",
+     "text": "Employees (W-2 headcount)",
+     "rendered": "DM Sans 9pt:25"
+    }
+   ]
+  },
+  "mobile": {
+   "width": 390,
+   "bodyFamily": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+   "sw": 390,
+   "bsw": 390,
+   "sh": 1799,
+   "title": "Atlas One: HR and Payroll Compliance Calendar",
+   "dmCheck": true,
+   "bodyRendered": "DM Sans 9pt:2",
+   "dmAsked": 4,
+   "dmRendered": 4,
+   "horasAsked": 2,
+   "horasRendered": 2,
+   "serif": 0,
+   "errors": [],
+   "nonFileRequests": [],
+   "samples": [
+    {
+     "i": 0,
+     "tag": "span",
+     "family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+     "weight": "700",
+     "text": "A",
+     "rendered": "DM Sans 9pt:2"
+    },
+    {
+     "i": 1,
+     "tag": "b",
+     "family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+     "weight": "900",
+     "text": "1",
+     "rendered": "DM Sans 9pt:1"
+    },
+    {
+     "i": 2,
+     "tag": "button",
+     "family": "\"DM Sans\"",
+     "weight": "600",
+     "text": "Export .ics",
+     "rendered": "DM Sans 9pt:11"
+    },
+    {
+     "i": 3,
+     "tag": "h1",
+     "family": "Horas, \"DM Sans\", serif",
+     "weight": "500",
+     "text": "HR and payroll compliance cale",
+     "rendered": "Horas Med:33"
+    },
+    {
+     "i": 4,
+     "tag": "p",
+     "family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+     "weight": "400",
+     "text": "Pick the states you have emplo",
+     "rendered": "DM Sans 9pt:230"
+    },
+    {
+     "i": 5,
+     "tag": "h2",
+     "family": "Horas, \"DM Sans\", serif",
+     "weight": "500",
+     "text": "Your business",
+     "rendered": "Horas Med:13"
+    },
+    {
+     "i": 6,
+     "tag": "label",
+     "family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+     "weight": "600",
+     "text": "Employees (W-2 headcount)",
+     "rendered": "DM Sans 9pt:25"
+    }
+   ]
+  }
+ }
+]

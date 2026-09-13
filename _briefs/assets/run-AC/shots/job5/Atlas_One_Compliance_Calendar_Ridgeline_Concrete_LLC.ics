@@ -1,0 +1,755 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Atlas One Solutions//Compliance Calendar//EN
+CALSCALE:GREGORIAN
+X-WR-CALNAME:Compliance calendar: Ridgeline Concrete LLC
+BEGIN:VEVENT
+UID:a1cal-20261015-0@atlasonesolutions.com
+DTSTAMP:20260913T155114Z
+DTSTART;VALUE=DATE:20261015
+DTEND;VALUE=DATE:20261016
+SUMMARY:[Federal] Medicare Part D creditable coverage notice to plan part
+ icipants
+DESCRIPTION:Any employer offering prescription drug coverage. Before Octo
+ ber 15 every year\, plus a disclosure to CMS within 60 days of the plan 
+ year start. Confirm before relying. Settled rule. Source: https://www.cm
+ s.gov/medicare/employers-plan-sponsors/creditable-coverage Prepared by A
+ tlas One Solutions for Ridgeline Concrete LLC.
+URL:https://www.cms.gov/medicare/employers-plan-sponsors/creditable-cover
+ age
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:Medicare Part D creditable coverage notice to plan participan
+ ts due in 7 days
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:a1cal-20261102-1@atlasonesolutions.com
+DTSTAMP:20260913T155114Z
+DTSTART;VALUE=DATE:20261102
+DTEND;VALUE=DATE:20261103
+SUMMARY:[CA] California DE 9 and DE 9C quarterly wage reports (EDD) (for 
+ Q3)
+DESCRIPTION:Due the last day of the month after each quarter through e-Se
+ rvices for Business. Confirm before relying. Settled rule. Source: https
+ ://edd.ca.gov/en/payroll_taxes/required_filings_and_due_dates/ Prepared 
+ by Atlas One Solutions for Ridgeline Concrete LLC.
+URL:https://edd.ca.gov/en/payroll_taxes/required_filings_and_due_dates/
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:California DE 9 and DE 9C quarterly wage reports (EDD) due in
+  7 days
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:a1cal-20261102-2@atlasonesolutions.com
+DTSTAMP:20260913T155114Z
+DTSTART;VALUE=DATE:20261102
+DTEND;VALUE=DATE:20261103
+SUMMARY:[CO] Colorado FAMLI quarterly wage report and premium (for Q3)
+DESCRIPTION:Premium is a percentage of wages split with employees\; emplo
+ yers with fewer than 10 employees remit only the employee share. The rat
+ e is set by the division each year\, verify. Confirm before relying. Ver
+ ify: set each year by the agency. Source: https://famli.colorado.gov/emp
+ loyers Prepared by Atlas One Solutions for Ridgeline Concrete LLC.
+URL:https://famli.colorado.gov/employers
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:Colorado FAMLI quarterly wage report and premium due in 7 day
+ s
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:a1cal-20261102-3@atlasonesolutions.com
+DTSTAMP:20260913T155114Z
+DTSTART;VALUE=DATE:20261102
+DTEND;VALUE=DATE:20261103
+SUMMARY:[CO] Colorado quarterly unemployment premium report (MyUI Employe
+ r+) (for Q3)
+DESCRIPTION:Due the last day of the month after each quarter. Confirm bef
+ ore relying. Settled rule. Source: https://cdle.colorado.gov/employers/u
+ nemployment-insurance Prepared by Atlas One Solutions for Ridgeline Conc
+ rete LLC.
+URL:https://cdle.colorado.gov/employers/unemployment-insurance
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:Colorado quarterly unemployment premium report (MyUI Employer
+ +) due in 7 days
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:a1cal-20261102-4@atlasonesolutions.com
+DTSTAMP:20260913T155114Z
+DTSTART;VALUE=DATE:20261102
+DTEND;VALUE=DATE:20261103
+SUMMARY:[Federal] Form 941 quarterly payroll tax return (for Q3)
+DESCRIPTION:Deposits follow your monthly or semiweekly schedule and are s
+ eparate from the return. Ten extra days if every deposit was on time. Co
+ nfirm before relying. Settled rule. Source: https://www.irs.gov/forms-pu
+ bs/about-form-941 Prepared by Atlas One Solutions for Ridgeline Concrete
+  LLC.
+URL:https://www.irs.gov/forms-pubs/about-form-941
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:Form 941 quarterly payroll tax return due in 7 days
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:a1cal-20261102-5@atlasonesolutions.com
+DTSTAMP:20260913T155114Z
+DTSTART;VALUE=DATE:20261102
+DTEND;VALUE=DATE:20261103
+SUMMARY:[Federal] FUTA deposit if the quarter's liability is over $500 (f
+ or Q3)
+DESCRIPTION:Under $500 carries forward to the next quarter. Pay through E
+ FTPS. Confirm before relying. Settled rule. Source: https://www.irs.gov/
+ businesses/small-businesses-self-employed/depositing-and-reporting-emplo
+ yment-taxes Prepared by Atlas One Solutions for Ridgeline Concrete LLC.
+URL:https://www.irs.gov/businesses/small-businesses-self-employed/deposit
+ ing-and-reporting-employment-taxes
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:FUTA deposit if the quarter's liability is over $500 due in 7
+  days
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:a1cal-20261102-6@atlasonesolutions.com
+DTSTAMP:20260913T155114Z
+DTSTART;VALUE=DATE:20261102
+DTEND;VALUE=DATE:20261103
+SUMMARY:[UT] Utah quarterly unemployment wage report and contribution (Fo
+ rm 33H) (for Q3)
+DESCRIPTION:Due the last day of the month after each quarter through the 
+ Employer Portal. Confirm before relying. Settled rule. Source: https://j
+ obs.utah.gov/ui/employer/employerhome.aspx Prepared by Atlas One Solutio
+ ns for Ridgeline Concrete LLC.
+URL:https://jobs.utah.gov/ui/employer/employerhome.aspx
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:Utah quarterly unemployment wage report and contribution (For
+ m 33H) due in 7 days
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:a1cal-20261116-7@atlasonesolutions.com
+DTSTAMP:20260913T155114Z
+DTSTART;VALUE=DATE:20261116
+DTEND;VALUE=DATE:20261117
+SUMMARY:[Federal] Employer health plan open enrollment and SBC distributi
+ on (plan year start)
+DESCRIPTION:Placeholder for a January plan year: the Summary of Benefits 
+ and Coverage goes out with open enrollment materials. Set to your renewa
+ l date. Confirm before relying. Verify: set each year by the agency. Sou
+ rce: https://www.dol.gov/agencies/ebsa/laws-and-regulations/laws/afforda
+ ble-care-act/for-employers-and-advisers/summary-of-benefits Prepared by 
+ Atlas One Solutions for Ridgeline Concrete LLC.
+URL:https://www.dol.gov/agencies/ebsa/laws-and-regulations/laws/affordabl
+ e-care-act/for-employers-and-advisers/summary-of-benefits
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:Employer health plan open enrollment and SBC distribution (pl
+ an year start) due in 7 days
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:a1cal-20270101-8@atlasonesolutions.com
+DTSTAMP:20260913T155114Z
+DTSTART;VALUE=DATE:20270101
+DTEND;VALUE=DATE:20270102
+SUMMARY:[CA] California minimum wage adjusts January 1 (amount set the pr
+ ior August)
+DESCRIPTION:Statewide CPI adjustment each January 1\; fast food and healt
+ h care sectors have their own higher rates\, and many cities set local r
+ ates on January 1 or July 1. Exempt salary floor moves with it (twice th
+ e minimum wage\, full time). Confirm before relying. Verify: set each ye
+ ar by the agency. Source: https://www.dir.ca.gov/dlse/faq_minimumwage.ht
+ m Prepared by Atlas One Solutions for Ridgeline Concrete LLC.
+URL:https://www.dir.ca.gov/dlse/faq_minimumwage.htm
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:California minimum wage adjusts January 1 (amount set the pri
+ or August) due in 7 days
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:a1cal-20270101-9@atlasonesolutions.com
+DTSTAMP:20260913T155114Z
+DTSTART;VALUE=DATE:20270101
+DTEND;VALUE=DATE:20270102
+SUMMARY:[CO] Colorado minimum wage adjusts January 1 (statewide and Denve
+ r)
+DESCRIPTION:CPI adjustment announced each fall in the new COMPS Order\; D
+ enver and Boulder County set higher local rates. Replace the COMPS poste
+ r the same day. Confirm before relying. Verify: set each year by the age
+ ncy. Source: https://cdle.colorado.gov/wage-and-hour-law/minimum-wage Pr
+ epared by Atlas One Solutions for Ridgeline Concrete LLC.
+URL:https://cdle.colorado.gov/wage-and-hour-law/minimum-wage
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:Colorado minimum wage adjusts January 1 (statewide and Denver
+ ) due in 7 days
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:a1cal-20270115-10@atlasonesolutions.com
+DTSTAMP:20260913T155114Z
+DTSTART;VALUE=DATE:20270115
+DTEND;VALUE=DATE:20270116
+SUMMARY:[CA] California harassment prevention training cycle check
+DESCRIPTION:Employers with 5 or more employees: one hour for nonsuperviso
+ ry and two hours for supervisory staff every two years\, new hires withi
+ n six months. Track each person's two year date\; this line is a reminde
+ r to pull the list. Confirm before relying. Settled rule. Source: https:
+ //calcivilrights.ca.gov/shpt/ Prepared by Atlas One Solutions for Ridgel
+ ine Concrete LLC.
+URL:https://calcivilrights.ca.gov/shpt/
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:California harassment prevention training cycle check due in 
+ 7 days
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:a1cal-20270115-11@atlasonesolutions.com
+DTSTAMP:20260913T155114Z
+DTSTART;VALUE=DATE:20270115
+DTEND;VALUE=DATE:20270116
+SUMMARY:[Federal] Review federal workplace posters for the year (FLSA\, E
+ EO\, OSHA\, EPPA\, USERRA\, FMLA at 50 or more)
+DESCRIPTION:No statutory date\; posters change when the agencies revise t
+ hem. The FMLA poster applies at 50 or more employees. Free from the DOL\
+ , never buy them. Confirm before relying. Settled rule. Source: https://
+ www.dol.gov/general/topics/posters Prepared by Atlas One Solutions for R
+ idgeline Concrete LLC.
+URL:https://www.dol.gov/general/topics/posters
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:Review federal workplace posters for the year (FLSA\, EEO\, O
+ SHA\, EPPA\, USERRA\, FMLA at 50 or more) due in 7 days
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:a1cal-20270115-12@atlasonesolutions.com
+DTSTAMP:20260913T155114Z
+DTSTART;VALUE=DATE:20270115
+DTEND;VALUE=DATE:20270116
+SUMMARY:[UT] Utah workplace poster check (Labor Commission required posti
+ ngs)
+DESCRIPTION:Utah minimum wage follows the federal $7.25\; no annual chang
+ e. Confirm the poster set each January. Confirm before relying. Settled 
+ rule. Source: https://laborcommission.utah.gov/divisions/uald/ Prepared 
+ by Atlas One Solutions for Ridgeline Concrete LLC.
+URL:https://laborcommission.utah.gov/divisions/uald/
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:Utah workplace poster check (Labor Commission required postin
+ gs) due in 7 days
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:a1cal-20270201-13@atlasonesolutions.com
+DTSTAMP:20260913T155114Z
+DTSTART;VALUE=DATE:20270201
+DTEND;VALUE=DATE:20270202
+SUMMARY:[CA] California DE 9 and DE 9C quarterly wage reports (EDD) (for 
+ Q4 of last year)
+DESCRIPTION:Due the last day of the month after each quarter through e-Se
+ rvices for Business. Confirm before relying. Settled rule. Source: https
+ ://edd.ca.gov/en/payroll_taxes/required_filings_and_due_dates/ Prepared 
+ by Atlas One Solutions for Ridgeline Concrete LLC.
+URL:https://edd.ca.gov/en/payroll_taxes/required_filings_and_due_dates/
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:California DE 9 and DE 9C quarterly wage reports (EDD) due in
+  7 days
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:a1cal-20270201-14@atlasonesolutions.com
+DTSTAMP:20260913T155114Z
+DTSTART;VALUE=DATE:20270201
+DTEND;VALUE=DATE:20270202
+SUMMARY:[CA] Cal/OSHA Form 300A posting and workplace violence prevention
+  plan annual review
+DESCRIPTION:Same February 1 to April 30 posting as federal. SB 553 requir
+ es the written workplace violence prevention plan to be reviewed at leas
+ t annually and training given. Confirm before relying. Settled rule. Sou
+ rce: https://www.dir.ca.gov/dosh/ Prepared by Atlas One Solutions for Ri
+ dgeline Concrete LLC.
+URL:https://www.dir.ca.gov/dosh/
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:Cal/OSHA Form 300A posting and workplace violence prevention 
+ plan annual review due in 7 days
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:a1cal-20270201-15@atlasonesolutions.com
+DTSTAMP:20260913T155114Z
+DTSTART;VALUE=DATE:20270201
+DTEND;VALUE=DATE:20270202
+SUMMARY:[CO] Colorado FAMLI quarterly wage report and premium (for Q4 of 
+ last year)
+DESCRIPTION:Premium is a percentage of wages split with employees\; emplo
+ yers with fewer than 10 employees remit only the employee share. The rat
+ e is set by the division each year\, verify. Confirm before relying. Ver
+ ify: set each year by the agency. Source: https://famli.colorado.gov/emp
+ loyers Prepared by Atlas One Solutions for Ridgeline Concrete LLC.
+URL:https://famli.colorado.gov/employers
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:Colorado FAMLI quarterly wage report and premium due in 7 day
+ s
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:a1cal-20270201-16@atlasonesolutions.com
+DTSTAMP:20260913T155114Z
+DTSTART;VALUE=DATE:20270201
+DTEND;VALUE=DATE:20270202
+SUMMARY:[CO] Colorado quarterly unemployment premium report (MyUI Employe
+ r+) (for Q4 of last year)
+DESCRIPTION:Due the last day of the month after each quarter. Confirm bef
+ ore relying. Settled rule. Source: https://cdle.colorado.gov/employers/u
+ nemployment-insurance Prepared by Atlas One Solutions for Ridgeline Conc
+ rete LLC.
+URL:https://cdle.colorado.gov/employers/unemployment-insurance
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:Colorado quarterly unemployment premium report (MyUI Employer
+ +) due in 7 days
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:a1cal-20270201-17@atlasonesolutions.com
+DTSTAMP:20260913T155114Z
+DTSTART;VALUE=DATE:20270201
+DTEND;VALUE=DATE:20270202
+SUMMARY:[Federal] Form W-2 to employees and to the SSA (with W-3)
+DESCRIPTION:Paper or electronic\, same date. Ten or more information retu
+ rns in total must be filed electronically. Confirm before relying. Settl
+ ed rule. Source: https://www.irs.gov/forms-pubs/about-form-w-2 Prepared 
+ by Atlas One Solutions for Ridgeline Concrete LLC.
+URL:https://www.irs.gov/forms-pubs/about-form-w-2
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:Form W-2 to employees and to the SSA (with W-3) due in 7 days
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:a1cal-20270201-18@atlasonesolutions.com
+DTSTAMP:20260913T155114Z
+DTSTART;VALUE=DATE:20270201
+DTEND;VALUE=DATE:20270202
+SUMMARY:[Federal] Form 1099-NEC to contractors and to the IRS
+DESCRIPTION:For nonemployee compensation of $600 or more (the threshold r
+ ises to $2\,000 for payments made in 2026\, verify). Confirm before rely
+ ing. Settled rule. Source: https://www.irs.gov/forms-pubs/about-form-109
+ 9-nec Prepared by Atlas One Solutions for Ridgeline Concrete LLC.
+URL:https://www.irs.gov/forms-pubs/about-form-1099-nec
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:Form 1099-NEC to contractors and to the IRS due in 7 days
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:a1cal-20270201-19@atlasonesolutions.com
+DTSTAMP:20260913T155114Z
+DTSTART;VALUE=DATE:20270201
+DTEND;VALUE=DATE:20270202
+SUMMARY:[Federal] Form 940 annual FUTA return
+DESCRIPTION:Due February 10 if every FUTA deposit was made on time. Confi
+ rm before relying. Settled rule. Source: https://www.irs.gov/forms-pubs/
+ about-form-940 Prepared by Atlas One Solutions for Ridgeline Concrete LL
+ C.
+URL:https://www.irs.gov/forms-pubs/about-form-940
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:Form 940 annual FUTA return due in 7 days
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:a1cal-20270201-20@atlasonesolutions.com
+DTSTAMP:20260913T155114Z
+DTSTART;VALUE=DATE:20270201
+DTEND;VALUE=DATE:20270202
+SUMMARY:[Federal] Form 941 quarterly payroll tax return (for Q4 of last y
+ ear)
+DESCRIPTION:Deposits follow your monthly or semiweekly schedule and are s
+ eparate from the return. Ten extra days if every deposit was on time. Co
+ nfirm before relying. Settled rule. Source: https://www.irs.gov/forms-pu
+ bs/about-form-941 Prepared by Atlas One Solutions for Ridgeline Concrete
+  LLC.
+URL:https://www.irs.gov/forms-pubs/about-form-941
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:Form 941 quarterly payroll tax return due in 7 days
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:a1cal-20270201-21@atlasonesolutions.com
+DTSTAMP:20260913T155114Z
+DTSTART;VALUE=DATE:20270201
+DTEND;VALUE=DATE:20270202
+SUMMARY:[Federal] FUTA deposit if the quarter's liability is over $500 (f
+ or Q4 of last year)
+DESCRIPTION:Under $500 carries forward to the next quarter. Pay through E
+ FTPS. Confirm before relying. Settled rule. Source: https://www.irs.gov/
+ businesses/small-businesses-self-employed/depositing-and-reporting-emplo
+ yment-taxes Prepared by Atlas One Solutions for Ridgeline Concrete LLC.
+URL:https://www.irs.gov/businesses/small-businesses-self-employed/deposit
+ ing-and-reporting-employment-taxes
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:FUTA deposit if the quarter's liability is over $500 due in 7
+  days
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:a1cal-20270201-22@atlasonesolutions.com
+DTSTAMP:20260913T155114Z
+DTSTART;VALUE=DATE:20270201
+DTEND;VALUE=DATE:20270202
+SUMMARY:[Federal] OSHA Form 300A summary posted in the workplace (through
+  April 30) (through 4/30)
+DESCRIPTION:Employers with more than 10 employees at any point last year\
+ , unless the establishment is in a partially exempt low hazard industry.
+  Post from February 1 to April 30. Confirm before relying. Settled rule.
+  Source: https://www.osha.gov/recordkeeping Prepared by Atlas One Soluti
+ ons for Ridgeline Concrete LLC.
+URL:https://www.osha.gov/recordkeeping
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:OSHA Form 300A summary posted in the workplace (through April
+  30) due in 7 days
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:a1cal-20270201-23@atlasonesolutions.com
+DTSTAMP:20260913T155114Z
+DTSTART;VALUE=DATE:20270201
+DTEND;VALUE=DATE:20270202
+SUMMARY:[UT] Utah quarterly unemployment wage report and contribution (Fo
+ rm 33H) (for Q4 of last year)
+DESCRIPTION:Due the last day of the month after each quarter through the 
+ Employer Portal. Confirm before relying. Settled rule. Source: https://j
+ obs.utah.gov/ui/employer/employerhome.aspx Prepared by Atlas One Solutio
+ ns for Ridgeline Concrete LLC.
+URL:https://jobs.utah.gov/ui/employer/employerhome.aspx
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:Utah quarterly unemployment wage report and contribution (For
+ m 33H) due in 7 days
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:a1cal-20270201-24@atlasonesolutions.com
+DTSTAMP:20260913T155114Z
+DTSTART;VALUE=DATE:20270201
+DTEND;VALUE=DATE:20270202
+SUMMARY:[UT] Utah annual withholding reconciliation (TC-941E) and W-2s to
+  the Tax Commission
+DESCRIPTION:Filed electronically through TAP. Confirm before relying. Set
+ tled rule. Source: https://tax.utah.gov/withholding Prepared by Atlas On
+ e Solutions for Ridgeline Concrete LLC.
+URL:https://tax.utah.gov/withholding
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:Utah annual withholding reconciliation (TC-941E) and W-2s to 
+ the Tax Commission due in 7 days
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:a1cal-20270215-25@atlasonesolutions.com
+DTSTAMP:20260913T155114Z
+DTSTART;VALUE=DATE:20270215
+DTEND;VALUE=DATE:20270216
+SUMMARY:[Federal] Form W-4 renewals for employees who claimed exempt last
+  year
+DESCRIPTION:Without a new W-4 by this date\, withhold as single with no a
+ djustments. Confirm before relying. Settled rule. Source: https://www.ir
+ s.gov/publications/p15 Prepared by Atlas One Solutions for Ridgeline Con
+ crete LLC.
+URL:https://www.irs.gov/publications/p15
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:Form W-4 renewals for employees who claimed exempt last year 
+ due in 7 days
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:a1cal-20270302-26@atlasonesolutions.com
+DTSTAMP:20260913T155114Z
+DTSTART;VALUE=DATE:20270302
+DTEND;VALUE=DATE:20270303
+SUMMARY:[Federal] OSHA electronic injury data submission (300A\, and 300 
+ and 301 for larger establishments)
+DESCRIPTION:Establishments with 20 to 249 employees in designated high ha
+ zard industries\, and 250 or more in all recordkeeping industries. Submi
+ t through the ITA. Confirm before relying. Settled rule. Source: https:/
+ /www.osha.gov/injuryreporting Prepared by Atlas One Solutions for Ridgel
+ ine Concrete LLC.
+URL:https://www.osha.gov/injuryreporting
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:OSHA electronic injury data submission (300A\, and 300 and 30
+ 1 for larger establishments) due in 7 days
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:a1cal-20270430-27@atlasonesolutions.com
+DTSTAMP:20260913T155114Z
+DTSTART;VALUE=DATE:20270430
+DTEND;VALUE=DATE:20270501
+SUMMARY:[CA] California DE 9 and DE 9C quarterly wage reports (EDD) (for 
+ Q1)
+DESCRIPTION:Due the last day of the month after each quarter through e-Se
+ rvices for Business. Confirm before relying. Settled rule. Source: https
+ ://edd.ca.gov/en/payroll_taxes/required_filings_and_due_dates/ Prepared 
+ by Atlas One Solutions for Ridgeline Concrete LLC.
+URL:https://edd.ca.gov/en/payroll_taxes/required_filings_and_due_dates/
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:California DE 9 and DE 9C quarterly wage reports (EDD) due in
+  7 days
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:a1cal-20270430-28@atlasonesolutions.com
+DTSTAMP:20260913T155114Z
+DTSTART;VALUE=DATE:20270430
+DTEND;VALUE=DATE:20270501
+SUMMARY:[CO] Colorado FAMLI quarterly wage report and premium (for Q1)
+DESCRIPTION:Premium is a percentage of wages split with employees\; emplo
+ yers with fewer than 10 employees remit only the employee share. The rat
+ e is set by the division each year\, verify. Confirm before relying. Ver
+ ify: set each year by the agency. Source: https://famli.colorado.gov/emp
+ loyers Prepared by Atlas One Solutions for Ridgeline Concrete LLC.
+URL:https://famli.colorado.gov/employers
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:Colorado FAMLI quarterly wage report and premium due in 7 day
+ s
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:a1cal-20270430-29@atlasonesolutions.com
+DTSTAMP:20260913T155114Z
+DTSTART;VALUE=DATE:20270430
+DTEND;VALUE=DATE:20270501
+SUMMARY:[CO] Colorado quarterly unemployment premium report (MyUI Employe
+ r+) (for Q1)
+DESCRIPTION:Due the last day of the month after each quarter. Confirm bef
+ ore relying. Settled rule. Source: https://cdle.colorado.gov/employers/u
+ nemployment-insurance Prepared by Atlas One Solutions for Ridgeline Conc
+ rete LLC.
+URL:https://cdle.colorado.gov/employers/unemployment-insurance
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:Colorado quarterly unemployment premium report (MyUI Employer
+ +) due in 7 days
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:a1cal-20270430-30@atlasonesolutions.com
+DTSTAMP:20260913T155114Z
+DTSTART;VALUE=DATE:20270430
+DTEND;VALUE=DATE:20270501
+SUMMARY:[Federal] Form 941 quarterly payroll tax return (for Q1)
+DESCRIPTION:Deposits follow your monthly or semiweekly schedule and are s
+ eparate from the return. Ten extra days if every deposit was on time. Co
+ nfirm before relying. Settled rule. Source: https://www.irs.gov/forms-pu
+ bs/about-form-941 Prepared by Atlas One Solutions for Ridgeline Concrete
+  LLC.
+URL:https://www.irs.gov/forms-pubs/about-form-941
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:Form 941 quarterly payroll tax return due in 7 days
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:a1cal-20270430-31@atlasonesolutions.com
+DTSTAMP:20260913T155114Z
+DTSTART;VALUE=DATE:20270430
+DTEND;VALUE=DATE:20270501
+SUMMARY:[Federal] FUTA deposit if the quarter's liability is over $500 (f
+ or Q1)
+DESCRIPTION:Under $500 carries forward to the next quarter. Pay through E
+ FTPS. Confirm before relying. Settled rule. Source: https://www.irs.gov/
+ businesses/small-businesses-self-employed/depositing-and-reporting-emplo
+ yment-taxes Prepared by Atlas One Solutions for Ridgeline Concrete LLC.
+URL:https://www.irs.gov/businesses/small-businesses-self-employed/deposit
+ ing-and-reporting-employment-taxes
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:FUTA deposit if the quarter's liability is over $500 due in 7
+  days
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:a1cal-20270430-32@atlasonesolutions.com
+DTSTAMP:20260913T155114Z
+DTSTART;VALUE=DATE:20270430
+DTEND;VALUE=DATE:20270501
+SUMMARY:[UT] Utah quarterly unemployment wage report and contribution (Fo
+ rm 33H) (for Q1)
+DESCRIPTION:Due the last day of the month after each quarter through the 
+ Employer Portal. Confirm before relying. Settled rule. Source: https://j
+ obs.utah.gov/ui/employer/employerhome.aspx Prepared by Atlas One Solutio
+ ns for Ridgeline Concrete LLC.
+URL:https://jobs.utah.gov/ui/employer/employerhome.aspx
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:Utah quarterly unemployment wage report and contribution (For
+ m 33H) due in 7 days
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:a1cal-20270802-33@atlasonesolutions.com
+DTSTAMP:20260913T155114Z
+DTSTART;VALUE=DATE:20270802
+DTEND;VALUE=DATE:20270803
+SUMMARY:[CA] California DE 9 and DE 9C quarterly wage reports (EDD) (for 
+ Q2)
+DESCRIPTION:Due the last day of the month after each quarter through e-Se
+ rvices for Business. Confirm before relying. Settled rule. Source: https
+ ://edd.ca.gov/en/payroll_taxes/required_filings_and_due_dates/ Prepared 
+ by Atlas One Solutions for Ridgeline Concrete LLC.
+URL:https://edd.ca.gov/en/payroll_taxes/required_filings_and_due_dates/
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:California DE 9 and DE 9C quarterly wage reports (EDD) due in
+  7 days
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:a1cal-20270802-34@atlasonesolutions.com
+DTSTAMP:20260913T155114Z
+DTSTART;VALUE=DATE:20270802
+DTEND;VALUE=DATE:20270803
+SUMMARY:[CO] Colorado FAMLI quarterly wage report and premium (for Q2)
+DESCRIPTION:Premium is a percentage of wages split with employees\; emplo
+ yers with fewer than 10 employees remit only the employee share. The rat
+ e is set by the division each year\, verify. Confirm before relying. Ver
+ ify: set each year by the agency. Source: https://famli.colorado.gov/emp
+ loyers Prepared by Atlas One Solutions for Ridgeline Concrete LLC.
+URL:https://famli.colorado.gov/employers
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:Colorado FAMLI quarterly wage report and premium due in 7 day
+ s
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:a1cal-20270802-35@atlasonesolutions.com
+DTSTAMP:20260913T155114Z
+DTSTART;VALUE=DATE:20270802
+DTEND;VALUE=DATE:20270803
+SUMMARY:[CO] Colorado quarterly unemployment premium report (MyUI Employe
+ r+) (for Q2)
+DESCRIPTION:Due the last day of the month after each quarter. Confirm bef
+ ore relying. Settled rule. Source: https://cdle.colorado.gov/employers/u
+ nemployment-insurance Prepared by Atlas One Solutions for Ridgeline Conc
+ rete LLC.
+URL:https://cdle.colorado.gov/employers/unemployment-insurance
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:Colorado quarterly unemployment premium report (MyUI Employer
+ +) due in 7 days
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:a1cal-20270802-36@atlasonesolutions.com
+DTSTAMP:20260913T155114Z
+DTSTART;VALUE=DATE:20270802
+DTEND;VALUE=DATE:20270803
+SUMMARY:[Federal] Form 941 quarterly payroll tax return (for Q2)
+DESCRIPTION:Deposits follow your monthly or semiweekly schedule and are s
+ eparate from the return. Ten extra days if every deposit was on time. Co
+ nfirm before relying. Settled rule. Source: https://www.irs.gov/forms-pu
+ bs/about-form-941 Prepared by Atlas One Solutions for Ridgeline Concrete
+  LLC.
+URL:https://www.irs.gov/forms-pubs/about-form-941
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:Form 941 quarterly payroll tax return due in 7 days
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:a1cal-20270802-37@atlasonesolutions.com
+DTSTAMP:20260913T155114Z
+DTSTART;VALUE=DATE:20270802
+DTEND;VALUE=DATE:20270803
+SUMMARY:[Federal] FUTA deposit if the quarter's liability is over $500 (f
+ or Q2)
+DESCRIPTION:Under $500 carries forward to the next quarter. Pay through E
+ FTPS. Confirm before relying. Settled rule. Source: https://www.irs.gov/
+ businesses/small-businesses-self-employed/depositing-and-reporting-emplo
+ yment-taxes Prepared by Atlas One Solutions for Ridgeline Concrete LLC.
+URL:https://www.irs.gov/businesses/small-businesses-self-employed/deposit
+ ing-and-reporting-employment-taxes
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:FUTA deposit if the quarter's liability is over $500 due in 7
+  days
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:a1cal-20270802-38@atlasonesolutions.com
+DTSTAMP:20260913T155114Z
+DTSTART;VALUE=DATE:20270802
+DTEND;VALUE=DATE:20270803
+SUMMARY:[UT] Utah quarterly unemployment wage report and contribution (Fo
+ rm 33H) (for Q2)
+DESCRIPTION:Due the last day of the month after each quarter through the 
+ Employer Portal. Confirm before relying. Settled rule. Source: https://j
+ obs.utah.gov/ui/employer/employerhome.aspx Prepared by Atlas One Solutio
+ ns for Ridgeline Concrete LLC.
+URL:https://jobs.utah.gov/ui/employer/employerhome.aspx
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:Utah quarterly unemployment wage report and contribution (For
+ m 33H) due in 7 days
+END:VALARM
+END:VEVENT
+END:VCALENDAR

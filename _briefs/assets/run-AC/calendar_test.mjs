@@ -1,0 +1,20 @@
+import { chromium } from '/Users/davidtaylor/.npm/_npx/e41f203b7505f1fb/node_modules/playwright/index.mjs';
+import fs from 'fs'; import path from 'path';
+const [file, outdir] = process.argv.slice(2); fs.mkdirSync(outdir, { recursive: true });
+const br = await chromium.launch(); const ctx = await br.newContext({ viewport: { width: 1440, height: 1000 }, acceptDownloads: true }); const pg = await ctx.newPage();
+const errs = []; pg.on('pageerror', e => errs.push(e.message)); pg.on('dialog', d => { errs.push('dialog ' + d.message()); d.dismiss(); });
+await pg.route('**/*', r => /^(file|data|blob):/.test(r.request().url()) ? r.continue() : r.abort());
+await pg.goto('file://' + file);
+await pg.fill('#ee', '24'); await pg.selectOption('#ben', 'ins'); await pg.fill('#co', 'Ridgeline Concrete LLC');
+for (const s of ['UT', 'CA', 'CO']) await pg.click(`.chip[data-st="${s}"]`);
+await pg.waitForTimeout(200);
+const r = await pg.evaluate(() => ({ count: document.getElementById('count').textContent, summary: document.getElementById('summary').textContent, first: [...document.querySelectorAll('.ev')].slice(0, 6).map(e => e.querySelector('.dt').textContent.replace(/\s+/g, ' ') + ' :: ' + e.querySelector('.t').textContent), months: [...document.querySelectorAll('.month h3')].map(h => h.textContent), standing: document.querySelectorAll('#stand table').length }));
+console.log(r.summary, '|', r.count); console.log(r.months.join(', ')); r.first.forEach(x => console.log('  ', x)); console.log('standing tables', r.standing);
+await pg.screenshot({ path: path.join(outdir, 'calendar_1440_filled.png'), fullPage: false });
+const dlP = pg.waitForEvent('download'); await pg.click('#btnIcs'); const dl = await dlP; const t = path.join(outdir, dl.suggestedFilename()); await dl.saveAs(t);
+const ics = fs.readFileSync(t, 'utf8'); console.log('ics', dl.suggestedFilename(), ics.length, 'bytes, VEVENTs', (ics.match(/BEGIN:VEVENT/g) || []).length, 'CRLF', ics.includes('\r\n'));
+console.log(ics.split('\r\n').slice(0, 16).join('\n'));
+// 50-employee ALE check
+await pg.fill('#ee', '120'); await pg.waitForTimeout(150); console.log('120 employees ->', await pg.evaluate(() => document.getElementById('count').textContent));
+await pg.selectOption('#show', 'verify'); await pg.waitForTimeout(150); console.log('verify only ->', await pg.evaluate(() => document.getElementById('count').textContent));
+console.log('errors', errs); await br.close();
