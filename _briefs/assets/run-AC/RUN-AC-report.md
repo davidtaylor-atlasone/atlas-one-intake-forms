@@ -91,7 +91,7 @@ Where asked and drawn differ by one or two, the misses are symbol glyphs DM Sans
 
 ## Repo
 
-`repo` (atlas-one-intake-forms, main, pushed): commits `b413d26` (job 0), `01abed8` (1), `a05d7c6` (2 shots), `0e44989` (3), `8b3c2a6` (4), `0a1eefe` (5), `2fc9d93` (6), `aeaaefb` (7), `b929cd9` (8), `ce73ad0` (9), `06d80bf` (10), then the job 11 commit carrying this report. `portal` (atlas-one-portal, main, pushed): `f15de1b` (job 2 kit), then the CI fix and the lockfile commit; CI run 34768232726 green.
+`repo` (atlas-one-intake-forms, main, pushed): commits `b413d26` (job 0), `01abed8` (1), `a05d7c6` (2 shots), `0e44989` (3), `8b3c2a6` (4), `0a1eefe` (5), `2fc9d93` (6), `aeaaefb` (7), `b929cd9` (8), `ce73ad0` (9), `06d80bf` (10), then `7efc799` (job 11, this report). `portal` (atlas-one-portal, main, pushed): `f15de1b` (job 2 kit), then the CI fix and the lockfile commit; CI run 34768232726 green.
 
 Files in `repo:_briefs/assets/run-AC/`: `log.sh`, `verify.mjs`, `embedfonts2.py`, `job1-embed-log.jsonl`, `portal-fontcheck.mjs`, `cockpit_deck10.js`, `cockpit_export_test.mjs`, `pptx2html.py` + `deckshots.mjs` + `fontfaces.css`, `a1shell.py` + `fonts/`, `build_routing_tool.py`, `routing_scenarios.mjs`, `build_compliance_calendar.py`, `calendar_test.mjs`, `build_coi_tracker.py`, `coi_test.mjs`, `build_marketplace_catalog.py`, `census_v2_patch.py`, `census_test.mjs`, `hub_add.py` + `hub_rows_job*.json`, `toolshub_add.py` + `toolshub_rows_job*.json`, `hubcheck.mjs`, `toolshub_check.mjs`, `portal_help_test.mjs`, `portal-builder/`, copies of the three markdown deliverables, `shots/`.
 
