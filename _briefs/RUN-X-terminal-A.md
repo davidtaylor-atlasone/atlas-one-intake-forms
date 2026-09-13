@@ -71,3 +71,12 @@ Run R closeout (form ids, URLs, workflow ids, fields created, questions).
   Part 1, Part 2, or Run R. Confirmed by curl that all four Part 2 / Run Q tool URLs now return 200 (time-savings
   included), so Part 2 item 4 is unblocked once GHL access works. Full detail in
   `<Master_Kit>/_BUILD-LOG/RUN-X-report.md` ("needs login" at top).
+- **2026-09-13 (RUN AD, GHL terminal), stopped before any edits ("needs login").** Run AD's Part 0 called
+  `tabs_context_mcp` first as instructed; it found no existing tab group and no tabs for this session at all, so
+  there was no pre-existing app.ridethehightide.com tab to reuse (this session's MCP tab tools only see tabs
+  inside its own group, which starts empty every run). Created one tab and navigated straight to the app root on
+  the chance the browser-level session was already active; after load it rendered GHL's sign-in form, not the app
+  shell. Per standing rules, no credentials entered, no login attempted. Stopped before the dead UI click test,
+  Part 1, Part 2, Run R, and the Part 4 copy pass. Full detail and open questions (including whether this
+  session's tab tools can ever see a tab opened outside its own MCP group) in
+  `<Master_Kit>/_BUILD-LOG/RUN-GHL-report.md` ("needs login" at top).
