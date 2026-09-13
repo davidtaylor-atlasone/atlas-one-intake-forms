@@ -55,7 +55,7 @@ The twelve `CAL/` files in the table, `Atlas One PORTAL.html` (rebuilt) and this
 
 ## Repo
 
-`repo:_briefs/assets/run-AB/`: `embedfonts.py`, `fontcheck.mjs`, `portal-fontcheck.mjs`, `_patch-log.jsonl`, `shots/` (36 tool renders, 2 Portal renders, 2 JSON logs) and a copy of this report. One commit on main, pushed (hash in the commit line below).
+`repo:_briefs/assets/run-AB/`: `embedfonts.py`, `fontcheck.mjs`, `portal-fontcheck.mjs`, `_patch-log.jsonl`, `shots/` (36 tool renders, 2 Portal renders, 2 JSON logs) and a copy of this report. One commit on main, `2fcab6b`, pushed.
 
 ## Assumptions
 
