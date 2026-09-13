@@ -1,0 +1,184 @@
+{
+ "title": "Atlas One Portal: build Sep 13, 2026 9:20 AM",
+ "stamp": "BUILD Sep 13, 2026  9:20 AM",
+ "tools": [
+  {
+   "label": "nda_builder",
+   "id": "t23",
+   "innerTitle": "NDA Builder: Atlas One Solutions",
+   "bodyFamily": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\",",
+   "dmLoaded": true,
+   "dmAsked": 13,
+   "dmRendered": 12,
+   "serifRendered": 0,
+   "probes": [
+    {
+     "i": 0,
+     "tag": "b",
+     "family": "\"DM Sans\", -apple-system, system-ui, \"Segoe UI\", R",
+     "weight": "700",
+     "text": "Want it done for you?",
+     "rendered": "DM Sans:21"
+    },
+    {
+     "i": 1,
+     "tag": "span",
+     "family": "\"DM Sans\", -apple-system, system-ui, \"Segoe UI\", R",
+     "weight": "400",
+     "text": "or call 385-213-7177",
+     "rendered": "DM Sans:20"
+    },
+    {
+     "i": 2,
+     "tag": "h1",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\",",
+     "weight": "700",
+     "text": "NDA Builder",
+     "rendered": "DM Sans:11"
+    },
+    {
+     "i": 3,
+     "tag": "p",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\",",
+     "weight": "500",
+     "text": "Atlas One Solutions · Custom",
+     "rendered": "DM Sans Medium:43"
+    },
+    {
+     "i": 4,
+     "tag": "span",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\",",
+     "weight": "700",
+     "text": "★",
+     "rendered": ".SF NS (system):1"
+    },
+    {
+     "i": 5,
+     "tag": "strong",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\",",
+     "weight": "700",
+     "text": "This is a premium custom-bui",
+     "rendered": "DM Sans:36"
+    },
+    {
+     "i": 6,
+     "tag": "button",
+     "family": "Arial",
+     "weight": "700",
+     "text": "Get a custom-built version →",
+     "rendered": "Arial (system):28"
+    },
+    {
+     "i": 7,
+     "tag": "span",
+     "family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+     "weight": "700",
+     "text": "Save your work",
+     "rendered": "DM Sans:14"
+    },
+    {
+     "i": 8,
+     "tag": "button",
+     "family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+     "weight": "700",
+     "text": "Save build",
+     "rendered": "DM Sans:10"
+    },
+    {
+     "i": 9,
+     "tag": "label",
+     "family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+     "weight": "700",
+     "text": "Add your company logo",
+     "rendered": "DM Sans:21"
+    },
+    {
+     "i": 10,
+     "tag": "label",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\",",
+     "weight": "600",
+     "text": "Choose NDA structure",
+     "rendered": "DM Sans:20"
+    },
+    {
+     "i": 11,
+     "tag": "small",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\",",
+     "weight": "500",
+     "text": "Requires return or destructi",
+     "rendered": "DM Sans Medium:56"
+    },
+    {
+     "i": 12,
+     "tag": "button",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\",",
+     "weight": "600",
+     "text": "Custom version",
+     "rendered": "DM Sans:14"
+    },
+    {
+     "i": 13,
+     "tag": "h2",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\",",
+     "weight": "700",
+     "text": "MUTUAL NON-DISCLOSURE AGREEM",
+     "rendered": "DM Sans:31"
+    }
+   ]
+  },
+  {
+   "label": "compliance_scorecard",
+   "id": "t16",
+   "innerTitle": "Compliance Risk Scorecard: Atlas One Solutions",
+   "bodyFamily": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\",",
+   "dmLoaded": true,
+   "dmAsked": 5,
+   "dmRendered": 5,
+   "serifRendered": 0,
+   "probes": [
+    {
+     "i": 0,
+     "tag": "span",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\",",
+     "weight": "700",
+     "text": "…",
+     "rendered": "DM Sans:1"
+    },
+    {
+     "i": 1,
+     "tag": "h1",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\",",
+     "weight": "700",
+     "text": "How compliant is your busine",
+     "rendered": "DM Sans:39"
+    },
+    {
+     "i": 2,
+     "tag": "button",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\",",
+     "weight": "700",
+     "text": "Print / Save as PDF",
+     "rendered": "DM Sans:19"
+    },
+    {
+     "i": 3,
+     "tag": "p",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\",",
+     "weight": "400",
+     "text": "Answer a few quick questions",
+     "rendered": "DM Sans:201"
+    },
+    {
+     "i": 4,
+     "tag": "h2",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\",",
+     "weight": "700",
+     "text": "Wage & Hour",
+     "rendered": "DM Sans:11"
+    }
+   ]
+  }
+ ],
+ "errors": [],
+ "nonFileRequests": []
+}
