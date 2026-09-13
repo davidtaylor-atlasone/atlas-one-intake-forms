@@ -27,6 +27,9 @@ Source of truth for most files is the Master Kit on OneDrive; find it with
    `/Users/davidtaylor/.npm/_npx/e41f203b7505f1fb/node_modules/playwright/index.mjs`), screenshots into
    `_briefs/assets/run-<X>/shots/`. Every tool must work offline on iPhone, iPad and desktop: `scrollWidth` equals the
    viewport at 390 px, no console errors, no network requests other than `file://`.
+8. **Always write reports and logs with a quoted heredoc (`<<'EOF'`) or a file write tool, never an unquoted
+   heredoc.** An unquoted heredoc lets the shell expand `$` inside the text, so dollar amounts like `$99` or `$0`
+   get silently swallowed or replaced with command output (this happened to RUN-AC-report.md).
 
 ## Brand rules (every HTML tool)
 
