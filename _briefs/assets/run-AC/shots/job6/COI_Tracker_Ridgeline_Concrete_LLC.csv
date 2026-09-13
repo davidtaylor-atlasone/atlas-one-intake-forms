@@ -1,0 +1,6 @@
+name,trade,email,phone,gl_on_file,gl_expires,wc_on_file,wc_expires,waiver_signed,hold,notes,status
+Summit Electrical LLC,Electrical,office@summitelec.com,801 555 0172,yes,2027-04-01,yes,2027-07-10,yes,auto,,Clear
+Wasatch Plumbing,Plumbing,ap@wasatchplumbing.com,,yes,2026-09-25,yes,2027-04-01,yes,auto,,Expiring
+Dahl Framing,Framing,marcus@dahlframing.com,,yes,2026-09-08,no,,no,auto,,Hold payment
+Peak Drywall,Drywall,,,no,,yes,2027-04-01,yes,release,,Missing
+Canyon Roofing,Roofing,x@canyonroof.com,,yes,2027-04-01,yes,2027-04-01,yes,hold,,Hold payment

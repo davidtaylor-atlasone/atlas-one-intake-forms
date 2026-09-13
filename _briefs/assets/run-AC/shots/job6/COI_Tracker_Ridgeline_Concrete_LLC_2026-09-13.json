@@ -1,0 +1,87 @@
+{
+ "app": "Atlas One COI Tracker",
+ "version": 1,
+ "saved": "2026-09-13T15:56:11.582Z",
+ "data": {
+  "gc": "Ridgeline Concrete LLC",
+  "proj": "Job 2041 Lehi warehouse",
+  "me": "Jenna Ruiz",
+  "mec": "jenna@ridgelineconcrete.com",
+  "win": "30",
+  "reqGL": "1",
+  "reqWC": "1",
+  "reqWV": "1",
+  "subs": [
+   {
+    "id": "a",
+    "name": "Summit Electrical LLC",
+    "trade": "Electrical",
+    "email": "office@summitelec.com",
+    "phone": "801 555 0172",
+    "gl": "yes",
+    "glx": "2027-04-01",
+    "wc": "yes",
+    "wcx": "2027-07-10",
+    "wv": "yes",
+    "hold": "auto",
+    "notes": ""
+   },
+   {
+    "id": "b",
+    "name": "Wasatch Plumbing",
+    "trade": "Plumbing",
+    "email": "ap@wasatchplumbing.com",
+    "phone": "",
+    "gl": "yes",
+    "glx": "2026-09-25",
+    "wc": "yes",
+    "wcx": "2027-04-01",
+    "wv": "yes",
+    "hold": "auto",
+    "notes": ""
+   },
+   {
+    "id": "c",
+    "name": "Dahl Framing",
+    "trade": "Framing",
+    "email": "marcus@dahlframing.com",
+    "phone": "",
+    "gl": "yes",
+    "glx": "2026-09-08",
+    "wc": "no",
+    "wcx": "",
+    "wv": "no",
+    "hold": "auto",
+    "notes": ""
+   },
+   {
+    "id": "d",
+    "name": "Peak Drywall",
+    "trade": "Drywall",
+    "email": "",
+    "phone": "",
+    "gl": "no",
+    "glx": "",
+    "wc": "yes",
+    "wcx": "2027-04-01",
+    "wv": "yes",
+    "hold": "release",
+    "notes": ""
+   },
+   {
+    "id": "e",
+    "name": "Canyon Roofing",
+    "trade": "Roofing",
+    "email": "x@canyonroof.com",
+    "phone": "",
+    "gl": "yes",
+    "glx": "2027-04-01",
+    "wc": "yes",
+    "wcx": "2027-04-01",
+    "wv": "yes",
+    "hold": "hold",
+    "notes": ""
+   }
+  ]
+ }
+}
