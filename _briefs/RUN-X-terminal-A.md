@@ -1,5 +1,15 @@
 ## Progress log
 
+- **2026-09-12 (later session), stopped before any edits ("needs Chrome restart").** User confirmed GHL was
+  already logged in and responsive. Direct nav to `/workflows` still hit the same "click here to refresh" then
+  blank-page Firebase-permissions failure as the prior attempt. Navigating to the app root instead worked and
+  landed on a fully interactive Dashboard; clicking into Automation loaded the Workflows list shell and table with
+  real data. But the workflows table (cross-origin iframe) did not respond to any click — tried the "Call: not
+  now" row at three offsets, the "Needs review" tab, and "Create workflow", all with zero effect. Did the one
+  allowed Cmd+R on that page and retried; still dead. Per the dead UI rule, stopped the whole batch before Part 1,
+  Part 2, or Run R. Re-verified outside the browser that the Part 2 item 4 URL still 404s and `GHL_BUILD_FORM` is
+  still unset. Full detail, including a narrower diagnosis than the account-wide Firebase failures seen before,
+  in `<Master_Kit>/_BUILD-LOG/RUN-X-report.md` ("needs Chrome restart" at top).
 - **2026-09-12, stopped before any edits ("needs Chrome restart").** Copied this brief in, then ran the standing
   dead-UI click test on the Workflows list before starting Part 1: the app stuck on GHL's own loading spinner past
   20s, then the "click here to refresh" screen (never clicked). Did the one allowed Cmd+R; the page went fully
