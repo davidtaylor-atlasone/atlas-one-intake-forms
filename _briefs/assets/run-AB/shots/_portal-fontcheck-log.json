@@ -1,0 +1,208 @@
+{
+ "title": "Atlas One Portal: build Sep 13, 2026 8:27 AM",
+ "stamp": "BUILD Sep 13, 2026  8:27 AM",
+ "tools": [
+  {
+   "label": "time_savings",
+   "id": "t13",
+   "innerTitle": "Atlas One: Time & Cost Savings Discovery",
+   "bodyFamily": "\"DM Sans\", system-ui, sans-serif",
+   "dmLoaded": true,
+   "dmAsked": 8,
+   "dmRendered": 8,
+   "serifRendered": 0,
+   "probes": [
+    {
+     "i": 0,
+     "tag": "span",
+     "family": "\"DM Sans\"",
+     "weight": "700",
+     "text": "A",
+     "rendered": "DM Sans:2"
+    },
+    {
+     "i": 1,
+     "tag": "b",
+     "family": "\"DM Sans\"",
+     "weight": "900",
+     "text": "1",
+     "rendered": "DM Sans:1"
+    },
+    {
+     "i": 2,
+     "tag": "button",
+     "family": "Arial",
+     "weight": "600",
+     "text": "Print / Save PDF",
+     "rendered": "Arial (system):16"
+    },
+    {
+     "i": 3,
+     "tag": "h1",
+     "family": "Horas, \"DM Sans\", serif",
+     "weight": "500",
+     "text": "What are they doing by hand ",
+     "rendered": "Horas Med:34"
+    },
+    {
+     "i": 4,
+     "tag": "p",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "400",
+     "text": "Fill this in with the prospe",
+     "rendered": "DM Sans:119"
+    },
+    {
+     "i": 5,
+     "tag": "span",
+     "family": "Horas",
+     "weight": "400",
+     "text": "8,785",
+     "rendered": "Horas Med:5"
+    },
+    {
+     "i": 6,
+     "tag": "label",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "600",
+     "text": "Pay runs per year",
+     "rendered": "DM Sans:17"
+    },
+    {
+     "i": 7,
+     "tag": "h2",
+     "family": "Horas, \"DM Sans\", serif",
+     "weight": "500",
+     "text": "Manual tasks & time",
+     "rendered": "Horas Med:19"
+    },
+    {
+     "i": 8,
+     "tag": "th",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "700",
+     "text": "Task done manually today",
+     "rendered": "DM Sans:24"
+    },
+    {
+     "i": 9,
+     "tag": "td",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "400",
+     "text": "39",
+     "rendered": "DM Sans:2"
+    },
+    {
+     "i": 10,
+     "tag": "span",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "700",
+     "text": "+ Add a task",
+     "rendered": "DM Sans:12"
+    },
+    {
+     "i": 11,
+     "tag": "b",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "700",
+     "text": "How to use this in a meeting",
+     "rendered": "DM Sans:29"
+    }
+   ]
+  },
+  {
+   "label": "savings_summary",
+   "id": "t1",
+   "innerTitle": "Your Atlas One Savings Summary",
+   "bodyFamily": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", s",
+   "dmLoaded": true,
+   "dmAsked": 10,
+   "dmRendered": 10,
+   "serifRendered": 0,
+   "probes": [
+    {
+     "i": 0,
+     "tag": "h1",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", s",
+     "weight": "700",
+     "text": "Your Atlas One Savings Summa",
+     "rendered": "DM Sans:30"
+    },
+    {
+     "i": 1,
+     "tag": "p",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", s",
+     "weight": "400",
+     "text": "Answer the questions below a",
+     "rendered": "DM Sans:158"
+    },
+    {
+     "i": 2,
+     "tag": "small",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", s",
+     "weight": "500",
+     "text": "Estimated annual savings opp",
+     "rendered": "DM Sans Medium:36"
+    },
+    {
+     "i": 3,
+     "tag": "strong",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", s",
+     "weight": "700",
+     "text": "$2,679 per employee per year",
+     "rendered": "DM Sans:28"
+    },
+    {
+     "i": 4,
+     "tag": "span",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", s",
+     "weight": "700",
+     "text": "1",
+     "rendered": "DM Sans:1"
+    },
+    {
+     "i": 5,
+     "tag": "label",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", s",
+     "weight": "500",
+     "text": "Full-time employees",
+     "rendered": "DM Sans Medium:19"
+    },
+    {
+     "i": 6,
+     "tag": "h2",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", s",
+     "weight": "700",
+     "text": "Where the savings come from",
+     "rendered": "DM Sans:27"
+    },
+    {
+     "i": 7,
+     "tag": "p",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "400",
+     "text": "We'll send this summary to y",
+     "rendered": "DM Sans:134"
+    },
+    {
+     "i": 8,
+     "tag": "button",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "600",
+     "text": "Email my results",
+     "rendered": "DM Sans:16"
+    },
+    {
+     "i": 9,
+     "tag": "button",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", s",
+     "weight": "600",
+     "text": "Print / save as PDF",
+     "rendered": "DM Sans:19"
+    }
+   ]
+  }
+ ],
+ "errors": [],
+ "nonFileRequests": []
+}

@@ -1,0 +1,3299 @@
+[
+ {
+  "file": "Atlas One Business Tools (17 generators).html",
+  "A": {
+   "mode": "A",
+   "bodyFamily": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, A",
+   "bodyRendered": ".SF NS (system):48",
+   "dmAsked": 9,
+   "dmRendered": 0,
+   "dmMissed": [
+    "body:.SF NS (system):227",
+    "span:.SF NS (system):48",
+    "p:.SF NS (system):130",
+    "button:.SF NS (system):14",
+    "label:.SF NS (system):12",
+    "h3:Helvetica (system):10",
+    "b:.SF NS (system):17",
+    "th:.SF NS (system):11",
+    "td:.SF NS (system):18"
+   ],
+   "serifRendered": 0,
+   "serifSamples": [],
+   "sw": 1440,
+   "sh": 1728,
+   "elements": 275,
+   "errors": [],
+   "nonFileRequests": [
+    "https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&d"
+   ],
+   "samples": [
+    {
+     "i": 0,
+     "tag": "body",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, A",
+     "weight": "400",
+     "text": "",
+     "rendered": ".SF NS (system):227"
+    },
+    {
+     "i": 1,
+     "tag": "span",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, A",
+     "weight": "400",
+     "text": "Free Business Tools · One Call",
+     "rendered": ".SF NS (system):48"
+    },
+    {
+     "i": 2,
+     "tag": "p",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, A",
+     "weight": "400",
+     "text": "Add your logo and company deta",
+     "rendered": ".SF NS (system):130"
+    },
+    {
+     "i": 3,
+     "tag": "button",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, A",
+     "weight": "600",
+     "text": "Clear branding",
+     "rendered": ".SF NS (system):14"
+    },
+    {
+     "i": 4,
+     "tag": "label",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, A",
+     "weight": "600",
+     "text": "Company name",
+     "rendered": ".SF NS (system):12"
+    },
+    {
+     "i": 5,
+     "tag": "h3",
+     "family": "\"DM Sans\", sans-serif",
+     "weight": "700",
+     "text": "Generators",
+     "rendered": "Helvetica (system):10"
+    },
+    {
+     "i": 6,
+     "tag": "h2",
+     "family": "Horas, Georgia, serif",
+     "weight": "700",
+     "text": "Invoice Maker",
+     "rendered": "Horas Med:13"
+    },
+    {
+     "i": 7,
+     "tag": "button",
+     "family": "Arial",
+     "weight": "400",
+     "text": "×",
+     "rendered": "Arial (system):1"
+    },
+    {
+     "i": 8,
+     "tag": "b",
+     "family": "Horas, serif",
+     "weight": "700",
+     "text": "INVOICE",
+     "rendered": "Horas Med:7"
+    },
+    {
+     "i": 9,
+     "tag": "b",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, A",
+     "weight": "700",
+     "text": "Your Business Name",
+     "rendered": ".SF NS (system):17"
+    },
+    {
+     "i": 10,
+     "tag": "th",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, A",
+     "weight": "600",
+     "text": "Description",
+     "rendered": ".SF NS (system):11"
+    },
+    {
+     "i": 11,
+     "tag": "td",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, A",
+     "weight": "400",
+     "text": "Service or product",
+     "rendered": ".SF NS (system):18"
+    }
+   ]
+  },
+  "B": {
+   "mode": "B",
+   "bodyFamily": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, A",
+   "bodyRendered": "DM Sans:48",
+   "dmAsked": 9,
+   "dmRendered": 9,
+   "dmMissed": [],
+   "serifRendered": 0,
+   "serifSamples": [],
+   "sw": 1440,
+   "sh": 1790,
+   "elements": 275,
+   "errors": [],
+   "nonFileRequests": [
+    "https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&d"
+   ],
+   "samples": [
+    {
+     "i": 0,
+     "tag": "body",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, A",
+     "weight": "400",
+     "text": "",
+     "rendered": "DM Sans:227"
+    },
+    {
+     "i": 1,
+     "tag": "span",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, A",
+     "weight": "400",
+     "text": "Free Business Tools · One Call",
+     "rendered": "DM Sans:48"
+    },
+    {
+     "i": 2,
+     "tag": "p",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, A",
+     "weight": "400",
+     "text": "Add your logo and company deta",
+     "rendered": "DM Sans:130"
+    },
+    {
+     "i": 3,
+     "tag": "button",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, A",
+     "weight": "600",
+     "text": "Clear branding",
+     "rendered": "DM Sans:14"
+    },
+    {
+     "i": 4,
+     "tag": "label",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, A",
+     "weight": "600",
+     "text": "Company name",
+     "rendered": "DM Sans:12"
+    },
+    {
+     "i": 5,
+     "tag": "h3",
+     "family": "\"DM Sans\", sans-serif",
+     "weight": "700",
+     "text": "Generators",
+     "rendered": "DM Sans:10"
+    },
+    {
+     "i": 6,
+     "tag": "h2",
+     "family": "Horas, Georgia, serif",
+     "weight": "700",
+     "text": "Invoice Maker",
+     "rendered": "Horas Med:13"
+    },
+    {
+     "i": 7,
+     "tag": "button",
+     "family": "Arial",
+     "weight": "400",
+     "text": "×",
+     "rendered": "Arial (system):1"
+    },
+    {
+     "i": 8,
+     "tag": "b",
+     "family": "Horas, serif",
+     "weight": "700",
+     "text": "INVOICE",
+     "rendered": "Horas Med:7"
+    },
+    {
+     "i": 9,
+     "tag": "b",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, A",
+     "weight": "700",
+     "text": "Your Business Name",
+     "rendered": "DM Sans:17"
+    },
+    {
+     "i": 10,
+     "tag": "th",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, A",
+     "weight": "600",
+     "text": "Description",
+     "rendered": "DM Sans:11"
+    },
+    {
+     "i": 11,
+     "tag": "td",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, A",
+     "weight": "400",
+     "text": "Service or product",
+     "rendered": "DM Sans:18"
+    }
+   ]
+  },
+  "C": {
+   "mode": "C",
+   "bodyFamily": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, A",
+   "bodyRendered": "DM Sans:48",
+   "dmAsked": 9,
+   "dmRendered": 9,
+   "dmMissed": [],
+   "serifRendered": 0,
+   "serifSamples": [],
+   "sw": 1440,
+   "sh": 1790,
+   "elements": 275,
+   "errors": [],
+   "nonFileRequests": [],
+   "samples": [
+    {
+     "i": 0,
+     "tag": "body",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, A",
+     "weight": "400",
+     "text": "",
+     "rendered": "DM Sans:227"
+    },
+    {
+     "i": 1,
+     "tag": "span",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, A",
+     "weight": "400",
+     "text": "Free Business Tools · One Call",
+     "rendered": "DM Sans:48"
+    },
+    {
+     "i": 2,
+     "tag": "p",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, A",
+     "weight": "400",
+     "text": "Add your logo and company deta",
+     "rendered": "DM Sans:130"
+    },
+    {
+     "i": 3,
+     "tag": "button",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, A",
+     "weight": "600",
+     "text": "Clear branding",
+     "rendered": "DM Sans:14"
+    },
+    {
+     "i": 4,
+     "tag": "label",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, A",
+     "weight": "600",
+     "text": "Company name",
+     "rendered": "DM Sans:12"
+    },
+    {
+     "i": 5,
+     "tag": "h3",
+     "family": "\"DM Sans\", sans-serif",
+     "weight": "700",
+     "text": "Generators",
+     "rendered": "DM Sans:10"
+    },
+    {
+     "i": 6,
+     "tag": "h2",
+     "family": "Horas, Georgia, serif",
+     "weight": "700",
+     "text": "Invoice Maker",
+     "rendered": "Horas Med:13"
+    },
+    {
+     "i": 7,
+     "tag": "button",
+     "family": "Arial",
+     "weight": "400",
+     "text": "×",
+     "rendered": "Arial (system):1"
+    },
+    {
+     "i": 8,
+     "tag": "b",
+     "family": "Horas, serif",
+     "weight": "700",
+     "text": "INVOICE",
+     "rendered": "Horas Med:7"
+    },
+    {
+     "i": 9,
+     "tag": "b",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, A",
+     "weight": "700",
+     "text": "Your Business Name",
+     "rendered": "DM Sans:17"
+    },
+    {
+     "i": 10,
+     "tag": "th",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, A",
+     "weight": "600",
+     "text": "Description",
+     "rendered": "DM Sans:11"
+    },
+    {
+     "i": 11,
+     "tag": "td",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, A",
+     "weight": "400",
+     "text": "Service or product",
+     "rendered": "DM Sans:18"
+    }
+   ]
+  },
+  "layout_B_equals_C": true,
+  "layout_diff_elements": 0,
+  "A_body_rendered": ".SF NS (system):48",
+  "C_body_rendered": "DM Sans:48"
+ },
+ {
+  "file": "Atlas One Savings Summary (Atlas One).html",
+  "A": {
+   "mode": "A",
+   "bodyFamily": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+   "bodyRendered": ".SF NS (system):30",
+   "dmAsked": 12,
+   "dmRendered": 0,
+   "dmMissed": [
+    "h1:.SF NS (system):30",
+    "p:.SF NS (system):160",
+    "small:.SF NS (system):36",
+    "strong:.SF NS (system):28",
+    "span:.SF NS (system):1",
+    "label:.SF NS (system):19",
+    "h2:.SF NS (system):27",
+    "p:.SF NS (system):134",
+    "button:.SF NS (system):16",
+    "a:.SF NS (system):26",
+    "a:.SF NS (system):21",
+    "button:.SF NS (system):19"
+   ],
+   "serifRendered": 0,
+   "serifSamples": [],
+   "sw": 1440,
+   "sh": 3508,
+   "elements": 287,
+   "errors": [],
+   "nonFileRequests": [
+    "https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&d"
+   ],
+   "samples": [
+    {
+     "i": 0,
+     "tag": "body",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+     "weight": "400",
+     "text": "",
+     "rendered": ""
+    },
+    {
+     "i": 1,
+     "tag": "h1",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+     "weight": "700",
+     "text": "Your Atlas One Savings Summary",
+     "rendered": ".SF NS (system):30"
+    },
+    {
+     "i": 2,
+     "tag": "p",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+     "weight": "400",
+     "text": "Answer the questions below and",
+     "rendered": ".SF NS (system):160"
+    },
+    {
+     "i": 3,
+     "tag": "small",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+     "weight": "500",
+     "text": "Estimated annual savings oppor",
+     "rendered": ".SF NS (system):36"
+    },
+    {
+     "i": 4,
+     "tag": "strong",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+     "weight": "700",
+     "text": "$2,679 per employee per year",
+     "rendered": ".SF NS (system):28"
+    },
+    {
+     "i": 5,
+     "tag": "span",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+     "weight": "700",
+     "text": "1",
+     "rendered": ".SF NS (system):1"
+    },
+    {
+     "i": 6,
+     "tag": "label",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+     "weight": "500",
+     "text": "Full-time employees",
+     "rendered": ".SF NS (system):19"
+    },
+    {
+     "i": 7,
+     "tag": "h2",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+     "weight": "700",
+     "text": "Where the savings come from",
+     "rendered": ".SF NS (system):27"
+    },
+    {
+     "i": 8,
+     "tag": "p",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "400",
+     "text": "We'll send this summary to you",
+     "rendered": ".SF NS (system):134"
+    },
+    {
+     "i": 9,
+     "tag": "button",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "600",
+     "text": "Email my results",
+     "rendered": ".SF NS (system):16"
+    },
+    {
+     "i": 10,
+     "tag": "a",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "600",
+     "text": "or book a 15-minute call →",
+     "rendered": ".SF NS (system):26"
+    },
+    {
+     "i": 11,
+     "tag": "a",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+     "weight": "600",
+     "text": "Book a 15-minute call",
+     "rendered": ".SF NS (system):21"
+    },
+    {
+     "i": 12,
+     "tag": "button",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+     "weight": "600",
+     "text": "Print / save as PDF",
+     "rendered": ".SF NS (system):19"
+    }
+   ]
+  },
+  "B": {
+   "mode": "B",
+   "bodyFamily": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+   "bodyRendered": "DM Sans:30",
+   "dmAsked": 12,
+   "dmRendered": 10,
+   "dmMissed": [
+    "small:DM Sans Medium:36",
+    "label:DM Sans Medium:19"
+   ],
+   "serifRendered": 0,
+   "serifSamples": [],
+   "sw": 1440,
+   "sh": 3493,
+   "elements": 287,
+   "errors": [],
+   "nonFileRequests": [
+    "https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&d"
+   ],
+   "samples": [
+    {
+     "i": 0,
+     "tag": "body",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+     "weight": "400",
+     "text": "",
+     "rendered": ""
+    },
+    {
+     "i": 1,
+     "tag": "h1",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+     "weight": "700",
+     "text": "Your Atlas One Savings Summary",
+     "rendered": "DM Sans:30"
+    },
+    {
+     "i": 2,
+     "tag": "p",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+     "weight": "400",
+     "text": "Answer the questions below and",
+     "rendered": "DM Sans:158"
+    },
+    {
+     "i": 3,
+     "tag": "small",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+     "weight": "500",
+     "text": "Estimated annual savings oppor",
+     "rendered": "DM Sans Medium:36"
+    },
+    {
+     "i": 4,
+     "tag": "strong",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+     "weight": "700",
+     "text": "$2,679 per employee per year",
+     "rendered": "DM Sans:28"
+    },
+    {
+     "i": 5,
+     "tag": "span",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+     "weight": "700",
+     "text": "1",
+     "rendered": "DM Sans:1"
+    },
+    {
+     "i": 6,
+     "tag": "label",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+     "weight": "500",
+     "text": "Full-time employees",
+     "rendered": "DM Sans Medium:19"
+    },
+    {
+     "i": 7,
+     "tag": "h2",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+     "weight": "700",
+     "text": "Where the savings come from",
+     "rendered": "DM Sans:27"
+    },
+    {
+     "i": 8,
+     "tag": "p",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "400",
+     "text": "We'll send this summary to you",
+     "rendered": "DM Sans:134"
+    },
+    {
+     "i": 9,
+     "tag": "button",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "600",
+     "text": "Email my results",
+     "rendered": "DM Sans:16"
+    },
+    {
+     "i": 10,
+     "tag": "a",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "600",
+     "text": "or book a 15-minute call →",
+     "rendered": "DM Sans:26"
+    },
+    {
+     "i": 11,
+     "tag": "a",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+     "weight": "600",
+     "text": "Book a 15-minute call",
+     "rendered": "DM Sans:21"
+    },
+    {
+     "i": 12,
+     "tag": "button",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+     "weight": "600",
+     "text": "Print / save as PDF",
+     "rendered": "DM Sans:19"
+    }
+   ]
+  },
+  "C": {
+   "mode": "C",
+   "bodyFamily": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+   "bodyRendered": "DM Sans:30",
+   "dmAsked": 12,
+   "dmRendered": 10,
+   "dmMissed": [
+    "small:DM Sans Medium:36",
+    "label:DM Sans Medium:19"
+   ],
+   "serifRendered": 0,
+   "serifSamples": [],
+   "sw": 1440,
+   "sh": 3493,
+   "elements": 287,
+   "errors": [],
+   "nonFileRequests": [],
+   "samples": [
+    {
+     "i": 0,
+     "tag": "body",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+     "weight": "400",
+     "text": "",
+     "rendered": ""
+    },
+    {
+     "i": 1,
+     "tag": "h1",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+     "weight": "700",
+     "text": "Your Atlas One Savings Summary",
+     "rendered": "DM Sans:30"
+    },
+    {
+     "i": 2,
+     "tag": "p",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+     "weight": "400",
+     "text": "Answer the questions below and",
+     "rendered": "DM Sans:158"
+    },
+    {
+     "i": 3,
+     "tag": "small",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+     "weight": "500",
+     "text": "Estimated annual savings oppor",
+     "rendered": "DM Sans Medium:36"
+    },
+    {
+     "i": 4,
+     "tag": "strong",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+     "weight": "700",
+     "text": "$2,679 per employee per year",
+     "rendered": "DM Sans:28"
+    },
+    {
+     "i": 5,
+     "tag": "span",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+     "weight": "700",
+     "text": "1",
+     "rendered": "DM Sans:1"
+    },
+    {
+     "i": 6,
+     "tag": "label",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+     "weight": "500",
+     "text": "Full-time employees",
+     "rendered": "DM Sans Medium:19"
+    },
+    {
+     "i": 7,
+     "tag": "h2",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+     "weight": "700",
+     "text": "Where the savings come from",
+     "rendered": "DM Sans:27"
+    },
+    {
+     "i": 8,
+     "tag": "p",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "400",
+     "text": "We'll send this summary to you",
+     "rendered": "DM Sans:134"
+    },
+    {
+     "i": 9,
+     "tag": "button",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "600",
+     "text": "Email my results",
+     "rendered": "DM Sans:16"
+    },
+    {
+     "i": 10,
+     "tag": "a",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "600",
+     "text": "or book a 15-minute call →",
+     "rendered": "DM Sans:26"
+    },
+    {
+     "i": 11,
+     "tag": "a",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+     "weight": "600",
+     "text": "Book a 15-minute call",
+     "rendered": "DM Sans:21"
+    },
+    {
+     "i": 12,
+     "tag": "button",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+     "weight": "600",
+     "text": "Print / save as PDF",
+     "rendered": "DM Sans:19"
+    }
+   ]
+  },
+  "layout_B_equals_C": true,
+  "layout_diff_elements": 0,
+  "A_body_rendered": ".SF NS (system):30",
+  "C_body_rendered": "DM Sans:30"
+ },
+ {
+  "file": "Atlas_One_Collections_Letter.html",
+  "A": {
+   "mode": "A",
+   "bodyFamily": "\"DM Sans\", system-ui, sans-serif",
+   "bodyRendered": ".SF NS (system):12",
+   "dmAsked": 4,
+   "dmRendered": 0,
+   "dmMissed": [
+    "label:.SF NS (system):12",
+    "p:.SF NS (system):89",
+    "b:.SF NS (system):23",
+    "td:.SF NS (system):7"
+   ],
+   "serifRendered": 2,
+   "serifSamples": [
+    "span:Times (system):2",
+    "b:Times (system):1"
+   ],
+   "sw": 1440,
+   "sh": 900,
+   "elements": 88,
+   "errors": [],
+   "nonFileRequests": [
+    "https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9"
+   ],
+   "samples": [
+    {
+     "i": 0,
+     "tag": "body",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "400",
+     "text": "",
+     "rendered": ""
+    },
+    {
+     "i": 1,
+     "tag": "span",
+     "family": "\"DM Sans\"",
+     "weight": "700",
+     "text": "A",
+     "rendered": "Times (system):2"
+    },
+    {
+     "i": 2,
+     "tag": "b",
+     "family": "\"DM Sans\"",
+     "weight": "900",
+     "text": "1",
+     "rendered": "Times (system):1"
+    },
+    {
+     "i": 3,
+     "tag": "button",
+     "family": "Arial",
+     "weight": "600",
+     "text": "Print / Save PDF",
+     "rendered": "Arial (system):16"
+    },
+    {
+     "i": 4,
+     "tag": "label",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "600",
+     "text": "Letter stage",
+     "rendered": ".SF NS (system):12"
+    },
+    {
+     "i": 5,
+     "tag": "p",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "400",
+     "text": "Not legal advice. For serious ",
+     "rendered": ".SF NS (system):89"
+    },
+    {
+     "i": 6,
+     "tag": "b",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "700",
+     "text": "Customer Name / Company",
+     "rendered": ".SF NS (system):23"
+    },
+    {
+     "i": 7,
+     "tag": "td",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "400",
+     "text": "Invoice",
+     "rendered": ".SF NS (system):7"
+    },
+    {
+     "i": 8,
+     "tag": "td",
+     "family": "Horas",
+     "weight": "700",
+     "text": "$0.00",
+     "rendered": "Horas Med:5"
+    }
+   ]
+  },
+  "B": {
+   "mode": "B",
+   "bodyFamily": "\"DM Sans\", system-ui, sans-serif",
+   "bodyRendered": "DM Sans:12",
+   "dmAsked": 4,
+   "dmRendered": 4,
+   "dmMissed": [],
+   "serifRendered": 0,
+   "serifSamples": [],
+   "sw": 1440,
+   "sh": 900,
+   "elements": 88,
+   "errors": [],
+   "nonFileRequests": [
+    "https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9"
+   ],
+   "samples": [
+    {
+     "i": 0,
+     "tag": "body",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "400",
+     "text": "",
+     "rendered": ""
+    },
+    {
+     "i": 1,
+     "tag": "span",
+     "family": "\"DM Sans\"",
+     "weight": "700",
+     "text": "A",
+     "rendered": "DM Sans:2"
+    },
+    {
+     "i": 2,
+     "tag": "b",
+     "family": "\"DM Sans\"",
+     "weight": "900",
+     "text": "1",
+     "rendered": "DM Sans:1"
+    },
+    {
+     "i": 3,
+     "tag": "button",
+     "family": "Arial",
+     "weight": "600",
+     "text": "Print / Save PDF",
+     "rendered": "Arial (system):16"
+    },
+    {
+     "i": 4,
+     "tag": "label",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "600",
+     "text": "Letter stage",
+     "rendered": "DM Sans:12"
+    },
+    {
+     "i": 5,
+     "tag": "p",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "400",
+     "text": "Not legal advice. For serious ",
+     "rendered": "DM Sans:89"
+    },
+    {
+     "i": 6,
+     "tag": "b",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "700",
+     "text": "Customer Name / Company",
+     "rendered": "DM Sans:23"
+    },
+    {
+     "i": 7,
+     "tag": "td",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "400",
+     "text": "Invoice",
+     "rendered": "DM Sans:7"
+    },
+    {
+     "i": 8,
+     "tag": "td",
+     "family": "Horas",
+     "weight": "700",
+     "text": "$0.00",
+     "rendered": "Horas Med:5"
+    }
+   ]
+  },
+  "C": {
+   "mode": "C",
+   "bodyFamily": "\"DM Sans\", system-ui, sans-serif",
+   "bodyRendered": "DM Sans:12",
+   "dmAsked": 4,
+   "dmRendered": 4,
+   "dmMissed": [],
+   "serifRendered": 0,
+   "serifSamples": [],
+   "sw": 1440,
+   "sh": 900,
+   "elements": 88,
+   "errors": [],
+   "nonFileRequests": [],
+   "samples": [
+    {
+     "i": 0,
+     "tag": "body",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "400",
+     "text": "",
+     "rendered": ""
+    },
+    {
+     "i": 1,
+     "tag": "span",
+     "family": "\"DM Sans\"",
+     "weight": "700",
+     "text": "A",
+     "rendered": "DM Sans:2"
+    },
+    {
+     "i": 2,
+     "tag": "b",
+     "family": "\"DM Sans\"",
+     "weight": "900",
+     "text": "1",
+     "rendered": "DM Sans:1"
+    },
+    {
+     "i": 3,
+     "tag": "button",
+     "family": "Arial",
+     "weight": "600",
+     "text": "Print / Save PDF",
+     "rendered": "Arial (system):16"
+    },
+    {
+     "i": 4,
+     "tag": "label",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "600",
+     "text": "Letter stage",
+     "rendered": "DM Sans:12"
+    },
+    {
+     "i": 5,
+     "tag": "p",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "400",
+     "text": "Not legal advice. For serious ",
+     "rendered": "DM Sans:89"
+    },
+    {
+     "i": 6,
+     "tag": "b",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "700",
+     "text": "Customer Name / Company",
+     "rendered": "DM Sans:23"
+    },
+    {
+     "i": 7,
+     "tag": "td",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "400",
+     "text": "Invoice",
+     "rendered": "DM Sans:7"
+    },
+    {
+     "i": 8,
+     "tag": "td",
+     "family": "Horas",
+     "weight": "700",
+     "text": "$0.00",
+     "rendered": "Horas Med:5"
+    }
+   ]
+  },
+  "layout_B_equals_C": true,
+  "layout_diff_elements": 0,
+  "A_body_rendered": ".SF NS (system):12",
+  "C_body_rendered": "DM Sans:12"
+ },
+ {
+  "file": "Atlas_One_Feedback_Request.html",
+  "A": {
+   "mode": "A",
+   "bodyFamily": "\"DM Sans\", system-ui, sans-serif",
+   "bodyRendered": ".SF NS (system):13",
+   "dmAsked": 5,
+   "dmRendered": 0,
+   "dmMissed": [
+    "label:.SF NS (system):13",
+    "p:.SF NS (system):113",
+    "a:.SF NS (system):22",
+    "b:.SF NS (system):18",
+    "span:.SF NS (system):14"
+   ],
+   "serifRendered": 2,
+   "serifSamples": [
+    "span:Times (system):2",
+    "b:Times (system):1"
+   ],
+   "sw": 1440,
+   "sh": 900,
+   "elements": 52,
+   "errors": [],
+   "nonFileRequests": [
+    "https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9"
+   ],
+   "samples": [
+    {
+     "i": 0,
+     "tag": "body",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "400",
+     "text": "",
+     "rendered": ""
+    },
+    {
+     "i": 1,
+     "tag": "span",
+     "family": "\"DM Sans\"",
+     "weight": "700",
+     "text": "A",
+     "rendered": "Times (system):2"
+    },
+    {
+     "i": 2,
+     "tag": "b",
+     "family": "\"DM Sans\"",
+     "weight": "900",
+     "text": "1",
+     "rendered": "Times (system):1"
+    },
+    {
+     "i": 3,
+     "tag": "button",
+     "family": "Arial",
+     "weight": "600",
+     "text": "Print / Save PDF",
+     "rendered": "Arial (system):16"
+    },
+    {
+     "i": 4,
+     "tag": "label",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "600",
+     "text": "Your business",
+     "rendered": ".SF NS (system):13"
+    },
+    {
+     "i": 5,
+     "tag": "p",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "400",
+     "text": "Hand it over on the job, print",
+     "rendered": ".SF NS (system):113"
+    },
+    {
+     "i": 6,
+     "tag": "a",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "700",
+     "text": "Leave a quick review →",
+     "rendered": ".SF NS (system):22"
+    },
+    {
+     "i": 7,
+     "tag": "b",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "700",
+     "text": "Your Business Name",
+     "rendered": ".SF NS (system):18"
+    },
+    {
+     "i": 8,
+     "tag": "span",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "400",
+     "text": "(000) 000-0000",
+     "rendered": ".SF NS (system):14"
+    }
+   ]
+  },
+  "B": {
+   "mode": "B",
+   "bodyFamily": "\"DM Sans\", system-ui, sans-serif",
+   "bodyRendered": "DM Sans:13",
+   "dmAsked": 5,
+   "dmRendered": 5,
+   "dmMissed": [],
+   "serifRendered": 0,
+   "serifSamples": [],
+   "sw": 1440,
+   "sh": 900,
+   "elements": 52,
+   "errors": [],
+   "nonFileRequests": [
+    "https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9"
+   ],
+   "samples": [
+    {
+     "i": 0,
+     "tag": "body",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "400",
+     "text": "",
+     "rendered": ""
+    },
+    {
+     "i": 1,
+     "tag": "span",
+     "family": "\"DM Sans\"",
+     "weight": "700",
+     "text": "A",
+     "rendered": "DM Sans:2"
+    },
+    {
+     "i": 2,
+     "tag": "b",
+     "family": "\"DM Sans\"",
+     "weight": "900",
+     "text": "1",
+     "rendered": "DM Sans:1"
+    },
+    {
+     "i": 3,
+     "tag": "button",
+     "family": "Arial",
+     "weight": "600",
+     "text": "Print / Save PDF",
+     "rendered": "Arial (system):16"
+    },
+    {
+     "i": 4,
+     "tag": "label",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "600",
+     "text": "Your business",
+     "rendered": "DM Sans:13"
+    },
+    {
+     "i": 5,
+     "tag": "p",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "400",
+     "text": "Hand it over on the job, print",
+     "rendered": "DM Sans:113"
+    },
+    {
+     "i": 6,
+     "tag": "a",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "700",
+     "text": "Leave a quick review →",
+     "rendered": "DM Sans:22"
+    },
+    {
+     "i": 7,
+     "tag": "b",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "700",
+     "text": "Your Business Name",
+     "rendered": "DM Sans:18"
+    },
+    {
+     "i": 8,
+     "tag": "span",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "400",
+     "text": "(000) 000-0000",
+     "rendered": "DM Sans:14"
+    }
+   ]
+  },
+  "C": {
+   "mode": "C",
+   "bodyFamily": "\"DM Sans\", system-ui, sans-serif",
+   "bodyRendered": "DM Sans:13",
+   "dmAsked": 5,
+   "dmRendered": 5,
+   "dmMissed": [],
+   "serifRendered": 0,
+   "serifSamples": [],
+   "sw": 1440,
+   "sh": 900,
+   "elements": 52,
+   "errors": [],
+   "nonFileRequests": [],
+   "samples": [
+    {
+     "i": 0,
+     "tag": "body",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "400",
+     "text": "",
+     "rendered": ""
+    },
+    {
+     "i": 1,
+     "tag": "span",
+     "family": "\"DM Sans\"",
+     "weight": "700",
+     "text": "A",
+     "rendered": "DM Sans:2"
+    },
+    {
+     "i": 2,
+     "tag": "b",
+     "family": "\"DM Sans\"",
+     "weight": "900",
+     "text": "1",
+     "rendered": "DM Sans:1"
+    },
+    {
+     "i": 3,
+     "tag": "button",
+     "family": "Arial",
+     "weight": "600",
+     "text": "Print / Save PDF",
+     "rendered": "Arial (system):16"
+    },
+    {
+     "i": 4,
+     "tag": "label",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "600",
+     "text": "Your business",
+     "rendered": "DM Sans:13"
+    },
+    {
+     "i": 5,
+     "tag": "p",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "400",
+     "text": "Hand it over on the job, print",
+     "rendered": "DM Sans:113"
+    },
+    {
+     "i": 6,
+     "tag": "a",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "700",
+     "text": "Leave a quick review →",
+     "rendered": "DM Sans:22"
+    },
+    {
+     "i": 7,
+     "tag": "b",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "700",
+     "text": "Your Business Name",
+     "rendered": "DM Sans:18"
+    },
+    {
+     "i": 8,
+     "tag": "span",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "400",
+     "text": "(000) 000-0000",
+     "rendered": "DM Sans:14"
+    }
+   ]
+  },
+  "layout_B_equals_C": true,
+  "layout_diff_elements": 0,
+  "A_body_rendered": ".SF NS (system):13",
+  "C_body_rendered": "DM Sans:13"
+ },
+ {
+  "file": "Atlas_One_Scan_ID.html",
+  "A": {
+   "mode": "A",
+   "bodyFamily": "\"DM Sans\", system-ui, sans-serif",
+   "bodyRendered": ".SF NS (system):153, .SF NS (system):19",
+   "dmAsked": 3,
+   "dmRendered": 0,
+   "dmMissed": [
+    "p:.SF NS (system):153, .SF NS (system):19",
+    "b:.SF NS (system):19",
+    "label:.SF NS (system):10"
+   ],
+   "serifRendered": 3,
+   "serifSamples": [
+    "span:Times (system):2",
+    "b:Times (system):1",
+    "button:Times (system):37, Apple Color Emoji (system):1"
+   ],
+   "sw": 1440,
+   "sh": 900,
+   "elements": 42,
+   "errors": [],
+   "nonFileRequests": [
+    "https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9",
+    "https://cdnjs.cloudflare.com/ajax/libs/zxing-library/0.21.3/umd/index.min.js"
+   ],
+   "samples": [
+    {
+     "i": 0,
+     "tag": "body",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "400",
+     "text": "",
+     "rendered": ""
+    },
+    {
+     "i": 1,
+     "tag": "span",
+     "family": "\"DM Sans\"",
+     "weight": "700",
+     "text": "A",
+     "rendered": "Times (system):2"
+    },
+    {
+     "i": 2,
+     "tag": "b",
+     "family": "\"DM Sans\"",
+     "weight": "900",
+     "text": "1",
+     "rendered": "Times (system):1"
+    },
+    {
+     "i": 3,
+     "tag": "button",
+     "family": "\"DM Sans\"",
+     "weight": "700",
+     "text": "📷 Scan driver's license (back",
+     "rendered": "Times (system):37, Apple Color Emoji (system):1"
+    },
+    {
+     "i": 4,
+     "tag": "p",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "400",
+     "text": "Point your phone camera at the",
+     "rendered": ".SF NS (system):153, .SF NS (system):19"
+    },
+    {
+     "i": 5,
+     "tag": "b",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "700",
+     "text": "barcode on the back",
+     "rendered": ".SF NS (system):19"
+    },
+    {
+     "i": 6,
+     "tag": "label",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "600",
+     "text": "First name",
+     "rendered": ".SF NS (system):10"
+    }
+   ]
+  },
+  "B": {
+   "mode": "B",
+   "bodyFamily": "\"DM Sans\", system-ui, sans-serif",
+   "bodyRendered": "DM Sans:153, DM Sans:19",
+   "dmAsked": 3,
+   "dmRendered": 3,
+   "dmMissed": [],
+   "serifRendered": 0,
+   "serifSamples": [],
+   "sw": 1440,
+   "sh": 900,
+   "elements": 42,
+   "errors": [],
+   "nonFileRequests": [
+    "https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9",
+    "https://cdnjs.cloudflare.com/ajax/libs/zxing-library/0.21.3/umd/index.min.js"
+   ],
+   "samples": [
+    {
+     "i": 0,
+     "tag": "body",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "400",
+     "text": "",
+     "rendered": ""
+    },
+    {
+     "i": 1,
+     "tag": "span",
+     "family": "\"DM Sans\"",
+     "weight": "700",
+     "text": "A",
+     "rendered": "DM Sans:2"
+    },
+    {
+     "i": 2,
+     "tag": "b",
+     "family": "\"DM Sans\"",
+     "weight": "900",
+     "text": "1",
+     "rendered": "DM Sans:1"
+    },
+    {
+     "i": 3,
+     "tag": "button",
+     "family": "\"DM Sans\"",
+     "weight": "700",
+     "text": "📷 Scan driver's license (back",
+     "rendered": "DM Sans:37, Apple Color Emoji (system):1"
+    },
+    {
+     "i": 4,
+     "tag": "p",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "400",
+     "text": "Point your phone camera at the",
+     "rendered": "DM Sans:153, DM Sans:19"
+    },
+    {
+     "i": 5,
+     "tag": "b",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "700",
+     "text": "barcode on the back",
+     "rendered": "DM Sans:19"
+    },
+    {
+     "i": 6,
+     "tag": "label",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "600",
+     "text": "First name",
+     "rendered": "DM Sans:10"
+    }
+   ]
+  },
+  "C": {
+   "mode": "C",
+   "bodyFamily": "\"DM Sans\", system-ui, sans-serif",
+   "bodyRendered": "DM Sans:153, DM Sans:19",
+   "dmAsked": 3,
+   "dmRendered": 3,
+   "dmMissed": [],
+   "serifRendered": 0,
+   "serifSamples": [],
+   "sw": 1440,
+   "sh": 900,
+   "elements": 42,
+   "errors": [],
+   "nonFileRequests": [
+    "https://cdnjs.cloudflare.com/ajax/libs/zxing-library/0.21.3/umd/index.min.js"
+   ],
+   "samples": [
+    {
+     "i": 0,
+     "tag": "body",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "400",
+     "text": "",
+     "rendered": ""
+    },
+    {
+     "i": 1,
+     "tag": "span",
+     "family": "\"DM Sans\"",
+     "weight": "700",
+     "text": "A",
+     "rendered": "DM Sans:2"
+    },
+    {
+     "i": 2,
+     "tag": "b",
+     "family": "\"DM Sans\"",
+     "weight": "900",
+     "text": "1",
+     "rendered": "DM Sans:1"
+    },
+    {
+     "i": 3,
+     "tag": "button",
+     "family": "\"DM Sans\"",
+     "weight": "700",
+     "text": "📷 Scan driver's license (back",
+     "rendered": "DM Sans:37, Apple Color Emoji (system):1"
+    },
+    {
+     "i": 4,
+     "tag": "p",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "400",
+     "text": "Point your phone camera at the",
+     "rendered": "DM Sans:153, DM Sans:19"
+    },
+    {
+     "i": 5,
+     "tag": "b",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "700",
+     "text": "barcode on the back",
+     "rendered": "DM Sans:19"
+    },
+    {
+     "i": 6,
+     "tag": "label",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "600",
+     "text": "First name",
+     "rendered": "DM Sans:10"
+    }
+   ]
+  },
+  "layout_B_equals_C": true,
+  "layout_diff_elements": 0,
+  "A_body_rendered": ".SF NS (system):153, .SF NS (system):19",
+  "C_body_rendered": "DM Sans:153, DM Sans:19"
+ },
+ {
+  "file": "Atlas_One_Time_Savings_Discovery.html",
+  "A": {
+   "mode": "A",
+   "bodyFamily": "\"DM Sans\", system-ui, sans-serif",
+   "bodyRendered": ".SF NS (system):119",
+   "dmAsked": 6,
+   "dmRendered": 0,
+   "dmMissed": [
+    "p:.SF NS (system):119",
+    "label:.SF NS (system):17",
+    "th:.SF NS (system):24",
+    "td:.SF NS (system):2",
+    "span:.SF NS (system):12",
+    "b:.SF NS (system):29"
+   ],
+   "serifRendered": 2,
+   "serifSamples": [
+    "span:Times (system):2",
+    "b:Times (system):1"
+   ],
+   "sw": 1440,
+   "sh": 1426,
+   "elements": 279,
+   "errors": [],
+   "nonFileRequests": [
+    "https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9"
+   ],
+   "samples": [
+    {
+     "i": 0,
+     "tag": "body",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "400",
+     "text": "",
+     "rendered": ""
+    },
+    {
+     "i": 1,
+     "tag": "span",
+     "family": "\"DM Sans\"",
+     "weight": "700",
+     "text": "A",
+     "rendered": "Times (system):2"
+    },
+    {
+     "i": 2,
+     "tag": "b",
+     "family": "\"DM Sans\"",
+     "weight": "900",
+     "text": "1",
+     "rendered": "Times (system):1"
+    },
+    {
+     "i": 3,
+     "tag": "button",
+     "family": "Arial",
+     "weight": "600",
+     "text": "Print / Save PDF",
+     "rendered": "Arial (system):16"
+    },
+    {
+     "i": 4,
+     "tag": "h1",
+     "family": "Horas, \"DM Sans\", serif",
+     "weight": "500",
+     "text": "What are they doing by hand to",
+     "rendered": "Horas Med:34"
+    },
+    {
+     "i": 5,
+     "tag": "p",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "400",
+     "text": "Fill this in with the prospect",
+     "rendered": ".SF NS (system):119"
+    },
+    {
+     "i": 6,
+     "tag": "span",
+     "family": "Horas",
+     "weight": "400",
+     "text": "8,785",
+     "rendered": "Horas Med:5"
+    },
+    {
+     "i": 7,
+     "tag": "label",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "600",
+     "text": "Pay runs per year",
+     "rendered": ".SF NS (system):17"
+    },
+    {
+     "i": 8,
+     "tag": "h2",
+     "family": "Horas, \"DM Sans\", serif",
+     "weight": "500",
+     "text": "Manual tasks & time",
+     "rendered": "Horas Med:19"
+    },
+    {
+     "i": 9,
+     "tag": "th",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "700",
+     "text": "Task done manually today",
+     "rendered": ".SF NS (system):24"
+    },
+    {
+     "i": 10,
+     "tag": "td",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "400",
+     "text": "39",
+     "rendered": ".SF NS (system):2"
+    },
+    {
+     "i": 11,
+     "tag": "span",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "700",
+     "text": "+ Add a task",
+     "rendered": ".SF NS (system):12"
+    },
+    {
+     "i": 12,
+     "tag": "b",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "700",
+     "text": "How to use this in a meeting:",
+     "rendered": ".SF NS (system):29"
+    }
+   ]
+  },
+  "B": {
+   "mode": "B",
+   "bodyFamily": "\"DM Sans\", system-ui, sans-serif",
+   "bodyRendered": "DM Sans:119",
+   "dmAsked": 6,
+   "dmRendered": 6,
+   "dmMissed": [],
+   "serifRendered": 0,
+   "serifSamples": [],
+   "sw": 1440,
+   "sh": 1468,
+   "elements": 279,
+   "errors": [],
+   "nonFileRequests": [
+    "https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9"
+   ],
+   "samples": [
+    {
+     "i": 0,
+     "tag": "body",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "400",
+     "text": "",
+     "rendered": ""
+    },
+    {
+     "i": 1,
+     "tag": "span",
+     "family": "\"DM Sans\"",
+     "weight": "700",
+     "text": "A",
+     "rendered": "DM Sans:2"
+    },
+    {
+     "i": 2,
+     "tag": "b",
+     "family": "\"DM Sans\"",
+     "weight": "900",
+     "text": "1",
+     "rendered": "DM Sans:1"
+    },
+    {
+     "i": 3,
+     "tag": "button",
+     "family": "Arial",
+     "weight": "600",
+     "text": "Print / Save PDF",
+     "rendered": "Arial (system):16"
+    },
+    {
+     "i": 4,
+     "tag": "h1",
+     "family": "Horas, \"DM Sans\", serif",
+     "weight": "500",
+     "text": "What are they doing by hand to",
+     "rendered": "Horas Med:34"
+    },
+    {
+     "i": 5,
+     "tag": "p",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "400",
+     "text": "Fill this in with the prospect",
+     "rendered": "DM Sans:119"
+    },
+    {
+     "i": 6,
+     "tag": "span",
+     "family": "Horas",
+     "weight": "400",
+     "text": "8,785",
+     "rendered": "Horas Med:5"
+    },
+    {
+     "i": 7,
+     "tag": "label",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "600",
+     "text": "Pay runs per year",
+     "rendered": "DM Sans:17"
+    },
+    {
+     "i": 8,
+     "tag": "h2",
+     "family": "Horas, \"DM Sans\", serif",
+     "weight": "500",
+     "text": "Manual tasks & time",
+     "rendered": "Horas Med:19"
+    },
+    {
+     "i": 9,
+     "tag": "th",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "700",
+     "text": "Task done manually today",
+     "rendered": "DM Sans:24"
+    },
+    {
+     "i": 10,
+     "tag": "td",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "400",
+     "text": "39",
+     "rendered": "DM Sans:2"
+    },
+    {
+     "i": 11,
+     "tag": "span",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "700",
+     "text": "+ Add a task",
+     "rendered": "DM Sans:12"
+    },
+    {
+     "i": 12,
+     "tag": "b",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "700",
+     "text": "How to use this in a meeting:",
+     "rendered": "DM Sans:29"
+    }
+   ]
+  },
+  "C": {
+   "mode": "C",
+   "bodyFamily": "\"DM Sans\", system-ui, sans-serif",
+   "bodyRendered": "DM Sans:119",
+   "dmAsked": 6,
+   "dmRendered": 6,
+   "dmMissed": [],
+   "serifRendered": 0,
+   "serifSamples": [],
+   "sw": 1440,
+   "sh": 1468,
+   "elements": 279,
+   "errors": [],
+   "nonFileRequests": [],
+   "samples": [
+    {
+     "i": 0,
+     "tag": "body",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "400",
+     "text": "",
+     "rendered": ""
+    },
+    {
+     "i": 1,
+     "tag": "span",
+     "family": "\"DM Sans\"",
+     "weight": "700",
+     "text": "A",
+     "rendered": "DM Sans:2"
+    },
+    {
+     "i": 2,
+     "tag": "b",
+     "family": "\"DM Sans\"",
+     "weight": "900",
+     "text": "1",
+     "rendered": "DM Sans:1"
+    },
+    {
+     "i": 3,
+     "tag": "button",
+     "family": "Arial",
+     "weight": "600",
+     "text": "Print / Save PDF",
+     "rendered": "Arial (system):16"
+    },
+    {
+     "i": 4,
+     "tag": "h1",
+     "family": "Horas, \"DM Sans\", serif",
+     "weight": "500",
+     "text": "What are they doing by hand to",
+     "rendered": "Horas Med:34"
+    },
+    {
+     "i": 5,
+     "tag": "p",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "400",
+     "text": "Fill this in with the prospect",
+     "rendered": "DM Sans:119"
+    },
+    {
+     "i": 6,
+     "tag": "span",
+     "family": "Horas",
+     "weight": "400",
+     "text": "8,785",
+     "rendered": "Horas Med:5"
+    },
+    {
+     "i": 7,
+     "tag": "label",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "600",
+     "text": "Pay runs per year",
+     "rendered": "DM Sans:17"
+    },
+    {
+     "i": 8,
+     "tag": "h2",
+     "family": "Horas, \"DM Sans\", serif",
+     "weight": "500",
+     "text": "Manual tasks & time",
+     "rendered": "Horas Med:19"
+    },
+    {
+     "i": 9,
+     "tag": "th",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "700",
+     "text": "Task done manually today",
+     "rendered": "DM Sans:24"
+    },
+    {
+     "i": 10,
+     "tag": "td",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "400",
+     "text": "39",
+     "rendered": "DM Sans:2"
+    },
+    {
+     "i": 11,
+     "tag": "span",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "700",
+     "text": "+ Add a task",
+     "rendered": "DM Sans:12"
+    },
+    {
+     "i": 12,
+     "tag": "b",
+     "family": "\"DM Sans\", system-ui, sans-serif",
+     "weight": "700",
+     "text": "How to use this in a meeting:",
+     "rendered": "DM Sans:29"
+    }
+   ]
+  },
+  "layout_B_equals_C": true,
+  "layout_diff_elements": 0,
+  "A_body_rendered": ".SF NS (system):119",
+  "C_body_rendered": "DM Sans:119"
+ },
+ {
+  "file": "atlas-command-center.html",
+  "A": {
+   "mode": "A",
+   "bodyFamily": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+   "bodyRendered": ".SF NS (system):14",
+   "dmAsked": 3,
+   "dmRendered": 0,
+   "dmMissed": [
+    "span:.SF NS (system):14",
+    "button:.SF NS (system):17",
+    "p:.SF NS (system):32"
+   ],
+   "serifRendered": 0,
+   "serifSamples": [],
+   "sw": 1440,
+   "sh": 1058,
+   "elements": 68,
+   "errors": [],
+   "nonFileRequests": [
+    "https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,4"
+   ],
+   "samples": [
+    {
+     "i": 0,
+     "tag": "body",
+     "family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+     "weight": "400",
+     "text": "",
+     "rendered": ""
+    },
+    {
+     "i": 1,
+     "tag": "span",
+     "family": "Horas, \"DM Sans\", system-ui, sans-serif",
+     "weight": "600",
+     "text": "Atlas One",
+     "rendered": ".SF NS (system):9"
+    },
+    {
+     "i": 2,
+     "tag": "span",
+     "family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+     "weight": "400",
+     "text": "Command Center",
+     "rendered": ".SF NS (system):14"
+    },
+    {
+     "i": 3,
+     "tag": "button",
+     "family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+     "weight": "400",
+     "text": "Open tracker file",
+     "rendered": ".SF NS (system):17"
+    },
+    {
+     "i": 4,
+     "tag": "p",
+     "family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+     "weight": "400",
+     "text": "Open your tracker file to begi",
+     "rendered": ".SF NS (system):32"
+    },
+    {
+     "i": 5,
+     "tag": "h2",
+     "family": "Horas, \"DM Sans\", system-ui, sans-serif",
+     "weight": "600",
+     "text": "What actually matters",
+     "rendered": ".SF NS (system):21"
+    }
+   ]
+  },
+  "B": {
+   "mode": "B",
+   "bodyFamily": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+   "bodyRendered": "DM Sans:14",
+   "dmAsked": 3,
+   "dmRendered": 3,
+   "dmMissed": [],
+   "serifRendered": 0,
+   "serifSamples": [],
+   "sw": 1440,
+   "sh": 1059,
+   "elements": 68,
+   "errors": [],
+   "nonFileRequests": [
+    "https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,4"
+   ],
+   "samples": [
+    {
+     "i": 0,
+     "tag": "body",
+     "family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+     "weight": "400",
+     "text": "",
+     "rendered": ""
+    },
+    {
+     "i": 1,
+     "tag": "span",
+     "family": "Horas, \"DM Sans\", system-ui, sans-serif",
+     "weight": "600",
+     "text": "Atlas One",
+     "rendered": "DM Sans:9"
+    },
+    {
+     "i": 2,
+     "tag": "span",
+     "family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+     "weight": "400",
+     "text": "Command Center",
+     "rendered": "DM Sans:14"
+    },
+    {
+     "i": 3,
+     "tag": "button",
+     "family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+     "weight": "400",
+     "text": "Open tracker file",
+     "rendered": "DM Sans:16"
+    },
+    {
+     "i": 4,
+     "tag": "p",
+     "family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+     "weight": "400",
+     "text": "Open your tracker file to begi",
+     "rendered": "DM Sans:32"
+    },
+    {
+     "i": 5,
+     "tag": "h2",
+     "family": "Horas, \"DM Sans\", system-ui, sans-serif",
+     "weight": "600",
+     "text": "What actually matters",
+     "rendered": "DM Sans:21"
+    }
+   ]
+  },
+  "C": {
+   "mode": "C",
+   "bodyFamily": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+   "bodyRendered": "DM Sans:14",
+   "dmAsked": 3,
+   "dmRendered": 3,
+   "dmMissed": [],
+   "serifRendered": 0,
+   "serifSamples": [],
+   "sw": 1440,
+   "sh": 1059,
+   "elements": 68,
+   "errors": [],
+   "nonFileRequests": [],
+   "samples": [
+    {
+     "i": 0,
+     "tag": "body",
+     "family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+     "weight": "400",
+     "text": "",
+     "rendered": ""
+    },
+    {
+     "i": 1,
+     "tag": "span",
+     "family": "Horas, \"DM Sans\", system-ui, sans-serif",
+     "weight": "600",
+     "text": "Atlas One",
+     "rendered": "Horas Med:9"
+    },
+    {
+     "i": 2,
+     "tag": "span",
+     "family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+     "weight": "400",
+     "text": "Command Center",
+     "rendered": "DM Sans:14"
+    },
+    {
+     "i": 3,
+     "tag": "button",
+     "family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+     "weight": "400",
+     "text": "Open tracker file",
+     "rendered": "DM Sans:16"
+    },
+    {
+     "i": 4,
+     "tag": "p",
+     "family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+     "weight": "400",
+     "text": "Open your tracker file to begi",
+     "rendered": "DM Sans:32"
+    },
+    {
+     "i": 5,
+     "tag": "h2",
+     "family": "Horas, \"DM Sans\", system-ui, sans-serif",
+     "weight": "600",
+     "text": "What actually matters",
+     "rendered": "Horas Med:21"
+    }
+   ]
+  },
+  "layout_B_equals_C": false,
+  "layout_diff_elements": 12,
+  "A_body_rendered": ".SF NS (system):14",
+  "C_body_rendered": "DM Sans:14"
+ },
+ {
+  "file": "Certified Payroll Manager (Atlas One).html",
+  "A": {
+   "mode": "A",
+   "bodyFamily": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+   "bodyRendered": ".SF NS (system):25",
+   "dmAsked": 6,
+   "dmRendered": 0,
+   "dmMissed": [
+    "h1:.SF NS (system):25",
+    "p:.SF NS (system):269",
+    "button:.SF NS (system):11",
+    "span:.SF NS (system):1",
+    "label:.SF NS (system):13",
+    "a:.SF NS (system):12"
+   ],
+   "serifRendered": 0,
+   "serifSamples": [],
+   "sw": 1440,
+   "sh": 1047,
+   "elements": 655,
+   "errors": [],
+   "nonFileRequests": [
+    "https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&d"
+   ],
+   "samples": [
+    {
+     "i": 0,
+     "tag": "body",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "400",
+     "text": "",
+     "rendered": ""
+    },
+    {
+     "i": 1,
+     "tag": "h1",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "700",
+     "text": "Certified Payroll Manager",
+     "rendered": ".SF NS (system):25"
+    },
+    {
+     "i": 2,
+     "tag": "p",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "400",
+     "text": "Run several certified jobs at ",
+     "rendered": ".SF NS (system):269"
+    },
+    {
+     "i": 3,
+     "tag": "button",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "600",
+     "text": "1 · Company",
+     "rendered": ".SF NS (system):11"
+    },
+    {
+     "i": 4,
+     "tag": "span",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "700",
+     "text": "1",
+     "rendered": ".SF NS (system):1"
+    },
+    {
+     "i": 5,
+     "tag": "label",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "600",
+     "text": "Business name",
+     "rendered": ".SF NS (system):13"
+    },
+    {
+     "i": 6,
+     "tag": "a",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "600",
+     "text": "385-213-7177",
+     "rendered": ".SF NS (system):12"
+    }
+   ]
+  },
+  "B": {
+   "mode": "B",
+   "bodyFamily": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+   "bodyRendered": "DM Sans:25",
+   "dmAsked": 6,
+   "dmRendered": 6,
+   "dmMissed": [],
+   "serifRendered": 0,
+   "serifSamples": [],
+   "sw": 1440,
+   "sh": 1047,
+   "elements": 655,
+   "errors": [],
+   "nonFileRequests": [
+    "https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&d"
+   ],
+   "samples": [
+    {
+     "i": 0,
+     "tag": "body",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "400",
+     "text": "",
+     "rendered": ""
+    },
+    {
+     "i": 1,
+     "tag": "h1",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "700",
+     "text": "Certified Payroll Manager",
+     "rendered": "DM Sans:25"
+    },
+    {
+     "i": 2,
+     "tag": "p",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "400",
+     "text": "Run several certified jobs at ",
+     "rendered": "DM Sans:268"
+    },
+    {
+     "i": 3,
+     "tag": "button",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "600",
+     "text": "1 · Company",
+     "rendered": "DM Sans:11"
+    },
+    {
+     "i": 4,
+     "tag": "span",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "700",
+     "text": "1",
+     "rendered": "DM Sans:1"
+    },
+    {
+     "i": 5,
+     "tag": "label",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "600",
+     "text": "Business name",
+     "rendered": "DM Sans:13"
+    },
+    {
+     "i": 6,
+     "tag": "a",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "600",
+     "text": "385-213-7177",
+     "rendered": "DM Sans:12"
+    }
+   ]
+  },
+  "C": {
+   "mode": "C",
+   "bodyFamily": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+   "bodyRendered": "DM Sans:25",
+   "dmAsked": 6,
+   "dmRendered": 6,
+   "dmMissed": [],
+   "serifRendered": 0,
+   "serifSamples": [],
+   "sw": 1440,
+   "sh": 1047,
+   "elements": 655,
+   "errors": [],
+   "nonFileRequests": [],
+   "samples": [
+    {
+     "i": 0,
+     "tag": "body",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "400",
+     "text": "",
+     "rendered": ""
+    },
+    {
+     "i": 1,
+     "tag": "h1",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "700",
+     "text": "Certified Payroll Manager",
+     "rendered": "DM Sans:25"
+    },
+    {
+     "i": 2,
+     "tag": "p",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "400",
+     "text": "Run several certified jobs at ",
+     "rendered": "DM Sans:268"
+    },
+    {
+     "i": 3,
+     "tag": "button",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "600",
+     "text": "1 · Company",
+     "rendered": "DM Sans:11"
+    },
+    {
+     "i": 4,
+     "tag": "span",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "700",
+     "text": "1",
+     "rendered": "DM Sans:1"
+    },
+    {
+     "i": 5,
+     "tag": "label",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "600",
+     "text": "Business name",
+     "rendered": "DM Sans:13"
+    },
+    {
+     "i": 6,
+     "tag": "a",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "600",
+     "text": "385-213-7177",
+     "rendered": "DM Sans:12"
+    }
+   ]
+  },
+  "layout_B_equals_C": true,
+  "layout_diff_elements": 0,
+  "A_body_rendered": ".SF NS (system):25",
+  "C_body_rendered": "DM Sans:25"
+ },
+ {
+  "file": "Health Comparison Builder (Atlas One).html",
+  "A": {
+   "mode": "A",
+   "bodyFamily": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+   "bodyRendered": ".SF NS (system):25",
+   "dmAsked": 7,
+   "dmRendered": 0,
+   "dmMissed": [
+    "h1:.SF NS (system):25",
+    "button:.SF NS (system):19",
+    "p:.SF NS (system):198",
+    "span:.SF NS (system):1",
+    "h2:.SF NS (system):18",
+    "label:.SF NS (system):12",
+    "b:.SF NS (system):2"
+   ],
+   "serifRendered": 0,
+   "serifSamples": [],
+   "sw": 1440,
+   "sh": 900,
+   "elements": 498,
+   "errors": [],
+   "nonFileRequests": [
+    "https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,"
+   ],
+   "samples": [
+    {
+     "i": 0,
+     "tag": "body",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "400",
+     "text": "",
+     "rendered": ""
+    },
+    {
+     "i": 1,
+     "tag": "h1",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "700",
+     "text": "Health Comparison Builder",
+     "rendered": ".SF NS (system):25"
+    },
+    {
+     "i": 2,
+     "tag": "button",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "700",
+     "text": "Print / Save as PDF",
+     "rendered": ".SF NS (system):19"
+    },
+    {
+     "i": 3,
+     "tag": "p",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "400",
+     "text": "What the group has today, what",
+     "rendered": ".SF NS (system):198"
+    },
+    {
+     "i": 4,
+     "tag": "span",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "700",
+     "text": "0",
+     "rendered": ".SF NS (system):1"
+    },
+    {
+     "i": 5,
+     "tag": "h2",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "700",
+     "text": "Step 1 · The Group",
+     "rendered": ".SF NS (system):18"
+    },
+    {
+     "i": 6,
+     "tag": "label",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "600",
+     "text": "Company name",
+     "rendered": ".SF NS (system):12"
+    },
+    {
+     "i": 7,
+     "tag": "b",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "700",
+     "text": "$0",
+     "rendered": ".SF NS (system):2"
+    }
+   ]
+  },
+  "B": {
+   "mode": "B",
+   "bodyFamily": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+   "bodyRendered": "DM Sans:25",
+   "dmAsked": 7,
+   "dmRendered": 7,
+   "dmMissed": [],
+   "serifRendered": 0,
+   "serifSamples": [],
+   "sw": 1440,
+   "sh": 900,
+   "elements": 498,
+   "errors": [],
+   "nonFileRequests": [
+    "https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,"
+   ],
+   "samples": [
+    {
+     "i": 0,
+     "tag": "body",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "400",
+     "text": "",
+     "rendered": ""
+    },
+    {
+     "i": 1,
+     "tag": "h1",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "700",
+     "text": "Health Comparison Builder",
+     "rendered": "DM Sans:25"
+    },
+    {
+     "i": 2,
+     "tag": "button",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "700",
+     "text": "Print / Save as PDF",
+     "rendered": "DM Sans:19"
+    },
+    {
+     "i": 3,
+     "tag": "p",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "400",
+     "text": "What the group has today, what",
+     "rendered": "DM Sans:198"
+    },
+    {
+     "i": 4,
+     "tag": "span",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "700",
+     "text": "0",
+     "rendered": "DM Sans:1"
+    },
+    {
+     "i": 5,
+     "tag": "h2",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "700",
+     "text": "Step 1 · The Group",
+     "rendered": "DM Sans:18"
+    },
+    {
+     "i": 6,
+     "tag": "label",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "600",
+     "text": "Company name",
+     "rendered": "DM Sans:12"
+    },
+    {
+     "i": 7,
+     "tag": "b",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "700",
+     "text": "$0",
+     "rendered": "DM Sans:2"
+    }
+   ]
+  },
+  "C": {
+   "mode": "C",
+   "bodyFamily": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+   "bodyRendered": "DM Sans:25",
+   "dmAsked": 7,
+   "dmRendered": 7,
+   "dmMissed": [],
+   "serifRendered": 0,
+   "serifSamples": [],
+   "sw": 1440,
+   "sh": 900,
+   "elements": 498,
+   "errors": [],
+   "nonFileRequests": [],
+   "samples": [
+    {
+     "i": 0,
+     "tag": "body",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "400",
+     "text": "",
+     "rendered": ""
+    },
+    {
+     "i": 1,
+     "tag": "h1",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "700",
+     "text": "Health Comparison Builder",
+     "rendered": "DM Sans:25"
+    },
+    {
+     "i": 2,
+     "tag": "button",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "700",
+     "text": "Print / Save as PDF",
+     "rendered": "DM Sans:19"
+    },
+    {
+     "i": 3,
+     "tag": "p",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "400",
+     "text": "What the group has today, what",
+     "rendered": "DM Sans:198"
+    },
+    {
+     "i": 4,
+     "tag": "span",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "700",
+     "text": "0",
+     "rendered": "DM Sans:1"
+    },
+    {
+     "i": 5,
+     "tag": "h2",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "700",
+     "text": "Step 1 · The Group",
+     "rendered": "DM Sans:18"
+    },
+    {
+     "i": 6,
+     "tag": "label",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "600",
+     "text": "Company name",
+     "rendered": "DM Sans:12"
+    },
+    {
+     "i": 7,
+     "tag": "b",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "700",
+     "text": "$0",
+     "rendered": "DM Sans:2"
+    }
+   ]
+  },
+  "layout_B_equals_C": true,
+  "layout_diff_elements": 0,
+  "A_body_rendered": ".SF NS (system):25",
+  "C_body_rendered": "DM Sans:25"
+ },
+ {
+  "file": "Meeting Bonus Import Builder (Atlas One).html",
+  "A": {
+   "mode": "A",
+   "bodyFamily": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+   "bodyRendered": ".SF NS (system):28",
+   "dmAsked": 5,
+   "dmRendered": 0,
+   "dmMissed": [
+    "h1:.SF NS (system):28",
+    "button:.SF NS (system):16",
+    "span:.SF NS (system):1",
+    "p:.SF NS (system):120",
+    "label:.SF NS (system):31"
+   ],
+   "serifRendered": 0,
+   "serifSamples": [],
+   "sw": 1440,
+   "sh": 900,
+   "elements": 161,
+   "errors": [],
+   "nonFileRequests": [
+    "https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=DM+Mono:w"
+   ],
+   "samples": [
+    {
+     "i": 0,
+     "tag": "body",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+     "weight": "400",
+     "text": "",
+     "rendered": ""
+    },
+    {
+     "i": 1,
+     "tag": "h1",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+     "weight": "600",
+     "text": "Meeting Bonus Import Builder",
+     "rendered": ".SF NS (system):28"
+    },
+    {
+     "i": 2,
+     "tag": "button",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+     "weight": "700",
+     "text": "Print / Save PDF",
+     "rendered": ".SF NS (system):16"
+    },
+    {
+     "i": 3,
+     "tag": "span",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+     "weight": "700",
+     "text": "1",
+     "rendered": ".SF NS (system):1"
+    },
+    {
+     "i": 4,
+     "tag": "p",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+     "weight": "400",
+     "text": "Upload the workbook. Every mon",
+     "rendered": ".SF NS (system):120"
+    },
+    {
+     "i": 5,
+     "tag": "label",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+     "weight": "600",
+     "text": "Meeting tracker (.xlsx or .csv",
+     "rendered": ".SF NS (system):31"
+    }
+   ]
+  },
+  "B": {
+   "mode": "B",
+   "bodyFamily": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+   "bodyRendered": "DM Sans:28",
+   "dmAsked": 5,
+   "dmRendered": 5,
+   "dmMissed": [],
+   "serifRendered": 0,
+   "serifSamples": [],
+   "sw": 1440,
+   "sh": 900,
+   "elements": 161,
+   "errors": [],
+   "nonFileRequests": [
+    "https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=DM+Mono:w"
+   ],
+   "samples": [
+    {
+     "i": 0,
+     "tag": "body",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+     "weight": "400",
+     "text": "",
+     "rendered": ""
+    },
+    {
+     "i": 1,
+     "tag": "h1",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+     "weight": "600",
+     "text": "Meeting Bonus Import Builder",
+     "rendered": "DM Sans:28"
+    },
+    {
+     "i": 2,
+     "tag": "button",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+     "weight": "700",
+     "text": "Print / Save PDF",
+     "rendered": "DM Sans:16"
+    },
+    {
+     "i": 3,
+     "tag": "span",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+     "weight": "700",
+     "text": "1",
+     "rendered": "DM Sans:1"
+    },
+    {
+     "i": 4,
+     "tag": "p",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+     "weight": "400",
+     "text": "Upload the workbook. Every mon",
+     "rendered": "DM Sans:120"
+    },
+    {
+     "i": 5,
+     "tag": "label",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+     "weight": "600",
+     "text": "Meeting tracker (.xlsx or .csv",
+     "rendered": "DM Sans:31"
+    }
+   ]
+  },
+  "C": {
+   "mode": "C",
+   "bodyFamily": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+   "bodyRendered": "DM Sans:28",
+   "dmAsked": 5,
+   "dmRendered": 5,
+   "dmMissed": [],
+   "serifRendered": 0,
+   "serifSamples": [],
+   "sw": 1440,
+   "sh": 900,
+   "elements": 161,
+   "errors": [],
+   "nonFileRequests": [],
+   "samples": [
+    {
+     "i": 0,
+     "tag": "body",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+     "weight": "400",
+     "text": "",
+     "rendered": ""
+    },
+    {
+     "i": 1,
+     "tag": "h1",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+     "weight": "600",
+     "text": "Meeting Bonus Import Builder",
+     "rendered": "DM Sans:28"
+    },
+    {
+     "i": 2,
+     "tag": "button",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+     "weight": "700",
+     "text": "Print / Save PDF",
+     "rendered": "DM Sans:16"
+    },
+    {
+     "i": 3,
+     "tag": "span",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+     "weight": "700",
+     "text": "1",
+     "rendered": "DM Sans:1"
+    },
+    {
+     "i": 4,
+     "tag": "p",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+     "weight": "400",
+     "text": "Upload the workbook. Every mon",
+     "rendered": "DM Sans:120"
+    },
+    {
+     "i": 5,
+     "tag": "label",
+     "family": "\"DM Sans\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+     "weight": "600",
+     "text": "Meeting tracker (.xlsx or .csv",
+     "rendered": "DM Sans:31"
+    }
+   ]
+  },
+  "layout_B_equals_C": true,
+  "layout_diff_elements": 0,
+  "A_body_rendered": ".SF NS (system):28",
+  "C_body_rendered": "DM Sans:28"
+ },
+ {
+  "file": "Retention Scorecard (Atlas One).html",
+  "A": {
+   "mode": "A",
+   "bodyFamily": "\"DM Sans\", sans-serif",
+   "bodyRendered": "Helvetica (system):152",
+   "dmAsked": 3,
+   "dmRendered": 0,
+   "dmMissed": [
+    "p:Helvetica (system):152",
+    "button:Helvetica (system):19",
+    "span:Helvetica (system):2"
+   ],
+   "serifRendered": 1,
+   "serifSamples": [
+    "button:Times (system):12"
+   ],
+   "sw": 1440,
+   "sh": 1551,
+   "elements": 117,
+   "errors": [],
+   "nonFileRequests": [
+    "https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9"
+   ],
+   "samples": [
+    {
+     "i": 0,
+     "tag": "body",
+     "family": "\"DM Sans\", sans-serif",
+     "weight": "400",
+     "text": "",
+     "rendered": ""
+    },
+    {
+     "i": 1,
+     "tag": "h1",
+     "family": "\"DM Serif Display\", serif",
+     "weight": "700",
+     "text": "How leaky is your revolving do",
+     "rendered": "Times (system):33"
+    },
+    {
+     "i": 2,
+     "tag": "p",
+     "family": "\"DM Sans\", sans-serif",
+     "weight": "400",
+     "text": "Ten quick questions on how wel",
+     "rendered": "Helvetica (system):152"
+    },
+    {
+     "i": 3,
+     "tag": "button",
+     "family": "\"DM Sans\", sans-serif",
+     "weight": "700",
+     "text": "Print / Save as PDF",
+     "rendered": "Helvetica (system):19"
+    },
+    {
+     "i": 4,
+     "tag": "span",
+     "family": "\"DM Sans\", sans-serif",
+     "weight": "700",
+     "text": "1.",
+     "rendered": "Helvetica (system):2"
+    },
+    {
+     "i": 5,
+     "tag": "button",
+     "family": "\"DM Sans\"",
+     "weight": "700",
+     "text": "See my score",
+     "rendered": "Times (system):12"
+    }
+   ]
+  },
+  "B": {
+   "mode": "B",
+   "bodyFamily": "\"DM Sans\", sans-serif",
+   "bodyRendered": "DM Sans:152",
+   "dmAsked": 3,
+   "dmRendered": 3,
+   "dmMissed": [],
+   "serifRendered": 0,
+   "serifSamples": [],
+   "sw": 1440,
+   "sh": 1552,
+   "elements": 117,
+   "errors": [],
+   "nonFileRequests": [
+    "https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9"
+   ],
+   "samples": [
+    {
+     "i": 0,
+     "tag": "body",
+     "family": "\"DM Sans\", sans-serif",
+     "weight": "400",
+     "text": "",
+     "rendered": ""
+    },
+    {
+     "i": 1,
+     "tag": "h1",
+     "family": "\"DM Serif Display\", serif",
+     "weight": "700",
+     "text": "How leaky is your revolving do",
+     "rendered": "Times (system):33"
+    },
+    {
+     "i": 2,
+     "tag": "p",
+     "family": "\"DM Sans\", sans-serif",
+     "weight": "400",
+     "text": "Ten quick questions on how wel",
+     "rendered": "DM Sans:152"
+    },
+    {
+     "i": 3,
+     "tag": "button",
+     "family": "\"DM Sans\", sans-serif",
+     "weight": "700",
+     "text": "Print / Save as PDF",
+     "rendered": "DM Sans:19"
+    },
+    {
+     "i": 4,
+     "tag": "span",
+     "family": "\"DM Sans\", sans-serif",
+     "weight": "700",
+     "text": "1.",
+     "rendered": "DM Sans:2"
+    },
+    {
+     "i": 5,
+     "tag": "button",
+     "family": "\"DM Sans\"",
+     "weight": "700",
+     "text": "See my score",
+     "rendered": "DM Sans:12"
+    }
+   ]
+  },
+  "C": {
+   "mode": "C",
+   "bodyFamily": "\"DM Sans\", sans-serif",
+   "bodyRendered": "DM Sans:152",
+   "dmAsked": 3,
+   "dmRendered": 3,
+   "dmMissed": [],
+   "serifRendered": 0,
+   "serifSamples": [],
+   "sw": 1440,
+   "sh": 1552,
+   "elements": 117,
+   "errors": [],
+   "nonFileRequests": [],
+   "samples": [
+    {
+     "i": 0,
+     "tag": "body",
+     "family": "\"DM Sans\", sans-serif",
+     "weight": "400",
+     "text": "",
+     "rendered": ""
+    },
+    {
+     "i": 1,
+     "tag": "h1",
+     "family": "\"DM Serif Display\", serif",
+     "weight": "700",
+     "text": "How leaky is your revolving do",
+     "rendered": "Times (system):33"
+    },
+    {
+     "i": 2,
+     "tag": "p",
+     "family": "\"DM Sans\", sans-serif",
+     "weight": "400",
+     "text": "Ten quick questions on how wel",
+     "rendered": "DM Sans:152"
+    },
+    {
+     "i": 3,
+     "tag": "button",
+     "family": "\"DM Sans\", sans-serif",
+     "weight": "700",
+     "text": "Print / Save as PDF",
+     "rendered": "DM Sans:19"
+    },
+    {
+     "i": 4,
+     "tag": "span",
+     "family": "\"DM Sans\", sans-serif",
+     "weight": "700",
+     "text": "1.",
+     "rendered": "DM Sans:2"
+    },
+    {
+     "i": 5,
+     "tag": "button",
+     "family": "\"DM Sans\"",
+     "weight": "700",
+     "text": "See my score",
+     "rendered": "DM Sans:12"
+    }
+   ]
+  },
+  "layout_B_equals_C": true,
+  "layout_diff_elements": 0,
+  "A_body_rendered": "Helvetica (system):152",
+  "C_body_rendered": "DM Sans:152"
+ },
+ {
+  "file": "Retention Scorecard (Espanol).html",
+  "A": {
+   "mode": "A",
+   "bodyFamily": "\"DM Sans\", sans-serif",
+   "bodyRendered": "Helvetica (system):178",
+   "dmAsked": 3,
+   "dmRendered": 0,
+   "dmMissed": [
+    "p:Helvetica (system):178",
+    "button:Helvetica (system):27",
+    "span:Helvetica (system):2"
+   ],
+   "serifRendered": 1,
+   "serifSamples": [
+    "button:Times (system):16"
+   ],
+   "sw": 1440,
+   "sh": 1596,
+   "elements": 117,
+   "errors": [],
+   "nonFileRequests": [
+    "https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9"
+   ],
+   "samples": [
+    {
+     "i": 0,
+     "tag": "body",
+     "family": "\"DM Sans\", sans-serif",
+     "weight": "400",
+     "text": "",
+     "rendered": ""
+    },
+    {
+     "i": 1,
+     "tag": "h1",
+     "family": "\"DM Serif Display\", serif",
+     "weight": "700",
+     "text": "¿Qué tan floja está tu puerta ",
+     "rendered": "Times (system):40"
+    },
+    {
+     "i": 2,
+     "tag": "p",
+     "family": "\"DM Sans\", sans-serif",
+     "weight": "400",
+     "text": "Diez preguntas rápidas sobre q",
+     "rendered": "Helvetica (system):178"
+    },
+    {
+     "i": 3,
+     "tag": "button",
+     "family": "\"DM Sans\", sans-serif",
+     "weight": "700",
+     "text": "Imprimir / Guardar como PDF",
+     "rendered": "Helvetica (system):27"
+    },
+    {
+     "i": 4,
+     "tag": "span",
+     "family": "\"DM Sans\", sans-serif",
+     "weight": "700",
+     "text": "1.",
+     "rendered": "Helvetica (system):2"
+    },
+    {
+     "i": 5,
+     "tag": "button",
+     "family": "\"DM Sans\"",
+     "weight": "700",
+     "text": "Ver mi resultado",
+     "rendered": "Times (system):16"
+    }
+   ]
+  },
+  "B": {
+   "mode": "B",
+   "bodyFamily": "\"DM Sans\", sans-serif",
+   "bodyRendered": "DM Sans:178",
+   "dmAsked": 3,
+   "dmRendered": 3,
+   "dmMissed": [],
+   "serifRendered": 0,
+   "serifSamples": [],
+   "sw": 1440,
+   "sh": 1617,
+   "elements": 117,
+   "errors": [],
+   "nonFileRequests": [
+    "https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9"
+   ],
+   "samples": [
+    {
+     "i": 0,
+     "tag": "body",
+     "family": "\"DM Sans\", sans-serif",
+     "weight": "400",
+     "text": "",
+     "rendered": ""
+    },
+    {
+     "i": 1,
+     "tag": "h1",
+     "family": "\"DM Serif Display\", serif",
+     "weight": "700",
+     "text": "¿Qué tan floja está tu puerta ",
+     "rendered": "Times (system):40"
+    },
+    {
+     "i": 2,
+     "tag": "p",
+     "family": "\"DM Sans\", sans-serif",
+     "weight": "400",
+     "text": "Diez preguntas rápidas sobre q",
+     "rendered": "DM Sans:178"
+    },
+    {
+     "i": 3,
+     "tag": "button",
+     "family": "\"DM Sans\", sans-serif",
+     "weight": "700",
+     "text": "Imprimir / Guardar como PDF",
+     "rendered": "DM Sans:27"
+    },
+    {
+     "i": 4,
+     "tag": "span",
+     "family": "\"DM Sans\", sans-serif",
+     "weight": "700",
+     "text": "1.",
+     "rendered": "DM Sans:2"
+    },
+    {
+     "i": 5,
+     "tag": "button",
+     "family": "\"DM Sans\"",
+     "weight": "700",
+     "text": "Ver mi resultado",
+     "rendered": "DM Sans:16"
+    }
+   ]
+  },
+  "C": {
+   "mode": "C",
+   "bodyFamily": "\"DM Sans\", sans-serif",
+   "bodyRendered": "DM Sans:178",
+   "dmAsked": 3,
+   "dmRendered": 3,
+   "dmMissed": [],
+   "serifRendered": 0,
+   "serifSamples": [],
+   "sw": 1440,
+   "sh": 1617,
+   "elements": 117,
+   "errors": [],
+   "nonFileRequests": [],
+   "samples": [
+    {
+     "i": 0,
+     "tag": "body",
+     "family": "\"DM Sans\", sans-serif",
+     "weight": "400",
+     "text": "",
+     "rendered": ""
+    },
+    {
+     "i": 1,
+     "tag": "h1",
+     "family": "\"DM Serif Display\", serif",
+     "weight": "700",
+     "text": "¿Qué tan floja está tu puerta ",
+     "rendered": "Times (system):40"
+    },
+    {
+     "i": 2,
+     "tag": "p",
+     "family": "\"DM Sans\", sans-serif",
+     "weight": "400",
+     "text": "Diez preguntas rápidas sobre q",
+     "rendered": "DM Sans:178"
+    },
+    {
+     "i": 3,
+     "tag": "button",
+     "family": "\"DM Sans\", sans-serif",
+     "weight": "700",
+     "text": "Imprimir / Guardar como PDF",
+     "rendered": "DM Sans:27"
+    },
+    {
+     "i": 4,
+     "tag": "span",
+     "family": "\"DM Sans\", sans-serif",
+     "weight": "700",
+     "text": "1.",
+     "rendered": "DM Sans:2"
+    },
+    {
+     "i": 5,
+     "tag": "button",
+     "family": "\"DM Sans\"",
+     "weight": "700",
+     "text": "Ver mi resultado",
+     "rendered": "DM Sans:16"
+    }
+   ]
+  },
+  "layout_B_equals_C": true,
+  "layout_diff_elements": 0,
+  "A_body_rendered": "Helvetica (system):178",
+  "C_body_rendered": "DM Sans:178"
+ }
+]
