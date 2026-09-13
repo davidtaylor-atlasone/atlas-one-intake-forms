@@ -47,3 +47,8 @@ Source of truth for most files is the Master Kit on OneDrive; find it with
 The Portal (`<Master_Kit>/Atlas One PORTAL.html`) is generated: `python3 "<Master_Kit>/_INTERNAL (do not share)/build_portal_single.py" "<Master_Kit>"`
 (the catalogue lives in `_INTERNAL (do not share)/build_portal.py`). Never hand edit the Portal. After a rebuild,
 confirm the `<title>` stamp and the tool count, and back the previous Portal up to `_to_delete/` first.
+
+The Portal is ONLY built by build_portal_single.py with the Master Kit path argument. build_portal.py is the
+catalogue; never run it to produce the Portal. (Run AE, 2026-09-13, ran build_portal.py and it overwrote the real
+17 MB Portal with its own 33 KB link launcher; build_portal.py now refuses to write to `Atlas One PORTAL.html` and
+defaults to `Atlas One PORTAL (launcher, links only).html` instead, but the rule still applies by name.)
