@@ -1,0 +1,32 @@
+{
+ "title": "Atlas One Portal: build Sep 12, 2026 9:54 PM",
+ "stamp": "BUILD Sep 12, 2026  9:54 PM",
+ "note": "This file is self-contained. All 40 tools live inside it. Nothing loads from a folder, a server or the internet. Copy it anywhere, email it to yourself, put it on a phone or iPad, open it on a plane. It behaves the same everywhere.",
+ "cards": 40,
+ "onboarding_tracker": {
+  "card": "Prospect Onboarding Tracker INTERNAL What they signed up for, pricing and deal terms, the facts gathered across calls, documents to collect, call log and the handoff notes for the setup team.",
+  "frameOn": true,
+  "frameSrcAttr": "",
+  "innerTitle": "Atlas One: Prospect Onboarding Tracker",
+  "innerH1": null,
+  "innerBodyChars": 45927,
+  "innerInputs": 217,
+  "pillOn": "Prospect Onboarding Tracker",
+  "homeOff": true
+ },
+ "time_savings": {
+  "card": "Time and Cost Savings Discovery Fill in with the prospect: the tasks they still do by hand and the software they could drop, and see the hours and dollars that come back every year. Free tool, also live at forms.atlasonesolutions.com/tools/time-savings/.",
+  "frameOn": true,
+  "frameSrcAttr": "",
+  "innerTitle": "Atlas One: Time & Cost Savings Discovery",
+  "innerH1": "What are they doing by hand today?",
+  "innerBodyChars": 14264,
+  "innerInputs": 44,
+  "pillOn": "Time and Cost Savings Discovery",
+  "homeOff": true
+ },
+ "errors": [],
+ "nonFileRequests": [
+  "https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap"
+ ]
+}
