@@ -38,7 +38,7 @@ Backups of the five changed files (before state) in `OneDrive:_to_delete/superse
 
 ## Repo
 
-`repo:_briefs/assets/run-AA/`: `nda-check.mjs`, `portal-check.mjs`, `hub-check.mjs`, `shots/` (NDA before/after at 390 and 1440, Portal home and both new tools, Tools Hub, the four JSON logs), and a copy of this report. One commit on main, pushed.
+`repo:_briefs/assets/run-AA/`: `nda-check.mjs`, `portal-check.mjs`, `hub-check.mjs`, `shots/` (NDA before/after at 390 and 1440, Portal home and both new tools, Tools Hub, the four JSON logs), and a copy of this report. One commit on main, `b25c946`, pushed.
 
 ## Assumptions
 
