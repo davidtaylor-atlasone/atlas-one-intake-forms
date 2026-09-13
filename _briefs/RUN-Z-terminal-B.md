@@ -25,3 +25,10 @@ commit and push. Never send, never deploy beyond the normal Pages push, never de
 ## Progress log (terminal B)
 
 - 2026-09-12: brief written to the repo. Starting item 1.
+- Item 1 done: "2025 to 26" is now "2025 to 2026" in Business Value Diagnostic (EN, ES), Retention Cost Calculator (EN, ES) and repo tools/retention-cost/index.html (6 occurrences); the repo retention copy stays byte identical to the kit copy.
+- Item 2 done: `Atlas One — Your Savings Summary.html` (byte identical to the "(Atlas One)" file) moved to OneDrive `_to_delete/superseded-2026-09-12/`. Nothing pointed at it: the Master Hub, the Tools Hub and build_portal.py already reference `Atlas One Savings Summary (Atlas One).html`; no repoint needed.
+- Item 3 done: build_portal_single.py line 93 title is "Atlas One Portal: build {{STAMP}}".
+- Item 4: nothing to do ("guaranteed rates" left as is).
+- Item 5 done: kit Time Savings file got the hosted copy's mobile block as `<style id="a1mobile-2026-09-12">` (identical CSS); no copy changed (meeting voice kept); scrollWidth 390 at 390 px; Run Y sample (rate 40, 2 hrs, $120) byte identical before/after. Backup in `_to_delete/superseded-2026-09-12/tools-before-mobile-pass-run-Z/`.
+- Item 6 done: repo tools/index.html has the hosted tools' navy `.hbar` (white logo, eyebrow "Free business tools"), bar moved outside `.wrap` so it spans the page; pushed (217948e); live `/tools/` returns 200 and is byte identical to the pushed file.
+- Item 7 done: additive `<style id="a1mobile-2026-09-12">` block in each of the six (backups first, same folder as item 5). scrollWidth 390 at 390 px on all six (was 522, 413, 855, 470, 833, 439), zero elements wider than the viewport. Sample (Run W fill pattern, fixed clock) at 390 and 1440: field values, generated document innerHTML, body text and getState() byte identical before and after on all twelve captures. 1440 px renders pixel identical (NDA differs only at the pulsing live-preview dot). Scripts: `_briefs/assets/run-Z/{mobilepass.py,sample.mjs,compare.py,culprits.mjs,shots.mjs,crops.mjs}`.
