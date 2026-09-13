@@ -1,26 +1,3 @@
-## Progress log
-
-- **2026-09-12 (later session), stopped before any edits ("needs Chrome restart").** User confirmed GHL was
-  already logged in and responsive. Direct nav to `/workflows` still hit the same "click here to refresh" then
-  blank-page Firebase-permissions failure as the prior attempt. Navigating to the app root instead worked and
-  landed on a fully interactive Dashboard; clicking into Automation loaded the Workflows list shell and table with
-  real data. But the workflows table (cross-origin iframe) did not respond to any click — tried the "Call: not
-  now" row at three offsets, the "Needs review" tab, and "Create workflow", all with zero effect. Did the one
-  allowed Cmd+R on that page and retried; still dead. Per the dead UI rule, stopped the whole batch before Part 1,
-  Part 2, or Run R. Re-verified outside the browser that the Part 2 item 4 URL still 404s and `GHL_BUILD_FORM` is
-  still unset. Full detail, including a narrower diagnosis than the account-wide Firebase failures seen before,
-  in `<Master_Kit>/_BUILD-LOG/RUN-X-report.md` ("needs Chrome restart" at top).
-- **2026-09-12, stopped before any edits ("needs Chrome restart").** Copied this brief in, then ran the standing
-  dead-UI click test on the Workflows list before starting Part 1: the app stuck on GHL's own loading spinner past
-  20s, then the "click here to refresh" screen (never clicked). Did the one allowed Cmd+R; the page went fully
-  blank afterward with console showing `FirebaseError: Missing or insufficient permissions` from GHL's app bundle —
-  same signature as the account-wide auth/session failure from the RUN-P "session start" incident, not the
-  narrower Sites-only failure from the most recent RUN-R-report.md. Per the dead UI rule, stopped the whole batch
-  before Part 1, Part 2, or Run R. Confirmed outside the browser that the Part 2 item 4 URL
-  (`https://forms.atlasonesolutions.com/tools/time-savings/`) still 404s, and that `build/index.html`'s
-  `GHL_BUILD_FORM` is still unset, ready for Run R. Full detail and next steps in
-  `<Master_Kit>/_BUILD-LOG/RUN-X-report.md` ("needs Chrome restart" at top).
-
 # RUN X (terminal A, GHL browser UI): fixes from the Run P and Run Q audits, then Run R
 
 Written by Cowork 2026-09-13. Same rules as every GHL run (app.ridethehightide.com only, one tab, Chrome in front,
@@ -64,3 +41,33 @@ test on Sites > Forms specifically before building.
 
 Report: `RUN-X-report.md` with Part 1 confirmations (node values read back after reload), Part 2 results, and the
 Run R closeout (form ids, URLs, workflow ids, fields created, questions).
+
+## Progress log
+
+- **2026-09-12 (later session), stopped before any edits ("needs Chrome restart").** User confirmed GHL was
+  already logged in and responsive. Direct nav to `/workflows` still hit the same "click here to refresh" then
+  blank-page Firebase-permissions failure as the prior attempt. Navigating to the app root instead worked and
+  landed on a fully interactive Dashboard; clicking into Automation loaded the Workflows list shell and table with
+  real data. But the workflows table (cross-origin iframe) did not respond to any click — tried the "Call: not
+  now" row at three offsets, the "Needs review" tab, and "Create workflow", all with zero effect. Did the one
+  allowed Cmd+R on that page and retried; still dead. Per the dead UI rule, stopped the whole batch before Part 1,
+  Part 2, or Run R. Re-verified outside the browser that the Part 2 item 4 URL still 404s and `GHL_BUILD_FORM` is
+  still unset. Full detail, including a narrower diagnosis than the account-wide Firebase failures seen before,
+  in `<Master_Kit>/_BUILD-LOG/RUN-X-report.md` ("needs Chrome restart" at top).
+- **2026-09-12, stopped before any edits ("needs Chrome restart").** Copied this brief in, then ran the standing
+  dead-UI click test on the Workflows list before starting Part 1: the app stuck on GHL's own loading spinner past
+  20s, then the "click here to refresh" screen (never clicked). Did the one allowed Cmd+R; the page went fully
+  blank afterward with console showing `FirebaseError: Missing or insufficient permissions` from GHL's app bundle —
+  same signature as the account-wide auth/session failure from the RUN-P "session start" incident, not the
+  narrower Sites-only failure from the most recent RUN-R-report.md. Per the dead UI rule, stopped the whole batch
+  before Part 1, Part 2, or Run R. Confirmed outside the browser that the Part 2 item 4 URL
+  (`https://forms.atlasonesolutions.com/tools/time-savings/`) still 404s, and that `build/index.html`'s
+  `GHL_BUILD_FORM` is still unset, ready for Run R. Full detail and next steps in
+  `<Master_Kit>/_BUILD-LOG/RUN-X-report.md` ("needs Chrome restart" at top).
+- **2026-09-13, stopped before any edits ("needs login").** David reported having just logged in fresh with the
+  Claude extension. Navigating to the app root in a new tab showed GHL's own sign-in screen, not an authenticated
+  app; one reload plus a longer wait did not change that. Per standing rules, did not enter any credentials or
+  attempt to authenticate, and no credential-handoff tool was available. Stopped before the dead UI click test,
+  Part 1, Part 2, or Run R. Confirmed by curl that all four Part 2 / Run Q tool URLs now return 200 (time-savings
+  included), so Part 2 item 4 is unblocked once GHL access works. Full detail in
+  `<Master_Kit>/_BUILD-LOG/RUN-X-report.md` ("needs login" at top).
