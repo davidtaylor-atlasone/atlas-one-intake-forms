@@ -1,0 +1,88 @@
+# BRIEF-GHL-part4-resume (written by Run AI, terminal GHL-JOBS, 2026-09-13)
+
+For the GHL terminal (terminal A, the only session allowed in the browser UI). Everything below assumes Run AI's
+Job 2 files exist at `<Master_Kit>/_BUILD-LOG/cadence-emails-2026-09-13/` with an `INDEX.md` describing all 26
+sends, and (if Job 3 succeeded) GHL Email Builder templates named `A1 cadence: <send name>` exist and are listed in
+that same INDEX.md with their template ids. Read INDEX.md first; it tells you which of the two paths below applies
+to each send.
+
+## Why this brief exists
+
+The last three attempts at Part 4 (the cadence email copy pass) each stalled after 0 to 2 sends because the only
+way to read or edit a send's HTML inside GHL's workflow builder is scroll+screenshot through a small source
+textarea (the builder panel lives in a cross-origin iframe the browser tools cannot reach via accessibility tree,
+`find`, `get_page_text`, or JavaScript, and clipboard reads are blocked). Composing a ~2,000 character body by
+typing it took roughly 30 tool calls per send. Run AI removed the composing step: every send's finished HTML
+already exists as a file (or a GHL template, if Job 3's API test worked). Your job now is paste, not compose.
+
+## Fast path per send (use whichever INDEX.md says applies)
+
+**If a template exists (Job 3 succeeded):** open the send's action, switch its content source to the template
+named `A1 cadence: <send name>`, save, reopen and screenshot the rendered preview. No source dialog needed.
+
+**If no template (paste HTML):** open the send's action, click the `</>` source code button, triple click inside
+the textarea to select the whole body, and paste the matching file's HTML (the `<!-- BODY START -->` through
+`<!-- BODY END -->` portion only if the action already carries its own wrapper table with the signature block below
+it; the whole thing if the action is currently empty or badly broken). Save inside the dialog, press Escape, save
+the action, reload, reopen and reread the source once to confirm it stuck (an undo can silently revert a paste).
+Screenshot the rendered preview.
+
+**For the 7 wrapper-only placeholder sends** (Email 3, Email 4, 45-B, 45-C, the construction audit email, YE-2,
+YE-4): do NOT replace the body. Open the source dialog, read the current body text, and manually re-wrap only the
+signature block underneath it with the current standard block from `12 GHL Setup doccs/Atlas_One_Email_HTML_How_To.md`
+(logo mark, name/title, phone/email, the two grey footer lines, tagline, address line) if it does not already match.
+Apply the global link/button rules from RUN-AD-GHL.md 4.1 to whatever body copy is already there (booking link
+instead of "send me times", no dashes, no "here" links, dark blue link colour, button pattern) without changing the
+substance of the message. These 7 need the most manual attention since there is no finished file to paste.
+
+Set From Name (`David Taylor, Atlas One Solutions`) and From Email (`david@atlasonesolutions.com`) on every send,
+every workflow, the first time you touch it (skip if Post-Presentation Email 1/2 already have it set from Run AG).
+
+## Order of operations
+
+1. Post-Presentation Email workflow (`304a9fa4-a256-4015-b767-031070f4186f`): Email 1 and Email 2 were hand-built in
+   Run AG using a signature block Run AG describes as matching the shape Job 1 later standardized (logo mark, name,
+   phone, email, then the two grey footer lines and address footer) -- but Run AG never actually opened E0 to check
+   byte for byte, so this has not been confirmed, only assumed consistent. Open both, compare the signature/footer
+   against the current How-To wrapper, and paste `email-1.html` / `email-2.html` over them if anything drifted.
+   Then Email 3, Email 4 (wrapper-only placeholders), then the construction audit email at the LT-2 slot
+   (wrapper-only placeholder).
+2. Call: not now workflow (`ff950be3-829d-4a51-8f9a-825db660796e`): E0, LT-1, LT-2, LT-4, LT-5, 45-A (paste path),
+   then 45-B, 45-C (wrapper-only placeholders), then the construction audit email above 45-B (wrapper-only
+   placeholder, same copy as the Post-Presentation Email one, likely already reused as a saved snippet in GHL --
+   check before rebuilding it twice).
+3. Seasonal touches 2026-27 workflow (`52f414cb-b63e-4425-80c9-adea42a210e3`): Q-1 (all three occurrences, same
+   template), YE-1, YE-3 (paste path), YE-2, YE-4 (wrapper-only placeholders).
+4. Books: after the call (new workflow, build per `_BUILD-LOG/BRIEF-GHL-bookkeeping-cadence.md` if not already
+   built) and Books: quarter and year end inserts: B-1, B-2, B-3, B-4, BQ-1, BYE-1, BYE-2, all paste path. Two
+   scheduling notes from Run AI Job 2 (apply when placing BQ-1 and BYE-1 in the Seasonal touches chain):
+   - BQ-1 fires one day after each Q-1 date, not 30 days before quarter end (avoids a same-date collision with Q-1).
+   - BYE-1 fires 2026-11-02, not 2026-11-01 (avoids a same-date collision with YE-1).
+5. Test send (RUN-AD-GHL.md 4.4): one test contact (unique phone, `david+zzad1@atlasonesolutions.com`), run through
+   Post-Presentation Email with waits as-is (Email 1 alone is enough), trigger E0 by adding tag `not-now`, screenshot
+   both received emails, confirm from name, signature/logo, footer lines, paragraph spacing, button. Delete the test
+   contact after.
+6. Run X Part 1 item 3: duplicate the remaining chain into the construction branch, every dead end, in both
+   workflows (confirmed by Run AG to recur at MULTIPLE gates in Post-Presentation Email, not a single copy -- verify
+   node by node before saving each duplication).
+7. Run R exactly as written in `_briefs/RUN-A-batch-2026-09-12.md` (forms C1/C2, two intake workflows, paste the C2
+   URL into `GHL_BUILD_FORM` in `repo:build/index.html`, confirm the forward page). Run the Sites > Forms click test
+   first (it was the module that died last time); if dead, skip Run R, note it, and end the run rather than forcing it.
+
+`/compact` between numbered sections above (each is a natural checkpoint). Hand-off mode stays in force per the
+current BRIEF-GHL.md Part 0 (David clicks each new workflow open in your tab, you never navigate the tab to a URL
+yourself after step 1; if his own click hangs the editor, stop and write "editor dead even for David").
+
+## Live log and report
+
+Append to `TERMINAL-GHL-live.md` after every send (paste/switch, save, screenshot, confirm). Write
+`RUN-GHL-report.md` at the end: per-send table (send name, path used -- template or paste, confirmed correct
+yes/no), Run X Part 1 item 3 and Run R outcomes, the test send screenshots, assumptions, Questions for David at the
+very end. Copy the report to `repo:_briefs/assets/run-<next letter>/`.
+
+## Hard stops unchanged
+
+Never send an email or SMS outside the one approved test send in step 5 above (and that test send itself is a real
+send to a real inbox David controls, not a hard stop, since RUN-AD-GHL.md 4.4 explicitly calls for it). Never enable
+SMS or GHL's HIPAA feature. Never delete a file (move to `_to_delete/superseded-<date>/`). Never deploy to
+production or spend money.
