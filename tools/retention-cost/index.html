@@ -129,7 +129,7 @@ h1,.summary h2,.card h2{font-family:'Horas',Georgia,serif; letter-spacing:-.01em
 
 <header>
   <h1>Retention vs. Replacement Cost Calculator</h1>
-  <p class="sub">Compare what it really costs — in dollars and time — to <b>keep a support agent</b>, <b>keep an existing customer</b>, and <b>win a brand-new customer</b>. Every field is editable; defaults are U.S. national-average benchmarks (2025–26). Change them to match your business.</p>
+  <p class="sub">Compare what it really costs, in dollars and time, to <b>keep a support agent</b>, <b>keep an existing customer</b>, and <b>win a brand-new customer</b>. Every field is editable; defaults are U.S. national-average benchmarks (2025 to 26). Change them to match your business.</p>
 </header>
 
 <div class="industrybar">
@@ -144,7 +144,7 @@ h1,.summary h2,.card h2{font-family:'Horas',Georgia,serif; letter-spacing:-.01em
     <option value="ecom">E-commerce / retail</option>
     <option value="gym">Gym / membership / subscription</option>
   </select>
-  <span class="ihint">Sets illustrative starting numbers — then edit any field to match your business.</span>
+  <span class="ihint">Sets illustrative starting numbers, then edit any field to match your business.</span>
 </div>
 
 <div class="wrap">
@@ -158,7 +158,7 @@ h1,.summary h2,.card h2{font-family:'Horas',Georgia,serif; letter-spacing:-.01em
       <label>Agent fully-loaded annual pay <span class="hint">(wage + benefits)</span></label>
       <div class="prefix"><span>$</span><input type="number" id="empSalary" value="42000" step="1000"></div>
 
-      <label>Replacement cost <span class="hint">(% of annual pay — Gallup: 50–200%)</span></label>
+      <label>Replacement cost <span class="hint">(% of annual pay: Gallup: 50 to 200%)</span></label>
       <input type="number" id="empPct" value="100" step="5">
 
       <label>Weeks to hire a replacement</label>
@@ -167,7 +167,7 @@ h1,.summary h2,.card h2{font-family:'Horas',Georgia,serif; letter-spacing:-.01em
       <label>Months to full productivity (ramp)</label>
       <input type="number" id="empRamp" value="4" step="1">
 
-      <label>Customers each rep supports <span class="hint">(SaaS ~250–500; high-touch 10–50)</span></label>
+      <label>Customers each rep supports <span class="hint">(SaaS ~250 to 500; high-touch 10 to 50)</span></label>
       <input type="number" id="empCustPerRep" value="350" step="10">
 
       <div class="out">
@@ -178,7 +178,7 @@ h1,.summary h2,.card h2{font-family:'Horas',Georgia,serif; letter-spacing:-.01em
 
         <details>
           <summary>Adjust for the new hire's productivity</summary>
-          <div class="hint" style="margin:6px 0 4px;">The one-time cost is mostly sunk (recruiting, training, ramp). But a stronger replacement adds ongoing value that pays it back over time — and a weaker one adds cost.</div>
+          <div class="hint" style="margin:6px 0 4px;">The one-time cost is mostly sunk (recruiting, training, ramp). But a stronger replacement adds ongoing value that pays it back over time, and a weaker one adds cost.</div>
           <label>New hire's steady-state productivity vs. the person lost <span class="hint">(%)</span></label>
           <input type="number" id="empProd" value="100" step="5">
           <label>Annual value one agent generates <span class="hint">(proxy: loaded pay)</span></label>
@@ -208,7 +208,7 @@ h1,.summary h2,.card h2{font-family:'Horas',Georgia,serif; letter-spacing:-.01em
       <label>Cost to acquire a customer (CAC) <span class="hint">(shared w/ next card)</span></label>
       <div class="prefix"><span>$</span><input type="number" id="cac" value="200" step="10"></div>
 
-      <label>Retention is cheaper than acquisition by <span class="hint">(×; benchmark 5×, range 3–25×)</span></label>
+      <label>Retention is cheaper than acquisition by <span class="hint">(×; benchmark 5×, range 3 to 25×)</span></label>
       <input type="number" id="retMult" value="5" step="0.5">
 
       <label>Average revenue per customer / yr</label>
@@ -228,7 +228,7 @@ h1,.summary h2,.card h2{font-family:'Horas',Georgia,serif; letter-spacing:-.01em
       <div class="out">
         <div class="lbl">Cost to retain (per customer)</div>
         <div class="big" id="retCost">$40</div>
-        <div class="time-badge">Sale to existing customer: 60–70% close vs 5–20% for new</div>
+        <div class="time-badge">Sale to existing customer: 60 to 70% close vs 5 to 20% for new</div>
         <div class="row" style="margin-top:8px;"><span>Lifetime value at stake (margin)</span><b id="clvVal">$3,600</b></div>
         <div class="row"><span>Every $1 retained protects</span><b id="retLeverage">$90</b></div>
       </div>
@@ -261,7 +261,7 @@ h1,.summary h2,.card h2{font-family:'Horas',Georgia,serif; letter-spacing:-.01em
 
   <!-- SUMMARY -->
   <div class="summary">
-    <h2>Side-by-side — on a per-customer basis</h2>
+    <h2>Side-by-side: on a per-customer basis</h2>
     <div class="sh">All three costs normalized to <b>one customer</b>, so they're comparable. The agent's replacement cost is spread across the customers that rep supports.</div>
     <div class="bars" id="bars"></div>
     <div class="ratio" id="ratioText"></div>
@@ -269,8 +269,8 @@ h1,.summary h2,.card h2{font-family:'Horas',Georgia,serif; letter-spacing:-.01em
 
   <!-- REVOLVING DOOR -->
   <div class="summary" style="margin-top:24px;">
-    <h2>The true cost of losing one customer — and the revolving door</h2>
-    <div class="sh">A lost customer isn't a lost sale — it's a lost <b>relationship</b>. Losing them to poor service costs you the future margin they'd have paid, <i>plus</i> what you'll spend to replace them just to stand still, <i>plus</i> the referrals they'd have sent.</div>
+    <h2>The true cost of losing one customer, and the revolving door</h2>
+    <div class="sh">A lost customer isn't a lost sale: it's a lost <b>relationship</b>. Losing them to poor service costs you the future margin they'd have paid, <i>plus</i> what you'll spend to replace them just to stand still, <i>plus</i> the referrals they'd have sent.</div>
 
     <div class="grid" style="grid-template-columns:repeat(3,1fr); margin-top:4px;">
       <div>
@@ -299,8 +299,8 @@ h1,.summary h2,.card h2{font-family:'Horas',Georgia,serif; letter-spacing:-.01em
       </div>
       <div class="card acq" style="padding:16px;">
         <div class="out" style="border:0; padding:0; margin:0;">
-          <div class="lbl">Revolving door — per year</div>
-          <div class="big" id="doorBleed" style="color:var(--acq)">$—</div>
+          <div class="lbl">Revolving door: per year</div>
+          <div class="big" id="doorBleed" style="color:var(--acq)">$…</div>
           <div class="row" style="margin-top:8px;"><span>Customers lost / yr</span><b id="doorLost">30</b></div>
           <div class="row"><span>Just to stand still, you must win</span><b id="doorReplace">30</b></div>
           <div class="row"><span>…before you grow at all</span><b>&nbsp;</b></div>
@@ -309,10 +309,10 @@ h1,.summary h2,.card h2{font-family:'Horas',Georgia,serif; letter-spacing:-.01em
       <div class="card ret" style="padding:16px;">
         <div class="out" style="border:0; padding:0; margin:0;">
           <div class="lbl">The retention play</div>
-          <div class="big" id="retSpend" style="color:var(--ret)">$—</div>
-          <div class="row" style="margin-top:8px;"><span>Cost to retain that whole cohort</span><b id="retCohort">$—</b></div>
-          <div class="row"><span>Value it protects</span><b id="retProtect">$—</b></div>
-          <div class="row"><span>Return on that spend</span><b id="retROI">—</b></div>
+          <div class="big" id="retSpend" style="color:var(--ret)">$…</div>
+          <div class="row" style="margin-top:8px;"><span>Cost to retain that whole cohort</span><b id="retCohort">$…</b></div>
+          <div class="row"><span>Value it protects</span><b id="retProtect">$…</b></div>
+          <div class="row"><span>Return on that spend</span><b id="retROI">…</b></div>
         </div>
       </div>
     </div>
@@ -322,7 +322,7 @@ h1,.summary h2,.card h2{font-family:'Horas',Georgia,serif; letter-spacing:-.01em
 </div>
 
 <div class="foot">
-  <b>Benchmark sources &amp; assumptions.</b> Support/contact-center turnover runs 41–46% annually (higher in first year); replacing one agent costs roughly 50–200% of pay (Gallup) or ~$10k–$46k all-in, with 5–8 weeks to hire and up to 6–8 months to full ramp. Retaining a customer typically costs 5× less than acquiring one (range 3–25× by industry; original "5×" from Bain/HBR, 1990); a 5% lift in retention can raise profits 25–95%. Existing customers convert at 60–70% vs 5–20% for new prospects. One rep supports roughly 250–500 customers in SaaS/B2B (HubSpot ~1:350) and 400–600 in e-commerce, though high-touch/account-based support can be 10–50; that ratio is what makes the agent cost comparable per customer. CAC varies enormously by industry — the $200 default is illustrative only; use your own. <b>On customer experience:</b> up to 32% of customers walk away from a brand they love after a single bad experience (PwC); ~40% of departures trace to how they felt about the service; poor service costs U.S. businesses tens of billions a year (NewVoiceMedia est. $75B). Lifetime value here is measured in gross <i>margin</i>, not revenue, so the ROI figures are real profit. Figures are directional planning benchmarks, not a substitute for your actual books.
+  <b>Benchmark sources &amp; assumptions.</b> Support/contact-center turnover runs 41 to 46% annually (higher in first year); replacing one agent costs roughly 50 to 200% of pay (Gallup) or ~$10k to $46k all-in, with 5 to 8 weeks to hire and up to 6 to 8 months to full ramp. Retaining a customer typically costs 5× less than acquiring one (range 3 to 25× by industry; original "5×" from Bain/HBR, 1990); a 5% lift in retention can raise profits 25 to 95%. Existing customers convert at 60 to 70% vs 5 to 20% for new prospects. One rep supports roughly 250 to 500 customers in SaaS/B2B (HubSpot ~1:350) and 400 to 600 in e-commerce, though high-touch/account-based support can be 10 to 50; that ratio is what makes the agent cost comparable per customer. CAC varies enormously by industry: the $200 default is illustrative only; use your own. <b>On customer experience:</b> up to 32% of customers walk away from a brand they love after a single bad experience (PwC); ~40% of departures trace to how they felt about the service; poor service costs U.S. businesses tens of billions a year (NewVoiceMedia est. $75B). Lifetime value here is measured in gross <i>margin</i>, not revenue, so the ROI figures are real profit. Figures are directional planning benchmarks, not a substitute for your actual books.
 </div>
 
 <script>
@@ -358,7 +358,7 @@ function calc(){
     $('empBreakeven').textContent = 'A stronger hire fully offsets the one-time cost in ~'
       + (Math.round(mo*10)/10) + ' months, then nets positive.';
   } else if(annualDelta < 0){
-    $('empBreakeven').textContent = 'A weaker hire never pays it back — the gap compounds every year.';
+    $('empBreakeven').textContent = 'A weaker hire never pays it back, the gap compounds every year.';
   } else {
     $('empBreakeven').textContent = 'Like-for-like replacement: the full one-time cost stands.';
   }
@@ -392,11 +392,11 @@ function calc(){
   const lifespan = +$('lifespan').value || 0;
   const clv = rev * margin * lifespan;          // lifetime GROSS MARGIN, not revenue
   $('clvVal').textContent = money(clv);
-  $('retLeverage').textContent = retCost>0 ? money(clv/retCost) : '—';
+  $('retLeverage').textContent = retCost>0 ? money(clv/retCost) : '…';
 
   // payback of acquisition against monthly revenue
   const monthlyRev = rev/12;
-  $('acqPayback').textContent = monthlyRev>0 ? (Math.round(cac/monthlyRev*10)/10)+' mo' : '—';
+  $('acqPayback').textContent = monthlyRev>0 ? (Math.round(cac/monthlyRev*10)/10)+' mo' : '…';
 
   // ----- Summary bars (all per-customer) -----
   const items = [
@@ -419,8 +419,8 @@ function calc(){
     `On a per-customer basis: winning a new customer costs <b>${acqVsRet.toFixed(1)}×</b> what it costs to keep one you already have. `+
     `The turnover of a rep serving <b>${custPerRep.toLocaleString('en-US')}</b> customers adds about <b>${money2(empPerCust)}</b> of hidden cost per customer `+
     `(that's <b>${empVsRetC>=1?empVsRetC.toFixed(1)+'×':Math.round(empVsRetC*100)+'%'}</b> of the retention cost). `+
-    `In absolute terms one agent's departure still costs <b>${money(empCost)}</b> — the equivalent of acquiring <b>${cac>0?Math.round(empCost/cac).toLocaleString('en-US'):'—'}</b> new customers. `+
-    `The through-line: <b>retention — of both customers and staff — is the cheapest dollar you spend</b>.`;
+    `In absolute terms one agent's departure still costs <b>${money(empCost)}</b>: the equivalent of acquiring <b>${cac>0?Math.round(empCost/cac).toLocaleString('en-US'):'…'}</b> new customers. `+
+    `The through-line: <b>retention, of both customers and staff, is the cheapest dollar you spend</b>.`;
 
   // ----- Revolving door -----
   const refCount = +$('referrals').value || 0;
@@ -446,13 +446,13 @@ function calc(){
   $('retSpend').textContent = money(retCohort);
   $('retCohort').textContent = money(retCohort);
   $('retProtect').textContent = money(retProtect);
-  $('retROI').textContent = retROI>0 ? retROI.toFixed(0)+'× ($1 → $'+retROI.toFixed(0)+')' : '—';
+  $('retROI').textContent = retROI>0 ? retROI.toFixed(0)+'× ($1 → $'+retROI.toFixed(0)+')' : '…';
 
   $('doorText').innerHTML =
-    `Losing one customer to poor service really costs about <b>${money(lostOne)}</b> — not the ${money(rev)} sale, but the lifetime margin, the ${money(cac)} to replace them, and the referrals that never come. `+
-    `At <b>${(custChurn*100).toFixed(0)}%</b> churn on <b>${totalCust.toLocaleString('en-US')}</b> customers, that's <b>${money(doorBleed)}</b> walking out the door every year — and you have to win <b>${Math.ceil(doorLost).toLocaleString('en-US')}</b> new customers just to break even before you grow at all. `+
-    `Spending <b>${money(retCohort)}</b> to keep that same group instead protects <b>${money(retProtect)}</b> of value — a <b>${retROI.toFixed(0)}×</b> return. `+
-    `And the two doors are connected: an experienced, well-treated CSR is what keeps that churn number low — lose the rep, service slips, and the customer door starts spinning faster.`;
+    `Losing one customer to poor service really costs about <b>${money(lostOne)}</b>, not the ${money(rev)} sale, but the lifetime margin, the ${money(cac)} to replace them, and the referrals that never come. `+
+    `At <b>${(custChurn*100).toFixed(0)}%</b> churn on <b>${totalCust.toLocaleString('en-US')}</b> customers, that's <b>${money(doorBleed)}</b> walking out the door every year, and you have to win <b>${Math.ceil(doorLost).toLocaleString('en-US')}</b> new customers just to break even before you grow at all. `+
+    `Spending <b>${money(retCohort)}</b> to keep that same group instead protects <b>${money(retProtect)}</b> of value, a <b>${retROI.toFixed(0)}×</b> return. `+
+    `And the two doors are connected: an experienced, well-treated CSR is what keeps that churn number low, lose the rep, service slips, and the customer door starts spinning faster.`;
 }
 
 // ----- Industry presets (illustrative starting points; every field stays editable) -----
@@ -484,7 +484,7 @@ calc();
 
 <div class="cta-band">
   <h3>Losing customers and reps is the most expensive problem most owners never measure.</h3>
-  <p>Atlas One is the concierge back office that keeps both doors from spinning — HR, payroll, benefits, bookkeeping, and the systems that hold your team and your customers. Run your numbers above, then let's talk about closing the gap. One call solves everything.</p>
+  <p>Atlas One is the concierge back office that keeps both doors from spinning, HR, payroll, benefits, bookkeeping, and the systems that hold your team and your customers. Run your numbers above, then let's talk about closing the gap. One call solves everything.</p>
   <a href="https://atlasonesolutions.com/contact/">Book a free call &rarr;</a>
 </div>
 <div class="afoot"><span>Atlas One Solutions &middot; One Call Solves Everything</span><span>david@AtlasOneSolutions.com &middot; 385-213-7177 &middot; atlasonesolutions.com</span></div>

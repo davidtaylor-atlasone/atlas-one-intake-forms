@@ -112,7 +112,7 @@
   </div>
 
   <h1>COI &rarr; Workers&rsquo; Comp Premium Estimator</h1>
-  <p class="lede">See how much <b>extra</b> workers&rsquo; comp premium you&rsquo;ll owe at audit for <b>uninsured subcontractors</b> (no Certificate of Insurance on file) &mdash; and how collecting their COIs drops that added premium to <b>$0</b>.</p>
+  <p class="lede">See how much <b>extra</b> workers&rsquo; comp premium you&rsquo;ll owe at audit for <b>uninsured subcontractors</b> (no Certificate of Insurance on file), and how collecting their COIs drops that added premium to <b>$0</b>.</p>
 
   <!-- HERO RESULT -->
   <div class="hero">
@@ -130,13 +130,13 @@
   <div class="explain">
     <h3>How auditors treat subcontractors (NCCI Basic Manual Rule 2)</h3>
     <ul>
-      <li class="excl"><b>Insured sub &mdash; valid COI / WC certificate on file:</b> excluded from your audit. Adds <b>$0</b>.</li>
-      <li><b>Uninsured sub &mdash; no COI (default):</b> charged on <b>100%</b> of what you paid them, unless you provide invoices splitting labor vs. materials.</li>
+      <li class="excl"><b>Insured sub: valid COI / WC certificate on file:</b> excluded from your audit. Adds <b>$0</b>.</li>
+      <li><b>Uninsured sub: no COI (default):</b> charged on <b>100%</b> of what you paid them, unless you provide invoices splitting labor vs. materials.</li>
       <li><b>Uninsured, labor only (documented):</b> not less than <b>90%</b> of the amount.</li>
       <li><b>Uninsured, labor + materials (invoices separating them):</b> not less than <b>50%</b> (auditor removes materials, capped at 50%).</li>
       <li><b>Uninsured, mobile equipment with operator doing all the work:</b> about <b>33%</b> (one-third).</li>
     </ul>
-    <div class="key">The reliable way to $0 is collecting the COI &mdash; the material reductions require documentation most subs never provide.</div>
+    <div class="key">The reliable way to $0 is collecting the COI, the material reductions require documentation most subs never provide.</div>
   </div>
 
   <!-- TABS -->
@@ -155,10 +155,10 @@
       <div class="field">
         <label>Treatment</label>
         <select id="q_treat">
-          <option value="def" selected>No COI + no labor/material breakdown &mdash; 100%</option>
-          <option value="labor">Uninsured, labor only (documented) &mdash; 90%</option>
-          <option value="both">Uninsured, labor + materials (invoices) &mdash; 50%</option>
-          <option value="mobile">Mobile equipment w/ operator &mdash; 33%</option>
+          <option value="def" selected>No COI + no labor/material breakdown: 100%</option>
+          <option value="labor">Uninsured, labor only (documented): 90%</option>
+          <option value="both">Uninsured, labor + materials (invoices): 50%</option>
+          <option value="mobile">Mobile equipment w/ operator: 33%</option>
         </select>
       </div>
       <div class="field">
@@ -209,7 +209,7 @@
           <th class="col-name">Sub name</th>
           <th>Amount paid</th>
           <th>COI on file?</th>
-          <th>If no COI &mdash; treatment</th>
+          <th>If no COI: treatment</th>
           <th></th>
         </tr>
       </thead>
@@ -219,7 +219,7 @@
   </div>
 
   <div class="disclaimer">
-    <b>Estimate only.</b> Based on NCCI Basic Manual Rule 2 &mdash; Subcontractors; actual treatment varies by state rating bureau, class code, and carrier. Verify with your auditor/carrier.
+    <b>Estimate only.</b> Based on NCCI Basic Manual Rule 2, Subcontractors; actual treatment varies by state rating bureau, class code, and carrier. Verify with your auditor/carrier.
   </div>
 
   <footer>
@@ -229,7 +229,7 @@
       <a href="tel:+13852137177">385-213-7177</a> &middot;
       <a href="https://atlasonesolutions.com" target="_blank" rel="noopener">atlasonesolutions.com</a>
     </div>
-    <div style="margin-top:8px;font-size:11.5px">Source: NCCI Basic Manual Rule 2 &mdash; Subcontractors.</div>
+    <div style="margin-top:8px;font-size:11.5px">Source: NCCI Basic Manual Rule 2: Subcontractors.</div>
   </footer>
 
 </div>
@@ -269,10 +269,10 @@
       '<td><div class="inline-prefix"><span>$</span><input class="row-amt" type="text" inputmode="decimal" value="'+(amt||'')+'" data-f="amt"></div></td>'+
       '<td><select data-f="coi"><option value="yes"'+(coi==='yes'?' selected':'')+'>Yes</option><option value="no"'+(coi!=='yes'?' selected':'')+'>No</option></select></td>'+
       '<td class="row-treat"><select data-f="treat">'+
-        '<option value="def"'+(treat==='def'||!treat?' selected':'')+'>No breakdown &mdash; 100%</option>'+
-        '<option value="labor"'+(treat==='labor'?' selected':'')+'>Labor only &mdash; 90%</option>'+
-        '<option value="both"'+(treat==='both'?' selected':'')+'>Labor + materials &mdash; 50%</option>'+
-        '<option value="mobile"'+(treat==='mobile'?' selected':'')+'>Mobile equip &mdash; 33%</option>'+
+        '<option value="def"'+(treat==='def'||!treat?' selected':'')+'>No breakdown: 100%</option>'+
+        '<option value="labor"'+(treat==='labor'?' selected':'')+'>Labor only: 90%</option>'+
+        '<option value="both"'+(treat==='both'?' selected':'')+'>Labor + materials: 50%</option>'+
+        '<option value="mobile"'+(treat==='mobile'?' selected':'')+'>Mobile equip: 33%</option>'+
       '</select></td>'+
       '<td><button class="rm" title="Remove" onclick="this.closest(\'tr\').remove();compute();">&times;</button></td>';
     tb.appendChild(tr);
