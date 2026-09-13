@@ -1,0 +1,187 @@
+[
+ {
+  "file": "index.html",
+  "desktop": {
+   "width": 1440,
+   "bodyFamily": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+   "sw": 1440,
+   "bsw": 1440,
+   "sh": 938,
+   "title": "Health Insurance Quote: Census & RFP Intake | Atlas One Solutions",
+   "dmCheck": true,
+   "bodyRendered": "DM Sans:19",
+   "dmAsked": 9,
+   "dmRendered": 8,
+   "horasAsked": 0,
+   "horasRendered": 0,
+   "serif": 0,
+   "errors": [],
+   "nonFileRequests": [],
+   "samples": [
+    {
+     "i": 0,
+     "tag": "h1",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "700",
+     "text": "Atlas One Solutions",
+     "rendered": "DM Sans:19"
+    },
+    {
+     "i": 1,
+     "tag": "a",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "700",
+     "text": "Book a call with David →",
+     "rendered": "DM Sans:24"
+    },
+    {
+     "i": 2,
+     "tag": "h2",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "700",
+     "text": "Health Insurance Quote: Census",
+     "rendered": "DM Sans:43"
+    },
+    {
+     "i": 3,
+     "tag": "p",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "400",
+     "text": "A few quick steps and we can b",
+     "rendered": "DM Sans:149"
+    },
+    {
+     "i": 4,
+     "tag": "h3",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "700",
+     "text": "What size is the group?",
+     "rendered": "DM Sans:23"
+    },
+    {
+     "i": 5,
+     "tag": "span",
+     "family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+     "weight": "700",
+     "text": "Save your work",
+     "rendered": "DM Sans:14"
+    },
+    {
+     "i": 6,
+     "tag": "button",
+     "family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+     "weight": "700",
+     "text": "Save build",
+     "rendered": "DM Sans:10"
+    },
+    {
+     "i": 7,
+     "tag": "span",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "700",
+     "text": "✓",
+     "rendered": ".SF NS (system):1"
+    },
+    {
+     "i": 8,
+     "tag": "button",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "700",
+     "text": "Next: Company info →",
+     "rendered": "DM Sans:20"
+    }
+   ]
+  },
+  "mobile": {
+   "width": 390,
+   "bodyFamily": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+   "sw": 390,
+   "bsw": 390,
+   "sh": 1310,
+   "title": "Health Insurance Quote: Census & RFP Intake | Atlas One Solutions",
+   "dmCheck": true,
+   "bodyRendered": "DM Sans:19",
+   "dmAsked": 9,
+   "dmRendered": 8,
+   "horasAsked": 0,
+   "horasRendered": 0,
+   "serif": 0,
+   "errors": [],
+   "nonFileRequests": [],
+   "samples": [
+    {
+     "i": 0,
+     "tag": "h1",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "700",
+     "text": "Atlas One Solutions",
+     "rendered": "DM Sans:19"
+    },
+    {
+     "i": 1,
+     "tag": "a",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "700",
+     "text": "Book a call with David →",
+     "rendered": "DM Sans:24"
+    },
+    {
+     "i": 2,
+     "tag": "h2",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "700",
+     "text": "Health Insurance Quote: Census",
+     "rendered": "DM Sans:42"
+    },
+    {
+     "i": 3,
+     "tag": "p",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "400",
+     "text": "A few quick steps and we can b",
+     "rendered": "DM Sans:147"
+    },
+    {
+     "i": 4,
+     "tag": "h3",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "700",
+     "text": "What size is the group?",
+     "rendered": "DM Sans:23"
+    },
+    {
+     "i": 5,
+     "tag": "span",
+     "family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+     "weight": "700",
+     "text": "Save your work",
+     "rendered": "DM Sans:14"
+    },
+    {
+     "i": 6,
+     "tag": "button",
+     "family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+     "weight": "700",
+     "text": "Save build",
+     "rendered": "DM Sans:10"
+    },
+    {
+     "i": 7,
+     "tag": "span",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "700",
+     "text": "✓",
+     "rendered": ".SF NS (system):1"
+    },
+    {
+     "i": 8,
+     "tag": "button",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\", Roboto, H",
+     "weight": "700",
+     "text": "Next: Company info →",
+     "rendered": "DM Sans:20"
+    }
+   ]
+  }
+ }
+]

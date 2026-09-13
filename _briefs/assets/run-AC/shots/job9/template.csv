@@ -1,0 +1,5 @@
+﻿First,Last/ID,Relationship,DOB or Age,Gender,Street,City,State,ZIP,Tier,SSN
+Jane,Doe,Employee,04/12/1985,Female,123 Main St,Salt Lake City,UT,84101,EE+Spouse,
+Tom,Doe,Spouse,09/02/1984,Male,,,,,,
+,ID-2049,Employee,39,Male,,,,84604,Family,
+Ava,ID-2049,Child,7,Female,,,,,,
