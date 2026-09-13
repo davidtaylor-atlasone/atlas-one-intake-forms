@@ -1,0 +1,288 @@
+{
+ "title": "Atlas One Portal: build Sep 13, 2026 10:16 AM",
+ "stamp": "BUILD Sep 13, 2026  10:16 AM",
+ "tools": [
+  {
+   "label": "routing",
+   "id": "t4",
+   "innerTitle": "Atlas One: Benefits Routing Tool",
+   "bodyFamily": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+   "dmLoaded": true,
+   "dmAsked": 5,
+   "dmRendered": 5,
+   "serifRendered": 0,
+   "probes": [
+    {
+     "i": 0,
+     "tag": "span",
+     "family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+     "weight": "700",
+     "text": "A",
+     "rendered": "DM Sans 9pt:2"
+    },
+    {
+     "i": 1,
+     "tag": "b",
+     "family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+     "weight": "900",
+     "text": "1",
+     "rendered": "DM Sans 9pt:1"
+    },
+    {
+     "i": 2,
+     "tag": "button",
+     "family": "\"DM Sans\"",
+     "weight": "600",
+     "text": "Clear",
+     "rendered": "DM Sans 9pt:5"
+    },
+    {
+     "i": 3,
+     "tag": "h1",
+     "family": "Horas, \"DM Sans\", serif",
+     "weight": "500",
+     "text": "Benefits routing: which door",
+     "rendered": "Horas Med:61"
+    },
+    {
+     "i": 4,
+     "tag": "p",
+     "family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+     "weight": "400",
+     "text": "Internal. Enter what you kno",
+     "rendered": "DM Sans 9pt:176"
+    },
+    {
+     "i": 5,
+     "tag": "h2",
+     "family": "Horas, \"DM Sans\", serif",
+     "weight": "500",
+     "text": "What we know",
+     "rendered": "Horas Med:12"
+    },
+    {
+     "i": 6,
+     "tag": "label",
+     "family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+     "weight": "600",
+     "text": "Entity type",
+     "rendered": "DM Sans 9pt:11"
+    }
+   ]
+  },
+  {
+   "label": "calendar",
+   "id": "t18",
+   "innerTitle": "Atlas One: HR and Payroll Compliance Calendar",
+   "bodyFamily": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+   "dmLoaded": true,
+   "dmAsked": 5,
+   "dmRendered": 5,
+   "serifRendered": 0,
+   "probes": [
+    {
+     "i": 0,
+     "tag": "span",
+     "family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+     "weight": "700",
+     "text": "A",
+     "rendered": "DM Sans 9pt:2"
+    },
+    {
+     "i": 1,
+     "tag": "b",
+     "family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+     "weight": "900",
+     "text": "1",
+     "rendered": "DM Sans 9pt:1"
+    },
+    {
+     "i": 2,
+     "tag": "button",
+     "family": "\"DM Sans\"",
+     "weight": "600",
+     "text": "Export .ics",
+     "rendered": "DM Sans 9pt:11"
+    },
+    {
+     "i": 3,
+     "tag": "h1",
+     "family": "Horas, \"DM Sans\", serif",
+     "weight": "500",
+     "text": "HR and payroll compliance ca",
+     "rendered": "Horas Med:34"
+    },
+    {
+     "i": 4,
+     "tag": "p",
+     "family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+     "weight": "400",
+     "text": "Pick the states you have emp",
+     "rendered": "DM Sans 9pt:234"
+    },
+    {
+     "i": 5,
+     "tag": "h2",
+     "family": "Horas, \"DM Sans\", serif",
+     "weight": "500",
+     "text": "Your business",
+     "rendered": "Horas Med:13"
+    },
+    {
+     "i": 6,
+     "tag": "label",
+     "family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+     "weight": "600",
+     "text": "Employees (W-2 headcount)",
+     "rendered": "DM Sans 9pt:25"
+    }
+   ]
+  },
+  {
+   "label": "coi",
+   "id": "t6",
+   "innerTitle": "Atlas One: COI Tracker",
+   "bodyFamily": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+   "dmLoaded": true,
+   "dmAsked": 6,
+   "dmRendered": 6,
+   "serifRendered": 0,
+   "probes": [
+    {
+     "i": 0,
+     "tag": "span",
+     "family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+     "weight": "700",
+     "text": "A",
+     "rendered": "DM Sans 9pt:2"
+    },
+    {
+     "i": 1,
+     "tag": "b",
+     "family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+     "weight": "900",
+     "text": "1",
+     "rendered": "DM Sans 9pt:1"
+    },
+    {
+     "i": 2,
+     "tag": "button",
+     "family": "\"DM Sans\"",
+     "weight": "600",
+     "text": "Print / Save PDF",
+     "rendered": "DM Sans 9pt:16"
+    },
+    {
+     "i": 3,
+     "tag": "h1",
+     "family": "Horas, \"DM Sans\", serif",
+     "weight": "500",
+     "text": "Certificate of insurance tra",
+     "rendered": "Horas Med:32"
+    },
+    {
+     "i": 4,
+     "tag": "p",
+     "family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+     "weight": "400",
+     "text": "Every subcontractor, every c",
+     "rendered": "DM Sans 9pt:218"
+    },
+    {
+     "i": 5,
+     "tag": "h2",
+     "family": "Horas, \"DM Sans\", serif",
+     "weight": "500",
+     "text": "Your company and rules",
+     "rendered": "Horas Med:22"
+    },
+    {
+     "i": 6,
+     "tag": "label",
+     "family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+     "weight": "600",
+     "text": "Your company",
+     "rendered": "DM Sans 9pt:12"
+    },
+    {
+     "i": 7,
+     "tag": "th",
+     "family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+     "weight": "700",
+     "text": "Status",
+     "rendered": "DM Sans 9pt:6"
+    }
+   ]
+  },
+  {
+   "label": "census",
+   "id": "t2",
+   "innerTitle": "Health Insurance Quote: Census & RFP Intake | Atlas One Solutions",
+   "bodyFamily": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\",",
+   "dmLoaded": true,
+   "dmAsked": 7,
+   "dmRendered": 6,
+   "serifRendered": 0,
+   "probes": [
+    {
+     "i": 0,
+     "tag": "h1",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\",",
+     "weight": "700",
+     "text": "Atlas One Solutions",
+     "rendered": "DM Sans:19"
+    },
+    {
+     "i": 1,
+     "tag": "h2",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\",",
+     "weight": "700",
+     "text": "Health Insurance Quote: Cens",
+     "rendered": "DM Sans:43"
+    },
+    {
+     "i": 2,
+     "tag": "p",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\",",
+     "weight": "400",
+     "text": "A few quick steps and we can",
+     "rendered": "DM Sans:149"
+    },
+    {
+     "i": 3,
+     "tag": "span",
+     "family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+     "weight": "700",
+     "text": "Save your work",
+     "rendered": "DM Sans:14"
+    },
+    {
+     "i": 4,
+     "tag": "button",
+     "family": "\"DM Sans\", system-ui, -apple-system, sans-serif",
+     "weight": "700",
+     "text": "Save build",
+     "rendered": "DM Sans:10"
+    },
+    {
+     "i": 5,
+     "tag": "span",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\",",
+     "weight": "700",
+     "text": "✓",
+     "rendered": ".SF NS (system):1"
+    },
+    {
+     "i": 6,
+     "tag": "button",
+     "family": "\"DM Sans\", -apple-system, \"system-ui\", \"Segoe UI\",",
+     "weight": "700",
+     "text": "Next: Company info →",
+     "rendered": "DM Sans:20"
+    }
+   ]
+  }
+ ],
+ "errors": [],
+ "nonFileRequests": []
+}

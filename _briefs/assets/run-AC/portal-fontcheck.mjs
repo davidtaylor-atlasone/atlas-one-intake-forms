@@ -38,7 +38,7 @@ for (const pair of pairs) {
   }
   await frame.evaluate(() => document.querySelectorAll('[data-a1probe]').forEach(e => e.removeAttribute('data-a1probe')));
   await pg.screenshot({ path: `${outdir}/Portal_${label}_1440.png`, fullPage: false });
-  const dm = probes.probes.filter(p => /^"?DM Sans/.test(p.family)); const dmOk = dm.filter(p => /^DM Sans( Medium)?:/.test(p.rendered));
+  const dm = probes.probes.filter(p => /^"?DM Sans/.test(p.family)); const dmOk = dm.filter(p => /^DM Sans( Medium| 9pt| 9pt SemiBold)?:/.test(p.rendered));
   const serif = probes.probes.filter(p => /Times|Georgia/.test(p.rendered));
   out.tools.push({ label, id, innerTitle: probes.title, bodyFamily: probes.bodyFamily, dmLoaded: probes.dmLoaded, dmAsked: dm.length, dmRendered: dmOk.length, serifRendered: serif.length, probes: probes.probes });
   console.log(label, '|', probes.title, '| body:', probes.bodyFamily, '| fonts.check DM Sans:', probes.dmLoaded, '| DM asked/rendered', dm.length + '/' + dmOk.length, '| serif', serif.length);
