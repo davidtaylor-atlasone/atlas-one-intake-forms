@@ -18,7 +18,14 @@ body{background:var(--off);color:var(--navy);font-family:'DM Sans',-apple-system
 h1{font-family:'Horas',Georgia,serif;font-size:30px;letter-spacing:-.02em;line-height:1.15;margin:0 0 12px}
 .lede{color:var(--mut);font-size:16px;margin-bottom:18px}
 .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px;margin-top:16px;box-shadow:0 2px 10px rgba(35,48,77,.05)}
-.doc{display:inline-block;border:2px solid var(--navy);border-radius:999px;padding:4px 14px;font-weight:700;font-size:14px;margin-bottom:12px}
+.doclabel{display:block;font-weight:700;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--mut);margin-bottom:6px}
+.doc-select{display:block;width:100%;border:2px solid var(--navy);border-radius:999px;padding:10px 16px;font-weight:700;font-size:15px;font-family:inherit;color:var(--navy);background:#fff;margin-bottom:18px;appearance:none;background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="9"><path d="M1 1l6 6 6-6" stroke="%2323304D" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>');background-repeat:no-repeat;background-position:right 16px center}
+.doc-select:focus{outline:2px solid var(--peri);outline-offset:1px}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px}
+.field label{display:block;font-size:13px;font-weight:700;color:var(--mut);margin-bottom:5px}
+.field input{display:block;width:100%;border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-family:inherit;font-size:15px;color:var(--navy);background:var(--off)}
+.field input:focus{outline:2px solid var(--peri);outline-offset:1px}
+@media (max-width:480px){.fields{grid-template-columns:1fr}}
 .btn{display:inline-block;background:var(--navy);color:#fff;text-decoration:none;font-weight:700;padding:13px 22px;border-radius:10px;border:2px solid var(--navy);font-size:16px;line-height:1.2;margin:6px 8px 6px 0}
 .btn.peri{background:var(--peri);border-color:var(--peri)}
 .btn.outline{background:transparent;color:var(--navy)}
@@ -30,8 +37,27 @@ h1{font-family:'Horas',Georgia,serif;font-size:30px;letter-spacing:-.02em;line-h
   <h1>Have Atlas One build this for you</h1>
   <p class="lede" id="lede">Tell David which document you need and he will build it around your business, review it, and send it back ready to sign.</p>
   <div class="card">
-    <div class="doc" id="docname">Document</div>
-    <p id="msg">Tell David which document you need. Email him with the document name already filled in, or book the 30 minute call and walk through it together.</p>
+    <label class="doclabel" for="docselect">Which document?</label>
+    <select class="doc-select" id="docselect">
+      <option value="handbook">Employee Handbook</option>
+      <option value="safety-manual">Safety Manual</option>
+      <option value="offer-letter">W-2 At-Will Agreement</option>
+      <option value="ic-agreement">Contractor Agreement</option>
+      <option value="nda">NDA</option>
+      <option value="writeup">Disciplinary Write-Up</option>
+      <option value="separation">Separation Letter</option>
+      <option value="w2-onboarding">W-2 Onboarding Packet</option>
+      <option value="1099-onboarding">1099 Onboarding Packet</option>
+      <option value="enrollment-guide">Enrollment Guide</option>
+      <option value="other">Other</option>
+    </select>
+    <div class="fields">
+      <div class="field"><label for="company">Company name</label><input type="text" id="company" placeholder="Company name"></div>
+      <div class="field"><label for="employees">Number of employees</label><input type="text" id="employees" placeholder="Number of employees"></div>
+      <div class="field"><label for="states">States you operate in</label><input type="text" id="states" placeholder="States you operate in"></div>
+      <div class="field"><label for="timeline">When you need it</label><input type="text" id="timeline" placeholder="When you need it"></div>
+    </div>
+    <p id="msg">Pick the document, answer the four questions, and click Email David. Your email opens already written with those answers so nothing is left to explain. David builds it around your business, reviews it with you, and sends it back ready to sign, usually within five business days. If it is easier to talk it through, book the 30 minute call instead and bring the same four answers.</p>
     <p style="margin-top:16px"><a class="btn peri" id="mail" href="mailto:David@AtlasOneSolutions.com">Email David</a><a class="btn outline" href="https://api.leadconnectorhq.com/widget/groups/book-david" target="_blank" rel="noopener">Book a 30 minute call</a></p>
     <p class="muted">Or call 385-213-7177.</p>
   </div>
@@ -39,22 +65,24 @@ h1{font-family:'Horas',Georgia,serif;font-size:30px;letter-spacing:-.02em;line-h
 </div>
 <script>
 (function(){
-  var NAMES={"handbook":"Employee Handbook","safety-manual":"Safety Manual","offer-letter":"W-2 At-Will Employment Agreement","ic-agreement":"Independent Contractor Agreement","nda":"Non-Disclosure Agreement","blank":""};
-  var q=new URLSearchParams(location.search), slug=(q.get('doc')||'blank').toLowerCase();
-  if(!(slug in NAMES)) slug='blank';
-  var name=NAMES[slug];
+  var NAMES={"handbook":"Employee Handbook","safety-manual":"Safety Manual","offer-letter":"W-2 At-Will Agreement","ic-agreement":"Contractor Agreement","nda":"NDA","writeup":"Disciplinary Write-Up","separation":"Separation Letter","w2-onboarding":"W-2 Onboarding Packet","1099-onboarding":"1099 Onboarding Packet","enrollment-guide":"Enrollment Guide","other":"Other"};
+  var q=new URLSearchParams(location.search), slug=(q.get('doc')||'').toLowerCase();
+  if(!(slug in NAMES)) slug='other';
   if(GHL_BUILD_FORM){
     var sep=GHL_BUILD_FORM.indexOf('?')>-1?'&':'?';
     location.replace(GHL_BUILD_FORM+sep+'doc='+encodeURIComponent(slug));
     return;
   }
-  document.getElementById('docname').textContent=name||'Which document?';
-  if(name){
-    document.getElementById('msg').textContent='Tell David you want the '+name+' built for you. Email him with the document name already filled in, or book the 30 minute call and walk through it together.';
+  var sel=document.getElementById('docselect'), company=document.getElementById('company'), employees=document.getElementById('employees'), states=document.getElementById('states'), timeline=document.getElementById('timeline'), mail=document.getElementById('mail');
+  sel.value=slug;
+  function updateMail(){
+    var name=NAMES[sel.value]||'Other';
+    var subject='Build this for me: '+name;
+    var body='Company name: '+company.value+'\nNumber of employees: '+employees.value+'\nStates you operate in: '+states.value+'\nWhen you need it: '+timeline.value+'\n\nAnything else I should know:';
+    mail.href='mailto:David@AtlasOneSolutions.com?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
   }
-  var subject='Please build this for me: '+(name||'(document name)');
-  var body='Hi David,\n\nPlease build the '+(name||'(document name)')+' for my business.\n\nCompany:\nState:\nNumber of employees:\nAnything specific to include:\n\nThanks,';
-  document.getElementById('mail').href='mailto:David@AtlasOneSolutions.com?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+  [sel,company,employees,states,timeline].forEach(function(el){ el.addEventListener('input',updateMail); el.addEventListener('change',updateMail); });
+  updateMail();
 })();
 </script>
 </body></html>
