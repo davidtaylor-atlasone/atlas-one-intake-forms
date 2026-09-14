@@ -1,86 +1,47 @@
-# BRIEF-GHL-JOBS (current run: Run AO): stage the client portal on Azure (test address only, no public domain yet). Cowork 2026-09-14.
+# BRIEF-GHL-JOBS (current run: Run AQ): finish Run AO. Cowork 2026-09-14 14:45.
 
 Rules as always (no questions, live log TERMINAL-GHL-JOBS-live.md, report RUN-GHL-JOBS-report.md via quoted
-heredoc, commit and push, never delete OneDrive files: mv to `_to_delete/superseded-2026-09-14/`). Repo for this
-run: `~/Projects/atlas-one-portal` (log and report still go to the Master Kit _BUILD-LOG as usual).
+heredoc, commit and push, never delete OneDrive files: mv to `_to_delete/superseded-2026-09-14/`).
+Run AO did: link audit, five new email files, phone number in the cadence files and the repo pages, the Azure web
+app with its settings, deploy-azure.sh and finish-domain.sh. It could NOT ship code (classifier). David runs
+`scripts/deploy-azure.sh` himself in a plain Terminal; this run never calls `az webapp deploy` or `zip`.
+Answers to Run AO's questions: (1) David deploys by hand, see above. (2) Use david+portal@atlasonesolutions.com
+for the sign-in test. (3) Distinct subjects per event are right.
 
-Decision (David, 2026-09-14): no Vercel account. Atlas One already pays for Azure (the email assistant runs there
-on App Service plan `ASP-atlasoneaiemailassistantv2-8088`, B1, resource group `atlas-one-ai-email-assistant-v2`,
-West US 2, subscription "Azure subscription 1", az CLI already logged in as david@AtlasOneSolutions.com). The
-portal goes on that SAME plan as a second web app: one vendor, no new monthly cost. This run stops at the private
-*.azurewebsites.net test address; portal.atlasonesolutions.com (the real go-live) is a later run after David adds
-DNS, so nothing in this run is public. The sign-in test email goes to david@atlasonesolutions.com only (David).
+## Job 1: the 16 booking and intake email files (Run AO skipped this)
+Bodies live in the project doc `claude/email-template-pass-run-E-2026-09-07.md`; a copy may be in `_BUILD-LOG/`
+(look for `email-template-pass-run-E*`), otherwise in the repo under `_briefs/` (RUN-E). Wrap each body in the
+standard wrapper (logo, signature with 380-225-5217, both footer lines, coloured spans on every link, no dashes)
+and save in `_BUILD-LOG/cadence-emails-2026-09-13/` as: `booking-c1.html`, `booking-reminder-24h.html`,
+`booking-reminder-1h.html`, `booking-c2.html`, `booking-c3.html`, `booking-cancelled.html`, `booking-no-show.html`,
+`intake-instant-reply.html`, `send-peo-form.html`, `send-bookkeeping-form.html`, `tool-lead-nurture-1.html` (and
+-2, -3 if the doc has them), `won-email-6.html`, `won-email-7-checklist.html`. Subject on the <title>. Add every
+one to INDEX.md with workflow and node name. Render two at 390 px, zero console errors. Commit, push, log
+"Job 1 files ready".
 
-## Job 0 (FIRST, 20 minutes, repo ~/Projects/atlas-one-intake-forms): email files the GHL terminal will paste
-Do this before the Azure jobs and commit it on its own, because the GHL terminal reads these files mid-run.
-a) Link colour fix. In Outlook for Mac (dark mode) every link without its own colour renders magenta. GHL strips
-   inline styles from <a>, so the colour must sit on a <span> inside the anchor. In every file in
-   `_BUILD-LOG/cadence-emails-2026-09-13/*.html` (all 26) and in the two wrapper sources in
-   `12 GHL Setup doccs/Atlas_One_Email_HTML_How_To.md`: for every <a ...>text</a> whose inner content is plain
-   text (no span, no table button), rewrite to <a href="..."><span style="color:#23304D;text-decoration:underline;">text</span></a>.
-   Leave table buttons alone. Write the list of files changed and the count of anchors fixed per file to
-   `cadence-emails-2026-09-13/LINK-FIX-2026-09-14.md`. Re-render two of them (email-1.html, b-1.html) in headless
-   Chromium and confirm no anchor is left without a coloured span (querySelectorAll('a:not(:has(span))') = 0
-   outside table buttons).
-b) Two branded confirmation emails on the standard wrapper (logo header, signature block, both footer lines,
-   no dashes), saved as `cadence-emails-2026-09-13/confirm-service-signup.html` and `confirm-document-build.html`
-   and added to INDEX.md. Use the merge tag placeholders {{contact.which_service}} and {{contact.which_document}}
-   (the GHL terminal swaps in the real picker tags). Copy, plain and specific:
-   Service sign-up, subject "Your {{contact.which_service}} request is in, {{contact.first_name}}": Hi first name.
-   Got your request for {{contact.which_service}} for {{contact.company_name}}. Here is what happens next: I look it
-   over today, then call or email you within one business day to confirm the details and the start date. If
-   documents are needed I will send one short list, not a drip. Questions before then: reply here or call
-   385-213-7177. Signature.
-   Document build, subject "Your {{contact.which_document}} is in the queue, {{contact.first_name}}": Hi first name.
-   Got your request: a {{contact.which_document}} for {{contact.company_name}}. I build it around your business,
-   review it with you, and send it back ready to sign, usually within five business days. If I need anything I
-   will ask once. Questions: reply here or call 385-213-7177. Signature.
-c) Three internal notification emails to David (same wrapper, compact): `internal-new-booking.html` (subject
-   "New booking: {{contact.name}}, {{appointment.start_time}}", body: calendar name, date and time, company,
-   phone, email, how they came in (lead source), one link to the contact in GHL), `internal-cancelled.html`,
-   `internal-rescheduled.html`. Add to INDEX.md.
-Commit and push, then log "Job 0 files ready" in the live log before starting Job 1.
+## Job 2: verify the portal on its test address (only if David has deployed)
+`curl -s -o /dev/null -w "%{http_code}" https://atlas-one-portal.azurewebsites.net/api/health`. If not 200, log
+"portal not deployed yet, David runs scripts/deploy-azure.sh" and skip to Job 3. If 200: in headless Chromium open
+the sign-in page (brand, fonts, zero console errors), request a sign-in link for david+portal@atlasonesolutions.com
+(temporarily set PORTAL_APP_URL to the azurewebsites address for the test, then set it back), read the link from
+the GHL conversation on that contact if possible (otherwise log "David: check the david+portal inbox and paste the
+link into the live log" and wait), follow it, screenshot Home, Documents, Requests, Book, Pay, Partners, Admin at
+1440 and 390 to `~/Projects/atlas-one-intake-forms/_briefs/assets/run-AQ/shots/`. Then check DNS:
+`dig +short portal.atlasonesolutions.com CNAME` and `dig +short TXT asuid.portal.atlasonesolutions.com`. If both
+answer, run `scripts/finish-domain.sh` and confirm https://portal.atlasonesolutions.com returns 200 with the
+sign-in page. If DNS is not there, say so; do not touch GoDaddy.
 
-## Job 1: make the app run as a plain Node server (it already nearly does)
-`server/app.ts` is Hono; `pnpm start` = `SERVE_STATIC=1 tsx server/dev.ts`. Add a production start that does not
-need tsx at runtime: compile the server (`tsc -p tsconfig.server.json` or an esbuild bundle to `dist-server/`),
-keep `pnpm build` for the Vite client, add `"start:prod"` that serves `dist/` and `/api/*` on `process.env.PORT`.
-`/api/health` must return 200. Test locally with PORTAL_TEST_MODE=1 first. Remove the Vercel pieces so nothing is
-duplicated: `git rm vercel.json api/index.ts`, drop `hono/vercel` if unused. Rewrite `DEPLOY.md` for Azure: David's
-only part is the two DNS records in Job 3, written in plain words (which account, which menu, what to type). Copy
-it to `<Master_Kit>/_BUILD-LOG/portal-DEPLOY-for-David.md` (overwrite; the old one is Vercel).
-
-## Job 2: create the Azure web app and stage the build on its test address
-- `az webapp create -g atlas-one-ai-email-assistant-v2 -p ASP-atlasoneaiemailassistantv2-8088 -n atlas-one-portal
-  --runtime "NODE:22-lts"` (if the name is taken use atlas-one-client-portal). Startup command = the production
-  start. Always On: on. HTTPS only: on.
-- App settings from `~/Projects/atlas-one-portal/.env` (GHL_PRIVATE_INTEGRATION_TOKEN, GHL_LOCATION_ID,
-  PORTAL_SESSION_SECRET) plus PORTAL_APP_URL=https://portal.atlasonesolutions.com,
-  PORTAL_ADMIN_EMAILS=david@atlasonesolutions.com, PORTAL_EMAIL_FROM=David@AtlasOneSolutions.com,
-  GHL_DAVID_USER_ID=vTV2wRivyR9f9XWNook3, NODE_ENV=production. Never print the token or secret in the log or the
-  report. Never set PORTAL_TEST_MODE on Azure.
-- Ship a prebuilt zip (`az webapp deploy --type zip`: client `dist/`, compiled server, production node_modules)
-  or SCM build with a pnpm-aware script, whichever is more reliable. Make it `scripts/deploy-azure.sh` so the
-  next update is one command; describe it in DEPLOY.md.
-- Verify on the azurewebsites.net address in headless Chromium: sign-in page renders (brand, fonts),
-  `/api/health` 200, zero console errors. Request a sign-in link for david@atlasonesolutions.com (PORTAL_APP_URL
-  will make the link point at portal.atlasonesolutions.com, which does not resolve yet: for this test set
-  PORTAL_APP_URL to the azurewebsites.net address, test, then set it back to the portal URL). Follow the link,
-  screenshot Home, Documents, Requests, Book, Pay, Partners, Admin at 1440 and 390 to
-  `~/Projects/atlas-one-intake-forms/_briefs/assets/run-AO/shots/`. If the email cannot be read by the terminal,
-  say "David: check your inbox" in the log and wait for him.
-- Run `node scripts/preflight.mjs` against the Azure settings; put the output in the report (customFields scope
-  may still be 401 until the GHL terminal's Part 5 adds it; say so, do not fix it here).
-
-## Job 3: prepare the custom domain, do not bind it
-`az webapp show -n <app> -g atlas-one-ai-email-assistant-v2 --query customDomainVerificationId`. Put at the TOP
-of the report a box titled "David: two records to add at GoDaddy" with exactly:
-  Record 1: Type CNAME, Name portal, Value <app>.azurewebsites.net, TTL 1 hour.
-  Record 2: Type TXT, Name asuid.portal, Value <the verification id>, TTL 1 hour.
-Write `scripts/finish-domain.sh` (hostname add, free managed certificate create, SNI bind, poll until
-https://portal.atlasonesolutions.com answers 200) but DO NOT run it this run; Cowork queues that as its own run
-after David adds the records. Do not touch GoDaddy.
+## Job 3: phone number sweep across OneDrive (Run AO skipped this)
+Find every 385-213-7177 (also 385.213.7177, (385) 213-7177, tel:13852137177) under
+`2. Atlas 1 Solutions Marketing/` (Master Kit tools, Tools Hub, MASTER HUB, Portal catalogue, A1_Sales playbooks,
+overlays, decks, agreements, one-pagers, pricing sheets, email drafts) EXCEPT `_to_delete/`, `_gold_backup*`, and
+anything under `3. Cornerstone PEO/`. Replace with 380-225-5217 (where a signature block prints the number, use
+"380-225-5217 (380-CALL-A1S)"). .html/.md/.txt/.json/.py/.js by sed; .docx and .pptx with python-docx and
+python-pptx (replace inside every run and table cell, save in place, back up each original first to
+`_to_delete/superseded-2026-09-14/phone-sweep/`); .xlsx with openpyxl the same way; .pdf: regenerate from its
+source when the source sits in the same folder, otherwise list it under "PDFs to regenerate". Rebuild the Portal
+(path argument) and confirm the stamp. Report: count per file type, files changed, PDFs to regenerate, and any
+file that still contains the old number.
 
 ## Report
-Paths, the azurewebsites.net URL, the two DNS records at the top, screenshots looked at, preflight output, monthly
-cost (should be $0 extra on the existing B1 plan; say so or say what it costs), assumptions, Questions for David.
+Paths, the portal test result and screenshots looked at, DNS state, the sweep counts, assumptions, Questions for David.
