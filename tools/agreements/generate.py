@@ -77,6 +77,58 @@ def check_no_dash(text):
     return text
 
 
+# ---------------------------------------------------------------- discount
+_MONTHLY_PRICE_RE = re.compile(r"^\$([\d,]+(?:\.\d+)?) a month$")
+
+
+def parse_discount_arg(raw):
+    """--discount takes "10%" or "$200". Returns (kind, value) or None."""
+    if not raw:
+        return None
+    raw = raw.strip()
+    if raw.endswith("%"):
+        return ("pct", float(raw[:-1]))
+    if raw.startswith("$"):
+        return ("usd", float(raw[1:].replace(",", "")))
+    raise SystemExit(f"generate.py: --discount must look like \"10%\" or \"$200\", got {raw!r}")
+
+
+def discount_line_text(discount):
+    kind, value = discount
+    if kind == "pct":
+        amt = f"{value:g}%"
+    else:
+        amt = f"${value:,.0f}"
+    return f"Introductory discount: {amt} off the monthly fee for the first 12 months"
+
+
+def apply_discount_to_rows(rows, discount):
+    """Sums every row whose price is a plain "$X a month" figure (skips
+    ranges, one-time fees and per-unit add-ons, which a flat monthly percent
+    or dollar discount cannot cleanly apply to), then appends a List total /
+    Introductory discount / Discounted total block under the pricing table.
+    Never removes or edits the original rows -- the list price always
+    stays visible."""
+    if not discount:
+        return rows
+    monthly_total = 0.0
+    for _, price in rows:
+        m = _MONTHLY_PRICE_RE.match(price.strip())
+        if m:
+            monthly_total += float(m.group(1).replace(",", ""))
+    if monthly_total <= 0:
+        return rows
+    kind, value = discount
+    disc_amt = monthly_total * (value / 100) if kind == "pct" else min(value, monthly_total)
+    disc_amt = int(disc_amt + 0.5)  # round half up, then derive the total from
+    new_total = monthly_total - disc_amt  # this rounded figure so the two rows always add back to the list total
+    return rows + [
+        ["List total (monthly)", f"${monthly_total:,.0f} a month"],
+        [discount_line_text(discount), f"−${disc_amt:,.0f} a month"],
+        ["Discounted total (monthly)", f"${new_total:,.0f} a month"],
+    ]
+
+
 # ------------------------------------------------------------ block model
 class Doc:
     """Records a document as an ordered list of content blocks. Rendered
@@ -722,7 +774,7 @@ PROPOSAL_SECTIONS = ["Overview", "Scope", "What is not included", "Pricing", "Ho
 
 
 def build_proposal(basename, service_label, client_name, overview, scope_items, not_included,
-                    table_rows, table_headers, billing, need_from_you, schedule_name):
+                    table_rows, table_headers, billing, need_from_you, schedule_name, discount=None):
     doc = Doc()
     doc.brand_header("PROPOSAL", f"{service_label}, prepared for {client_name}")
     doc.para("Overview", size=12.5, bold=True, font=HEAD_FONT, space_after=4)
@@ -737,7 +789,7 @@ def build_proposal(basename, service_label, client_name, overview, scope_items, 
         doc.bullet(item)
 
     doc.heading("Pricing")
-    doc.table(table_rows, headers=table_headers)
+    doc.table(apply_discount_to_rows(table_rows, discount), headers=table_headers)
 
     doc.heading("How billing works")
     doc.para(billing, size=10)
@@ -767,7 +819,7 @@ def build_proposal_shell():
 CLIENT = "Tell Me More LLC"
 
 
-def sample_proposals():
+def sample_proposals(discount=None):
     out = []
 
     pr = PRICES["bookkeeping"]
@@ -787,7 +839,7 @@ def sample_proposals():
         "plan rate for each month of catch up needed.",
         ["Bank and card statements or read access to the accounts",
          "The most recent tax return or prior bookkeeper's file, if switching"],
-        "Bookkeeping Schedule"))
+        "Bookkeeping Schedule", discount=discount))
 
     pr = PRICES["gl_import"]
     out.append(build_proposal(
@@ -804,7 +856,7 @@ def sample_proposals():
         ("Item", "Amount"),
         "Monthly fee billed in advance. Setup is billed once, at signing.",
         ["Read access to the payroll reports each pay period"],
-        "Payroll to GL Converter Schedule"))
+        "Payroll to GL Converter Schedule", discount=discount))
 
     pr = PRICES["cert_payroll"]["monthly"]
     out.append(build_proposal(
@@ -819,7 +871,7 @@ def sample_proposals():
         ("Item", "Amount"),
         "Billed monthly based on the number of active jobs reported that month.",
         ["Certified payroll hours and wage determinations for each active job"],
-        "Certified Payroll Schedule"))
+        "Certified Payroll Schedule", discount=discount))
 
     pr = PRICES["wc_audit"]["contingency"]
     out.append(build_proposal(
@@ -835,7 +887,7 @@ def sample_proposals():
         "No fee unless a recovery is made. The fee is a percentage of the amount actually recovered, paid once.",
         ["Authorization to contact the carrier and rating bureau",
          "Recent workers comp policies and premium audit history"],
-        "Audit Recovery Schedule"))
+        "Audit Recovery Schedule", discount=discount))
 
     pr = PRICES["coi_tracking"]["monthly"]
     out.append(build_proposal(
@@ -850,7 +902,7 @@ def sample_proposals():
         ("Item", "Amount"),
         "Monthly fee billed in advance.",
         ["A current list of active subcontractors"],
-        "Software Tools Schedule"))
+        "Software Tools Schedule", discount=discount))
 
     pr = PRICES["ai_services"]
     out.append(build_proposal(
@@ -866,7 +918,7 @@ def sample_proposals():
         ("Item", "Amount"),
         "Setup billed once at signing. Monthly fee billed in advance thereafter.",
         ["Administrator consent to connect the mailbox"],
-        "AI Services Schedule"))
+        "AI Services Schedule", discount=discount))
 
     pr = PRICES["documents"]
     out.append(build_proposal(
@@ -882,7 +934,7 @@ def sample_proposals():
         ("Item", "Amount"),
         "One time fee billed at signing. The annual update is optional and billed separately if selected.",
         ["Current policies, if any, and a list of states where employees work"],
-        "Document Services Schedule"))
+        "Document Services Schedule", discount=discount))
 
     pr = PRICES["membership"]
     out.append(build_proposal(
@@ -896,14 +948,22 @@ def sample_proposals():
         ("Item", "Amount"),
         "Monthly fee billed in advance. Setup is often waived at signing, confirmed on the invoice.",
         ["A short intake call to confirm priorities across the six divisions"],
-        "Membership Schedule"))
+        "Membership Schedule", discount=discount))
 
     return out
 
 
 # --------------------------------------------------------------------- main
 def main():
-    mk = sys.argv[1] if len(sys.argv) > 1 else "."
+    args = sys.argv[1:]
+    discount_raw = None
+    if "--discount" in args:
+        i = args.index("--discount")
+        discount_raw = args[i + 1]
+        del args[i:i + 2]
+    discount = parse_discount_arg(discount_raw)
+
+    mk = args[0] if args else "."
     mkt = os.path.normpath(os.path.join(mk, "..", ".."))
     out_dir = os.path.join(mkt, "A1_Sales", "A1 Agreements", "2026-09-15 masters")
     os.makedirs(out_dir, exist_ok=True)
@@ -920,7 +980,7 @@ def main():
     docs.append(schedule_documents())
     docs.append(schedule_membership())
     docs.append(build_proposal_shell())
-    docs.extend(sample_proposals())
+    docs.extend(sample_proposals(discount=discount))
 
     built = []
     for doc, basename in docs:
