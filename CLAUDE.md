@@ -42,13 +42,28 @@ Source of truth for most files is the Master Kit on OneDrive; find it with
 - Status by form, not colour (icons, shapes, labels; colour alone never carries meaning).
 - Every tool is a single self-contained HTML file that works from `file://` with no network.
 
-## Portal
+## Atlas One COMMAND (Run AR, 2026-09-14: replaces the Portal, the Tools Hub and the Master Hub)
 
-The Portal (`<Master_Kit>/Atlas One PORTAL.html`) is generated: `python3 "<Master_Kit>/_INTERNAL (do not share)/build_portal_single.py" "<Master_Kit>"`
-(the catalogue lives in `_INTERNAL (do not share)/build_portal.py`). Never hand edit the Portal. After a rebuild,
-confirm the `<title>` stamp and the tool count, and back the previous Portal up to `_to_delete/` first.
+David used to open three separate launchers and could not tell them apart: `Atlas One PORTAL.html` (44 tools
+inlined, internal, carried the rate card), `Atlas One — Tools Hub.html` (32 links, meant for prospects but broke
+if the file traveled without its folder) and `Atlas_One_MASTER_HUB.html` (167 rows of sales docs, decks, pricing
+and tool links, internal). All three are retired to `_to_delete/superseded-2026-09-14/launchers/`. There are now
+two outputs from one builder, in the layout of the client portal app (left navigation with counts, rows not
+cards, search at top):
 
-The Portal is ONLY built by build_portal_single.py with the Master Kit path argument. build_portal.py is the
-catalogue; never run it to produce the Portal. (Run AE, 2026-09-13, ran build_portal.py and it overwrote the real
-17 MB Portal with its own 33 KB link launcher; build_portal.py now refuses to write to `Atlas One PORTAL.html` and
-defaults to `Atlas One PORTAL (launcher, links only).html` instead, but the rule still applies by name.)
+- `<Master_Kit>/Atlas One COMMAND.html`: every internal, prospect and client tool, doc, deck, sheet and PDF.
+- `<Master_Kit>/Atlas One Tools (share with prospects).html`: prospect-only, everything inlined, no Internal
+  section, no rate card, no margins, no vendor names (grep-guarded at build time).
+
+Rebuild command: `python3 "<Master_Kit>/_INTERNAL (do not share)/build_command.py" "<Master_Kit>"`
+
+The single source of truth for both outputs is `_INTERNAL (do not share)/catalogue.py` (a static Python list,
+merged once from the three legacy launchers' catalogues; there is no more upstream to regenerate from, so add or
+change a tool by editing catalogue.py directly). Run `catalogue_check.py "<Master_Kit>"` after any edit to
+catalogue.py; it fails if a path does not resolve. Never hand edit either generated HTML output. After a
+rebuild, confirm the `<title>` stamp and the item count, and back the previous outputs up to `_to_delete/` first.
+
+`build_portal.py` and `build_portal_single.py` are kept in place for their catalogue/inlining logic but no
+longer produce anything to open directly; running `build_portal_single.py` now just prints that it is superseded
+by `build_command.py` and exits. Never write to `Atlas One PORTAL.html`, `Atlas One — Tools Hub.html` or
+`Atlas_One_MASTER_HUB.html` again — those names are retired.
