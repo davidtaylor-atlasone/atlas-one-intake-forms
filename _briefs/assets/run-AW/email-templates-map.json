@@ -1,0 +1,370 @@
+{
+  "new_templates_2026_09_15": [
+    {
+      "send": "Email-1",
+      "workflow": "Post-Presentation Email",
+      "template_name": "A1 | Email-1 | email-1",
+      "template_id": "6aa9c89bbbf4cb7988c03afd",
+      "subject": "Your next step with Atlas One, {{contact.first_name}}",
+      "file": "email-1.html"
+    },
+    {
+      "send": "Email-2",
+      "workflow": "Post-Presentation Email",
+      "template_name": "A1 | Email-2 | email-2",
+      "template_id": "6aa9c89db1a9b275e36982ac",
+      "subject": "Still here whenever you're ready, {{contact.first_name}}",
+      "file": "email-2.html"
+    },
+    {
+      "send": "E0",
+      "workflow": "Call: not now",
+      "template_name": "A1 | E0 | e0",
+      "template_id": "6aa9c89e8fc016e6508479a3",
+      "subject": "Thanks for the time today, {{contact.first_name}}",
+      "file": "e0.html"
+    },
+    {
+      "send": "LT-1",
+      "workflow": "Call: not now (Long Tail loop)",
+      "template_name": "A1 | LT-1 | lt-1",
+      "template_id": "6aa9c8a096b1ac2874f591ac",
+      "subject": "One thing from our call, {{contact.first_name}}",
+      "file": "lt-1.html"
+    },
+    {
+      "send": "LT-2",
+      "workflow": "Call: not now (Long Tail loop)",
+      "template_name": "A1 | LT-2 | lt-2",
+      "template_id": "6aa9c8a19ed784b5df8c500a",
+      "subject": "A number worth knowing",
+      "file": "lt-2.html"
+    },
+    {
+      "send": "LT-3",
+      "workflow": "Call: not now (Long Tail loop)",
+      "template_name": "A1 | LT-3 | lt-3",
+      "template_id": "6aa9c8a3b40c9f3a4ff410a8",
+      "subject": "Want to knock the form out together?",
+      "file": "lt-3.html"
+    },
+    {
+      "send": "LT-4",
+      "workflow": "Call: not now (Long Tail loop)",
+      "template_name": "A1 | LT-4 | lt-4",
+      "template_id": "6aa9c8a4b40c9f3a4ff410c2",
+      "subject": "Two minutes, your own numbers",
+      "file": "lt-4.html"
+    },
+    {
+      "send": "LT-5",
+      "workflow": "Call: not now (Long Tail loop)",
+      "template_name": "A1 | LT-5 | lt-5",
+      "template_id": "6aa9c8a6bbf4cb7988c03b94",
+      "subject": "Should I close your file, {{contact.first_name}}?",
+      "file": "lt-5.html"
+    },
+    {
+      "send": "45-A",
+      "workflow": "Call: not now (45 day pass)",
+      "template_name": "A1 | 45-A | 45-a",
+      "template_id": "6aa9c8a896b1ac2874f5926b",
+      "subject": "Quick one, {{contact.first_name}}",
+      "file": "45-a.html"
+    },
+    {
+      "send": "Q-1",
+      "workflow": "Seasonal touches 2026-27",
+      "template_name": "A1 | Q-1 | q-1",
+      "template_id": "6aa9c8a93029d837f98fd141",
+      "subject": "If you are changing anything this quarter, start now",
+      "file": "q-1.html"
+    },
+    {
+      "send": "YE-1",
+      "workflow": "Seasonal touches 2026-27",
+      "template_name": "A1 | YE-1 | ye-1",
+      "template_id": "6aa9c8abb1a9b275e369839b",
+      "subject": "January 1 is the easiest start date of the year",
+      "file": "ye-1.html"
+    },
+    {
+      "send": "YE-3",
+      "workflow": "Seasonal touches 2026-27",
+      "template_name": "A1 | YE-3 | ye-3",
+      "template_id": "6aa9c8ac7919774ef2688437",
+      "subject": "Last clean cut-over date",
+      "file": "ye-3.html"
+    },
+    {
+      "send": "B-1",
+      "workflow": "Books: after the call (same day)",
+      "template_name": "A1 | B-1 | b-1",
+      "template_id": "6aa9c8ae94dd61786846a646",
+      "subject": "What Atlas One bookkeeping actually looks like, {{contact.first_name}}",
+      "file": "b-1.html"
+    },
+    {
+      "send": "B-2",
+      "workflow": "Books: after the call (+3 days)",
+      "template_name": "A1 | B-2 | b-2",
+      "template_id": "6aa9c8b00bbbc34b5ea9c48f",
+      "subject": "What falling behind on the books actually costs",
+      "file": "b-2.html"
+    },
+    {
+      "send": "B-3",
+      "workflow": "Books: after the call (+7 days)",
+      "template_name": "A1 | B-3 | b-3",
+      "template_id": "6aa9c8b1b40c9f3a4ff411ed",
+      "subject": "A proof point, no names attached",
+      "file": "b-3.html"
+    },
+    {
+      "send": "B-4",
+      "workflow": "Books: after the call (+14 days)",
+      "template_name": "A1 | B-4 | b-4",
+      "template_id": "6aa9c8b33029d837f98fd1b2",
+      "subject": "Should I close your file, {{contact.first_name}}?",
+      "file": "b-4.html"
+    },
+    {
+      "send": "BQ-1",
+      "workflow": "Books: quarter and year end",
+      "template_name": "A1 | BQ-1 | bq-1",
+      "template_id": "6aa9c8b43029d837f98fd1c5",
+      "subject": "The easiest time to switch bookkeepers is right now",
+      "file": "bq-1.html"
+    },
+    {
+      "send": "BYE-1",
+      "workflow": "Books: quarter and year end",
+      "template_name": "A1 | BYE-1 | bye-1",
+      "template_id": "6aa9c8b67919774ef26884d4",
+      "subject": "January is the easiest month to start clean books",
+      "file": "bye-1.html"
+    },
+    {
+      "send": "BYE-2",
+      "workflow": "Books: quarter and year end",
+      "template_name": "A1 | BYE-2 | bye-2",
+      "template_id": "6aa9c8b807aac9f9aae4fa66",
+      "subject": "Start the year with a clean set of books",
+      "file": "bye-2.html"
+    },
+    {
+      "send": "Confirm: service sign up",
+      "workflow": "Service picker form submitted",
+      "template_name": "A1 | Confirm: service sign up | confirm-service-signup",
+      "template_id": "6aa9c8b9b0cd6d0085962db6",
+      "subject": "Your {{contact.which_service}} request is in, {{contact.first_name}}",
+      "file": "confirm-service-signup.html"
+    },
+    {
+      "send": "Confirm: document build",
+      "workflow": "Document build request submitted",
+      "template_name": "A1 | Confirm: document build | confirm-document-build",
+      "template_id": "6aa9c8bb94dd61786846a795",
+      "subject": "Your {{contact.which_document}} is in the queue, {{contact.first_name}}",
+      "file": "confirm-document-build.html"
+    },
+    {
+      "send": "C1",
+      "workflow": "Booking: confirm and remind",
+      "template_name": "A1 | C1 | booking-c1",
+      "template_id": "6aa9c8bd8fc016e650847ba5",
+      "subject": "You're booked with David, {{contact.first_name}}",
+      "file": "booking-c1.html"
+    },
+    {
+      "send": "24 hour reminder",
+      "workflow": "Booking: confirm and remind",
+      "template_name": "A1 | 24 hour reminder | booking-reminder-24h",
+      "template_id": "6aa9c8be96b1ac2874f59462",
+      "subject": "Reminder: your call with David is tomorrow",
+      "file": "booking-reminder-24h.html"
+    },
+    {
+      "send": "1 hour reminder",
+      "workflow": "Booking: confirm and remind",
+      "template_name": "A1 | 1 hour reminder | booking-reminder-1h",
+      "template_id": "6aa9c8c096b1ac2874f5947e",
+      "subject": "Talk in an hour",
+      "file": "booking-reminder-1h.html"
+    },
+    {
+      "send": "C2",
+      "workflow": "Booking: after the call",
+      "template_name": "A1 | C2 | booking-c2",
+      "template_id": "6aa9c8c15893810abc0c7689",
+      "subject": "Thanks for the time today, {{contact.first_name}}",
+      "file": "booking-c2.html"
+    },
+    {
+      "send": "C3",
+      "workflow": "Booking: after the call",
+      "template_name": "A1 | C3 | booking-c3",
+      "template_id": "6aa9c8c37919774ef26885e7",
+      "subject": "Still thinking it over, {{contact.first_name}}?",
+      "file": "booking-c3.html"
+    },
+    {
+      "send": "Cancelled",
+      "workflow": "Booking: cancelled",
+      "template_name": "A1 | Cancelled | booking-cancelled",
+      "template_id": "6aa9c8c57919774ef268860d",
+      "subject": "No problem, {{contact.first_name}}. Want to pick a new time?",
+      "file": "booking-cancelled.html"
+    },
+    {
+      "send": "No show",
+      "workflow": "Booking: no show",
+      "template_name": "A1 | No show | booking-no-show",
+      "template_id": "6aa9c8c707aac9f9aae4fb90",
+      "subject": "We missed each other, {{contact.first_name}}",
+      "file": "booking-no-show.html"
+    },
+    {
+      "send": "Email 1 (intake)",
+      "workflow": "Intake: Instant reply",
+      "template_name": "A1 | Email 1 (intake) | intake-instant-reply",
+      "template_id": "6aa9c8c894dd61786846a8c7",
+      "subject": "We've got it, {{contact.first_name}}. Here's what happens next",
+      "file": "intake-instant-reply.html"
+    },
+    {
+      "send": "Email 2 (PEO form)",
+      "workflow": "Send PEO form on tag",
+      "template_name": "A1 | Email 2 (PEO form) | send-peo-form",
+      "template_id": "6aa9c8cab40c9f3a4ff413f7",
+      "subject": "Your next step with Atlas One, {{contact.first_name}}",
+      "file": "send-peo-form.html"
+    },
+    {
+      "send": "Email 2B (bookkeeping form)",
+      "workflow": "Send bookkeeping form on tag",
+      "template_name": "A1 | Email 2B (bookkeeping form) | send-bookkeeping-form",
+      "template_id": "6aa9c8cb94dd61786846a92c",
+      "subject": "One more short form for your books, {{contact.first_name}}",
+      "file": "send-bookkeeping-form.html"
+    },
+    {
+      "send": "Email 5A",
+      "workflow": "Tool-Lead Nurture",
+      "template_name": "A1 | Email 5A | tool-lead-nurture-1",
+      "template_id": "6aa9c8cd94dd61786846a953",
+      "subject": "The number's only half the story, {{contact.first_name}}",
+      "file": "tool-lead-nurture-1.html"
+    },
+    {
+      "send": "Email 5B",
+      "workflow": "Tool-Lead Nurture",
+      "template_name": "A1 | Email 5B | tool-lead-nurture-2",
+      "template_id": "6aa9c8cf3029d837f98fd3dc",
+      "subject": "One thing most owners in your spot are overpaying for",
+      "file": "tool-lead-nurture-2.html"
+    },
+    {
+      "send": "Email 6",
+      "workflow": "Won - Pay Referral Partner",
+      "template_name": "A1 | Email 6 | won-email-6",
+      "template_id": "6aa9c8d0b40c9f3a4ff41498",
+      "subject": "Welcome to Atlas One, {{contact.first_name}}",
+      "file": "won-email-6.html"
+    },
+    {
+      "send": "Email 7 (new)",
+      "workflow": "Won - Pay Referral Partner",
+      "template_name": "A1 | Email 7 (new) | won-email-7-checklist",
+      "template_id": "6aa9c8d294dd61786846a99e",
+      "subject": "Setup checklist for {{contact.company_name}}",
+      "file": "won-email-7-checklist.html"
+    }
+  ],
+  "p_templates_2026_09_08": [
+    {
+      "template_name": "P-A-3 Referral Email 3",
+      "template_id": "6aa0a9db9931e5f937c72b41"
+    },
+    {
+      "template_name": "P-B-1 Trigger Email 1",
+      "template_id": "6aa0a9dc62526e75c2c33cf1"
+    },
+    {
+      "template_name": "P-B-2 Trigger Email 2",
+      "template_id": "6aa0a9de8b41b02dc82267ae"
+    },
+    {
+      "template_name": "P-B-3 Trigger Email 3",
+      "template_id": "6aa0a9e0357107c100ca0098"
+    },
+    {
+      "template_name": "P-B-4 Trigger close",
+      "template_id": "6aa0a9e113c848fe04dd0e6f"
+    },
+    {
+      "template_name": "P-B-120 Renewal heads-up",
+      "template_id": "6aa0a9e3fce73710076f96e5"
+    },
+    {
+      "template_name": "P-B-60 Last window",
+      "template_id": "6aa0a9e455d1ce8973c140eb"
+    },
+    {
+      "template_name": "P-C-2 Inbound Email 2",
+      "template_id": "6aa0a9e60078269ef83ce1e3"
+    },
+    {
+      "template_name": "P-C-3 Inbound Email 3",
+      "template_id": "6aa0a9e82ac25123fb0d99aa"
+    },
+    {
+      "template_name": "P-D-1 Cold Email 1",
+      "template_id": "6aa0a9e9b2a4c1fa6304518a"
+    },
+    {
+      "template_name": "P-D-2 Cold Email 2",
+      "template_id": "6aa0a9eb8b41b02dc822682a"
+    },
+    {
+      "template_name": "P-D-3 Cold Email 3",
+      "template_id": "6aa0a9edfce73710076f9746"
+    },
+    {
+      "template_name": "P-D-4 Cold breakup",
+      "template_id": "6aa0a9ee9931e5f937c72c75"
+    },
+    {
+      "template_name": "P-E-0 Gracious close",
+      "template_id": "6aa0a9f00457161d4222f524"
+    },
+    {
+      "template_name": "P-E-4 Month four",
+      "template_id": "6aa0a9f12ac25123fb0d9a2b"
+    },
+    {
+      "template_name": "P-E-Q1 Quarterly tool",
+      "template_id": "6aa0a9f3fce73710076f9784"
+    },
+    {
+      "template_name": "P-E-Q2 Quarterly law change",
+      "template_id": "6aa0a9f513c848fe04dd0f32"
+    },
+    {
+      "template_name": "P-E-Q3 Quarterly proof story",
+      "template_id": "6aa0a9f62ac25123fb0d9a5c"
+    },
+    {
+      "template_name": "P-W7-1 WSA Email 1",
+      "template_id": "6aa0a9f855d1ce8973c141a2"
+    },
+    {
+      "template_name": "P-W7-2 WSA Email 2",
+      "template_id": "6aa0a9f955d1ce8973c141a8"
+    },
+    {
+      "template_name": "P-W7-3 WSA Email 3",
+      "template_id": "6aa0a9fb6ec737a976fa481f"
+    }
+  ]
+}
