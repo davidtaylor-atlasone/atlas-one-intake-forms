@@ -1,45 +1,44 @@
-# BRIEF for the GHL-JOBS terminal: Run AU (Pax8 flow-down into the agreement set)
+# BRIEF for the GHL-JOBS terminal: Run AV (push every cadence email into GHL as a template, through the API)
 
-Terminal name: GHL-JOBS. Files, code and headless Chromium only. Never the GoHighLevel browser. Build end to
-end, no questions, answer every permission prompt yourself, assumptions logged, questions at the END of the
+Terminal name: GHL-JOBS. Files, code, API and headless Chromium only. Never the GoHighLevel browser. Build end
+to end, no questions, permission prompts answered by you, assumptions logged, questions at the END of the
 report. Live log `_BUILD-LOG/TERMINAL-GHL-JOBS-live.md`; report `_BUILD-LOG/RUN-GHL-JOBS-report.md` (quoted
-heredoc). Back up the prior report to `_to_delete/superseded-2026-09-15/prior-reports/RUN-GHL-JOBS-report-RunAT.md`.
-One terminal at a time on OneDrive. Commit and push. Clients are in all 50 states; never write "Utah" client-facing.
-Context: Pax8 (the distributor behind the Microsoft 365 and other software Atlas One resells) changed its Partner
-Terms effective 2026-09-15. Summary and the exact clauses to pass down: `_BUILD-LOG/pax8-partner-terms-2026-09-15.md`.
+heredoc). Back up the prior report to `_to_delete/superseded-2026-09-15/prior-reports/RUN-GHL-JOBS-report-RunAU.md`.
+Commit and push. Clients are in all 50 states.
 
-## Job 1: Software and Licenses Schedule + master agreement additions
-Generator: `_INTERNAL (do not share)/tools/agreements/generate.py` (Run AT's HTML-to-PDF path; keep it).
-1. New `Atlas_One_Software_and_Licenses_Schedule` (docx + PDF, one page, "ATTORNEY REVIEW PENDING" banner):
-   what is covered (subscriptions and licences Atlas One resells or provisions, named by product, never by
-   distributor); the client accepts the product vendor's terms by reference and may not resell or redistribute;
-   commitment term matches the vendor term, annual products auto-renew and cannot be cancelled mid-term, the
-   client owes the full term if it leaves early; seat counts, additions and true-ups are the client's
-   responsibility and are billed as they happen; vendor price changes pass through with 30 days notice; auto-pay
-   (ACH or card in GHL) is required for resold software; Atlas One provisions and supports the tenant, the
-   vendor provides the service; on termination the client keeps its own data and tenant per the vendor's terms.
-   Prices come from `prices.json` (add a software section: Microsoft 365 plans and any other resold products at
-   the client prices in Quick Quote; if Quick Quote has no line for a product, print "quoted" and list it in
-   the report).
-2. Master Client Services Agreement: add (a) a client indemnity for third-party claims arising from the
-   client's misuse of resold products or AI output, viruses the client introduces, or violation of a vendor's
-   product terms; (b) a liability cap for resold software equal to the fees the client paid Atlas One for that
-   product in the two months before the claim; (c) late fee clause changed to "1.5% per month on amounts more
-   than 15 days past due, or the highest rate the law allows" (fill the bracket; this matches the distributor
-   terms and is David's recommended default pending his answer); (d) a sentence that AI features inside resold
-   products can produce inaccurate output and the client keeps a human in the loop.
-3. Hold Harmless and Acknowledgement: extend the AI acknowledgement from "Atlas One assistants" to "any AI
-   product or feature Atlas One provides or resells".
-4. Regenerate every docx and PDF, check BaseFont on two PDFs (Horas and DM Sans only), render page one of
-   the new schedule and the master agreement to PNG and look at them, no dashes anywhere. Update
-   `Atlas_One_Agreements_How_They_Fit.md` and `catalogue.py`; rebuild COMMAND.
+## Why
+GHL's workflow Quick Compose editor rewrites pasted HTML: Cowork read a delivered test of Email-1 on
+2026-09-15 and it arrived with every paragraph forced to Verdana 16px, the logo images stripped and the link
+colour gone. Marketing > Emails > Templates keeps HTML intact, and workflows can send a template instead of
+Quick Compose. So every cadence file becomes a template, created through the Email Builder API, and the GHL
+terminal only switches each Send Email action to the template (its brief already says how).
 
-## Job 2: the software cards notice (files only; PORTAL and GHL do the UI)
-Write `cadence-emails-2026-09-13/software-terms-line.md`: the one-line notice "Annual licences renew
-automatically and cannot be cancelled mid-term; by ordering you accept the product vendor's terms" and a
-two-sentence plain explanation, for the PORTAL terminal (software cards) and the GHL terminal (Form C1
-software block first-field label) to paste. No build beyond the file.
+## Job 0: scopes check (do this first, stop cleanly if it fails)
+The Private Integration "Atlas One apps" (token in `~/Projects/atlas-one-portal/.env`,
+`GHL_PRIVATE_INTEGRATION_TOKEN`, location `AzTPxnK2vSUj19jYoDmR`) needs `emails/builder.readonly` and
+`emails/builder.write`. Call `GET https://services.leadconnectorhq.com/emails/builder?locationId=...` with
+`Version: 2021-07-28`. If it returns 401 or a scope error, write the report with "David: add the two email
+builder scopes" at the top (click path: Settings > Integrations > Private Integrations > Atlas One apps > Edit
+> Scopes > search "builder" > tick both > Update; the token does not rotate on a scope change, proven in Run
+AV) and end the run. Never print the token.
+
+## Job 1: push the templates
+Source: every `.html` in `_BUILD-LOG/cadence-emails-2026-09-13/` that is a FULL file (skip the PLACEHOLDER
+files listed in INDEX.md: 45-b, 45-c, construction-audit, email-3, email-4, ye-2, ye-4; and skip the three
+internal-* files, which the GHL terminal pastes by hand). Before pushing, confirm each file contains
+"380-225-5217", no "385-213", no `{{contact.company_name}}`, and no dashes in copy.
+For each file: create one template named `A1 | <Send> | <file stem>` (Send from INDEX.md, for example
+`A1 | Email-1 | email-1`), type HTML, body = the file verbatim, subject = the INDEX.md subject where one is
+given. Use the Email Builder API (`POST /emails/builder`, then `GET` to confirm). If the API rejects raw
+HTML templates, say exactly what it returned and stop after the first failure; do not paste in a browser.
+Write `_BUILD-LOG/email-templates-map.md`: one row per template: Send, workflow (from INDEX.md), template
+name, template id, subject, file. Also write it as `email-templates-map.json` for the portal build.
+
+## Job 2: proof
+Fetch two of the created templates back through the API and diff their HTML against the source files (must
+be byte-identical apart from whitespace). Render one fetched template at 600px in headless Chromium and look
+at it (logo present, DM Sans, periwinkle button, 380 phone). Screenshots in `_briefs/assets/run-AV/shots/`.
 
 ## Report
-Built, Retired, Verification (BaseFont proof, PNGs looked at), Assumptions, Skipped, Questions for David
-(include any resold product with no price in Quick Quote).
+Built (template count, map path), Verification (diffs, screenshot), Assumptions, Skipped (the placeholders
+and internal files, by name), Questions for David.
