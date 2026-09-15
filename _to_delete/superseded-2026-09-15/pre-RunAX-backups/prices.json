@@ -9,8 +9,7 @@
     "quickbooks_sub": {"label": "QuickBooks Online subscription", "price": "$115 a month, ProAdvisor partner pricing, 50% off the first three months"}
   },
   "gl_import": {
-    "monthly": {"label": "Monthly payroll", "price": "$50 a month"},
-    "semi_monthly_biweekly": {"label": "Semi-monthly or bi-weekly payroll", "price": "$75 a month"},
+    "standard": {"label": "Monthly, semi-monthly or bi-weekly payroll", "price": "$75 a month"},
     "weekly": {"label": "Weekly payroll", "price": "$125 a month"},
     "setup": {"label": "Setup", "price": "$250 one time, waived on Professional membership and above, included in Concierge"},
     "extra": {"label": "Each additional entity or state journal, on the same payroll", "price": "$25 a month"}
@@ -50,6 +49,5 @@
   },
   "advisory_support": {
     "over_allowance": {"label": "Support beyond the included allowance", "price": "$150 an hour"}
-  },
-  "discount": ""
+  }
 }

@@ -554,8 +554,7 @@ def schedule_bookkeeping():
 
 def schedule_gl_import():
     pr = PRICES["gl_import"]
-    rows = [[pr["monthly"]["label"], pr["monthly"]["price"]],
-            [pr["semi_monthly_biweekly"]["label"], pr["semi_monthly_biweekly"]["price"]],
+    rows = [[pr["standard"]["label"], pr["standard"]["price"]],
             [pr["weekly"]["label"], pr["weekly"]["price"]],
             [pr["setup"]["label"], pr["setup"]["price"]],
             [pr["extra"]["label"], pr["extra"]["price"]]]
@@ -798,9 +797,7 @@ def sample_proposals():
         ["A journal entry prepared for every payroll run, lump sum or split by job",
          f"{CLIENT}'s own review before anything posts to the books"],
         ["Running payroll itself (this converts the output, it does not process pay)"],
-        [[pr["monthly"]["label"], pr["monthly"]["price"]],
-         [pr["semi_monthly_biweekly"]["label"], pr["semi_monthly_biweekly"]["price"]],
-         [pr["setup"]["label"], pr["setup"]["price"]]],
+        [[pr["standard"]["label"], pr["standard"]["price"]], [pr["setup"]["label"], pr["setup"]["price"]]],
         ("Item", "Amount"),
         "Monthly fee billed in advance. Setup is billed once, at signing.",
         ["Read access to the payroll reports each pay period"],

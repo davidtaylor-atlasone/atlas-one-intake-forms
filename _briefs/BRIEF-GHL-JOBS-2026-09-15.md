@@ -1,54 +1,45 @@
-# BRIEF for the GHL-JOBS terminal: Run AW (push every cadence email into GHL as a template, the way Run G did it)
+# BRIEF for the GHL-JOBS terminal: Run AX (COMMAND navigation and theme, GL converter prices, discount line)
+Run AW (35 templates) is done and audited. Back up the prior report to `_to_delete/superseded-2026-09-15/prior-reports/RUN-GHL-JOBS-report-RunAW.md`.
 
-Terminal name: GHL-JOBS. Files, code, API and headless Chromium only. Never the GoHighLevel browser. Build end
-to end, no questions, permission prompts answered by you, assumptions logged, questions at the END of the
-report. Live log `_BUILD-LOG/TERMINAL-GHL-JOBS-live.md`; report `_BUILD-LOG/RUN-GHL-JOBS-report.md` (quoted
-heredoc). Back up the prior report to `_to_delete/superseded-2026-09-15/prior-reports/RUN-GHL-JOBS-report-RunAV.md`.
-Commit and push. Clients are in all 50 states. Never print the token.
+Terminal name: GHL-JOBS. Files and code only. Build end to end, no questions, permission prompts answered by
+you, assumptions logged, questions at the END of the report. Live log `_BUILD-LOG/TERMINAL-GHL-JOBS-live.md`;
+report `_BUILD-LOG/RUN-GHL-JOBS-report.md`. Back up the prior report to
+`_to_delete/superseded-<date>/prior-reports/`. Back up every file before editing it. Commit and push.
 
-## What Run AV missed (read this before anything else)
-Run AV concluded the Email Builder API cannot write a template body. It can. On 2026-09-08 this same token
-created 21 named templates (P-A-3, P-B-1 ... P-W7-3, ids in `_briefs/prospecting-workflows-W1-W7-REPORT.md`,
-"Checkpoint 2") with a two-call sequence Run AV never tried:
+## Job 1: COMMAND navigation (David, 2026-09-15, with screenshots)
+Source: `_INTERNAL (do not share)/build_command.py` and `catalogue.py`. Output `Master_Kit/Atlas One COMMAND.html`.
+1. Clicking a left-rail section must show ONLY that section's rows on the right. Today it scrolls to the
+   section heading and the other sections are still below it, so David scrolls out of Technology &
+   Operations into Business Consulting without noticing. Filter, do not scroll-jump. "Start here" shows
+   only the pinned rows. Search still searches everything and shows a "Search results" view.
+2. Default to the LIGHT theme (off-white #FAFAF8 page, soft blue #DBE4ED rails and cards, dark blue text).
+   Keep the theme toggle; remember the choice in localStorage. David finds the dark build hard to read:
+   "everything is dark navy on a black background".
+3. Text one step bigger everywhere: row titles 17px, blurbs 15px, rail items 16px, section headings 22px.
+   Re-check contrast in both themes against the four brand colours; status by form, never a fifth colour.
+4. Move the three AI Email Assistant links (Approval Queue, Tasks & Follow-ups, Activity log) and the client
+   portal admin link into "Start here" as the first group, titled "Your queue", and pin them. Keep them in
+   Technology & Operations too.
+Verify in headless Chromium at 1440 and 390, both themes: click every rail item and confirm the right pane
+holds only that section (count rows against the rail badge), zero console errors, scrollWidth = viewport.
+Screenshots in `_briefs/assets/run-AX/shots/`. Look at them.
 
-1. Create: `POST https://services.leadconnectorhq.com/emails/builder`
-   headers `Authorization: Bearer <token>`, `Version: 2021-07-28`, `Content-Type: application/json`
-   body `{"locationId":"AzTPxnK2vSUj19jYoDmR","type":"html","title":"A1 | Email-1 | email-1","updatedBy":"atlas-one-apps"}`
-   The name field is `title`, not `name`. Response carries the new template id.
-2. Fill: `POST https://services.leadconnectorhq.com/emails/builder/data`
-   body `{"locationId":"AzTPxnK2vSUj19jYoDmR","templateId":"<id from step 1>","updatedBy":"atlas-one-apps","editorType":"html","html":"<the file, verbatim>","dnd":{},"previewText":""}`
-   Then `GET /emails/builder?locationId=...` and fetch the template's `previewUrl` to confirm the body landed.
+## Job 2: GL converter prices (David approved 2026-09-15)
+New client prices: monthly payroll $50 a month; semi-monthly or bi-weekly $75 a month; weekly $125 a month;
+setup $250 one time, waived on Professional and above, included in Concierge; each additional entity or
+state journal on the same payroll $25 a month. Update, in this order, backing up each first:
+`tools/agreements/prices.json` (gl_import: split "standard" into monthly $50 and semi_monthly_biweekly $75),
+regenerate the GL Converter Schedule and its sample proposal (docx + PDF, Horas/DM Sans only, check BaseFont),
+Quick Quote `gl_import` rate and documentation note (09 Quick Quote Tool), Master Pricing V8 xlsx Financial
+Services GL row (retail column now approved, note "approved 2026-09-15"), `Atlas_One_Agreements_How_They_Fit.md`.
+Rebuild COMMAND.
 
-Job 0: prove the sequence on ONE file (email-1.html) before touching the rest: create, fill, fetch back,
-diff against the source. If step 2 returns 401 or 4xx, record the exact status and body, try the field
-name `html` and then `editorContent` once each, and if both fail stop cleanly with the two responses at the
-top of the report. Do not probe anything else and do not create more empty shells.
-
-Templates carry no subject; the subject is set on each workflow's Send Email action (the GHL terminal does
-that from the map). So the map's Subject column is for the GHL terminal, taken from INDEX.md.
-
-## Job 1: push the templates
-Source: every `.html` in `_BUILD-LOG/cadence-emails-2026-09-13/` that is a FULL file (skip the PLACEHOLDER
-files listed in INDEX.md: 45-b, 45-c, construction-audit, email-3, email-4, ye-2, ye-4; and skip the three
-internal-* files, which the GHL terminal pastes by hand). Run AV already verified the 35 candidates: each
-contains "380-225-5217", no "385-213", no `{{contact.company_name}}` in the body, no dashes. Re-run that
-check anyway (files may have changed) and push all 35 with the two-call sequence above, named
-`A1 | <Send> | <file stem>` (Send from INDEX.md). Write `_BUILD-LOG/email-templates-map.md`: one row per
-template: Send, workflow (from INDEX.md), template name, template id, subject (from INDEX.md), file. Also
-write `email-templates-map.json` (same rows) for the portal build. Include the 21 P- templates from the
-2026-09-08 report in a second table so the GHL terminal has every template id in one place.
-
-## Job 2: proof
-Fetch three of the created templates back through their previewUrl and diff against the source files (must
-be identical apart from whitespace). Render one at 600px in headless Chromium and look at it (logo present,
-DM Sans, periwinkle button, 380 phone). Screenshots in `_briefs/assets/run-AW/shots/`.
-
-## Cleanup note
-Run AV left four empty templates named "New Template" (ids 6aa9c57694dd617868466523, 6aa9c5b9e686ab50486928b1,
-6aa9c5ef3029d837f98f9666, 6aa9c6179ed784b5df8c1a95). Try `DELETE /emails/builder/AzTPxnK2vSUj19jYoDmR/<id>`
-once each; if the sandbox blocks it, list them under Questions and move on. David can delete them in
-Marketing > Emails > Templates.
+## Job 3: discount line on every proposal and on Quick Quote
+Add an optional discount to the proposal generator: `discount` in prices.json is empty by default; a proposal
+build accepts `--discount 10%` or `--discount $200` and prints a line "Introductory discount: 10% off the
+monthly fee for the first 12 months" (or the dollar form) under the totals, with the discounted total next to
+the list total. Quick Quote gets a single "Discount" control at the top of the totals panel (percent or dollar,
+applies to monthly recurring, shown as its own line on the printed quote). Never hide the list price.
 
 ## Report
-Built (template count, map path), Verification (diffs, screenshot), Assumptions, Skipped (the placeholders
-and internal files, by name), Questions for David.
+Built, Verification (screenshots, BaseFont check, Quick Quote render), Assumptions, Skipped, Questions for David.
