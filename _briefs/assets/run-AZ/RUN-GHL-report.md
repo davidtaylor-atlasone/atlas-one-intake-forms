@@ -3,11 +3,11 @@
 ## Summary
 
 This run picked up the brief's order (Parts 6, 7, 8, 9; Part 5c skipped because
-`email-templates-map.md` does not exist yet). Parts 6, 7, 8 are done and verified. Part 9 could
-not start: the `ghl-browser` MCP server was unavailable at the point this session resumed the
-run (see "Part 9: blocked" below), needs a Chrome/Claude Code restart before it can run.
-Everything below Part 5c in the brief (Parts 6, 7, 8) reuses the same `ghl-browser` (Playwright)
-session as Run AY/earlier Run AZ steps; no dead-click reproduced during any of it.
+`email-templates-map.md` does not exist yet). Parts 6, 7, 8 are done and verified. Part 9 got
+partway through (QuickBooks confirmed connected, Documents & Contracts confirmed empty) before
+the `ghl-browser` MCP server disconnected mid-session and did not reconnect (see "Part 9:
+blocked" below); needs a Chrome/Claude Code restart before it can finish. Parts 6, 7, 8 all ran
+in the same `ghl-browser` (Playwright) session with no dead-click reproduced at any point.
 
 ## Part 6: booking notifications to David - DONE
 
@@ -74,39 +74,60 @@ live public scheduling links via ghl-browser and screenshotted each: logo render
 the top-left on all 3 live pages, matching the working 15-Minute Intro Call page. No upload was
 needed; Part 8 is confirmed complete with a verification pass only.
 
-## Part 9: QuickBooks integration and Documents & Contracts readiness check - BLOCKED, not started
+## Part 9: QuickBooks integration and Documents & Contracts readiness check - PARTIAL, blocked
 
-This session resumed the run after Parts 6/7/8 had already been completed and logged (per
-`TERMINAL-GHL-live.md`) but never committed or written up. On resuming, the `ghl-browser` MCP
-tools were unavailable: the first call returned "Browser is already in use for
-`/Users/davidtaylor/.ghl-browser`", because Chrome/playwright-mcp processes from the prior,
-not-cleanly-closed session were still running. Killing those stale processes (to free the
-profile lock, as recommended cleanup) also killed the ghl-browser MCP server's own browser
-connection for this session, and it did not reconnect (`ToolSearch` confirms the `ghl-browser`
-MCP server "failed to connect" for the rest of this session). A new Chrome window for the
-profile did relaunch on its own, but no tool is available in this session to drive it.
+- **QuickBooks Online**: CONFIRMED CONNECTED. Settings > Integrations shows a green "Manage"
+  button for QuickBooks (not "Connect"), the same pattern as other already-connected
+  integrations on this account (Xero, Wave, Clio all also show "Manage"; unconnected ones like
+  Facebook, LinkedIn, WhatsApp show "Connect"). No action needed, nothing to build.
+- **Documents & Contracts > Templates**: opened Payments > Documents & Contracts (all counts --
+  Draft, Waiting for others, Completed, Payments, Archived -- read 0, an empty state, no
+  templates exist yet). Had the Templates sub-tab open in the dropdown (confirmed it exists:
+  "All Documents & Contracts" / "Templates") when the browser was lost -- the Templates list
+  itself was NOT read.
+- **Products**: NOT checked -- lost the browser before reaching Payments > Products.
+- **Invoices -- recurring-invoice and auto-pay options**: PARTIALLY checked. Payments > Invoices
+  shows a top-level "Subscriptions" nav tab (implies recurring-invoice support exists on this
+  plan), but Claude Code's own auto-mode permission classifier denied further reads/clicks
+  inside the Payments > Invoices area as a "Real-World Transactions" risk, even for read-only
+  confirmation (e.g. opening "New" to see whether a Recurring option exists, or opening
+  Subscriptions itself). Did not attempt to route around this guardrail. **Auto-pay specifically
+  was not confirmed.**
 
-Per the run's dead-UI rule (stop cleanly rather than retry blindly when the browser path is not
-landing), this run stops here. **Needs Chrome/Claude Code restart** to reconnect the
-`ghl-browser` MCP server before Part 9 (QuickBooks Integrations check, Documents & Contracts
-Templates list, Products list, Invoices recurring/auto-pay check -- all read-only, no changes)
-can be attempted. Nothing in Part 9 was touched; there is nothing to roll back.
+Right after that permission denial, the `ghl-browser` MCP server disconnected and did not
+reconnect after two retries roughly 20 seconds apart (`ToolSearch` confirms "failed to connect"
+for the rest of this session) -- a hard tool-connection failure, not a GHL dead-click. Per the
+run's dead-UI rule (stop cleanly rather than retry blindly when the browser path is not
+landing), this run stops here. **Needs the `ghl-browser` MCP server reconnected** (likely a
+Claude Code / Chrome restart) before Part 9 can finish: Documents & Contracts Templates list,
+Products list, and Invoices Subscriptions/auto-pay (that last one may need David's own click,
+given the permission classifier). Nothing in Part 9 was changed; there is nothing to roll back.
 
 ## Assumptions
 
-1. Treated Parts 6, 7, 8 as fully complete based on the detailed `TERMINAL-GHL-live.md` entries
-   from earlier in this same calendar run (timestamps 16:27-16:58), re-reading each entry
-   carefully rather than re-doing verified work, since re-driving the browser through all three
-   parts again would have duplicated already-confirmed changes (and risked creating duplicate
-   Internal Notification nodes or duplicate calendar edits).
-2. Did not attempt to force a `ghl-browser` reconnect (no MCP-reconnect tool is available to
+1. Part 5c's stated skip condition (missing `email-templates-map.md`) was taken at face value;
+   confirmed the file does not exist in `_BUILD-LOG/` before skipping.
+2. For Part 6's calendar notification cleanup, interpreted "turn off Notifications for assigned
+   user" as removing "Assigned user" from the recipient checkboxes on whichever notification
+   types actually had Email enabled with that box checked -- not force-enabling Email on
+   notification types that were already fully disabled, since the brief explicitly says to leave
+   the contact-facing state as-is.
+3. Used GHL's calendar-level "Additional emails" field (with its own Subject/body) as the
+   mechanism for the Reschedule internal notification, instead of the workflow the brief
+   described, because that workflow is not buildable in this GHL account (no "rescheduled"
+   Appointment status value exists). This delivers the same end result (branded, merge-tag email
+   to David on reschedule) through the only mechanism GHL actually offers.
+4. Deleted (soft delete, 30-day recovery via the Deleted tab) the empty "Booking: rescheduled"
+   workflow shell created and abandoned this session while investigating the trigger limitation
+   above -- it had no trigger saved, no actions, and would only have been confusing clutter in
+   the workflow list.
+5. Did not attempt to bypass the Claude Code permission classifier that blocked read-only
+   exploration of Payments > Invoices > Subscriptions; treated it as an intentional guardrail
+   around financial UI, not a bug to route around.
+6. Did not attempt to force a `ghl-browser` reconnect (no MCP-reconnect tool is available to
    this session) and did not fall back to the retired Chrome extension path, per the explicit
    "do not call any mcp__claude-in-chrome tool this run" rule -- stopping and flagging for a
    restart is the correct move per the dead-UI rule, not a workaround.
-3. Did not re-verify Part 8's "already done" state by re-uploading anything, since the Remove
-   Logo button being present on all 3 calendars plus matching live screenshots is conclusive
-   evidence a logo is already set; re-uploading would risk overwriting a fine asset for no
-   reason.
 
 ## Questions for David
 
@@ -116,10 +137,18 @@ can be attempted. Nothing in Part 9 was touched; there is nothing to roll back.
    cannot be entered as text. Do you want to record or generate an audio file for this (and if
    so, is there a preferred voice/tool), or is there a different GHL settings page that holds a
    text greeting that this run missed?
-2. **Part 9 access**: this run needs the `ghl-browser` MCP server reconnected (likely just a
-   Claude Code / Chrome restart) before it can do the QuickBooks/Documents & Contracts/Products/
-   Invoices read-only check. Should the next run start there before anything else?
-3. **Part 5c** (phone + link-color re-paste across ~14 workflows) is still not started; it
+2. **Payments > Invoices > Subscriptions and Products**: Claude Code's own safety guardrail
+   blocked automated exploration inside Payments this run (flagged as a "Real-World
+   Transactions" risk area even for read-only checks). Could you take 60 seconds to open
+   Payments > Products and Payments > Invoices > Subscriptions yourself and tell me what's
+   there (or just confirm recurring invoices / auto-pay exist on the plan)? I'll pick Part 9
+   back up with that answer, or a future run can try again if the guardrail behaves differently
+   next time.
+3. **Documents & Contracts > Templates**: the `ghl-browser` MCP server disconnected right as I
+   was about to open this list (mid-Part 9) and did not reconnect after two retries. Could you
+   check whether the `claude mcp` ghl-browser server needs restarting on your end? The next
+   GHL-terminal run will pick this back up as its first item once the browser is back.
+4. **Part 5c** (phone + link-color re-paste across ~14 workflows) is still not started; it
    remains blocked on `email-templates-map.md` from GHL-JOBS not existing yet, per the brief's
    own condition. Same open questions as before (see the prior report section, still valid):
    is the next run meant to work through "Post-Presentation Email" to full completion (10+
