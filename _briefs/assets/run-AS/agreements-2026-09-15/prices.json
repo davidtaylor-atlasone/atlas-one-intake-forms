@@ -1,0 +1,53 @@
+{
+  "_source": "Client prices only, pulled from the Quick Quote catalogue (09 Quick Quote Tool/Atlas_One_Quick_Quote.html) and INTERNAL Master Pricing V8 on 2026-09-15. No vendor cost or margin in this file, per the agreements/proposal brief.",
+  "bookkeeping": {
+    "small": {"label": "Bookkeeping, Small (1 to 3 accounts, 50 to 300 transactions a month)", "price": "$300 to $1,000 a month"},
+    "medium": {"label": "Bookkeeping, Medium (3 to 5 accounts, about 300 to 600 transactions a month)", "price": "$1,000 to $2,000 a month"},
+    "large": {"label": "Bookkeeping, Large (5 plus accounts, 600 plus transactions a month)", "price": "$2,000 to $3,000 a month"},
+    "catchup": {"label": "Catch up work", "price": "Billed at your plan's monthly rate for each month of catch up needed, prorated for a partial month"},
+    "advisory": {"label": "Advisory and consulting", "price": "$150 an hour, billed in 15 minute increments, 30 minute minimum"},
+    "quickbooks_sub": {"label": "QuickBooks Online subscription", "price": "$115 a month, ProAdvisor partner pricing, 50% off the first three months"}
+  },
+  "gl_import": {
+    "standard": {"label": "Monthly, semi-monthly or bi-weekly payroll", "price": "$75 a month"},
+    "weekly": {"label": "Weekly payroll", "price": "$125 a month"},
+    "setup": {"label": "Setup", "price": "$250 one time, waived on Professional membership and above, included in Concierge"},
+    "extra": {"label": "Each additional entity or state journal, on the same payroll", "price": "$25 a month"}
+  },
+  "cert_payroll": {
+    "monthly": {"label": "Certified payroll reporting (WH-347), per active job", "price": "$125 a month"}
+  },
+  "wc_audit": {
+    "contingency": {"label": "Workers comp audit recovery, contingency fee", "price": "[__]% of the premium recovered, paid only if a recovery is made, nothing owed if none is found"}
+  },
+  "coi_tracking": {
+    "monthly": {"label": "Certificate of insurance tracking for subcontractors", "price": "[__] a month, price pending David's confirmation"}
+  },
+  "ai_services": {
+    "essentials": {"label": "AI Email Assistant, Essentials (1 mailbox, 30 minutes support a month)", "price": "$249 a month"},
+    "professional": {"label": "AI Email Assistant, Professional (up to 3 mailboxes, 1 hour support a month)", "price": "$499 a month"},
+    "extra_mailbox": {"label": "Additional mailbox, each", "price": "$75 a month"},
+    "setup": {"label": "Setup", "price": "$750 standard, $999 for complex multi mailbox rollouts"},
+    "task_agent_standalone": {"label": "AI Task Agent, standalone", "price": "$199 a month"},
+    "task_agent_bundled": {"label": "AI Task Agent, bundled with the Email Assistant", "price": "$99 a month"},
+    "task_agent_setup": {"label": "AI Task Agent setup", "price": "$500, waived when bundled"}
+  },
+  "documents": {
+    "handbook": {"label": "Employee handbook, custom, bilingual, 50 state compliant", "price": "$950 one time"},
+    "handbook_update": {"label": "Handbook annual update", "price": "$250 a year"},
+    "safety": {"label": "Safety manual, OSHA, bilingual, 50 state", "price": "$1,200 one time"},
+    "safety_update": {"label": "Safety manual annual refresh", "price": "$300 a year"},
+    "agreement_each": {"label": "W-2 at will agreement, 1099 contractor agreement, or NDA, each, multi state", "price": "$450 one time"},
+    "agreement_bundle": {"label": "All three agreements, bundle", "price": "$1,200 one time"},
+    "hr_docs": {"label": "Custom HR document or policy, each", "price": "$175 one time"}
+  },
+  "membership": {
+    "essential": {"label": "Membership, Essential", "price": "$99 a month, setup waived"},
+    "professional": {"label": "Membership, Professional", "price": "$399 a month, $495 setup, often waived"},
+    "enterprise": {"label": "Membership, Enterprise", "price": "$999 a month, $995 setup, waived on an annual plan"},
+    "concierge": {"label": "Membership, Concierge, Fractional COO", "price": "$1,900 a month, $1,500 setup"}
+  },
+  "advisory_support": {
+    "over_allowance": {"label": "Support beyond the included allowance", "price": "$150 an hour"}
+  }
+}
