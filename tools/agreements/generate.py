@@ -1022,9 +1022,24 @@ def main():
         del args[i:i + 2]
     discount = parse_discount_arg(discount_raw)
 
-    mk = args[0] if args else "."
+    if not args:
+        raise SystemExit(
+            "generate.py requires the Atlas_One_Master_Kit path as its first argument "
+            "(e.g. python3 generate.py \"<Master_Kit>\"). Refusing to default to the "
+            "current directory: that silently wrote 21 agreement docs under "
+            "_INTERNAL (do not share)/tools/A1_Sales/ once already (Run AZ, 2026-09-16)."
+        )
+    mk = args[0]
+    if os.path.basename(os.path.normpath(mk)) != "Atlas_One_Master_Kit":
+        raise SystemExit(
+            f"expected the Master Kit path (a directory named Atlas_One_Master_Kit), got: {mk}"
+        )
     mkt = os.path.normpath(os.path.join(mk, "..", ".."))
     out_dir = os.path.join(mkt, "A1_Sales", "A1 Agreements", "2026-09-15 masters")
+    if not os.path.isdir(os.path.join(mkt, "A1_Sales")):
+        raise SystemExit(
+            f"resolved output parent does not exist, refusing to create a new tree: {mkt}"
+        )
     os.makedirs(out_dir, exist_ok=True)
 
     docs = []
