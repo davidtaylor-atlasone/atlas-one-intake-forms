@@ -768,6 +768,43 @@ def schedule_membership():
                            clauses, rows)
 
 
+def schedule_software():
+    pr = PRICES["software"]
+    rows = [[pr["m365_business_basic"]["label"], pr["m365_business_basic"]["price"]],
+            [pr["m365_business_standard"]["label"], pr["m365_business_standard"]["price"]],
+            [pr["m365_business_premium"]["label"], pr["m365_business_premium"]["price"]],
+            [pr["m365_copilot"]["label"], pr["m365_copilot"]["price"]],
+            [pr["quickbooks_online"]["label"], pr["quickbooks_online"]["price"]],
+            [pr["other_resold"]["label"], pr["other_resold"]["price"]]]
+    clauses = [
+        ("1.", "What is covered", "This Schedule covers the products selected below and any other "
+         "subscription or license Atlas One resells or provisions for the Client, named by product, not by "
+         "the distributor Atlas One buys through."),
+        ("2.", "Vendor terms, no resale", "By ordering a product, the Client accepts that product vendor's "
+         "own terms by reference and may not resell or redistribute it."),
+        ("3.", "Commitment term, auto renewal", "Each product's commitment term matches the vendor's own "
+         "term. An annual product auto renews at the end of its term and cannot be cancelled mid term; a "
+         "Client who leaves before the term ends owes the full remaining term."),
+        ("4.", "Seat counts and true ups", "Adding seats, removing seats, and any true up the vendor requires "
+         "are the Client's responsibility and are billed as they happen."),
+        ("5.", "Price changes", "A vendor price change passes through to the Client with thirty days notice."),
+        ("6.", "Automatic payment required", "Resold software is billed by automatic payment, ACH or card on "
+         "file, kept current in the Client's account; the Client keeps a valid payment method on file for as "
+         "long as this Schedule is active."),
+        ("7.", "Provisioning, support, and termination", "Atlas One provisions and supports the Client's "
+         "tenant; the product vendor provides the underlying service. On termination the Client keeps its own "
+         "data and tenant per the vendor's own terms."),
+    ]
+    return build_schedule("Software_and_Licenses", "Software and Licenses",
+                           "This Schedule (Software and Licenses Schedule) covers subscriptions and licenses "
+                           "Atlas One resells or provisions on the Client's behalf. It is entered into as of "
+                           "____________________ and is incorporated into the Atlas One Client Services "
+                           "Agreement.",
+                           clauses, rows,
+                           extra_note="A product not listed above is quoted and confirmed on the Client's "
+                           "invoice before it is added.")
+
+
 # ------------------------------------------------------------- Proposal
 PROPOSAL_SECTIONS = ["Overview", "Scope", "What is not included", "Pricing", "How billing works",
                      "What we need from you", "To accept"]
@@ -950,6 +987,28 @@ def sample_proposals(discount=None):
         ["A short intake call to confirm priorities across the six divisions"],
         "Membership Schedule", discount=discount))
 
+    pr = PRICES["software"]
+    out.append(build_proposal(
+        "Sample_Proposal_Software_and_Licenses",
+        "Software and Licenses", CLIENT,
+        f"{CLIENT}'s Microsoft 365 and QuickBooks Online move onto one Atlas One invoice, at the vendor's own "
+        "published price, with seat counts and support handled by Atlas One.",
+        ["Setup or migration of the selected Microsoft 365 and QuickBooks Online accounts",
+         "Seat counts added, removed, and checked monthly",
+         "Support calls handled by Atlas One, not the vendor"],
+        ["Reselling or redistributing a license outside the Client's own use"],
+        [[pr["m365_business_basic"]["label"], pr["m365_business_basic"]["price"]],
+         [pr["m365_business_standard"]["label"], pr["m365_business_standard"]["price"]],
+         [pr["m365_business_premium"]["label"], pr["m365_business_premium"]["price"]],
+         [pr["m365_copilot"]["label"], pr["m365_copilot"]["price"]],
+         [pr["quickbooks_online"]["label"], pr["quickbooks_online"]["price"]],
+         [pr["other_resold"]["label"], pr["other_resold"]["price"]]],
+        ("Item", "Amount"),
+        "Billed by automatic payment on the Client's Atlas One invoice. A vendor price change passes through "
+        "with thirty days notice.",
+        ["A current seat count for each product and a valid payment method on file"],
+        "Software and Licenses Schedule", discount=discount))
+
     return out
 
 
@@ -979,6 +1038,7 @@ def main():
     docs.append(schedule_ai_services())
     docs.append(schedule_documents())
     docs.append(schedule_membership())
+    docs.append(schedule_software())
     docs.append(build_proposal_shell())
     docs.extend(sample_proposals(discount=discount))
 

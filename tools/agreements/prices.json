@@ -6,7 +6,7 @@
     "large": {"label": "Bookkeeping, Large (5 plus accounts, 600 plus transactions a month)", "price": "$2,000 to $3,000 a month"},
     "catchup": {"label": "Catch up work", "price": "Billed at your plan's monthly rate for each month of catch up needed, prorated for a partial month"},
     "advisory": {"label": "Advisory and consulting", "price": "$150 an hour, billed in 15 minute increments, 30 minute minimum"},
-    "quickbooks_sub": {"label": "QuickBooks Online subscription", "price": "$115 a month, ProAdvisor partner pricing, 50% off the first three months"}
+    "quickbooks_sub": {"label": "QuickBooks Online subscription", "price": "Simple Start $38, Essentials $85, Plus $140 or Advanced $340 a month, set up and supported by Atlas One"}
   },
   "gl_import": {
     "monthly": {"label": "Monthly payroll", "price": "$50 a month"},
@@ -50,6 +50,14 @@
   },
   "advisory_support": {
     "over_allowance": {"label": "Support beyond the included allowance", "price": "$150 an hour"}
+  },
+  "software": {
+    "m365_business_basic": {"label": "Microsoft 365 Business Basic, per user", "price": "$7 per user per month, annual term"},
+    "m365_business_standard": {"label": "Microsoft 365 Business Standard, per user", "price": "$14 per user per month, annual term"},
+    "m365_business_premium": {"label": "Microsoft 365 Business Premium, per user", "price": "$22 per user per month, annual term"},
+    "m365_copilot": {"label": "Microsoft 365 Copilot, per user", "price": "$21 per user per month, annual term, requires a Business plan"},
+    "quickbooks_online": {"label": "QuickBooks Online subscription", "price": "Simple Start $38, Essentials $85, Plus $140, Advanced $340 per month"},
+    "other_resold": {"label": "Any other resold software product, per unit", "price": "Quoted per product, confirmed on the client's invoice"}
   },
   "discount": ""
 }

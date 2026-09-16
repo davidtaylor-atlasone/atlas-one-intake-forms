@@ -1,0 +1,47 @@
+==============================================================================
+ATLAS ONE — TOTAL IMPACT MODEL
+Big Red Jelly LLC
+as of 2026-08-29
+==============================================================================
+
+PER-DIVISION WATERFALL
+------------------------------------------------------------------------------
+  Workforce & HR                     ($531)
+      Payroll & admin — incumbent vs Atlas O       ($531)   PEO deck
+      Turnover prevented x replacement cost             —   not quoted
+  Benefits & Retirement              $2,198
+      Health premium — today vs recommended        $2,198   health engine
+      Section 125 / FICA saving on pre-tax p            —   not quoted
+      401(k) — current fees vs master plan              —   not quoted
+  Financial Services                      —   not in scope
+  Risk & Insurance                        —   not in scope
+  Technology & Operations                 —   not in scope
+  Business Consulting                     —   not in scope
+------------------------------------------------------------------------------
+  Gross annual impact                $1,667
+  Less: Atlas One fees                    —   Atlas One's $11,161 is already inside the ($531) cash line — do not subtract twice
+==============================================================================
+  NET FIRST-YEAR IMPACT              $1,667
+==============================================================================
+  2 of 6 divisions scoped.
+
+MEMO — REAL, BUT DELIBERATELY NOT IN THE TOTAL
+------------------------------------------------------------------------------
+  HR / payroll / compliance hours x load       $6,100   PEO deck
+      Slide 7 automation lines: manage benefits/401k $2,400 + multi-vendor elimination $2,400 + ConnectTeam job costing $1,300. Eliminated manual work, not cash. The deck deliberately does NOT dollarise the 12 hrs/mo separately (slide 18 says 'Not dollarised') — dollarising both would double-count.
+  memo total (NOT added above)                 $6,100
+
+THREE-YEAR VIEW  (3% payroll growth; fees escalate with it;
+                  one-time items in year 1 only)
+------------------------------------------------------------------------------
+  Year                Gross   Atlas One fees              Net
+  Year 1             $1,667               $0           $1,667
+  Year 2             $1,717               $0           $1,717
+  Year 3             $1,769               $0           $1,769
+------------------------------------------------------------------------------
+  3-yr               $5,153               $0           $5,153
+
+RECONCILIATION
+------------------------------------------------------------------------------
+  vs combined savings shown to Josh ($24,528)      $24,528   DOES NOT RECONCILE — difference ($22,861)
+  vs live deck COMBINED ANNUAL ROI ($15,394)      $15,394   DOES NOT RECONCILE — difference ($13,727)
