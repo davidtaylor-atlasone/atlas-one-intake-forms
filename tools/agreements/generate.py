@@ -557,8 +557,19 @@ def build_hold_harmless():
                "create an ongoing service relationship; a future update or a different deliverable is a new "
                "engagement, priced and delivered separately.")
 
-    doc.signature(extra_line="Governed by Utah law. This Acknowledgement, not the Master Agreement, "
-                              "covers this document only sale.")
+    doc.clause("5.", "California, release and waiver of unknown claims (Civil Code 1542)", "If the deliverable "
+               "is for use with an employee, contractor, or business located in California, the Client releases "
+               "Atlas One from all claims arising out of or relating to the deliverable, whether known or "
+               "unknown, and expressly waives the protection of California Civil Code section 1542, which reads: "
+               "\"A general release does not extend to claims that the creditor or releasing party does not know "
+               "or suspect to exist in his or her favor at the time of executing the release, and that, if known "
+               "by him or her, would have materially affected his or her settlement with the debtor or released "
+               "party.\" The Client understands and accepts that this release applies to all such claims, "
+               "including ones the Client does not currently know or suspect.")
+
+    doc.signature(extra_line="Governed by Utah law, except that the California Civil Code 1542 waiver above is "
+                              "included to give full effect to the release under California law. This "
+                              "Acknowledgement, not the Master Agreement, covers this document only sale.")
     doc.footer()
     return doc, "Atlas_One_Hold_Harmless_and_Acknowledgement"
 
