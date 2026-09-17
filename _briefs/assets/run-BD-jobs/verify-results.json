@@ -1,0 +1,62 @@
+[
+  {
+    "file": "Employee Handbook Builder (Bilingual 50-State).html",
+    "slug": "handbook",
+    "consoleErrors": [],
+    "externalReqs": [],
+    "bannerVisibleOnScreen": true,
+    "scrollCheck390": {
+      "sw": 390,
+      "vw": 390
+    },
+    "pdfPath": "/Users/davidtaylor/Projects/atlas-one-intake-forms/_briefs/assets/run-BD-jobs/shots/handbook.pdf"
+  },
+  {
+    "file": "Safety Manual Builder (Bilingual OSHA).html",
+    "slug": "safety-manual",
+    "consoleErrors": [],
+    "externalReqs": [],
+    "bannerVisibleOnScreen": true,
+    "scrollCheck390": {
+      "sw": 390,
+      "vw": 390
+    },
+    "pdfPath": "/Users/davidtaylor/Projects/atlas-one-intake-forms/_briefs/assets/run-BD-jobs/shots/safety-manual.pdf"
+  },
+  {
+    "file": "W-2 At-Will Employment Agreement Builder (Atlas One).html",
+    "slug": "w2-offer-letter",
+    "consoleErrors": [],
+    "externalReqs": [],
+    "bannerVisibleOnScreen": true,
+    "scrollCheck390": {
+      "sw": 390,
+      "vw": 390
+    },
+    "pdfPath": "/Users/davidtaylor/Projects/atlas-one-intake-forms/_briefs/assets/run-BD-jobs/shots/w2-offer-letter.pdf"
+  },
+  {
+    "file": "Independent Contractor Agreement Builder (Atlas One).html",
+    "slug": "ic-agreement",
+    "consoleErrors": [],
+    "externalReqs": [],
+    "bannerVisibleOnScreen": true,
+    "scrollCheck390": {
+      "sw": 390,
+      "vw": 390
+    },
+    "pdfPath": "/Users/davidtaylor/Projects/atlas-one-intake-forms/_briefs/assets/run-BD-jobs/shots/ic-agreement.pdf"
+  },
+  {
+    "file": "NDA Builder (Atlas One).html",
+    "slug": "nda",
+    "consoleErrors": [],
+    "externalReqs": [],
+    "bannerVisibleOnScreen": true,
+    "scrollCheck390": {
+      "sw": 390,
+      "vw": 390
+    },
+    "pdfPath": "/Users/davidtaylor/Projects/atlas-one-intake-forms/_briefs/assets/run-BD-jobs/shots/nda.pdf"
+  }
+]

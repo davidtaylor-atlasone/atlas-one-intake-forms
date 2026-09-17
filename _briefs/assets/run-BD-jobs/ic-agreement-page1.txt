@@ -1,0 +1,29 @@
+INDEPENDENT CONTRACTOR AGREEMENT
+This Independent Contractor Agreement (the “Agreement”) is entered into as of [Effective
+Date] (the “Effective Date”), by and between Atlas One Solutions (the “Company”), and Jane
+Doe (the “Contractor”). The Company and the Contractor may be referred to individually as a
+“Party” and collectively as the “Parties.”
+1. SERVICES
+The Contractor agrees to perform the following services for the Company (the “Services”):
+[Description of Services]. The Contractor shall perform the Services in a professional and
+workmanlike manner consistent with industry standards.
+2. TERM
+This Agreement shall commence on the Effective Date and shall continue on an ongoing basis
+until terminated by either Party in accordance with the Termination section of this
+Agreement.
+3. COMPENSATION
+The Company shall pay the Contractor at a rate of [Rate] per hour for Services performed.
+The Contractor shall submit invoices upon completion of the Services, and the Company shall
+pay each undisputed invoice within 30 days of receipt (Net 30).
+The Contractor shall be responsible for all expenses incurred in performing the Services, and
+no expenses shall be reimbursed by the Company unless separately agreed in writing.
+4. INDEPENDENT CONTRACTOR STATUS
+The Contractor is an independent contractor and not an employee, partner, agent, or joint
+venturer of the Company. The Contractor controls the means, methods, and manner by which
+the Services are performed. The Contractor is not entitled to any employee benefits,
+including health insurance, retirement, paid leave, or workers’ compensation. The Contractor
+is solely responsible for all federal, state, and local taxes, including self-employment taxes,
+arising from compensation under this Agreement, and the Company shall report payments on
+IRS Form 1099 as required by law. Nothing in this Agreement creates an employment
+relationship between the Parties.
+5. CONFIDENTIALITY

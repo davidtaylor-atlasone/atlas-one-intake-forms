@@ -1,0 +1,36 @@
+MUTUAL NON-DISCLOSURE AGREEMENT
+Two-Way / Mutual · Atlas One Solutions
+This Mutual Non-Disclosure Agreement (the "Agreement") is entered into as of [effective date] (the "Effective
+Date"), by and between Atlas One Solutions ("Atlas One Solutions"), and Test Counterparty Inc. ("Test Counterparty
+Inc."). Each party may disclose to and receive Confidential Information from the other. Each party, in its capacity as
+the party disclosing Confidential Information, is a "Disclosing Party," and each party, in its capacity as the party
+receiving Confidential Information, is a "Receiving Party." Atlas One Solutions and Test Counterparty Inc. are
+collectively the "Parties."
+1. PURPOSE
+The Parties wish to explore and/or engage in a business relationship concerning [purpose of disclosure] (the
+"Purpose"). In connection with the Purpose, each Disclosing Party may disclose to the other party certain
+Confidential Information as defined below.
+2. DEFINITION OF CONFIDENTIAL INFORMATION
+For purposes of this Agreement, "Confidential Information" means any and all non-public, proprietary, or confidential
+information disclosed by the Disclosing Party to the Receiving Party, whether orally, in writing, electronically, or by
+inspection of tangible objects, that is designated as confidential or that reasonably should be understood to be
+confidential given the nature of the information and the circumstances of disclosure. Confidential Information
+includes, without limitation: business plans, financial information, customer and client lists, pricing, methods,
+processes, software, technical data, trade secrets, and know-how.
+3. EXCLUSIONS FROM CONFIDENTIAL INFORMATION
+Confidential Information does not include information that the Receiving Party can demonstrate:
+is or becomes publicly available through no wrongful act or breach of this Agreement by the Receiving Party;
+was already known to the Receiving Party prior to disclosure, without an obligation of confidentiality;
+is independently developed by the Receiving Party without use of or reference to the Confidential Information;
+or
+is rightfully received from a third party who is not under a duty of confidentiality to the Disclosing Party.
+4. OBLIGATIONS OF THE RECEIVING PARTY
+Each Receiving Party agrees to: (a) use the Confidential Information solely for the Purpose and for no other purpose;
+(b) protect the Confidential Information using at least the same degree of care it uses for its own confidential
+information, and in no event less than a reasonable degree of care; and (c) not disclose the Confidential Information
+to any third party without the prior written consent of the Disclosing Party, except to its employees, agents, or
+advisors who have a legitimate need to know for the Purpose and who are bound by confidentiality obligations at
+least as protective as those in this Agreement.
+5. TERM AND SURVIVAL
+This Agreement shall commence on the Effective Date and continue for a period of 2 year(s), unless earlier
+terminated by either party upon written notice. The obligations of confidentiality set forth herein shall survive the
