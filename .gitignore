@@ -5,3 +5,6 @@ _briefs/assets/run-O/*.xlsx
 __pycache__/
 
 .playwright-mcp/
+
+# GHL API token, never committed
+.env
