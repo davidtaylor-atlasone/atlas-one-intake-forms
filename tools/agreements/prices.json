@@ -27,7 +27,6 @@
   "ai_services": {
     "essentials": {"label": "AI Email Assistant, Essentials (1 mailbox, 30 minutes support a month)", "price": "$249 a month"},
     "professional": {"label": "AI Email Assistant, Professional (up to 3 mailboxes, 1 hour support a month)", "price": "$499 a month"},
-    "concierge": {"label": "AI Email Assistant, Concierge", "price": "$649 a month"},
     "extra_mailbox": {"label": "Additional mailbox, each", "price": "$75 a month"},
     "setup": {"label": "Setup", "price": "$750 standard, $999 for complex multi mailbox rollouts"},
     "task_agent_standalone": {"label": "AI Task Agent, standalone", "price": "$199 a month"},
@@ -36,10 +35,8 @@
   },
   "documents": {
     "handbook": {"label": "Employee handbook, custom, bilingual, 50 state compliant", "price": "$950 one time"},
-    "handbook_basic": {"label": "Employee handbook, basic", "price": "$299 one time"},
     "handbook_update": {"label": "Handbook annual update", "price": "$250 a year"},
     "safety": {"label": "Safety manual, OSHA, bilingual, 50 state", "price": "$1,200 one time"},
-    "safety_basic": {"label": "Safety manual, basic", "price": "$299 one time"},
     "safety_update": {"label": "Safety manual annual refresh", "price": "$300 a year"},
     "agreement_each": {"label": "W-2 at will agreement, 1099 contractor agreement, or NDA, each, multi state", "price": "$450 one time"},
     "agreement_bundle": {"label": "All three agreements, bundle", "price": "$1,200 one time"},
