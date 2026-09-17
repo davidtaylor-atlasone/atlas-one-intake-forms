@@ -1,0 +1,114 @@
+- iframe [active] [ref=e11]:
+  - generic [ref=f3e1]:
+    - generic [ref=f3e3]:
+      - list:
+        - listitem:
+          - link "Skip to main content" [ref=f3e4] [cursor=pointer]:
+            - /url: "#main"
+      - generic [ref=f3e3756]:
+        - generic [ref=f3e3757]:
+          - generic [ref=f3e3758]:
+            - generic [ref=f3e3759]:
+              - button "Workflows list" [ref=f3e3760] [cursor=pointer]
+              - button "Toggle sidebar" [ref=f3e3765] [cursor=pointer]
+            - paragraph [ref=f3e3770]:
+              - button [ref=f3e3771] [cursor=pointer]:
+                - heading "Workflow name" [level=1] [ref=f3e3773]: Send PEO form on tag
+            - generic [ref=f3e3777]:
+              - group [ref=f3e3779]:
+                - generic [ref=f3e3780]: DT
+              - generic [ref=f3e3783]:
+                - button "Recent changes" [ref=f3e3785] [cursor=pointer]:
+                  - img "Recent changes" [ref=f3e3787]
+                - button "Undo" [disabled] [ref=f3e3789]
+                - button "Redo" [disabled] [ref=f3e3793]
+              - button "Save workflow button" [disabled] [ref=f3e3799]:
+                - generic [ref=f3e3800]: Saved
+          - generic [ref=f3e3805]:
+            - generic [ref=f3e3810] [cursor=pointer]:
+              - generic [ref=f3e3812]: Standard builder
+              - img "loading" [ref=f3e3813]
+            - tablist [ref=f3e3826]:
+              - tab "Builder" [selected] [ref=f3e3828] [cursor=pointer]:
+                - paragraph [ref=f3e3830]: Builder
+              - tab "Settings" [ref=f3e3833] [cursor=pointer]:
+                - paragraph [ref=f3e3835]: Settings
+              - tab "Enrollment history" [ref=f3e3838] [cursor=pointer]:
+                - paragraph [ref=f3e3840]: Enrollment history
+              - tab "Execution logs" [ref=f3e3843] [cursor=pointer]:
+                - paragraph [ref=f3e3845]: Execution logs
+            - generic [ref=f3e3847]:
+              - button "Test workflow" [ref=f3e3848] [cursor=pointer]
+              - generic [ref=f3e3850]:
+                - paragraph [ref=f3e3851]: Draft
+                - switch "Toggle draft publish workflow" [checked] [ref=f3e3852]:
+                  - generic [aria-hidden] [ref=f3e3853] [cursor=pointer]
+                - paragraph [ref=f3e3855]: Publish
+        - generic [ref=f3e3858]:
+          - generic [ref=f3e3861]:
+            - button [ref=f3e3862] [cursor=pointer]
+            - button [ref=f3e3866] [cursor=pointer]
+            - button [ref=f3e3870] [cursor=pointer]
+            - button [ref=f3e3874] [cursor=pointer]
+            - button [ref=f3e3878] [cursor=pointer]
+            - button [ref=f3e3882] [cursor=pointer]
+            - button [ref=f3e3886] [cursor=pointer]
+            - button [ref=f3e3890] [cursor=pointer]
+          - generic "Workflow tree" [ref=f3e3900]:
+            - generic [ref=f3e3902]:
+              - generic:
+                - img:
+                  - button "Edge from 8f1cd1d1-cc51-420f-a571-6c0e9b3b6297 to 2b11071d-11d7-4eda-9ae7-e9710bddfde3"
+                - img:
+                  - button "Edge from 2b11071d-11d7-4eda-9ae7-e9710bddfde3 to be9e09a6-a191-491b-a6d2-9b0417608a88"
+                - img:
+                  - button "Edge from be9e09a6-a191-491b-a6d2-9b0417608a88 to be9e09a6-a191-491b-a6d2-9b0417608a88-end"
+                - img:
+                  - button "Edge from vVsGahRnczqSojmdv03I to 8f1cd1d1-cc51-420f-a571-6c0e9b3b6297" [ref=f3e3903] [cursor=pointer]
+                - img:
+                  - button "Edge from add-new-trigger to 8f1cd1d1-cc51-420f-a571-6c0e9b3b6297" [ref=f3e3906] [cursor=pointer]
+                - generic:
+                  - generic "Add action" [ref=f3e3912]:
+                    - button "Add action" [ref=f3e3914] [cursor=pointer]
+                  - generic "Add action" [ref=f3e3922]:
+                    - button "Add action" [ref=f3e3924] [cursor=pointer]
+                  - generic "Add action" [ref=f3e3932]:
+                    - button "Add action" [ref=f3e3934] [cursor=pointer]
+                - generic:
+                  - button [ref=f3e3939] [cursor=pointer]:
+                    - button "Email 2 - PEO moving forward Action" [ref=f3e3940]:
+                      - button "Add action" [ref=f3e3944]
+                      - button "Email 2 - PEO moving forward" [ref=f3e3949]:
+                        - button [ref=f3e3962]
+                  - button [ref=f3e3965] [cursor=pointer]:
+                    - button "Add Tag - form-a-sent Action" [ref=f3e3966]:
+                      - button "Add Tag - form-a-sent" [ref=f3e3968]:
+                        - button [ref=f3e3981]
+                  - button [ref=f3e3984] [cursor=pointer]:
+                    - button "Remove Tag - send-peo-form Action" [ref=f3e3985]:
+                      - button "Remove Tag - send-peo-form" [ref=f3e3987]:
+                        - button [ref=f3e3999]
+                  - button "END" [ref=f3e4002] [cursor=pointer]
+                  - button "Contact Tag Trigger Tag added includes \"send-peo-form\" Stats" [ref=f3e4007] [cursor=pointer]:
+                    - generic [ref=f3e4009]:
+                      - button "Contact Tag Trigger" [ref=f3e4010]:
+                        - generic [ref=f3e4011]: Contact Tag
+                      - generic [ref=f3e4020]:
+                        - list [ref=f3e4022]:
+                          - listitem [ref=f3e4023]:
+                            - generic [ref=f3e4024]: Tag added includes "send-peo-form"
+                        - button "Stats" [ref=f3e4031]
+                  - button [ref=f3e4035] [cursor=pointer]:
+                    - generic "Add trigger" [ref=f3e4038]: Add new trigger
+            - img "Vue Flow mini map" [ref=f3e4048]
+            - button "Add" [ref=f3e4059] [cursor=pointer]
+            - generic [ref=f3e4064]:
+              - button [ref=f3e4066] [cursor=pointer]
+              - group [ref=f3e4071]:
+                - button "Zoom in" [ref=f3e4072] [cursor=pointer]
+                - button "100%" [ref=f3e4076] [cursor=pointer]
+                - button "Zoom out" [ref=f3e4078] [cursor=pointer]
+              - group [ref=f3e4081]:
+                - button "Fit to Screen" [ref=f3e4082] [cursor=pointer]
+            - button [ref=f3e4087] [cursor=pointer]
+    - log [ref=f3e379]

@@ -1,0 +1,211 @@
+- generic [ref=f258e3]:
+  - status [ref=f258e317]
+  - generic [ref=f258e9]:
+    - img "form.banner_alt" [ref=f258e12]
+    - generic [ref=f258e16]:
+      - text: ONE CALL SOLVES EVERYTHING.
+      - generic [ref=f258e17]:
+        - text: Tell us about your business.
+        - heading "Your contact information" [level=1] [ref=f258e319]
+        - generic [ref=f258e28]:
+          - generic [ref=f258e29]: First Name *
+          - textbox "First Name *" [ref=f258e320]:
+            - /placeholder: Enter your first name
+            - text: Run BE
+        - generic [ref=f258e36]:
+          - generic [ref=f258e37]: Last Name *
+          - textbox "Last Name *" [ref=f258e321]:
+            - /placeholder: Enter your last name
+            - text: Test Co
+        - generic [ref=f258e42]:
+          - generic [ref=f258e43]: Email *
+          - textbox "Email *" [ref=f258e322]:
+            - /placeholder: your@email.com
+            - text: david+zzbe@atlasonesolutions.com
+        - generic [ref=f258e51]:
+          - generic [ref=f258e52]: Phone *
+          - textbox "Phone *" [ref=f258e323]:
+            - /placeholder: +1 (555) 000-0000
+            - text: (702) 555-0198
+        - heading "Your business" [level=1] [ref=f258e325]
+        - generic [ref=f258e66]:
+          - generic [ref=f258e67]: Legal Business Name
+          - textbox "Legal Business Name" [ref=f258e326]:
+            - /placeholder: Enter your text
+        - generic [ref=f258e74]:
+          - generic [ref=f258e75]: State (main office) *
+          - textbox "State (main office) *" [ref=f258e327]:
+            - /placeholder: Enter your state
+            - text: Texas
+        - generic [ref=f258e80]:
+          - generic [ref=f258e81]: What kind of business is it?
+          - combobox [ref=f258e328]:
+            - generic [ref=f258e329] [cursor=pointer]
+            - generic [ref=f258e330]:
+              - textbox "gZn8B7wJU1zXDuKYrNoi-searchbox":
+                - /placeholder: ""
+        - generic [ref=f258e90]:
+          - generic [ref=f258e91]: DBA / Trade Name
+          - textbox "DBA / Trade Name" [ref=f258e331]:
+            - /placeholder: Enter your text
+        - generic [ref=f258e98]:
+          - generic [ref=f258e99]: FEIN / EIN
+          - textbox "FEIN / EIN" [ref=f258e332]:
+            - /placeholder: Enter your text
+        - generic [ref=f258e104]:
+          - generic [ref=f258e105]: Entity Type
+          - combobox [ref=f258e333]:
+            - generic [ref=f258e334] [cursor=pointer]
+            - generic [ref=f258e335]:
+              - textbox "J11FeO1rjT9Q6Trn1B2G-searchbox":
+                - /placeholder: Select an option
+              - generic [ref=f258e336]: Select an option
+        - heading "What would you like quoted?" [level=1] [ref=f258e338]
+        - generic [ref=f258e119]:
+          - generic [ref=f258e120]: Which core services would you like included in your quote?
+          - combobox [ref=f258e339]:
+            - generic [ref=f258e340] [cursor=pointer]
+            - generic [ref=f258e341]:
+              - textbox "LKRhhB99LHo0cPG1xwEm-searchbox":
+                - /placeholder: Choose one or more options
+              - generic [ref=f258e342]: Choose one or more options
+        - heading "Workers Compensation" [level=1] [ref=f258e344]
+        - generic [ref=f258e135]:
+          - generic [ref=f258e136]: Do you currently have Workers' Comp coverage?
+          - generic [ref=f258e137]:
+            - combobox [ref=f258e346]:
+              - generic [ref=f258e347] [cursor=pointer]
+              - generic [ref=f258e348]:
+                - textbox "iMb61nQsfujoq7vZevMn-searchbox":
+                  - /placeholder: Select an option
+                - generic [ref=f258e349]: Select an option
+            - generic [ref=f258e142]: No coverage yet, or a brand-new business? No problem. We will send you a short no-loss form to sign after you submit.
+        - generic [ref=f258e145]:
+          - generic [ref=f258e146]: Review or quote employee benefits?
+          - combobox [ref=f258e350]:
+            - generic [ref=f258e351] [cursor=pointer]
+            - generic [ref=f258e352]:
+              - textbox "65guGJQ2k8G6tz8Ci4Dg-searchbox":
+                - /placeholder: Select an option
+              - generic [ref=f258e353]: Select an option
+        - heading [level=1] [ref=f258e355]:
+          - generic [ref=f258e356]:
+            - text: Prefer to fill it in by hand?
+            - link "Open the Atlas One census tool" [ref=f258e357] [cursor=pointer]:
+              - /url: https://forms.atlasonesolutions.com/census/
+        - generic [ref=f258e162]:
+          - generic [ref=f258e163]: Review or quote other business insurance?
+          - combobox [ref=f258e358]:
+            - generic [ref=f258e359] [cursor=pointer]
+            - generic [ref=f258e360]:
+              - textbox "C3mv4V9dFPhGVwipH5A9-searchbox":
+                - /placeholder: Select an option
+              - generic [ref=f258e361]: Select an option
+        - generic [ref=f258e171]:
+          - generic [ref=f258e172]: Additional services or add-ons you're interested in (optional)
+          - combobox [ref=f258e362]:
+            - generic [ref=f258e363] [cursor=pointer]
+            - generic [ref=f258e364]:
+              - textbox "ETPGenAjZmyvWpW1MKJY-searchbox":
+                - /placeholder: Choose one or more options
+              - generic [ref=f258e365]: Choose one or more options
+        - heading "Would you like a quote on anything else, or to simplify your whole back office? Most owners don't realize how much they can consolidate under one relationship. Check anything you'd like us to quote or explore — no obligation:" [level=1] [ref=f258e367]:
+          - strong [ref=f258e368]: Would you like a quote on anything else,
+          - generic [ref=f258e369]: "or to simplify your whole back office? Most owners don't realize how much they can consolidate under one relationship. Check anything you'd like us to quote or explore — no obligation:"
+        - generic [ref=f258e188]:
+          - generic [ref=f258e189]: Quote or explore — no obligation
+          - generic [ref=f258e191]:
+            - generic [ref=f258e193]:
+              - checkbox "HR support & compliance" [ref=f258e194] [cursor=pointer]
+              - generic [ref=f258e195]: HR support & compliance
+            - generic [ref=f258e197]:
+              - checkbox "Employee benefits / health insurance" [ref=f258e198] [cursor=pointer]
+              - generic [ref=f258e199]: Employee benefits / health insurance
+            - generic [ref=f258e201]:
+              - checkbox "Workers' compensation" [ref=f258e202] [cursor=pointer]
+              - generic [ref=f258e203]: Workers' compensation
+            - generic [ref=f258e205]:
+              - checkbox "Business insurance (GL, auto, property, E&O, bonds, umbrella)" [ref=f258e206] [cursor=pointer]
+              - generic [ref=f258e207]: Business insurance (GL, auto, property, E&O, bonds, umbrella)
+            - generic [ref=f258e209]:
+              - checkbox "Bookkeeping & accounting" [ref=f258e210] [cursor=pointer]
+              - generic [ref=f258e211]: Bookkeeping & accounting
+            - generic [ref=f258e213]:
+              - checkbox "Tax strategy & filings" [ref=f258e214] [cursor=pointer]
+              - generic [ref=f258e215]: Tax strategy & filings
+            - generic [ref=f258e217]:
+              - checkbox "Fractional CFO" [ref=f258e218] [cursor=pointer]
+              - generic [ref=f258e219]: Fractional CFO
+            - generic [ref=f258e221]:
+              - checkbox "AI Email Assistant" [ref=f258e222] [cursor=pointer]
+              - generic [ref=f258e223]: AI Email Assistant
+            - generic [ref=f258e225]:
+              - checkbox "AI Task Agent" [ref=f258e226] [cursor=pointer]
+              - generic [ref=f258e227]: AI Task Agent
+            - generic [ref=f258e229]:
+              - checkbox "Workers' comp audit help" [ref=f258e230] [cursor=pointer]
+              - generic [ref=f258e231]: Workers' comp audit help
+            - generic [ref=f258e233]:
+              - checkbox "Software & technology stack" [ref=f258e234] [cursor=pointer]
+              - generic [ref=f258e235]: Software & technology stack
+            - generic [ref=f258e237]:
+              - checkbox "Business consulting / vendor audit" [ref=f258e238] [cursor=pointer]
+              - generic [ref=f258e239]: Business consulting / vendor audit
+            - generic [ref=f258e241]:
+              - checkbox "Business Concierge — full back-office package (payroll, HR, benefits, finance, risk, tech, all in one)" [ref=f258e242] [cursor=pointer]
+              - generic [ref=f258e243]: Business Concierge — full back-office package (payroll, HR, benefits, finance, risk, tech, all in one)
+            - generic [ref=f258e245]:
+              - checkbox "Certified Payroll Reporting" [ref=f258e246] [cursor=pointer]
+              - generic [ref=f258e247]: Certified Payroll Reporting
+            - generic [ref=f258e249]:
+              - checkbox "Custom HR documents & policies" [ref=f258e250] [cursor=pointer]
+              - generic [ref=f258e251]: Custom HR documents & policies
+            - generic [ref=f258e253]:
+              - checkbox "Employee handbook & safety manual" [ref=f258e254] [cursor=pointer]
+              - generic [ref=f258e255]: Employee handbook & safety manual
+            - generic [ref=f258e257]:
+              - checkbox "Employment agreements & contracts (W-2 & 1099)" [ref=f258e258] [cursor=pointer]
+              - generic [ref=f258e259]: Employment agreements & contracts (W-2 & 1099)
+            - generic [ref=f258e261]:
+              - checkbox "Certified payroll (prevailing wage / WH-347)" [ref=f258e262] [cursor=pointer]
+              - generic [ref=f258e263]: Certified payroll (prevailing wage / WH-347)
+            - generic [ref=f258e265]:
+              - checkbox "Payroll → accounting GL import/export files" [ref=f258e266] [cursor=pointer]
+              - generic [ref=f258e267]: Payroll → accounting GL import/export files
+            - generic [ref=f258e269]:
+              - checkbox "Background checks, drug testing, MVR & E-Verify" [ref=f258e270] [cursor=pointer]
+              - generic [ref=f258e271]: Background checks, drug testing, MVR & E-Verify
+            - generic [ref=f258e273]:
+              - checkbox "401(k) / retirement plans" [ref=f258e274] [cursor=pointer]
+              - generic [ref=f258e275]: 401(k) / retirement plans
+            - generic [ref=f258e277]:
+              - checkbox "Recruiting, applicant tracking & onboarding" [ref=f258e278] [cursor=pointer]
+              - generic [ref=f258e279]: Recruiting, applicant tracking & onboarding
+            - generic [ref=f258e281]:
+              - checkbox "Time & attendance / PTO tracking" [ref=f258e282] [cursor=pointer]
+              - generic [ref=f258e283]: Time & attendance / PTO tracking
+        - generic [ref=f258e286]:
+          - generic [ref=f258e287]: Signature
+          - generic [ref=f258e289]:
+            - generic [ref=f258e370]:
+              - generic [ref=f258e371] [cursor=pointer]
+              - generic: Sign here
+            - generic "Clear" [ref=f258e290] [cursor=pointer]
+        - group "T & C" [ref=f258e294]:
+          - generic [ref=f258e295]:
+            - checkbox "By checking this box, I consent to receive non-marketing text messages from Atlas One Solutions about your HR, payroll and benefits quote. Message frequency varies, message &amp; data rates may apply. Text HELP for assistance, reply STOP to opt out." [ref=f258e296] [cursor=pointer]
+            - paragraph [ref=f258e374]:
+              - text: By checking this box, I consent to receive non-marketing text messages from
+              - strong [ref=f258e375]: Atlas One Solutions
+              - text: about
+              - strong [ref=f258e376]: your HR, payroll and benefits quote
+              - text: . Message frequency varies, message & data rates may apply. Text HELP for assistance, reply STOP to opt out.
+          - generic [ref=f258e302]:
+            - checkbox "By checking this box, I consent to receive marketing and promotional messages including special offers, discounts, new product updates among others, from Atlas One Solutions at the phone number provided. Frequency may vary. Message &amp; data rates may apply. Text HELP for assistance, reply STOP to opt out." [ref=f258e303] [cursor=pointer]
+            - paragraph [ref=f258e379]:
+              - text: By checking this box, I consent to receive marketing and promotional messages including special offers, discounts, new product updates among others, from
+              - strong [ref=f258e380]: Atlas One Solutions
+              - text: at the phone number provided. Frequency may vary. Message & data rates may apply. Text HELP for assistance, reply STOP to opt out.
+        - button [ref=f258e312] [cursor=pointer]:
+          - paragraph [ref=f258e382]: Get My Quote
+        - text: Takes about 5 minutes. Only the sections you pick will open up.

@@ -1,0 +1,471 @@
+- iframe [active] [ref=f84e1810]:
+  - generic [active] [ref=f87e1]:
+    - generic [ref=f87e6]:
+      - generic [ref=f87e8]:
+        - button "Back" [ref=f87e13] [cursor=pointer]
+        - textbox "Form Name" [ref=f87e20]
+        - generic [ref=f87e24]:
+          - button "Preview" [ref=f87e25] [cursor=pointer]
+          - button "Integrate" [ref=f87e31] [cursor=pointer]
+          - button "Save" [ref=f87e7836] [cursor=pointer]
+      - generic [ref=f87e42]:
+        - generic [ref=f87e43]:
+          - generic [ref=f87e1076]:
+            - button "Add Form Element" [ref=f87e1077] [cursor=pointer]
+            - button "Open Conditional Logic" [ref=f87e1081] [cursor=pointer]
+          - generic [ref=f87e1085]:
+            - button "Desktop Mode" [ref=f87e1086] [cursor=pointer]
+            - button "Mobile Mode" [ref=f87e1090] [cursor=pointer]
+        - generic [ref=f87e64]:
+          - generic [ref=f87e65] [cursor=pointer]: Edit
+          - generic [ref=f87e66] [cursor=pointer]: Settings
+          - generic [ref=f87e67] [cursor=pointer]: Submissions
+          - generic [ref=f87e68] [cursor=pointer]: Notifications
+          - generic [ref=f87e69] [cursor=pointer]: Analytics
+        - generic [ref=f87e1095]:
+          - button "Versions" [ref=f87e1097] [cursor=pointer]
+          - generic [ref=f87e1101]:
+            - button "Undo" [ref=f87e1102] [cursor=pointer]
+            - button "Redo" [disabled] [ref=f87e1106]
+          - button "Styles & Options" [ref=f87e1110] [cursor=pointer]
+      - generic [ref=f87e91]:
+        - generic [ref=f87e1116]:
+          - img "banner" [ref=f87e1119]
+          - generic [ref=f87e1122]:
+            - text: ONE CALL SOLVES EVERYTHING.
+            - generic [ref=f87e1124]:
+              - heading "Your contact information" [level=1] [ref=f87e7845]
+              - generic [ref=f87e7849]:
+                - generic [ref=f87e7850]: First Name*
+                - textbox "Enter your first name" [ref=f87e7853]
+              - generic [ref=f87e7857]:
+                - generic [ref=f87e7858]: Last Name*
+                - textbox "Enter your last name" [ref=f87e7861]
+              - generic [ref=f87e7865]:
+                - generic [ref=f87e7866]: Email*
+                - textbox "your@email.com" [ref=f87e7871]
+              - generic [ref=f87e7875]:
+                - generic [ref=f87e7876]: Phone*
+                - textbox "+1 (555) 000-0000" [ref=f87e7880]
+              - heading "Your business" [level=1] [ref=f87e7888]
+              - generic [ref=f87e7892]:
+                - textbox "Label" [ref=f87e7895]
+                - textbox "Enter your text" [ref=f87e7897]
+              - generic [ref=f87e7901]:
+                - generic [ref=f87e7902]: State (main office)*
+                - textbox "Enter your state" [ref=f87e7905]
+              - generic [ref=f87e7908]:
+                - generic [ref=f87e7909]:
+                  - textbox "Label" [ref=f87e7912]
+                  - generic [ref=f87e7913]:
+                    - textbox [ref=f87e7916]
+                    - generic [ref=f87e7920]:
+                      - generic [ref=f87e7922]:
+                        - generic [ref=f87e7925]: Audiology
+                        - img [aria-hidden] [ref=f87e7926] [cursor=pointer]
+                      - generic [ref=f87e7929]:
+                        - generic [ref=f87e7932]: Dental Ortho Optometry ENT
+                        - img [aria-hidden] [ref=f87e7933] [cursor=pointer]
+                      - generic [ref=f87e7936]:
+                        - generic [ref=f87e7939]: Construction
+                        - img [aria-hidden] [ref=f87e7940] [cursor=pointer]
+                      - generic [ref=f87e7943]:
+                        - generic [ref=f87e7946]: Technology
+                        - img [aria-hidden] [ref=f87e7947] [cursor=pointer]
+                      - generic [ref=f87e7950]:
+                        - generic [ref=f87e7953]: Hospitality
+                        - img [aria-hidden] [ref=f87e7954] [cursor=pointer]
+                      - generic [ref=f87e7957]:
+                        - generic [ref=f87e7960]: Professional Services
+                        - img [aria-hidden] [ref=f87e7961] [cursor=pointer]
+                      - generic [ref=f87e7964]:
+                        - generic [ref=f87e7967]: Other
+                        - img [aria-hidden] [ref=f87e7968] [cursor=pointer]
+                      - generic [ref=f87e7971]:
+                        - generic [ref=f87e7974]: Construction and trades
+                        - img [aria-hidden] [ref=f87e7975] [cursor=pointer]
+                      - generic [ref=f87e7978]:
+                        - generic [ref=f87e7981]: Restaurants and hospitality
+                        - img [aria-hidden] [ref=f87e7982] [cursor=pointer]
+                      - generic [ref=f87e7985]:
+                        - generic [ref=f87e7988]: Professional services (law, accounting, agencies)
+                        - img [aria-hidden] [ref=f87e7989] [cursor=pointer]
+                      - generic [ref=f87e7992]:
+                        - generic [ref=f87e7995]: Manufacturing and industrial
+                        - img [aria-hidden] [ref=f87e7996] [cursor=pointer]
+                      - generic [ref=f87e7999]:
+                        - generic [ref=f87e8002]: Retail and e-commerce
+                        - img [aria-hidden] [ref=f87e8003] [cursor=pointer]
+                      - generic [ref=f87e8006]:
+                        - generic [ref=f87e8009]: Home services
+                        - img [aria-hidden] [ref=f87e8010] [cursor=pointer]
+                      - generic [ref=f87e8013]:
+                        - generic [ref=f87e8016]: Medical practices (non dental)
+                        - img [aria-hidden] [ref=f87e8017] [cursor=pointer]
+                      - generic [ref=f87e8020]:
+                        - generic [ref=f87e8023]: Behavioral health and treatment centers
+                        - img [aria-hidden] [ref=f87e8024] [cursor=pointer]
+                      - generic [ref=f87e8027]:
+                        - generic [ref=f87e8030]: Veterinary
+                        - img [aria-hidden] [ref=f87e8031] [cursor=pointer]
+                      - generic [ref=f87e8034]:
+                        - generic [ref=f87e8037]: Technology and software
+                        - img [aria-hidden] [ref=f87e8038] [cursor=pointer]
+                      - generic [ref=f87e8041]:
+                        - generic [ref=f87e8044]: Transportation and logistics
+                        - img [aria-hidden] [ref=f87e8045] [cursor=pointer]
+                      - generic [ref=f87e8048]:
+                        - generic [ref=f87e8051]: Real estate and property management
+                        - img [aria-hidden] [ref=f87e8052] [cursor=pointer]
+                      - generic [ref=f87e8055]:
+                        - generic [ref=f87e8058]: Nonprofit
+                        - img [aria-hidden] [ref=f87e8059] [cursor=pointer]
+                    - button "Add option" [ref=f87e8062] [cursor=pointer]
+                    - generic [ref=f87e8066]: Type a short label
+                - generic [ref=f87e8067]:
+                  - button "Open settings" [ref=f87e8068] [cursor=pointer]
+                  - button "Clone field" [ref=f87e8072] [cursor=pointer]
+                  - button "Remove field" [ref=f87e8075] [cursor=pointer]
+                - button "Add Element" [ref=f87e8078] [cursor=pointer]
+              - generic [ref=f87e8084]:
+                - textbox "Label" [ref=f87e8087]
+                - textbox "Enter your text" [ref=f87e8089]
+              - generic [ref=f87e8093]:
+                - textbox "Label" [ref=f87e8096]
+                - textbox "Enter your text" [ref=f87e8098]
+              - generic [ref=f87e8102]:
+                - textbox "Label" [ref=f87e8105]
+                - button "Select an option ▼" [ref=f87e8108] [cursor=pointer]
+              - heading "What would you like quoted?" [level=1] [ref=f87e8116]
+              - generic [ref=f87e8120]:
+                - textbox "Label" [ref=f87e8123]
+                - button "Choose one or more options ▼" [ref=f87e8126] [cursor=pointer]
+              - generic [ref=f87e8130]:
+                - generic [ref=f87e8131]:
+                  - textbox "Label" [ref=f87e8133]
+                  - generic [ref=f87e8134]: Hidden
+                - textbox "Enter your text" [ref=f87e8136]
+              - generic [ref=f87e8140]:
+                - generic [ref=f87e8141]:
+                  - textbox "Label" [ref=f87e8143]
+                  - generic [ref=f87e8144]: Hidden
+                - textbox [ref=f87e8146]
+              - generic [ref=f87e8150]:
+                - generic [ref=f87e8151]:
+                  - textbox "Label" [ref=f87e8153]
+                  - generic [ref=f87e8154]: Hidden
+                - textbox "Enter your text" [ref=f87e8156]
+              - generic [ref=f87e8160]:
+                - generic [ref=f87e8161]:
+                  - textbox "Label" [ref=f87e8163]
+                  - generic [ref=f87e8164]: Hidden
+                - textbox "Enter your text" [ref=f87e8166]
+              - generic [ref=f87e8170]:
+                - textbox "Label" [ref=f87e8173]
+                - button "Select an option ▼" [ref=f87e8176] [cursor=pointer]
+              - generic [ref=f87e8180]:
+                - generic [ref=f87e8181]:
+                  - textbox "Label" [ref=f87e8183]
+                  - generic [ref=f87e8184]: Hidden
+                - textbox "Enter your text" [ref=f87e8186]
+              - generic [ref=f87e8190]:
+                - generic [ref=f87e8191]:
+                  - textbox "Label" [ref=f87e8193]
+                  - generic [ref=f87e8194]: Hidden
+                - textbox [ref=f87e8196]
+              - generic [ref=f87e8200]:
+                - textbox "Label" [ref=f87e8203]
+                - button "Select an option ▼" [ref=f87e8206] [cursor=pointer]
+              - generic [ref=f87e8210]:
+                - generic [ref=f87e8211]:
+                  - textbox "Label" [ref=f87e8213]
+                  - generic [ref=f87e8214]: Hidden
+                - textbox "Enter your text" [ref=f87e8216]
+              - generic [ref=f87e8220]:
+                - generic [ref=f87e8221]:
+                  - textbox "Label" [ref=f87e8223]
+                  - generic [ref=f87e8224]: Hidden
+                - textbox "Type your message here" [ref=f87e8226]
+              - heading "Payroll uploads ROI Comparison. (Optional) to build your true side-by-side, share your most recent payroll report/summary and invoice, and one from around Feb/March if you can. The more you share, the more accurate and honest your comparison.\"" [level=1] [ref=f87e8234]: Payroll uploads ROI Comparison.(Optional) to build your true side-by-side, share your most recent payroll report/summary and invoice, and one from around Feb/March if you can. The more you share, the more accurate and honest your comparison."
+              - generic [ref=f87e8238]:
+                - textbox "Label" [ref=f87e8241]
+                - generic [ref=f87e8243]:
+                  - textbox [ref=f87e8248]
+                  - generic [ref=f87e8249]: PDF, DOC/DOCX, XLS/CSV, JPG/JPEG, PNG, GIF ( max 10 File )
+              - heading "Workers Compensation" [level=1] [ref=f87e8257]
+              - generic [ref=f87e8262]:
+                - textbox "Label" [ref=f87e8265]
+                - generic [ref=f87e8266]:
+                  - button "Select an option ▼" [ref=f87e8268] [cursor=pointer]
+                  - generic [ref=f87e8269]: No coverage yet, or a brand-new business? No problem. We will send you a short no-loss form to sign after you submit.
+              - generic [ref=f87e8273]:
+                - generic [ref=f87e8274]:
+                  - textbox "Label" [ref=f87e8276]
+                  - generic [ref=f87e8277]: Hidden
+                - textbox "YYYY-MM-DD" [ref=f87e8281]
+              - generic [ref=f87e8285]:
+                - generic [ref=f87e8286]:
+                  - textbox "Label" [ref=f87e8288]
+                  - generic [ref=f87e8289]: Hidden
+                - textbox "Enter your text" [ref=f87e8291]
+              - heading [level=1] [ref=f87e8299]:
+                - generic [ref=f87e8300]: Upload your current WC policy if you have it
+                - text: Our master policy typically saves around 30%. No policy? Just give us a description of what your employees do and the states they work in, and we'll assign the class codes and quote your real rates.
+              - generic [ref=f87e8304]:
+                - textbox "Label" [ref=f87e8307]
+                - generic [ref=f87e8309]:
+                  - textbox [ref=f87e8314]
+                  - generic [ref=f87e8315]: PDF, DOC/DOCX, XLS/CSV, JPG/JPEG, PNG, GIF
+              - generic [ref=f87e8319]:
+                - generic [ref=f87e8320]:
+                  - textbox "Label" [ref=f87e8322]
+                  - generic [ref=f87e8323]: Hidden
+                - generic [ref=f87e8326]:
+                  - generic "YES " [ref=f87e8329]
+                  - generic "NO " [ref=f87e8332]
+                  - generic "NONE NEEDED " [ref=f87e8335]
+              - generic [ref=f87e8339]:
+                - generic [ref=f87e8340]:
+                  - textbox "Label" [ref=f87e8342]
+                  - generic [ref=f87e8343]: Hidden
+                - textbox "Enter your text" [ref=f87e8345]
+              - generic [ref=f87e8349]:
+                - generic [ref=f87e8350]:
+                  - textbox "Label" [ref=f87e8352]
+                  - generic [ref=f87e8353]: Hidden
+                - textbox "Enter your text" [ref=f87e8355]
+              - generic [ref=f87e8359]:
+                - textbox "Label" [ref=f87e8362]
+                - button "Select an option ▼" [ref=f87e8365] [cursor=pointer]
+              - heading "For accurate benefits comparison we need an Employee census. Please list every employee plus their spouse and children/dependents even anyone waiving coverage or with other insurance. Listing everyone gives us a true worksite count, which often brings the premium in more aggressively and can lower your rate" [level=1] [ref=f87e8373]
+              - generic [ref=f87e8377]:
+                - generic [ref=f87e8378]:
+                  - textbox "Label" [ref=f87e8380]
+                  - generic [ref=f87e8381]: Hidden
+                - generic [ref=f87e8384]:
+                  - generic "Upload My Census " [ref=f87e8387]
+                  - generic "Use the Quick Census Tool " [ref=f87e8390]
+                  - generic "Upload an Eployee Roster " [ref=f87e8393]
+                  - generic "Send Later " [ref=f87e8396]
+              - heading [level=1] [ref=f87e8404]:
+                - generic [ref=f87e8405]:
+                  - text: Prefer to fill it in by hand?
+                  - link "Open the Atlas One census tool" [ref=f87e8406] [cursor=pointer]:
+                    - /url: https://forms.atlasonesolutions.com/census/
+              - generic [ref=f87e8410]:
+                - textbox "Label" [ref=f87e8413]
+                - generic [ref=f87e8415]:
+                  - textbox [ref=f87e8420]
+                  - generic [ref=f87e8421]: PDF, DOCX, DOC, JPEG, JPG, PNG, GIF, XLSX, XLS or CSV ( max 10 File )
+              - generic [ref=f87e8425]:
+                - textbox "Label" [ref=f87e8428]
+                - button "Select an option ▼" [ref=f87e8431] [cursor=pointer]
+              - generic [ref=f87e8435]:
+                - generic [ref=f87e8436]:
+                  - textbox "Label" [ref=f87e8438]
+                  - generic [ref=f87e8439]: Hidden
+                - generic [ref=f87e8442]:
+                  - generic [ref=f87e8444]:
+                    - checkbox "General Liability" [disabled]
+                    - generic [ref=f87e8445]: General Liability
+                  - generic [ref=f87e8447]:
+                    - checkbox "Commercial Auto" [disabled]
+                    - generic [ref=f87e8448]: Commercial Auto
+                  - generic [ref=f87e8450]:
+                    - checkbox "Professional Liability / E&O" [disabled]
+                    - generic [ref=f87e8451]: Professional Liability / E&O
+                  - generic [ref=f87e8453]:
+                    - checkbox "Cyber" [disabled]
+                    - generic [ref=f87e8454]: Cyber
+                  - generic [ref=f87e8456]:
+                    - checkbox "Bonds" [disabled]
+                    - generic [ref=f87e8457]: Bonds
+                  - generic [ref=f87e8459]:
+                    - checkbox "Property / Inland Marine / Tools & Equipment" [disabled]
+                    - generic [ref=f87e8460]: Property / Inland Marine / Tools & Equipment
+                  - generic [ref=f87e8462]:
+                    - checkbox "Umbrella" [disabled]
+                    - generic [ref=f87e8463]: Umbrella
+                  - generic [ref=f87e8465]:
+                    - checkbox "EPLI" [disabled]
+                    - generic [ref=f87e8466]: EPLI
+                  - generic [ref=f87e8468]:
+                    - checkbox "D&O" [disabled]
+                    - generic [ref=f87e8469]: D&O
+                  - generic [ref=f87e8471]:
+                    - checkbox "Other" [disabled]
+                    - generic [ref=f87e8472]: Other
+              - generic [ref=f87e8476]:
+                - textbox "Label" [ref=f87e8479]
+                - table [ref=f87e8480]:
+                  - rowgroup [ref=f87e8481]:
+                    - generic [ref=f87e8482]:
+                      - row [ref=f87e8483]:
+                        - cell "Vehicle 1" [ref=f87e8484]
+                        - cell [ref=f87e8486]:
+                          - textbox "Vehicle 1" [ref=f87e8488]:
+                            - /placeholder: Add values
+                        - cell [ref=f87e8489]
+                      - row [ref=f87e8490]:
+                        - cell "2" [ref=f87e8491]
+                        - cell [ref=f87e8493]:
+                          - textbox "2" [ref=f87e8495]:
+                            - /placeholder: Add values
+                        - cell [ref=f87e8496]
+                      - row [ref=f87e8497]:
+                        - cell "3" [ref=f87e8498]
+                        - cell [ref=f87e8500]:
+                          - textbox "3" [ref=f87e8502]:
+                            - /placeholder: Add values
+                        - cell [ref=f87e8503]
+              - generic [ref=f87e8507]:
+                - textbox "Label" [ref=f87e8510]
+                - button "Choose one or more options ▼" [ref=f87e8513] [cursor=pointer]
+              - heading "Would you like a quote on anything else, or to simplify your whole back office? Most owners don't realize how much they can consolidate under one relationship. Check anything you'd like us to quote or explore — no obligation:" [level=1] [ref=f87e8521]:
+                - strong [ref=f87e8522]: Would you like a quote on anything else,
+                - generic [ref=f87e8523]: "or to simplify your whole back office? Most owners don't realize how much they can consolidate under one relationship. Check anything you'd like us to quote or explore — no obligation:"
+              - generic [ref=f87e8527]:
+                - textbox "Label" [ref=f87e8530]
+                - generic [ref=f87e8533]:
+                  - generic [ref=f87e8535]:
+                    - checkbox "HR support & compliance" [disabled]
+                    - generic [ref=f87e8536]: HR support & compliance
+                  - generic [ref=f87e8538]:
+                    - checkbox "Employee benefits / health insurance" [disabled]
+                    - generic [ref=f87e8539]: Employee benefits / health insurance
+                  - generic [ref=f87e8541]:
+                    - checkbox "Workers' compensation" [disabled]
+                    - generic [ref=f87e8542]: Workers' compensation
+                  - generic [ref=f87e8544]:
+                    - checkbox "Business insurance (GL, auto, property, E&O, bonds, umbrella)" [disabled]
+                    - generic [ref=f87e8545]: Business insurance (GL, auto, property, E&O, bonds, umbrella)
+                  - generic [ref=f87e8547]:
+                    - checkbox "Bookkeeping & accounting" [disabled]
+                    - generic [ref=f87e8548]: Bookkeeping & accounting
+                  - generic [ref=f87e8550]:
+                    - checkbox "Tax strategy & filings" [disabled]
+                    - generic [ref=f87e8551]: Tax strategy & filings
+                  - generic [ref=f87e8553]:
+                    - checkbox "Fractional CFO" [disabled]
+                    - generic [ref=f87e8554]: Fractional CFO
+                  - generic [ref=f87e8556]:
+                    - checkbox "AI Email Assistant" [disabled]
+                    - generic [ref=f87e8557]: AI Email Assistant
+                  - generic [ref=f87e8559]:
+                    - checkbox "AI Task Agent" [disabled]
+                    - generic [ref=f87e8560]: AI Task Agent
+                  - generic [ref=f87e8562]:
+                    - checkbox "Workers' comp audit help" [disabled]
+                    - generic [ref=f87e8563]: Workers' comp audit help
+                  - generic [ref=f87e8565]:
+                    - checkbox "Software & technology stack" [disabled]
+                    - generic [ref=f87e8566]: Software & technology stack
+                  - generic [ref=f87e8568]:
+                    - checkbox "Business consulting / vendor audit" [disabled]
+                    - generic [ref=f87e8569]: Business consulting / vendor audit
+                  - generic [ref=f87e8571]:
+                    - checkbox "Business Concierge — full back-office package (payroll, HR, benefits, finance, risk, tech, all in one)" [disabled]
+                    - generic [ref=f87e8572]: Business Concierge — full back-office package (payroll, HR, benefits, finance, risk, tech, all in one)
+                  - generic [ref=f87e8574]:
+                    - checkbox "Certified Payroll Reporting" [disabled]
+                    - generic [ref=f87e8575]: Certified Payroll Reporting
+                  - generic [ref=f87e8577]:
+                    - checkbox "Custom HR documents & policies" [disabled]
+                    - generic [ref=f87e8578]: Custom HR documents & policies
+                  - generic [ref=f87e8580]:
+                    - checkbox "Employee handbook & safety manual" [disabled]
+                    - generic [ref=f87e8581]: Employee handbook & safety manual
+                  - generic [ref=f87e8583]:
+                    - checkbox "Employment agreements & contracts (W-2 & 1099)" [disabled]
+                    - generic [ref=f87e8584]: Employment agreements & contracts (W-2 & 1099)
+                  - generic [ref=f87e8586]:
+                    - checkbox "Certified payroll (prevailing wage / WH-347)" [disabled]
+                    - generic [ref=f87e8587]: Certified payroll (prevailing wage / WH-347)
+                  - generic [ref=f87e8589]:
+                    - checkbox "Payroll → accounting GL import/export files" [disabled]
+                    - generic [ref=f87e8590]: Payroll → accounting GL import/export files
+                  - generic [ref=f87e8592]:
+                    - checkbox "Background checks, drug testing, MVR & E-Verify" [disabled]
+                    - generic [ref=f87e8593]: Background checks, drug testing, MVR & E-Verify
+                  - generic [ref=f87e8595]:
+                    - checkbox "401(k) / retirement plans" [disabled]
+                    - generic [ref=f87e8596]: 401(k) / retirement plans
+                  - generic [ref=f87e8598]:
+                    - checkbox "Recruiting, applicant tracking & onboarding" [disabled]
+                    - generic [ref=f87e8599]: Recruiting, applicant tracking & onboarding
+                  - generic [ref=f87e8601]:
+                    - checkbox "Time & attendance / PTO tracking" [disabled]
+                    - generic [ref=f87e8602]: Time & attendance / PTO tracking
+              - generic [ref=f87e8606]:
+                - textbox "Label" [ref=f87e8609]
+                - generic [ref=f87e8610]: Sign here
+              - generic [ref=f87e8618]:
+                - generic [ref=f87e8619]:
+                  - checkbox
+                  - paragraph [ref=f87e8622]:
+                    - text: By checking this box, I consent to receive non-marketing text messages from
+                    - strong [ref=f87e8623]: Atlas One Solutions
+                    - text: about
+                    - strong [ref=f87e8624]: your HR, payroll and benefits quote
+                    - text: . Message frequency varies, message & data rates may apply. Text HELP for assistance, reply STOP to opt out.
+                - generic [ref=f87e8625]:
+                  - checkbox
+                  - paragraph [ref=f87e8628]:
+                    - text: By checking this box, I consent to receive marketing and promotional messages including special offers, discounts, new product updates among others, from
+                    - strong [ref=f87e8629]: Atlas One Solutions
+                    - text: at the phone number provided. Frequency may vary. Message & data rates may apply. Text HELP for assistance, reply STOP to opt out.
+              - button [ref=f87e8635] [cursor=pointer]:
+                - paragraph [ref=f87e8641]: Get My Quote
+              - paragraph [ref=f87e8649]:
+                - link "Privacy Policy" [ref=f87e8650] [cursor=pointer]:
+                  - /url: https://www.example.com
+                - text: "|"
+                - link "Terms of Service" [ref=f87e8651] [cursor=pointer]:
+                  - /url: https://www.example.com
+        - generic [ref=f87e6581]:
+          - button "Back" [ref=f87e6582] [cursor=pointer]
+          - generic [ref=f87e6586]:
+            - generic [ref=f87e6591]:
+              - generic [ref=f87e6592]: Content
+              - generic [ref=f87e6595]: Options
+            - generic [ref=f87e6600]:
+              - generic [ref=f87e6601]:
+                - generic [ref=f87e6602]: General Settings
+                - generic [ref=f87e6612]:
+                  - generic [ref=f87e6613]:
+                    - generic [ref=f87e6614]: Label
+                    - generic [ref=f87e6617]:
+                      - textbox "Please Input" [ref=f87e6619]: What kind of business is it?
+                      - img "loading" [ref=f87e6621]
+                  - generic [ref=f87e6623]:
+                    - generic [ref=f87e6624]:
+                      - generic [ref=f87e6625]: Label Alignment
+                      - img [aria-hidden] [ref=f87e6627] [cursor=pointer]
+                    - generic [ref=f87e6631]: Form Default
+                  - generic [ref=f87e6643]:
+                    - generic [ref=f87e6644]: Placeholder
+                    - generic [ref=f87e6647]:
+                      - generic [ref=f87e6648]:
+                        - textbox "Please Input" [ref=f87e6649]
+                        - generic: Please Input
+                      - img "loading" [ref=f87e6651]
+                  - generic [ref=f87e6652]:
+                    - generic [ref=f87e6653]: Short Label
+                    - generic [ref=f87e6656]:
+                      - generic [ref=f87e6657]:
+                        - textbox "Please Input" [ref=f87e6658]
+                        - generic: Please Input
+                      - img "loading" [ref=f87e6660]
+                  - generic [ref=f87e6661]:
+                    - generic [ref=f87e6662]: Query Key
+                    - generic [ref=f87e6667]:
+                      - textbox "Please Input" [ref=f87e6669]: vertical
+                      - img "loading" [ref=f87e6671]
+                  - generic [ref=f87e6672]:
+                    - generic [ref=f87e6673]: Field Width
+                    - generic [ref=f87e6675]:
+                      - textbox "Please Input" [ref=f87e6680]: "100"
+                      - generic [ref=f87e6681]: "%"
+                  - checkbox "Required" [ref=f87e6684] [cursor=pointer]
+              - generic [ref=f87e6692]: Advanced Settings
+    - log [ref=f87e1000]

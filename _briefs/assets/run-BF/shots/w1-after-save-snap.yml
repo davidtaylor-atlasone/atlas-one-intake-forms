@@ -1,0 +1,139 @@
+- iframe [active] [ref=f24e1451]:
+  - generic [ref=f27e1]:
+    - generic [ref=f27e3]:
+      - list:
+        - listitem:
+          - link "Skip to main content" [ref=f27e4] [cursor=pointer]:
+            - /url: "#main"
+      - generic [ref=f27e1455]:
+        - generic [ref=f27e1456]:
+          - generic [ref=f27e1457]:
+            - generic [ref=f27e1458]:
+              - button "Workflows list" [ref=f27e1459] [cursor=pointer]
+              - button "Toggle sidebar" [ref=f27e1464] [cursor=pointer]
+            - paragraph [ref=f27e1469]:
+              - button [ref=f27e1470] [cursor=pointer]:
+                - heading "Workflow name" [level=1] [ref=f27e1472]: W1 Inbound speed to lead (duplicate instant reply removed 2026-09-16)
+            - generic [ref=f27e1476]:
+              - group [ref=f27e2429]:
+                - generic [ref=f27e2430]: DT
+              - generic [ref=f27e1478]:
+                - button "Recent changes" [ref=f27e1480] [cursor=pointer]:
+                  - img "Recent changes" [ref=f27e1482]
+                - button "Undo" [disabled] [ref=f27e1484]
+                - button "Redo" [disabled] [ref=f27e1488]
+              - button "Save workflow button" [disabled] [ref=f27e1494]:
+                - generic [ref=f27e1495]: Saved
+          - generic [ref=f27e1500]:
+            - generic [ref=f27e1505] [cursor=pointer]:
+              - generic [ref=f27e1507]: Standard builder
+              - img "loading" [ref=f27e1508]
+            - tablist [ref=f27e1521]:
+              - tab "Builder" [selected] [ref=f27e1523] [cursor=pointer]:
+                - paragraph [ref=f27e1525]: Builder
+              - tab "Settings" [ref=f27e1528] [cursor=pointer]:
+                - paragraph [ref=f27e1530]: Settings
+              - tab "Enrollment history" [ref=f27e1533] [cursor=pointer]:
+                - paragraph [ref=f27e1535]: Enrollment history
+              - tab "Execution logs" [ref=f27e1538] [cursor=pointer]:
+                - paragraph [ref=f27e1540]: Execution logs
+            - generic [ref=f27e1542]:
+              - button "Test workflow" [ref=f27e1543] [cursor=pointer]
+              - generic [ref=f27e1545]:
+                - paragraph [ref=f27e1546]: Draft
+                - switch "Toggle draft publish workflow" [checked] [ref=f27e1547]:
+                  - generic [aria-hidden] [ref=f27e1548] [cursor=pointer]
+                - paragraph [ref=f27e1550]: Publish
+        - generic [ref=f27e1553]:
+          - generic [ref=f27e1556]:
+            - button [ref=f27e1557] [cursor=pointer]
+            - button [ref=f27e1561] [cursor=pointer]
+            - button [ref=f27e1565] [cursor=pointer]
+            - button [ref=f27e1569] [cursor=pointer]
+            - button [ref=f27e1573] [cursor=pointer]
+            - button [ref=f27e1577] [cursor=pointer]
+            - button [ref=f27e1581] [cursor=pointer]
+            - button [ref=f27e1585] [cursor=pointer]
+          - generic "Workflow tree" [ref=f27e1595]:
+            - generic [ref=f27e1597]:
+              - generic:
+                - img:
+                  - button "Edge from 685e9a99-3386-43e3-87bc-c217d41be0cf to 27541f5f-6071-452d-8741-fd12de89f306"
+                - img:
+                  - button "Edge from 27541f5f-6071-452d-8741-fd12de89f306 to ca6e4b4e-8f88-42c5-951c-f5a4f5ba8240"
+                - img:
+                  - button "Edge from ca6e4b4e-8f88-42c5-951c-f5a4f5ba8240 to e8d91a44-a9bf-4af1-9e68-cc4fbdfd5426"
+                - img:
+                  - button "Edge from e8d91a44-a9bf-4af1-9e68-cc4fbdfd5426 to dc58952b-8b17-4f3e-a931-b7fa98255f8b" [ref=f27e1598] [cursor=pointer]
+                - img:
+                  - button "Edge from e8d91a44-a9bf-4af1-9e68-cc4fbdfd5426 to 244c932e-7127-4d36-8025-cb659e8c2011" [ref=f27e1601] [cursor=pointer]
+                - img:
+                  - button "Edge from dc58952b-8b17-4f3e-a931-b7fa98255f8b to d74fd6e1-592d-4778-b534-1588905e519f" [ref=f27e1604] [cursor=pointer]
+                - img:
+                  - button "Edge from 244c932e-7127-4d36-8025-cb659e8c2011 to 534cbada-d3cd-4c0b-b091-1bbda830e5ea" [ref=f27e1607] [cursor=pointer]
+                - img:
+                  - button "Edge from rxzvRUMBjVXmZfJ3JZPt to 685e9a99-3386-43e3-87bc-c217d41be0cf" [ref=f27e1622] [cursor=pointer]
+                - img:
+                  - button "Edge from add-new-trigger to 685e9a99-3386-43e3-87bc-c217d41be0cf" [ref=f27e1625] [cursor=pointer]
+                - generic:
+                  - generic "Add action" [ref=f27e1631]:
+                    - button "Add action" [ref=f27e1633] [cursor=pointer]
+                  - generic "Add action" [ref=f27e1641]:
+                    - button "Add action" [ref=f27e1643] [cursor=pointer]
+                  - generic "Add action" [ref=f27e1651]:
+                    - button "Add action" [ref=f27e1653] [cursor=pointer]
+                  - generic "Add action" [ref=f27e1661]:
+                    - button "Add action" [ref=f27e1663] [cursor=pointer]
+                  - generic "Add action" [ref=f27e1671]:
+                    - button "Add action" [ref=f27e1673] [cursor=pointer]
+                - generic:
+                  - button [ref=f27e1858] [cursor=pointer]:
+                    - button "Lead Lane C Inbound Action" [ref=f27e1859]:
+                      - button "Add action" [ref=f27e1863]
+                      - button "Lead Lane C Inbound" [ref=f27e1868]:
+                        - button [ref=f27e1880]
+                  - button [ref=f27e1883] [cursor=pointer]:
+                    - button "Add sequence active Action" [ref=f27e1884]:
+                      - button "Add sequence active" [ref=f27e1886]:
+                        - button [ref=f27e1899]
+                  - button [ref=f27e1902] [cursor=pointer]:
+                    - button "Stamp Last Touch Date Action" [ref=f27e1903]:
+                      - button "Stamp Last Touch Date" [ref=f27e1905]:
+                        - button [ref=f27e1917]
+                  - button [ref=f27e1920] [cursor=pointer]:
+                    - button "Suppressed? Action" [ref=f27e1921]:
+                      - button "Suppressed?" [ref=f27e1923]:
+                        - button [ref=f27e1935]
+                  - button [ref=f27e1938] [cursor=pointer]:
+                    - generic [ref=f27e1941]:
+                      - button "Suppressed" [ref=f27e1942]
+                      - button "If \"Tags\" includes \"cooling 30d\" or i..." [ref=f27e1948]
+                  - button [ref=f27e1952] [cursor=pointer]:
+                    - generic [ref=f27e1956]:
+                      - button "None" [ref=f27e1957]
+                      - button "When none of the conditions are met" [ref=f27e1963]
+                  - button "Form A or Form B submitted Trigger Form is is any of [\"Atlas One — PEO / Prospect Quote Request\", \"Atlas One — Accounting, Bookkeeping & Payroll — Service Request\"] Stats" [ref=f27e2317] [cursor=pointer]:
+                    - generic [ref=f27e2319]:
+                      - button "Form A or Form B submitted Trigger" [ref=f27e2320]:
+                        - generic [ref=f27e2327]:
+                          - generic [ref=f27e2328]: Form submitted
+                          - generic [ref=f27e2330]: Form A or Form B submitted
+                      - generic [ref=f27e2332]:
+                        - list [ref=f27e2334]:
+                          - listitem [ref=f27e2335]:
+                            - generic [ref=f27e2336]: Form is is any of ["Atlas One — PEO / Prospect Quote Request", "Atlas One — Accounting, Bookkeeping & Payroll — Service Request"]
+                        - button "Stats" [ref=f27e2343]
+                  - button [ref=f27e2347] [cursor=pointer]:
+                    - generic "Add trigger" [ref=f27e2350]: Add new trigger
+            - img "Vue Flow mini map" [ref=f27e2360]
+            - button "Add" [ref=f27e2395] [cursor=pointer]
+            - generic [ref=f27e2400]:
+              - button [ref=f27e2402] [cursor=pointer]
+              - group [ref=f27e2407]:
+                - button "Zoom in" [ref=f27e2408] [cursor=pointer]
+                - button "100%" [ref=f27e2412] [cursor=pointer]
+                - button "Zoom out" [ref=f27e2414] [cursor=pointer]
+              - group [ref=f27e2417]:
+                - button "Fit to Screen" [ref=f27e2418] [cursor=pointer]
+            - button [ref=f27e2423] [cursor=pointer]
+    - log [ref=f27e6]
