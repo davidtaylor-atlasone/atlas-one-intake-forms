@@ -1,44 +1,40 @@
-# BRIEF for the GHL-JOBS terminal: Run BF (three stale prices out of prices.json, Cockpit catalog matched to Quick Quote)
+# BRIEF for the GHL-JOBS terminal: Run BG (stale phone in the P prospecting templates, apar default)
 
-Terminal name: GHL-JOBS. Files and code only, headless Chromium for verification. Build end to end, no questions,
-answer permission prompts yourself, log assumptions, questions at the END of the report. Back up the prior report
-to `_to_delete/superseded-2026-09-17/prior-reports/RUN-GHL-JOBS-report-RunBE.md` (create the folder). Back up
-every file before editing. Commit and push. Repo assets in `_briefs/assets/run-BF-jobs/`. No dashes in copy.
+Terminal name: GHL-JOBS. Files, code and the GHL API only (no browser clicks in GHL). Build end to end, no
+questions, answer permission prompts yourself, log assumptions, questions at the END of the report. Back up the
+prior report to `_to_delete/superseded-2026-09-17/prior-reports/RUN-GHL-JOBS-report-RunBF.md` (already copied;
+overwrite is fine). Back up every file before editing. Commit and push. Repo assets in `_briefs/assets/run-BG-jobs/`.
+No dashes in copy.
 
-Answers to Run BE's questions (Cowork, 2026-09-17 07:45):
-1. Enterprise and Concierge fit lines: keep the Cockpit's existing wording. Fine.
-2. Yes, reword that heading (Job 2).
-3. Quick Quote stays a Master Kit tool and it is the SOURCE for the service list. Do not move it onto
-   prices.json; prices.json and the Cockpit follow Quick Quote, not the other way round (Job 1).
+Answers to Run BF's questions (Cowork, 2026-09-17 08:15):
+1. `apar`: default $500 a month (A/P $250 plus A/R $250, both Quick Quote rows), editable. Fix it, rerun
+   build_cockpit.py, note the before and after total.
+2. Bookkeeping anchors stay as they are; the AI Task Agent standalone figure stays out of the Cockpit; Quick
+   Quote stays hand maintained. All three closed.
 
-## Job 1: undo three stale additions and match the Cockpit's catalog to Quick Quote
-Run BE copied three rows from the Cockpit into prices.json that are retired pricing and must come out:
-`ai_services.concierge` ("AI Email Assistant, Concierge", $649: the Email Assistant has exactly two tiers,
-Essentials $249 and Professional $499; $649 is from the retired $199/$349/$649 set), `documents.handbook_basic`
-($299) and `documents.safety_basic` ($299) (Quick Quote sells one handbook at $950 and one safety manual at
-$1,200, no basic tier). Quick Quote (`09 Quick Quote Tool/Atlas_One_Quick_Quote.html`, the 104 service list)
-is the source of truth for WHICH services exist and at what price.
-1. Remove those three entries from prices.json (both copies, byte identical after; run the diff).
-2. Remove the matching three rows from the Cockpit's catalog (AI Email Concierge, basic handbook, basic safety
-   manual) and any TIER_META or constant that only served them; rerun `build_cockpit.py`.
-3. Then diff the Cockpit's whole catalog against Quick Quote's service list: for every Cockpit row, find the
-   Quick Quote row with the same service (by name) and compare price, model (monthly, one time, per employee)
-   and setup. Write `_BUILD-LOG/cockpit-vs-quick-quote-2026-09-17.md`: three tables, (a) rows that match,
-   (b) rows in the Cockpit with a different price or model than Quick Quote (fix the Cockpit to match Quick
-   Quote, through prices.json where the row is generated, and list old and new), (c) rows in the Cockpit that
-   do not exist in Quick Quote at all (remove them from the Cockpit and prices.json; list them). Do not add
-   anything to Quick Quote. The bookkeeping package defaults may stay as the Cockpit's own editable anchors
-   (Quick Quote quotes ranges); say so in the report.
-4. Verify as in Run BE: before and after totals on the same sample entity, zero console errors, zero non file
-   requests, fonts embedded, 1440 and 390, one pager PPTX still exports. Screenshots.
+## Job 1: the 385 number is still in the P prospecting email templates
+GHL Run BG (read only) found the P-C-2 and P-C-3 templates ("Inbound Email 2" and "Inbound Email 3", used by
+"W1 Inbound speed to lead") still carry 385-213-7177 in the footer. Rule: Atlas One material carries
+380-225-5217 only. Using the Email Builder API the way Run AW pushed templates (`GET /emails/builder` to list,
+`POST /emails/builder/data` to update; the Private Integration token and scopes are already in place, see
+`_BUILD-LOG/email-templates-map.md` and the Run AW report in `_to_delete/superseded-2026-09-16/prior-reports/`):
+1. Pull every template whose name starts with `A1 | P-` (the 21 P prospecting templates in the map's second
+   table) plus any other template in the account; save each template's HTML to
+   `_briefs/assets/run-BG-jobs/templates-before/<name>.html`.
+2. Grep them all for `385-213-7177`, `385.213.7177`, `(385) 213-7177`, `+13852137177`, `385` near "call". List
+   every hit by template name.
+3. For each hit, replace with 380-225-5217 (and `tel:+13802255217` in any tel link), keep everything else byte
+   for byte, push the update, re-pull and diff to confirm only the phone changed. Never touch a template with
+   no hit. Do not send anything.
+4. Also grep `_BUILD-LOG/cadence-emails-2026-09-13/` and the repo's `_briefs/assets/` email HTML files for the
+   same strings; fix any live cadence file (not the historical run assets) and say which.
+5. Report the table: template name, id, hits before, hits after, updated yes or no.
+If the API refuses (scope error), stop Job 1 cleanly, write the exact error and the exact scope name to add,
+and continue with Job 2; the GHL browser terminal will do the edits by hand in that case.
 
-## Job 2: BRJ index heading
-`Atlas One — Complete Kit for BRJ/⭐ START HERE — BRJ Index.html`: reword the "Premium Builders" section heading
-to "Premium Builders (the five document builders)" with no dash, so it no longer says "behind the paywall" next
-to the paragraph that says no paywall is needed.
-
-## Job 3: rebuild and verify
-catalogue_check.py, rebuild COMMAND, confirm the stamp, screenshot.
+## Job 2: apar default and rebuild
+Set `apar` to $500 a month as above. Rerun build_cockpit.py, verify as in Run BF (before and after totals, zero
+console errors, no external requests, 1440 and 390, PPTX export). catalogue_check.py, rebuild COMMAND, stamp.
 
 ## Report
-Built, Verification (the three tables summarized, before and after totals), Assumptions, Skipped, Questions.
+Built, Verification, Assumptions, Skipped, Questions.
