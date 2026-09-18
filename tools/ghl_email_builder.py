@@ -77,7 +77,7 @@ def list_templates(token, location_id=LOCATION_ID):
         status, body = _request("GET", url, token)
         if status != 200:
             return templates, (status, body)
-        page = body.get("templates") or body.get("data") or []
+        page = body.get("builders") or body.get("templates") or body.get("data") or []
         if isinstance(body, list):
             page = body
         templates.extend(page)

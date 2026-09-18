@@ -1,0 +1,122 @@
+[
+  {
+    "name": "P-A-1 Referral Email 1",
+    "content_matches_push": true,
+    "hits_after_refetch": 0
+  },
+  {
+    "name": "P-A-2 Referral Email 2",
+    "content_matches_push": true,
+    "hits_after_refetch": 0
+  },
+  {
+    "name": "P-A-3 Referral Email 3",
+    "content_matches_push": true,
+    "hits_after_refetch": 0
+  },
+  {
+    "name": "P-B-1 Trigger Email 1",
+    "content_matches_push": true,
+    "hits_after_refetch": 0
+  },
+  {
+    "name": "P-B-120 Renewal heads-up",
+    "content_matches_push": true,
+    "hits_after_refetch": 0
+  },
+  {
+    "name": "P-B-2 Trigger Email 2",
+    "content_matches_push": true,
+    "hits_after_refetch": 0
+  },
+  {
+    "name": "P-B-3 Trigger Email 3",
+    "content_matches_push": true,
+    "hits_after_refetch": 0
+  },
+  {
+    "name": "P-B-4 Trigger close",
+    "content_matches_push": true,
+    "hits_after_refetch": 0
+  },
+  {
+    "name": "P-B-60 Last window",
+    "content_matches_push": true,
+    "hits_after_refetch": 0
+  },
+  {
+    "name": "P-BUILDER-DELIVERY",
+    "content_matches_push": true,
+    "hits_after_refetch": 0
+  },
+  {
+    "name": "P-C-0 Instant reply",
+    "content_matches_push": true,
+    "hits_after_refetch": 0
+  },
+  {
+    "name": "P-C-2 Inbound Email 2",
+    "content_matches_push": true,
+    "hits_after_refetch": 0
+  },
+  {
+    "name": "P-C-3 Inbound Email 3",
+    "content_matches_push": true,
+    "hits_after_refetch": 0
+  },
+  {
+    "name": "P-D-1 Cold Email 1",
+    "content_matches_push": true,
+    "hits_after_refetch": 0
+  },
+  {
+    "name": "P-D-2 Cold Email 2",
+    "content_matches_push": true,
+    "hits_after_refetch": 0
+  },
+  {
+    "name": "P-D-3 Cold Email 3",
+    "content_matches_push": true,
+    "hits_after_refetch": 0
+  },
+  {
+    "name": "P-D-4 Cold breakup",
+    "content_matches_push": true,
+    "hits_after_refetch": 0
+  },
+  {
+    "name": "P-E-0 Gracious close",
+    "content_matches_push": true,
+    "hits_after_refetch": 0
+  },
+  {
+    "name": "P-E-4 Month four",
+    "content_matches_push": true,
+    "hits_after_refetch": 0
+  },
+  {
+    "name": "P-E-Q1 Quarterly tool",
+    "content_matches_push": true,
+    "hits_after_refetch": 0
+  },
+  {
+    "name": "P-E-Q2 Quarterly law change",
+    "content_matches_push": true,
+    "hits_after_refetch": 0
+  },
+  {
+    "name": "P-E-Q3 Quarterly proof story",
+    "content_matches_push": true,
+    "hits_after_refetch": 0
+  },
+  {
+    "name": "P-MEMBER-WELCOME",
+    "content_matches_push": true,
+    "hits_after_refetch": 0
+  },
+  {
+    "name": "P-PAY-FAILED",
+    "content_matches_push": true,
+    "hits_after_refetch": 0
+  }
+]

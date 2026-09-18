@@ -1,0 +1,170 @@
+[
+  {
+    "name": "P-A-1 Referral Email 1",
+    "id": "6aa0a8409256eb9f6cb6b7b7",
+    "hits_before": 2,
+    "hits_after": 0,
+    "push_status": 201
+  },
+  {
+    "name": "P-A-2 Referral Email 2",
+    "id": "6aa0a8ce62526e75c2c32cd7",
+    "hits_before": 2,
+    "hits_after": 0,
+    "push_status": 201
+  },
+  {
+    "name": "P-A-3 Referral Email 3",
+    "id": "6aa0a9db9931e5f937c72b41",
+    "hits_before": 2,
+    "hits_after": 0,
+    "push_status": 201
+  },
+  {
+    "name": "P-B-1 Trigger Email 1",
+    "id": "6aa0a9dc62526e75c2c33cf1",
+    "hits_before": 2,
+    "hits_after": 0,
+    "push_status": 201
+  },
+  {
+    "name": "P-B-120 Renewal heads-up",
+    "id": "6aa0a9e3fce73710076f96e5",
+    "hits_before": 2,
+    "hits_after": 0,
+    "push_status": 201
+  },
+  {
+    "name": "P-B-2 Trigger Email 2",
+    "id": "6aa0a9e10078269ef83ce1ac",
+    "hits_before": 2,
+    "hits_after": 0,
+    "push_status": 201
+  },
+  {
+    "name": "P-B-3 Trigger Email 3",
+    "id": "6aa0a9e0357107c100ca0098",
+    "hits_before": 2,
+    "hits_after": 0,
+    "push_status": 201
+  },
+  {
+    "name": "P-B-4 Trigger close",
+    "id": "6aa0a9e113c848fe04dd0e6f",
+    "hits_before": 2,
+    "hits_after": 0,
+    "push_status": 201
+  },
+  {
+    "name": "P-B-60 Last window",
+    "id": "6aa0a9e455d1ce8973c140eb",
+    "hits_before": 2,
+    "hits_after": 0,
+    "push_status": 201
+  },
+  {
+    "name": "P-BUILDER-DELIVERY",
+    "id": "6aa370697919774ef2ed8f30",
+    "hits_before": 3,
+    "hits_after": 0,
+    "push_status": 201
+  },
+  {
+    "name": "P-C-0 Instant reply",
+    "id": "6aa0c1de55d1ce8973c2a813",
+    "hits_before": 3,
+    "hits_after": 0,
+    "push_status": 201
+  },
+  {
+    "name": "P-C-2 Inbound Email 2",
+    "id": "6aa0a9e60078269ef83ce1e3",
+    "hits_before": 2,
+    "hits_after": 0,
+    "push_status": 201
+  },
+  {
+    "name": "P-C-3 Inbound Email 3",
+    "id": "6aa0a9e82ac25123fb0d99aa",
+    "hits_before": 2,
+    "hits_after": 0,
+    "push_status": 201
+  },
+  {
+    "name": "P-D-1 Cold Email 1",
+    "id": "6aa0a9e9b2a4c1fa6304518a",
+    "hits_before": 2,
+    "hits_after": 0,
+    "push_status": 201
+  },
+  {
+    "name": "P-D-2 Cold Email 2",
+    "id": "6aa0a9eb8b41b02dc822682a",
+    "hits_before": 2,
+    "hits_after": 0,
+    "push_status": 201
+  },
+  {
+    "name": "P-D-3 Cold Email 3",
+    "id": "6aa0a9edfce73710076f9746",
+    "hits_before": 2,
+    "hits_after": 0,
+    "push_status": 201
+  },
+  {
+    "name": "P-D-4 Cold breakup",
+    "id": "6aa0a9ee9931e5f937c72c75",
+    "hits_before": 2,
+    "hits_after": 0,
+    "push_status": 201
+  },
+  {
+    "name": "P-E-0 Gracious close",
+    "id": "6aa0a9f00457161d4222f524",
+    "hits_before": 2,
+    "hits_after": 0,
+    "push_status": 201
+  },
+  {
+    "name": "P-E-4 Month four",
+    "id": "6aa0a9f12ac25123fb0d9a2b",
+    "hits_before": 2,
+    "hits_after": 0,
+    "push_status": 201
+  },
+  {
+    "name": "P-E-Q1 Quarterly tool",
+    "id": "6aa0a9f3fce73710076f9784",
+    "hits_before": 2,
+    "hits_after": 0,
+    "push_status": 201
+  },
+  {
+    "name": "P-E-Q2 Quarterly law change",
+    "id": "6aa0a9f513c848fe04dd0f32",
+    "hits_before": 2,
+    "hits_after": 0,
+    "push_status": 201
+  },
+  {
+    "name": "P-E-Q3 Quarterly proof story",
+    "id": "6aa0a9f62ac25123fb0d9a5c",
+    "hits_before": 2,
+    "hits_after": 0,
+    "push_status": 201
+  },
+  {
+    "name": "P-MEMBER-WELCOME",
+    "id": "6aa37036a813792f409bf1a9",
+    "hits_before": 3,
+    "hits_after": 0,
+    "push_status": 201
+  },
+  {
+    "name": "P-PAY-FAILED",
+    "id": "6aa371c107aac9f9aa6a4e75",
+    "hits_before": 3,
+    "hits_after": 0,
+    "push_status": 201
+  }
+]
