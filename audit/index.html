@@ -1,0 +1,88 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Back Office Audit: send your documents</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#23304D;--peri:#788DE3;--off:#FAFAF8;--soft:#DBE4ED;--muted:#5b6478}
+*{box-sizing:border-box}
+body{margin:0;background:var(--off);font-family:"DM Sans",system-ui,-apple-system,Segoe UI,sans-serif;color:var(--navy)}
+.wrap{max-width:760px;margin:0 auto;padding:40px 20px 70px}
+
+.bar{background:var(--navy);color:#fff;border-radius:18px;padding:40px 30px;position:relative;overflow:hidden}
+.bar::after{content:"";position:absolute;right:-60px;top:-60px;width:240px;height:240px;background:radial-gradient(circle,rgba(120,141,227,.55),transparent 70%)}
+.wm{display:flex;align-items:center;gap:14px;position:relative;z-index:1}
+.mark{width:52px;height:52px;flex:none;display:grid;place-items:center}
+.mark img{width:100%;height:100%}
+.name{font-weight:700;letter-spacing:.5px;font-size:15px}.name span{color:var(--peri)}
+.tag{font-size:12.5px;color:var(--soft);letter-spacing:.4px}
+h1{font-size:26px;margin:24px 0 6px;position:relative;z-index:1}
+.lead{color:var(--soft);font-size:15.5px;line-height:1.6;margin:0;position:relative;z-index:1;max-width:56ch}
+
+.card{margin-top:26px;background:#fff;border:1px solid var(--soft);border-radius:16px;padding:26px 26px 24px;box-shadow:0 10px 30px -22px rgba(35,48,77,.5)}
+.card h2{margin:0 0 14px;font-size:19px}
+.doclist{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.doclist li{display:flex;gap:12px;align-items:flex-start;font-size:14.5px;line-height:1.55;color:var(--navy)}
+.docnum{flex:none;width:26px;height:26px;border-radius:50%;background:var(--soft);color:var(--navy);font-weight:700;font-size:13px;display:grid;place-items:center;margin-top:1px}
+
+.formcard{margin-top:22px;background:#fff;border:1px solid var(--soft);border-radius:16px;padding:26px;box-shadow:0 10px 30px -22px rgba(35,48,77,.5)}
+.formcard h2{margin:0 0 12px;font-size:19px}
+.fallback{margin:0;color:var(--muted);font-size:14.5px;line-height:1.6}
+.fallback a{color:var(--navy);font-weight:600}
+#audit-form iframe{width:100%;border:none}
+
+.foot{margin-top:44px;text-align:center;color:var(--muted);font-size:13px;line-height:1.9}
+.foot a{color:var(--navy);font-weight:600;text-decoration:none}
+</style></head><body><div class="wrap">
+
+<div class="bar">
+  <div class="wm"><div class="mark"><img src="../assets/atlas-one-mark.svg" alt="Atlas One Solutions"></div><div><div class="name">ATLAS ONE <span>SOLUTIONS</span></div><div class="tag">One Call Solves Everything.</div></div></div>
+  <h1>Back Office Audit: send your documents</h1>
+  <p class="lead">Four documents, five minutes. Upload them here before our call and the Audit starts the moment we sit down.</p>
+</div>
+
+<div class="card">
+  <h2>What to send</h2>
+  <ul class="doclist">
+    <li><span class="docnum">1</span><span>Bank or card statements for the last three months, or the QuickBooks Expenses by Vendor report, or the Ramp vendor export.</span></li>
+    <li><span class="docnum">2</span><span>Your last payroll register or provider invoice.</span></li>
+    <li><span class="docnum">3</span><span>Your workers comp declarations page.</span></li>
+    <li><span class="docnum">4</span><span>Your benefits renewal or current carrier invoice.</span></li>
+  </ul>
+</div>
+
+<div class="formcard">
+  <h2>Upload your documents</h2>
+  <div id="audit-form">
+    <p class="fallback">The upload form is being switched on. If you see this, email the documents to <a href="mailto:David@atlasonesolutions.com">David@atlasonesolutions.com</a> and we will take it from there.</p>
+  </div>
+</div>
+
+<div class="foot">
+  Call <a href="tel:+13802255217">380-CALL-A1S (380-225-5217)</a><br>
+  <a href="mailto:david@atlasonesolutions.com">david@atlasonesolutions.com</a><br>
+  Serving businesses in all 50 states.
+</div>
+
+</div>
+<script>
+const AUDIT_FORM_ID = "";
+(function(){
+  if (!AUDIT_FORM_ID) return;
+  const params = new URLSearchParams(window.location.search);
+  const auditCode = params.get("audit_code");
+  let formUrl = "https://api.leadconnectorhq.com/widget/form/" + AUDIT_FORM_ID;
+  if (auditCode) formUrl += "?audit_code=" + encodeURIComponent(auditCode);
+  const container = document.getElementById("audit-form");
+  container.innerHTML = "";
+  const iframe = document.createElement("iframe");
+  iframe.src = formUrl;
+  iframe.id = "inline-" + AUDIT_FORM_ID;
+  iframe.style.height = "600px";
+  container.appendChild(iframe);
+  const script = document.createElement("script");
+  script.src = "https://link.msgsndr.com/js/form_embed.js";
+  document.body.appendChild(script);
+})();
+</script>
+</body></html>

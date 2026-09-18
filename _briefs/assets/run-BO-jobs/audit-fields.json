@@ -1,0 +1,58 @@
+{
+  "audit_code": {
+    "status": 201,
+    "body": {
+      "customField": {
+        "id": "nHP6JGw9eY0lyDNAs4Tc",
+        "model": "contact",
+        "name": "Audit Code",
+        "fieldKey": "contact.audit_code",
+        "placeholder": "",
+        "dataType": "TEXT",
+        "position": 750,
+        "documentType": "field",
+        "parentId": "AmY51esJO2QF0v3wvODu",
+        "locationId": "AzTPxnK2vSUj19jYoDmR",
+        "dateAdded": "2026-09-18T13:44:30.529Z",
+        "standard": false,
+        "scopes": []
+      },
+      "backfillTriggered": false,
+      "traceId": "bb1dfc74-45b5-4436-a560-e26c57d77002"
+    }
+  },
+  "audit_offer_expires": {
+    "status": 201,
+    "body": {
+      "customField": {
+        "id": "TGGXt9MICuxqMDk8LNpz",
+        "model": "contact",
+        "name": "Audit Offer Expires",
+        "fieldKey": "contact.audit_offer_expires",
+        "placeholder": "",
+        "dataType": "DATE",
+        "position": 800,
+        "documentType": "field",
+        "parentId": "AmY51esJO2QF0v3wvODu",
+        "locationId": "AzTPxnK2vSUj19jYoDmR",
+        "dateAdded": "2026-09-18T13:44:31.114Z",
+        "standard": false,
+        "scopes": []
+      },
+      "backfillTriggered": false,
+      "traceId": "1502ff46-a1d6-421f-8ea5-29a6b712c91f"
+    }
+  },
+  "existing_wc_policy_expiration": {
+    "id": "eMCAKthzngNPmoED1zm4",
+    "key": "contact.workers_comp_policy_expiration_date",
+    "name": "Workers' Comp Policy Expiration Date",
+    "dataType": "DATE"
+  },
+  "existing_benefits_renewal_date": {
+    "id": "1HY5GB56JfGVW9pZNdCn",
+    "key": "contact.benefits_renewal_date",
+    "name": "Benefits Renewal Date",
+    "dataType": "DATE"
+  }
+}
