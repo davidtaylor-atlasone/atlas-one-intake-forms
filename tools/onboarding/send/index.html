@@ -70,20 +70,22 @@ table td.v{color:var(--navy);word-break:break-word;}
 <body>
 <div class="wrap">
   <div class="tag">Atlas One Solutions</div>
-  <h1>Send to Atlas One</h1>
+  <h1>Taking you to the intake form</h1>
   <div class="card">
-    <p>David is finishing this page. Email your documents to <a class="mail" href="mailto:david@atlasonesolutions.com">david@atlasonesolutions.com</a> for now.</p>
-    <p>Nothing you filled out was lost, the details you already entered are shown below so you can copy them into your email.</p>
+    <p>This link now goes straight to the Atlas One onboarding form. If the redirect does not
+    start on its own, use the link below.</p>
+    <p><a class="mail" id="formLink" href="https://api.leadconnectorhq.com/widget/form/p0UoqkUnGEwvlc31q636">Open the onboarding form</a></p>
   </div>
   <div class="details">
-    <h2>What was prefilled</h2>
+    <h2>What will be prefilled</h2>
     <table id="detailsTable"></table>
-    <div id="emptyNote" class="empty-note" hidden>No details were passed on the link. Just email your documents directly.</div>
+    <div id="emptyNote" class="empty-note" hidden>No details were passed on the link. The form will open blank.</div>
   </div>
   <div class="foot">Atlas One Solutions, One Call Solves Everything, david@atlasonesolutions.com, 380-225-5217</div>
 </div>
 <script>
 (function(){
+  var FORM_BASE = "https://api.leadconnectorhq.com/widget/form/p0UoqkUnGEwvlc31q636";
   var LABELS = {
     first_name: "First name",
     last_name: "Last name",
@@ -120,6 +122,9 @@ table td.v{color:var(--navy);word-break:break-word;}
         table.appendChild(tr);
       });
     }
+    var target = params.toString() ? (FORM_BASE + "?" + params.toString()) : FORM_BASE;
+    document.getElementById("formLink").href = target;
+    window.location.replace(target);
   } catch (e) {
     document.getElementById("emptyNote").hidden = false;
   }
