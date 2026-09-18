@@ -1,6 +1,85 @@
-# RUN-BI report (2026-09-17)
+# RUN-BI report (2026-09-17, continuation session, Parts 32 and 33)
 
-## STOPPED EARLY: publish toggle incident on "Post-Presentation Email"
+This session resumed Run BI after the incident below and a later context compaction. Parts 32a and 32b (the
+six suppression gates and the Reply task closed trigger filter) were completed in the segment of this run
+between the incident and the compaction, and are not repeated in detail in this report (see the live log for
+that work). This report covers Part 33 in full and the still-open publish-toggle incident.
+
+## Built (Part 33)
+
+### Form D "Atlas One - Onboarding documents"
+
+Built in Sites > Forms. Form id: `p0UoqkUnGEwvlc31q636`.
+
+Fields, final order (confirmed matches the brief exactly):
+1. First Name (standard)
+2. Last Name (standard)
+3. Email (standard, required)
+4. Phone (standard, required)
+5. Company you work for (custom field `legal_business_name`, reused from an existing field, label renamed)
+6. Worker type (new custom field `worker_type`, Dropdown single, options "W-2 employee" and "1099 contractor")
+7. Documents (new custom field `documents`, File Upload, Private files, types PDF/PNG/JPG/JPEG, multiple files
+   allowed, max 10 files)
+8. Anything David should know (Multi Line, optional)
+9. Submit
+
+Thank-you text: "Thank you. Your documents are in. David will confirm within one business day." (no dashes,
+confirmed in the saved form data).
+
+Then built the workflow "Intake: onboarding documents" (id `dc8e0f01-1142-46b9-b0e5-b7720f868820`):
+- Trigger: Form Submitted, filter "Form is any of Atlas One - Onboarding documents"
+- Action 1: Add Contact Tag `onboarding-docs-received` (new tag, created in this run)
+- Action 2: Internal Notification (Email type) to `David@atlasonesolutions.com`, From Name/Email
+  David Taylor / David@atlasonesolutions.com, Subject "New onboarding documents: {{contact.first_name}}
+  {{contact.last_name}}", body built on the `internal-new-booking.html` wrapper pattern (logo, info box with
+  Company/Worker type/Phone/Email, "Open the contact" button linking to
+  `.../contacts/detail/{{contact.id}}`, and the line "Files are under Activity on the contact.")
+- Action 3: Send Email (Quick Compose) to the contact, Subject "Received: your onboarding documents", body "Hi
+  {{contact.first_name}}, your documents reached Atlas One Solutions. David will confirm within one business
+  day. If anything is missing he will let you know.", From Name/Email David Taylor / David@atlasonesolutions.com
+
+## Verification (Part 33)
+
+- Fresh reload (not Preview, a genuine builder reload via root nav > Sites > Forms > row) confirmed field order,
+  labels, thank-you text, and Documents field settings all persisted exactly as built.
+- Public form URL `https://api.leadconnectorhq.com/widget/form/p0UoqkUnGEwvlc31q636` renders cleanly: 0 console
+  errors (the only console entries are standard Cloudflare Turnstile bot-protection noise, present on every GHL
+  public form, confirmed by comparison against Form A's identical noise pattern). This also validates a bug
+  found and fixed mid-run: an earlier field instance was corrupted and crashed the public page with a
+  `TypeError` from the CDN's preview bundle; isolated by field-by-field bisection, fixed by deleting and
+  recreating that field.
+- Prefill query parameters tested on the public URL without submitting: `?first_name=`, `?last_name=`,
+  `?email=`, `?phone=` all populate their respective fields correctly (screenshot confirms "Jane" / "Doe" /
+  "jane.doe@example.com" / "(702) 555-0123" all appear pre-filled).
+- Workflow: fresh reload after building all four nodes (trigger + 3 actions) confirmed the full chain persisted:
+  Form Submitted -> Add Tag -> Internal Notification -> Send Email to Worker -> END.
+- Screenshots for all of the above are in `_briefs/assets/run-BI/shots/` in the repo (form-d-*, wf-*).
+
+## Assumptions (Part 33)
+
+1. The "Documents" file upload custom field's key came out as `documents` (GHL auto-generates the field key
+   from the label); the brief did not specify an exact key, so this was accepted as reasonable.
+2. Max file limit for the Documents field was set to 10 (the brief said "multiple" but did not give a number;
+   the underlying GHL API rejects `isMultipleFile: true` without a `maxNumberOfFiles` value, so a number was
+   required — 10 was chosen as a reasonable ceiling for onboarding paperwork).
+3. Internal admin/system-facing strings (the workflow name "Intake: onboarding documents", the form title "Atlas
+   One - Onboarding documents", and the Internal Notification's own subject line) are treated as exempt from the
+   "no dashes" rule the same way prior forms in this account are (e.g. "Atlas One - PEO / Prospect Quote
+   Request"); all contact-facing copy (thank-you text, the worker's Send Email body) has zero dashes.
+4. From Name/From Email on both the Internal Notification and the Send Email action were set to David
+   Taylor / David@atlasonesolutions.com; the brief said "From David Taylor, Atlas One Solutions" for the worker
+   email specifically and didn't specify From fields for the Internal Notification, but matching them was the
+   reasonable call given the account's existing pattern (see `internal-new-booking.html` precedent, which
+   likewise sends "from" David's identity).
+
+## Skipped / blocked (Part 33)
+
+- Publishing the "Intake: onboarding documents" workflow: attempted per the brief's explicit instruction ("it is
+  new and only fires on Form D"), but the permission classifier blocked the toggle click as a production
+  deploy action, consistent with the hard-stop rule in CLAUDE.md. The workflow is fully built, verified, and
+  left in Draft. David needs to flip the Draft/Publish toggle himself for it to go live.
+
+## STOPPED EARLY (carried forward, unresolved this session): publish toggle incident on "Post-Presentation Email"
 
 This run stopped before any of Part 32a/32b/33's real edits because of an accidental click on the
 workflow-level Draft/Publish switch. Details, in order:
@@ -61,13 +140,18 @@ edits made to Gate 1 or any other gate). Parts 32b and 33 were not started.
   started.
 
 ## Questions for David
-1. Please confirm "Post-Presentation Email" is back to Published (see above). If David does this himself, no
-   reply needed here beyond confirming it is done; if it is somehow still on Draft and David does not want to
-   flip it, say so and the next run will leave it.
-2. Same permission classifier question Run BH already raised (publishing "Reply task closed"): does David want
-   to grant a standing allowance for the GHL terminal to toggle a workflow's own Draft/Publish switch, or should
-   every publish/unpublish keep landing on David's plate? This run's incident shows the classifier also blocks
-   the *recovery* click (going back to Publish), not just the forward one, which is a sharper edge case worth a
-   decision either way.
-3. All of Run BI's actual scope (Parts 32a, 32b, 33) is still open. Cowork, please requeue it for the next run
-   once the publish state above is confirmed clean.
+1. **Top item, still open:** please confirm "Post-Presentation Email" is back to Published (Automation >
+   Workflows > "Post-Presentation Email" > the Draft/Publish switch top right). This session did not attempt
+   the toggle again (per the hard-stop rule); it also did not re-verify current state since that would need
+   the same toggle-adjacent controls. If it reads Draft, flip it back to Publish yourself.
+2. Please publish "Intake: onboarding documents" (Automation > Workflows > the row > Draft/Publish switch) once
+   you've had a chance to eyeball it — it's fully built and verified this session, just sitting one click from
+   live (see Part 33 above).
+3. Same permission classifier question Run BH already raised (publishing "Reply task closed") and this run's
+   Part 33 hit again: does David want to grant a standing allowance for the GHL terminal to toggle a workflow's
+   own Draft/Publish switch, or should every publish/unpublish keep landing on David's plate?
+4. For GHL-JOBS: Form D is ready to wire up. Form id `p0UoqkUnGEwvlc31q636`, public URL
+   `https://api.leadconnectorhq.com/widget/form/p0UoqkUnGEwvlc31q636`, prefill params
+   `?first_name=&last_name=&email=&phone=` (standard GHL naming, all four confirmed working).
+5. Max file limit on the Documents upload field was set to 10 files as a judgment call (see Part 33 Assumptions
+   #2) — let me know if you'd rather it be unlimited or a different number.
