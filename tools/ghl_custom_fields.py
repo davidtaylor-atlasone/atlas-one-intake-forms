@@ -66,13 +66,15 @@ def list_fields(token, location_id=LOCATION_ID, model="contact"):
     return fields or [], (status, body)
 
 
-def create_field(token, name, data_type, location_id=LOCATION_ID, model="contact", parent_id=None, placeholder=None):
+def create_field(token, name, data_type, location_id=LOCATION_ID, model="contact", parent_id=None, placeholder=None, options=None):
     url = f"{API_BASE}/locations/{location_id}/customFields"
     body = {"name": name, "dataType": data_type, "model": model}
     if parent_id:
         body["parentId"] = parent_id
     if placeholder:
         body["placeholder"] = placeholder
+    if options:
+        body["options"] = options
     return _request("POST", url, token, body)
 
 
