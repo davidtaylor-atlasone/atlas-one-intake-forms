@@ -1,0 +1,24 @@
+[
+  {
+    "customField": {
+      "id": "BFh35cY8JrPFK6II0RaH",
+      "model": "contact",
+      "name": "Portal Documents",
+      "fieldKey": "contact.portal_documents",
+      "dataType": "LARGE_TEXT",
+      "parentId": "AmY51esJO2QF0v3wvODu",
+      "locationId": "AzTPxnK2vSUj19jYoDmR"
+    }
+  },
+  {
+    "customField": {
+      "id": "NXn919RjaVX2Xk0Vhikh",
+      "model": "contact",
+      "name": "Portal Messages",
+      "fieldKey": "contact.portal_messages",
+      "dataType": "LARGE_TEXT",
+      "parentId": "AmY51esJO2QF0v3wvODu",
+      "locationId": "AzTPxnK2vSUj19jYoDmR"
+    }
+  }
+]

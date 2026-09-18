@@ -1,51 +1,54 @@
-# BRIEF for the GHL-JOBS terminal: Run BM (portal custom fields by API, Vertical options file, laptop mark on the front door, COMMAND blurb fix)
+# BRIEF for the GHL-JOBS terminal: Run BN (two more portal fields, Azure Blob container, two portal email templates)
 
 Terminal name: GHL-JOBS. Files, code and the GHL API only (no browser clicks in GHL). Build end to end, no
-questions, answer permission prompts yourself, log assumptions, questions at the END of the report. Prior
-report already backed up to `_to_delete/superseded-2026-09-17/prior-reports/RUN-GHL-JOBS-report-RunBL.md`.
-Never fork, background or delegate to a sub agent (rule 44). Do only the jobs written here. Commit and push.
-Repo assets in `_briefs/assets/run-BM-jobs/`. No dashes in copy. Log to `TERMINAL-GHL-JOBS-live.md`; report to
-`RUN-GHL-JOBS-report.md` (quoted heredoc).
+questions, answer permission prompts yourself, log assumptions, questions at the END of the report. Never
+fork, background or delegate to a sub agent (rule 44). Do only the jobs written here. Commit and push. Repo
+assets in `_briefs/assets/run-BN-jobs/`. No dashes in copy. Log to `TERMINAL-GHL-JOBS-live.md`; report to
+`Master_Kit/_BUILD-LOG/RUN-GHL-JOBS-report.md` (quoted heredoc) AND a copy in the repo assets folder.
+Prior report already backed up (`_to_delete/superseded-2026-09-18/prior-reports/RUN-GHL-JOBS-report-RunBM.md`).
 
-Token: `GHL_PIT` in `~/Projects/atlas-one-intake-forms/.env` (starts with `pit-`). Never print or log it, never
-look in `~/.claude.json`. Location `AzTPxnK2vSUj19jYoDmR`, `Version: 2021-07-28`, browser User-Agent (the
-Cloudflare fix from Run BK). Master Kit: find by name (`MK=$(find ~ -type d -name "Atlas_One_Master_Kit" 2>/dev/null
-| grep -vi -e _to_delete -e archiv | head -1)`). A1_Sales is `$MK/../../A1_Sales` (beside HR_Docs, Run BL confirmed).
+Token: `GHL_PIT` in `~/Projects/atlas-one-intake-forms/.env`. Never print or log it, never look in
+`~/.claude.json`. Location `AzTPxnK2vSUj19jYoDmR`, `Version: 2021-07-28`, browser User-Agent. Reuse
+`tools/ghl_custom_fields.py` and `tools/ghl_email_builder.py`. Master Kit by name; A1_Sales is `$MK/../../A1_Sales`.
 
-## Job 1: two contact custom fields for the portal (Run P2 asked for them)
-Custom Fields API (`GET /locations/{id}/customFields`, `POST /locations/{id}/customFields`). Read first: if a
-field with name "Portal Switches" or "Portal Favorites" (or key `portal_switches` / `portal_favorites`) already
-exists, do not create a second one. Otherwise create two Contact fields, type large text (multi line), names
-"Portal Switches" and "Portal Favorites", in the folder the existing portal field `services` lives in (read
-that field to find its folder; if none, the default folder). Save the response JSON (ids and keys, no token)
-to `_briefs/assets/run-BM-jobs/portal-fields.json`. Then in `~/Projects/atlas-one-portal/.env` (David's
-machine, same home) add or replace the two lines `GHL_FIELD_PORTAL_SWITCHES=<id>` and
-`GHL_FIELD_PORTAL_FAVORITES=<id>` (Run P2's report names these env variables; open
-`~/Projects/atlas-one-portal/server/fields.ts` to confirm the exact names and whether it expects the field id
-or the key, and use what it expects). Do not commit `.env`. Also write the same two lines into
-`_BUILD-LOG/portal-env-additions-2026-09-18.md` so the Azure app settings can be updated by David (the report
-tells him: Azure portal, App Service atlas-one-portal, Settings, Environment variables, add the two names and
-values, Apply; or note if `scripts/deploy-azure.sh` already pushes `.env` values, read it and say which).
+## Job 1: two more contact fields (PORTAL Run P3 asked for them)
+Same as Run BM Job 1: read first, then create Contact fields type LARGE_TEXT named "Portal Documents"
+(key `portal_documents`) and "Portal Messages" (key `portal_messages`) in folder `AmY51esJO2QF0v3wvODu`.
+Append `GHL_FIELD_PORTAL_DOCUMENTS=<id>` and `GHL_FIELD_PORTAL_MESSAGES=<id>` to
+`~/Projects/atlas-one-portal/.env` (confirm the names in `server/fields.ts` or `server/env.ts` first). Append
+the two lines to `_BUILD-LOG/portal-env-additions-2026-09-18.md` under a "Run BN" heading (David adds them in
+Azure by hand, same steps as before).
 
-## Job 2: the real Vertical options
-`GET /locations/{id}/customFields`, find the contact field named "Vertical" (Prospecting folder). Write every
-option, exactly spelled, one per line, to `_BUILD-LOG/ghl-vertical-options.md` with the field id and key at
-the top. The PORTAL terminal keys its industry starter set on this file.
+## Job 2: Azure Blob container for portal uploads (no new spend)
+Run `az account show` (if not logged in, stop this job, write "needs az login" and continue with Job 3).
+`az storage account list --resource-group atlas-one-ai-email-assistant-v2` (and, if empty, across the
+subscription). If a storage account already exists in that resource group, create container `portal-docs`
+in it (`az storage container create`, private access), fetch its connection string with
+`az storage account show-connection-string` and append `AZURE_STORAGE_CONNECTION=<string>` to the portal
+`.env` ONLY (never into the report, log, git or OneDrive). Add the line name (not the value) to
+`portal-env-additions-2026-09-18.md` with "value: copy from the portal .env on the Mac Studio, or Azure
+Portal, storage account, Access keys". If NO storage account exists, create nothing (a new account is new
+spend) and write in the report exactly which resource groups and accounts you saw.
 
-## Job 3: laptop mark on the front door and the forms index
-The periwinkle laptop mark exists: `$MK/A1_Final Brand/1. Logos/Logo Mark/Full Color/Web/` (pick the SVG if there is
-one, else the largest PNG). Copy it into the forms repo as `assets/atlas-one-mark.svg` (or `.png`) and use it in the
-hero of `start/index.html` and `index.html` in place of the periwinkle "A1" square (keep the wordmark text
-beside it). Verify both pages at 390 and 1440, zero console errors, screenshots to
-`_briefs/assets/run-BM-jobs/shots/`. Commit and push.
-
-## Job 4: two small COMMAND fixes, then rebuild
-In `catalogue.py`: the "Prospect Pitch Deck" row's blurb is just "pptx."; make it "The 16 slide prospect deck
-(pptx). Present it; do not email it. The 9 slide First Meeting cut is the PDF below." The row icon for pptx
-rows renders a red chart emoji; use a plain periwinkle CSS glyph like the other kinds (four colours only).
-Rebuild COMMAND and the Sales Kit (`python3 build_command.py "$MK"`), confirm the stamps show today,
-`catalogue_check.py` OK, one screenshot each.
+## Job 3: two portal email templates pushed to GHL (Email Builder API, as Run AW and BK)
+Build two HTML emails in `_BUILD-LOG/cadence-emails-2026-09-13/` using the same wrapper, logo, DM Sans,
+button and signature as `internal-new-intake.html` and the client welcome template (read
+`email-templates-map.md` for the welcome template's file and the push sequence). No dashes.
+a. `portal-doc-ready.html`, template name `A1 | Portal | doc-ready`, to the client. Subject "A new document is
+   waiting in your portal". Body: "Hi {{contact.first_name}}, David added a document to your Atlas One
+   portal. Sign in and open Documents to view or download it." Button "Open my portal" to
+   https://portal.atlasonesolutions.com/ . One line under: "Questions? Reply to this email or call
+   380-CALL-A1S (380-225-5217)." Standard signature.
+b. `internal-doc-uploaded.html`, template name `A1 | Internal | doc-uploaded`, to David. Subject
+   "Portal upload: {{contact.name}}". Body table: Client {{contact.name}} ({{contact.company_name}} if it
+   resolves in this account; Run BD found which keys resolve, read RUN-GHL-report history in BRIEF-GHL.md
+   if unsure and use only keys proven to resolve), Email {{contact.email}}, then "Open the contact" link to
+   https://app.ridethehightide.com/v2/location/AzTPxnK2vSUj19jYoDmR/contacts/detail/{{contact.id}} and
+   "Open the portal admin" link to https://portal.atlasonesolutions.com/admin . Line: "The file and folder
+   are in the contact's notes."
+Push both with `POST /emails/builder/data` (create first with `POST /emails/builder`), fetch back, diff, save
+before and after copies in the repo assets folder, add both rows to `email-templates-map.md`. Send nothing.
+Report the two template ids; the GHL terminal wires them into workflows.
 
 ## Report
-Field ids created or found, the Vertical options file path and count, which env names fields.ts expects and
-what you wrote where, the mark file used, screenshots, assumptions, "Questions for David" at the end.
+Field ids, container result, template ids, env names written, assumptions, "Questions for David" at the end.
