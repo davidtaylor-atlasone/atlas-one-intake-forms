@@ -1,0 +1,36 @@
+Run A2 parity check, 2026-09-18
+Prospect: SAMPLE_Tell_Me_More_LLC.json (fictional demo)
+
+Audit Workbench (Stage 5, headless Chromium, sample loaded via loadProspectFile):
+  Total Impact pin:  $13,117
+  2x test:           pass, $18,400 documented vs $10,566 (2x first year membership)
+
+total_impact_model.py (python3 total_impact_model.py SAMPLE_Tell_Me_More_LLC.json):
+  NET FIRST-YEAR IMPACT:  $13,117
+  Reconciliation line:    vs Deck slide 8 sample number, with $495 setup -> $13,117, reconciles
+
+build_audit_report.py (python3 build_audit_report.py SAMPLE_Tell_Me_More_LLC.json):
+  Page one hero figure:  $13,117
+  Rebuilt into the DEMO Proposal Set, both html and pdf, in place at the same filenames.
+
+Bench, script and report agree to the dollar: $13,117.
+
+Job 3 check: build_tim.py run after this parity check with the sample file already present.
+  MD5 of SAMPLE_Tell_Me_More_LLC.json before:  ad572bb803bf9717ae0362c6738c74ff
+  MD5 of SAMPLE_Tell_Me_More_LLC.json after:   ad572bb803bf9717ae0362c6738c74ff (unchanged)
+  build_tim.py printed: "skipped: .../SAMPLE_Tell_Me_More_LLC.json (already exists, carries
+  the Audit Workbench's audit block, never overwritten)"
+  Total Impact model re-run after build_tim.py: still $13,117.
+
+Job 2 check, the offer table: audit.offer.lines on the sample now carries 5 entries
+({key, label, price_text}, never a Total Impact dollar amount): membership.professional,
+payroll_models.peo, included_services.wc_placement, included_services.benefits_placement,
+included_services.software_consolidation. These are exactly the five items the brief named
+(Professional membership, PEO per EE per check, workers comp placement, health placement
+through the carrier partners, software stack consolidation), auto-checked in the Workbench's
+Stage 6 from which Total Impact lines were quoted (payroll_admin, wc_premium, health_premium/
+section_125, software_stack), verified by reading P.audit.offer.lines back out of the page
+after loading the sample.
+
+Job 4 check: grepped Atlas_One_Audit_Workbench.html for "&mdash;" and the literal em dash,
+excluding the base64 font blocks -- zero occurrences remain in UI strings.
