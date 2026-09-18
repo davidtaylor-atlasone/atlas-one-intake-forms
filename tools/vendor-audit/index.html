@@ -100,7 +100,7 @@ select.dec-review{background:var(--soft);border-color:var(--soft)}
     <h2>1. Load your spending</h2>
     <p class="muted" style="margin-top:4px">Export the last 3 to 12 months from your bank, business credit card, or QuickBooks (Expenses, then Export). CSV is best. A copied statement pasted as text also works. Card numbers and deposits are ignored; only the descriptions and amounts are read, and they stay on this device.</p>
     <div class="row nop">
-      <label class="btn soft" for="file">Upload CSV or text</label><input type="file" id="file" accept=".csv,.txt,.tsv,.qbo,.ofx,text/plain,text/csv" hidden>
+      <label class="btn soft" for="file">Upload CSV or text</label><input type="file" id="file" accept=".csv,.txt,.tsv,.qbo,.ofx,text/plain,text/csv" multiple hidden>
       <button class="btn ghost" id="demoBtn" type="button">Show me with sample data</button>
       <button class="btn ghost" id="quickBtn" type="button">No statement handy? Quick estimate</button>
     </div>
@@ -181,7 +181,7 @@ select.dec-review{background:var(--soft);border-color:var(--soft)}
     <h3>One call instead of a dozen.</h3>
     <p>Atlas One becomes the single point of contact for payroll, benefits, insurance, books, IT and the software underneath them. Bring this page to a 30 minute Back Office Audit and we will walk the twelve points together, line by line, with your numbers. If the audit cannot find two times your first year membership in savings or risk removed, there is nothing to buy.</p>
     <a href="https://api.leadconnectorhq.com/widget/groups/book-david" target="_blank" rel="noopener">Book the 30 minute audit</a><a href="tel:+13802255217" style="background:transparent;border:1.5px solid rgba(255,255,255,.6)">Call 380-CALL-A1S (380-225-5217)</a>
-    <div class="row nop" style="margin-top:14px"><button class="btn ghost" id="saveBtn" type="button">Save this audit (file)</button><button class="btn ghost" id="loadBtn" type="button">Load a saved audit</button><input type="file" id="loadFile" accept=".json" hidden></div>
+    <div class="row nop" style="margin-top:14px"><button class="btn ghost" id="saveBtn" type="button">Save this audit (file)</button><button class="btn ghost" id="loadBtn" type="button">Load a saved audit</button><input type="file" id="loadFile" accept=".json" hidden><button class="btn ghost" id="sendAuditBtn" type="button">Save my results</button></div>
   </div>
   <div class="afoot"><span>Atlas One Solutions · One Call Solves Everything</span><span>david@AtlasOneSolutions.com · 380-225-5217 · atlasonesolutions.com</span></div>
   <p class="muted small" style="margin-top:10px">Estimates only. Vendor names are matched from descriptions and can be wrong; check the list before relying on it. Nothing entered on this page is transmitted or stored anywhere except the file you choose to save.</p>
@@ -420,6 +420,9 @@ var SIMPLIFIED={
 </script>
 <script>/* Atlas One Vendor & Software Audit: everything runs in this page. Nothing is uploaded anywhere. */
 var STATE={rows:[],company:'',rate:75,eff:70,hrsPer:1.5,check:{},mode:'auto'};
+var NOTE_STACK='Duplicate tools and cancellations: ';
+var NOTE_MOVE='Consolidated spend is not a saving on its own; shown for context. Moves under one relationship: ';
+var NOTE_NONE='none found';
 function money(n){var neg=n<0;n=Math.abs(n);return (neg?'-':'')+'$'+Math.round(n).toLocaleString('en-US');}
 function $(id){return document.getElementById(id);}
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
@@ -635,9 +638,72 @@ function renderChecklist(c){
 }
 
 /* ---------- events ---------- */
+/* ---------- Run A1 Job 2: multi file / multi paste hand off to the Audit Workbench ---------- */
+STATE.fileBlocks=STATE.fileBlocks||[];
+function dedupeParsedRows(rows){
+  var seen={},out=[];
+  rows.forEach(function(r){
+    var dkey=r.date?(r.date.getFullYear()+'-'+r.date.getMonth()+'-'+r.date.getDate()):'nodate';
+    var key=normKey(r.desc)+'|'+dkey+'|'+Math.abs(r.amt).toFixed(2);
+    if(seen[key]) return; seen[key]=1; out.push(r);
+  });
+  return out;
+}
+function splitPasteBlocks(txt){ return String(txt||'').split(/\n\s*-{3,}\s*\n/).map(function(t){return t.trim();}).filter(Boolean); }
+function reanalyzeAll(){
+  var pasted=splitPasteBlocks($('paste').value);
+  var blocks=STATE.fileBlocks.concat(pasted);
+  var all=[]; blocks.forEach(function(b){ all=all.concat(parseText(b)); });
+  var before=all.length; all=dedupeParsedRows(all);
+  STATE.raw=all.length; STATE.sourcesCount=blocks.length; STATE.dupesRemoved=before-all.length;
+  var found=analyze(all); found.forEach(function(r){ r.decision=defaultDecision(r); });
+  STATE.rows=found; renderTable(); renderResults();
+  $('parseNote').textContent=all.length?(all.length+' transactions read across '+blocks.length+' file'+(blocks.length===1?'':'s')+
+    (STATE.dupesRemoved?' ('+STATE.dupesRemoved+' duplicate rows across files removed)':'')+'. '+found.length+' recurring vendors and subscriptions found, '+
+    found.filter(function(r){return r.matched;}).length+' recognized by name. Unrecognized one-time purchases were left out.'):
+    'Nothing readable in that yet. Add a file or paste a statement above; a date and an amount on each line is enough.';
+}
+function auditChecklistScore(c){
+  var p=0; CHECKS.forEach(function(k){ var v=k[2]==='auto'?autoCheck(k[0],c):(STATE.check[k[0]]||'unknown'); if(v==='pass') p++; });
+  return p;
+}
+function buildAuditVendorsPayload(){
+  var c=compute();
+  var overlapNames=[];
+  c.overlaps.forEach(function(o){ var sorted=o.rows.slice().sort(function(a,b){return b.monthly-a.monthly;}); for(var i=1;i<sorted.length;i++) overlapNames.push(sorted[i].name); });
+  var cancelNames=STATE.rows.filter(function(r){return r.decision==='cancel';}).map(function(r){return r.name;});
+  var moveNames=STATE.rows.filter(function(r){return r.decision==='consolidate'||r.decision==='simplify';}).map(function(r){return r.name;});
+  var dupCancelAnnual=Math.round((c.over+c.cancel)*1200)/100;
+  var moveAnnual=Math.round((c.consol+c.simp)*1200)/100;
+  var dupCancelNames=overlapNames.concat(cancelNames);
+  var dupCancelNote=NOTE_STACK+(dupCancelNames.length?dupCancelNames.join(', '):NOTE_NONE);
+  var moveNote=NOTE_MOVE+(moveNames.length?moveNames.join(', '):NOTE_NONE);
+  return {
+    audit:{ vendors:{
+      source:'Vendor & Software Audit, '+(STATE.sourcesCount||(STATE.rows.length?1:0))+' source'+((STATE.sourcesCount||1)===1?'':'s')+', '+new Date().toISOString().slice(0,10),
+      monthly_spend:Math.round(c.spend*100)/100, annual_spend:Math.round(c.spend*1200)/100,
+      count:STATE.rows.length,
+      overlaps:c.overlaps.map(function(o){ return {job:FUNCTION_LABEL[o.fn]||o.fn, vendors:o.rows.map(function(r){return r.name;})}; }),
+      moves:moveNames, cancel:cancelNames,
+      hours_month:Math.round((c.annualHrs/12)*100)/100,
+      score:auditChecklistScore(c),
+      rows:STATE.rows.map(function(r){ return {name:r.name, fn:r.fn, div:r.div, monthly:r.monthly, decision:r.decision, hrs:r.hrs}; })
+    }},
+    lines:{
+      software_stack:{amount:dupCancelAnnual, note:dupCancelNote},
+      vendor_audit:{amount:moveAnnual, memo:true, note:moveNote}
+    }
+  };
+}
+function sendToAudit(){
+  var payload=buildAuditVendorsPayload();
+  var blob=new Blob([JSON.stringify(payload,null,1)],{type:'application/json'});
+  var a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+  a.download=(STATE.company||'client').replace(/[^\w]+/g,'_')+'_audit_vendors.json'; a.click();
+}
 function bind(){
-  $('parseBtn').addEventListener('click',function(){ var txt=$('paste').value; loadText(txt); });
-  $('file').addEventListener('change',function(e){ var f=e.target.files[0]; if(!f) return; var rd=new FileReader(); rd.onload=function(){ $('paste').value=rd.result; loadText(rd.result); }; rd.readAsText(f); });
+  $('parseBtn').addEventListener('click',function(){ reanalyzeAll(); });
+  $('file').addEventListener('change',function(e){ var files=Array.prototype.slice.call(e.target.files); if(!files.length) return; var remaining=files.length; files.forEach(function(f){ var rd=new FileReader(); rd.onload=function(){ STATE.fileBlocks.push(rd.result); remaining--; if(remaining===0) reanalyzeAll(); }; rd.readAsText(f); }); });
   $('addRow').addEventListener('click',function(){ STATE.rows.unshift({key:'',name:'New vendor',fn:'other',div:'other',kind:'monthly',monthly:0,count:0,months:0,total:0,sample:'added by hand',decision:'review',hrs:null,matched:false}); renderTable(); renderResults(); });
   $('rowsBody').addEventListener('input',function(e){ var tr=e.target.closest('tr'); if(!tr) return; var r=STATE.rows[+tr.getAttribute('data-i')]; var f=e.target.getAttribute('data-f'); if(!f) return;
     if(f==='monthly') r.monthly=+e.target.value||0; else if(f==='hrs') r.hrs=e.target.value===''?null:+e.target.value; else if(f==='name') r.name=e.target.value; renderResults(); });
@@ -649,9 +715,10 @@ function bind(){
   $('checks').addEventListener('click',function(e){ var b=e.target.closest('[data-ck]'); if(!b) return; STATE.check[b.getAttribute('data-ck')]=b.getAttribute('data-v'); renderResults(); });
   $('saveBtn').addEventListener('click',function(){ var blob=new Blob([JSON.stringify({v:1,state:STATE},null,1)],{type:'application/json'}); var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='Atlas_One_Vendor_Audit_'+(STATE.company||'client').replace(/[^\w]+/g,'_')+'.json'; a.click(); });
   $('loadBtn').addEventListener('click',function(){ $('loadFile').click(); });
+  $('sendAuditBtn').addEventListener('click',sendToAudit);
   $('loadFile').addEventListener('change',function(e){ var f=e.target.files[0]; if(!f) return; var rd=new FileReader(); rd.onload=function(){ try{ var o=JSON.parse(rd.result); STATE=o.state; ['rate','eff','hrsPer','revenue','company'].forEach(function(id){ $(id).value=STATE[id]||''; }); $('prepFor').textContent=STATE.company?('Prepared for '+STATE.company):''; renderTable(); renderResults(); }catch(err){ alert('That file did not load.'); } }; rd.readAsText(f); });
   $('csvBtn').addEventListener('click',function(){ var lines=[['Vendor','Function','Division','Pattern','Monthly','Annual','Decision']].concat(STATE.rows.map(function(r){return [r.name,FUNCTION_LABEL[r.fn]||r.fn,r.div,r.kind,r.monthly.toFixed(2),(r.monthly*12).toFixed(2),r.decision];})); var csv=lines.map(function(l){return l.map(function(x){return '"'+String(x).replace(/"/g,'""')+'"';}).join(',');}).join('\n'); var a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'})); a.download='Atlas_One_Vendor_Audit.csv'; a.click(); });
-  $('clearBtn').addEventListener('click',function(){ STATE.rows=[]; $('paste').value=''; renderTable(); renderResults(); });
+  $('clearBtn').addEventListener('click',function(){ STATE.rows=[]; STATE.fileBlocks=[]; $('paste').value=''; $('parseNote').textContent=''; renderTable(); renderResults(); });
   $('demoBtn').addEventListener('click',function(){ $('paste').value=DEMO; loadText(DEMO); if(!$('company').value){ $('company').value='Sample Co'; STATE.company='Sample Co'; $('prepFor').textContent='Prepared for Sample Co'; } });
   $('quickBtn').addEventListener('click',function(){ $('quick').hidden=!$('quick').hidden; });
   document.querySelectorAll('#quick input').forEach(function(inp){ inp.addEventListener('change',function(){}); });
