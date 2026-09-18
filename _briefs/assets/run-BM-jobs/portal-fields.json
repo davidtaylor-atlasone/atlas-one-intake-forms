@@ -1,0 +1,46 @@
+{
+  "Portal Switches": {
+    "status": 201,
+    "body": {
+      "customField": {
+        "id": "zUZ55MT5SCj5nFCj0yYK",
+        "model": "contact",
+        "name": "Portal Switches",
+        "fieldKey": "contact.portal_switches",
+        "placeholder": "",
+        "dataType": "LARGE_TEXT",
+        "position": 550,
+        "documentType": "field",
+        "parentId": "AmY51esJO2QF0v3wvODu",
+        "locationId": "AzTPxnK2vSUj19jYoDmR",
+        "dateAdded": "2026-09-18T03:58:58.972Z",
+        "standard": false,
+        "scopes": []
+      },
+      "backfillTriggered": false,
+      "traceId": "5fe662ca-e342-4cca-a25a-8e3e33912ebb"
+    }
+  },
+  "Portal Favorites": {
+    "status": 201,
+    "body": {
+      "customField": {
+        "id": "Va0mTobvO3OloAmuFv6T",
+        "model": "contact",
+        "name": "Portal Favorites",
+        "fieldKey": "contact.portal_favorites",
+        "placeholder": "",
+        "dataType": "LARGE_TEXT",
+        "position": 600,
+        "documentType": "field",
+        "parentId": "AmY51esJO2QF0v3wvODu",
+        "locationId": "AzTPxnK2vSUj19jYoDmR",
+        "dateAdded": "2026-09-18T03:58:59.519Z",
+        "standard": false,
+        "scopes": []
+      },
+      "backfillTriggered": false,
+      "traceId": "8caa96a4-d39d-4861-9605-8574e02bfedd"
+    }
+  }
+}

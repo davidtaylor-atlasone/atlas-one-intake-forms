@@ -10,7 +10,8 @@
 .bar{background:var(--navy);color:#fff;border-radius:18px;padding:36px 30px;position:relative;overflow:hidden}
 .bar::after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;background:radial-gradient(circle,rgba(120,141,227,.55),transparent 70%)}
 .wm{display:flex;align-items:center;gap:14px;position:relative;z-index:1}
-.mark{width:46px;height:46px;border-radius:12px;background:var(--peri);display:grid;place-items:center;font-weight:700;font-size:22px;color:var(--navy)}
+.mark{width:46px;height:46px;flex:none;display:grid;place-items:center}
+.mark img{width:100%;height:100%}
 .name{font-weight:700;letter-spacing:.5px}.name span{color:var(--peri)}
 .tag{font-size:12.5px;color:var(--soft);letter-spacing:.4px}
 h1{font-size:26px;margin:22px 0 8px;position:relative;z-index:1}
@@ -23,7 +24,7 @@ a.card p{margin:0;color:var(--muted);font-size:14px;line-height:1.55}
 a.card .go{display:inline-block;margin-top:14px;color:var(--peri);font-weight:600;font-size:14px}
 .foot{margin-top:34px;text-align:center;color:var(--muted);font-size:13px;line-height:1.6}
 </style></head><body><div class="wrap">
-<div class="bar"><div class="wm"><div class="mark">A1</div><div><div class="name">ATLAS ONE <span>SOLUTIONS</span></div><div class="tag">One Call Solves Everything</div></div></div>
+<div class="bar"><div class="wm"><div class="mark"><img src="assets/atlas-one-mark.svg" alt="Atlas One Solutions"></div><div><div class="name">ATLAS ONE <span>SOLUTIONS</span></div><div class="tag">One Call Solves Everything</div></div></div>
 <h1>Intake Forms</h1><p class="lead">Choose the form that matches what you need. Each takes just a few minutes and goes straight to our team.</p></div>
 <div class="cards">
 <a class="card" href="peo/"><h2>Quote &amp; Onboarding Intake</h2><p>PEO, HR, payroll, benefits, workers' comp and business insurance. Best if you have W-2 employees and want a full quote.</p><span class="go">Start this form →</span></a>

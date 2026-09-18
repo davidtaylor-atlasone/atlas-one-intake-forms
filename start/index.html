@@ -12,7 +12,8 @@ body{margin:0;background:var(--off);font-family:"DM Sans",system-ui,-apple-syste
 .bar{background:var(--navy);color:#fff;border-radius:18px;padding:40px 30px;position:relative;overflow:hidden}
 .bar::after{content:"";position:absolute;right:-60px;top:-60px;width:240px;height:240px;background:radial-gradient(circle,rgba(120,141,227,.55),transparent 70%)}
 .wm{display:flex;align-items:center;gap:14px;position:relative;z-index:1}
-.mark{width:52px;height:52px;border-radius:13px;background:var(--peri);display:grid;place-items:center;font-weight:700;font-size:24px;color:var(--navy);flex:none}
+.mark{width:52px;height:52px;flex:none;display:grid;place-items:center}
+.mark img{width:100%;height:100%}
 .name{font-weight:700;letter-spacing:.5px;font-size:15px}.name span{color:var(--peri)}
 .tag{font-size:12.5px;color:var(--soft);letter-spacing:.4px}
 h1{font-size:29px;margin:24px 0 6px;position:relative;z-index:1}
@@ -43,7 +44,7 @@ a.card .go{display:inline-block;margin-top:12px;color:var(--peri);font-weight:60
 </style></head><body><div class="wrap">
 
 <div class="bar">
-  <div class="wm"><div class="mark">A1</div><div><div class="name">ATLAS ONE <span>SOLUTIONS</span></div><div class="tag">One Call Solves Everything.</div></div></div>
+  <div class="wm"><div class="mark"><img src="../assets/atlas-one-mark.svg" alt="Atlas One Solutions"></div><div><div class="name">ATLAS ONE <span>SOLUTIONS</span></div><div class="tag">One Call Solves Everything.</div></div></div>
   <h1>Atlas One Solutions</h1>
   <p class="lead">Payroll, benefits, insurance and books for growing businesses in all 50 states. One relationship replaces ten to twenty vendors.</p>
 </div>
