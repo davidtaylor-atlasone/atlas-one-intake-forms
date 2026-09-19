@@ -78,6 +78,13 @@ def create_field(token, name, data_type, location_id=LOCATION_ID, model="contact
     return _request("POST", url, token, body)
 
 
+def update_contact_field(token, contact_id, field_id, value):
+    """PUT /contacts/{contactId}, set one custom field's value."""
+    url = f"{API_BASE}/contacts/{contact_id}"
+    body = {"customFields": [{"id": field_id, "field_value": value}]}
+    return _request("PUT", url, token, body)
+
+
 if __name__ == "__main__":
     token = get_token()
     if not token:

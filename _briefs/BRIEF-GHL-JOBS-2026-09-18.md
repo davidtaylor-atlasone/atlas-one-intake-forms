@@ -1,64 +1,63 @@
-# BRIEF-GHL-JOBS (current run: Run BR, 2026-09-18 13:55). Audit booking follow up, the API half: one client email template, one custom field. GHL Run BS (browser) wires them after this reports.
+# BRIEF-GHL-JOBS (current run: Run BT, 2026-09-18 14:45). Kill the wrong expiry date in the two offer emails, and make the Audit report write the real one.
 
 Terminal name: GHL-JOBS. Files, code and the GHL REST API only, never the GoHighLevel browser UI. Safe to run
-while the GHL terminal is on Run BQ (different terminal, no browser). Build end to end, no questions, log
-assumptions, questions at the END. Never fork or background (rule 44). Commit and push after each job. Repo
-assets in `_briefs/assets/run-BR-jobs/`. No dashes anywhere in email copy. Log to `TERMINAL-GHL-JOBS-live.md`;
-report to `Master_Kit/_BUILD-LOG/RUN-GHL-JOBS-report.md` plus a copy in the assets folder. Prior report already
-backed up. Send nothing, spend nothing, delete nothing.
+alongside the GHL browser terminal. Build end to end, no questions, log assumptions, questions at the END.
+Never fork or background (rule 44). Commit and push after each job. Assets `_briefs/assets/run-BT-jobs/`.
+No dashes in any email copy. Log to `TERMINAL-GHL-JOBS-live.md`; report to
+`Master_Kit/_BUILD-LOG/RUN-GHL-JOBS-report.md` plus a copy in the assets folder. Prior report already backed
+up. Send nothing, spend nothing, delete nothing.
 
-Why: current clients book the same 30 minute calendar as Audit prospects. David decided (2026-09-18, see
-`_BUILD-LOG/audit-decisions-2026-09-18.md` decision 1): a booking question routes the email. The audit answer
-gets `A1 | Audit | prep` (exists, 6aad411ab397941922a158c5). The client answer, or the tag `client-current`,
-gets a short "here is everything else Atlas One handles now" email. That email and the field the booking
-question writes to are built here by API so the browser run only has to click them into place.
+## The problem this run fixes
+`audit-offer-day20.html` and `audit-offer-day28.html` both print `{{contact.audit_offer_expires}}`. Run BQ
+found this GHL account has no date math (its Date/Time Formatter only formats and compares), so the workflow
+now sets that field to the date the workflow runs. A prospect on day 20 would read "your offer expires" next
+to the date the offer STARTED. That is worse than a blank, so the merge tag comes out of the emails and the
+real date comes from the one place that already computes it correctly, the Audit report.
 
-## Job 1: the client email file
-Write `_BUILD-LOG/cadence-emails-2026-09-13/client-more-we-handle.html`. Copy the exact table structure,
-inline CSS, header, button style, footer and signature block from `audit-prep.html` in the same folder so the
-two read as one family. Copy, plain and short, no dashes, no vendor names, David's voice:
-- "Hi {{contact.first_name}},"
-- "Thanks for booking. Talk soon."
-- One short paragraph: Atlas One now handles payroll, benefits, insurance, bookkeeping, software and the
-  paperwork in between, all under the one relationship you already have with us. One call, one bill, one
-  person who knows your business.
-- One line: "Nothing you have today moves unless you ask for it."
-- Button "See everything Atlas One handles" to https://forms.atlasonesolutions.com/tools/what-we-do/
-- The standard signature exactly as audit-prep.html carries it.
-Subject (goes in the map, not the file): "Everything Atlas One handles for you now, {{contact.first_name}}"
-Render it headless at 390 and 700 wide, look at it, no horizontal scroll, screenshots to the assets folder.
-Run the dash check over the file (em dash, en dash, or a hyphen used between spaces all fail).
+Decision (Cowork, do not re-ask David): the offer deadline is stated in words in the emails, and as a real
+date only in the written Audit report, which already renders "offer good through <report date + 30>".
 
-## Job 2: push it as a template
-`python3 tools/ghl_email_builder.py` create then fill (the two call sequence in that file's docstring):
-title `A1 | Client | more we handle`, editorType html, the file's full HTML. Fetch the previewUrl back and
-diff its body against the file (the same check Run BO did). Append one row to
-`_BUILD-LOG/email-templates-map.md` under a new heading
-"## Client booking template (1, Run BR, pushed through the Email Builder API)" with the same columns as the
-Audit rows (Send, Workflow, Template name, Template id, Subject, File). Write
-`_BUILD-LOG/audit-client-template-id.md` containing exactly `CLIENT_TEMPLATE_ID=<id>` on the first line.
+## Job 1: take the date out of the two offer emails
+In `_BUILD-LOG/cadence-emails-2026-09-13/audit-offer-day20.html` and `audit-offer-day28.html`, remove every
+`{{contact.audit_offer_expires}}` and rewrite the sentence around it in plain words, keeping David's voice and
+the existing structure, CSS, button and signature untouched:
+- day 20: the offer from the Audit report holds for ten more days. The number, the three fixes and the price
+  in that report stay good until then.
+- day 28: two days left on the offer in your Audit report. After that the numbers get rebuilt from current
+  rates.
+Keep `{{contact.first_name}}`. No dashes. Run the dash check on both files. Render both headless at 390 and
+700 wide, look at them, screenshots to the assets folder. Confirm by grep that no
+`{{contact.audit_offer_expires}}` remains in either file.
 
-## Job 3: the call purpose field
-`python3 tools/ghl_custom_fields.py list` first. If a contact field named "Call purpose" (key
-`contact.call_purpose`) already exists, use it and skip creation. Otherwise extend `create_field` in
-`tools/ghl_custom_fields.py` with an optional `options` argument (the API body key is `options`, a list of
-strings) and create: name "Call purpose", dataType SINGLE_OPTIONS, model contact, parent folder
-`AmY51esJO2QF0v3wvODu` (the folder Audit Code lives in; if the API rejects that parent, create without it and
-say so), options exactly: `My Back Office Audit`, `I am already a client`, `Something else`. List again and
-read the field back. Append `CALL_PURPOSE_FIELD_ID=<id>` and `CALL_PURPOSE_KEY=<key>` as two more lines to
-`_BUILD-LOG/audit-client-template-id.md`. Create no other field: `audit_code`, `audit_offer_expires`,
-`wc_policy_expiration` and `benefits_renewal_date` all already exist.
+## Job 2: re-push both templates in place
+Push the two edited files through the Email Builder API so the LIVE templates change, keeping the same ids
+(`A1 | Audit | offer-day20` = 6aad411bb0cd6d0085e3ac07, `A1 | Audit | offer-day28` = 6aad411d173deedb774b43e6):
+use the `fill` call (`POST /emails/builder/data`) with the existing templateId, not create. Fetch each
+previewUrl back and confirm the date merge tag is gone and the new sentence is there. Do not create a new
+template and do not delete the old ones. Update the Subject and any note column in
+`_BUILD-LOG/email-templates-map.md` if the row text no longer matches.
 
-## Job 4: the 90 day pulse task text
-Check whether `_BUILD-LOG/pulse-admin-url.md` exists (the PORTAL staff pulse run writes it). If it does,
-append `PULSE_ADMIN_URL=<url>` to `audit-client-template-id.md`; if not, append `PULSE_ADMIN_URL=` (empty)
-and note "PORTAL pulse not shipped yet" under Assumptions. No build either way.
+## Job 3: the Audit report writes the real expiry to GHL
+In `build_audit_report.py` (`08 ROI Quote Master Template/Total_Impact_Model/`), after the report renders, write
+the offer expiry to the prospect's GHL contact: `PUT /contacts/{contactId}` with the custom field
+`audit_offer_expires` (field id `TGGXt9MICuxqMDk8LNpz`) set to the same date the report prints (report date
+plus 30 days), formatted the way the field accepts. Reuse the token loader in `tools/ghl_custom_fields.py`
+(`.env`, `GHL_PIT`, never printed). Rules:
+- The contact id comes from the prospect JSON (`audit.ghl_contact_id`, add the key to `AUDIT_SCHEMA.md`). If
+  it is missing, or the token or the call fails, the report still renders and the script prints one plain line
+  for David: "Could not set the offer expiry in GoHighLevel. Open the contact and type <date> into Audit Offer
+  Expires." Never fail the report over this.
+- Add `--no-ghl` to skip the write, and skip it automatically for the Tell Me More LLC sample so the sample
+  never touches a real contact.
+Test both paths with a fake contact id (expect the API to refuse) and with `--no-ghl`, and show the printed
+fallback line in the report.
+
+## Job 4: keep the sample honest
+Re-render the Tell Me More LLC sample audit report and confirm the offer page still reads the right date and
+that nothing about the email change broke it. Rebuild COMMAND only if a catalogued file changed; if nothing
+catalogued changed, say so rather than rebuilding.
 
 ## Report
-First line: the three ids (template id, field id, field key) and whether PULSE_ADMIN_URL is set. Then per job:
-what was done, the preview diff result, screenshots, assumptions, "Questions for David" at the end.
-
----- Last run (BP), kept for reference ----
-Run BP (done 2026-09-18 09:59, audited): Job 1 filled AUDIT_FORM_ID (pUCVA3wZgAOMMVnZsb4c) into
-`audit/index.html`, verified headless, live URL 200. Job 2 added the "Audit intake page (public)" catalogue
-row and rebuilt COMMAND (199 items) and the Sales Kit (57 items).
+First line: whether both templates are clean of the date merge tag, and whether the report can write the
+expiry. Then per job: what changed, the preview check, screenshots, assumptions, "Questions for David" at
+the end.
