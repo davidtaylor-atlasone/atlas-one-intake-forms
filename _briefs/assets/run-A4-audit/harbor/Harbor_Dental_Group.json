@@ -1,0 +1,245 @@
+{
+  "client": "Harbor Dental Group (SAMPLE, fictional)",
+  "as_of": "September 2026",
+  "lines": {
+    "software_stack": {
+      "amount": 0,
+      "note": "Duplicate tools and cancellations: none found"
+    },
+    "vendor_audit": {
+      "amount": 2856,
+      "memo": true,
+      "note": "Consolidated spend is not a saving on its own; shown for context. Moves under one relationship: Gusto, Microsoft 365"
+    },
+    "wc_premium": {
+      "amount": 2053.25,
+      "note": "Current dec page premium $6,253 vs re-rated $4,200 (typed by David)."
+    },
+    "section_125": {
+      "amount": 1918.16,
+      "note": "employer FICA on pre tax premium, no cafeteria plan today"
+    }
+  },
+  "atlas_one_fees": {
+    "amount": 4788,
+    "one_time_amount": 495,
+    "source": "Audit Workbench, professional membership",
+    "note": ""
+  },
+  "reconcile_against": {},
+  "audit": {
+    "code": "HDG2609",
+    "date": "2026-09-19",
+    "headcount": 20,
+    "states": [],
+    "pay_frequency": "biweekly",
+    "vendors": {
+      "source": "Vendor & Software Audit, 7 sources, 2026-09-20",
+      "monthly_spend": 560.48,
+      "annual_spend": 6725.76,
+      "count": 7,
+      "overlaps": [],
+      "moves": [
+        "Gusto",
+        "Microsoft 365"
+      ],
+      "cancel": [],
+      "hours_month": 10.5,
+      "score": 2,
+      "rows": [
+        {
+          "name": "Office Supply Run",
+          "fn": "other",
+          "div": "other",
+          "monthly": 220,
+          "decision": "review",
+          "hrs": null
+        },
+        {
+          "name": "Gusto",
+          "fn": "payroll",
+          "div": "Workforce & HR",
+          "monthly": 189,
+          "decision": "consolidate",
+          "hrs": null
+        },
+        {
+          "name": "Adobe",
+          "fn": "design",
+          "div": "Technology & Operations",
+          "monthly": 54.99,
+          "decision": "review",
+          "hrs": null
+        },
+        {
+          "name": "Microsoft 365",
+          "fn": "email and office",
+          "div": "Technology & Operations",
+          "monthly": 49,
+          "decision": "simplify",
+          "hrs": null
+        },
+        {
+          "name": "Dropbox",
+          "fn": "file storage",
+          "div": "Technology & Operations",
+          "monthly": 20,
+          "decision": "review",
+          "hrs": null
+        },
+        {
+          "name": "Zoom",
+          "fn": "video meetings",
+          "div": "Technology & Operations",
+          "monthly": 14.99,
+          "decision": "review",
+          "hrs": null
+        },
+        {
+          "name": "Slack",
+          "fn": "team chat",
+          "div": "Technology & Operations",
+          "monthly": 12.5,
+          "decision": "review",
+          "hrs": null
+        }
+      ]
+    },
+    "payroll": {
+      "source": "a-modern-journal.xlsx",
+      "gross_annual": 913250,
+      "employer_taxes_annual": 88129.86,
+      "provider_fee_per_check": 0,
+      "provider_fee_annual": 0,
+      "by_department": {
+        "Sales": 316225,
+        "Operations": 323050,
+        "Admin": 273975
+      },
+      "atlas_one_quote_annual": 13000,
+      "atlas_one_model": "peo",
+      "atlas_one_rate": 25
+    },
+    "wc": {
+      "carrier_page_date": "",
+      "expiration": "2027-01-01",
+      "mod": 1.05,
+      "expense_constant": 200,
+      "classes": [
+        {
+          "code": "8021",
+          "payroll_estimate": 650000,
+          "rate": 0.85,
+          "premium": 5801.25,
+          "actual_payroll": 0
+        },
+        {
+          "code": "8810",
+          "payroll_estimate": 120000,
+          "rate": 0.2,
+          "premium": 252,
+          "actual_payroll": 0
+        }
+      ],
+      "premium_total": 6253.25,
+      "rerated_premium": 4200,
+      "subs": {
+        "spend": 0,
+        "coi_pct": 0,
+        "labor_share": 0.9
+      }
+    },
+    "benefits": {
+      "renewal": "2027-01-01",
+      "carrier_named_on_report": false,
+      "section_125": false,
+      "employer_share_pct": 65,
+      "tiers": [
+        {
+          "tier": "Employee Only",
+          "rate": 410,
+          "enrolled": 5
+        },
+        {
+          "tier": "Employee + Family",
+          "rate": 980,
+          "enrolled": 4
+        }
+      ],
+      "employee_share_annual": 25074
+    },
+    "pulse": {
+      "sent": 12,
+      "responses": 7,
+      "averages": {
+        "q1": 3.9,
+        "q2": 4.2,
+        "q3": 3.1,
+        "q4": 3.4,
+        "q8": 4.1,
+        "q5": 2.3,
+        "q6": 1.8,
+        "q7": 1.1
+      },
+      "free_text": [
+        "Fewer forms to sign every month.",
+        "More heads up before deadlines."
+      ],
+      "score": 3.7,
+      "weakest": [
+        "q3",
+        "q4"
+      ],
+      "picks": {
+        "One login for everything": 4,
+        "Benefits explained in plain words": 3
+      },
+      "code": "HDG2609",
+      "client": "Harbor Dental Group",
+      "round": "Audit"
+    },
+    "fixes": [
+      {
+        "line": "wc_premium",
+        "rank": 1,
+        "value": 2053.25,
+        "confidence": 0.8,
+        "effort_days": 45,
+        "why": "Workers Comp, current vs shopped and re-rated worth $2,053 a year, about 45 days to put in place."
+      },
+      {
+        "line": "section_125",
+        "rank": 2,
+        "value": 1918.16,
+        "confidence": 0.8,
+        "effort_days": 30,
+        "why": "Section 125 / FICA saving on pre tax premium worth $1,918 a year, about 30 days to put in place."
+      }
+    ],
+    "confidence": {},
+    "offer": {
+      "tier": "professional",
+      "also_tier": "enterprise",
+      "monthly": 399,
+      "setup": 495,
+      "lines": [
+        {
+          "key": "membership.professional",
+          "label": "Membership, Professional",
+          "price_text": "$399 a month, $495 setup"
+        }
+      ],
+      "good_through": "2026-10-19",
+      "guarantee": "2x",
+      "_checked": {
+        "membership.essential": true,
+        "payroll_models.peo": false,
+        "included_services.wc_placement": false,
+        "included_services.benefits_placement": false,
+        "included_services.bookkeeping_review": false,
+        "included_services.software_consolidation": false,
+        "membership.professional": true
+      }
+    }
+  }
+}

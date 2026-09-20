@@ -1,0 +1,57 @@
+Run A4 Job 4: bench, script and report parity, the sample and Harbor Dental Group (invented, fictional)
+
+SAMPLE_Tell_Me_More_LLC.json (unchanged numbers, only audit.pulse.round added this run)
+  total_impact_model.py:        NET FIRST-YEAR IMPACT $13,117 / 3-yr net $41,578
+  Workbench timReport(P):       net_year_one $13,117 / three_year_net $41,578 (read live via timReport in
+                                 headless Chromium after loading the sample)
+  build_audit_report.py:        renders 2 pages, hero $13,117, "Over three years: $41,578" on page one,
+                                 two tier cards (Professional recommended, Enterprise also worth a look),
+                                 Staff Pulse Score 3.7 of 5, weakest: benefits understanding, documents,
+                                 zero dashes, zero vendor/PEO names (ADP hits are inside the base64 font
+                                 block only).
+  Agree to the dollar. PASS, no regression from this run's schema and Stage 4 changes.
+
+Harbor Dental Group (SAMPLE, fictional), built from blank in this run
+  Built via: Stage 1 client name + the Job 2 vendor round trip payload (a's 3 bank files + b's 4 card
+    files, de duplicated), Stage 2 the Job 1 fixture (a) modern payroll journal xlsx (20 employees, no fee
+    line in this fixture so payroll_admin stays "not quoted", the honest answer for this data), PEO model,
+    $25 per employee per check rate typed, biweekly; Stage 3 two typed WC class codes (8021 dental office,
+    $650,000 payroll estimate, $0.85/100; 8810 clerical, $120,000, $0.20/100; mod 1.05, $200 expense
+    constant, re-rated premium $4,200 typed) and two benefit tiers (Employee Only $410/mo x 5 enrolled,
+    Employee + Family $980/mo x 4 enrolled, employer share 65%, no Section 125); Stage 4 the exact worked
+    pulse export from pulse-questions-2026-09-18.md (code HDG2609, client Harbor Dental Group, round
+    Audit, 7 of 12 responses, score 3.7, weakest benefits understanding/documents); Stage 5 read; Stage 6
+    left on the rule (headcount 20 from the register, Professional recommended, Enterprise also worth a
+    look, matching MEMBERSHIP_TIER_BY_HEADCOUNT's 8 to 30 bracket).
+  Saved to _briefs/assets/run-A4-audit/harbor/Harbor_Dental_Group.json.
+
+  total_impact_model.py:        gross $3,971, NET FIRST-YEAR IMPACT ($1,312), 3-yr gross $12,275, 3-yr fees
+                                 ($15,294), 3-yr net ($3,019). Vendor audit & ROI work $2,856 shown as memo,
+                                 not added, matching the vendor round trip payload from Job 2.
+  Workbench timReport(P):       gross 3971.41, net_year_one -1311.59 (rounds to -$1,312), three_year_net
+                                 -3019. Read live via timReport in headless Chromium after loading the
+                                 saved JSON with loadProspectFile, independent of the driving session that
+                                 built it.
+  build_audit_report.py:        renders 2 pages (confirmed page count), audit.code correctly picked up as
+                                 HDG2609 from the pulse export (audit.code was blank until the pulse paste,
+                                 per Job 3's rule), Staff Pulse Score 3.7 of 5, weakest: benefits
+                                 understanding, documents on page one, two tier cards on page two
+                                 (Professional recommended solid navy, Enterprise also worth a look
+                                 outlined), zero dashes, zero vendor or PEO brand names (grep confirmed,
+                                 same base64 font false positive as the sample).
+  Agree to the dollar between the bench, the script and the report. PASS.
+
+  Net first-year impact is negative for Harbor by design of this fixture: the payroll register fixture
+  (Job 1's (a)) carries no incumbent provider fee, so payroll_admin is honestly "not quoted" rather than
+  invented, and no health premium comparison or hr_hours rate was typed for this fixture, leaving only
+  wc_premium ($2,053), section_125 ($1,918) and software_stack ($0, no overlaps in this vendor fixture) to
+  offset the $5,283 Professional membership fee. This is the reader working correctly on a thin data set,
+  not a defect; it also means the 2x test correctly does not pass for Harbor ($3,971 documented vs $10,566
+  needed) while it still prints, which is what Job 4 asked to confirm ("the 2x test must print").
+
+Assumption: the brief describes Harbor as "12 employees" but also says to drop the Job 1 fixture (a),
+which is a 20 employee register (built for Job 1's own purposes, three departments). Rather than build a
+second, redundant 12 employee payroll fixture, this run used the Job 1 fixture as given and let the bench's
+own payroll reader set headcount from the register (20), which is the reader's actual job (never a typed
+guess). Both 12 and 20 fall in the same 8 to 30 Professional bracket, so the tier outcome the brief expects
+(Professional recommended, Enterprise also) is unaffected either way.
