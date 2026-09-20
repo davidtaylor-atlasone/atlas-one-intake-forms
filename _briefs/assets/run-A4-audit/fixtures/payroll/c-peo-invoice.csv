@@ -1,0 +1,26 @@
+"Fixture PEO Services Invoice (invented, fixture only)"
+Invoice #: INV-90210    Pay Date: 09/18/2026
+""
+Employee Charges
+Employee Name,Department,Gross Wages,Employer Taxes,401k Match,Admin Fee Per Check,Net Pay
+Avery Chen,Sales,1400.0,135.1,0.0,6.5,1138.0
+Blake Nguyen,Operations,1437.5,138.7,21.56,6.5,1171.57
+Casey Rivera,Admin,1475.0,142.34,22.12,6.5,1202.12
+Dana Okafor,Sales,1512.5,145.97,22.69,6.5,1187.68
+Elliot Brooks,Operations,1550.0,149.58,0.0,6.5,1309.75
+Frankie Silva,Admin,1587.5,153.2,23.81,6.5,1293.82
+Gray Patel,Sales,1625.0,156.81,24.38,6.5,1279.38
+Harper Lund,Operations,1662.5,160.44,24.94,6.5,1354.93
+Iris Novak,Admin,1700.0,164.05,0.0,6.5,1436.5
+Jules Bianchi,Sales,1737.5,167.66,26.06,6.5,1371.07
+Kai Thompson,Operations,1775.0,171.29,26.62,6.5,1446.62
+Lane Whitfield,Admin,1812.5,174.92,27.19,6.5,1477.18
+Morgan Reyes,Sales,1850.0,178.53,0.0,6.5,1518.25
+Noor Haddad,Operations,1887.5,182.16,28.31,6.5,1538.32
+Oakley Vance,Admin,1925.0,185.76,28.88,6.5,1568.88
+Parker Sung,Sales,1962.5,189.39,29.44,6.5,1554.43
+Quinn Delacroix,Operations,2000.0,193.0,0.0,6.5,1690.0
+Riley Osei,Admin,2037.5,196.62,30.56,6.5,1660.57
+Sage Falk,Sales,2075.0,200.24,31.12,6.5,1646.12
+Toby Marchetti,Operations,2112.5,203.85,31.69,6.5,1721.68
+Invoice Total,,35125.0,3389.61,399.37,130.0,28566.87

@@ -1,0 +1,30 @@
+"Big Provider Payroll Register (invented, fixture only)"
+"Client: Fixture Client B, LLC"
+Pay Period: 09/01/2026 to 09/14/2026    Check Date: 09/18/2026
+""
+Emp #,Employee Name,Dept,Gross Pay,ER FICA,ER Medicare,ER FUTA,ER SUTA,EE Ded 401k,Net Check
+EE100,Avery Chen,Sales,1400.0,86.8,20.3,8.4,19.6,0,1138.0
+EE103,Dana Okafor,Sales,1512.5,93.78,21.93,9.08,21.18,45.38,1187.68
+EE106,Gray Patel,Sales,1625.0,100.75,23.56,9.75,22.75,48.75,1279.38
+EE109,Jules Bianchi,Sales,1737.5,107.72,25.19,10.43,24.32,52.12,1371.07
+EE112,Morgan Reyes,Sales,1850.0,114.7,26.83,11.1,25.9,0,1518.25
+EE115,Parker Sung,Sales,1962.5,121.67,28.46,11.78,27.48,58.88,1554.43
+EE118,Sage Falk,Sales,2075.0,128.65,30.09,12.45,29.05,62.25,1646.12
+Subtotal Sales,,,12162.5,754.07,176.36,72.99,170.28,267.38,9694.93
+EE101,Blake Nguyen,Operations,1437.5,89.12,20.84,8.62,20.12,43.12,1171.57
+EE104,Elliot Brooks,Operations,1550.0,96.1,22.48,9.3,21.7,0,1309.75
+EE107,Harper Lund,Operations,1662.5,103.08,24.11,9.97,23.28,49.88,1354.93
+EE110,Kai Thompson,Operations,1775.0,110.05,25.74,10.65,24.85,53.25,1446.62
+EE113,Noor Haddad,Operations,1887.5,117.03,27.37,11.33,26.43,56.62,1538.32
+EE116,Quinn Delacroix,Operations,2000.0,124.0,29.0,12.0,28.0,0,1690.0
+EE119,Toby Marchetti,Operations,2112.5,130.97,30.63,12.68,29.57,63.38,1721.68
+Subtotal Operations,,,12425.0,770.35,180.17,74.55,173.95,266.25,10232.87
+EE102,Casey Rivera,Admin,1475.0,91.45,21.39,8.85,20.65,44.25,1202.12
+EE105,Frankie Silva,Admin,1587.5,98.42,23.02,9.53,22.23,47.62,1293.82
+EE108,Iris Novak,Admin,1700.0,105.4,24.65,10.2,23.8,0,1436.5
+EE111,Lane Whitfield,Admin,1812.5,112.38,26.28,10.88,25.38,54.38,1477.18
+EE114,Oakley Vance,Admin,1925.0,119.35,27.91,11.55,26.95,57.75,1568.88
+EE117,Riley Osei,Admin,2037.5,126.33,29.54,12.22,28.53,61.12,1660.57
+Subtotal Admin,,,10537.5,653.33,152.79,63.23,147.54,265.12,8639.07
+Grand Total,,,35125.0,2177.75,509.32,210.77,491.77,798.75,28566.87
+Processing Fee,,,,,,,,,275.0

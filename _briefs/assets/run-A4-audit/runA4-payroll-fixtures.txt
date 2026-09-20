@@ -1,0 +1,103 @@
+Run A4 Job 1: payroll reader proven on xlsx and four real world register layouts
+All data below is invented (fixture only). 20 invented employees, 3 departments (Sales, Operations, Admin),
+biweekly (26 periods/year default). Tested in headless Chromium against the Audit Workbench's Stage 2,
+both .csv and .xlsx of each fixture, zero console errors on every run.
+
+(a) Modern online payroll journal, one row per employee, columns per item
+  Expected: headcount 20, gross annual $913,250, employer taxes annual $88,129.86, by department
+    Sales $316,225 / Operations $323,050 / Admin $273,975, no provider fee line.
+  Read (csv and xlsx, identical): headcount 20, gross annual $913,250, employer taxes annual $88,129.86,
+    by department Sales $316,225 / Operations $323,050 / Admin $273,975, "No provider fee line found."
+  Result: PASS, no fix needed.
+
+(b) Legacy big provider register: header block above columns, subtotal rows per department, grand total
+    row, a Processing Fee line at the bottom ($275/period)
+  Expected: headcount 20 (subtotal/grand total rows excluded), same gross/tax/department totals as (a),
+    provider fee $275/period = $7,150/yr.
+  Read BEFORE fix: headcount 20 (subtotal and grand total rows were already excluded because their name
+    column is blank, not because of the totals regex), but provider_fee_annual $0, "No provider fee line
+    found" - the $275 footer line is not a per-employee column, so the existing column-only fee scan
+    never saw it.
+  FIX: added a footer-fee scan in Stage 2 (s2ProcessRows) that looks at rows below the header for a
+    label matching admin/processing/service/PEO/delivery fee and takes the row's number as a whole-run
+    fee when no fee column exists.
+  Read AFTER fix: headcount 20, gross/tax/department all match (a), provider fee annual $7,150,
+    provider fee per check (period) $275. PASS.
+
+(c) PEO invoice: per employee lines, a combined "Employer Taxes" column (not split into FICA/Medicare/
+    FUTA/SUTA), a 401k match column, an Admin Fee Per Check column, an "Invoice Total" row at the bottom
+  Expected: headcount 20, gross/department totals same as (a), employer taxes annual $88,129.86 (same
+    people, same total, just reported as one combined column instead of four), provider fee annual
+    $6.50 x 20 x 26 = $3,380.
+  Read BEFORE fix: headcount 21 (the "Invoice Total" row was counted as a 21st employee, in an
+    "Unassigned" department, because the totals-row filter only matched rows starting with "total",
+    "grand total" or "subtotal", not "Invoice Total"), employer_taxes_annual $0 (a single combined
+    "Employer Taxes" column has no keyword the classifier recognized, so it fell through to "unknown"
+    and was dropped from the employer tax sum).
+  FIX 1: totals-row filter widened from /^grand total|^total|^subtotal|^sum/ to
+    /^grand total|^subtotal|^sum|\btotal\b/ so "Invoice Total" (and any other "<word> Total" row) is
+    excluded, not just rows that start with the word "total".
+  FIX 2: guessCat's "^employer " branch, which only recognized 401k/health/dental/vision/life/benefit
+    words as an employer contribution, now also returns er_tax_fed for any "employer ..." column
+    containing "tax" (a combined "Employer Taxes" column), so it is not silently dropped.
+  Read AFTER fix: headcount 20, gross annual $913,250, employer taxes annual $88,129.86 (matches (a)
+    to the dollar), by department matches (a), provider fee annual $3,380. PASS.
+  Both fixes are shared classifier code (guessCat, the totals-row filter) copied from
+  "Payroll to GL Import Converter (Atlas One).html". The master had the identical fault in both spots
+  (confirmed by grep and by reading its guessCat/import-row code); both fixes were applied to the master
+  too, then smoke tested in headless Chromium (zero console errors, scrollWidth 1280 unchanged). The
+  master's own journal-building output for these three shapes was not re-verified end to end in this run
+  (out of scope: Job 1 is the bench's audit KPIs, not the Converter's GL export); logged under Assumptions.
+
+(d) Accounting suite payroll summary: sections stacked vertically (Wages, Employer Taxes, Deductions),
+    employee names as the header of each section instead of one row per employee (10 invented employees,
+    a genuinely different shape, no department column in this export)
+  Expected: this shape has no per-employee row and no header row the existing classifier can find; the
+    real-world value is headcount, gross and employer tax totals, not a department split (this export
+    carries no department at all).
+  Read BEFORE fix: "Could not find a header row" alert; nothing read (findHeader's scoring happened to
+    treat the "Wages" section label row as a normal header some of the time, in the false case it
+    matched but split the data into a single 11 column row of names not numbers, giving headcount 0 and
+    every KPI $0).
+  FIX: added s2VerticalSections(), a fallback parser that runs before findHeader: it looks for rows whose
+    first cell is exactly "Wages", "Employer Taxes" or "Deductions" with employee names across the same
+    row, then sums the numeric rows under each section per employee. When it recognizes this shape it is
+    used instead of the normal column classifier; when it does not, normal column classification proceeds
+    as before.
+  Read AFTER fix: headcount 10, gross annual $407,875, employer taxes annual $39,360.10, "Read as vertical
+    sections (employee names as columns): 10 employees. No department column and no fee line in this
+    shape; payroll_admin not quoted." Department table correctly shows "No department column found yet."
+  Known limit, logged as Assumption: this fallback reads the two numbers the Total Impact needs (gross,
+    employer tax) from this specific vertical shape; it does not attempt to also detect a department
+    breakdown or a fee line inside a vertical layout, because this fixture (an accounting suite's payroll
+    summary) does not carry either of those on its own. If a real vertical-shaped export turns up with a
+    department or fee section, that will need a second pass. The GL Converter master was not changed for
+    this shape: building a full journal entry set from a transposed register is a materially larger
+    feature than reading two audit KPIs, and is out of scope for this run; it still shows "Could not find
+    the header row" on this shape, logged as a carried-forward gap, not silently fixed.
+
+(e) The same PEO invoice as pasted text, tab separated (mimics copying a table out of a PDF or a
+    spreadsheet, which pastes with tabs, not commas)
+  Expected: same numbers as (c) once parsed.
+  Read BEFORE fix: headcount 0, every KPI $0. The paste box only ever ran text through the comma CSV
+    parser; tab separated text produced one giant single-column "row" per line, so no header was ever
+    found.
+  FIX: added parsePastedRegister(), which splits on tabs when the pasted text contains any tab character,
+    and falls back to the existing comma parser otherwise; the paste button now calls this instead of
+    parseCSV directly.
+  Read AFTER fix: headcount 20, gross annual $913,250, employer taxes annual $88,129.86, provider fee
+    annual $3,380, matches (c) exactly (same source data, pasted instead of uploaded). PASS.
+
+DecompressionStream missing (the xlsx path's real dependency)
+  Stubbed window.DecompressionStream to undefined before loading (a)'s .xlsx file in headless Chromium.
+  Result: no silent failure and no thrown/uncaught error; the tool's own alert() fired with the plain
+  words message "This browser cannot unpack .xlsx. Save as CSV and upload that." Confirmed this message
+  was already in place from Run A1 (AtlasRead.unzip); Job 1 did not need to add it, only prove it, which
+  this run does. PASS.
+
+Summary: all five fixtures (a to e), csv and xlsx where applicable, read correctly after three fixes
+(footer fee line, combined employer-tax column plus the "Invoice Total" exclusion, and a vertical-sections
+fallback) plus one paste fix (tab delimited text). Zero console errors on every load. The DecompressionStream
+fallback message was proven, not newly built. One limitation carried forward: a vertical/transposed layout
+that also carries a department or fee section is not yet handled (none of the fixtures needed it; noted for
+a future run if a real prospect's export has that shape).
