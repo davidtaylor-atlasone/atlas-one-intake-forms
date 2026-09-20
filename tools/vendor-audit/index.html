@@ -100,9 +100,13 @@ select.dec-review{background:var(--soft);border-color:var(--soft)}
     <h2>1. Load your spending</h2>
     <p class="muted" style="margin-top:4px">Export the last 3 to 12 months from your bank, business credit card, or QuickBooks (Expenses, then Export). CSV is best. A copied statement pasted as text also works. Card numbers and deposits are ignored; only the descriptions and amounts are read, and they stay on this device.</p>
     <div class="row nop">
-      <label class="btn soft" for="file">Upload CSV or text</label><input type="file" id="file" accept=".csv,.txt,.tsv,.qbo,.ofx,text/plain,text/csv" multiple hidden>
+      <label class="btn soft" for="file">Upload CSV, xlsx or text</label><input type="file" id="file" accept=".csv,.txt,.tsv,.qbo,.ofx,.xlsx,text/plain,text/csv" multiple hidden>
       <button class="btn ghost" id="demoBtn" type="button">Show me with sample data</button>
       <button class="btn ghost" id="quickBtn" type="button">No statement handy? Quick estimate</button>
+    </div>
+    <div class="row nop" id="periodMonthsWrap" hidden style="align-items:center;gap:8px">
+      <label for="periodMonths" style="width:auto;margin:0">A vendor summary with no dates was found. Period length, in months:</label>
+      <input type="number" id="periodMonths" min="1" max="24" value="3" style="width:80px">
     </div>
     <textarea id="paste" class="nop" placeholder="Or paste here. Example lines:&#10;06/03/2026, GUSTO PAYROLL FEE, -189.00&#10;06/05/2026, INTUIT *QBooks Online, -99.00"></textarea>
     <div class="row nop"><button class="btn" id="parseBtn" type="button">Find my vendors</button><span class="muted" id="parseNote"></span></div>
@@ -419,13 +423,63 @@ var SIMPLIFIED={
 };
 </script>
 <script>/* Atlas One Vendor & Software Audit: everything runs in this page. Nothing is uploaded anywhere. */
-var STATE={rows:[],company:'',rate:75,eff:70,hrsPer:1.5,check:{},mode:'auto'};
+var STATE={rows:[],company:'',rate:75,eff:70,hrsPer:1.5,check:{},mode:'auto',summaryFiles:[]};
 var NOTE_STACK='Duplicate tools and cancellations: ';
 var NOTE_MOVE='Consolidated spend is not a saving on its own; shown for context. Moves under one relationship: ';
 var NOTE_NONE='none found';
 function money(n){var neg=n<0;n=Math.abs(n);return (neg?'-':'')+'$'+Math.round(n).toLocaleString('en-US');}
 function $(id){return document.getElementById(id);}
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+
+/* ---------- xlsx reading, copied verbatim from Atlas_One_Audit_Workbench.html (Run A1 Job 3's copy
+   of the GL Converter's reader). Run A4 Job 2: do not maintain a second parser here; if the Workbench's
+   copy changes, copy it again. ---------- */
+var AtlasXlsx=(function(){
+ function u16(d,o){return d[o]|(d[o+1]<<8);}
+ function u32(d,o){return (d[o]|(d[o+1]<<8)|(d[o+2]<<16)|(d[o+3]<<24))>>>0;}
+ async function unzip(buf){var d=new Uint8Array(buf),files={};var eocd=-1;for(var i=d.length-22;i>=0&&i>d.length-66000;i--){if(u32(d,i)===0x06054b50){eocd=i;break;}}if(eocd<0)throw new Error('Not a valid .xlsx file.');var count=u16(d,eocd+10),off=u32(d,eocd+16);for(var n=0;n<count;n++){if(u32(d,off)!==0x02014b50)break;var method=u16(d,off+10),csize=u32(d,off+20),nameLen=u16(d,off+28),extraLen=u16(d,off+30),cmtLen=u16(d,off+32),lho=u32(d,off+42);var name=new TextDecoder().decode(d.subarray(off+46,off+46+nameLen));var lNameLen=u16(d,lho+26),lExtraLen=u16(d,lho+28);var start=lho+30+lNameLen+lExtraLen;files[name]={method:method,data:d.subarray(start,start+csize)};off+=46+nameLen+extraLen+cmtLen;}var out={};for(var k in files){var f=files[k];if(f.method===0)out[k]=new TextDecoder().decode(f.data);else if(f.method===8){if(typeof DecompressionStream==='undefined')throw new Error('This browser cannot unpack .xlsx. Save as CSV and upload that.');var ds=new DecompressionStream('deflate-raw');out[k]=await new Response(new Blob([f.data]).stream().pipeThrough(ds)).text();}}return out;}
+ function colToIdx(ref){var m=/^([A-Z]+)/.exec(ref);if(!m)return 0;var c=0,s=m[1];for(var i=0;i<s.length;i++)c=c*26+(s.charCodeAt(i)-64);return c-1;}
+ function unesc(v){return String(v).replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').replace(/&#39;/g,"'");}
+ async function readXlsx(buf){var z=await unzip(buf);var shared=[];if(z['xl/sharedStrings.xml']){shared=z['xl/sharedStrings.xml'].split(/<si[ >]/).slice(1).map(function(ch){return (ch.match(/<t[^>]*>([\s\S]*?)<\/t>/g)||[]).map(function(t){return unesc(t.replace(/<[^>]+>/g,''));}).join('');});}
+  var names=Object.keys(z).filter(function(k){return /^xl\/worksheets\/sheet\d+\.xml$/.test(k);}).sort(function(a,b){return parseInt(a.match(/\d+/)[0])-parseInt(b.match(/\d+/)[0]);});if(!names.length)throw new Error('No worksheet found.');
+  var best=null;names.forEach(function(sn){var xml=z[sn],rows=[];xml.split(/<row[ >]/).slice(1).forEach(function(rc){var arr=[];rc.split(/<c[ >]/).slice(1).forEach(function(cc){var refM=/r="([A-Z]+\d+)"/.exec(cc);var idx=refM?colToIdx(refM[1]):arr.length;var isStr=/t="s"/.test(cc),isInline=/t="(inlineStr|str)"/.test(cc);var vM=/<v[^>]*>([\s\S]*?)<\/v>/.exec(cc),tM=/<t[^>]*>([\s\S]*?)<\/t>/.exec(cc);var val='';if(isStr&&vM)val=shared[+vM[1]]||'';else if(isInline&&tM)val=tM[1];else if(vM)val=vM[1];val=unesc(val);while(arr.length<idx)arr.push('');arr[idx]=val;});if(arr.some(function(x){return String(x).trim()!=='';}))rows.push(arr);});if(!best||rows.length>best.length)best=rows;});return best;}
+ return {readXlsx:readXlsx};
+})();
+function rowsToCsvText(rows){
+  return rows.map(function(r){ return (r||[]).map(function(c){ var s=(c===null||c===undefined)?'':(''+c); if(/[",\n]/.test(s)) s='"'+s.replace(/"/g,'""')+'"'; return s; }).join(','); }).join('\n');
+}
+function detectPeriodSummary(rows){
+  /* A vendor+total period summary (the QuickBooks "Expenses by Vendor Summary" export): a Vendor
+     column and a Total column, no date column anywhere. Run A4 Job 2. */
+  for(var i=0;i<Math.min(rows.length,20);i++){
+    var hdr=(rows[i]||[]).map(function(h){return (''+h).trim().toLowerCase();});
+    var iVendor=-1,iTotal=-1,hasDate=false;
+    hdr.forEach(function(h,j){ if(iVendor<0&&/vendor|payee/.test(h)) iVendor=j; if(iTotal<0&&/^total$|^amount$/.test(h)) iTotal=j; if(/date/.test(h)) hasDate=true; });
+    if(iVendor>=0&&iTotal>=0&&!hasDate){
+      var out=[];
+      for(var r=i+1;r<rows.length;r++){
+        var row=rows[r]||[]; var vendor=(''+(row[iVendor]||'')).trim();
+        if(!vendor||/^total$|^grand total$|^totals$/i.test(vendor)) continue;
+        var amt=parseAmount(row[iTotal]); if(amt===null) continue;
+        out.push({vendor:vendor,total:Math.abs(amt)});
+      }
+      if(out.length) return out;
+    }
+  }
+  return null;
+}
+function periodSummaryToBlock(list,months){
+  var lines=['Date,Description,Amount']; var base=new Date(); base.setDate(1);
+  list.forEach(function(v){
+    var per=Math.round((v.total/months)*100)/100;
+    for(var m=0;m<months;m++){
+      var d=new Date(base.getFullYear(),base.getMonth()-m,1);
+      var iso=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-01';
+      lines.push(iso+',"'+v.vendor.replace(/"/g,'""')+'",-'+per.toFixed(2));
+    }
+  });
+  return lines.join('\n');
+}
 
 /* ---------- parsing ---------- */
 function parseCSVLine(line){
@@ -650,9 +704,33 @@ function dedupeParsedRows(rows){
   return out;
 }
 function splitPasteBlocks(txt){ return String(txt||'').split(/\n\s*-{3,}\s*\n/).map(function(t){return t.trim();}).filter(Boolean); }
+function handleFiles(files){
+  if(!files.length) return;
+  var remaining=files.length;
+  function done(){ remaining--; if(remaining===0) reanalyzeAll(); }
+  files.forEach(function(f){
+    var name=(f.name||'').toLowerCase();
+    if(/\.xlsx$/.test(name)){
+      f.arrayBuffer().then(function(buf){ return AtlasXlsx.readXlsx(buf); }).then(function(rows){
+        var summary=detectPeriodSummary(rows);
+        if(summary){ STATE.summaryFiles.push({name:f.name,rows:summary}); $('periodMonthsWrap').hidden=false; }
+        else STATE.fileBlocks.push(rowsToCsvText(rows));
+        done();
+      }).catch(function(err){ alert('Could not read '+f.name+': '+err.message); done(); });
+    } else if(/\.xls$/.test(name)){
+      alert('Old .xls format. Save as .xlsx or .csv and upload again.'); done();
+    } else {
+      var rd=new FileReader();
+      rd.onload=function(){ STATE.fileBlocks.push(rd.result); done(); };
+      rd.readAsText(f);
+    }
+  });
+}
 function reanalyzeAll(){
   var pasted=splitPasteBlocks($('paste').value);
-  var blocks=STATE.fileBlocks.concat(pasted);
+  var months=(+($('periodMonths')&&$('periodMonths').value))||3;
+  var summaryBlocks=(STATE.summaryFiles||[]).map(function(sf){ return periodSummaryToBlock(sf.rows,months); });
+  var blocks=STATE.fileBlocks.concat(pasted).concat(summaryBlocks);
   var all=[]; blocks.forEach(function(b){ all=all.concat(parseText(b)); });
   var before=all.length; all=dedupeParsedRows(all);
   STATE.raw=all.length; STATE.sourcesCount=blocks.length; STATE.dupesRemoved=before-all.length;
@@ -703,7 +781,10 @@ function sendToAudit(){
 }
 function bind(){
   $('parseBtn').addEventListener('click',function(){ reanalyzeAll(); });
-  $('file').addEventListener('change',function(e){ var files=Array.prototype.slice.call(e.target.files); if(!files.length) return; var remaining=files.length; files.forEach(function(f){ var rd=new FileReader(); rd.onload=function(){ STATE.fileBlocks.push(rd.result); remaining--; if(remaining===0) reanalyzeAll(); }; rd.readAsText(f); }); });
+  $('file').addEventListener('change',function(e){ handleFiles(Array.prototype.slice.call(e.target.files)); });
+  $('loadCard').addEventListener('dragover',function(e){ e.preventDefault(); });
+  $('loadCard').addEventListener('drop',function(e){ e.preventDefault(); var files=e.dataTransfer&&e.dataTransfer.files?Array.prototype.slice.call(e.dataTransfer.files):[]; if(files.length) handleFiles(files); });
+  $('periodMonths').addEventListener('input',reanalyzeAll);
   $('addRow').addEventListener('click',function(){ STATE.rows.unshift({key:'',name:'New vendor',fn:'other',div:'other',kind:'monthly',monthly:0,count:0,months:0,total:0,sample:'added by hand',decision:'review',hrs:null,matched:false}); renderTable(); renderResults(); });
   $('rowsBody').addEventListener('input',function(e){ var tr=e.target.closest('tr'); if(!tr) return; var r=STATE.rows[+tr.getAttribute('data-i')]; var f=e.target.getAttribute('data-f'); if(!f) return;
     if(f==='monthly') r.monthly=+e.target.value||0; else if(f==='hrs') r.hrs=e.target.value===''?null:+e.target.value; else if(f==='name') r.name=e.target.value; renderResults(); });
@@ -718,7 +799,7 @@ function bind(){
   $('sendAuditBtn').addEventListener('click',sendToAudit);
   $('loadFile').addEventListener('change',function(e){ var f=e.target.files[0]; if(!f) return; var rd=new FileReader(); rd.onload=function(){ try{ var o=JSON.parse(rd.result); STATE=o.state; ['rate','eff','hrsPer','revenue','company'].forEach(function(id){ $(id).value=STATE[id]||''; }); $('prepFor').textContent=STATE.company?('Prepared for '+STATE.company):''; renderTable(); renderResults(); }catch(err){ alert('That file did not load.'); } }; rd.readAsText(f); });
   $('csvBtn').addEventListener('click',function(){ var lines=[['Vendor','Function','Division','Pattern','Monthly','Annual','Decision']].concat(STATE.rows.map(function(r){return [r.name,FUNCTION_LABEL[r.fn]||r.fn,r.div,r.kind,r.monthly.toFixed(2),(r.monthly*12).toFixed(2),r.decision];})); var csv=lines.map(function(l){return l.map(function(x){return '"'+String(x).replace(/"/g,'""')+'"';}).join(',');}).join('\n'); var a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'})); a.download='Atlas_One_Vendor_Audit.csv'; a.click(); });
-  $('clearBtn').addEventListener('click',function(){ STATE.rows=[]; STATE.fileBlocks=[]; $('paste').value=''; $('parseNote').textContent=''; renderTable(); renderResults(); });
+  $('clearBtn').addEventListener('click',function(){ STATE.rows=[]; STATE.fileBlocks=[]; STATE.summaryFiles=[]; $('periodMonthsWrap').hidden=true; $('paste').value=''; $('parseNote').textContent=''; renderTable(); renderResults(); });
   $('demoBtn').addEventListener('click',function(){ $('paste').value=DEMO; loadText(DEMO); if(!$('company').value){ $('company').value='Sample Co'; STATE.company='Sample Co'; $('prepFor').textContent='Prepared for Sample Co'; } });
   $('quickBtn').addEventListener('click',function(){ $('quick').hidden=!$('quick').hidden; });
   document.querySelectorAll('#quick input').forEach(function(inp){ inp.addEventListener('change',function(){}); });

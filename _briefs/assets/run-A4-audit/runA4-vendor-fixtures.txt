@@ -1,0 +1,66 @@
+Run A4 Job 2: the Vendor & Software Audit reads what the prep email tells prospects to bring
+All data below is invented (fixture only). Tested against the master, the Spanish twin
+(Auditoria_de_Proveedores_y_Software_Espanol.html) and the repo public copy (tools/vendor-audit/index.html),
+all three in headless Chromium at 1200 and 390, zero console errors, scrollWidth equals viewport at both.
+
+Before this run: the file input only accepted .csv,.txt,.tsv,.qbo,.ofx. QuickBooks' "Expenses by Vendor
+Summary" export and Ramp's transactions export are both .xlsx. Dropping either in did nothing (the browser's
+file picker filtered them out, or a renamed .csv-that-is-really-xlsx would have thrown a parse failure).
+
+Built: xlsx reading (AtlasXlsx, copied verbatim from Atlas_One_Audit_Workbench.html's own copy of the GL
+Converter's zip/sheet reader, not a second parser), a period-summary detector for a vendor+total export
+with no date column (asks for the period length in months, default 3, in a field that only appears when
+that shape is found), and confirmed the Ramp shape already works once xlsx is readable (its "Merchant"
+column was already recognized by the existing description-column matcher). Applied identically to all
+three files (button label difference kept: "Send to Audit" internal, "Save my results" public; Spanish
+strings translated, code unchanged).
+
+(a) Bank checking CSV, three monthly files (Date, Description, Amount, Balance), three invented recurring
+    vendors (Gusto payroll fee $189/mo, Microsoft 365 $49/mo, Zoom $14.99/mo) plus a one-off noise line each
+    month (Office Supply Run, meant to be dropped since it does not recur under the same vendor key across
+    all three months... it does recur here by design, at $220/mo (uncategorized "other"), which analyze()
+    correctly keeps once it has 3 occurrences: this is expected behavior for the classifier, not a bug, and
+    is called out to distinguish it from truly one-off noise, which analyze() drops when a vendor is not in
+    the catalog and appears fewer than 3 times).
+  Read: 12 raw transactions across 3 files, 4 recurring lines (Office Supply Run $220/mo, Gusto $189/mo,
+    Microsoft 365 $49/mo, Zoom $14.99/mo), each count 3. Matches invented amounts exactly. PASS, no xlsx
+    needed for this shape (already worked before this run); included to prove the round trip below.
+
+(b) Card CSV, three invented recurring vendors (Adobe Creative Cloud $54.99/mo, Dropbox $20/mo, Slack
+    $12.50/mo), four files: June, July (twice, as fileA and fileB, to test cross file de duplication), August.
+  Read: 9 transactions after de duplication (12 raw minus 3 duplicate rows from the doubled July file),
+    "3 duplicate rows across files removed" in the parse note, each vendor count 3 (three真 months), not 4.
+    Matches (b)'s pre-fix behavior from Run A1 Job 2's dedupe work; re-confirmed here since Job 2 touches the
+    same file handling code path. PASS.
+
+(c) QuickBooks "Expenses by Vendor Summary" export, xlsx: three title rows, a blank row, a Vendor/Total
+    header with no date column, three invented vendors (Fixture Insurance Brokers $4,500, Fixture Cleaning
+    Co $900, Fixture IT Services LLC $2,100), a TOTAL row at the bottom.
+  Read BEFORE fix: file input rejected .xlsx outright (not in the accept list); had it been forced through,
+    the existing date based parser would have found no date column and produced zero rows.
+  Read AFTER fix: xlsx read via AtlasXlsx, period summary shape detected (Vendor + Total columns, no date
+    column), the TOTAL row correctly excluded, "Period length in months" field appeared (default 3) where it
+    was hidden before, and Stage results show Fixture Insurance Brokers $1,500/mo, Fixture IT Services $700/mo
+    (title cased from "Fixture IT Services LLC"), Fixture Cleaning $300/mo (from "Fixture Cleaning Co") -
+    each exactly the invented total divided by 3. Changing the months field re-derives the monthly figures
+    live (confirmed by reading STATE after an input event). PASS.
+
+(d) Ramp transactions export, xlsx and csv (Merchant, Amount, Date, Cardholder, Category, Memo), three
+    invented recurring merchants (Notion Labs $96/mo, Figma Inc $45/mo, Calendly $12/mo) across three months.
+  Read (both csv and xlsx, identical): Notion $96/mo, Figma $45/mo, Calendly $12/mo, each count 3. The
+    "Merchant" column was already recognized as a description column before this run; the only real gap was
+    xlsx reading itself, now fixed. PASS.
+
+Round trip: dropped (a)'s three files and (b)'s four files together (7 sources, 3 true months once
+de duplicated), clicked Send to Audit (via buildAuditVendorsPayload in the test harness, same function the
+button calls), loaded the resulting JSON straight into the Audit Workbench with ingestVendorsPayload.
+Confirmed in the Workbench: P.audit.vendors.count is 7, P.lines.software_stack and P.lines.vendor_audit both
+arrived (software_stack $0/no overlaps found for this fixture since no two vendors do the same job;
+vendor_audit $2,856/yr, "Moves under one relationship: Gusto, Microsoft 365"), and every vendor's recurrence
+count is 3, not 4, confirming the cross file de duplication survives the full hand off. Zero console errors
+on either page during the round trip.
+
+Screenshots: 03-vendor-master-before-load (all three files, 1200 and 390, empty state, confirms no
+regression from the new period-months field, which stays hidden until a summary file is loaded) and
+02-vendor-xlsx (master, 1200 and 390, after loading the QuickBooks xlsx fixture, period field visible,
+three vendor rows correct).
