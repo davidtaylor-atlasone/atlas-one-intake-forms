@@ -591,7 +591,7 @@ tr.dep-row td:first-child::before{content:"\21B3";position:absolute;left:8px;col
       </table>
     </div>
     <div class="note-box" style="margin-top:14px;">
-      <strong>CSV or Excel format:</strong> columns are <em>Emp Seq #, EE #, Last name, First name, Relationship, Date of birth, Gender, Street, City, State, ZIP, Coverage tier, Hire date, Employee status, Position, Pay type, Salary or rate, SSN</em>. Relationship is Employee, Spouse, Child or Domestic partner; a spouse or child row belongs to the employee row above it. Tier accepts EE, EE+Spouse, EE+Child(ren), Family, or Waiving. Employee status, Position, Pay type and Salary or rate apply to employee rows only. Salary or rate is required on an employee row when Accident, Hospital indemnity, Short term disability or Long term disability is requested. The older eight column template (with Tobacco and Dependents) still imports. <strong>SSN is optional</strong>: it is masked on screen, saved only into the file you download, and never sent anywhere by this page.
+      <strong>CSV or Excel format:</strong> columns are <em>Emp Seq #, EE #, Last name, First name, Relationship, Date of birth, Gender, Street, City, State, ZIP, Coverage tier, Hire date, Employee status, Position, Pay type, Salary or rate, SSN</em>. Relationship is Employee, Spouse, Child or Domestic partner; a spouse or child row belongs to the employee row above it. Tier accepts EE, EE+Spouse, EE+Child(ren), Family, or Waiving. Hire date, Employee status, Position, Pay type and Salary or rate apply to employee rows only. Salary or rate is required on an employee row when Accident, Hospital indemnity, Short term disability or Long term disability is requested. The older eight column template (with Tobacco and Dependents) still imports. <strong>SSN is optional</strong>: it is masked on screen, saved only into the file you download, and never sent anywhere by this page.
     </div>
 
     <div class="error-banner" data-error="4">Please add at least one employee (or upload a census) to continue.</div>
@@ -933,7 +933,7 @@ window.A1_SAVE_CFG = { kind:'census', title:'this census', mount:'.card' };
       '<td><input type="text" class="c-state cell-narrow" value="'+esc(data.state)+'" placeholder="UT" maxlength="2" style="text-transform:uppercase"'+(addrDisabled?' disabled':'')+'></td>' +
       '<td><input type="text" class="c-zip cell-narrow" value="'+esc(data.zip)+'" placeholder="ZIP" inputmode="numeric" maxlength="10"'+(addrDisabled?' disabled':'')+'></td>' +
       '<td><select class="c-tier"'+(isDep?' disabled':'')+'>'+tierOptions(data.tier)+'</select></td>' +
-      '<td><input type="text" class="c-hire cell-mid" value="'+esc(data.hireDate)+'" placeholder="Estimate ok"></td>' +
+      '<td><input type="text" class="c-hire cell-mid" value="'+(isDep?'':esc(data.hireDate))+'" placeholder="Estimate ok"'+(isDep?' disabled':'')+'></td>' +
       '<td><select class="c-status cell-mid"'+(isDep?' disabled':'')+'>'+statusOptions(isDep?'':data.status)+'</select></td>' +
       '<td><input type="text" class="c-position cell-mid" value="'+(isDep?'':esc(data.position))+'" placeholder="Optional"'+(isDep?' disabled':'')+'></td>' +
       '<td><select class="c-paytype cell-mid"'+(isDep?' disabled':'')+'>'+payTypeOptions(isDep?'':data.payType)+'</select></td>' +
@@ -1012,7 +1012,7 @@ window.A1_SAVE_CFG = { kind:'census', title:'this census', mount:'.card' };
       sameAsEmployee: sameAsEmployee,
       street: street, city: city, state: state, zip: zip,
       tier: dep ? '' : val(tr,'.c-tier'),
-      hireDate: val(tr,'.c-hire'),
+      hireDate: dep ? '' : val(tr,'.c-hire'),
       status: dep ? '' : val(tr,'.c-status'),
       position: dep ? '' : val(tr,'.c-position'),
       payType: dep ? '' : val(tr,'.c-paytype'),
@@ -1414,8 +1414,8 @@ window.A1_SAVE_CFG = { kind:'census', title:'this census', mount:'.card' };
       [''],
       ['Column', 'What to put there'],
       ['Emp Seq #', 'A number you assign: give every employee the next number (1, 2, 3...). A spouse or child shares their employee’s number so we know which family they belong to.'],
-      ['EE #, Coverage tier, Hire date, Position, SSN', 'Optional. Leave blank if you do not have them.'],
-      ['Employee status, Position, Pay type, Salary or rate', 'Employee rows only, leave blank on a Spouse/Child row.'],
+      ['EE #, Coverage tier, Position, SSN', 'Optional. Leave blank if you do not have them.'],
+      ['Hire date, Employee status, Position, Pay type, Salary or rate', 'Employee rows only, leave blank on a Spouse/Child row. Estimate if unknown.'],
       ['Salary or rate', 'Required on an Employee row when Accident, Hospital indemnity, Short term disability or Long term disability coverage is requested. These plans pay a benefit based on earnings, so we need a pay figure to quote them.'],
       ['Relationship', 'Employee, Spouse, Domestic partner or Child. Pick from the dropdown on the Census tab.'],
       ['Street, City, State, ZIP', 'A Spouse or Child living at the same address as their Employee can leave these blank; we will assume it matches.'],
