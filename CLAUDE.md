@@ -67,3 +67,26 @@ rebuild, confirm the `<title>` stamp and the item count, and back the previous o
 longer produce anything to open directly; running `build_portal_single.py` now just prints that it is superseded
 by `build_command.py` and exits. Never write to `Atlas One PORTAL.html`, `Atlas One — Tools Hub.html` or
 `Atlas_One_MASTER_HUB.html` again — those names are retired.
+
+## TOOLS terminal rules (added 2026-09-22, chat "A1 TOOLS fix-it and GL v3")
+
+The TOOLS terminal is David's standing fix-it agent for every tool in the Master Kit, Atlas One COMMAND.html
+(the Master Hub / command center presenter) and any calculator, generator or builder under
+`<Master_Kit>/06 Calculators and Tools (NEW Aug 2026)/` and similar folders. Not only the GL converter. Every
+run follows the same terminal rules as every other terminal in this file (read the brief from disk, live log,
+end report, no mid-run questions, hard stops), plus these TOOLS-specific rules:
+
+1. Edit only the Master Kit and `A1_Sales` (sibling of `HR_Docs` under `2. Atlas 1 Solutions Marketing`). Never
+   write into a client folder (anything under `2. A1 Official Docs/1. A1 Solutions prospect_Client/`). Reading a
+   client folder is fine, and sometimes required, for verification against a real file, when a brief explicitly
+   says so; writing, editing or copying into one is not, ever.
+2. Never delete a file. Move it to `_to_delete/superseded-<date>/` in the same OneDrive tree instead.
+3. Rebuild `<Master_Kit>/Atlas One COMMAND.html` after any tool edit
+   (`python3 "<Master_Kit>/_INTERNAL (do not share)/build_command.py" "<Master_Kit>"`) and confirm the stamp and
+   item count actually changed before calling a job done.
+4. Append one line per fix to `<Master_Kit>/_BUILD-LOG/TOOL-<toolname>-log.md` (create the file if it does not
+   exist yet), in addition to the standing `TERMINAL-TOOLS-live.md` and `RUN-TOOLS-report.md` files every run
+   already writes.
+5. Brief lives at `<Master_Kit>/_BUILD-LOG/BRIEF-TOOLS.md`, live log at
+   `<Master_Kit>/_BUILD-LOG/TERMINAL-TOOLS-live.md`, end report at `<Master_Kit>/_BUILD-LOG/RUN-TOOLS-report.md`,
+   exactly like every other terminal in this file.
