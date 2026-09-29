@@ -402,6 +402,37 @@ def append_log(row_key, company, action, contact_id, result, log_path=LOG_PATH):
         w.writerow([row_key, company, action, contact_id or "", result])
 
 
+
+# ---- Cowork 2026-09-28: shared phone guard -------------------------------------------------
+# A phone number that appears on two or more different companies in the Book (for example
+# PeoplePayGlobal's shared USA line +1 212 424 6015 on six PPG referred clients) must never be
+# used to find an existing GHL contact, or unrelated companies get merged into one record.
+PPG_SHARED_LINES = {"2124246015"}
+_SHARED = None
+def _digits10(p):
+    d = re.sub(r"\D", "", str(p or ""))
+    return d[1:] if len(d) == 11 and d.startswith("1") else d
+def _norm_co(n):
+    n = re.sub(r"[^a-z0-9 ]", " ", str(n or "").lower().replace("&", " and "))
+    n = re.sub(r"\b(llc|inc|corp|co|company|pllc|pc|ltd|lp|llp|dba|the|group)\b", " ", n)
+    return " ".join(n.split())
+def shared_phones():
+    global _SHARED
+    if _SHARED is None:
+        import collections
+        seen = collections.defaultdict(set)
+        wb = openpyxl.load_workbook(BOOK_PATH, read_only=True, data_only=True)
+        rows = list(wb["Book"].iter_rows(values_only=True)); hdr = rows[0]
+        ix = {h: i for i, h in enumerate(hdr)}
+        for r in rows[1:]:
+            for k in ("Phone", "Main contact phone"):
+                d = _digits10(r[ix[k]]) if k in ix else ""
+                if len(d) == 10 and r[ix["Company"]]:
+                    seen[d].add(_norm_co(r[ix["Company"]]))
+        _SHARED = {d for d, cos in seen.items() if len(cos) > 1} | PPG_SHARED_LINES
+    return _SHARED
+
+
 def build_plan(row_dict, notes_idx, contacts_idx, fix_pass=False):
     """Read-only: computes what would happen. Never writes. Used by plan mode and as the
     first half of every real-write pass so the decision logic lives in exactly one place."""
@@ -424,10 +455,16 @@ def build_plan(row_dict, notes_idx, contacts_idx, fix_pass=False):
         existing = search_by_email(email)
         if existing:
             match_method = "email"
-    if not existing and phone_norm:
+    if not existing and phone_norm and _digits10(phone_norm) not in shared_phones():
         existing = search_by_phone(phone_norm)
         if existing:
             match_method = "phone"
+            # Cowork 2026-09-28: a phone match to a contact that already carries a DIFFERENT
+            # company name is a shared number (referral partner line, related entity), not the same
+            # company. Treat it as no match and create a new contact instead of merging.
+            ex_co = (existing.get("companyName") or "").strip()
+            if ex_co and _norm_co(ex_co) != _norm_co(company):
+                existing, match_method = None, None
     if not existing and row_dict.get("GHL Contact ID"):
         existing = get_contact(row_dict["GHL Contact ID"])
         if existing:
