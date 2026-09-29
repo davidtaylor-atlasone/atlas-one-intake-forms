@@ -1,49 +1,30 @@
-# RESUME (2026-09-28): Run CN part 2. Jobs 0 and 1 are DONE and checked by Cowork. Do NOT redo them.
-Do, in this order: Job G (Dr. Gould drafts, below, FIRST), then Job 6 (finish owner identity), Job 2 (Form D, continue from the structure map in the part 1
-report, which is backed up to _to_delete/superseded-2026-09-28/run-cn-part1-report/ before you overwrite
-RUN-GHL-report.md), Job 4, Job 3, Job 5. Log to TERMINAL-GHL-live.md as "Run CN part 2".
+# RESUME 3 (2026-09-29): Run CN part 3. Jobs 0, 1 and G are DONE and checked by Cowork. Do NOT redo them.
+Back up the part 2 report is already done (_to_delete/superseded-2026-09-29/run-cn-part2-report/). Overwrite
+RUN-GHL-report.md at the end. Log to TERMINAL-GHL-live.md as "Run CN part 3".
 
-David's answers to part 1's questions:
-1. Lead Source: use the existing option "Website Form" in "Website booking: source" (add an Update contact field
-   action, Lead Source = Website Form, after the tag). Do not add a new picklist option.
-2. Notification Email: David turns it off himself. Your first step stays the read only check of David's and
-   Charity's Notification Settings. If any Email box is still ON, you may turn it OFF (never ON), save, reopen
-   and screenshot. That is the only change allowed on that screen.
-3. Form D: continue directly from your structure map. No review needed.
+Order: Job 2 (Form D, continue from the part 1 structure map in
+_to_delete/superseded-2026-09-28/run-cn-part1-report/RUN-CN-part1-report.md), then Job 4, Job 3, Job 5, then Job 6
+with whatever time is left. Job 6 matters only once Charity sends from GHL, so it goes last.
 
-## Job G (FIRST): Dr. Gould invoice, agreement and products. DRAFTS ONLY, SEND NOTHING.
+First step, as before: read only check of David's and Charity's Notification Settings. If any Email box is ON you
+may turn it OFF (never ON), save, reopen, screenshot. Report what you found.
 
-Source of truth: `A1_Sales/Dr Gould Dental/Dr_Gould_GHL_Invoice_and_Agreement_Setup_2026-09-28.md` (read it).
-David decided 2026-09-28: the $495 Professional setup is WAIVED (this replaces the 09-26 decision to charge it).
-Contact: Dr. Joel Gould, drjoeldgould@gmail.com; business "Joel D. Gould DDS, A Professional Corporation".
+Answers to part 2's questions (David, via Cowork):
+1. Dr. Gould's business name is now set on his contact (Cowork did it through the API). Nothing to do.
+2. Gould agreement: David uploads the packet PDF and places the signature fields himself. Nothing to do.
+3. Recurring invoice lead time: keep 0 days. Nothing to do.
+4. won-email-6.html and won-email-7-checklist.html ARE in _BUILD-LOG/cadence-emails-2026-09-13/ (Cowork listed
+   them). Use those.
+5. Job 6 goes last this run (see order above).
+6. The old Run CM brief is not needed; your repo copy _briefs/RUN-CM-terminal-GHL.md is the source for Job 6.
 
-G1. Products (Payments, Products). Check first, create only what is missing, no other prices:
-- Membership, Professional: $399 a month recurring (note setup $495 in the description). Reuse if it exists.
-- Membership setup, Professional: $495 one time. Reuse if it exists.
-- Bookkeeping with bill pay: $750 a month recurring. Description: "Monthly bookkeeping with bill pay (accounts
-  payable). Accounts receivable not included, priced separately." (David confirmed this price 2026-09-28.)
-- Payroll to books: this is the existing "Payroll to GL Converter: semi-monthly or bi-weekly" $75 a month and its
-  $250 setup product. Do NOT create a duplicate; record the ids.
-G2. The old draft INV-000002 (6ab802c4543c55f014bd6611, $894, setup charged) is now wrong. Do not delete it.
-   Change only its title to "DO NOT SEND, replaced 2026-09-28" and Save. David deletes it himself.
-G3. New invoice for Dr. Gould. Lines: Membership, Professional $399.00; Membership setup fee $495.00; a discount
-   line or GHL "Add Discount" of $495.00 labeled "Setup fee waived"; total due $399.00. Terms: "ACH bank payment
-   preferred, no fee." Processing fee OFF. Attach Dr_Gould_Professional_Membership_Inclusions_2026-09-28.pdf if the
-   invoice screen allows attachments; if not, say so.
-   Recurring monthly on the 1st starting October 1, 2026: use New Recurring Invoice ONLY if GHL lets you save it
-   without scheduling or activating it. If saving a recurring invoice would schedule an automatic send, STOP that
-   part: save a normal one time DRAFT invoice dated October 1 instead, and put the exact recurring setup steps in
-   the report for David to click himself. Never click Send, Schedule or Activate.
-G4. Agreement (Payments, Documents & Contracts). Find the membership agreement master in
-   `A1_Sales/A1 Agreements/2026-09-15 masters/` (the files there are Atlas_One_Membership_Schedule.docx/.pdf and
-   Sample_Proposal_Membership; if a file named "Atlas One Membership Agreement" exists anywhere in A1 Agreements,
-   use that; otherwise use the Membership Schedule). Build it as a native text document (not a flat image), filled
-   for Professional, $399 a month, $495 setup waived, with client and Atlas One signature fields and today's date
-   field. Add the inclusions PDF as the itemized list (attach it, or paste its item list as a section if GHL
-   documents cannot take an attachment). Attorney review: keep the flag INTERNAL. Name the draft
-   "Dr Gould Membership Agreement (ATTORNEY REVIEW PENDING)" but do NOT print a review banner in the body the client
-   signs. Save as draft. Never click Send.
-G5. Report at the top: the link to each draft (invoice, agreement), every product id, and anything not done.
+Standing rule from David (2026-09-29): an old GHL draft that will never be used (invoice, estimate, document,
+template, form copy) gets DELETED, not renamed "DO NOT SEND". This overrides the no delete stop for obsolete
+drafts you or Cowork created; still never delete live records, contacts, workflows, or anything a client has seen.
+Cowork already deleted INV-000002 on 2026-09-29.
+
+Form building note: adding a field by CLICKING it in the field list worked in Run CL (Promo code). Only dragging
+fails. If a needed field type can only be dragged, skip it, finish everything else, and list it for David.
 
 # BRIEF-GHL Run CN (GHL lane, installed 2026-09-27 after Cowork audited Run CM: PASS WITH GAPS)
 
