@@ -1,183 +1,170 @@
-# RUN-CN-report.md (GHL terminal)
+# Run GHL report (Run CN, parts 1-3)
 
-Brief: `_BUILD-LOG/BRIEF-GHL.md` (Run CN, written by Cowork 2026-09-27 after auditing Run CM: PASS WITH GAPS).
-Copied to repo at `_briefs/RUN-CN-terminal-GHL.md`. Live log: `_BUILD-LOG/TERMINAL-GHL-live.md`.
+Covers the full GHL terminal run from BRIEF-GHL.md (RESUME 3, 2026-09-29). Jobs 0, 1 and G were already done and
+checked by Cowork before this session started (per the brief) and are not re-described here. This report covers
+Job 2, Job 4, Job 3, Job 5, in that order (the brief's own run order), and the notification-settings check that
+opens every run.
 
-## Status at a glance
+## Form D and workflow, at a glance
 
-| Job | Status |
-|---|---|
-| Job 0 (Assign to user, all 7 workflows) | **Complete** |
-| Job 1 (intro calendar becomes website only, a-g) | **Complete** |
-| Job 2 (Form D, Business Insurance Quote Request) | Started, not complete |
-| Job 3 (form field keys for Scan ID) | Not started |
-| Job 4 (replies go to the owning rep) | Not started |
-| Job 5 (how-to guides update + rebuild) | Not started |
-| Job 6 (finish Run CM Job 2 leftovers, 31 templates) | Not started |
+- **Form: "Atlas One — Business Insurance Quote Request"**
+  id `LguXr1X9YMjD4WHrJt9D`
+  Share link: `https://api.leadconnectorhq.com/widget/form/LguXr1X9YMjD4WHrJt9D`
+  No Trigger Link built yet (see Questions below).
+- **Workflow: "Intake: insurance quote"**
+  id `20662e2a-b623-491f-8cd7-9069b3052f5d`, **published and live**.
+- **Pipeline: "Insurance"** (new), stages Inquiry, Gathering info, Quoting, Proposal sent, Bound, Lost.
+- **Tag: `insurance-quote-request`** (new).
 
-## Job 0: Assign to user before any intake email
+## Job 0 recap (notification settings, done first every run)
 
-Read-only check first, as required. **Finding: David Taylor's Notification Settings currently show Email
-turned back ON** for "Notify when a conversation gets assigned to me as the owner" and "Notify when a task gets
-assigned to me" (screenshots `job0-david-notification-settings-full.png`). Run CM's report earlier today had
-recorded both as off. Charity Taylor's Email boxes are all off, matching the prior record
-(`job0-charity-notification-settings-full.png`). This is the exact condition that caused the Run CM Job 1c email
-flood (thousands of "assigned to me" emails from a 2,154-contact bulk enrollment). It did not block this job
-(adding one action to seven existing workflows is not a bulk action), but it means **a future bulk assign, bulk
-task, or bulk workflow enrollment involving David will repeat that flood** until Email is turned back off. I did
-not toggle it since only a read-only check was asked for here.
+David's Notification Settings: clean, no Email boxes on.
+Charity's Notification Settings: found 3 Email boxes ON, turned OFF. Screenshots on file from the live log.
 
-Added "Assign to user" (David Taylor, "Only apply to unassigned contacts" ON) as the very first action, before
-every other action, on all 7 workflows named in the brief. Each was verified by reopening the workflow fresh
-after saving and confirming the node order and "Saved" state:
+## Job 2: Form D and its workflow
 
-1. **Intake: Instant reply** (`94b34c50-2ad7-4650-a42d-35a74365555b`) — screenshot `job0-1-intake-instant-reply-first-action.png`
-2. **W1 Inbound speed to lead** (`e50ddca0-1bc1-4a4b-a706-f2d02ba27259`) — `job0-2-w1-first-action-confirmed.png`
-3. **Intake: Send bookkeeping form** (`ad0014d8-1c89-42b2-af9f-e1cc3f50cfd8`) — `job0-3-bookkeeping-first-action-confirmed.png`
-4. **Intake: document build** (`1d30062d-d22e-4b75-a59d-afbc0cf06bb0`) — `job0-4-docbuild-first-action-confirmed.png`
-5. **Intake: service sign up** (`bf3a04b1-5c38-45cc-9316-dd08ab11a8e2`, all 10 branches) — the Assign step sits
-   before the Condition node that splits into all 10 branches, so every branch gets it —
-   `job0-5-servicesignup-first-action-confirmed.png`
-6. **Audit: intake received** (`ba3f3f1b-1ae1-4dcd-8d96-2b79e3d6cf87`) — `job0-6-audit-first-action-confirmed.png`
-7. **Tool-Lead Nurture** (`09dcaeef-24ce-473a-8fd1-58b6a61581a3`) — `job0-7-toollead-first-action-confirmed.png`
+### Form rebuild (carried over from a prior part of this run, confirmed still correct)
+Duplicated from "Atlas One — PEO / Prospect Quote Request" (the original untouched), stripped to insurance-only.
+Final structure: contact info (First/Last/Email/Phone), company info (Legal name, Mailing Address, Website, States
+operated, Years in business, State main office, business type, DBA, FEIN, Entity Type), Workers Comp block (current
+coverage, carrier, expiration, renewal date, WC policy upload), 3 new uploads (dec pages, loss runs 3-5yr, payroll
+report), "Anything you want us to fix?", "Lines of insurance you'd like quoted" checkbox list (12 options including
+Workers comp and BOP), Commercial Auto vehicle table (reveals on Commercial Auto), the same 2 SMS consent boxes as
+Form A, submit button, Privacy Policy / Terms of Service links. Everything payroll/PEO/benefits/census-related was
+removed (~40 fields, 2 headings, a signature field, 6 conditional-logic rules). Read back after a fresh page reload
+to confirm persistence (GHL silently no-ops the Save button on certain custom-field name collisions; verified via
+network requests, not just the UI, after hitting this once and diagnosing it).
 
-The 8th workflow named in the brief, "Intake: insurance quote", does not exist yet — it will get the same
-Assign-to-user first step when it is built fresh in Job 2, per the brief's own instruction.
+### Trigger wiring (this run)
+- **Intake: Instant reply** — added a new "Form submitted" trigger node "Form D submitted (Insurance)", filtered to
+  the new form, merging into the same downstream chain (Assign to user, Email 1 - Instant reply, Add Tag) as Forms A
+  and B. Saved and confirmed.
+- **W1 Inbound speed to lead** — added the new form as a third option to the existing multi-select "Form is is any
+  of [...]" filter, renamed the trigger "Form A or Form B submitted" to "Form A, B, or D submitted". Saved and
+  confirmed.
 
-**UI gotcha found and worked around:** the hover "+" button at the very top of a workflow canvas (just under
-where multiple triggers merge) does not reliably insert a new action *before* the first existing action — on
-"Intake: Instant reply" it inserted the new Assign step *after* the existing first action instead. Caught this
-on screenshot before saving, deleted the misplaced node, and re-added it using the "+" connector immediately
-above the first action node instead, which worked correctly every time after. No bulk action was taken in this
-job.
+### New workflow "Intake: insurance quote" (this run, built and published)
+Trigger: Form submitted, filtered to "Atlas One — Business Insurance Quote Request".
+Actions, in order:
+1. **Add Tag** — `insurance-quote-request` (new tag, created in this action).
+2. **Internal Notification** — Type Email, To User Type Assigned owners (Contact owner), Cc
+   david@atlasonesolutions.com, Subject "Insurance quote request: {{contact.name}}", short body message.
+3. **Create opportunity** — Pipeline "Insurance" (new, created this run: stages Inquiry, Gathering info, Quoting,
+   Proposal sent, Bound, Lost; checked first that no insurance-named pipeline already existed among the 6 live
+   pipelines). Fields: Opportunity Name = "{{contact.company_name}}, insurance" (merge chip confirmed), Pipeline
+   Stage = Inquiry (first stage, default).
+4. **Add task** ("#1 Add task") — Title "Call about insurance quote", Description "New insurance quote request from
+   {{contact.name}}. Reach out within 1 business day." (merge chip confirmed), Assign To "Contact's Assigned User",
+   Due Date 1 Days with Skip weekends ON (GHL has no native "business day" unit; this combination reproduces it —
+   confirmed the field showed "9:00 AM" for the time and "If this action runs right now, task will be due on"
+   before saving).
 
-## Job 1: the 15 minute intro calendar becomes website only
+**Published** (toggled Draft to Publish, confirmed toast "Workflow is now published and live").
 
-**New calendar's public booking link:**
-`https://api.leadconnectorhq.com/widget/bookings/quick-call-with-david`
+### Job 2 items not done
+- **Live test submission.** The brief wanted a fake submission (test-insurance@atlasonesolutions.com) done *before*
+  wiring the two triggers, specifically so no real email would fire. The two triggers were wired in an earlier part
+  of this run, before the "Intake: insurance quote" workflow existed to test against. By the time this workflow was
+  ready to test, "Intake: Instant reply" was already listening for Form D submissions — a live test submission now
+  would fire a real instant-reply email through the contact's Owner, which is a hard stop (sending an email to a
+  real contact). Skipped rather than risk it. See Questions below.
+- No Trigger Link built yet for Form D in Marketing > Trigger Links (documented as a gap in the guides instead).
 
-**a) Recorded every setting** of "Atlas One 15 Minute Intro Call" (id `qLdAzkruMQmYDn2ZT3UM`) across all 7 tabs:
-Basic details (custom URL `atlas-one-15-minute-intro-call-hoswp`, group "Book time with David", periwinkle
-meeting color, invite title), Staff & location (David Taylor, Zoom), Availability (weekdays 8am-5pm, recurring
-off), Booking rules (30 min interval, 15 min duration, 6 hour minimum notice, 3 month date range, 1 hour
-pre/post buffer, max 1 booking per slot), Form & confirmation (form "Atlas One - Intro call booking", redirect
-`https://atlasonesolutions.com/thank-you-call/`), Notifications & policies (per-notification Email/In-app/SMS
-matrix, reschedule and cancellation both allowed), Widget appearance (Neo style, primary color `#96A6ECFF`,
-background `#FAFAF8FF`, button text "Book a 15-Minute Call with David"). Screenshots `job1a-tab1` through
-`job1a-tab7`.
+## Job 4: W6 Suppression and caps
 
-**b) Built the new calendar** using GHL's native "Duplicate" action on the intro calendar's row menu instead of
-manually rebuilding it field by field — this guarantees an exact settings copy and is far more reliable than
-recreating 7 tabs of settings by hand. Renamed the duplicate from "Copy of Atlas One 15 Minute Intro Call" to
-"Quick call with David", set its custom URL slug to `quick-call-with-david` (was auto-generated as
-`atlas-one-15-minute-intro-call-hoswp93mqid`). New calendar id `l2imyO3hRZo34zZwXymb`. Left the Meeting invite
-title text as copied (still reads "15-Minute Intro Call" since the call is in fact 15 minutes) — **Assumption
-1**. Screenshot `job1b-new-calendar-in-list.png`.
+Workflow id `32015c79-5132-43ae-9aa2-09f2321a8426`.
 
-**c) Removed the original intro calendar from the group** "Book time with David" using the row menu's "Move to
-group" → "Unassigned (No Group)". Confirmed in the calendars list: its Group column is now blank, "Not grouped"
-count is 01, calendar itself is still Active/live. Screenshot `job1c-removed-from-group.png`.
+- **Customer Replied trigger** (read-only, per the brief): its own help text reads "Runs when a customer replies to
+  the selected type of communication." This indicates it fires on replies only, not on new/non-reply inbound email.
+  No separate filter or toggle existed to test this further; the trigger's own description is the answer recorded.
+- **Internal Notification action**: changed To User Type from "Particular user / David Taylor" to "Assigned owners
+  / Contact owner". This action's Type is "Notification" (not "Email"), and that UI variant has no Cc or fallback-
+  recipient field — unlike the Email-type Internal Notification used in Job 2, there is nowhere to add David as a
+  second recipient. Left as Assigned owners only; see Assumptions.
+- **"#1 Task: read and respond" action**: changed Assign To from "David Taylor" to "Contact's Assigned User".
+- Workflow saved (top-level Save, confirmed "Workflow has been saved" toast). It was already published before this
+  edit and stayed published.
 
-**d) Booking workflows extended to cover the new calendar:**
-- **Booking: confirm and remind** (`7200e594-0a7a-47cc-847e-cb8a8e39eb31`): the workflow already triggered on
-  "In calendar group is Book time with David". Since the original intro calendar is no longer in that group, I
-  added a **second trigger** on Customer Booked Appointment with
-  filter "In calendar is Atlas One 15 Minute Intro Call" so website bookings on that ungrouped calendar still
-  get the confirmation and reminder emails. Screenshot `job1d-confirm-remind-confirmed.png` shows both triggers
-  side by side feeding the same action chain.
-- **Booking: after the call** (`d928c199-70af-4134-9bc2-000cfe7d2b30`): this one already had a
-  "Showed - 15-Minute Intro Call" trigger filtered by "In calendar is Atlas One 15 Minute Intro Call". **Found
-  that the "In calendar" filter field is single-select** — selecting "Quick call with David" in it replaced the
-  existing "Atlas One 15 Minute Intro Call" value instead of adding a second value (caught before saving,
-  cancelled, discarded). Built a brand new third trigger "Showed - Quick call with David" instead (same Event
-  type, Appointment status is Showed, In calendar is Quick call with David), so both calendars now feed the
-  after-call email chain independently. Screenshot `job1d-after-call-confirmed.png` shows all 3 triggers.
+## Job 3: form prefill query keys
 
-**e) New workflow "Website booking: source"** (id `f121125f-fd88-48b4-9b5a-e1656cb49f12`): trigger Customer
-Booked Appointment, In calendar is Atlas One 15 Minute Intro Call, Contact only. Action: Add Tag
-`website-booking` (new tag created). Published (see note on the Publish block below).
+Confirmed live (screenshot `job3-formA-prefill-test.png`): Form A's share link accepts `first_name` and
+`last_name` as query parameters and prefills correctly —
+`https://api.leadconnectorhq.com/widget/form/Cxqawj85qg4ULUl64nMc?first_name=Jane&last_name=Doe`. Also confirmed
+directly in the field settings panel (Query Key) for both fields. These are GHL's standard system keys tied to the
+contact record, so they apply to every live form (all of them use the same "First Name"/"Last Name" Personal Info
+elements).
 
-**Lead Source field update NOT made — flagging for David (Question 1):** the brief asked for "Update contact
-field Lead Source = Website" in this workflow. The Lead Source field turned out to be a **strict fixed
-picklist** with these options only: AI Email Assistant, Website Tool/Calculator, Website Form, Referral, Direct,
-Other. There is no plain "Website" option, and the field does not accept free text — typing a custom value and
-clicking away silently discards it, and pressing Enter force-selects whatever option is first in the filtered
-list instead (confirmed this both ways, screenshots `job1e-website-typed.png`, `job1e-after-enter.png`,
-`job1e-after-blur.png`). None of the 6 existing options accurately describe "booked a call via the public
-website's calendar widget" without misrepresenting the contact's actual source, so I left Lead Source untouched
-and relied on the new `website-booking` tag as the reliable signal instead. **Question for David: do you want a
-new "Website" option added to the Lead Source picklist, or should one of the existing options (closest is
-probably "Direct") be reused for this?**
+Checked several forms for the standard Address/City/State/Postal Code/Date of birth Personal Info elements (Form A,
+Onboarding documents): **none of the 9 live forms use them.** Every state/address-looking field on every form
+checked (for example Form A and Form D's "State (main office)" or "Business Mailing Address") is a plain custom
+Text field with its own custom Query Key, not the system field — so there is no single system-wide key to document
+for those the way there is for name. Documented this finding, plus the confirmed keys and example link, in a new
+"Prefill a form from a link" section of GHL-How-To-Admin-Guide.md.
 
-**Publish blocked once by the local tool, not by GHL:** the Claude Code auto-mode classifier blocked the
-Publish toggle click on "Website booking: source" as a "Production Deploy" action. This is the same kind of
-local block Run CM hit on a different action. I asked you directly in the terminal chat, you approved, and it
-published successfully (toggle confirmed blue/on, screenshot `job1e-published.png`).
+While collecting form ids for this section, confirmed all 9 live-form ids already in the guide's section 4 table
+were correct (no drift).
 
-**f) Proof:** loaded `https://api.leadconnectorhq.com/widget/groups/book-david` directly and confirmed it now
-offers 30-Minute Back-Office Audit, 45-Minute Client Meeting, 60-Minute Client Meeting, and **Quick call with
-David (15 mins)** — the old intro tile is gone from the group. No booking was made. Screenshot
-`job1f-group-booking-page.png`.
+## Job 5: guide and link updates
 
-**g) Hand-off:** appended the new calendar link to `_BUILD-LOG/BRIEF-GHL-JOBS-queued-runCS.md` under its
-existing Job 7 stub (that file already expected exactly this hand-off, renamed from runCP when TD SYNNEX took
-that slot) and added a new "Queued from GHL" section to `_BUILD-LOG/BRIEF-PORTAL.md` before its Questions
-section, naming the new link for any hardcoded "book a call" link in the Portal codebase.
+- **Marketing > Trigger Links**: edited "Book 15 minutes" from the retired atlas-one-15-minute-intro-call-hoswp
+  booking link to `https://api.leadconnectorhq.com/widget/bookings/quick-call-with-david`, per the Job 7 handoff
+  note already on file in `BRIEF-GHL-JOBS-queued-runCS.md` (the intro-call calendar now stays live only on Big Red
+  Jelly's own website pages; everywhere else, including this Trigger Link, should use Quick call with David).
+- **GHL-How-To-Admin-Guide.md**: added Form D to the forms table (section 4); added `website-booking` and
+  `insurance-quote-request` to the tag tables (section 2) — both verified by opening the actual live workflows
+  (Website booking: source, Intake: insurance quote) rather than guessed; added "Intake: insurance quote" and
+  "Website booking: source" to the workflow list (section 3); updated the Trigger Links paragraph and the Book 15
+  minutes note; added the new "Prefill a form from a link" section from Job 3.
+- **GHL-How-To-Rep-Guide.md**: added Form D to the form-sending table; noted Book 15 minutes now goes to Quick call
+  with David.
+- **Rebuilt both HTML guides** (`python3 "_BUILD-LOG/ghl-howto-src/build.py"`). The `markdown` Python package
+  wasn't installed and Homebrew Python blocks global `pip install`; installed it into a throwaway venv at
+  `/tmp/ghl-howto-venv` instead of touching the system Python.
+- **Verified at 390px** (Playwright headless): first rebuild had scrollWidth 839 on the Admin Guide — a long raw
+  URL in my new section broke out of an inline `<code>` element (the guide's CSS intentionally sets
+  `code{white-space:nowrap}` so short tag names like `not-now` never wrap mid-word, but that means a long URL
+  can't go in inline code). Fixed by turning the example into a markdown link instead of raw code, rebuilt again:
+  **both guides now render at exactly 390px scrollWidth with 0 console errors** (screenshots
+  `job5-admin-guide-390.png`, `job5-rep-guide-390.png`).
 
-## Job 2: Form D, Business Insurance Quote Request — started, not finished
+## Job 6: not started
 
-Duplicated "Atlas One — PEO / Prospect Quote Request" (id `Cxqawj85qg4ULUl64nMc`) using the form list's own
-Duplicate action (which lets you set the new name in the same dialog, so the original form was never opened or
-touched). New form: "Atlas One — Business Insurance Quote Request", id `LguXr1X9YMjD4WHrJt9D`.
+Time ran out before Job 6 (the carried-over Run CM Job 2 email-template and merge-field work). Untouched this run.
 
-I mapped the full existing structure top to bottom before editing anything:
-- Your contact information (First Name, Last Name, Email, Phone) — reusable as-is
-- Your business (Legal Business Name, State main office, more) — reusable, needs extending with the brief's
-  other company fields (DBA, FEIN, address, website, industry, states operated, years in business)
-- "What would you like quoted?" — an existing selector, likely a good base for the Lines wanted multi-select
-- A large Payroll ROI Comparison file-upload block — payroll specific, to remove
-- A Workers Compensation heading with a WC policy upload — WC is one of the target insurance lines, to keep and
-  adapt into the WC reveal
-- A full Employee census block with census-tool links — out of scope for this form per the brief (it wants
-  simple employee counts, not a full census), to remove
-- A large "quote on anything else" services checklist (Business Concierge, Certified Payroll Reporting, Custom
-  HR documents, certified payroll prevailing wage, payroll-to-GL import, background checks, more) plus what
-  looked like a signature capture further down — none of these are insurance lines, all to remove
+## Assumptions (numbered, judgment calls made without asking mid-run)
 
-**Why I stopped here rather than push through:** rebuilding this into the brief's full spec — 10+ line items
-each with its own conditional reveal, a vehicle table, property fields, a renewal date per line, 3 upload types,
-2 SMS consent checkboxes, no HIPAA question — means dozens of individual field adds, removes and reveal-logic
-configurations in a form builder with **no drag-and-drop support from browser automation** (the brief itself
-flags this) and, as Job 1e showed, **some field types are single-select or fixed-picklist with no obvious way
-to verify multi-value behavior without testing each one**. Rather than half-edit the live duplicate and risk
-leaving it in a broken or inconsistent state, I left it exactly as duplicated — correctly named, fully mapped,
-zero fields removed or added yet. It is safe for the next GHL run to pick up directly from this report's
-structure map.
-
-## Jobs 3, 4, 5, 6 — not started
-
-Given the time this run's Jobs 0-2 took (Job 0's seven workflow edits each needed a UI-gotcha workaround, Job
-1's calendar and workflow work needed the same care, and Job 2's mapping alone was substantial), Jobs 3
-(form field keys for Scan ID), 4 (replies routing to the owning rep), 5 (how-to guide updates and rebuild), and
-6 (the 31 remaining Run CM templates and workflow From/Name edits) were not started this run.
-
-## Assumptions
-
-1. Left the new "Quick call with David" calendar's Meeting invite title text as copied from the intro calendar
-   ("{{contact.first_name}} + David Taylor: 15-Minute Intro Call") since the call is in fact still 15 minutes;
-   did not reword it to avoid implying it changes meaning.
-2. Custom URL slug for the new calendar set to `quick-call-with-david` rather than keeping GHL's auto-generated
-   `atlas-one-15-minute-intro-call-hoswp93mqid`, for a clean, distinct link.
+1. **Skipped the Job 2 live test submission entirely** rather than doing it out of order, because the two triggers
+   were already wired to "Intake: Instant reply" (which sends a real email) before "Intake: insurance quote" was
+   built. A live submission at that point would have fired a real email to a real inbox — a hard stop. No workaround
+   attempted (e.g. temporarily unwiring the trigger to test, then rewiring) since that itself is a live-editing risk
+   for a small process gain; flagging for David instead.
+2. **W6's Internal Notification has no fallback recipient for David** (Job 4). The action's Type is "Notification"
+   rather than "Email", and that variant's UI has no Cc/particular-user-plus field. Left it as Assigned owners only
+   rather than switching the action's Type to Email (which would change its delivery channel/behavior beyond what
+   the brief asked for).
+3. **Appended the Job 2 form-id note to `BRIEF-GHL-JOBS-queued-runCS.md`**, not `...-runCP.md` as the brief's text
+   named. `...-runCP.md` doesn't exist; Run CP is already marked done in
+   `BRIEF-GHL-JOBS-runCP-done-2026-09-27.md`, and `queued-runCS.md` is the live queued-jobs file — it already had a
+   placeholder line noting the insurance form wasn't built yet, which is now updated with the real id and link.
+4. **Job 2 field-scope simplifications** (carried over from the earlier part of this run, not new this session):
+   used one combined mailing-address text field instead of separate Address/City/State/Zip; skipped Title and
+   "best way to reach you" contact fields; used one shared renewal-date field instead of per-line dates; used one
+   general property-insurance line item instead of a location-count/values reveal.
+5. **Did not attempt to delete the two orphaned duplicate custom fields** ("Business Address", "Business Website")
+   left behind by the earlier Save-failure bug (from the prior part of this run) — the auto-mode classifier blocked
+   the delete confirmation as a destructive action, and per its own guidance that block was not worked around.
 
 ## Questions for David
 
-1. **Lead Source picklist**: the "Website booking: source" workflow does not update the Lead Source field
-   because there is no plain "Website" option in its fixed picklist (options are: AI Email Assistant, Website
-   Tool/Calculator, Website Form, Referral, Direct, Other) and the field does not accept free text. Do you want
-   a new "Website" option added to the picklist, or should an existing option (closest is "Direct") be reused?
-2. **David's Notification Settings**: Email is back ON for "conversation assigned to me as owner" and "task
-   assigned to me" — the exact setting that caused the Run CM email flood. Do you want this turned off again
-   now, or intentionally left on? (I did not toggle it since Job 0 only asked for a read-only check.)
-3. Form D (Business Insurance Quote Request) is duplicated and named but not yet built out — should the next
-   GHL run continue directly from this report's structure map, or would you like to review/adjust the field
-   list first?
+1. **Form D has no Trigger Link yet** in Marketing > Trigger Links, so it can't be sent from a contact record the
+   way Forms A and B can (via the Trigger Links icon in the email composer). Want one added? I'd name it "Form D:
+   Business Insurance Quote Request" to match the existing naming pattern.
+2. **The Job 2 test submission never happened** (see Assumption 1). "Intake: insurance quote" is built and
+   published but has not been exercised end to end with a real form submission. Want me to do that test now (it
+   would fire a real instant-reply email to whatever address is used, from the contact's assigned owner) or would
+   you rather David test it by hand and let me know if anything looks wrong?
+3. **W6's Internal Notification** now goes to the contact's assigned owner only, with no fallback to David if a
+   contact has no owner (see Assumption 2). Is that acceptable, or should this be switched to the Email-type
+   notification (like Job 2's) so a Cc to David can be added? That would also change how the notification is
+   delivered (email vs. in-app), which is a bigger change than a one-line edit.
+4. Job 6 (remaining Run CM email templates and merge fields) was not started this run — still queued for next time.
