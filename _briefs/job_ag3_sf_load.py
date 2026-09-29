@@ -151,9 +151,31 @@ def execute_plan(plan, dry_run=False):
 
 
 def process_row(row, dry_run=False):
+    """Cowork 2026-09-28: same guards the book load needed.
+    - a phone match to a contact that already carries a different company is not the same company
+    - GHL refuses a second contact with the same phone (related companies, shared lines) or a bad phone format:
+      retry without the phone and keep the number in the note
+    - a row with no email, phone or name gets the company name as its last name (tag no-contact-name is on it)"""
     try:
         plan = build_plan(row)
-        return execute_plan(plan, dry_run=dry_run)
+        ex = plan["existing"]
+        if ex and plan["match_method"] == "phone":
+            ex_co = (ex.get("companyName") or "").strip()
+            if ex_co and base._norm_co(ex_co) != base._norm_co(plan["company_name"]):
+                plan["existing"] = None
+        if not (plan["first"] or plan["last"] or plan["email"] or plan["phone_norm"]):
+            plan["last"] = plan["company_name"]
+        st, cid, det = execute_plan(plan, dry_run=dry_run)
+        if st == "failed" and plan["phone_norm"] and any(k in (det or "") for k in ("duplicated contacts", "calling code", "phone number")):
+            line = f"Phone on file: {plan['phone_norm']} (GHL already has this number on another contact, or the format was rejected)"
+            plan["note_body"] = line + ("\n\n" + plan["note_body"] if plan["note_body"] else "")
+            plan["phone_norm"] = None
+            if plan["existing"]:
+                plan["existing"] = base.get_contact(plan["existing"]["id"])
+            if not (plan["first"] or plan["last"] or plan["email"]):
+                plan["last"] = plan["company_name"]
+            st, cid, det = execute_plan(plan, dry_run=dry_run)
+        return st, cid, det
     except Exception as e:
         return "failed", None, f"exception: {e}"
 

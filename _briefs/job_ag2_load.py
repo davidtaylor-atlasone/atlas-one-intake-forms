@@ -77,8 +77,8 @@ FIX_CONTACT_OVERRIDES = {
 }
 
 FEIN_KEYWORD_RE = re.compile(r"\b(fein|ein|tax id)\b", re.I)
-FEIN_NUM_RE = re.compile(r"\b(\d{2})-?(\d{7})\b")
-SSN_RE = re.compile(r"\b\d{3}-\d{2}-\d{4}\b")
+FEIN_NUM_RE = re.compile(r"(?<!\d)(\d{2})-(\d{7})(?!\d)")
+SSN_RE = re.compile(r"(?<!\d)\d{3}-\d{2}-\d{4}(?!\d)")
 
 
 def load_env():
@@ -182,7 +182,7 @@ def mask_pii(text):
         return text
     out_lines = []
     for line in text.split("\n"):
-        if FEIN_KEYWORD_RE.search(line):
+        if True:  # Cowork 2026-09-28: mask every NN-NNNNNNN shape, keyword or not (FEINs sat next to other text)
             def repl(m):
                 digits = m.group(1) + m.group(2)
                 return f"XX-XXX{digits[-4:]}"
@@ -465,7 +465,7 @@ def build_plan(row_dict, notes_idx, contacts_idx, fix_pass=False):
             ex_co = (existing.get("companyName") or "").strip()
             if ex_co and _norm_co(ex_co) != _norm_co(company):
                 existing, match_method = None, None
-    if not existing and row_dict.get("GHL Contact ID"):
+    if not existing and row_dict.get("GHL Contact ID") and str(row_dict.get("GHL match method") or "") not in ("email domain", "cleared: shared phone"):
         existing = get_contact(row_dict["GHL Contact ID"])
         if existing:
             match_method = "GHL Contact ID column"
