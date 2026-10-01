@@ -20,6 +20,7 @@ h2{font-family:'Horas',Georgia,serif;font-size:22px;line-height:1.25;letter-spac
 .btn.link{background:transparent;border-color:transparent;color:var(--mut);padding-left:6px;padding-right:6px;font-weight:400;text-decoration:underline}
 .btn:disabled{opacity:.45;cursor:default}
 .muted{color:var(--mut);font-size:13.5px}
+.why{margin:12px 0 0;padding:10px 14px;border-left:4px solid #788DE3;background:#DBE4ED;color:#23304D;font-size:15px;line-height:1.45;border-radius:0 8px 8px 0}
 .screen{display:none}.screen.on{display:block}
 .prog{display:flex;gap:4px;margin:6px 0 18px}
 .prog span{flex:1;height:6px;border-radius:3px;border:1.5px solid var(--navy);background:transparent}
@@ -73,6 +74,7 @@ input:focus{outline:none;border-color:var(--peri)}
   <div class="prog" id="prog"></div>
   <div class="qn" id="qn"></div>
   <h2 id="qt"></h2>
+  <p class="why" id="qnote" style="display:none"></p>
   <div class="opts" id="opts"></div>
   <div class="nav"><button class="btn link" id="back" onclick="back()">Back</button><button class="btn" id="next" onclick="next()" disabled>Next</button></div>
 </section>
@@ -126,7 +128,7 @@ var Q=[
    ["Office manager",[1,0,1],"Certificates of insurance depend on one person remembering, with no system tracking expirations."],
    ["Our insurance agent",[0,0,0],""],
    ["We do not use subs",[0,0,0],""]]},
- {k:"benefits",l:"benefits last shopped",t:"When were benefits last shopped?",o:[
+ {k:"benefits",l:"benefits last shopped",t:"When were benefits last shopped with different carriers or brokers?",n:"Why shopping matters: renewals creep up when nobody compares the market. One broker quoting one carrier is not shopping, it is the same answer asked twice.",o:[
    ["This year",[0,0,0],""],
    ["1 to 2 years ago",[0,1,0],"Benefits have not been shopped in over a year, and renewals drift up when nobody takes them to market."],
    ["3 or more years ago",[0,3,1],"Benefits have not been shopped in three or more years, which usually means paying for the carrier's renewal increases in full."],
@@ -176,6 +178,7 @@ function draw(){
   document.getElementById('prog').innerHTML=Q.map(function(_,i){return '<span class="'+(i<=cur?'done':'')+'"></span>';}).join('');
   document.getElementById('qn').textContent='Question '+(cur+1)+' of '+Q.length;
   document.getElementById('qt').textContent=q.t;
+  var nt=document.getElementById('qnote');nt.textContent=q.n||'';nt.style.display=q.n?'block':'none';
   document.getElementById('opts').innerHTML=q.o.map(function(o,i){return '<button class="opt'+(ans[cur]===i?' sel':'')+'" onclick="pick('+i+')">'+o[0]+'</button>';}).join('');
   document.getElementById('back').style.visibility=cur===0?'hidden':'visible';
   document.getElementById('next').disabled=(ans[cur]===undefined);
