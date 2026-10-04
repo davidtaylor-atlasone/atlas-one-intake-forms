@@ -1,0 +1,25 @@
+Grep proof, Charity Taylor kit zip (final build). Every html and txt (page text and every decoded tool blob), pdf, pptx, docx and xlsx.
+67 files scanned
+
+   0  vendors pay me / us
+   0  carrier or provider pays me
+   0  pays me to bring
+   0  paid by the vendors, carriers, providers, PEO
+   0  how I get paid
+   0  I am paid / we are paid
+   0  revenue share
+   0  referral fee back / to partners
+   0  my / your / her commission
+   0  near free (pay hook)
+   0  David booking link
+
+Places the word 'commission' still appears (all client business tools, none about a rep):
+   9  Atlas One Sales Kit (Charity Taylor).html blob t2
+   1  Atlas One Sales Kit (Charity Taylor).html blob t41
+  12  Atlas One Sales Kit (Charity Taylor).html blob t70
+   1  Atlas One Sales Kit (Charity Taylor).html blob t78
+   1  Client Presentations/Atlas One Presentation Services Deck (rep safe).pdf
+   1  Division Sheets/Atlas_One_Division_Business_Consulting.html
+   1  Division Sheets/Atlas_One_Division_Business_Consulting.pdf
+
+9  occurrences of 'David Taylor, our licensed agent' (insurance and PEO routing)

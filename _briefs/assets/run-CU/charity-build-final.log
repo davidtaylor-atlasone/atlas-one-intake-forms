@@ -1,0 +1,74 @@
+build_rep_everything: moved existing /Users/davidtaylor/Library/CloudStorage/OneDrive-AtlasOneSolutions/2. A1 Official Docs/2. Atlas 1 Solutions Marketing/A1_Sales/_Rep Kits/Charity Taylor to /Users/davidtaylor/Library/CloudStorage/OneDrive-AtlasOneSolutions/2. A1 Official Docs/2. Atlas 1 Solutions Marketing/_to_delete/superseded-2026-10-04/charity-kit-before-CS-4
+rep_assets: A1_Sales/A1_Pitch Decks Inv/Atlas_One_Prospect_Pitch_Deck_First_Meeting.pptx: 5 paragraph(s) swapped, pdf Atlas_One_Prospect_Pitch_Deck_First_Meeting.pdf
+rep_assets: A1_Sales/A1_Pitch Decks Inv/Atlas_One_Prospect_Pitch_Deck.pptx: 6 paragraph(s) swapped, pdf Atlas_One_Prospect_Pitch_Deck.pdf
+rep_assets: A1_Sales/A1_Pitch Decks Inv/Client Pitch Deck/Atlas_One_Client_Launch_Deck_2026-09.pptx: 5 paragraph(s) swapped, pdf Atlas_One_Client_Launch_Deck_2026-09.pdf
+rep_assets: A1_Sales/A1_Pitch Decks Inv/Client Pitch Deck/Atlas_One_Client_Launch_Companion_2026-09.docx: 3 paragraph(s) swapped, pdf Atlas_One_Client_Launch_Companion_2026-09.pdf
+rep_assets: HR_Docs/Atlas_One_Master_Kit/11 Service Proposal Decks/Atlas_One_AI_Task_Agent_2026-08-23.pptx: 2 paragraph(s) swapped, pdf Atlas_One_AI_Task_Agent_2026-08-23.pdf
+rep_assets: HR_Docs/Atlas_One_Master_Kit/11 Service Proposal Decks/Atlas_One_Bookkeeping_and_Accounting_2026-08-23.pptx: 2 paragraph(s) swapped, pdf Atlas_One_Bookkeeping_and_Accounting_2026-08-23.pdf
+rep_assets: HR_Docs/Atlas_One_Master_Kit/11 Service Proposal Decks/Atlas_One_Handbook_and_Safety_2026-08-23.pptx: 2 paragraph(s) swapped, pdf Atlas_One_Handbook_and_Safety_2026-08-23.pdf
+rep_assets: HR_Docs/Atlas_One_Master_Kit/11 Service Proposal Decks/Atlas_One_WC_Premium_Audit_Review_2026-08-23.pptx: 2 paragraph(s) swapped, pdf Atlas_One_WC_Premium_Audit_Review_2026-08-23.pdf
+rep_assets: HR_Docs/Atlas_One_Master_Kit/11 Service Proposal Decks/Atlas_One_Services_One_Pager.pptx: 1 paragraph(s) swapped, pdf Atlas_One_Services_One_Pager.pdf
+rep_assets: A1_Sales/A1_Pitch Decks Inv/Atlas One Presentation Services Deck (rep safe).pdf: 43 span(s) swapped on [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15] page(s), warnings []
+build(): skipped 48 piece(s) with no a1-footer-person (tools/calculators, not sales pieces, footer swap not applicable):
+  - HR_Docs/Atlas_One_Master_Kit/06 Calculators and Tools (NEW Aug 2026)/Atlas One Business Tools (17 generators).html
+  - HR_Docs/Atlas_One_Master_Kit/06 Calculators and Tools (NEW Aug 2026)/Atlas One Calculators (53 tools).html
+  - HR_Docs/Atlas_One_Master_Kit/06 Calculators and Tools (NEW Aug 2026)/Auditoria_de_Proveedores_y_Software_Espanol.html
+  - HR_Docs/Atlas_One_Master_Kit/06 Calculators and Tools (NEW Aug 2026)/Atlas_One_Back_Office_Self_Assessment.html
+  - HR_Docs/Atlas_One_Master_Kit/06 Calculators and Tools (NEW Aug 2026)/Business Infrastructure Audit (Espanol).html
+  - HR_Docs/Atlas_One_Master_Kit/06 Calculators and Tools (NEW Aug 2026)/Business Value Diagnostic (Atlas One).html
+  - HR_Docs/Atlas_One_Master_Kit/06 Calculators and Tools (NEW Aug 2026)/Business Value Diagnostic (Espanol).html
+  - HR_Docs/Atlas_One_Master_Kit/06 Calculators and Tools (NEW Aug 2026)/Atlas_One_Compliance_Calendar.html
+  - HR_Docs/Atlas_One_Master_Kit/06 Calculators and Tools (NEW Aug 2026)/Compliance Risk Scorecard (Atlas One).html
+  - HR_Docs/Atlas_One_Master_Kit/06 Calculators and Tools (NEW Aug 2026)/Cost of a Compliance Mistake (Atlas One).html
+  - HR_Docs/Atlas_One_Master_Kit/06 Calculators and Tools (NEW Aug 2026)/Business Infrastructure Audit (Atlas One).html
+  - HR_Docs/Atlas_One_Master_Kit/06 Calculators and Tools (NEW Aug 2026)/Retention Cost Calculator (Atlas One).html
+  - HR_Docs/Atlas_One_Master_Kit/06 Calculators and Tools (NEW Aug 2026)/Retention Scorecard (Atlas One).html
+  - HR_Docs/Atlas_One_Master_Kit/06 Calculators and Tools (NEW Aug 2026)/Atlas_One_Vendor_Software_Audit.html
+  - (dropped, no rep copy) HR_Docs/Atlas_One_Master_Kit/06 Calculators and Tools (NEW Aug 2026)/Atlas_One_Prospect_Web_Pitch.html
+  - (dropped, no rep copy) A1_Sales/A1 What we do Overview/Atlas_One_Services_Overview.pdf
+  - HR_Docs/Atlas_One_Master_Kit/06 Calculators and Tools (NEW Aug 2026)/Meeting Bonus Import Builder (Atlas One).html
+  - (dropped, no rep copy) A1_Sales/Atlas 1 Bookkeeping/Atlas_One_QuickBooks_Accountant_Access_Guide.pdf
+  - HR_Docs/Atlas_One_Master_Kit/06 Calculators and Tools (NEW Aug 2026)/Certified Payroll Converter (WH-347) (Atlas One).html
+  - HR_Docs/Atlas_One_Master_Kit/06 Calculators and Tools (NEW Aug 2026)/Certified Payroll Manager (Atlas One).html
+  - HR_Docs/Atlas_One_Master_Kit/12 GHL Setup doccs/Branded Intake Forms/Atlas_One_Email_Assistant_Setup_Intake.html
+  - HR_Docs/Atlas_One_Master_Kit/12 GHL Setup doccs/Atlas_One_Booking_Confirmation.html
+  - HR_Docs/Atlas_One_Master_Kit/12 GHL Setup doccs/_HANDOFF BRJ 2026-08-27/Atlas_One_Bookkeeping_Intake_Form.html
+  - HR_Docs/Atlas_One_Master_Kit/12 GHL Setup doccs/_HANDOFF BRJ 2026-08-27/Atlas_One_PEO_Intake_Form.html
+  - (dropped, no rep copy) A1_Sales/Pricing/Atlas_One_Price_List.pdf
+  - HR_Docs/Atlas_One_Master_Kit/06 Calculators and Tools (NEW Aug 2026)/Atlas_One_COI_Tracker.html
+  - HR_Docs/Atlas_One_Master_Kit/06 Calculators and Tools (NEW Aug 2026)/COI to Workers Comp Premium Estimator (Atlas One).html
+  - HR_Docs/Atlas_One_Master_Kit/06 Calculators and Tools (NEW Aug 2026)/Health Comparison Builder (Atlas One).html
+  - HR_Docs/Atlas_One_Master_Kit/06 Calculators and Tools (NEW Aug 2026)/Atlas One Savings Summary (Atlas One).html
+  - HR_Docs/Atlas_One_Master_Kit/06 Calculators and Tools (NEW Aug 2026)/Independent Contractor Onboarding Packet (Bilingual).html
+  - HR_Docs/Atlas_One_Master_Kit/06 Calculators and Tools (NEW Aug 2026)/Independent Contractor Agreement Builder (Atlas One).html
+  - HR_Docs/Atlas_One_Master_Kit/06 Calculators and Tools (NEW Aug 2026)/Disciplinary Write-Up Notice Generator (Atlas One).html
+  - HR_Docs/Atlas_One_Master_Kit/04 Safety Library/Safety Training Program/Safety_Training_12_Month_Calendar.html
+  - HR_Docs/Atlas_One_Master_Kit/06 Calculators and Tools (NEW Aug 2026)/Employee Handbook Builder (Bilingual 50-State).html
+  - HR_Docs/Atlas_One_Master_Kit/06 Calculators and Tools (NEW Aug 2026)/Employee Benefits Package & Enrollment Guide (Bilingual) (Atlas One).html
+  - HR_Docs/Atlas_One_Master_Kit/Atlas One — Complete Kit for BRJ/2. Interactive Tools (embed these)/templates.html
+  - HR_Docs/Atlas_One_Master_Kit/06 Calculators and Tools (NEW Aug 2026)/Atlas_One_Build_This_For_Me.html
+  - HR_Docs/Atlas_One_Master_Kit/Atlas One — Complete Kit for BRJ/8. Labor Law Posters/Labor Law Poster Center.html
+  - HR_Docs/Atlas_One_Master_Kit/06 Calculators and Tools (NEW Aug 2026)/NDA Builder (Atlas One).html
+  - HR_Docs/Atlas_One_Master_Kit/Atlas One — Complete Kit for BRJ/3. Comparison & Lead-Magnet Tools/PEO Comparison Tool (Atlas One).html
+  - HR_Docs/Atlas_One_Master_Kit/06 Calculators and Tools (NEW Aug 2026)/Retention Cost Calculator (Espanol).html
+  - HR_Docs/Atlas_One_Master_Kit/06 Calculators and Tools (NEW Aug 2026)/Retention Scorecard (Espanol).html
+  - HR_Docs/Atlas_One_Master_Kit/06 Calculators and Tools (NEW Aug 2026)/Safety Manual Builder (Bilingual OSHA).html
+  - HR_Docs/Atlas_One_Master_Kit/06 Calculators and Tools (NEW Aug 2026)/Separation Letter Generator (Atlas One).html
+  - HR_Docs/Atlas_One_Master_Kit/06 Calculators and Tools (NEW Aug 2026)/W-2 At-Will Employment Agreement Builder (Atlas One).html
+  - HR_Docs/Atlas_One_Master_Kit/06 Calculators and Tools (NEW Aug 2026)/W-2 Employee Onboarding Packet (Bilingual).html
+  - HR_Docs/Atlas_One_Master_Kit/05 Build Specs (for BRJ)/Atlas One Website Package/Workforce Software Comparison (Atlas One).html
+  - (dropped, no rep copy) A1_Sales/A1 What we do Overview/Atlas_One_Partner_Client_Program_PPG.pdf
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+rendered 6 pdfs
+rendered 5 pdfs
+rendered 8 pdfs
+rendered 1 pdfs
+wrote: /Users/davidtaylor/Library/CloudStorage/OneDrive-AtlasOneSolutions/2. A1 Official Docs/2. Atlas 1 Solutions Marketing/A1_Sales/_Rep Kits/Charity Taylor/Atlas One Sales Kit (Charity Taylor).html 99 items, 48337896 bytes -- Internal rows: 0, Present markup: 0, forbidden terms: none (checked in build())
+wrote: /Users/davidtaylor/Library/CloudStorage/OneDrive-AtlasOneSolutions/2. A1 Official Docs/2. Atlas 1 Solutions Marketing/A1_Sales/_Rep Kits/Charity Taylor/READ ME FIRST.txt
+wrote 6 Division Sheets (HTML + PDF) to /Users/davidtaylor/Library/CloudStorage/OneDrive-AtlasOneSolutions/2. A1 Official Docs/2. Atlas 1 Solutions Marketing/A1_Sales/_Rep Kits/Charity Taylor/Division Sheets, all clean
+wrote 5 One Pagers (HTML + PDF) to /Users/davidtaylor/Library/CloudStorage/OneDrive-AtlasOneSolutions/2. A1 Official Docs/2. Atlas 1 Solutions Marketing/A1_Sales/_Rep Kits/Charity Taylor/One Pagers, all clean
+wrote 8 Sales Pieces (HTML + PDF) to /Users/davidtaylor/Library/CloudStorage/OneDrive-AtlasOneSolutions/2. A1 Official Docs/2. Atlas 1 Solutions Marketing/A1_Sales/_Rep Kits/Charity Taylor/Sales Pieces, all clean
+wrote 1 Price List (HTML + PDF) to /Users/davidtaylor/Library/CloudStorage/OneDrive-AtlasOneSolutions/2. A1 Official Docs/2. Atlas 1 Solutions Marketing/A1_Sales/_Rep Kits/Charity Taylor/Price List, all clean
+wrote 6 Email Templates pages for Charity Taylor to /Users/davidtaylor/Library/CloudStorage/OneDrive-AtlasOneSolutions/2. A1 Official Docs/2. Atlas 1 Solutions Marketing/A1_Sales/_Rep Kits/Charity Taylor/Email Templates
+Job 2 guard: clean, zero david@atlasonesolutions.com / David Taylor / cornerstone leaks and zero vendor pay or commission lines under /Users/davidtaylor/Library/CloudStorage/OneDrive-AtlasOneSolutions/2. A1 Official Docs/2. Atlas 1 Solutions Marketing/A1_Sales/_Rep Kits/Charity Taylor
+build_rep_everything: Charity Taylor complete at /Users/davidtaylor/Library/CloudStorage/OneDrive-AtlasOneSolutions/2. A1 Official Docs/2. Atlas 1 Solutions Marketing/A1_Sales/_Rep Kits/Charity Taylor
