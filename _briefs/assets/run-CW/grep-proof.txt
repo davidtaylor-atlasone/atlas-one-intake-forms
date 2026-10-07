@@ -1,0 +1,20 @@
+GREP PROOF, Run CW, 2026-10-06 20:35
+Rule: price_scan.py annual plan rule (two months free, waived on annual, 15% off annual, pay annually, annual option, annual billing, annual prepay, monthly or annual) over the Master Kit and A1_Sales, text, DOCX, PPTX, XLSX and PDF.
+Allowed skips: _to_delete, _BUILD-LOG, A1 Competitor resources (competitor terms), AppDirect internal vendor file, _Rep Kits (scanned separately below), prices.json and the guard files (list the retired phrases on purpose).
+
+Annual plan offers (two months free, waived on annual, 15% off annual, pay annually)    0 hits in   0 files
+TOTAL retired price hits: 0
+
+catalogue_check:
+catalogue_check: OK, 216 entries, all 25 checks passed
+
+Charity Taylor folder (A1_Sales/_Rep Kits), same rule:
+  STILL HAS: /A1_Sales/_Rep Kits/Charity Taylor/Price List/Atlas_One_Price_List.pdf
+  STILL HAS: /A1_Sales/_Rep Kits/Charity Taylor/Decks/Atlas_One_Prospect_Pitch_Deck_First_Meeting.pptx
+  STILL HAS: /A1_Sales/_Rep Kits/Charity Taylor/Decks/Atlas_One_Prospect_Pitch_Deck.pptx
+  STILL HAS: /A1_Sales/_Rep Kits/Charity Taylor/Decks/Atlas_One_Prospect_Pitch_Deck_First_Meeting.pdf
+  STILL HAS: /A1_Sales/_Rep Kits/Charity Taylor/Decks/Atlas_One_Prospect_Pitch_Deck.pdf
+  STILL HAS: /A1_Sales/_Rep Kits/Charity Taylor/Sales Pieces/Atlas_One_Membership_Pricing.pdf
+  STILL HAS: /A1_Sales/_Rep Kits/Charity Taylor/Sales Pieces/Atlas_One_Membership_Brochure.pdf
+  files with hits in folder: 7
+Charity Taylor.zip (built 18:52, NOT rebuilt this run): 77 members, 6 with annual plan phrases
