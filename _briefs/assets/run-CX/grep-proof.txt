@@ -1,0 +1,6 @@
+GREP PROOF, Run CX, 2026-10-07 13:39:27
+Rules: price_scan annual plan rule, rep_scrub.pay_problems, vendor hosts and usernames. Text, DOCX, PPTX, PDF read.
+Charity Taylor folder: 68 files scanned, annual plan hits 0, pay line hits 0, vendor host/username hits 0
+Charity Taylor.zip (extracted): 68 files scanned, annual plan hits 0, pay line hits 0, vendor host/username hits 0
+Sales Kit html: vendor hosts and usernames present: []
+Sales Kit html: annual plan hit: False

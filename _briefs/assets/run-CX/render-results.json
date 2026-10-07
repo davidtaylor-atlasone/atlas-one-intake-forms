@@ -1,0 +1,114 @@
+{
+ "res": [
+  {
+   "bn": "chromium",
+   "fn": "command",
+   "w": 1440,
+   "scrollWidth": 1440,
+   "viewport": 1440,
+   "errors": [],
+   "nonFileRequests": []
+  },
+  {
+   "bn": "chromium",
+   "fn": "command",
+   "w": 390,
+   "scrollWidth": 390,
+   "viewport": 390,
+   "errors": [],
+   "nonFileRequests": []
+  },
+  {
+   "bn": "chromium",
+   "fn": "saleskit",
+   "w": 1440,
+   "scrollWidth": 1440,
+   "viewport": 1440,
+   "errors": [],
+   "nonFileRequests": []
+  },
+  {
+   "bn": "chromium",
+   "fn": "saleskit",
+   "w": 390,
+   "scrollWidth": 390,
+   "viewport": 390,
+   "errors": [],
+   "nonFileRequests": []
+  },
+  {
+   "bn": "webkit",
+   "fn": "command",
+   "w": 1440,
+   "scrollWidth": 1440,
+   "viewport": 1440,
+   "errors": [],
+   "nonFileRequests": []
+  },
+  {
+   "bn": "webkit",
+   "fn": "command",
+   "w": 390,
+   "scrollWidth": 390,
+   "viewport": 390,
+   "errors": [],
+   "nonFileRequests": []
+  },
+  {
+   "bn": "webkit",
+   "fn": "saleskit",
+   "w": 1440,
+   "scrollWidth": 1440,
+   "viewport": 1440,
+   "errors": [],
+   "nonFileRequests": []
+  },
+  {
+   "bn": "webkit",
+   "fn": "saleskit",
+   "w": 390,
+   "scrollWidth": 390,
+   "viewport": 390,
+   "errors": [],
+   "nonFileRequests": []
+  }
+ ],
+ "vend": [
+  {
+   "h": "underwriting.crm.dynamics.com",
+   "found": true,
+   "href": "https://underwriting.crm.dynamics.com/",
+   "target": "_blank",
+   "text": "Open",
+   "row": "Open",
+   "popupUrl": "https://login.microsoftonline.com/0d9daacc-30e3-4937-8724-29d94750264a/oauth2/authorize?client_id=00000007-0000-0000-c000-000000000000&response_type=code%20id_token&scope=openid%20profile&state=OpenIdConnect.AuthenticationProperties%3DMAAAAOzdjr6-ABHxvocAIkgFtSTGhx6_4Y6b6xop2dgmitBY2kmSW3tVrJFlE_iYQnIoCAEAAAABAAAACS5yZWRpcmVjdCZodHRwczovL3VuZGVyd3JpdGluZy5jcm0uZHluYW1pY3MuY29tLw%26ReplyUrl%3DMAAAAOzdjr6%252bABHxvocAIkgFtSSjXqVKUhteXOVJcsnbcsKVjzh2SMAWXeyUtMvEFD9F9Gh0dHBzOi8vYnkyLS1uYW1jcm1saXZlc2c2MDcuY3JtLmR5bmFtaWNzLmNvbS8%253d%26RedirectTo%3DMAAAAOzdjr6%252bABHxvocAIkgFtSQZ7I2XPc%252bzCmBebYfwRRZSGHDYwlB7TquRtxU9L1Bitmh0dHBzOi8vdW5kZXJ3cml0aW5nLmNybS5keW5hbWljcy5jb20v%26RedirectToForMcas%3Dhttps%253a%252f%252funderwriting.crm.dynamics.com%252f&response_mode=form_post&nonce=639269988214051921.MTMyYTE1Y2UtOTM2MC00OGExLWJiNDYtYWQyNmY5NTgwNTJiZTQ4ZTc5NjktZTk5OS00NjViLWI2NDQtZWZmZTc1OWI0Mjdj&redirect_uri=https%3A%2F%2Fby2--namcrmlivesg607.crm.dynamics.com%2F&max_age=86400&claims=%7B%22id_token%22%3A%7B%22xms_cc%22%3A%7B%22values%22%3A%5B%22CP1%22%5D%7D%7D%7D&x-client-SKU=ID_NET472&x-client-ver=8.16.0.0"
+  },
+  {
+   "h": "login.salesforce.com",
+   "found": true,
+   "href": "https://login.salesforce.com/",
+   "target": "_blank",
+   "text": "Open",
+   "row": "Open",
+   "popupUrl": "https://login.salesforce.com/"
+  },
+  {
+   "h": "salestool.verohcm.com",
+   "found": true,
+   "href": "https://salestool.verohcm.com/login",
+   "target": "_blank",
+   "text": "Open",
+   "row": "Open",
+   "popupUrl": "https://salestool.verohcm.com/login"
+  },
+  {
+   "h": "app.ridethehightide.com",
+   "found": true,
+   "href": "https://app.ridethehightide.com/",
+   "target": "_blank",
+   "text": "GoHighLevel",
+   "row": "QUICK LINKS\nClient portal\nGoHighLevel\nAI Email Assistant queue\nBook a call",
+   "popupUrl": "https://app.ridethehightide.com/"
+  }
+ ]
+}
