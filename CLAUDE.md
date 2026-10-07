@@ -5,7 +5,7 @@ Source of truth for most files is the Master Kit on OneDrive at
 `"$HOME/Library/CloudStorage/OneDrive-AtlasOneSolutions/2. A1 Official Docs/2. Atlas 1 Solutions Marketing/HR_Docs/Atlas_One_Master_Kit"`
 (same path on both Macs; never `find ~` for it, a home folder scan over OneDrive hangs). `_BUILD-LOG/` below means `<Master_Kit>/_BUILD-LOG/`.
 
-## How every run in this repo works (terminal rules, added Run AC 2026-09-13)
+## How every run in this repo works (terminal rules)
 
 1. **Read the brief from disk.** Briefs live at `_BUILD-LOG/RUN-<X>-terminal-<A|B>.md`. Copy the brief to
    `_briefs/RUN-<X>-terminal-<A|B>.md` in this repo before starting. Terminal A is the only session allowed in the
@@ -23,13 +23,13 @@ Source of truth for most files is the Master Kit on OneDrive at
    feature, deleting a file (never delete or park files in `_to_delete`; list replaced files under **Retire** in the RUN report, the auditing chat deletes them),
    deploying to production, spending money. Never do any of these.
 6. **Commit and push after every job.** One commit per job on `main`, message starts with `Run <X>:`.
-7. **Verify by rendering and looking.** Headless Chromium (Playwright at
-   `/Users/davidtaylor/.npm/_npx/e41f203b7505f1fb/node_modules/playwright/index.mjs`), screenshots into
+7. **Verify by rendering and looking.** Headless Chromium (Playwright from the npx cache,
+   `~/.npm/_npx/<hash>/node_modules/playwright/index.mjs`; the home folder and hash differ per Mac), screenshots into
    `_briefs/assets/run-<X>/shots/`. Every tool must work offline on iPhone, iPad and desktop: `scrollWidth` equals the
    viewport at 390 px, no console errors, no network requests other than `file://`.
 8. **Always write reports and logs with a quoted heredoc (`<<'EOF'`) or a file write tool, never an unquoted
    heredoc.** An unquoted heredoc lets the shell expand `$` inside the text, so dollar amounts like `$99` or `$0`
-   get silently swallowed or replaced with command output (this happened to RUN-AC-report.md).
+   get silently swallowed or replaced with command output.
 
 ## Brand rules (every HTML tool)
 
@@ -42,14 +42,10 @@ Source of truth for most files is the Master Kit on OneDrive at
 - Status by form, not colour (icons, shapes, labels; colour alone never carries meaning).
 - Every tool is a single self-contained HTML file that works from `file://` with no network.
 
-## Atlas One COMMAND (Run AR, 2026-09-14: replaces the Portal, the Tools Hub and the Master Hub)
+## Atlas One COMMAND
 
-David used to open three separate launchers and could not tell them apart: `Atlas One PORTAL.html` (44 tools
-inlined, internal, carried the rate card), `Atlas One — Tools Hub.html` (32 links, meant for prospects but broke
-if the file traveled without its folder) and `Atlas_One_MASTER_HUB.html` (167 rows of sales docs, decks, pricing
-and tool links, internal). All three are retired. There are now
-two outputs from one builder, in the layout of the client portal app (left navigation with counts, rows not
-cards, search at top):
+COMMAND is the only launcher. One builder produces two outputs, in the layout of the client portal app (left
+navigation with counts, rows not cards, search at top):
 
 - `<Master_Kit>/Atlas One COMMAND.html`: every internal, prospect and client tool, doc, deck, sheet and PDF.
 - `<Master_Kit>/Atlas One Tools (share with prospects).html`: prospect-only, everything inlined, no Internal
@@ -57,18 +53,16 @@ cards, search at top):
 
 Rebuild command: `python3 "<Master_Kit>/_INTERNAL (do not share)/build_command.py" "<Master_Kit>"`
 
-The single source of truth for both outputs is `_INTERNAL (do not share)/catalogue.py` (a static Python list,
-merged once from the three legacy launchers' catalogues; there is no more upstream to regenerate from, so add or
-change a tool by editing catalogue.py directly). Run `catalogue_check.py "<Master_Kit>"` after any edit to
+The single source of truth for both outputs is `_INTERNAL (do not share)/catalogue.py`, a static Python list
+with no upstream: add or change a tool by editing catalogue.py directly. Run `catalogue_check.py "<Master_Kit>"` after any edit to
 catalogue.py; it fails if a path does not resolve. Never hand edit either generated HTML output. After a
 rebuild, confirm the `<title>` stamp and the item count. The outputs are generated, so a rebuild simply overwrites them; no backup copy.
 
-`build_portal.py` and `build_portal_single.py` are kept in place for their catalogue/inlining logic but no
-longer produce anything to open directly; running `build_portal_single.py` now just prints that it is superseded
-by `build_command.py` and exits. Never write to `Atlas One PORTAL.html`, `Atlas One — Tools Hub.html` or
-`Atlas_One_MASTER_HUB.html` again — those names are retired.
+`build_portal.py` and `build_portal_single.py` stay in place as libraries for their catalogue and inlining
+logic; neither produces a file to open. Never write to `Atlas One PORTAL.html`, `Atlas One — Tools Hub.html` or
+`Atlas_One_MASTER_HUB.html`: those launchers are retired because David could not tell three launchers apart.
 
-## TOOLS terminal rules (added 2026-09-22, chat "A1 TOOLS fix-it and GL v3")
+## TOOLS terminal rules
 
 The TOOLS terminal is David's standing fix-it agent for every tool in the Master Kit, Atlas One COMMAND.html
 (the Master Hub / command center presenter) and any calculator, generator or builder under
