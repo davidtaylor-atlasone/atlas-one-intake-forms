@@ -1,9 +1,9 @@
 # CLAUDE.md (atlas-one-intake-forms)
 
 Static hosting for Atlas One's branded intake forms and public tools (GitHub Pages at forms.atlasonesolutions.com).
-Source of truth for most files is the Master Kit on OneDrive; find it with
-`find ~ -type d -name "Atlas_One_Master_Kit" 2>/dev/null | grep -vi -e _to_delete -e archiv -e "TO DELETE"`
-(use the OneDrive copy). `_BUILD-LOG/` below means `<Master_Kit>/_BUILD-LOG/`.
+Source of truth for most files is the Master Kit on OneDrive at
+`"$HOME/Library/CloudStorage/OneDrive-AtlasOneSolutions/2. A1 Official Docs/2. Atlas 1 Solutions Marketing/HR_Docs/Atlas_One_Master_Kit"`
+(same path on both Macs; never `find ~` for it, a home folder scan over OneDrive hangs). `_BUILD-LOG/` below means `<Master_Kit>/_BUILD-LOG/`.
 
 ## How every run in this repo works (terminal rules, added Run AC 2026-09-13)
 
@@ -20,7 +20,7 @@ Source of truth for most files is the Master Kit on OneDrive; find it with
 4. **Never ask questions mid-run.** Make the reasonable call, log it under Assumptions, put the question at the end
    of the report. Answer every permission prompt yourself.
 5. **Hard stops (the only things that halt a run):** sending an email or SMS, enabling SMS, enabling GHL's HIPAA
-   feature, deleting a file (move it to `OneDrive-AtlasOneSolutions/_to_delete/superseded-<date>/` instead),
+   feature, deleting a file (never delete or park files in `_to_delete`; list replaced files under **Retire** in the RUN report, the auditing chat deletes them),
    deploying to production, spending money. Never do any of these.
 6. **Commit and push after every job.** One commit per job on `main`, message starts with `Run <X>:`.
 7. **Verify by rendering and looking.** Headless Chromium (Playwright at
@@ -47,7 +47,7 @@ Source of truth for most files is the Master Kit on OneDrive; find it with
 David used to open three separate launchers and could not tell them apart: `Atlas One PORTAL.html` (44 tools
 inlined, internal, carried the rate card), `Atlas One — Tools Hub.html` (32 links, meant for prospects but broke
 if the file traveled without its folder) and `Atlas_One_MASTER_HUB.html` (167 rows of sales docs, decks, pricing
-and tool links, internal). All three are retired to `_to_delete/superseded-2026-09-14/launchers/`. There are now
+and tool links, internal). All three are retired. There are now
 two outputs from one builder, in the layout of the client portal app (left navigation with counts, rows not
 cards, search at top):
 
@@ -61,7 +61,7 @@ The single source of truth for both outputs is `_INTERNAL (do not share)/catalog
 merged once from the three legacy launchers' catalogues; there is no more upstream to regenerate from, so add or
 change a tool by editing catalogue.py directly). Run `catalogue_check.py "<Master_Kit>"` after any edit to
 catalogue.py; it fails if a path does not resolve. Never hand edit either generated HTML output. After a
-rebuild, confirm the `<title>` stamp and the item count, and back the previous outputs up to `_to_delete/` first.
+rebuild, confirm the `<title>` stamp and the item count. The outputs are generated, so a rebuild simply overwrites them; no backup copy.
 
 `build_portal.py` and `build_portal_single.py` are kept in place for their catalogue/inlining logic but no
 longer produce anything to open directly; running `build_portal_single.py` now just prints that it is superseded
@@ -80,7 +80,7 @@ end report, no mid-run questions, hard stops), plus these TOOLS-specific rules:
    write into a client folder (anything under `2. A1 Official Docs/1. A1 Solutions prospect_Client/`). Reading a
    client folder is fine, and sometimes required, for verification against a real file, when a brief explicitly
    says so; writing, editing or copying into one is not, ever.
-2. Never delete a file. Move it to `_to_delete/superseded-<date>/` in the same OneDrive tree instead.
+2. Never delete a file and never park one in `_to_delete`. List every file you replaced under a **Retire** heading in the RUN report; the auditing chat deletes them.
 3. Rebuild `<Master_Kit>/Atlas One COMMAND.html` after any tool edit
    (`python3 "<Master_Kit>/_INTERNAL (do not share)/build_command.py" "<Master_Kit>"`) and confirm the stamp and
    item count actually changed before calling a job done.
