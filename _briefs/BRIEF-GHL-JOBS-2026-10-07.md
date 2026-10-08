@@ -1,45 +1,36 @@
-# BRIEF-GHL-JOBS (current run: GHL-JOBS Run CX, 2026-10-07): Charity kit, vendor logins, Provo cleanup
+# BRIEF-GHL-JOBS (current run: GHL-JOBS Run CY, 2026-10-07): bookkeeping payroll quoted, governing law by state
 
-Installed by A1 GHL Jobs 4 after the Run CW audit (PASS with one blocker, claude/ghl-jobs-run-CW-audit-2026-10-07.md).
-Archive Run CW's report first. Files and code only, never the GHL UI. No questions mid run, no sends, no spending, no
-deploys, no git push to main of atlas-one-intake-forms. No dashes in anything a client, prospect or BRJ reads. Log real
-clock times. Finish with RUN-GHL-JOBS-report.md. RETIRE RULE: overwrite in place, list replaced files under "Retire".
+Installed by A1 GHL Jobs 4 after the Run CX audit (PASS, claude/ghl-jobs-run-CX-audit-2026-10-07.md). Archive Run CX's
+report first. Files and code only, never the GHL UI. No questions mid run, no sends, no spending, no deploys, no git push
+to main of atlas-one-intake-forms. No dashes in anything a client, prospect or BRJ reads. Log real clock times. Finish
+with RUN-GHL-JOBS-report.md. RETIRE RULE: overwrite in place, list replaced files under "Retire".
 
-## Job 1: Charity's kit, overwrite in place (David's written approval)
-David's rule, CHAT-ROSTER 2026-10-03, in his words: "delete never park". That is his written yes to this change.
-Edit `build_command.py` `build_rep_everything()` so `--person` overwrites the rep folder in place, never moves anything
-into `_to_delete` or `superseded-*`, and prints each replaced file as a RETIRE line. Then remove the opt in `--move`
-from `tools/agreements_inventory_2026-09-12.py` the same way.
-FALLBACK if the edit is denied again: do not retry another way. Run `--person charity` with the existing code ONCE,
-note the exact `_to_delete/superseded-<date>/` path it made under "Retire", and carry on. Cowork deletes that folder.
-Either way: rebuild Charity's kit and `Charity Taylor.zip`, run `--check-zip`, grep proof of zero annual plan phrases
-and zero pay lines in her folder and zip. Her stale pieces from Run CW: Price List PDF, both Prospect pitch decks (pptx
-and pdf), Membership Brochure PDF, Membership Pricing PDF.
+## Job 1: bookkeeping payroll becomes "Quoted for your company" (David approved 2026-10-07)
+Payroll through Atlas One Bookkeeping is no longer a printed price. It reads "Quoted for your company (headcount, pay
+cycle, PTO tracking and more)", exactly like PEO, ASO and HCM. Every other price stays as listed.
+- prices.json: V12. Replace the bookkeeping payroll block with a quoted entry; changelog line "V12 2026-10-07
+  bookkeeping payroll quoted, David." Keep the old numbers only in the INTERNAL Master Pricing sheet as a guide.
+- Retire from every client, rep and BRJ piece, tool, generator and sheet: $30 / $15 / $7.50 per employee, the $100
+  and $150 monthly minimums, $199 payroll setup, $130 quarterly filing, $20 new hire onboarding, $20 / $10 / $5 1099
+  contractor rates, and the Run CW W-2 line ("one extra payroll run at your rate"). Includes Quick Quote, Quote
+  Cockpit, Price List, bookkeeping marketing sheet, membership brochure and pricing, Service Content Library, Audit
+  Workbench, agreement masters (Bookkeeping Schedule), BRJ pricing page, Sales Kit, gen_pricing_skill.py.
+- Do NOT touch: payroll tax account setup ($250 per state account etc.), Payroll to GL import, certified payroll,
+  any vendor sheet. Watch for false hits: $20, $130 and $199 appear in other services; only change payroll lines.
+- Add the retired figures (in payroll context) to the price_scan guard.
+- Dr Gould files: do not touch (operator lane).
 
-## Job 2: vendor login rows in COMMAND (internal only, hubs.py)
-Replace "link needed" with these. Show the username beside each button. NEVER store or print a password anywhere.
+## Job 2: governing law follows the client's state (clients are national)
+The Independent Contractor Agreement Builder and the W-2 At-Will Employment Agreement Builder print "governed by the
+laws of the State of Utah". Replace with a required state picker (all 50 states plus DC) that fills the Governing Law
+clause and venue with the state where the worker performs the work; default to the client state field if the builder
+has one, otherwise blank and required. Apply the same check to every other agreement builder and the agreement
+masters (generate.py): any hard coded Utah governing law or venue becomes [State] or the picker. Atlas One's OWN
+agreements with its clients (MCSA, Membership Agreement, NDA where Atlas One is a party) keep Utah, since Atlas One
+is the Utah party. List every file you changed and every one you left on Utah and why.
 
-| Row | Opens | Username |
-|---|---|---|
-| Cornerstone CRM (Dynamics 365) | https://underwriting.crm.dynamics.com | david.taylor@cornerstonepeo.com |
-| G&A Partners Salesforce | https://login.salesforce.com/ | dtaylor@gnapartners.com |
-| VeroHCM sales tool | https://salestool.verohcm.com/login | david@verohcm.com |
-| GoHighLevel (keep) | https://app.ridethehightide.com | David@atlasonesolutions.com |
-
-These rows live only in David's COMMAND. Strip them from every rep build and the shared Sales Kit; add a guard to
-catalogue_check that fails if any of these hosts or usernames appears in a rep kit, the Sales Kit, client or BRJ
-material. Microsoft Partner Center and QuickBooks Online Accountant stay "link needed".
-
-## Job 3: Provo and Utah sample defaults (clients are national)
-Independent Contractor Agreement Builder sample address, W-2 At-Will Agreement Builder "Provo, UT office" placeholder,
-GHL Client Import Template.csv example row: use [City], [State], [ZIP]. Lehi stays only as the company address line.
-
-## Job 4: decisions recorded (no work unless noted)
-- Tools Cheat Sheet stays off COMMAND (archived 2026-10-03 on purpose).
-- AI Email demo deck $499 a month and $750 setup are current (Professional tier, prices.json). No change.
-- Dr Gould documents: owned by the A1 AGENT operator lane. Do not touch.
-
-## Job 5: rebuild and prove
-Rebuild COMMAND, Sales Kit and `--person charity`; all guards green; Chromium and WebKit at 1440 and 390, zero console
-errors; click each of the four vendor buttons in Chromium (new tab, right host); grep proof that the vendor hosts and
-usernames are absent from her zip and the Sales Kit. Report every file changed and the Retire list.
+## Job 3: rebuild and prove
+Rebuild COMMAND, Sales Kit, `--person charity` (overwrite in place, as Run CX did), BRJ package with today's date.
+Guards green, Chromium and WebKit at 1440 and 390, zero console errors, fill each agreement builder once with a
+non Utah state and screenshot the governing law clause. Grep proof of zero retired payroll figures in payroll context
+across A1_Sales, the Master Kit outputs and her zip. Report and Retire list.

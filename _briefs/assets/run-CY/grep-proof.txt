@@ -1,0 +1,50 @@
+Run CY grep proof, 2026-10-07 18:17:33
+Rule: price_scan.py 'Bookkeeping payroll figures' (retired: per employee rates, $100 and $150 minimums, $199 payroll setup, $130 quarterly filing, $20 onboarding, $20/$10/$5 contractor rates, one extra payroll run at your rate), payroll context only.
+Scope: all of A1_Sales and the Master Kit (generated outputs, COMMAND, Sales Kit, rep kit folder, Charity Taylor.zip and nested zips opened), text read from html md txt csv json py docx pptx xlsx pdf. Excluded: _to_delete, _BUILD-LOG, Book of Business (historic CRM notes), the guard files and the 3 INTERNAL guide files that keep old numbers on purpose.
+
+files walked 3057, text units scanned 2857, zips opened 24
+retired payroll figure hits: 32
+   <A1_Sales>/Dr Gould Dental/Dr_Gould_Payroll_Quote_2026-10-07.pdf | roll for the employees paid that period, so a new hire adds $20 a paycheck and a departure removes it. Employer payroll tax
+   <A1_Sales>/Dr Gould Dental/Dr_Gould_Payroll_Quote_2026-10-07.html | roll for the employees paid that period, so a new hire adds $20 a paycheck and a departure removes it. Employer payroll tax
+   <A1_Sales>/Atlas 1 Bookkeeping/Book Keeping zip V 7.0/Book Keeping V 7.0.zip!Atlas_One_Bookkeeping_Marketing_Sheet_V7.pdf | $15 / employee Per employee — Weekly Billed each pay period $7.50 / employee 1099 CONTRACTOR PAYROLL SERVICE DETAIL PRICE One
+   <A1_Sales>/Atlas 1 Bookkeeping/Book Keeping zip V 7.0/Book Keeping V 7.0.zip!Atlas_One_Bookkeeping_Marketing_Sheet_V7.pdf | tup, per company $199 Per employee — Monthly Billed monthly $30 / employee Per employee — Bi-weekly / Semi- monthly Billed 
+   <A1_Sales>/Atlas 1 Bookkeeping/Book Keeping zip V 7.0/Book Keeping V 7.0.zip!Atlas_One_Bookkeeping_Marketing_Sheet_V7.pdf | employee — Bi-weekly / Semi- monthly Billed each pay period $15 / employee Per employee — Weekly Billed each pay period $7.
+   <A1_Sales>/Atlas 1 Bookkeeping/Book Keeping zip V 7.0/Book Keeping V 7.0.zip!Atlas_One_Bookkeeping_Marketing_Sheet_V7.pdf | DETAIL PRICE One-time setup Full payroll setup, per company $199 Per employee — Monthly Billed monthly $30 / employee Per em
+   <A1_Sales>/Atlas 1 Bookkeeping/Book Keeping zip V 7.0/Book Keeping V 7.0.zip!Atlas_One_Bookkeeping_Marketing_Sheet_V7.pdf |  One-time setup Full contractor payroll setup, per  company $199 Per contractor — Monthly Billed monthly, or $10 per check $
+   <A1_Sales>/Atlas 1 Bookkeeping/Book Keeping zip V 7.0/Book Keeping V 7.0.zip!Atlas_One_Bookkeeping_Marketing_Sheet_V7.pdf | ilings Preparation and filing of quarterly  payroll returns $130 / filing 05   Accounting Software We set up and manage your
+   <A1_Sales>/Atlas 1 Bookkeeping/Book Keeping zip V 7.0/Book Keeping V 7.0.zip!Atlas_One_Bookkeeping_Marketing_Sheet_V7.pdf | 9 Per contractor — Monthly Billed monthly, or $10 per check $20 / contractor Per contractor — Bi-weekly / Semi- monthly Bil
+   <A1_Sales>/Atlas 1 Bookkeeping/Book Keeping zip V 7.0/Book Keeping V 7.0.zip!Atlas_One_Bookkeeping_Marketing_Sheet_V7.pdf | ew-hire onboarding — one-time For each newly hired employee $20 / new hire New-hire onboarding — after initial Each new hir
+   <A1_Sales>/Atlas 1 Bookkeeping/Book Keeping zip V 7.0/Book Keeping V 7.0.zip!Atlas_One_Bookkeeping_Marketing_Sheet_V7.pdf | nboarding — after initial Each new hire added after go-live $20 / new hire ATLAS ONE SOLUTIONS Lehi, Utah   ·   385-213-717
+   <A1_Sales>/Atlas 1 Bookkeeping/Book Keeping zip V 7.0/Book Keeping V 7.0.zip!Atlas_One_Bookkeeping_Marketing_Sheet_V7.docx |        Billed each pay period                               $7.50 / employee                               1099 Contractor Pa
+   <A1_Sales>/Atlas 1 Bookkeeping/Book Keeping zip V 7.0/Book Keeping V 7.0.zip!Atlas_One_Bookkeeping_Marketing_Sheet_V7.docx |                Billed monthly                               $30 / employee                                 Per employee — B
+   <A1_Sales>/Atlas 1 Bookkeeping/Book Keeping zip V 7.0/Book Keeping V 7.0.zip!Atlas_One_Bookkeeping_Marketing_Sheet_V7.docx |        Billed each pay period                               $15 / employee                                 Per employee — W
+   <A1_Sales>/Atlas 1 Bookkeeping/Book Keeping zip V 7.0/Book Keeping V 7.0.zip!Atlas_One_Bookkeeping_Marketing_Sheet_V7.docx | ll payroll setup, per company                               $199                                 Per employee — Monthly     
+   <A1_Sales>/Atlas 1 Bookkeeping/Book Keeping zip V 7.0/Book Keeping V 7.0.zip!Atlas_One_Bookkeeping_Marketing_Sheet_V7.docx | or payroll setup, per company                               $199                                 Per contractor — Monthly   
+   <A1_Sales>/Atlas 1 Bookkeeping/Book Keeping zip V 7.0/Book Keeping V 7.0.zip!Atlas_One_Bookkeeping_Marketing_Sheet_V7.docx |  of quarterly payroll returns                               $130 / filing                        05                Accountin
+   <A1_Sales>/Atlas 1 Bookkeeping/Book Keeping zip V 7.0/Book Keeping V 7.0.zip!Atlas_One_Bookkeeping_Marketing_Sheet_V7.docx | led monthly, or $10 per check                               $20 / contractor                                 Per contractor
+   <A1_Sales>/Atlas 1 Bookkeeping/Book Keeping zip V 7.0/Book Keeping V 7.0.zip!Atlas_One_Bookkeeping_Marketing_Sheet_V7.docx | For each newly hired employee                               $20 / new hire                                 New-hire onboard
+   <A1_Sales>/Atlas 1 Bookkeeping/Book Keeping zip V 7.0/Book Keeping V 7.0.zip!Atlas_One_Bookkeeping_Marketing_Sheet_V7.docx |  new hire added after go-live                               $20 / new hire                               Time &amp; Attenda
+   <A1_Sales>/Atlas 1 Bookkeeping/Book Keeping zip V 7.0/Book Keeping V 7.0.zip!Atlas_One_INTERNAL_Master_Pricing_V7.pdf | OR COST ATLAS ONE KEEPS / Semi $12.88 Per employee — Weekly $7.50 $1.25 $6.25 + 15% of $1.25 =  $6.44 1099 CONTRACTOR PAYROLL
+   <A1_Sales>/Atlas 1 Bookkeeping/Book Keeping zip V 7.0/Book Keeping V 7.0.zip!Atlas_One_INTERNAL_Master_Pricing_V7.pdf | + 15% of $5 = $15.75 Per 1099 — Bi-weekly /  Semi $10 $2.50 $7.50 + 15% of $2.50 =  $7.88 Per 1099 — Weekly $5 $1.25 $3.75 + 
+   <A1_Sales>/Atlas 1 Bookkeeping/Book Keeping zip V 7.0/Book Keeping V 7.0.zip!Atlas_One_INTERNAL_Master_Pricing_V7.pdf | (+ QB cost) $179 + 15% of $20 = $182 Per employee — Monthly $30 $5.00 $25 + 15% of $5 = $25.75 Per employee — Bi-weekly $15
+   <A1_Sales>/Atlas 1 Bookkeeping/Book Keeping zip V 7.0/Book Keeping V 7.0.zip!Atlas_One_INTERNAL_Master_Pricing_V7.pdf | $30 $5.00 $25 + 15% of $5 = $25.75 Per employee — Bi-weekly $15 $2.50 $12.50 + 15% of $2.50 =  ATLAS ONE SOLUTIONS Lehi, Ut
+   <A1_Sales>/Atlas 1 Bookkeeping/Book Keeping zip V 7.0/Book Keeping V 7.0.zip!Atlas_One_INTERNAL_Master_Pricing_V7.pdf | INE ATLAS RETAIL VENDOR COST ATLAS ONE KEEPS One-time setup $199 (+ QB cost) $20 (+ QB cost) $179 + 15% of $20 = $182 Per em
+   <A1_Sales>/Atlas 1 Bookkeeping/Book Keeping zip V 7.0/Book Keeping V 7.0.zip!Atlas_One_INTERNAL_Master_Pricing_V7.pdf | INE ATLAS RETAIL VENDOR COST ATLAS ONE KEEPS One-time setup $199 (+ QB cost) $20 (+ QB cost) $179 + 15% of $20 = $182 Per 10
+   <A1_Sales>/Atlas 1 Bookkeeping/Book Keeping zip V 7.0/Book Keeping V 7.0.zip!Atlas_One_INTERNAL_Master_Pricing_V7.pdf | VENDOR COST ATLAS ONE KEEPS New-hire onboarding —  one-time $20 / new hire $0 100% New-hire onboarding —  after initial set
+   <A1_Sales>/Atlas 1 Bookkeeping/Book Keeping zip V 7.0/Book Keeping V 7.0.zip!Atlas_One_INTERNAL_Master_Pricing_V7.pdf | new hire $0 100% New-hire onboarding —  after initial setup $20 / new hire $0 100% New-hire onboarding does NOT appear on X
+   <A1_Sales>/Atlas 1 Bookkeeping/Book Keeping zip V 7.0/Book Keeping V 7.0.zip!Atlas_One_INTERNAL_Master_Pricing_V7.docx |        Per employee — Monthly                               $30                               $5.00                        
+   <A1_Sales>/Atlas 1 Bookkeeping/Book Keeping zip V 7.0/Book Keeping V 7.0.zip!Atlas_One_INTERNAL_Master_Pricing_V7.docx | r employee — Bi-weekly / Semi                               $15                               $2.50                        
+   <A1_Sales>/Atlas 1 Bookkeeping/Book Keeping zip V 7.0/Book Keeping V 7.0.zip!Atlas_One_INTERNAL_Master_Pricing_V7.docx | ew-hire onboarding — one-time                               $20 / new hire                               $0                
+   <A1_Sales>/Atlas 1 Bookkeeping/Book Keeping zip V 7.0/Book Keeping V 7.0.zip!Atlas_One_INTERNAL_Master_Pricing_V7.docx | oarding — after initial setup                               $20 / new hire                               $0                
+
+Breakdown: Dr Gould files (operator lane, untouched) = 2 hit lines; stale V7 archive zip (Book Keeping V 7.0.zip) = 30 hit lines (listed under Retire); every other file = 0.
+
+price_scan.py over both roots (sources, no pypdf):
+Payment due in ten days (agreement terms)                     0 hits in   0 files
+Card surcharge 2.9 percent plus $0.30                         0 hits in   0 files
+TOTAL retired price hits: 0
+
+price_scan.py with pypdf (PDF text included):
+Payment due in ten days (agreement terms)                     0 hits in   0 files
+Card surcharge 2.9 percent plus $0.30                         0 hits in   0 files
+TOTAL retired price hits: 0
