@@ -1,0 +1,590 @@
+{
+ "loads": [
+  {
+   "browser": "chromium",
+   "page": "COMMAND",
+   "width": 1440,
+   "scrollWidth": 1440,
+   "ok": true,
+   "title": "Atlas One COMMAND: build Oct 7, 2026 6:05 PM",
+   "errors": [],
+   "nonFile": []
+  },
+  {
+   "browser": "chromium",
+   "page": "COMMAND",
+   "width": 390,
+   "scrollWidth": 390,
+   "ok": true,
+   "title": "Atlas One COMMAND: build Oct 7, 2026 6:05 PM",
+   "errors": [],
+   "nonFile": []
+  },
+  {
+   "browser": "chromium",
+   "page": "SalesKit",
+   "width": 1440,
+   "scrollWidth": 1440,
+   "ok": true,
+   "title": "Atlas One Sales Kit: build Oct 7, 2026 6:05 PM",
+   "errors": [],
+   "nonFile": []
+  },
+  {
+   "browser": "chromium",
+   "page": "SalesKit",
+   "width": 390,
+   "scrollWidth": 390,
+   "ok": true,
+   "title": "Atlas One Sales Kit: build Oct 7, 2026 6:05 PM",
+   "errors": [],
+   "nonFile": []
+  },
+  {
+   "browser": "webkit",
+   "page": "COMMAND",
+   "width": 1440,
+   "scrollWidth": 1440,
+   "ok": true,
+   "title": "Atlas One COMMAND: build Oct 7, 2026 6:05 PM",
+   "errors": [],
+   "nonFile": []
+  },
+  {
+   "browser": "webkit",
+   "page": "COMMAND",
+   "width": 390,
+   "scrollWidth": 390,
+   "ok": true,
+   "title": "Atlas One COMMAND: build Oct 7, 2026 6:05 PM",
+   "errors": [],
+   "nonFile": []
+  },
+  {
+   "browser": "webkit",
+   "page": "SalesKit",
+   "width": 1440,
+   "scrollWidth": 1440,
+   "ok": true,
+   "title": "Atlas One Sales Kit: build Oct 7, 2026 6:05 PM",
+   "errors": [],
+   "nonFile": []
+  },
+  {
+   "browser": "webkit",
+   "page": "SalesKit",
+   "width": 390,
+   "scrollWidth": 390,
+   "ok": true,
+   "title": "Atlas One Sales Kit: build Oct 7, 2026 6:05 PM",
+   "errors": [],
+   "nonFile": []
+  }
+ ],
+ "builders": [
+  {
+   "browser": "chromium",
+   "builder": "IC",
+   "width": 1440,
+   "state": "Texas",
+   "scrollWidth": 1440,
+   "scrollOk": true,
+   "blank": {
+    "value": "",
+    "optionCount": 52,
+    "hasDC": true,
+    "hasUtahSelected": false,
+    "required": true,
+    "invalid": "true",
+    "stateBlankInDoc": true,
+    "printDisabled": true
+   },
+   "after": {
+    "govClauses": [
+     "This Agreement shall be governed by and construed in accordance with the laws of the State of Texas, without regard to its conflict-of-laws principles.",
+     "All documents and services are provided as is and as available, without warranty of any kind, express or implied, including any implied warranties of merchantability or fitness for a particular purpose, and without any warranty that a document is accurate, complete, or compliant with or enforceable under the laws of any jurisdiction.",
+     "This Agreement is governed by the laws of the State of Utah."
+    ],
+    "venueClauses": [
+     "Any dispute arising out of or relating to this Agreement shall be resolved in the state or federal courts located in the State of Texas, and each Party consents to the personal jurisdiction of such courts."
+    ],
+    "printDisabled": false,
+    "mentionsStateInClause": true
+   },
+   "errors": [],
+   "nonFile": []
+  },
+  {
+   "browser": "chromium",
+   "builder": "IC",
+   "width": 390,
+   "state": "Texas",
+   "scrollWidth": 390,
+   "scrollOk": true,
+   "blank": {
+    "value": "",
+    "optionCount": 52,
+    "hasDC": true,
+    "hasUtahSelected": false,
+    "required": true,
+    "invalid": "true",
+    "stateBlankInDoc": true,
+    "printDisabled": true
+   },
+   "after": {
+    "govClauses": [
+     "This Agreement shall be governed by and construed in accordance with the laws of the State of Texas, without regard to its conflict-of-laws principles.",
+     "All documents and services are provided as is and as available, without warranty of any kind, express or implied, including any implied warranties of merchantability or fitness for a particular purpose, and without any warranty that a document is accurate, complete, or compliant with or enforceable under the laws of any jurisdiction.",
+     "This Agreement is governed by the laws of the State of Utah."
+    ],
+    "venueClauses": [
+     "Any dispute arising out of or relating to this Agreement shall be resolved in the state or federal courts located in the State of Texas, and each Party consents to the personal jurisdiction of such courts."
+    ],
+    "printDisabled": false,
+    "mentionsStateInClause": true
+   },
+   "errors": [],
+   "nonFile": []
+  },
+  {
+   "browser": "chromium",
+   "builder": "IC-DC",
+   "width": 1440,
+   "state": "District of Columbia",
+   "scrollWidth": 1440,
+   "scrollOk": true,
+   "blank": {
+    "value": "",
+    "optionCount": 52,
+    "hasDC": true,
+    "hasUtahSelected": false,
+    "required": true,
+    "invalid": "true",
+    "stateBlankInDoc": true,
+    "printDisabled": true
+   },
+   "after": {
+    "govClauses": [
+     "This Agreement shall be governed by and construed in accordance with the laws of the District of Columbia, without regard to its conflict-of-laws principles.",
+     "All documents and services are provided as is and as available, without warranty of any kind, express or implied, including any implied warranties of merchantability or fitness for a particular purpose, and without any warranty that a document is accurate, complete, or compliant with or enforceable under the laws of any jurisdiction.",
+     "This Agreement is governed by the laws of the State of Utah."
+    ],
+    "venueClauses": [
+     "Any dispute arising out of or relating to this Agreement shall be resolved in the state or federal courts located in the District of Columbia, and each Party consents to the personal jurisdiction of such courts."
+    ],
+    "printDisabled": false,
+    "mentionsStateInClause": true
+   },
+   "errors": [],
+   "nonFile": []
+  },
+  {
+   "browser": "chromium",
+   "builder": "IC-DC",
+   "width": 390,
+   "state": "District of Columbia",
+   "scrollWidth": 390,
+   "scrollOk": true,
+   "blank": {
+    "value": "",
+    "optionCount": 52,
+    "hasDC": true,
+    "hasUtahSelected": false,
+    "required": true,
+    "invalid": "true",
+    "stateBlankInDoc": true,
+    "printDisabled": true
+   },
+   "after": {
+    "govClauses": [
+     "This Agreement shall be governed by and construed in accordance with the laws of the District of Columbia, without regard to its conflict-of-laws principles.",
+     "All documents and services are provided as is and as available, without warranty of any kind, express or implied, including any implied warranties of merchantability or fitness for a particular purpose, and without any warranty that a document is accurate, complete, or compliant with or enforceable under the laws of any jurisdiction.",
+     "This Agreement is governed by the laws of the State of Utah."
+    ],
+    "venueClauses": [
+     "Any dispute arising out of or relating to this Agreement shall be resolved in the state or federal courts located in the District of Columbia, and each Party consents to the personal jurisdiction of such courts."
+    ],
+    "printDisabled": false,
+    "mentionsStateInClause": true
+   },
+   "errors": [],
+   "nonFile": []
+  },
+  {
+   "browser": "chromium",
+   "builder": "W2",
+   "width": 1440,
+   "state": "Ohio",
+   "scrollWidth": 1440,
+   "scrollOk": true,
+   "blank": {
+    "value": "",
+    "optionCount": 52,
+    "hasDC": true,
+    "hasUtahSelected": false,
+    "required": true,
+    "invalid": "true",
+    "stateBlankInDoc": true,
+    "printDisabled": true
+   },
+   "after": {
+    "govClauses": [
+     "This agreement is governed by the laws of the State of Ohio, without regard to its conflict-of-laws principles.",
+     "All documents and services are provided as is and as available, without warranty of any kind, express or implied, including any implied warranties of merchantability or fitness for a particular purpose, and without any warranty that a document is accurate, complete, or compliant with or enforceable under the laws of any jurisdiction.",
+     "This Agreement is governed by the laws of the State of Utah."
+    ],
+    "venueClauses": [],
+    "printDisabled": false,
+    "mentionsStateInClause": true
+   },
+   "errors": [],
+   "nonFile": []
+  },
+  {
+   "browser": "chromium",
+   "builder": "W2",
+   "width": 390,
+   "state": "Ohio",
+   "scrollWidth": 390,
+   "scrollOk": true,
+   "blank": {
+    "value": "",
+    "optionCount": 52,
+    "hasDC": true,
+    "hasUtahSelected": false,
+    "required": true,
+    "invalid": "true",
+    "stateBlankInDoc": true,
+    "printDisabled": true
+   },
+   "after": {
+    "govClauses": [
+     "This agreement is governed by the laws of the State of Ohio, without regard to its conflict-of-laws principles.",
+     "All documents and services are provided as is and as available, without warranty of any kind, express or implied, including any implied warranties of merchantability or fitness for a particular purpose, and without any warranty that a document is accurate, complete, or compliant with or enforceable under the laws of any jurisdiction.",
+     "This Agreement is governed by the laws of the State of Utah."
+    ],
+    "venueClauses": [],
+    "printDisabled": false,
+    "mentionsStateInClause": true
+   },
+   "errors": [],
+   "nonFile": []
+  },
+  {
+   "browser": "chromium",
+   "builder": "NDA",
+   "width": 1440,
+   "state": "Florida",
+   "scrollWidth": 1440,
+   "scrollOk": true,
+   "blank": {
+    "value": "",
+    "optionCount": 53,
+    "hasDC": true,
+    "hasUtahSelected": false,
+    "required": true,
+    "invalid": "true",
+    "stateBlankInDoc": true,
+    "printDisabled": true
+   },
+   "after": {
+    "govClauses": [
+     "This Agreement shall be governed by and construed in accordance with the laws of the State of Florida, without regard to its conflict-of-laws principles.",
+     "This document is provided as is and as available, without warranty of any kind, express or implied, including any implied warranties of merchantability or fitness for a particular purpose, and without any warranty that it is accurate, complete, or compliant with or enforceable under the laws of any jurisdiction.",
+     "This Agreement is governed by the laws of the State of Utah."
+    ],
+    "venueClauses": [
+     "The Parties consent to the exclusive jurisdiction of the state and federal courts located in the State of Florida for the resolution of any dispute arising out of or relating to this Agreement, and waive any objection to venue in such courts."
+    ],
+    "printDisabled": false,
+    "mentionsStateInClause": true
+   },
+   "errors": [],
+   "nonFile": []
+  },
+  {
+   "browser": "chromium",
+   "builder": "NDA",
+   "width": 390,
+   "state": "Florida",
+   "scrollWidth": 390,
+   "scrollOk": true,
+   "blank": {
+    "value": "",
+    "optionCount": 53,
+    "hasDC": true,
+    "hasUtahSelected": false,
+    "required": true,
+    "invalid": "true",
+    "stateBlankInDoc": true,
+    "printDisabled": true
+   },
+   "after": {
+    "govClauses": [
+     "This Agreement shall be governed by and construed in accordance with the laws of the State of Florida, without regard to its conflict-of-laws principles.",
+     "This document is provided as is and as available, without warranty of any kind, express or implied, including any implied warranties of merchantability or fitness for a particular purpose, and without any warranty that it is accurate, complete, or compliant with or enforceable under the laws of any jurisdiction.",
+     "This Agreement is governed by the laws of the State of Utah."
+    ],
+    "venueClauses": [
+     "The Parties consent to the exclusive jurisdiction of the state and federal courts located in the State of Florida for the resolution of any dispute arising out of or relating to this Agreement, and waive any objection to venue in such courts."
+    ],
+    "printDisabled": false,
+    "mentionsStateInClause": true
+   },
+   "errors": [],
+   "nonFile": []
+  },
+  {
+   "browser": "webkit",
+   "builder": "IC",
+   "width": 1440,
+   "state": "Texas",
+   "scrollWidth": 1440,
+   "scrollOk": true,
+   "blank": {
+    "value": "",
+    "optionCount": 52,
+    "hasDC": true,
+    "hasUtahSelected": false,
+    "required": true,
+    "invalid": "true",
+    "stateBlankInDoc": true,
+    "printDisabled": true
+   },
+   "after": {
+    "govClauses": [
+     "This Agreement shall be governed by and construed in accordance with the laws of the State of Texas, without regard to its conflict-of-laws principles.",
+     "All documents and services are provided as is and as available, without warranty of any kind, express or implied, including any implied warranties of merchantability or fitness for a particular purpose, and without any warranty that a document is accurate, complete, or compliant with or enforceable under the laws of any jurisdiction.",
+     "This Agreement is governed by the laws of the State of Utah."
+    ],
+    "venueClauses": [
+     "Any dispute arising out of or relating to this Agreement shall be resolved in the state or federal courts located in the State of Texas, and each Party consents to the personal jurisdiction of such courts."
+    ],
+    "printDisabled": false,
+    "mentionsStateInClause": true
+   },
+   "errors": [],
+   "nonFile": []
+  },
+  {
+   "browser": "webkit",
+   "builder": "IC",
+   "width": 390,
+   "state": "Texas",
+   "scrollWidth": 390,
+   "scrollOk": true,
+   "blank": {
+    "value": "",
+    "optionCount": 52,
+    "hasDC": true,
+    "hasUtahSelected": false,
+    "required": true,
+    "invalid": "true",
+    "stateBlankInDoc": true,
+    "printDisabled": true
+   },
+   "after": {
+    "govClauses": [
+     "This Agreement shall be governed by and construed in accordance with the laws of the State of Texas, without regard to its conflict-of-laws principles.",
+     "All documents and services are provided as is and as available, without warranty of any kind, express or implied, including any implied warranties of merchantability or fitness for a particular purpose, and without any warranty that a document is accurate, complete, or compliant with or enforceable under the laws of any jurisdiction.",
+     "This Agreement is governed by the laws of the State of Utah."
+    ],
+    "venueClauses": [
+     "Any dispute arising out of or relating to this Agreement shall be resolved in the state or federal courts located in the State of Texas, and each Party consents to the personal jurisdiction of such courts."
+    ],
+    "printDisabled": false,
+    "mentionsStateInClause": true
+   },
+   "errors": [],
+   "nonFile": []
+  },
+  {
+   "browser": "webkit",
+   "builder": "IC-DC",
+   "width": 1440,
+   "state": "District of Columbia",
+   "scrollWidth": 1440,
+   "scrollOk": true,
+   "blank": {
+    "value": "",
+    "optionCount": 52,
+    "hasDC": true,
+    "hasUtahSelected": false,
+    "required": true,
+    "invalid": "true",
+    "stateBlankInDoc": true,
+    "printDisabled": true
+   },
+   "after": {
+    "govClauses": [
+     "This Agreement shall be governed by and construed in accordance with the laws of the District of Columbia, without regard to its conflict-of-laws principles.",
+     "All documents and services are provided as is and as available, without warranty of any kind, express or implied, including any implied warranties of merchantability or fitness for a particular purpose, and without any warranty that a document is accurate, complete, or compliant with or enforceable under the laws of any jurisdiction.",
+     "This Agreement is governed by the laws of the State of Utah."
+    ],
+    "venueClauses": [
+     "Any dispute arising out of or relating to this Agreement shall be resolved in the state or federal courts located in the District of Columbia, and each Party consents to the personal jurisdiction of such courts."
+    ],
+    "printDisabled": false,
+    "mentionsStateInClause": true
+   },
+   "errors": [],
+   "nonFile": []
+  },
+  {
+   "browser": "webkit",
+   "builder": "IC-DC",
+   "width": 390,
+   "state": "District of Columbia",
+   "scrollWidth": 390,
+   "scrollOk": true,
+   "blank": {
+    "value": "",
+    "optionCount": 52,
+    "hasDC": true,
+    "hasUtahSelected": false,
+    "required": true,
+    "invalid": "true",
+    "stateBlankInDoc": true,
+    "printDisabled": true
+   },
+   "after": {
+    "govClauses": [
+     "This Agreement shall be governed by and construed in accordance with the laws of the District of Columbia, without regard to its conflict-of-laws principles.",
+     "All documents and services are provided as is and as available, without warranty of any kind, express or implied, including any implied warranties of merchantability or fitness for a particular purpose, and without any warranty that a document is accurate, complete, or compliant with or enforceable under the laws of any jurisdiction.",
+     "This Agreement is governed by the laws of the State of Utah."
+    ],
+    "venueClauses": [
+     "Any dispute arising out of or relating to this Agreement shall be resolved in the state or federal courts located in the District of Columbia, and each Party consents to the personal jurisdiction of such courts."
+    ],
+    "printDisabled": false,
+    "mentionsStateInClause": true
+   },
+   "errors": [],
+   "nonFile": []
+  },
+  {
+   "browser": "webkit",
+   "builder": "W2",
+   "width": 1440,
+   "state": "Ohio",
+   "scrollWidth": 1440,
+   "scrollOk": true,
+   "blank": {
+    "value": "",
+    "optionCount": 52,
+    "hasDC": true,
+    "hasUtahSelected": false,
+    "required": true,
+    "invalid": "true",
+    "stateBlankInDoc": true,
+    "printDisabled": true
+   },
+   "after": {
+    "govClauses": [
+     "This agreement is governed by the laws of the State of Ohio, without regard to its conflict-of-laws principles.",
+     "All documents and services are provided as is and as available, without warranty of any kind, express or implied, including any implied warranties of merchantability or fitness for a particular purpose, and without any warranty that a document is accurate, complete, or compliant with or enforceable under the laws of any jurisdiction.",
+     "This Agreement is governed by the laws of the State of Utah."
+    ],
+    "venueClauses": [],
+    "printDisabled": false,
+    "mentionsStateInClause": true
+   },
+   "errors": [],
+   "nonFile": []
+  },
+  {
+   "browser": "webkit",
+   "builder": "W2",
+   "width": 390,
+   "state": "Ohio",
+   "scrollWidth": 390,
+   "scrollOk": true,
+   "blank": {
+    "value": "",
+    "optionCount": 52,
+    "hasDC": true,
+    "hasUtahSelected": false,
+    "required": true,
+    "invalid": "true",
+    "stateBlankInDoc": true,
+    "printDisabled": true
+   },
+   "after": {
+    "govClauses": [
+     "This agreement is governed by the laws of the State of Ohio, without regard to its conflict-of-laws principles.",
+     "All documents and services are provided as is and as available, without warranty of any kind, express or implied, including any implied warranties of merchantability or fitness for a particular purpose, and without any warranty that a document is accurate, complete, or compliant with or enforceable under the laws of any jurisdiction.",
+     "This Agreement is governed by the laws of the State of Utah."
+    ],
+    "venueClauses": [],
+    "printDisabled": false,
+    "mentionsStateInClause": true
+   },
+   "errors": [],
+   "nonFile": []
+  },
+  {
+   "browser": "webkit",
+   "builder": "NDA",
+   "width": 1440,
+   "state": "Florida",
+   "scrollWidth": 1440,
+   "scrollOk": true,
+   "blank": {
+    "value": "",
+    "optionCount": 53,
+    "hasDC": true,
+    "hasUtahSelected": false,
+    "required": true,
+    "invalid": "true",
+    "stateBlankInDoc": true,
+    "printDisabled": true
+   },
+   "after": {
+    "govClauses": [
+     "This Agreement shall be governed by and construed in accordance with the laws of the State of Florida, without regard to its conflict-of-laws principles.",
+     "This document is provided as is and as available, without warranty of any kind, express or implied, including any implied warranties of merchantability or fitness for a particular purpose, and without any warranty that it is accurate, complete, or compliant with or enforceable under the laws of any jurisdiction.",
+     "This Agreement is governed by the laws of the State of Utah."
+    ],
+    "venueClauses": [
+     "The Parties consent to the exclusive jurisdiction of the state and federal courts located in the State of Florida for the resolution of any dispute arising out of or relating to this Agreement, and waive any objection to venue in such courts."
+    ],
+    "printDisabled": false,
+    "mentionsStateInClause": true
+   },
+   "errors": [],
+   "nonFile": []
+  },
+  {
+   "browser": "webkit",
+   "builder": "NDA",
+   "width": 390,
+   "state": "Florida",
+   "scrollWidth": 390,
+   "scrollOk": true,
+   "blank": {
+    "value": "",
+    "optionCount": 53,
+    "hasDC": true,
+    "hasUtahSelected": false,
+    "required": true,
+    "invalid": "true",
+    "stateBlankInDoc": true,
+    "printDisabled": true
+   },
+   "after": {
+    "govClauses": [
+     "This Agreement shall be governed by and construed in accordance with the laws of the State of Florida, without regard to its conflict-of-laws principles.",
+     "This document is provided as is and as available, without warranty of any kind, express or implied, including any implied warranties of merchantability or fitness for a particular purpose, and without any warranty that it is accurate, complete, or compliant with or enforceable under the laws of any jurisdiction.",
+     "This Agreement is governed by the laws of the State of Utah."
+    ],
+    "venueClauses": [
+     "The Parties consent to the exclusive jurisdiction of the state and federal courts located in the State of Florida for the resolution of any dispute arising out of or relating to this Agreement, and waive any objection to venue in such courts."
+    ],
+    "printDisabled": false,
+    "mentionsStateInClause": true
+   },
+   "errors": [],
+   "nonFile": []
+  }
+ ]
+}
