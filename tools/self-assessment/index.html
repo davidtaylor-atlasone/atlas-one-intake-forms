@@ -209,6 +209,7 @@ function result(){
   var lk=R.leaks.length?R.leaks.map(function(l){return '<li>'+l.s+'</li>';}).join(''):'<li>Nothing in your answers looks like a leak. The audit is still worth thirty minutes to confirm it.</li>';
   document.getElementById('leaks').innerHTML=lk;
   show('s-result');
+  if(A1_PREFILL&&!document.getElementById('send').disabled){send();}
 }
 function send(){
   var name=document.getElementById('f_name').value.trim(), company=document.getElementById('f_company').value.trim(),
@@ -229,4 +230,17 @@ function send(){
   document.getElementById('send').disabled=true;
   document.getElementById('sent').style.display='block';
 }
+
+/* Prefill from the website audit form (added 2026-10-09). The thank you page links here with
+   ?name=&email=&phone=&company= (first_name and last_name also work). When an email or phone arrives
+   in the link, the scores are saved to GoHighLevel automatically as soon as they show. */
+var A1_PREFILL=false;
+(function(){try{
+  var p=new URLSearchParams(location.search);
+  function g(){for(var i=0;i<arguments.length;i++){var v=p.get(arguments[i]);if(v){v=v.trim();if(v&&v.indexOf('{')<0&&v.indexOf('%')<0)return v;}}return '';}
+  var nm=g('name','full_name','fullname')||[g('first_name','firstname','first'),g('last_name','lastname','last')].join(' ').trim();
+  var f={f_name:nm,f_company:g('company','company_name','business'),f_email:g('email','email_address'),f_phone:g('phone','phone_number','mobile')};
+  for(var k in f){if(f[k]){var el=document.getElementById(k);if(el)el.value=f[k];}}
+  A1_PREFILL=!!(f.f_email||f.f_phone);
+}catch(e){A1_PREFILL=false;}})();
 </script></body></html>
