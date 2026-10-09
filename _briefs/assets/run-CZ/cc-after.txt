@@ -1,0 +1,30 @@
+FAIL  catalogue paths resolve: 1 problem(s)
+      - missing path: business-cards-folder: A1_Sales/Business Cards/
+ok    no build manifest or output list writes under the client folder
+ok    present.py ids in the catalogue
+ok    a1-footer-person never carries support@
+ok    prices.json locked, versioned, changelogged
+ok    price cells match prices.json
+ok    price placeholders
+ok    embedded PRICES copies
+ok    printed prices on client facing surfaces are in prices.json
+ok    Quick Quote rows match prices.json
+ok    no PEO, ASO or HCM rate defaults in Cockpit or generators
+ok    proposed pricing skill text matches prices.json
+ok    retired prices and retired terms (late fee, ten days, card surcharge)
+ok    screen share snippet on every tool and sales piece
+ok    Scan ID module and field marks on every person block tool
+ok    15 minute intro calendar only on website pages
+ok    role and support email rules
+ok    approved atlasonesolutions.com addresses only
+ok    every row has a hub, a purpose, a language and a valid sub hub
+ok    format cards are unambiguous (one button per format)
+ok    nothing opens as code (.py .js .json, unrendered .md)
+ok    rep and shared hub rules, vendor rows internal only
+ok    Talk Track row is pinned and rep visible
+ok    collections have members
+ok    no AppDirect path in the catalogue or a BRJ package
+ok    rep copies carry no vendor pay, commission or referral fee language
+ok    vendor login hosts and usernames stay out of rep kits, Sales Kit, client and BRJ material
+note: the INSTALLED atlas-pricing skill still prints 10 figure(s) not in prices.json ($0, $12, $18, $23, $349, $397, $649, $7.50, $897, $899). Pending David's yes on _BUILD-LOG/SKILL-atlas-pricing-proposed.md.
+catalogue_check: 1 of 27 check(s) FAILED

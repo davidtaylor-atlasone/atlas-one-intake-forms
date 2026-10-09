@@ -1,0 +1,17 @@
+2026-10-09 17:43:57  ./A1_Sales/A1 What we do Overview/Atlas_One_Services_Overview.html
+2026-10-09 17:43:57  ./A1_Sales/Atlas 1 Bookkeeping/Atlas_One_Bookkeeping_Marketing_Sheet_V8.html
+2026-10-09 17:43:57  ./HR_Docs/Atlas_One_Master_Kit/_INTERNAL (do not share)/tools/bookkeeping-docs/Access To Hearing - Bookkeeping Proposal 2026-09-15.html
+2026-10-09 17:43:57  ./HR_Docs/Atlas_One_Master_Kit/_INTERNAL (do not share)/tools/bookkeeping-docs/Atlas_One_Bookkeeping_Marketing_Sheet_V8.html
+2026-10-09 17:43:57  ./HR_Docs/Atlas_One_Master_Kit/_INTERNAL (do not share)/tools/bookkeeping-docs/Atlas_One_Client_Agreement_Packet_MASTER.html
+2026-10-09 17:43:57  ./HR_Docs/Atlas_One_Master_Kit/_INTERNAL (do not share)/tools/bookkeeping-docs/Atlas_One_Invoice_MASTER.html
+2026-10-09 17:43:57  ./HR_Docs/Atlas_One_Master_Kit/_INTERNAL (do not share)/tools/bookkeeping-docs/Atlas_One_QuickBooks_Accountant_Access_Guide.html
+2026-10-09 17:43:57  ./HR_Docs/Atlas_One_Master_Kit/_INTERNAL (do not share)/tools/bookkeeping-docs/Atlas_One_Services_Overview.html
+2026-10-09 17:43:57  ./HR_Docs/Atlas_One_Master_Kit/_INTERNAL (do not share)/tools/bookkeeping-docs/Cirque Lodge - Bookkeeping and QuickBooks Advisory Proposal 2026-09-15.html
+2026-10-09 17:43:57  ./HR_Docs/Atlas_One_Master_Kit/_INTERNAL (do not share)/tools/bookkeeping-docs/manifest.json
+2026-10-09 17:44:09  ./A1_Sales/Atlas 1 Bookkeeping/Atlas_One_Client_Agreement_Packet_MASTER.pdf
+2026-10-09 17:44:09  ./A1_Sales/Atlas 1 Bookkeeping/Atlas_One_Invoice_MASTER.pdf
+2026-10-09 17:44:10  ./A1_Sales/A1 What we do Overview/Atlas_One_Services_Overview.pdf
+2026-10-09 17:44:10  ./A1_Sales/Atlas 1 Bookkeeping/Atlas_One_Bookkeeping_Marketing_Sheet_V8.pdf
+2026-10-09 17:44:11  ./HR_Docs/Atlas_One_Master_Kit/_INTERNAL (do not share)/tools/bookkeeping-docs/Access To Hearing - Bookkeeping Proposal 2026-09-15.pdf
+2026-10-09 17:44:11  ./HR_Docs/Atlas_One_Master_Kit/_INTERNAL (do not share)/tools/bookkeeping-docs/Atlas_One_QuickBooks_Accountant_Access_Guide.pdf
+2026-10-09 17:44:12  ./HR_Docs/Atlas_One_Master_Kit/_INTERNAL (do not share)/tools/bookkeeping-docs/Cirque Lodge - Bookkeeping and QuickBooks Advisory Proposal 2026-09-15.pdf
