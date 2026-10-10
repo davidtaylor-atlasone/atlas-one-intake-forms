@@ -1,25 +1,20 @@
-# BRIEF-GHL-JOBS (current run: GHL-JOBS Run CZ, 2026-10-08): master builds never write into client folders
+# BRIEF-GHL-JOBS (current run: GHL-JOBS Run DA, 2026-10-09): business cards path, then idle
 
-Installed by A1 GHL Jobs 4 after the Run CY audit (PASS, claude/ghl-jobs-run-CY-audit-2026-10-07.md). Archive Run CY's
-report first. Files and code only, never the GHL UI. No questions mid run, no sends, no spending, no deploys, no git push
-to main of atlas-one-intake-forms. Log real clock times. Finish with RUN-GHL-JOBS-report.md. RETIRE RULE: overwrite in
-place, list replaced files under "Retire".
+Installed by A1 GHL Jobs 4 after the Run CZ audit (PASS, claude/ghl-jobs-run-CZ-audit-2026-10-09.md). Archive Run CZ's
+report first. Files and code only. No questions mid run, no sends, no deploys, no git push to main. Log real clock
+times. Finish with RUN-GHL-JOBS-report.md.
 
-## Job 1: remove client folders from build manifests
-`bookkeeping-docs/build.py` has a standing manifest that writes two Access To Hearing PDFs into
-`1. A1 Solutions prospect_Client/3. Quotes_A1/Access To Hearing LLC (Guiden Group)/`. Prospect and client data never
-come from a master build. Remove those entries from the manifest so the build writes only master and A1_Sales outputs.
-If the Access To Hearing documents need a generator, give the script a separate opt in flag (`--client <folder>`),
-off by default.
-Then check every other build script under the Master Kit and the intake forms repo (build_command.py, generate.py,
-division_sheets_build, render_html_pdfs.py, the SCL builder, BRJ package builder) for any output path under
-`1. A1 Solutions prospect_Client`. Remove each one the same way and list them.
+## Job 1: business cards row
+The Business Cards folder now lives at `A1_Sales/Blog and Content/Business Cards/` (moved by another lane). Point the
+catalogue row `business-cards-folder` at that path in catalogue.py (and hubs.py if it carries the path). Rebuild
+COMMAND and the Sales Kit. catalogue_check must be 27 of 27 green.
 
-## Job 2: guard
-Add a catalogue_check guard: fail if any build manifest or output list contains a path under
-`1. A1 Solutions prospect_Client`. Run catalogue_check and report the result (the GHL How-To booking link fail is the
-GHL lane's and is expected until they fix it; name it, do not edit those files).
+## Answers to Run CZ questions (no work)
+- The Service Content Library has no standalone builder; its source lives in
+  `14 Service Content Library/service-content-library-src-2026-09-30.tgz`. Unpack to a temp folder and confirm its
+  build script writes nothing under `1. A1 Solutions prospect_Client`. Report the result.
+- The BRJ package has no script; terminals assemble it by hand each run. Nothing to check.
+- Access To Hearing documents: do NOT regenerate them. The operator lane does client documents.
 
-## Job 3: prove
-Run the bookkeeping build once and show (file list plus mtimes) that nothing under `1. A1 Solutions prospect_Client`
-changed. Report every file changed.
+## Job 2: prove
+COMMAND and Sales Kit render clean in Chromium at 1440 and 390, the Business Cards card opens the folder.
