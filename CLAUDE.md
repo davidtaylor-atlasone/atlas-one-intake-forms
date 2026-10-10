@@ -44,19 +44,17 @@ Source of truth for most files is the Master Kit on OneDrive at
 
 ## Atlas One COMMAND
 
-COMMAND is the only launcher. One builder produces two outputs, in the layout of the client portal app (left
+COMMAND is the only launcher. One builder produces one output, in the layout of the client portal app (left
 navigation with counts, rows not cards, search at top):
 
 - `<Master_Kit>/Atlas One COMMAND.html`: every internal, prospect and client tool, doc, deck, sheet and PDF.
-- `<Master_Kit>/Atlas One Tools (share with prospects).html`: prospect-only, everything inlined, no Internal
-  section, no rate card, no margins, no vendor names (grep-guarded at build time).
 
 Rebuild command: `python3 "<Master_Kit>/_INTERNAL (do not share)/build_command.py" "<Master_Kit>"`
 
-The single source of truth for both outputs is `_INTERNAL (do not share)/catalogue.py`, a static Python list
+The single source of truth for the output is `_INTERNAL (do not share)/catalogue.py`, a static Python list
 with no upstream: add or change a tool by editing catalogue.py directly. Run `catalogue_check.py "<Master_Kit>"` after any edit to
-catalogue.py; it fails if a path does not resolve. Never hand edit either generated HTML output. After a
-rebuild, confirm the `<title>` stamp and the item count. The outputs are generated, so a rebuild simply overwrites them; no backup copy.
+catalogue.py; it fails if a path does not resolve. Never hand edit the generated HTML output. After a
+rebuild, confirm the `<title>` stamp and the item count. The output is generated, so a rebuild simply overwrites it; no backup copy.
 
 `build_portal.py` and `build_portal_single.py` stay in place as libraries for their catalogue and inlining
 logic; neither produces a file to open. Never write to `Atlas One PORTAL.html`, `Atlas One — Tools Hub.html` or
