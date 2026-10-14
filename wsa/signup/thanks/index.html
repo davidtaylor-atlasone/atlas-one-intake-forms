@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">
+<title>Thank you</title>
+<style>
+html,body{margin:0;background:#FAFAF8;color:#23304D;font-family:'DM Sans',system-ui,sans-serif}
+body{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;box-sizing:border-box}
+p{font-size:20px;line-height:1.5;margin:0}
+a{color:#23304D}
+</style></head>
+<body>
+<p>Thank you. Your offer is on its way to your email.<br><a href="/wsa/signup/">Back to the sign up form</a></p>
+<script>
+// The WSA sign up form (GoHighLevel) redirects here after a submission.
+// Inside the iPad page's frame: tell the page, which shows its thank you screen and resets.
+// Opened on its own: go back to the sign up page, which shows the same thank you screen.
+(function(){
+  var framed = true;
+  try { framed = window.top !== window.self; } catch (e) { framed = true; }
+  if (framed) { try { window.parent.postMessage({a1wsa: "sent"}, location.origin); } catch (e) {} }
+  else { location.replace("/wsa/signup/?sent=1"); }
+})();
+</script>
+</body></html>
