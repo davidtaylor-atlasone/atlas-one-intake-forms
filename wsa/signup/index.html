@@ -35,6 +35,18 @@ header{background:var(--navy);color:var(--off);padding:74px 0 26px}
 .sent .count{font-size:16px;margin:18px 0 0}
 .sent .bar{height:6px;background:var(--soft);margin:12px auto 0;max-width:360px;overflow:hidden}
 .sent .bar i{display:block;height:100%;width:100%;background:var(--navy);transform-origin:left;transition:transform linear}
+.sent .phonebtns{display:none;flex-direction:column;gap:12px;max-width:420px;margin:22px auto 0}
+.sent .phonebtns a{display:flex;align-items:center;justify-content:center;min-height:60px;font-size:20px;font-weight:600;text-decoration:none;border:2px solid var(--navy)}
+.sent .phonebtns a.solid{background:var(--navy);color:var(--off)}
+.sent .phonebtns a.line{background:#fff;color:var(--navy)}
+.sent .phonebtns small{font-size:15px;color:var(--ink2);line-height:1.45}
+html.phone #useOffline,html.phone #next,html.phone #savedLink,html.phone #saved,html.phone #offline,html.phone #thanks{display:none!important}
+html.phone #a1-ss-btn{display:none!important}
+html.phone .sent .hand,html.phone .sent #next3,html.phone .sent .count,html.phone .sent .bar,html.phone .sent .ipadonly{display:none!important}
+html.phone .sent .phonebtns{display:flex}
+html.phone header{padding-top:26px}
+html.phone.is-sent .offer,html.phone.is-sent header .sub,html.phone.is-sent header h1{display:none}
+html.phone.is-sent main{padding-top:16px}
 .event{font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);text-align:right;line-height:1.5}
 h1{font-family:'Horas','DM Sans',sans-serif;font-weight:500;font-size:clamp(38px,6vw,58px);line-height:1.05;margin:22px 0 8px;letter-spacing:-.01em}
 .sub{font-size:20px;line-height:1.4;margin:0;color:var(--off)}
@@ -212,7 +224,7 @@ html:not(#a1x) [data-a1st~="h"]{height:auto!important;min-height:0!important}
       <button type="button" id="next">Next person</button>
       <button type="button" class="alt" id="useOffline">No internet? Save on this iPad</button>
     </div>
-    <p class="note">After you tap Send me the offer, a thank you screen shows and the form clears itself for the next person.</p>
+    <p class="note" id="noteIpad">After you tap Send me the offer, a thank you screen shows and the form clears itself for the next person.</p>
   </div>
 
   <form id="offline" novalidate>
@@ -255,7 +267,13 @@ html:not(#a1x) [data-a1st~="h"]{height:auto!important;min-height:0!important}
     <div class="tick" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#FAFAF8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
     <h2>Thank you!</h2>
     <p class="lead">Your offer is on its way to your email.</p>
-    <p>If you asked for a meeting, the email has a link to pick a time with David.</p>
+    <p class="ipadonly">If you asked for a meeting, the email has a link to pick a time with David.</p>
+    <div class="phonebtns">
+      <small>Save my contact so my emails and calls reach you.</small>
+      <a class="solid" href="/card/david-wsa/david-wsa.vcf" download="David Taylor, Atlas One.vcf">Save David's contact</a>
+      <a class="line" href="https://api.leadconnectorhq.com/widget/bookings/wsa-2026-meeting-with-david?utm_source=wsa-conference&amp;utm_medium=booth-qr&amp;utm_campaign=wsa-2026-10-15">Pick a time to meet</a>
+      <a class="line" href="/card/david-wsa/">See my digital card</a>
+    </div>
     <p class="hand">Please hand the iPad back.</p>
     <button type="button" id="next3">Next person</button>
     <p class="count">Starting over for the next person in <b id="sentCount">8</b></p>
@@ -282,6 +300,12 @@ html:not(#a1x) [data-a1st~="h"]{height:auto!important;min-height:0!important}
   var FORM_URL = "https://api.leadconnectorhq.com/widget/form/ZdKNkSmhE5erN2lafTn9";
   var BASE = {promo_code: "WSA2026", utm_source: "wsa-conference", utm_medium: "booth-ipad", utm_campaign: "wsa-2026-10-15"};
   var KEY = "a1-wsa-2026-saved";
+  // Phone mode: opened from the printed QR sign (?m=phone). Remembered for this tab so the thank you
+  // screen after the form's redirect (?sent=1) also shows the phone version.
+  var PHONE = /[?&]m=phone/.test(location.search);
+  try { if (PHONE) sessionStorage.setItem("a1-wsa-phone", "1"); else if (sessionStorage.getItem("a1-wsa-phone") === "1") PHONE = true; } catch(e){}
+  if (PHONE) { document.documentElement.classList.add("phone"); BASE.utm_medium = "booth-qr"; }
+  if (PHONE) { var n = document.getElementById("noteIpad"); if (n) n.textContent = "After you tap Send me the offer, it lands in your email right away."; }
   var $ = function(id){ return document.getElementById(id); };
   var frame = $("ghl"), loading = $("loading");
 
@@ -302,6 +326,7 @@ html:not(#a1x) [data-a1st~="h"]{height:auto!important;min-height:0!important}
   function showSent(){
     $("online").style.display = "none"; $("offline").style.display = "none"; $("thanks").style.display = "none"; $("saved").style.display = "none";
     $("sent").style.display = "block"; window.scrollTo(0, 0);
+    if (PHONE) { if (sentTimer) { clearInterval(sentTimer); sentTimer = null; } document.documentElement.classList.add("is-sent"); window.scrollTo(0, 0); return; }
     var left = 8, bar = $("sentBar");
     $("sentCount").textContent = String(left);
     bar.style.transition = "none"; bar.style.transform = "scaleX(1)"; void bar.offsetWidth;
@@ -310,7 +335,7 @@ html:not(#a1x) [data-a1st~="h"]{height:auto!important;min-height:0!important}
     sentTimer = setInterval(function(){ left -= 1; $("sentCount").textContent = String(Math.max(left, 0)); if (left <= 0) nextPerson(); }, 1000);
   }
   window.addEventListener("message", function(e){ if (e.origin === location.origin && e.data && e.data.a1wsa === "sent") showSent(); });
-  function showOnline(){ stopSent(); $("offline").style.display = "none"; $("thanks").style.display = "none"; $("online").style.display = "block"; }
+  function showOnline(){ stopSent(); document.documentElement.classList.remove("is-sent"); $("offline").style.display = "none"; $("thanks").style.display = "none"; $("online").style.display = "block"; }
   function showOffline(){ stopSent(); $("online").style.display = "none"; $("thanks").style.display = "none"; $("offline").style.display = "block"; $("offline").reset(); setEmp(""); setMtg(""); $("err").style.display = "none"; window.scrollTo(0, 0); }
   function nextPerson(){ $("saved").style.display = "none"; if (navigator.onLine === false) { showOffline(); } else { showOnline(); load(); } window.scrollTo(0, 0); }
 
@@ -370,7 +395,7 @@ html:not(#a1x) [data-a1st~="h"]{height:auto!important;min-height:0!important}
   window.addEventListener("online", function(){ renderSaved(); if (read().some(function(r){ return !r.sent; })) { $("saved").style.display = "block"; } });
 
   renderSaved();
-  if (/[?&]sent=1/.test(location.search)) { try { history.replaceState(null, "", location.pathname); } catch(e){} showSent(); }
+  if (/[?&]sent=1/.test(location.search)) { try { history.replaceState(null, "", location.pathname + (PHONE ? "?m=phone" : "")); } catch(e){} showSent(); }
   else if (navigator.onLine === false) { showOffline(); } else { load(); }
 })();
 </script>
