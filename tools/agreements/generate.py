@@ -769,7 +769,7 @@ def schedule_membership():
          "self-service tools, the vendor and software audit, and, at higher tiers, concierge support and "
          "dedicated coordination across bookkeeping, benefits, payroll, and risk."),
         ("2.", "Setup fee and annual option", "A one time setup fee applies at some tiers as shown below. "
-         "Setup is often waived at signing or on an annual plan; the Client's proposal states the exact setup "
+         "The setup fee is one time and variable; the Client's proposal states the exact setup "
          "due, if any."),
     ]
     return build_schedule("Membership", "Membership",
@@ -994,7 +994,7 @@ def sample_proposals(discount=None):
         ["Services outside the six divisions Atlas One covers"],
         [[pr["professional"]["label"], pr["professional"]["price"]]],
         ("Item", "Amount"),
-        "Monthly fee billed in advance. Setup is often waived at signing, confirmed on the invoice.",
+        "Monthly fee billed in advance. The one time setup fee (variable) is confirmed on the invoice.",
         ["A short intake call to confirm priorities across the six divisions"],
         "Membership Schedule", discount=discount))
 

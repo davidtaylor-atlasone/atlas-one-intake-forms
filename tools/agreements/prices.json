@@ -43,10 +43,10 @@
     "hr_docs": {"label": "Custom HR document or policy, each", "price": "$175 one time"}
   },
   "membership": {
-    "essential": {"label": "Membership, Essential", "price": "$99 a month, setup waived", "fit": "1 to 20 employees, one state, under five hours a month of back office work. You do most of it yourself."},
-    "professional": {"label": "Membership, Professional", "price": "$399 a month, $495 setup, often waived", "fit": "15 to 50 employees, or five to fifteen hours a month. The owner is still the back office."},
-    "enterprise": {"label": "Membership, Enterprise", "price": "$999 a month, $995 setup, waived on an annual plan", "fit": "Forty to a hundred employees, or more than fifteen hours a month. You want it run, not advised."},
-    "concierge": {"label": "Membership, Concierge, Fractional COO", "price": "$1,900 a month, $1,500 setup", "fit": "The honest answer to \"who runs operations\" is \"me, at night.\""}
+    "essential": {"label": "Membership, Essential", "price": "$99 a month, no setup fee", "fit": "1 to 20 employees, one state, under five hours a month of back office work. You do most of it yourself."},
+    "professional": {"label": "Membership, Professional", "price": "$399 a month, $495 one time setup fee (variable)", "fit": "15 to 50 employees, or five to fifteen hours a month. The owner is still the back office."},
+    "enterprise": {"label": "Membership, Enterprise", "price": "$999 a month, $995 one time setup fee (variable)", "fit": "Forty to a hundred employees, or more than fifteen hours a month. You want it run, not advised."},
+    "concierge": {"label": "Membership, Concierge, Fractional COO", "price": "$1,900 a month, $1,500 one time setup fee (variable)", "fit": "The honest answer to \"who runs operations\" is \"me, at night.\""}
   },
   "advisory_support": {
     "over_allowance": {"label": "Support beyond the included allowance", "price": "$150 an hour"}
