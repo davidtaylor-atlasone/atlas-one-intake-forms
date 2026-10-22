@@ -8,3 +8,8 @@ __pycache__/
 
 # GHL API token, never committed
 .env
+
+# Internal run notes and superseded copies: kept on disk, never tracked or served (2026-10-22)
+_briefs/
+_to_delete/
+tools/phone_sweep.py
