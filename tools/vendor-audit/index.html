@@ -115,10 +115,10 @@ select.dec-review{background:var(--soft);border-color:var(--soft)}
       <div class="tblwrap"><table>
         <thead><tr><th>Area</th><th>Separate vendor?</th><th>Monthly cost</th><th>Hours a month managing it</th></tr></thead>
         <tbody>
-          <tr data-fn="payroll" data-div="Workforce, Payroll & HR" data-name="Payroll provider"><td>Payroll</td><td><input type="checkbox"></td><td><div class="prefix"><span>$</span><input type="number" data-q="cost"></div></td><td><input type="number" data-q="hrs" step="0.5"></td></tr>
+          <tr data-fn="payroll" data-div="Workforce, Payroll and HR" data-name="Payroll provider"><td>Payroll</td><td><input type="checkbox"></td><td><div class="prefix"><span>$</span><input type="number" data-q="cost"></div></td><td><input type="number" data-q="hrs" step="0.5"></td></tr>
           <tr data-fn="bookkeeping service" data-div="Financial Services" data-name="Bookkeeper or accountant"><td>Bookkeeping and accounting</td><td><input type="checkbox"></td><td><div class="prefix"><span>$</span><input type="number" data-q="cost"></div></td><td><input type="number" data-q="hrs" step="0.5"></td></tr>
           <tr data-fn="tax" data-div="Financial Services" data-name="Tax preparer"><td>Tax prep and strategy</td><td><input type="checkbox"></td><td><div class="prefix"><span>$</span><input type="number" data-q="cost"></div></td><td><input type="number" data-q="hrs" step="0.5"></td></tr>
-          <tr data-fn="hr" data-div="Workforce, Payroll & HR" data-name="HR platform or consultant"><td>HR and compliance</td><td><input type="checkbox"></td><td><div class="prefix"><span>$</span><input type="number" data-q="cost"></div></td><td><input type="number" data-q="hrs" step="0.5"></td></tr>
+          <tr data-fn="hr" data-div="Workforce, Payroll and HR" data-name="HR platform or consultant"><td>HR and compliance</td><td><input type="checkbox"></td><td><div class="prefix"><span>$</span><input type="number" data-q="cost"></div></td><td><input type="number" data-q="hrs" step="0.5"></td></tr>
           <tr data-fn="benefits admin" data-div="Benefits & Retirement" data-name="Benefits broker or 401(k)"><td>Employee benefits and 401(k)</td><td><input type="checkbox"></td><td><div class="prefix"><span>$</span><input type="number" data-q="cost"></div></td><td><input type="number" data-q="hrs" step="0.5"></td></tr>
           <tr data-fn="health insurance" data-div="Benefits & Retirement" data-name="Health carrier"><td>Health insurance</td><td><input type="checkbox"></td><td><div class="prefix"><span>$</span><input type="number" data-q="cost"></div></td><td><input type="number" data-q="hrs" step="0.5"></td></tr>
           <tr data-fn="business insurance" data-div="Risk & Insurance" data-name="Business insurance agent"><td>Business insurance</td><td><input type="checkbox"></td><td><div class="prefix"><span>$</span><input type="number" data-q="cost"></div></td><td><input type="number" data-q="hrs" step="0.5"></td></tr>
@@ -195,39 +195,39 @@ select.dec-review{background:var(--soft);border-color:var(--soft)}
    division = which Atlas One division absorbs it (or "keep" when it is not something Atlas One replaces) */
 var CATALOG=[
  // Payroll and HR
- [/\bGUSTO\b/,"Gusto","payroll","Workforce, Payroll & HR"],
- [/\bADP\b/,"ADP","payroll","Workforce, Payroll & HR"],
- [/\bPAYCHEX\b/,"Paychex","payroll","Workforce, Payroll & HR"],
- [/PAYLOCITY/,"Paylocity","payroll","Workforce, Payroll & HR"],
- [/PAYCOM/,"Paycom","payroll","Workforce, Payroll & HR"],
- [/PAYCOR/,"Paycor","payroll","Workforce, Payroll & HR"],
- [/RIPPLING/,"Rippling","payroll","Workforce, Payroll & HR"],
- [/JUSTWORKS/,"Justworks","payroll","Workforce, Payroll & HR"],
- [/TRINET/,"TriNet","payroll","Workforce, Payroll & HR"],
- [/INSPERITY/,"Insperity","payroll","Workforce, Payroll & HR"],
- [/\bONPAY\b/,"OnPay","payroll","Workforce, Payroll & HR"],
- [/SQUARE PAYROLL|SQ \*PAYROLL/,"Square Payroll","payroll","Workforce, Payroll & HR"],
- [/INTUIT.*PAYROLL|QB.*PAYROLL|QUICKBOOKS PAYROLL/,"QuickBooks Payroll","payroll","Workforce, Payroll & HR"],
- [/PATRIOT SOFTWARE/,"Patriot Payroll","payroll","Workforce, Payroll & HR"],
- [/\bDEEL\b/,"Deel","payroll","Workforce, Payroll & HR"],
- [/BAMBOOHR|BAMBOO HR/,"BambooHR","hr","Workforce, Payroll & HR"],
- [/ZENEFITS/,"Zenefits","hr","Workforce, Payroll & HR"],
- [/HOMEBASE/,"Homebase","scheduling","Workforce, Payroll & HR"],
- [/WHEN I WORK|WHENIWORK/,"When I Work","scheduling","Workforce, Payroll & HR"],
- [/\bDEPUTY\b/,"Deputy","scheduling","Workforce, Payroll & HR"],
- [/7SHIFTS/,"7shifts","scheduling","Workforce, Payroll & HR"],
- [/CONNECTEAM/,"Connecteam","scheduling","Workforce, Payroll & HR"],
- [/TSHEETS|QUICKBOOKS TIME|QB TIME/,"QuickBooks Time","time tracking","Workforce, Payroll & HR"],
- [/CLOCKIFY/,"Clockify","time tracking","Workforce, Payroll & HR"],
- [/HUBSTAFF/,"Hubstaff","time tracking","Workforce, Payroll & HR"],
- [/TIMECLOCK|BUDDY PUNCH|BUDDYPUNCH/,"Time clock app","time tracking","Workforce, Payroll & HR"],
- [/\bCHECKR\b/,"Checkr","background checks","Workforce, Payroll & HR"],
- [/GOODHIRE/,"GoodHire","background checks","Workforce, Payroll & HR"],
- [/\bINDEED\b/,"Indeed","hiring","Workforce, Payroll & HR"],
- [/ZIPRECRUITER/,"ZipRecruiter","hiring","Workforce, Payroll & HR"],
- [/LINKEDIN/,"LinkedIn","hiring","Workforce, Payroll & HR"],
- [/\bLATTICE\b/,"Lattice","hr","Workforce, Payroll & HR"],
- [/\bHR ?360\b|HRDIRECT|HR DIRECT/,"HR compliance service","hr","Workforce, Payroll & HR"],
+ [/\bGUSTO\b/,"Gusto","payroll","Workforce, Payroll and HR"],
+ [/\bADP\b/,"ADP","payroll","Workforce, Payroll and HR"],
+ [/\bPAYCHEX\b/,"Paychex","payroll","Workforce, Payroll and HR"],
+ [/PAYLOCITY/,"Paylocity","payroll","Workforce, Payroll and HR"],
+ [/PAYCOM/,"Paycom","payroll","Workforce, Payroll and HR"],
+ [/PAYCOR/,"Paycor","payroll","Workforce, Payroll and HR"],
+ [/RIPPLING/,"Rippling","payroll","Workforce, Payroll and HR"],
+ [/JUSTWORKS/,"Justworks","payroll","Workforce, Payroll and HR"],
+ [/TRINET/,"TriNet","payroll","Workforce, Payroll and HR"],
+ [/INSPERITY/,"Insperity","payroll","Workforce, Payroll and HR"],
+ [/\bONPAY\b/,"OnPay","payroll","Workforce, Payroll and HR"],
+ [/SQUARE PAYROLL|SQ \*PAYROLL/,"Square Payroll","payroll","Workforce, Payroll and HR"],
+ [/INTUIT.*PAYROLL|QB.*PAYROLL|QUICKBOOKS PAYROLL/,"QuickBooks Payroll","payroll","Workforce, Payroll and HR"],
+ [/PATRIOT SOFTWARE/,"Patriot Payroll","payroll","Workforce, Payroll and HR"],
+ [/\bDEEL\b/,"Deel","payroll","Workforce, Payroll and HR"],
+ [/BAMBOOHR|BAMBOO HR/,"BambooHR","hr","Workforce, Payroll and HR"],
+ [/ZENEFITS/,"Zenefits","hr","Workforce, Payroll and HR"],
+ [/HOMEBASE/,"Homebase","scheduling","Workforce, Payroll and HR"],
+ [/WHEN I WORK|WHENIWORK/,"When I Work","scheduling","Workforce, Payroll and HR"],
+ [/\bDEPUTY\b/,"Deputy","scheduling","Workforce, Payroll and HR"],
+ [/7SHIFTS/,"7shifts","scheduling","Workforce, Payroll and HR"],
+ [/CONNECTEAM/,"Connecteam","scheduling","Workforce, Payroll and HR"],
+ [/TSHEETS|QUICKBOOKS TIME|QB TIME/,"QuickBooks Time","time tracking","Workforce, Payroll and HR"],
+ [/CLOCKIFY/,"Clockify","time tracking","Workforce, Payroll and HR"],
+ [/HUBSTAFF/,"Hubstaff","time tracking","Workforce, Payroll and HR"],
+ [/TIMECLOCK|BUDDY PUNCH|BUDDYPUNCH/,"Time clock app","time tracking","Workforce, Payroll and HR"],
+ [/\bCHECKR\b/,"Checkr","background checks","Workforce, Payroll and HR"],
+ [/GOODHIRE/,"GoodHire","background checks","Workforce, Payroll and HR"],
+ [/\bINDEED\b/,"Indeed","hiring","Workforce, Payroll and HR"],
+ [/ZIPRECRUITER/,"ZipRecruiter","hiring","Workforce, Payroll and HR"],
+ [/LINKEDIN/,"LinkedIn","hiring","Workforce, Payroll and HR"],
+ [/\bLATTICE\b/,"Lattice","hr","Workforce, Payroll and HR"],
+ [/\bHR ?360\b|HRDIRECT|HR DIRECT/,"HR compliance service","hr","Workforce, Payroll and HR"],
  // Benefits and insurance
  [/\bEASE\b|EASECENTRAL/,"Ease","benefits admin","Benefits & Retirement"],
  [/EMPLOYEE NAVIGATOR/,"Employee Navigator","benefits admin","Benefits & Retirement"],
@@ -797,7 +797,7 @@ function bind(){
   $('saveBtn').addEventListener('click',function(){ var blob=new Blob([JSON.stringify({v:1,state:STATE},null,1)],{type:'application/json'}); var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='Atlas_One_Vendor_Audit_'+(STATE.company||'client').replace(/[^\w]+/g,'_')+'.json'; a.click(); });
   $('loadBtn').addEventListener('click',function(){ $('loadFile').click(); });
   $('sendAuditBtn').addEventListener('click',sendToAudit);
-  $('loadFile').addEventListener('change',function(e){ var f=e.target.files[0]; if(!f) return; var rd=new FileReader(); rd.onload=function(){ try{ var o=JSON.parse(rd.result); STATE=o.state; (STATE.rows||[]).forEach(function(r){ if(r.div==='Workforce & HR') r.div='Workforce, Payroll & HR'; }); ['rate','eff','hrsPer','revenue','company'].forEach(function(id){ $(id).value=STATE[id]||''; }); $('prepFor').textContent=STATE.company?('Prepared for '+STATE.company):''; renderTable(); renderResults(); }catch(err){ alert('That file did not load.'); } }; rd.readAsText(f); });
+  $('loadFile').addEventListener('change',function(e){ var f=e.target.files[0]; if(!f) return; var rd=new FileReader(); rd.onload=function(){ try{ var o=JSON.parse(rd.result); STATE=o.state; (STATE.rows||[]).forEach(function(r){ if(/^Workforce(, Payroll)? (&|and) HR$/.test(r.div||'')) r.div='Workforce, Payroll and HR'; }); /* 2026-10-16 and 2026-10-21: audits saved before either division rename still load under the current name */ ['rate','eff','hrsPer','revenue','company'].forEach(function(id){ $(id).value=STATE[id]||''; }); $('prepFor').textContent=STATE.company?('Prepared for '+STATE.company):''; renderTable(); renderResults(); }catch(err){ alert('That file did not load.'); } }; rd.readAsText(f); });
   $('csvBtn').addEventListener('click',function(){ var lines=[['Vendor','Function','Division','Pattern','Monthly','Annual','Decision']].concat(STATE.rows.map(function(r){return [r.name,FUNCTION_LABEL[r.fn]||r.fn,r.div,r.kind,r.monthly.toFixed(2),(r.monthly*12).toFixed(2),r.decision];})); var csv=lines.map(function(l){return l.map(function(x){return '"'+String(x).replace(/"/g,'""')+'"';}).join(',');}).join('\n'); var a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'})); a.download='Atlas_One_Vendor_Audit.csv'; a.click(); });
   $('clearBtn').addEventListener('click',function(){ STATE.rows=[]; STATE.fileBlocks=[]; STATE.summaryFiles=[]; $('periodMonthsWrap').hidden=true; $('paste').value=''; $('parseNote').textContent=''; renderTable(); renderResults(); });
   $('demoBtn').addEventListener('click',function(){ $('paste').value=DEMO; loadText(DEMO); if(!$('company').value){ $('company').value='Sample Co'; STATE.company='Sample Co'; $('prepFor').textContent='Prepared for Sample Co'; } });

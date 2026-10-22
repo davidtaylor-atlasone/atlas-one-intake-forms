@@ -123,10 +123,11 @@ IMPACT = {
     "sample_close": T(8, 10),
 }
 
-# Tab 6: Proof (slide 9)
+# Tab 6: Proof (slide 9). The 2026-10-21 deck dropped the separate check mark
+# lines, so each item is now a title line followed by its detail line.
 PROOF = {
     "h1": T(9, 0),
-    "items": [(T(9, 2), T(9, 3)), (T(9, 5), T(9, 6)), (T(9, 8), T(9, 9))],
+    "items": [(T(9, 1), T(9, 2)), (T(9, 3), T(9, 4)), (T(9, 5), T(9, 6))],
 }
 
 # Tab 7: Membership (slide 10, tiers overridden per website decision 2026-09-13)
@@ -314,6 +315,15 @@ def build_proof():
     </section>"""
 
 
+def setup_line(tier):
+    """The setup fee always sits beside the monthly. Since the 2026-10-21 deck the
+    tier line itself carries it, so the prices.json line is added only when the
+    deck line does not already say it."""
+    if "setup fee" in tier["desc"].lower():
+        return ""
+    return f'\n          <p class="setup">{esc(tier["setup"])}</p>'
+
+
 def build_membership():
     e, p = MEMBERSHIP["essential"], MEMBERSHIP["professional"]
     return f"""
@@ -324,14 +334,12 @@ def build_membership():
         <div class="tier">
           <h3>{esc(e['title'])}</h3>
           <div class="price">{esc(e['price'])}</div>
-          <p>{esc(e['desc'])}</p>
-          <p class="setup">{esc(e['setup'])}</p>
+          <p>{esc(e['desc'])}</p>{setup_line(e)}
         </div>
         <div class="tier feat">
           <h3>{esc(p['title'])}</h3>
           <div class="price">{esc(p['price'])}</div>
-          <p>{esc(p['desc'])}</p>
-          <p class="setup">{esc(p['setup'])}</p>
+          <p>{esc(p['desc'])}</p>{setup_line(p)}
         </div>
         <div class="tier built">
           <h3>Enterprise</h3>

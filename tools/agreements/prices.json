@@ -1,63 +1,680 @@
 {
-  "_source": "Client prices only, pulled from the Quick Quote catalogue (09 Quick Quote Tool/Atlas_One_Quick_Quote.html) and INTERNAL Master Pricing V8 on 2026-09-15. No vendor cost or margin in this file, per the agreements/proposal brief.",
+  "_source": "Client prices only. V17, 2026-10-21 (first locked 2026-09-30 as V10): the LOCKED price book (David approved 2026-09-30, see _BUILD-LOG/price-book-locked-2026-09-30.md). Built from the Quick Quote catalogue and INTERNAL Master Pricing V8. No vendor cost or margin in this file.",
+  "_locked": "2026-09-30, David",
+  "_lock_rule": "Only the Files and sales material lane (A1 GHL Jobs chat, GHL-JOBS terminal) edits this file, and only after David says yes in writing in that chat. Other chats report price problems, they never change a price. catalogue_check.py fails the build on any printed price not in this file or any retired price.",
+  "_version": "V17",
+  "_changelog": [
+    "V17 2026-10-21 card processing fee, David (decided in writing in chat 2026-10-21; live in GHL Payments, Settings, Miscellaneous Charges, Credit card processing fee 3.5%, on Invoices and Estimates and Payment links). Clients who pay by credit card pay a 3.5% processing fee; ACH is preferred and has no fee. Billing terms otherwise unchanged: Net 15, no late fee. \"A card surcharge\" comes off the retired list (the old 2.9% plus /bin/zsh.30 surcharge wording stays retired). No other price changed. Applied by the alignment sweep at the coordinator's direction.",
+    "V16 2026-10-16 tool tiers follow up (coordinator, in line with David's approved proposal). The tools the proposal did not name now sit in a tier: Professional adds time and attendance drift, onboarding cost, absence, meeting cost, job description, employee number, mileage log, business card, direct deposit, status change, equipment, credit application, offboarding and customer statement; Enterprise adds revenue per employee, business valuation, automation ROI, incident report, toolbox talk, vehicle inspection, WC class code request, the benefits enrollment guide and the bonus import builder. GL import and certified payroll self service lines now say included at Enterprise and above; the fees stay for Essential and Professional. GL import setup: waived on Professional, included at Enterprise and above. No dollar amount changed.",
+    "V15 2026-10-16 tool tiers, David (approved 2026-10-16, TOOL TIERS PROPOSAL 2026-10-16). Which tools each tier opens: Essential 8 calculators, 4 generators and the compliance calendar; Professional adds the hiring and cash tools; Enterprise adds the protection tools, the handbook and safety manual builders, agreements, onboarding packets and the operations tools (COI tracker, certified payroll, payroll to GL converter, onboarding tracker); Concierge every tool, done for you. New tool_tiers section. COI Tracker self service, the separation letter generator, the payroll to GL converter and certified payroll (WH-347) are now included at Enterprise and above; the 28 business generators are split by tier. Industry field math stays in every tier; the sales calculators stay Atlas One's to run in the free Back Office Audit. No dollar amount changed.",
+    "V14 2026-10-16 setup fee wording, David (approved 2026-10-16). The old waiver wording on membership setup is retired. Essential: no setup fee. Professional: $495 one time setup fee (variable). Enterprise: $995 one time setup fee (variable). Concierge: $1,500 one time setup fee (variable). Monthly prices unchanged ($99, $399, $999, $1,900). Same day: division 1 is now named Workforce, Payroll and HR (Workforce, Payroll & HR where the piece uses &).",
+    "V13 2026-10-10 workers comp audit recovery range, David (approved in writing 2026-10-10). Recovery changes from 25% of premium recovered to 15% to 25% of premium recovered, set for each company (25% standard, 20% clean single year file, 15% Professional members and above or as a closing discount), nothing owed if none is found.",
+    "V12 2026-10-07 bookkeeping payroll quoted, David. Payroll through Atlas One Bookkeeping is no longer a printed price: it reads Quoted for your company (headcount, pay cycle, PTO tracking and more), like PEO, ASO and HCM. Retired: the per employee rates, the monthly minimums, payroll setup, quarterly filing, new hire onboarding, the 1099 contractor payroll rates and the year end W-2 line. Old numbers stay only in the INTERNAL Master Pricing sheet as a guide.",
+    "V11 2026-10-06 annual plans removed, David. 'Annual plans, two months free: no.' No annual plan offer is printed anywhere: no two months free, no 15% off annual, no setup waived on annual, no pay annually. Enterprise setup now reads $995, often waived (same wording as Professional).",
+    "V10 2026-09-30 (David, Run CT Job 0 item 1): Concierge includes the AI Email Assistant (one mailbox) AND the AI Task Agent. Matches the atlas-pricing skill and the membership brochure.",
+    "V10 2026-09-30 (David, Run CT Job 0 item 2): Bookkeeping Medium and Large include A/P and A/R. The A/R and A/P price ranges stay inside the Quick Quote only. Bookkeeping with bill pay stays $750 (A/P included, A/R $250 more).",
+    "V10 2026-09-30 (David, Run CT Job 0 item 3): Year end W-2s are one extra payroll run at the client's rate, and the monthly minimum applies (greater of the rate or the minimum).",
+    "V10 2026-09-30 (David, Run CT Job 0 item 4): Handbook plus safety manual have no bundle price. Always show the two prices, handbook $950 and safety manual $1,200.",
+    "V10 2026-09-30 (David, Run CT Job 0 item 10): the existing catalogue prices that were not part of the 2026-09-30 decisions are locked in other_catalogue exactly as printed today (no value changed). Added the printed rows that were missing: 1099 contractor payroll, contractor administration, new hire onboarding, 1099 setup and manual 1099, time tracking, Connecteam, financial statements, benefits administration, ICHRA, Section 125, open enrollment, 5500, performance management, unemployment claims, WC policy review, business formation, ROI analysis, banking setup, brand design, S-Corp owner payroll, QuickBooks Ledger and Solopreneur.",
+    "V10 2026-09-30 (David, Run CT Job 0 item 11): annual plans stay OPEN. Every 'two months free' and '15% off' line is untouched until David decides. Nothing added or removed.",
+    "V9 2026-09-30 (David): QuickBooks Online retail Simple Start $38, Essentials $85, Plus $140, Advanced $340. $75, $115 and $275 retired.",
+    "V9 2026-09-30 (David): Professional membership is 3 hands on hours a month and a quarterly review. 10 tickets and the monthly advisory call retired. Per hire packs and document discount percentages removed from the comparison sheet.",
+    "V9 2026-09-30 (David): Bookkeeping Small is Starting at $300, exact price after a 15 minute look at your books. Medium and Large are priced after a 15 minute look at the books on client pieces (ranges only inside the Quick Quote).",
+    "V9 2026-09-30 (David): PEO, ASO and HCM are never printed. Quoted for your company (headcount, pay cycle, PTO tracking and more). No defaults in any tool or generator.",
+    "V9 2026-09-30 (David): Payroll tax account setup $250 per state withholding account and $250 per state unemployment account, $50 per additional city, county or state local tax account set up alongside (Nevada MBT: Nevada = $300), expedited plus $100 per account.",
+    "V9 2026-09-30 (David): Hourly advisory and support beyond the allowance $150 an hour (15 minute increments, 30 minute minimum), strategy consulting $250 an hour. $120 an hour retired.",
+    "V9 2026-09-30 (David): Workers comp audit recovery 25% of premium recovered, nothing owed if none.",
+    "V9 2026-09-30 (David): Background screening, drug testing, website build, hosting and care, content and blogging are Quoted on client pieces.",
+    "V9 2026-09-30 (David): Handbook update $250 and safety manual update $300 are per update, one time, included at Professional and above. Agreements $450 each, all three $1,200, custom HR document $175, same day rush $150.",
+    "V9 2026-09-30 (David): AI Task Agent setup $500. AI Task Agent $199 a month, $99 when bundled with the AI Email Assistant or on Enterprise, included in Concierge.",
+    "V9 2026-09-30 (David): Payroll through Atlas One Bookkeeping is the GREATER of the per employee rate or the monthly minimum ($100 monthly, $150 semi monthly, bi weekly or weekly). Year end W-2s billed as one extra payroll run at the client's rate. Setup $199, quarterly filing $130.",
+    "V9 2026-09-30 (David): Bookkeeping with bill pay $750 a month (A/R not included, $250 a month if added). A/P or A/R standalone $250 each.",
+    "V9 2026-09-30 (David): No late fee. Net 15 on invoices and in the MCSA (was ten days). Card surcharge sentence removed from the Bookkeeping Client Agreement Packet (ACH preferred, no processing fee).",
+    "V9 2026-09-30 (David): Annual membership plans are OPEN, David to answer. Nothing changed."
+  ],
   "bookkeeping": {
-    "small": {"label": "Bookkeeping, Small (1 to 3 accounts, 50 to 300 transactions a month)", "price": "$300 to $1,000 a month"},
-    "medium": {"label": "Bookkeeping, Medium (3 to 5 accounts, about 300 to 600 transactions a month)", "price": "$1,000 to $2,000 a month"},
-    "large": {"label": "Bookkeeping, Large (5 plus accounts, 600 plus transactions a month)", "price": "$2,000 to $3,000 a month"},
-    "catchup": {"label": "Catch up work", "price": "Billed at your plan's monthly rate for each month of catch up needed, prorated for a partial month"},
-    "advisory": {"label": "Advisory and consulting", "price": "$150 an hour, billed in 15 minute increments, 30 minute minimum"},
-    "quickbooks_sub": {"label": "QuickBooks Online subscription", "price": "Simple Start $38, Essentials $85, Plus $140 or Advanced $340 a month, set up and supported by Atlas One"}
+    "small": {
+      "label": "Bookkeeping, Small (1 to 3 accounts, 50 to 300 transactions a month)",
+      "price": "Starting at $300, exact price after a 15 minute look at your books"
+    },
+    "medium": {
+      "label": "Bookkeeping, Medium (3 to 5 accounts, about 300 to 600 transactions a month, includes A/P and A/R)",
+      "price": "Priced after a 15 minute look at your books"
+    },
+    "large": {
+      "label": "Bookkeeping, Large (5 plus accounts, 600 plus transactions a month, includes A/P and A/R)",
+      "price": "Priced after a 15 minute look at your books"
+    },
+    "catchup": {
+      "label": "Catch up work",
+      "price": "Billed at your plan's monthly rate for each month of catch up needed, prorated for a partial month"
+    },
+    "advisory": {
+      "label": "Advisory and support beyond the allowance",
+      "price": "$150 an hour, billed in 15 minute increments, 30 minute minimum"
+    },
+    "quickbooks_sub": {
+      "label": "QuickBooks Online subscription",
+      "price": "Simple Start $38, Essentials $85, Plus $140 or Advanced $340 a month, set up and supported by Atlas One"
+    },
+    "strategy_consulting": {
+      "label": "Strategy consulting",
+      "price": "$250 an hour, billed in 15 minute increments, 30 minute minimum"
+    },
+    "bill_pay": {
+      "label": "Bookkeeping with bill pay (A/P included)",
+      "price": "$750 a month, A/R not included"
+    },
+    "ap_ar_standalone": {
+      "label": "A/P or A/R, standalone, each",
+      "price": "$250 a month"
+    },
+    "ar_add_on": {
+      "label": "A/R added to bookkeeping with bill pay",
+      "price": "$250 a month"
+    },
+    "medium_large_ap_ar": {
+      "label": "A/P and A/R in Bookkeeping Medium and Large",
+      "price": "Included in Medium and Large, no extra charge"
+    }
   },
   "gl_import": {
-    "monthly": {"label": "Monthly payroll", "price": "$50 a month"},
-    "semi_monthly_biweekly": {"label": "Semi-monthly or bi-weekly payroll", "price": "$75 a month"},
-    "weekly": {"label": "Weekly payroll", "price": "$125 a month"},
-    "setup": {"label": "Setup", "price": "$250 one time, waived on Professional membership and above, included in Concierge"},
-    "extra": {"label": "Each additional entity or state journal, on the same payroll", "price": "$25 a month"}
+    "monthly": {
+      "label": "Monthly payroll",
+      "price": "$50 a month, included at Enterprise and above"
+    },
+    "semi_monthly_biweekly": {
+      "label": "Semi-monthly or bi-weekly payroll",
+      "price": "$75 a month, included at Enterprise and above"
+    },
+    "weekly": {
+      "label": "Weekly payroll",
+      "price": "$125 a month, included at Enterprise and above"
+    },
+    "setup": {
+      "label": "Setup",
+      "price": "$250 one time, waived on Professional, included at Enterprise and above"
+    },
+    "extra": {
+      "label": "Each additional entity or state journal, on the same payroll",
+      "price": "$25 a month"
+    },
+    "done_for_you": {
+      "label": "Payroll to GL import, Atlas One runs it and sends the files",
+      "price": "$35 per payroll run"
+    }
   },
   "cert_payroll": {
-    "monthly": {"label": "Certified payroll reporting (WH-347), per active job", "price": "$125 a month"}
+    "setup": {
+      "label": "Certified payroll (WH-347), setup",
+      "price": "$300 one time per company, included at Enterprise and above"
+    },
+    "bundle_setup_with_gl_import": {
+      "label": "GL import plus certified payroll setup, bought together",
+      "price": "$300 one time per company, included at Enterprise and above (replaces the $250 GL import setup plus the $300 certified payroll setup; the certified payroll setup fee covers both)"
+    },
+    "report": {
+      "label": "Certified payroll (WH-347), per report",
+      "price": "$60 per report, included at Enterprise and above"
+    },
+    "state_monthly": {
+      "label": "Certified payroll (WH-347), state monthly job",
+      "price": "$125 a month, per active job, included at Enterprise and above"
+    },
+    "federal_weekly": {
+      "label": "Certified payroll (WH-347), federal weekly job",
+      "price": "$250 a month, per active job, included at Enterprise and above"
+    },
+    "done_for_you": {
+      "label": "Certified payroll (WH-347), done for you",
+      "price": "$400 a month, per active job"
+    }
   },
   "wc_audit": {
-    "contingency": {"label": "Workers comp audit recovery, contingency fee", "price": "[__]% of the premium recovered, paid only if a recovery is made, nothing owed if none is found"}
+    "contingency": {
+      "label": "Workers comp audit recovery, contingency fee",
+      "price": "15% to 25% of the premium recovered, set for each company (25% standard, 20% clean single year file, 15% Professional members and above or as a closing discount), nothing owed if none is found"
+    }
   },
   "coi_tracking": {
-    "monthly": {"label": "Certificate of insurance tracking for subcontractors", "price": "[__] a month, price pending David's confirmation"}
+    "self_service": {
+      "label": "Certificate of insurance tracking, self service (COI Tracker)",
+      "price": "Included, Enterprise membership and above"
+    },
+    "done_for_you_small": {
+      "label": "Certificate of insurance tracking, done for you, up to 15 subcontractors",
+      "price": "$49 a month"
+    },
+    "done_for_you_medium": {
+      "label": "Certificate of insurance tracking, done for you, up to 50 subcontractors",
+      "price": "$99 a month"
+    },
+    "done_for_you_large": {
+      "label": "Certificate of insurance tracking, done for you, up to 100 subcontractors",
+      "price": "$149 a month"
+    },
+    "done_for_you_larger": {
+      "label": "Certificate of insurance tracking, done for you, over 100 subcontractors",
+      "price": "Quoted"
+    },
+    "done_for_you_setup": {
+      "label": "Certificate of insurance tracking, done for you, setup",
+      "price": "$150 one time, waived on Professional membership and above"
+    },
+    "done_for_you_included": {
+      "label": "Certificate of insurance tracking, done for you, included in Concierge",
+      "price": "Included in Concierge membership, up to 25 subcontractors"
+    }
+  },
+  "safety_training": {
+    "done_for_you_build": {
+      "label": "Safety training program, done for you, build and load for your industry",
+      "price": "$295 one time, waived on Enterprise membership and above"
+    },
+    "done_for_you_small": {
+      "label": "Safety training program, done for you, up to 25 employees",
+      "price": "$79 a month"
+    },
+    "done_for_you_medium": {
+      "label": "Safety training program, done for you, 26 to 75 employees",
+      "price": "$129 a month"
+    },
+    "done_for_you_larger": {
+      "label": "Safety training program, done for you, over 75 employees",
+      "price": "Quoted"
+    },
+    "done_for_you_included": {
+      "label": "Safety training program, done for you, included in Concierge",
+      "price": "Included in Concierge membership"
+    },
+    "done_for_you_note": {
+      "label": "Safety training program, done for you, what is included",
+      "price": "A new talk and quiz loaded every month, a new hire not yet trained alert, and a quarterly report to the owner"
+    },
+    "done_for_you_connecteam": {
+      "label": "Safety training program, done for you, when the client uses Connecteam",
+      "price": "Connecteam's own license is added at Connecteam's list price"
+    },
+    "diy": {
+      "label": "Safety training, do it yourself, the 12 month calendar and talk library in the portal",
+      "price": "Included, Professional membership and above"
+    }
+  },
+  "inclusions": {
+    "business_generators": {
+      "label": "The 28 business generators",
+      "price": "Split by tier, not sold alone: Essential has the invoice, receipt, quote and timesheet; Professional adds the offer letter, PTO request, purchase order, expense report, employee ID card, job description, employee number, mileage log, business card, direct deposit, status change, equipment, credit application, offboarding and customer statement; Enterprise adds the work order, change order, lien waiver, SOP, org chart, incident report, toolbox talk, vehicle inspection and WC class code request, so Enterprise and Concierge have all 28"
+    },
+    "write_up_generator": {
+      "label": "The write up generator",
+      "price": "Included, Professional membership and above, not sold alone"
+    },
+    "separation_letter_generator": {
+      "label": "The separation letter generator",
+      "price": "Included, Enterprise membership and above, not sold alone"
+    },
+    "gl_converter_concierge": {
+      "label": "Payroll to GL import converter",
+      "price": "Included, Enterprise membership and above"
+    },
+    "cert_payroll_concierge": {
+      "label": "Certified payroll (WH-347)",
+      "price": "Included, Enterprise membership and above"
+    },
+    "handbook_or_safety_enterprise": {
+      "label": "One employee handbook or safety manual a year",
+      "price": "Included in Enterprise membership"
+    },
+    "handbook_and_safety_concierge": {
+      "label": "One employee handbook and one safety manual a year",
+      "price": "Included in Concierge membership"
+    },
+    "ai_concierge": {
+      "label": "AI Email Assistant (one mailbox) and AI Task Agent",
+      "price": "Both included in Concierge membership"
+    }
+  },
+  "tool_tiers": {
+    "_note": "Which tools each membership tier opens (David approved 2026-10-16, Claude Design/_Handoff Notes/TOOL TIERS PROPOSAL 2026-10-16.md; V16 places the tools the proposal did not name). Inclusions, not prices. Every member tool is named in one tier; Concierge gets every tool.",
+    "essential": {
+      "label": "Tools with Essential",
+      "price": "8 calculators (labor burden, overtime, paycheck tax, time card, profit, break even, cash flow runway, quarterly estimated tax), 4 generators (invoice, receipt, quote, timesheet) and the compliance calendar"
+    },
+    "professional": {
+      "label": "Tools with Professional",
+      "price": "Everything in Essential, plus the hiring and cash tools: cost of hiring, bad hire, turnover, PTO, pay raise, sales pay and total comp, receivables and owner tax calculators, and the offer letter, PTO request, purchase order, expense report, collections letter, write up, feedback request and employee ID card generators; plus the everyday tools: time and attendance drift, onboarding cost, absence and meeting cost calculators, and the job description, employee number, mileage log, business card, direct deposit, status change, equipment, credit application, offboarding and customer statement generators"
+    },
+    "enterprise": {
+      "label": "Tools with Enterprise",
+      "price": "Everything in Professional, plus the protection tools: workers comp audit and premium, HIPAA risk, 401(k) fees, software stack, COI time cost, sales tax nexus, LLC vs S Corp, Section 179, overhead, customer value, acquisition cost, loan, revenue per employee, business valuation and automation ROI calculators; the employee handbook (50 states, English and Spanish) and safety manual builders; the at will, contractor and NDA agreements, the W-2 and contractor onboarding packets and the benefits enrollment guide; separation letter, work order, change order, lien waiver, SOP, org chart, incident report, toolbox talk, vehicle inspection and WC class code request; and the operations tools: COI tracker, certified payroll (WH-347), payroll to GL converter, onboarding tracker and bonus import builder"
+    },
+    "concierge": {
+      "label": "Tools with Concierge",
+      "price": "Every tool, and Atlas One runs them for you (your handbook and safety manual built for you), plus the AI Email Assistant and the AI Task Agent"
+    },
+    "industry": {
+      "label": "Industry field math calculators",
+      "price": "Every tier: the trade calculators for the member's own industry (roofing, HVAC, lawn, cleaning, pest, janitorial, concrete, paint, asphalt, excavation, electrical, pipe sizing, restaurant break even, tip pooling)"
+    },
+    "sales_tools": {
+      "label": "Sales calculators (Total Outsourcing ROI, True Cost, PEO vs In House, Total Impact, Vendor and Software Audit)",
+      "price": "Not a member tool: Atlas One runs them for the prospect in the free Back Office Audit"
+    }
   },
   "ai_services": {
-    "essentials": {"label": "AI Email Assistant, Essentials (1 mailbox, 30 minutes support a month)", "price": "$249 a month"},
-    "professional": {"label": "AI Email Assistant, Professional (up to 3 mailboxes, 1 hour support a month)", "price": "$499 a month"},
-    "extra_mailbox": {"label": "Additional mailbox, each", "price": "$75 a month"},
-    "setup": {"label": "Setup", "price": "$750 standard, $999 for complex multi mailbox rollouts"},
-    "task_agent_standalone": {"label": "AI Task Agent, standalone", "price": "$199 a month"},
-    "task_agent_bundled": {"label": "AI Task Agent, bundled with the Email Assistant", "price": "$99 a month"},
-    "task_agent_setup": {"label": "AI Task Agent setup", "price": "$500, waived when bundled"}
+    "essentials": {
+      "label": "AI Email Assistant, Essentials (1 mailbox, 30 minutes support a month)",
+      "price": "$249 a month"
+    },
+    "professional": {
+      "label": "AI Email Assistant, Professional (up to 3 mailboxes, 1 hour support a month)",
+      "price": "$499 a month"
+    },
+    "extra_mailbox": {
+      "label": "Additional mailbox, each",
+      "price": "$75 a month"
+    },
+    "setup": {
+      "label": "Setup",
+      "price": "$750 standard, $999 for complex multi mailbox rollouts"
+    },
+    "task_agent_standalone": {
+      "label": "AI Task Agent, standalone",
+      "price": "$199 a month, $99 when bundled with the AI Email Assistant or on Enterprise, included in Concierge"
+    },
+    "task_agent_bundled": {
+      "label": "AI Task Agent, bundled with the Email Assistant",
+      "price": "$99 a month"
+    },
+    "task_agent_setup": {
+      "label": "AI Task Agent setup",
+      "price": "$500, waived when bundled"
+    },
+    "task_agent_enterprise": {
+      "label": "AI Task Agent, on Enterprise membership",
+      "price": "$99 a month"
+    },
+    "task_agent_included": {
+      "label": "AI Task Agent, included in Concierge",
+      "price": "Included in Concierge membership"
+    },
+    "email_assistant_concierge": {
+      "label": "AI Email Assistant, included in Concierge (one mailbox)",
+      "price": "Included in Concierge membership, one mailbox"
+    }
   },
   "documents": {
-    "handbook": {"label": "Employee handbook, custom, bilingual, 50 state compliant", "price": "$950 one time"},
-    "handbook_update": {"label": "Handbook annual update", "price": "$250 a year"},
-    "safety": {"label": "Safety manual, OSHA, bilingual, 50 state", "price": "$1,200 one time"},
-    "safety_update": {"label": "Safety manual annual refresh", "price": "$300 a year"},
-    "agreement_each": {"label": "W-2 at will agreement, 1099 contractor agreement, or NDA, each, multi state", "price": "$450 one time"},
-    "agreement_bundle": {"label": "All three agreements, bundle", "price": "$1,200 one time"},
-    "hr_docs": {"label": "Custom HR document or policy, each", "price": "$175 one time"}
+    "handbook": {
+      "label": "Employee handbook, custom, bilingual, 50 state compliant",
+      "price": "$950 one time"
+    },
+    "handbook_basic": {
+      "label": "Employee handbook, basic, generated from your answers",
+      "price": "$299 one time"
+    },
+    "handbook_update": {
+      "label": "Handbook update",
+      "price": "$250 per update, one time, included at Professional and above"
+    },
+    "safety": {
+      "label": "Safety manual, OSHA, bilingual, 50 state",
+      "price": "$1,200 one time"
+    },
+    "safety_basic": {
+      "label": "Safety manual, basic, generated from your answers",
+      "price": "$299 one time"
+    },
+    "safety_update": {
+      "label": "Safety manual update",
+      "price": "$300 per update, one time, included at Professional and above"
+    },
+    "agreement_each": {
+      "label": "W-2 at will agreement, 1099 contractor agreement, or NDA, each, multi state",
+      "price": "$450 one time"
+    },
+    "agreement_bundle": {
+      "label": "All three agreements, bundle",
+      "price": "$1,200 one time"
+    },
+    "hr_docs": {
+      "label": "Custom HR document or policy, each",
+      "price": "$175 one time"
+    },
+    "rush": {
+      "label": "Same day rush, any document",
+      "price": "$150"
+    },
+    "handbook_safety_bundle": {
+      "label": "Employee handbook plus safety manual together",
+      "price": "No bundle price, show the two prices: handbook $950 and safety manual $1,200"
+    }
   },
   "membership": {
-    "essential": {"label": "Membership, Essential", "price": "$99 a month, no setup fee", "fit": "1 to 20 employees, one state, under five hours a month of back office work. You do most of it yourself."},
-    "professional": {"label": "Membership, Professional", "price": "$399 a month, $495 one time setup fee (variable)", "fit": "15 to 50 employees, or five to fifteen hours a month. The owner is still the back office."},
-    "enterprise": {"label": "Membership, Enterprise", "price": "$999 a month, $995 one time setup fee (variable)", "fit": "Forty to a hundred employees, or more than fifteen hours a month. You want it run, not advised."},
-    "concierge": {"label": "Membership, Concierge, Fractional COO", "price": "$1,900 a month, $1,500 one time setup fee (variable)", "fit": "The honest answer to \"who runs operations\" is \"me, at night.\""}
+    "essential": {
+      "label": "Membership, Essential",
+      "price": "$99 a month, no setup fee",
+      "fit": "1 to 20 employees, one state, under five hours a month of back office work. You do most of it yourself."
+    },
+    "professional": {
+      "label": "Membership, Professional",
+      "price": "$399 a month, $495 one time setup fee (variable)",
+      "fit": "15 to 50 employees, or five to fifteen hours a month. The owner is still the back office. Includes 3 hands on hours a month and a quarterly review.",
+      "hours": "3 hands on hours a month and a quarterly review"
+    },
+    "enterprise": {
+      "label": "Membership, Enterprise",
+      "price": "$999 a month, $995 one time setup fee (variable)",
+      "fit": "Forty to a hundred employees, or more than fifteen hours a month. You want it run, not advised."
+    },
+    "concierge": {
+      "label": "Membership, Concierge, Fractional COO",
+      "price": "$1,900 a month, $1,500 one time setup fee (variable)",
+      "fit": "The honest answer to \"who runs operations\" is \"me, at night.\""
+    }
   },
   "advisory_support": {
-    "over_allowance": {"label": "Support beyond the included allowance", "price": "$150 an hour"}
+    "over_allowance": {
+      "label": "Support beyond the included allowance",
+      "price": "$150 an hour, 15 minute increments, 30 minute minimum"
+    },
+    "strategy_consulting": {
+      "label": "Strategy consulting",
+      "price": "$250 an hour"
+    }
   },
   "software": {
-    "m365_business_basic": {"label": "Microsoft 365 Business Basic, per user", "price": "$7 per user per month, annual term"},
-    "m365_business_standard": {"label": "Microsoft 365 Business Standard, per user", "price": "$14 per user per month, annual term"},
-    "m365_business_premium": {"label": "Microsoft 365 Business Premium, per user", "price": "$22 per user per month, annual term"},
-    "m365_copilot": {"label": "Microsoft 365 Copilot, per user", "price": "$21 per user per month, annual term, requires a Business plan"},
-    "quickbooks_online": {"label": "QuickBooks Online subscription", "price": "Simple Start $38, Essentials $85, Plus $140, Advanced $340 per month"},
-    "other_resold": {"label": "Any other resold software product, per unit", "price": "Quoted per product, confirmed on the client's invoice"}
+    "m365_business_basic": {
+      "label": "Microsoft 365 Business Basic, per user",
+      "price": "$7 per user per month, annual term"
+    },
+    "m365_business_standard": {
+      "label": "Microsoft 365 Business Standard, per user",
+      "price": "$14 per user per month, annual term"
+    },
+    "m365_business_premium": {
+      "label": "Microsoft 365 Business Premium, per user",
+      "price": "$22 per user per month, annual term"
+    },
+    "m365_copilot": {
+      "label": "Microsoft 365 Copilot, per user",
+      "price": "$21 per user per month, annual term, requires a Business plan"
+    },
+    "quickbooks_online": {
+      "label": "QuickBooks Online subscription",
+      "price": "Simple Start $38, Essentials $85, Plus $140, Advanced $340 per month"
+    },
+    "other_resold": {
+      "label": "Any other resold software product, per unit",
+      "price": "Quoted per product, confirmed on the client's invoice"
+    }
   },
-  "discount": ""
+  "discount": "",
+  "payroll_models": {
+    "peo": {
+      "label": "PEO, full service payroll, HR support, benefits admin and compliance",
+      "price": "Quoted for your company (headcount, pay cycle, PTO tracking and more)"
+    },
+    "peo_pct": {
+      "label": "PEO, priced as a percentage of gross payroll",
+      "price": "Quoted for your company (headcount, pay cycle, PTO tracking and more)"
+    },
+    "aso": {
+      "label": "ASO, administrative services, you keep your FEIN, benefits and workers comp",
+      "price": "Quoted for your company (headcount, pay cycle, PTO tracking and more)"
+    },
+    "hcm": {
+      "label": "HCM software only, self service",
+      "price": "Quoted for your company (headcount, pay cycle, PTO tracking and more)"
+    },
+    "bookkeeping": {
+      "label": "Payroll through Atlas One Bookkeeping",
+      "price": "Quoted for your company (headcount, pay cycle, PTO tracking and more)"
+    }
+  },
+  "included_services": {
+    "wc_placement": {
+      "label": "Workers comp shopped and placed",
+      "price": "Shopped and placed for you, premium quoted separately"
+    },
+    "benefits_placement": {
+      "label": "Health and benefits shopped and placed",
+      "price": "Shopped and placed for you, premiums quoted separately"
+    },
+    "bookkeeping_review": {
+      "label": "Bookkeeping review",
+      "price": "Plan and price confirmed after we see your books"
+    },
+    "software_consolidation": {
+      "label": "Software stack consolidated",
+      "price": "Moved onto one bill with one call for support"
+    }
+  },
+  "payroll_tax_setup": {
+    "withholding": {
+      "label": "Payroll tax account setup, state withholding account",
+      "price": "$250 per account, one time"
+    },
+    "unemployment": {
+      "label": "Payroll tax account setup, state unemployment account",
+      "price": "$250 per account, one time"
+    },
+    "state_both": {
+      "label": "Payroll tax account setup, one state with withholding and unemployment",
+      "price": "$500 one time"
+    },
+    "additional_local": {
+      "label": "Each additional city, county or state local tax account set up alongside (for example the Nevada MBT)",
+      "price": "$50 per account, one time"
+    },
+    "expedited": {
+      "label": "Expedited account setup",
+      "price": "Plus $100 per account"
+    }
+  },
+  "quoted_services": {
+    "screening": {
+      "label": "Background screening and drug testing",
+      "price": "Quoted"
+    },
+    "website": {
+      "label": "Website build",
+      "price": "Quoted"
+    },
+    "hosting": {
+      "label": "Website hosting and care",
+      "price": "Quoted"
+    },
+    "blogging": {
+      "label": "Content and blogging",
+      "price": "Quoted"
+    }
+  },
+  "billing_terms": {
+    "payment_terms": {
+      "label": "Invoice and MCSA payment terms",
+      "price": "Net 15, due within fifteen days of the invoice date"
+    },
+    "late_fee": {
+      "label": "Late fee",
+      "price": "None"
+    },
+    "payment_method": {
+      "label": "Payment method",
+      "price": "ACH preferred, no fee. Credit card payments carry a 3.5% processing fee"
+    },
+    "card_processing_fee": {
+      "label": "Credit card processing fee",
+      "price": "3.5% of each card payment (invoices, estimates and payment links); ACH has no fee"
+    }
+  },
+  "annual_plans": {
+    "_status": "OFF, David 2026-10-06. No yearly deal of any kind is printed anywhere."
+  },
+  "other_catalogue": {
+    "_note": "Existing printed catalogue prices (Price List, division sheets, Quick Quote) that are NOT part of the 2026-09-30 decisions. Recorded here unchanged so the price guard can see them. LOCKED unchanged on 2026-09-30 (Run CT Job 0 item 10, David): every value is exactly as printed today and the price guard protects it. Changing any of them needs David in writing.",
+    "1099_automated_form": {
+      "label": "Year end 1099s, automated, per form",
+      "price": "$17 per form"
+    },
+    "everify": {
+      "label": "E-Verify, per verification",
+      "price": "$8 per verification"
+    },
+    "lms": {
+      "label": "Learning management (LMS), per employee",
+      "price": "$4 per employee per month"
+    },
+    "hris": {
+      "label": "HRIS and employee management, per employee",
+      "price": "$4 per employee per month"
+    },
+    "cert_tracking": {
+      "label": "Certification and training tracking, per employee",
+      "price": "$2 per employee per month"
+    },
+    "ats": {
+      "label": "Applicant tracking system",
+      "price": "$95 a month"
+    },
+    "expense_tracking": {
+      "label": "Expense tracking and receipt capture",
+      "price": "$95 a month"
+    },
+    "doc_digital": {
+      "label": "Document digitisation and form design, per form",
+      "price": "$95 per form"
+    },
+    "security_audit": {
+      "label": "Annual security audit",
+      "price": "$2,500 a year"
+    },
+    "solo_401k": {
+      "label": "Solo 401(k), SEP or IRA setup",
+      "price": "$350 one time"
+    },
+    "pep_401k": {
+      "label": "401(k) PEP or MEP, per participant per year",
+      "price": "$65 per participant per year, setup $450"
+    },
+    "aca": {
+      "label": "ACA reporting",
+      "price": "$8 per employee"
+    },
+    "quarterly_filing_monthly_equiv": {
+      "label": "Quarterly payroll filing",
+      "price": "Quoted for your company (headcount, pay cycle, PTO tracking and more)"
+    },
+    "scorp_monthly_equiv": {
+      "label": "S corp election support, monthly equivalent in the Quick Quote",
+      "price": "$83.33 a month"
+    },
+    "open_enrollment_monthly_equiv": {
+      "label": "Open enrollment support, monthly equivalent in the Quick Quote",
+      "price": "$41.67 a month"
+    },
+    "it_helpdesk": {
+      "label": "IT support and helpdesk",
+      "price": "$125 a month"
+    },
+    "compliance_package": {
+      "label": "Compliance package (HIPAA, SOC 2)",
+      "price": "$500 a month"
+    },
+    "cobra": {
+      "label": "COBRA administration",
+      "price": "$35"
+    },
+    "garnishment": {
+      "label": "Garnishment administration, per garnishment per month",
+      "price": "$15"
+    },
+    "contractor_1099_payroll": {
+      "label": "1099 contractor payroll, per contractor",
+      "price": "Quoted for your company (headcount, pay cycle, PTO tracking and more)"
+    },
+    "contractor_admin": {
+      "label": "Contractor payroll administration, per contractor",
+      "price": "$5 a month"
+    },
+    "onboarding": {
+      "label": "New hire onboarding, per hire (digital W-4, I-9, W-9, direct deposit)",
+      "price": "Quoted for your company (headcount, pay cycle, PTO tracking and more)"
+    },
+    "1099_automated_setup": {
+      "label": "Year end 1099s, automated, setup",
+      "price": "$75 setup"
+    },
+    "1099_manual": {
+      "label": "Year end 1099s, manual or spreadsheet: setup / per form",
+      "price": "$100 / $25"
+    },
+    "scorp_owner_payroll": {
+      "label": "S-Corp owner payroll, per quarter (annual W-2 included)",
+      "price": "$250"
+    },
+    "time_tracking": {
+      "label": "Time tracking and attendance, per user per month",
+      "price": "$1 to $15"
+    },
+    "connecteam": {
+      "label": "Connecteam workforce hubs, per employee per month",
+      "price": "$3 to $15"
+    },
+    "financial_statements": {
+      "label": "Financial statement preparation, per set",
+      "price": "$450"
+    },
+    "qbo_ledger_solopreneur": {
+      "label": "QuickBooks Online Ledger / Solopreneur",
+      "price": "$10 / $20"
+    },
+    "benefits_admin": {
+      "label": "Benefits administration, per employee (included in a PEO engagement)",
+      "price": "$7"
+    },
+    "ichra_admin": {
+      "label": "ICHRA / individual coverage administration, per employee",
+      "price": "$20"
+    },
+    "sec125": {
+      "label": "Section 125, HSA, FSA, HRA administration, per employee",
+      "price": "$5"
+    },
+    "open_enrollment": {
+      "label": "Open enrollment support, per year",
+      "price": "$500"
+    },
+    "form_5500": {
+      "label": "5500 filing and nondiscrimination testing, per year",
+      "price": "$950"
+    },
+    "performance_mgmt": {
+      "label": "Performance management, per employee",
+      "price": "$3"
+    },
+    "unemployment_claims": {
+      "label": "Unemployment claims administration, per claim",
+      "price": "$25"
+    },
+    "wc_policy_review": {
+      "label": "Workers comp policy review, flat fee",
+      "price": "$495"
+    },
+    "business_formation": {
+      "label": "Business formation and structure, plus state fees",
+      "price": "$750"
+    },
+    "roi_analysis": {
+      "label": "ROI analysis and reporting",
+      "price": "$750"
+    },
+    "banking_setup": {
+      "label": "Banking and treasury setup",
+      "price": "$750"
+    },
+    "brand_design": {
+      "label": "Brand, flyer and collateral design",
+      "price": "$1,200"
+    }
+  }
 }

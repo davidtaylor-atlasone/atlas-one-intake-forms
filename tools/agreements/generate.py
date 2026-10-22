@@ -3,7 +3,8 @@
 
 Builds the Master Client Services Agreement, the standalone Hold Harmless,
 one page Schedules for every service, the proposal shell, and a sample
-proposal per schedule for a fictional client "Tell Me More LLC".
+proposal per schedule for a fictional client, "Sample Company" (David, 2026-10-13:
+no real company name in any sample, his own included).
 
 Every document is built once as a list of content blocks (see the Doc class
 below), then rendered TWICE from that single source of truth:
@@ -32,7 +33,8 @@ Quick Quote catalogue and Master Pricing V8 (client prices only, no vendor
 cost or margin). The "no dashes in client copy" rule is enforced below;
 this script raises if an em dash or en dash reaches any paragraph.
 
-Run:  python3 generate.py "/path/to/Atlas_One_Master_Kit"
+Run:  python3 generate.py "/path/to/Atlas_One_Master_Kit" [--sync-ghl]
+      --sync-ghl also copies 01 to 13 (no 05) into A1_Sales/A1 Agreements/GHL Upload 2026-10-01.
 """
 import io
 import json
@@ -49,6 +51,10 @@ from docx.oxml.ns import qn
 from docx.shared import Pt, RGBColor, Cm
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+
+sys.path.insert(0, os.path.join(HERE, "..", ".."))
+from people import load_people
+_A1_COMPANY = load_people()["company"]
 
 NAVY = "#23304D"
 PERI = "#788DE3"
@@ -67,6 +73,20 @@ with io.open(os.path.join(HERE, "prices.json"), encoding="utf-8") as f:
 
 with io.open(os.path.join(HERE, "fonts_faces.css"), encoding="utf-8") as f:
     FONT_FACES_CSS = f.read()
+
+# The official A1 Solutions logo (Full Mark, full color) from the brand kit. The brand is fixed:
+# every agreement, schedule and proposal carries this mark at the top left, never typed text
+# (2026-10-21: a text "ATLAS ONE SOLUTIONS LLC" header had replaced it; restored to the 2026-09-30 placement).
+LOGO_PATH = os.path.normpath(os.path.join(
+    HERE, "..", "..", "..", "A1_Final Brand", "1. Logos", "Full Mark", "Full Color", "Web",
+    "atlas-one-solutions-full-mark-full-color-rgb-900px-w-72ppi.png"))
+if not os.path.exists(LOGO_PATH):
+    raise SystemExit(f"generate.py: brand logo not found, refusing to build without it: {LOGO_PATH}")
+with open(LOGO_PATH, "rb") as f:
+    LOGO_BYTES = f.read()
+import base64 as _b64
+LOGO_DATA_URI = "data:image/png;base64," + _b64.b64encode(LOGO_BYTES).decode("ascii")
+LOGO_WIDTH_PT = 84   # 900 x 402 px mark printed 84 pt wide, about 37.5 pt tall (the 2026-09-30 GHL set)
 
 DASH_RE = re.compile("[–—]")
 
@@ -245,11 +265,8 @@ def render_docx(doc):
         k = b["kind"]
         if k == "brand_header":
             p = d.add_paragraph()
-            p.paragraph_format.space_after = Pt(0)
-            _set_run(p.add_run("ATLAS ONE SOLUTIONS LLC"), 13, bold=True, color=NAVY_RGB, font=HEAD_FONT)
-            p2 = d.add_paragraph()
-            p2.paragraph_format.space_after = Pt(2)
-            _set_run(p2.add_run("One Call Solves Everything."), 9, italic=True, color=PERI_RGB, font=BODY_FONT)
+            p.paragraph_format.space_after = Pt(2)
+            p.add_run().add_picture(io.BytesIO(LOGO_BYTES), width=Pt(LOGO_WIDTH_PT))
             rule = d.add_paragraph()
             rule.paragraph_format.space_after = Pt(10)
             pPr = rule._p.get_or_add_pPr()
@@ -307,7 +324,9 @@ def render_docx(doc):
         elif k == "signature":
             _docx_signature(d, b["extra_line"], b["lead_text"], b["skip_heading"])
         elif k == "footer":
-            _docx_para(d, "Atlas One Solutions LLC · Lehi, Utah · 380-225-5217 · David@AtlasOneSolutions.com",
+            _docx_para(d, "%s · %s · %s · %s" % (
+                           _A1_COMPANY["name"], _A1_COMPANY["support_email"],
+                           _A1_COMPANY["phone_display"], _A1_COMPANY["site"]),
                        size=8, color=NAVY_RGB, space_after=0)
         else:
             raise SystemExit(f"render_docx: unknown block kind {k!r}")
@@ -334,6 +353,7 @@ p { margin: 0; }
 .para { margin: 0 0 var(--sa, 6pt) 0; }
 .brand-name { font-size: 13pt; font-weight: 700; color: #23304D; margin: 0; }
 .tagline { font-size: 9pt; font-style: italic; color: #788DE3; margin: 2pt 0 0 0; }
+.logo { display: block; width: 84pt; height: auto; margin: 0; }
 .rule { border-bottom: 1.5pt solid #788DE3; margin: 5pt 0 8pt 0; }
 .doc-title { font-size: 16pt; font-weight: 700; color: #23304D; margin: 0 0 2pt 0; }
 .subtitle { font-size: 9.5pt; font-style: italic; color: #23304D; margin: 0 0 9pt 0; }
@@ -362,8 +382,7 @@ def render_html(doc, page_title):
     for b in doc.blocks:
         k = b["kind"]
         if k == "brand_header":
-            parts.append("<p class='brand-name'>ATLAS ONE SOLUTIONS LLC</p>")
-            parts.append("<p class='tagline'>One Call Solves Everything.</p>")
+            parts.append(f"<img class='logo' src='{LOGO_DATA_URI}' alt='A1 Solutions'>")
             parts.append("<div class='rule'></div>")
             parts.append(f"<p class='doc-title'>{_esc(b['title'])}</p>")
             if b["subtitle"]:
@@ -414,8 +433,9 @@ def render_html(doc, page_title):
                 "</table>"
             )
         elif k == "footer":
-            parts.append("<p class='footer'>Atlas One Solutions LLC &middot; Lehi, Utah &middot; "
-                          "380-225-5217 &middot; David@AtlasOneSolutions.com</p>")
+            parts.append("<p class='footer'>%s &middot; %s &middot; %s &middot; %s</p>" % (
+                _esc(_A1_COMPANY["name"]), _esc(_A1_COMPANY["support_email"]),
+                _esc(_A1_COMPANY["phone_display"]), _esc(_A1_COMPANY["site"])))
         else:
             raise SystemExit(f"render_html: unknown block kind {k!r}")
     parts.append("</body></html>")
@@ -455,7 +475,7 @@ def build_msa():
     doc = Doc()
     doc.brand_header("MASTER CLIENT SERVICES AGREEMENT",
                       "The master agreement. Attach the Schedule for each service the client buys.")
-    doc.watermark("ATTORNEY REVIEW PENDING, DO NOT SEND FOR SIGNATURE UNTIL DAVID CLEARS THIS DOCUMENT")
+    # 2026-09-29: David ruled Atlas One's own service agreements need no attorney review banner.
     doc.para("This Master Client Services Agreement (this Agreement) is entered into as of "
              "____________________ between Atlas One Solutions LLC, a Utah limited liability company "
              "(Atlas One), and ____________________ (Client). This Agreement, together with every Schedule "
@@ -467,12 +487,11 @@ def build_msa():
                "this Agreement.")
 
     doc.clause("2.", "Fees and billing", "Fees are set in each Schedule. Monthly fees are billed in advance and "
-               "charged automatically to the payment method on file, or invoiced with payment due within ten days of "
-               "the invoice date if the Client has not set up automatic payment. A late fee of [__] applies to an "
-               "invoice not paid within the stated terms; the exact fee and the day it starts are confirmed by David "
-               "before this Agreement is signed. One time and setup fees are due at signing unless the Schedule says "
+               "charged automatically to the payment method on file, or invoiced with payment due within fifteen days of "
+               "the invoice date if the Client has not set up automatic payment. One time and setup fees are due at signing unless the Schedule says "
                "otherwise. Every price in a Schedule is confirmed at signing and does not change mid term without "
-               "written notice.")
+               "written notice. ACH is preferred and has no fee. Credit card payments carry a 3.5% processing fee. "
+               "There is no late fee.")
 
     doc.clause("3.", "Term and termination", "This Agreement begins on the date above and continues month to "
                "month unless a Schedule states a different term. Either party may end a service by giving thirty "
@@ -535,7 +554,7 @@ def build_hold_harmless():
     doc = Doc()
     doc.brand_header("HOLD HARMLESS AND ACKNOWLEDGEMENT",
                       "Standalone, one page. Use for a document only sale that is not covered by a signed Master Agreement.")
-    doc.watermark("ATTORNEY REVIEW PENDING, DO NOT SEND FOR SIGNATURE UNTIL DAVID CLEARS THIS DOCUMENT")
+    # 2026-09-29: David ruled Atlas One's own service agreements need no attorney review banner.
     doc.para("This Hold Harmless and Acknowledgement (this Acknowledgement) is entered into as of "
              "____________________ between Atlas One Solutions LLC (Atlas One) and ____________________ "
              "(Client), covering the document or deliverable described below.", size=10)
@@ -597,14 +616,16 @@ def schedule_bookkeeping():
             [pr["large"]["label"], pr["large"]["price"]],
             [pr["catchup"]["label"], pr["catchup"]["price"]],
             [pr["advisory"]["label"], pr["advisory"]["price"]],
-            [pr["quickbooks_sub"]["label"], pr["quickbooks_sub"]["price"]]]
+            [pr["quickbooks_sub"]["label"], pr["quickbooks_sub"]["price"]],
+            [pr["strategy_consulting"]["label"], pr["strategy_consulting"]["price"]]]
     clauses = [
         ("1.", "Scope", "Atlas One provides bookkeeping at the plan level selected below: transactions "
          "categorized, accounts reconciled, and a monthly close delivered on a set schedule. Adding "
          "accounts payable, accounts receivable, job costing, or advisory is a plan change, not a new "
          "engagement."),
         ("2.", "Electronic payment", "The Client pays by the electronic payment method selected on the first "
-         "invoice, or by another method the parties agree to in writing."),
+         "invoice, or by another method the parties agree to in writing. ACH is preferred and has no fee. "
+         "Credit card payments carry a 3.5% processing fee."),
         ("3.", "Books access", "The Client grants Atlas One read and write access to the QuickBooks Online "
          "company file (or the accounting software in use) for as long as this Schedule is active."),
     ]
@@ -640,8 +661,10 @@ def schedule_gl_import():
 
 
 def schedule_cert_payroll():
-    pr = PRICES["cert_payroll"]["monthly"]
-    rows = [[pr["label"], pr["price"]]]
+    pr = PRICES["cert_payroll"]
+    keys = ["setup", "report", "state_monthly", "federal_weekly", "done_for_you"]
+    rows = [[pr[k]["label"], pr[k]["price"]] if pr.get(k) and pr[k].get("price") else
+            [pr[k]["label"] if pr.get(k) else k, "Priced after review"] for k in keys]
     clauses = [
         ("1.", "Scope", "Atlas One prepares and files certified payroll reports (WH-347 or the state "
          "equivalent) for each active job the Client identifies, with hours split by classification and "
@@ -669,7 +692,8 @@ def schedule_wc_audit():
         ("2.", "Authorization to contact the carrier", "The Client authorizes Atlas One to contact the "
          "Client's workers compensation carrier and rating bureau, and to request and receive the records "
          "needed to complete the review and pursue a recovery."),
-        ("3.", "Contingency fee", "Atlas One's fee is a percentage of the premium actually recovered, paid "
+        ("3.", "Contingency fee", "Atlas One's fee is a percentage of the premium actually recovered, from 15% to 25%, "
+         "set for the Client and written in the fee line of this Schedule, paid "
          "only when a recovery is made. If no recovery is found or paid, the Client owes nothing under this "
          "Schedule."),
     ]
@@ -678,27 +702,54 @@ def schedule_wc_audit():
                            "recovery on a contingency basis. It is entered into as of ____________________ and "
                            "is incorporated into the Atlas One Client Services Agreement.",
                            clauses, rows,
-                           extra_note="Contingency percentage confirmed by David before this Schedule is sent for signature.")
+                           extra_note="Atlas One's fee is 15 to 25 percent of the premium recovered, set for each company. The percentage for this Client is ________ percent. Nothing is owed if no recovery is made.")
 
 
 def schedule_coi():
-    pr = PRICES["coi_tracking"]["monthly"]
-    rows = [[pr["label"], pr["price"]]]
+    pr = PRICES["coi_tracking"]
+    keys = ["self_service", "done_for_you_setup", "done_for_you_small", "done_for_you_medium",
+            "done_for_you_large", "done_for_you_larger", "done_for_you_included"]
+    rows = [[pr[k]["label"], pr[k]["price"]] for k in keys]
     clauses = [
-        ("1.", "Scope", "Atlas One tracks certificates of insurance for the Client's subcontractors: "
-         "collecting current certificates, flagging an expired or missing certificate, and keeping a record "
-         "the Client can review at any time."),
-        ("2.", "Client decides who works", "Atlas One tracks coverage status and reports it; the Client alone "
-         "decides which subcontractors are allowed to work, including a subcontractor whose certificate has "
-         "lapsed. Atlas One does not make that call."),
+        ("1.", "Scope", "Atlas One requests certificates of insurance from the Client's subcontractors, "
+         "reviews them, chases an expired or missing certificate, and sends the notices below in Atlas "
+         "One's name so the subcontractor is dealing with Atlas One and not the Client directly."),
+        ("2.", "The Client decides on payment", "Atlas One never holds, releases, or advises on payment to a "
+         "subcontractor. The notice below tells the subcontractor the Client will not release payment until "
+         "a current certificate or a signed waiver is on file; the Client alone decides whether to release "
+         "payment in every case, including a subcontractor whose certificate has lapsed."),
+        ("3.", "Self service option", "The Client may instead use the Atlas One COI Tracker for self service "
+         "tracking at no additional charge, included at the Enterprise membership level and above."),
     ]
     return build_schedule("COI_Tracking", "COI Tracking",
                            "This Schedule (Software Tools Schedule, COI Tracking) covers certificate of "
-                           "insurance tracking for subcontractors. It is entered into as of "
-                           "____________________ and is incorporated into the Atlas One Client Services "
-                           "Agreement.",
-                           clauses, rows,
-                           extra_note="Price confirmed by David before this Schedule is sent for signature.")
+                           "insurance tracking for subcontractors, self service or done for you. It is "
+                           "entered into as of ____________________ and is incorporated into the Atlas One "
+                           "Client Services Agreement.",
+                           clauses, rows)
+
+
+def schedule_safety_training():
+    pr = PRICES["safety_training"]
+    keys = ["diy", "done_for_you_build", "done_for_you_small", "done_for_you_medium",
+            "done_for_you_larger", "done_for_you_included"]
+    rows = [[pr[k]["label"], pr[k]["price"]] for k in keys]
+    clauses = [
+        ("1.", "Scope", "Atlas One builds a 12 month safety training program for the Client's industry, loads "
+         "it, and delivers a new toolbox talk and quiz every month, an alert when a new hire has not yet been "
+         "trained, and a quarterly report to the owner."),
+        ("2.", "Do it yourself option", "The Client may instead use the 12 month safety calendar and talk "
+         "library built into the portal at no additional charge, included at the Professional membership "
+         "level and above."),
+        ("3.", "Connecteam", "When the Client uses Connecteam for employee self service on phones, "
+         "Connecteam's own license is billed separately at Connecteam's list price; Atlas One does not mark "
+         "it up."),
+    ]
+    return build_schedule("Safety_Training", "Safety Training Program",
+                           "This Schedule (Safety Training Schedule) covers the safety training program, do "
+                           "it yourself or done for you. It is entered into as of ____________________ and is "
+                           "incorporated into the Atlas One Client Services Agreement.",
+                           clauses, rows)
 
 
 def schedule_ai_services():
@@ -726,8 +777,7 @@ def schedule_ai_services():
     return build_schedule("AI_Services", "AI Services",
                            "This Schedule (AI Services Schedule) covers the AI Email Assistant and the AI Task "
                            "Agent. It is entered into as of ____________________ and is incorporated into the "
-                           "Atlas One Client Services Agreement. Prices verified against the Quick Quote "
-                           "catalogue, 2026-09-15.",
+                           "Atlas One Client Services Agreement.",
                            clauses, rows)
 
 
@@ -768,9 +818,13 @@ def schedule_membership():
         ("1.", "Scope", "Membership is the platform layer that ties every Atlas One division together: "
          "self-service tools, the vendor and software audit, and, at higher tiers, concierge support and "
          "dedicated coordination across bookkeeping, benefits, payroll, and risk."),
-        ("2.", "Setup fee and annual option", "A one time setup fee applies at some tiers as shown below. "
-         "The setup fee is one time and variable; the Client's proposal states the exact setup "
+        ("2.", "Setup fee", "A one time setup fee applies at some tiers as shown below. "
+         "The setup fee is variable; the Client's proposal states the exact setup "
          "due, if any."),
+        ("3.", "Professional membership inclusions", "Professional membership includes 3 hands on hours a "
+         "month and a quarterly review. Handbook and safety manual updates are included at Professional and "
+         "above. Support beyond the included hours is billed at $150 an hour in 15 minute increments, 30 "
+         "minute minimum; strategy consulting is $250 an hour."),
     ]
     return build_schedule("Membership", "Membership",
                            "This Schedule (Membership Schedule) covers the Atlas One membership tier the "
@@ -801,7 +855,7 @@ def schedule_software():
         ("5.", "Price changes", "A vendor price change passes through to the Client with thirty days notice."),
         ("6.", "Automatic payment required", "Resold software is billed by automatic payment, ACH or card on "
          "file, kept current in the Client's account; the Client keeps a valid payment method on file for as "
-         "long as this Schedule is active."),
+         "long as this Schedule is active. ACH has no fee; card payments carry a 3.5% processing fee."),
         ("7.", "Provisioning, support, and termination", "Atlas One provisions and supports the Client's "
          "tenant; the product vendor provides the underlying service. On termination the Client keeps its own "
          "data and tenant per the vendor's own terms."),
@@ -864,7 +918,7 @@ def build_proposal_shell():
     return doc, "Atlas_One_Proposal_Shell"
 
 
-CLIENT = "Tell Me More LLC"
+CLIENT = "Sample Company"
 
 
 def sample_proposals(discount=None):
@@ -906,7 +960,10 @@ def sample_proposals(discount=None):
         ["Read access to the payroll reports each pay period"],
         "Payroll to GL Converter Schedule", discount=discount))
 
-    pr = PRICES["cert_payroll"]["monthly"]
+    pr = PRICES["cert_payroll"]
+    cert_keys = ["setup", "report", "state_monthly", "federal_weekly", "done_for_you"]
+    cert_rows = [[pr[k]["label"], pr[k]["price"]] if pr.get(k) and pr[k].get("price") else
+                 [pr[k]["label"] if pr.get(k) else k, "Priced after review"] for k in cert_keys]
     out.append(build_proposal(
         "Sample_Proposal_Certified_Payroll",
         "Certified Payroll", CLIENT,
@@ -915,9 +972,9 @@ def sample_proposals(discount=None):
         ["A WH-347 or state equivalent report prepared and filed for each active job",
          "Hours split by classification and wage determination"],
         ["Determining prevailing wage rates themselves (Atlas One applies the rate the Client attests to)"],
-        [[pr["label"], pr["price"]]],
+        cert_rows,
         ("Item", "Amount"),
-        "Billed monthly based on the number of active jobs reported that month.",
+        "Billed based on the number of active jobs reported each month, plus setup and per report fees where they apply.",
         ["Certified payroll hours and wage determinations for each active job"],
         "Certified Payroll Schedule", discount=discount))
 
@@ -932,23 +989,24 @@ def sample_proposals(discount=None):
         ["A guarantee of recovery; some reviews find nothing to recover"],
         [[pr["label"], pr["price"]]],
         ("Item", "Amount"),
-        "No fee unless a recovery is made. The fee is a percentage of the amount actually recovered, paid once.",
+        "15 to 25 percent of the premium recovered, set for each company, paid only if a recovery is made. Nothing is owed if none is found.",
         ["Authorization to contact the carrier and rating bureau",
          "Recent workers comp policies and premium audit history"],
         "Audit Recovery Schedule", discount=discount))
 
-    pr = PRICES["coi_tracking"]["monthly"]
+    pr = PRICES["coi_tracking"]
     out.append(build_proposal(
         "Sample_Proposal_COI_Tracking",
-        "COI Tracking", CLIENT,
-        f"{CLIENT} stops chasing subcontractors for paperwork. Atlas One tracks every certificate of insurance "
-        "and flags a lapse before it becomes a liability.",
-        ["Certificates of insurance collected and tracked for every subcontractor",
-         "A flag when a certificate is missing or about to expire"],
-        ["Deciding which subcontractors are allowed to work (that stays the Client's call)"],
-        [[pr["label"], pr["price"]]],
+        "COI Tracking, done for you", CLIENT,
+        f"{CLIENT} stops chasing subcontractors for paperwork. Atlas One requests, reviews and chases every "
+        "certificate of insurance in its own name, and flags a lapse before it becomes a liability.",
+        ["Certificates of insurance requested, reviewed and tracked for every subcontractor",
+         "Expiration reminders and a payment on hold notice sent in Atlas One's name"],
+        ["Holding, releasing, or advising on payment to a subcontractor (that stays the Client's call, always)"],
+        [[pr["done_for_you_small"]["label"], pr["done_for_you_small"]["price"]],
+         [pr["done_for_you_setup"]["label"], pr["done_for_you_setup"]["price"]]],
         ("Item", "Amount"),
-        "Monthly fee billed in advance.",
+        "Monthly fee billed in advance, based on the number of active subcontractors.",
         ["A current list of active subcontractors"],
         "Software Tools Schedule", discount=discount))
 
@@ -980,7 +1038,7 @@ def sample_proposals(discount=None):
          "standalone Hold Harmless)"],
         [[pr["handbook"]["label"], pr["handbook"]["price"]], [pr["handbook_update"]["label"], pr["handbook_update"]["price"]]],
         ("Item", "Amount"),
-        "One time fee billed at signing. The annual update is optional and billed separately if selected.",
+        "One time fee billed at signing. Handbook and safety manual updates are included at Professional and above.",
         ["Current policies, if any, and a list of states where employees work"],
         "Document Services Schedule", discount=discount))
 
@@ -988,13 +1046,13 @@ def sample_proposals(discount=None):
     out.append(build_proposal(
         "Sample_Proposal_Membership",
         "Membership, Professional", CLIENT,
-        f"{CLIENT} gets a concierge team on the line with vendors, priority escalation, and a monthly advisory "
-        "call, tying every Atlas One service together.",
-        ["Concierge support team", "Priority escalation and up to ten tickets a month", "A monthly advisory call"],
+        f"{CLIENT} gets 3 hands on hours a month from Atlas One and a quarterly review, tying "
+        "every Atlas One service together.",
+        ["3 hands on hours a month", "A quarterly review", "Handbook and safety manual updates included at Professional and above"],
         ["Services outside the six divisions Atlas One covers"],
         [[pr["professional"]["label"], pr["professional"]["price"]]],
         ("Item", "Amount"),
-        "Monthly fee billed in advance. The one time setup fee (variable) is confirmed on the invoice.",
+        "Monthly fee billed in advance. One time setup fee (variable), confirmed on the invoice.",
         ["A short intake call to confirm priorities across the six divisions"],
         "Membership Schedule", discount=discount))
 
@@ -1023,6 +1081,23 @@ def sample_proposals(discount=None):
     return out
 
 
+# The GHL Upload 2026-10-01 set: master basename -> numbered upload name (01 to 13, no 05).
+GHL_UPLOAD_SET = [
+    ("Atlas_One_Master_Client_Services_Agreement", "01 Master Client Services Agreement.pdf"),
+    ("Atlas_One_Membership_Schedule", "02 Membership Schedule.pdf"),
+    ("Atlas_One_Hold_Harmless_and_Acknowledgement", "03 Hold Harmless and Acknowledgement.pdf"),
+    ("Atlas_One_Bookkeeping_Schedule", "04 Bookkeeping Schedule.pdf"),
+    ("Atlas_One_AI_Services_Schedule", "06 AI Services Schedule.pdf"),
+    ("Atlas_One_COI_Tracking_Schedule", "07 COI Tracking Schedule.pdf"),
+    ("Atlas_One_Certified_Payroll_Schedule", "08 Certified Payroll Schedule.pdf"),
+    ("Atlas_One_Document_Services_Schedule", "09 Document Services Schedule.pdf"),
+    ("Atlas_One_Payroll_to_GL_Converter_Schedule", "10 Payroll to GL Converter Schedule.pdf"),
+    ("Atlas_One_Safety_Training_Schedule", "11 Safety Training Schedule.pdf"),
+    ("Atlas_One_Software_and_Licenses_Schedule", "12 Software and Licenses Schedule.pdf"),
+    ("Atlas_One_WC_Audit_Recovery_Schedule", "13 WC Audit Recovery Schedule.pdf"),
+]
+
+
 # --------------------------------------------------------------------- main
 def main():
     args = sys.argv[1:]
@@ -1032,6 +1107,9 @@ def main():
         discount_raw = args[i + 1]
         del args[i:i + 2]
     discount = parse_discount_arg(discount_raw)
+    sync_ghl = "--sync-ghl" in args
+    if sync_ghl:
+        args.remove("--sync-ghl")
 
     if not args:
         raise SystemExit(
@@ -1061,6 +1139,7 @@ def main():
     docs.append(schedule_cert_payroll())
     docs.append(schedule_wc_audit())
     docs.append(schedule_coi())
+    docs.append(schedule_safety_training())
     docs.append(schedule_ai_services())
     docs.append(schedule_documents())
     docs.append(schedule_membership())
@@ -1075,6 +1154,21 @@ def main():
     for docx_path, pdf_path in built:
         print("wrote:", os.path.basename(docx_path), "+", os.path.basename(pdf_path))
     print(f"\n{len(built)} documents built in {out_dir}")
+
+    if sync_ghl:
+        # Copy the numbered set David uploads to GoHighLevel Documents and Contracts. 05 (PEO Services),
+        # 14, 15 and 16 come from other builders and are never touched here.
+        import shutil
+        ghl_dir = os.path.join(mkt, "A1_Sales", "A1 Agreements", "GHL Upload 2026-10-01")
+        if not os.path.isdir(ghl_dir):
+            raise SystemExit(f"--sync-ghl: folder not found: {ghl_dir}")
+        if discount:
+            raise SystemExit("--sync-ghl refuses to copy a discounted run into the GHL masters")
+        for src_base, ghl_name in GHL_UPLOAD_SET:
+            src = os.path.join(out_dir, src_base + ".pdf")
+            dst = os.path.join(ghl_dir, ghl_name)
+            shutil.copyfile(src, dst)
+            print("synced:", ghl_name)
 
 
 if __name__ == "__main__":
