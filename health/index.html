@@ -192,8 +192,8 @@ details p{margin:10px 0 0;color:var(--navy-70)}
       <ol>
         <li><div><b>Choose your plan on HealtheMe</b><span>With your broker. Your plan comes with you to the next step.</span></div></li>
         <li><div><b>Confirm you fit</b><span>Self employed, no W-2 employees, age 18 to 65.</span></div></li>
-        <li><div><b>Tell us about your business</b><span>Already have an LLC or S corp? Skip the setup. No entity? We form it.</span></div></li>
-        <li><div><b>Two agreements, W-4 and direct deposit</b><span>Your Atlas One agreement and your payroll platform agreement, signed by email. Your W-4 and deposit go to the secure payroll onboarding.</span></div></li>
+        <li><div><b>Tell us about your business</b><span>First question: do you have a business entity? No entity? We can set one up for you.</span></div></li>
+        <li><div><b>Sign, upload, W-4 and I-9</b><span>Read and sign your agreements right on the page. Add your ID and a voided check. Your W-4 and I-9 are filled from your answers.</span></div></li>
         <li><div><b>Welcome email, then covered</b><span>Your payroll portal login arrives by email. Setups in by the 15th start the next month.</span></div></li>
       </ol>
     </aside>
@@ -257,8 +257,8 @@ details p{margin:10px 0 0;color:var(--navy-70)}
     <h2>What you will need</h2>
     <div class="need" style="margin-top:18px">
       <div class="card"><b>Your business details</b><span class="small muted">Legal name, state, address and EIN, if you have them. No entity yet? We set it up.</span></div>
-      <div class="card"><b>A photo ID</b><span class="small muted">Driver license or passport for the employment eligibility form.</span></div>
-      <div class="card"><b>Your bank details</b><span class="small muted">Business account for drafts, and a personal account if you want direct deposit.</span></div>
+      <div class="card"><b>A photo ID</b><span class="small muted">Driver license or passport. Upload it or take a photo with your phone.</span></div>
+      <div class="card"><b>A voided check</b><span class="small muted">For the business account payroll and taxes are drafted from, and your personal account if you want direct deposit.</span></div>
       <div class="card"><b>Proof you own it</b><span class="small muted">Operating agreement, articles or a cap table. Upload now or later.</span></div>
     </div>
   </div>
@@ -271,10 +271,10 @@ details p{margin:10px 0 0;color:var(--navy-70)}
     <details><summary>Where do I choose my plan?</summary><p>On the HealtheMe plans page, with your broker. Your plan comes with you into this onboarding, so you are never asked for it twice. Want a different plan? Use "Change plan" and you come right back.</p></details>
     <details><summary>Why does a health plan need payroll?</summary><p>This is an employer sponsored plan. Running you through a professional payroll platform makes you an eligible employee of your own business, so the plan and the tax treatment of your premium work the way they should. We set it all up and run it.</p></details>
     <details><summary>Do I have to change my business?</summary><p>No. If you already have an LLC or S corp, you skip the setup step. If you do not, we can form one for you, and we will tell you plainly whether an S corp makes sense at your income.</p></details>
-    <details><summary>How many agreements do I sign?</summary><p>Two: your client service agreement with Atlas One and your agreement with your payroll platform. Both arrive by email for e-signature after our setup team checks your details. Your W-4, state withholding, direct deposit and I-9 are finished in the platform's secure payroll onboarding.</p></details>
+    <details><summary>How many agreements do I sign?</summary><p>Your client service agreement with Atlas One, and your agreement with your payroll platform. Most owners read and sign both right on the page, in one sitting. If you add extra services, or we need to set up your business first, you sign the Atlas One agreement on the page and your platform agreement comes by email after David reviews your setup.</p></details>
     <details><summary>When does my plan start?</summary><p>Setups received by the 15th of the month start the next month. Your start date is on your agreement.</p></details>
-    <details><summary>Can my broker fill this out with me?</summary><p>Yes. Your broker can complete the business steps with you. You finish the W-4 and direct deposit privately from the link we email you.</p></details>
-    <details><summary>Is my information safe?</summary><p>Your form goes over an encrypted connection. Your Social Security number and bank numbers are never kept in our sales or marketing systems. They go only to our setup team and your payroll platform, and are never shown in full again on screen.</p></details>
+    <details><summary>Can my broker fill this out with me?</summary><p>Yes. Your broker can complete the business details with you. You add your Social Security number, sign, upload your ID and voided checks, and finish the W-4 and I-9 privately from the link we email you.</p></details>
+    <details><summary>Is my information safe?</summary><p>Your form goes over an encrypted connection to a secure folder that only our setup team can open. Your Social Security number, bank numbers and any state logins are never kept in our sales or marketing systems, and never saved on your device. They go only to our setup team and your payroll platform.</p></details>
   </div>
 </section>
 
@@ -308,7 +308,7 @@ details p{margin:10px 0 0;color:var(--navy-70)}
 
 <script>
 window.HP = {
-  version: '2026-10-23 sandbox r4 (HealtheMe, two agreements)',
+  version: '2026-10-24 sandbox r5 (Cornerstone style intake, same sitting or David review)',
   program: {
     name: 'HealtheMe',
     issuer: 'U.S. Health Centers',
@@ -328,50 +328,70 @@ window.HP = {
   ],
   networks: { ppo: 'National PPO', open: 'Open Network' },
   tiers: { EE: 'Just me', ES: 'Me and my spouse', EC: 'Me and my children', EF: 'My family' },
-  atlasOne: {
-    agreement: {id:'a1csa', n:'Atlas One client service agreement', who:'Business owner', d:'Your agreement with Atlas One for enrollment, payroll setup and ongoing service, with your fees.'}
-  },
   peos: {
-    cornerstone: {
-      name: 'Cornerstone PEO', line: 'HealtheMe, powered by Cornerstone PEO', tag: 'hp-peo-cornerstone',
-      agreement: {id:'peocsa', n:'Cornerstone PEO client service agreement', who:'Business owner', d:'Your co-employment agreement with Cornerstone PEO, with Exhibit A for the states you work in.'},
-      documents: [
-        {id:'quote', n:'Service proposal acceptance', who:'Business owner', d:'Confirms your HealtheMe plan, your pay schedule and your fees before anything is set up.'},
-        {id:'guar',  n:'Personal guaranty', who:'Business owner', d:'For a business with one owner. Uses your home address.', show:'singleOwner'},
-        {id:'wcown', n:'Workers compensation owner election (include or exclude)', who:'Business owner', d:'As the only owner, you choose whether you are covered by workers compensation or excluded, under your state rules.', show:'singleOwner'},
-        {id:'noloss',n:'Workers compensation no loss letter', who:'Business owner', d:'Only for a new business that never had workers compensation coverage.', show:'newEntity'},
-        {id:'notice',n:'Co-employment notice', who:'You as the employee', d:'A short notice explaining who does what. Read and acknowledge.'},
-        {id:'s2553', n:'Form 2553 (S corp election)', who:'Business owner', d:'Only if you choose the S corp option and are not already an S corp.', show:'scorp'}
-      ]
-    },
-    vero: {
-      name: 'Vero HCM', line: 'HealtheMe, powered by Vero HCM', tag: 'hp-peo-vero',
-      pending: true,
-      agreement: {id:'peocsa', n:'Vero HCM client service agreement', who:'Business owner', d:'Your agreement with Vero HCM for payroll, tax filing and the states you work in.'},
-      documents: [
-        {id:'quote', n:'Service proposal acceptance', who:'Business owner', d:'Confirms your HealtheMe plan, your pay schedule and your fees before anything is set up.'},
-        {id:'wc',    n:'Workers compensation (pay as you go) and owner election', who:'Business owner', d:'Premium is figured each payroll, so nothing is owed at the end of the policy year. Confirms whether you, as the owner, are covered or excluded.'},
-        {id:'noloss',n:'Workers compensation no loss letter', who:'Business owner', d:'Only for a new business that never had workers compensation coverage.', show:'newEntity'},
-        {id:'s2553', n:'Form 2553 (S corp election)', who:'Business owner', d:'Only if you choose the S corp option and are not already an S corp.', show:'scorp'}
-      ]
-    }
+    cornerstone: { name: 'Cornerstone PEO', line: 'HealtheMe, powered by Cornerstone PEO', tag: 'hp-peo-cornerstone' },
+    vero:        { name: 'Vero HCM',        line: 'HealtheMe, powered by Vero HCM',        tag: 'hp-peo-vero' }
   },
-  unassigned: {
-    tag: 'hp-peo-unassigned',
-    agreement: {id:'peocsa', n:'Payroll platform client service agreement', who:'Business owner', d:'Follows by email once we assign your payroll and benefits platform. You do not need to do anything now.', pending:true},
-    documents: [
-      {id:'quote', n:'Service proposal acceptance', who:'Business owner', d:'Confirms your HealtheMe plan, your pay schedule and your fees before anything is set up.'},
-      {id:'noloss',n:'Workers compensation no loss letter', who:'Business owner', d:'Only for a new business that never had workers compensation coverage.', show:'newEntity'},
-      {id:'s2553', n:'Form 2553 (S corp election)', who:'Business owner', d:'Only if you choose the S corp option and are not already an S corp.', show:'scorp'}
+  unassigned: { tag: 'hp-peo-unassigned' },
+  platforms: {
+    cornerstone_peo: { name: 'Cornerstone PEO', peo: 'cornerstone', kind: 'PEO', tag: 'hp-plat-cornerstone-peo', guaranty: true, wcOwnerElection: true,
+      agreement: { id: 'cs_peo_csa', n: 'Cornerstone PEO client service agreement', terms: 'cornerstone-peo' },
+      guarantyTerms: 'guaranty-cornerstone' },
+    vero_peo: { name: 'Vero PEO', peo: 'vero', kind: 'PEO', tag: 'hp-plat-vero-peo', guaranty: true,
+      agreement: { id: 'vero_peo_csa', n: 'Vero HCM client service agreement (PEO)', terms: 'vero-peo', url: 'https://www.verohcm.com/terms-and-conditions-peo' },
+      guarantyTerms: 'guaranty-vero' },
+    vero_aso: { name: 'Vero ASO', peo: 'vero', kind: 'ASO', tag: 'hp-plat-vero-aso', guaranty: false,
+      agreement: { id: 'vero_aso_terms', n: 'Vero HCM ASO terms and conditions', terms: 'vero-aso', url: 'https://www.verohcm.com/terms-and-conditions' } },
+    atlas_one_aso: { name: 'Atlas One ASO', peo: '', kind: 'ASO', tag: 'hp-plat-atlas-one-aso', guaranty: false, reviewOnly: true,
+      agreement: { id: 'a1_aso', n: 'Atlas One ASO payroll schedule', terms: '' } }
+  },
+  emailPacket: {
+    cornerstone_peo: [
+      {id:'wcown', n:'Workers compensation owner election (include or exclude)', d:'You choose whether you, as the owner, are covered by workers compensation or excluded, under your state rules.'},
+      {id:'notice', n:'Co-employment notice', d:'A short notice explaining who does what. Read and acknowledge.'},
+      {id:'noloss', n:'Workers compensation no loss letter', d:'Only for a new business that never had workers compensation coverage.', show:'newEntity'},
+      {id:'s2553', n:'Form 2553 (S corp election)', d:'Only if you want the S corporation election.', show:'scorp'}
+    ],
+    vero_peo: [
+      {id:'wc', n:'Workers compensation (pay as you go) and owner election', d:'Premium is figured each payroll. Confirms whether you, as the owner, are covered or excluded.'},
+      {id:'noloss', n:'Workers compensation no loss letter', d:'Only for a new business that never had workers compensation coverage.', show:'newEntity'},
+      {id:'s2553', n:'Form 2553 (S corp election)', d:'Only if you want the S corporation election.', show:'scorp'}
+    ],
+    vero_aso: [
+      {id:'achdd', n:'ACH authorization for direct deposit', d:'Lets the platform make your direct deposits.'},
+      {id:'authagent', n:'Authorized Agent signature form', d:'Only if the platform signs payroll checks for your business.'},
+      {id:'s2553', n:'Form 2553 (S corp election)', d:'Only if you want the S corporation election.', show:'scorp'}
+    ],
+    unassigned: [
+      {id:'platform', n:'Your payroll platform agreement', d:'Comes by email once David chooses your platform and price.'},
+      {id:'noloss', n:'Workers compensation no loss letter', d:'Only for a new business that never had workers compensation coverage.', show:'newEntity'},
+      {id:'s2553', n:'Form 2553 (S corp election)', d:'Only if you want the S corporation election.', show:'scorp'}
     ]
   },
-  peoOnboardingForms: [
-    {id:'w4',  n:'Form W-4 and your state withholding form', who:'You as the employee', d:'Prefilled from your answers in the tax step. You confirm and sign in the secure payroll onboarding.'},
-    {id:'dd',  n:'Direct deposit authorization', who:'You as the employee', d:'Prefilled from your answers in the pay step. Signed in the secure payroll onboarding.'},
-    {id:'i9',  n:'Form I-9 (employment eligibility)', who:'You as the employee', d:'Federal form for every employee, owners included. Your ID is reviewed remotely.'},
-    {id:'ach', n:'ACH authorization', who:'Business owner', d:'Lets your payroll, premium and fees be drafted from your business account.'}
-  ],
+  veroBasicTermsUrl: 'https://www.verohcm.com/verosmarter/terms',
+  atlasOne: { agreement: { id: 'a1csa', n: 'Atlas One client service agreement', terms: 'atlas-one' } },
+  services: {
+    standard: ['health', 'payroll'],
+    optional: [
+      {id:'bookkeeping', n:'Bookkeeping', d:'Monthly books, reconciled. Quoted for your company.'},
+      {id:'tax', n:'Tax preparation and planning', d:'Your business and personal returns, and planning through the year.'},
+      {id:'hr', n:'HR support', d:'Policies, handbook and answers when you need them.'},
+      {id:'other', n:'Something else', d:'Tell us what you need.'}
+    ]
+  },
+  prices: {
+    version: 'V18',
+    formation_setup: { label: 'Business formation and setup, 1 to 2 owners (state formation documents, EIN, S corporation election when it applies)', price: '$510 one time, plus state filing fees at cost' },
+    formation_extra_owner: { label: 'Business formation, each additional owner', price: '$35 per owner, one time' },
+    scorp_election: { label: 'S corporation election for an existing LLC, 1 to 2 owners', price: '$195 one time' },
+    state_fees: { label: 'State filing fees, registered agent and government fees', price: 'At cost, passed through on the invoice' },
+    withholding: { label: 'Payroll tax account setup, state withholding account', price: '$250 per account, one time' },
+    unemployment: { label: 'Payroll tax account setup, state unemployment account', price: '$250 per account, one time' },
+    payroll: { label: 'Payroll', price: 'Quoted for your company (headcount, pay cycle, PTO tracking and more)' }
+  },
+  pricing: { standardPlatformFee: '' },
   secure: { endpoint: '' },
+  uploads: { maxBytes: 10485760, types: ['image/jpeg','image/png','image/heic','image/heif','image/webp','application/pdf'] },
   questionnaire: {
     enabled: false,
     stopTag: 'hp-hq-stop',
@@ -386,14 +406,13 @@ window.HP = {
       {id:'hq5', t:'Has anyone you plan to cover used tobacco or nicotine products in the last 12 months?'}
     ]
   },
-  submit: {
-    mode: 'preview',
-    webhookUrl: ''
-  },
+  submit: { mode: 'preview' },
+  testNumbers: false,
   phone: { label: '380-CALL-A1S (380-225-5217)', tel: '+13802255217' },
   bookingUrl: 'https://api.leadconnectorhq.com/widget/groups/book-david',
   programStart: '2027-01-01',
   monthlyCutoffDay: 15,
+  storageKey: 'a1hp-progress-v5',
   excludedStates: ['CA','CO','HI','MN','NH','NJ','NY','OR','VT','WA'],
   noIncomeTaxStates: ['AK','FL','NV','SD','TN','TX','WY','NH','WA'],
   w4: { childCredit: 2200, otherDependent: 500, incomeLimitSingle: 200000, incomeLimitJoint: 400000 }
@@ -402,7 +421,7 @@ window.HP = {
 <script>
 (function(){
   var C = window.HP, q = new URLSearchParams(location.search);
-  var keep = ['plan','network','tier','rate','planName','producer','peo','ref','embed','assist','utm_source','utm_medium','utm_campaign','hq'];
+  var keep = ['plan','network','tier','rate','planName','producer','peo','plat','ref','embed','assist','utm_source','utm_medium','utm_campaign','hq'];
   var pass = new URLSearchParams();
   keep.forEach(function(k){ if(q.get(k)) pass.set(k, q.get(k)); });
   var qs = pass.toString() ? ('?' + pass.toString()) : '';
