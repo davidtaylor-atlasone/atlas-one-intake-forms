@@ -446,9 +446,9 @@ input::placeholder{color:var(--navy-50)}
     <div id="ownerBlocks"></div>
     <div class="notice soft" id="pctNote" hidden role="status"><p id="pctText"></p></div>
     <div class="row">
-      <div class="c6"><label class="f" for="w2">Number of W-2 employees <span class="opt">(not counting owners)</span></label><input type="number" id="w2" name="company.w2Employees" min="0" max="999" inputmode="numeric" data-req data-v="int"><div class="errmsg">Enter a number. Enter 0 if it is just you.</div></div>
+      <div class="c6"><label class="f" for="w2">Number of W-2 employees <span class="opt">(count yourself, and your spouse if they are on payroll)</span></label><input type="number" id="w2" name="company.w2Employees" min="0" max="999" inputmode="numeric" data-req data-v="int"><div class="errmsg">Enter a number. Enter 1 if it is just you, or 2 for you and your spouse.</div></div>
     </div>
-    <div class="notice" id="ineligibleW2" hidden role="alert"><h3>Your business fits a group plan</h3><p>This program is built for owners with no W-2 employees. With a team, a group plan usually costs less per person. Book a call and we will build it with you.</p><p><a class="btn ghost" data-book href="#">Book a call</a></p></div>
+    <div class="notice" id="ineligibleW2" hidden role="alert"><h3>Your business fits a group plan</h3><p>This program is built for owners on payroll: you, and your spouse if they work in the business. With other employees, a group plan usually costs less per person. Book a call and we will build it with you.</p><p><a class="btn ghost" data-book href="#">Book a call</a></p></div>
     <div class="notice" id="ineligibleAge" hidden role="alert"><h3>Ages 18 to 65</h3><p>The program covers owners from 18 to 65 on the start date. Book a call and we will find the right fit.</p><p><a class="btn ghost" data-book href="#">Book a call</a></p></div>
     <div class="row">
       <div class="c6"><label class="f" for="producer">Producer code <span class="opt">(if you have one)</span></label><input type="text" id="producer" name="source.producer" autocomplete="off"></div>
@@ -780,6 +780,7 @@ input::placeholder{color:var(--navy-50)}
       <div style="display:flex;gap:10px;flex-wrap:wrap"><button type="button" class="btn ghost" id="dlGhl">Download GHL payload (JSON)</button><button type="button" class="btn ghost" id="dlSecure">Download secure record (JSON)</button></div>
     </div>
     <p style="margin-top:24px">Questions? Call <a data-tel href="tel:+13802255217">380-CALL-A1S (380-225-5217)</a>.</p>
+    <p style="margin-top:20px"><button type="button" class="btn ghost" id="closeWin">Close this window</button> <span class="small muted" id="closeHint" hidden>You are all done. You can close this tab now.</span></p>
   </section>
 
   <div class="navbar" id="navbar">
@@ -849,22 +850,22 @@ window.HP = {
       {id:'wcown', n:'Workers compensation owner election (include or exclude)', d:'You choose whether you, as the owner, are covered by workers compensation or excluded, under your state rules.'},
       {id:'notice', n:'Co-employment notice', d:'A short notice explaining who does what. Read and acknowledge.'},
       {id:'noloss', n:'Workers compensation no loss letter', d:'Only for a new business that never had workers compensation coverage.', show:'newEntity'},
-      {id:'s2553', n:'Form 2553 (S corp election)', d:'Only if you want the S corporation election.', show:'scorp'}
+      {id:'s2553', n:'Form 2553 (S corp election)', d:'Only if you want the S corporation election.', show:'needs2553'}
     ],
     vero_peo: [
       {id:'wc', n:'Workers compensation (pay as you go) and owner election', d:'Premium is figured each payroll. Confirms whether you, as the owner, are covered or excluded.'},
       {id:'noloss', n:'Workers compensation no loss letter', d:'Only for a new business that never had workers compensation coverage.', show:'newEntity'},
-      {id:'s2553', n:'Form 2553 (S corp election)', d:'Only if you want the S corporation election.', show:'scorp'}
+      {id:'s2553', n:'Form 2553 (S corp election)', d:'Only if you want the S corporation election.', show:'needs2553'}
     ],
     vero_aso: [
       {id:'achdd', n:'ACH authorization for direct deposit', d:'Lets the platform make your direct deposits.'},
       {id:'authagent', n:'Authorized Agent signature form', d:'Only if the platform signs payroll checks for your business.'},
-      {id:'s2553', n:'Form 2553 (S corp election)', d:'Only if you want the S corporation election.', show:'scorp'}
+      {id:'s2553', n:'Form 2553 (S corp election)', d:'Only if you want the S corporation election.', show:'needs2553'}
     ],
     unassigned: [
       {id:'platform', n:'Your payroll platform agreement', d:'Comes by email once David chooses your platform and price.'},
       {id:'noloss', n:'Workers compensation no loss letter', d:'Only for a new business that never had workers compensation coverage.', show:'newEntity'},
-      {id:'s2553', n:'Form 2553 (S corp election)', d:'Only if you want the S corporation election.', show:'scorp'}
+      {id:'s2553', n:'Form 2553 (S corp election)', d:'Only if you want the S corporation election.', show:'needs2553'}
     ]
   },
   veroBasicTermsUrl: 'https://www.verohcm.com/verosmarter/terms',
@@ -889,7 +890,7 @@ window.HP = {
     payroll: { label: 'Payroll', price: 'Quoted for your company (headcount, pay cycle, PTO tracking and more)' }
   },
   pricing: { standardPlatformFee: '' },
-  secure: { endpoint: 'https://portal-staging.atlasonesolutions.com/api/health-intake' },
+  secure: { endpoint: 'https://portal.atlasonesolutions.com/api/health-intake' },
   uploads: { maxBytes: 10485760, types: ['image/jpeg','image/png','image/heic','image/heif','image/webp','application/pdf'] },
   questionnaire: {
     enabled: false,
@@ -1247,7 +1248,9 @@ window.HP_TERMS = {"atlas-one": {"title": "HEALTHEME SERVICE SCHEDULE", "version
     $$('#agreeCards .who').forEach(function(w){ w.textContent = 'Signed by Owner 1: ' + signer + (w.closest('[data-agree="guaranty"]') ? '. Only the business owner signs it, never a spouse or another owner.' : ''); });
     // the rest of the packet, by email
     var pk = fi.flow === 'same_sitting' && PLAT_KEY ? C.emailPacket[PLAT_KEY] : C.emailPacket.unassigned;
-    var rule = {newEntity: raw('company.entityStatus') !== 'yes', scorp: wantScorp()};
+    // 2026-10-27 (David): Form 2553 is listed only when the owner has no business yet and wants the S corp election.
+    var rule = {newEntity: raw('company.entityStatus') !== 'yes', scorp: wantScorp(),
+      needs2553: raw('company.entityStatus') !== 'yes' && raw('company.formation.scorp') === 'yes'};
     $('#packetList').innerHTML = pk.filter(function(d){ return !d.show || rule[d.show]; }).map(function(d){ return '<li data-doc="' + d.id + '"><span class="ic" aria-hidden="true"></span><span><b>' + esc(d.n) + '</b><span class="small muted" style="display:block">' + esc(d.d) + '</span></span><span class="who">Business owner</span></li>'; }).join('');
     return fi;
   }
@@ -1388,7 +1391,9 @@ window.HP_TERMS = {"atlas-one": {"title": "HEALTHEME SERVICE SCHEDULE", "version
       if (!REG.length) { $('#regStates').classList.add('err'); b.push($('#regStates')); }
     }
     if (stepName === 'owners') {
-      var w2 = raw('company.w2Employees'), w2bad = w2 !== '' && +w2 > 0;
+      // 2026-10-27 (David): the owner on an S corp payroll is a W-2 employee, and so is a spouse who works in the business.
+      // Up to one W-2 per owner, plus one for a spouse, is fine; more than that means other employees (group plan review).
+      var w2 = raw('company.w2Employees'), w2bad = w2 !== '' && +w2 > Math.max(2, ownerCount() + 1);
       $('#ineligibleW2').hidden = !w2bad; if (w2bad) b.push($('#ineligibleW2'));
       var tot = 0; for (var i = 0; i < ownerCount(); i++) tot += +raw('owners.' + i + '.ownershipPct') || 0;
       var pctBad = Math.abs(tot - 100) > 0.01;
@@ -1748,6 +1753,12 @@ window.HP_TERMS = {"atlas-one": {"title": "HEALTHEME SERVICE SCHEDULE", "version
   window.addEventListener('resize', postHeight);
 
   if (q.get('producer')) $('#producer').value = clean(q.get('producer'), 40);
+  // 2026-10-27 (David): a way to close the page at the end. A browser only lets a page close a tab that a script
+  // opened, so when it refuses, say so instead of doing nothing.
+  $('#closeWin').addEventListener('click', function(){
+    try { window.close(); } catch (e) {}
+    setTimeout(function(){ $('#closeHint').hidden = false; }, 300);
+  });
   var at = restore();
   refresh();
   show(at);

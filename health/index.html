@@ -350,22 +350,22 @@ window.HP = {
       {id:'wcown', n:'Workers compensation owner election (include or exclude)', d:'You choose whether you, as the owner, are covered by workers compensation or excluded, under your state rules.'},
       {id:'notice', n:'Co-employment notice', d:'A short notice explaining who does what. Read and acknowledge.'},
       {id:'noloss', n:'Workers compensation no loss letter', d:'Only for a new business that never had workers compensation coverage.', show:'newEntity'},
-      {id:'s2553', n:'Form 2553 (S corp election)', d:'Only if you want the S corporation election.', show:'scorp'}
+      {id:'s2553', n:'Form 2553 (S corp election)', d:'Only if you want the S corporation election.', show:'needs2553'}
     ],
     vero_peo: [
       {id:'wc', n:'Workers compensation (pay as you go) and owner election', d:'Premium is figured each payroll. Confirms whether you, as the owner, are covered or excluded.'},
       {id:'noloss', n:'Workers compensation no loss letter', d:'Only for a new business that never had workers compensation coverage.', show:'newEntity'},
-      {id:'s2553', n:'Form 2553 (S corp election)', d:'Only if you want the S corporation election.', show:'scorp'}
+      {id:'s2553', n:'Form 2553 (S corp election)', d:'Only if you want the S corporation election.', show:'needs2553'}
     ],
     vero_aso: [
       {id:'achdd', n:'ACH authorization for direct deposit', d:'Lets the platform make your direct deposits.'},
       {id:'authagent', n:'Authorized Agent signature form', d:'Only if the platform signs payroll checks for your business.'},
-      {id:'s2553', n:'Form 2553 (S corp election)', d:'Only if you want the S corporation election.', show:'scorp'}
+      {id:'s2553', n:'Form 2553 (S corp election)', d:'Only if you want the S corporation election.', show:'needs2553'}
     ],
     unassigned: [
       {id:'platform', n:'Your payroll platform agreement', d:'Comes by email once David chooses your platform and price.'},
       {id:'noloss', n:'Workers compensation no loss letter', d:'Only for a new business that never had workers compensation coverage.', show:'newEntity'},
-      {id:'s2553', n:'Form 2553 (S corp election)', d:'Only if you want the S corporation election.', show:'scorp'}
+      {id:'s2553', n:'Form 2553 (S corp election)', d:'Only if you want the S corporation election.', show:'needs2553'}
     ]
   },
   veroBasicTermsUrl: 'https://www.verohcm.com/verosmarter/terms',
@@ -390,7 +390,7 @@ window.HP = {
     payroll: { label: 'Payroll', price: 'Quoted for your company (headcount, pay cycle, PTO tracking and more)' }
   },
   pricing: { standardPlatformFee: '' },
-  secure: { endpoint: 'https://portal-staging.atlasonesolutions.com/api/health-intake' },
+  secure: { endpoint: 'https://portal.atlasonesolutions.com/api/health-intake' },
   uploads: { maxBytes: 10485760, types: ['image/jpeg','image/png','image/heic','image/heif','image/webp','application/pdf'] },
   questionnaire: {
     enabled: false,
