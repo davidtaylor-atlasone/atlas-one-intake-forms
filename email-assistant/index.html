@@ -275,6 +275,8 @@ textarea{min-height:76px;resize:vertical;line-height:1.5}
     <p class="hint" id="extranote">Your mailbox list above decides the extra mailbox count, so add every mailbox in step 3 and the number here looks after itself.</p>
 
     <label class="pick" style="margin-top:22px"><input type="checkbox" name="consent" value="yes"> <span>I am authorized to ask Atlas One Solutions to set up the AI Email Assistant on our shared mailboxes. I understand that it reads and sorts mail and writes suggested replies, that it never sends anything unless somebody here approves it, and that sending is switched off entirely for the first two weeks. <span class="req">*</span></span></label>
+    <!-- 2026-10-29: the AI disclosure, required, same wording as the MCSA and GHL Form A and Form B. -->
+    <label class="pick" style="margin-top:12px"><input type="checkbox" name="ai_disclosure" value="yes"> <span>I understand that Atlas One uses AI assistants, supervised by our team, to help with scheduling, documents and follow-up. Some messages and calls may be handled with their help. <span class="req">*</span></span></label>
   </div>
 
   <div class="err" id="err"><b>Almost there.</b><span id="errlist"></span></div>
@@ -434,7 +436,8 @@ function collect(){
           extra_mailboxes:ex, extra_mailbox_monthly:PRICE.extra,
           setup_kind:s, setup_once:s?PRICE.setup[s]:0,
           monthly_total:(t?PRICE[t]:0)+ex*PRICE.extra},
-    consent:checked('consent')
+    consent:checked('consent'),
+    ai_disclosure:checked('ai_disclosure')
   };
 }
 function summary(o){
@@ -462,7 +465,8 @@ function summary(o){
    +"Plan: "+(o.plan.tier||"not picked")+" at "+o.plan.monthly+" a month, "
    +o.plan.extra_mailboxes+" extra mailbox(es) at "+o.plan.extra_mailbox_monthly+", monthly total "+o.plan.monthly_total+"\n"
    +"Setup: "+(o.plan.setup_kind||"not picked")+" at "+o.plan.setup_once+" once\n"
-   +"Consent given: "+(o.consent?"YES":"NO");
+   +"Consent given: "+(o.consent?"YES":"NO")+"\n"
+   +"AI assistants disclosure ticked: "+(o.ai_disclosure?"YES":"NO");
 }
 
 /* ---------- save a copy -------------------------------------------------- */
@@ -500,6 +504,7 @@ function problems(o){
   if(!o.plan.tier) p.push("which plan you bought");
   if(!o.plan.setup_kind) p.push("which setup fee is on your agreement");
   if(!o.consent) p.push("the authorization tick at the bottom");
+  if(!o.ai_disclosure) p.push("the AI assistants tick at the bottom");
   return p;
 }
 document.getElementById('f').addEventListener('submit',function(ev){
