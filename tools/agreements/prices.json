@@ -246,7 +246,7 @@
     },
     "enterprise": {
       "label": "Tools with Enterprise",
-      "price": "Everything in Professional, plus the protection tools: workers comp audit and premium, HIPAA risk, 401(k) fees, software stack, COI time cost, sales tax nexus, LLC vs S Corp, Section 179, overhead, customer value, acquisition cost, loan, revenue per employee, business valuation and automation ROI calculators; the employee handbook (50 states, English and Spanish) and safety manual builders; the at will, contractor and NDA agreements, the W-2 and contractor onboarding packets and the benefits enrollment guide; separation letter, work order, change order, lien waiver, SOP, org chart, incident report, toolbox talk, vehicle inspection and WC class code request; and the operations tools: COI tracker, certified payroll (WH-347), payroll to GL converter, onboarding tracker and bonus import builder"
+      "price": "Everything in Professional, plus the protection tools: workers comp audit and premium, HIPAA risk, 401(k) fees, software stack, COI time cost, sales tax nexus, LLC vs S-Corp, Section 179, overhead, customer value, acquisition cost, loan, revenue per employee, business valuation and automation ROI calculators; the employee handbook (50 states, English and Spanish) and safety manual builders; the at will, contractor and NDA agreements, the W-2 and contractor onboarding packets and the benefits enrollment guide; separation letter, work order, change order, lien waiver, SOP, org chart, incident report, toolbox talk, vehicle inspection and WC class code request; and the operations tools: COI tracker, certified payroll (WH-347), payroll to GL converter, onboarding tracker and bonus import builder"
     },
     "concierge": {
       "label": "Tools with Concierge",
@@ -565,7 +565,7 @@
       "price": "Quoted for your company (headcount, pay cycle, PTO tracking and more)"
     },
     "scorp_monthly_equiv": {
-      "label": "S corp election support, monthly equivalent in the Quick Quote",
+      "label": "S-Corp election support, monthly equivalent in the Quick Quote",
       "price": "$83.33 a month"
     },
     "open_enrollment_monthly_equiv": {
