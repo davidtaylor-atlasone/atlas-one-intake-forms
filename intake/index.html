@@ -71,6 +71,7 @@ legend{padding:0;font-weight:600;margin-bottom:4px;overflow-wrap:anywhere}
 .note{background:var(--tint);border-left:4px solid var(--p);padding:10px 12px;border-radius:0 7px 7px 0;margin:0}
 .note.big{font-size:19px;font-weight:700;line-height:1.35}
 .note a{display:block;margin-top:6px;color:var(--p);font-weight:600}
+.note a.sharebtn{display:inline-flex;align-items:center;min-height:44px;margin-top:8px;padding:8px 14px;background:var(--bg);border:1px solid var(--p);border-radius:8px;text-decoration:none}
 details.grp{border:1px solid var(--line);border-radius:8px;margin-bottom:8px;background:var(--bg)}
 details.grp>summary{cursor:pointer;padding:12px 14px;font-weight:600;min-height:44px}
 details.grp>summary:focus-visible{outline:2px solid var(--p)}
@@ -217,9 +218,11 @@ const reqTag=f=>f.req?[" ",el("span",{class:"req",text:"(required)"})]:null;
 function labelEl(f,forId){const kids=[f.label,reqTag(f)];if(f.route==="secure"&&f.type!=="file")kids.push(el("span",{class:"lock",text:"Secure"}));return el("label",{for:forId},kids)}
 function fieldWrap(f,inner){return el("div",{class:"f "+(f.w||""),"data-fid":f.id},inner)}
 function help(f){return f.help?el("span",{class:"help",text:f.help}):null}
+function fillLink(u,row){return u.replace(/\{(\w+)\}/g,(m,k)=>encodeURIComponent((row&&row[k])||S[k]||""))}
+function noteLinks(f,row){return (f.links||[]).map(l=>el("a",{class:/\{/.test(l[1])?"sharebtn":null,href:fillLink(l[1],row),target:"_blank",rel:"noopener noreferrer",text:l[0],onclick:e=>{e.currentTarget.href=fillLink(l[1],row)}}))}
 function renderField(f){const t=f.type;
  const setter=v=>{S[f.id]=v;onChange(f.id)};
- if(t==="note")return fieldWrap(f,el("div",{class:"note"+(f.big?" big":"")},el("span",{text:f.text}),(f.links||[]).map(l=>el("a",{href:l[1],target:"_blank",rel:"noopener noreferrer",text:l[0]}))));
+ if(t==="note")return fieldWrap(f,el("div",{class:"note"+(f.big?" big":"")},el("span",{text:f.text}),noteLinks(f)));
  if(t==="radio"||t==="checks"){const multi=t==="checks";const cur=S[f.id]||(multi?[]:"");
   return fieldWrap(f,el("fieldset",null,el("legend",null,f.label,reqTag(f)),help(f),
    el("div",{class:"opts"},f.opts.map((o,i)=>el("label",{class:"opt"},el("input",{type:multi?"checkbox":"radio",name:f.id,value:o,id:f.id+"-"+i,checked:multi?cur.includes(o):cur===o,
@@ -250,7 +253,7 @@ function renderField(f){const t=f.type;
 function refreshPer(){for(const f of CFG.steps[step].fields){if(f.type==="per_state"||f.type==="per_owner"){const o=$(`[data-fid=${f.id}]`);if(o)o.replaceWith(renderField(f))}}applyVisibility()}
 function ownerTotal(){const t=(S.owners||[]).reduce((n,o)=>n+(parseFloat(o.pct)||0),0);return "Total ownership listed: "+t+"%"}
 const SUBS=new Map();
-function subField(f,sf,row,i){const idp=f.id+"-"+i+"-";const w=el("div",{class:"f "+(sf.w||""),"data-sub":sf.id});
+function subField(f,sf,row,i){if(sf.type==="note")return el("div",{class:"f","data-sub":sf.id},el("div",{class:"note"},el("span",{text:sf.text}),noteLinks(sf,row)));const idp=f.id+"-"+i+"-";const w=el("div",{class:"f "+(sf.w||""),"data-sub":sf.id});
  w.append(el("label",{for:idp+sf.id},sf.label,reqTag(sf)));SUBS.set(w,[sf,row]);
  const c=control(sf,row[sf.id],v=>{row[sf.id]=v;if(f.id==="owners"){const n=$("[data-total]");if(n)n.textContent=ownerTotal()}applyVisibility();saveLocal()},idp);[c].flat().forEach(x=>w.append(x));return w}
 function onChange(id){applyVisibility();saveLocal()}
@@ -321,7 +324,7 @@ async function sendForm(P){const btns=[...document.querySelectorAll(".acts butto
   off(false);sendMsg(SEND_ERR[j.error]||"We could not send your form. Your answers are still here. Please try again in a minute.",true);return}}
  catch(e){off(false);sendMsg("We could not send your form. Your answers are still here. Please check your connection and try again.",true)}}
 function showThanks(j){try{localStorage.removeItem(KEY)}catch(e){}
- const kids=[el("h2",{text:"Thank you"}),el("p",{id:"thanks",text:"Thank you. Your information has been received. "+CFG.thanks}),(CFG.after||[]).map(l=>el("p",null,el("a",{href:l[1],target:"_blank",rel:"noopener noreferrer",text:l[0]}))),el("p",{class:"help",id:"ref",text:"Your reference: "+j.ref})];
+ const kids=[el("h2",{text:"Thank you"}),el("p",{id:"thanks",text:"Thank you. Your information has been received. "+CFG.thanks}),(CFG.after||[]).map(l=>el("p",null,el("a",{href:l[1],target:"_blank",rel:"noopener noreferrer",text:l[0]}))),j.loginLink?el("p",null,el("a",{id:"loginlink",href:j.loginLink,target:"_blank",rel:"noopener noreferrer",text:"Share a login securely"})):null,el("p",{class:"help",id:"ref",text:"Your reference: "+j.ref})];
  if(j.test)kids.push(el("p",{class:"note",id:"testnote",text:"Test mode. Nothing was saved. This is what would have been written."}),el("h3",{text:"Note"}),el("pre",{id:"testcrm",style:"white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px",text:j.test.note}),el("h3",{text:"Files"}),el("pre",{id:"testfiles",style:"white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px",text:j.test.files.join("\n")}));
  const nav=$("nav"),bar=$("#bar");if(nav)nav.style.display="none";if(bar)bar.style.display="none";$(".wrap").style.gridTemplateColumns="minmax(0,1fr)";
  $("#main").replaceChildren(el("div",{class:"done"},kids));window.scrollTo(0,0)}
