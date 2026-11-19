@@ -375,7 +375,9 @@ renderField=function(f){if(f.type!=="employees")return _rfE(f);const list=Array.
  return fieldWrap(f,el("fieldset",null,el("legend",null,f.label,el("span",{class:"lock",text:"Secure"})),el("p",{class:"help",text:list.length?list.length+" employee"+(list.length>1?"s":"")+" added.":"No employees added yet."}),cards,
   el("button",{type:"button",class:"go",id:f.id+"-add",text:list.length?"Add another employee":f.add,onclick:()=>empOpen(f,null)})))};
 window.__t={go,S,FILES,CFG,get step(){return step}};
-loadLocal();renderStep();
+// A pre-filled link: the data rides after the #, so it never reaches a web server. Plain fields only, never over a typed answer.
+function prefill(){try{const h=new URLSearchParams(location.hash.slice(1)).get("p");if(!h)return;const b=atob(h.replace(/-/g,"+").replace(/_/g,"/"));const o=JSON.parse(new TextDecoder().decode(Uint8Array.from(b,c=>c.charCodeAt(0))));const OK=["text","email","tel","fein","textarea","state","zip"];for(const k in o){const f=BY_ID[k],v=o[k];if(!f||f.route==="secure"||(S[k]!==undefined&&S[k]!==""))continue;if(f.type==="statesgrid"&&Array.isArray(v))S[k]=v.filter(x=>typeof x==="string"&&x.length<4).slice(0,60);else if(OK.includes(f.type)&&typeof v==="string"&&v.length<500)S[k]=v}history.replaceState(null,"",location.pathname+location.search)}catch(e){}}
+loadLocal();prefill();renderStep();
 </script>
 </body>
 </html>
