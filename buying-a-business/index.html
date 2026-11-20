@@ -173,12 +173,44 @@ const FMT={
 function check(f,v){if(blank(v))return f.req?"This answer is required.":true;if(FMT[f.type]&&typeof v==="string")return FMT[f.type](v.trim());return true}
 function fieldErrors(f){const out=[];const t=f.type;
  if(t==="note"||t==="optiontable")return out;
+ if(t==="w4")return w4Errors(f);
  if(t==="file"){if(f.req&&!(FILES[f.id]||[]).length)out.push({msg:"Please upload a file."});return out}
  if(t==="repeater"){const rows=S[f.id]||[];if(f.req&&!rows.length)out.push({msg:"This answer is required."});
   rows.forEach((r,i)=>{const touched=f.req||Object.values(r).some(Boolean);if(touched)f.sub.forEach(sf=>{if(!subShown(sf,r))return;const m=check(sf,r[sf.id]);if(m!==true)out.push({msg:m,sel:`[data-fid=${f.id}] [data-row="${i}"] [data-sub=${sf.id}]`})})});return out}
  if(t==="per_state"||t==="per_owner"){const st=S[f.id]||{};const keys=t==="per_state"?stateRows():ownerRows().map(o=>o.key);
   keys.forEach(k=>f.sub.forEach(sf=>{if(t==="per_state"&&CFG.noWageTax.includes(k)&&/^wh_/.test(sf.id))return;const m=check(sf,(st[k]||{})[sf.id]);if(m!==true)out.push({msg:m,sel:`[data-fid=${f.id}] [data-row="${k}"] [data-sub=${sf.id}]`})}));return out}
  const m=check(f,S[f.id]);if(m!==true)out.push({msg:m});return out}
+// Form W-4 inside the payroll form (David, 2026-11-19): one W-4 for the main owner, and one for each other owner who is paid.
+// Each is filled in here, uploaded (already signed), or, for a helper or another owner, skipped for the payroll team to collect.
+const W4KEYS=["first","last","street","city","state","zip","status","exempt","step2c","kids","deps","credits","inc4a","ded4b","extra4c","sign_name","sign_date","perjury"];
+const W4STEPS=["status","step2c","kids","deps","credits","inc4a","ded4b","extra4c"];
+function w4People(){const ex=(BY_ID.owners&&shown(BY_ID.owners))?ownerRows():[];
+ return [{key:"main",extra:false,label:[S.first_name,S.last_name].filter(Boolean).join(" ")},...ex.map(o=>({key:o.key,extra:true,label:o.label}))]}
+function w4CanSkip(f,p){return p.extra||(!!f.w4&&!!f.w4.helper&&S.who_fills===f.w4.helper)}
+function w4Errors(f){const out=[];const all=S[f.id]&&typeof S[f.id]==="object"?S[f.id]:{};let up=false;
+ const sel=(k,x)=>`[data-fid=${f.id}] [data-w4="${k}"]`+(x?` [data-w4f=${x}]`:"");
+ for(const p of w4People()){const d=all[p.key]||{};const add=(x,msg)=>out.push({msg,sel:sel(p.key,x)});
+  if(p.extra){if(d.paid!=="Yes"&&d.paid!=="No"){add("paid","Please answer this.");continue}if(d.paid==="No")continue}
+  if(!(d.how==="fill"||d.how==="upload"||(d.how==="skip"&&w4CanSkip(f,p)))){add("how","Please choose one.");continue}
+  if(d.how==="upload"){up=true;continue}if(d.how==="skip")continue;
+  for(const k of ["first","last","street","city","state","zip"])if(blank(d[k]))add(k,"This answer is required.");
+  if(!blank(d.state)&&!CFG.states.some(s=>s[0]===d.state))add("state","Pick a state.");
+  if(!blank(d.zip)){const m=FMT.zip(String(d.zip).trim());if(m!==true)add("zip",m)}
+  if(d.exempt!=="Yes"){if(!(f.w4.status||[]).some(s=>s[0]===d.status))add("status","Please pick a filing status.");
+   for(const k of ["kids","deps"])if(!blank(d[k])){const m=FMT.number(String(d[k]).trim());if(m!==true)add(k,m)}
+   for(const k of ["credits","inc4a","ded4b","extra4c"])if(!blank(d[k])){const m=FMT.money(String(d[k]).trim());if(m!==true)add(k,m)}}
+  if(blank(d.sign_name))add("sign_name","Type your full name to sign.");
+  if(blank(d.sign_date))add("sign_date","This answer is required.");else if(!/^\d{4}-\d{2}-\d{2}$/.test(d.sign_date))add("sign_date","Enter the date.");
+  if(d.perjury!=="Yes")add("perjury","Check this box to sign.")}
+ if(up&&!(FILES.up_w4||[]).length)out.push({msg:"Upload the signed W-4 in the box below, or choose to fill it in here."});
+ return out}
+function w4Clean(f,v){if(!v||typeof v!=="object")return undefined;const o={};
+ for(const p of w4People()){const d=v[p.key];if(!d||typeof d!=="object")continue;const r={};
+  if(p.extra){if(d.paid!=="Yes"&&d.paid!=="No")continue;r.paid=d.paid;if(d.paid==="No"){o[p.key]=r;continue}}
+  if(!["fill","upload","skip"].includes(d.how)){if(Object.keys(r).length)o[p.key]=r;continue}r.how=d.how;r.name=p.label||"";
+  if(d.how==="fill")for(const k of W4KEYS){if(d.exempt==="Yes"&&W4STEPS.includes(k))continue;if(!blank(d[k]))r[k]=typeof d[k]==="string"?d[k].trim():d[k]}
+  o[p.key]=r}
+ return Object.keys(o).length?o:undefined}
 function missing(i){let n=0;for(const f of CFG.steps[i].fields){if(!shown(f))continue;n+=fieldErrors(f).length}return n}
 function collect(){const R={answers:{},uploads:{},secure:{}};
  for(const s of CFG.steps)for(const f of s.fields){if(!shown(f)||f.type==="note")continue;
@@ -187,10 +219,11 @@ function collect(){const R={answers:{},uploads:{},secure:{}};
   if(f.type==="per_state"||f.type==="per_owner"){const keep=f.type==="per_state"?stateRows():ownerRows().map(o=>o.key);const o={};for(const k of keep){const r=(v||{})[k];if(r&&Object.values(r).some(Boolean))o[k]=r}v=Object.keys(o).length?o:undefined}
   if(f.type==="repeater"&&Array.isArray(v))v=v.filter(r=>Object.values(r).some(Boolean)).map(r=>{const o={};for(const sf of f.sub){if(subShown(sf,r)&&!blank(r[sf.id]))o[sf.id]=r[sf.id]}return o});
   if(f.type==="optiontable"&&v&&!Object.keys(v).length)v=undefined;
+  if(f.type==="w4")v=w4Clean(f,v);
   if(blank(v))continue;
   (f.route==="secure"?R.secure:R.answers)[f.id]=v}
  return R}
-return {BY_ID,blank,cond,condShown,shown,subShown,stateRows,ownerRows,check,fieldErrors,missing,collect}}
+return {BY_ID,blank,cond,condShown,shown,subShown,stateRows,ownerRows,check,fieldErrors,missing,collect,w4People,w4CanSkip}}
 
 const {BY_ID,blank,cond,condShown,shown,subShown,stateRows,ownerRows,check,fieldErrors,missing,collect}=makeLogic(CFG,S,FILES);
 
