@@ -92,6 +92,7 @@ footer{max-width:840px;margin:0 auto;padding:0 16px 28px;font-size:13.5px;color:
 <div id="form">
 <div class="note"><p><strong>Why we ask:</strong> Atlas One pays partner payouts only once your W-9 is on file. Without one, the IRS requires us to hold back 24% of every payment (backup withholding). Each January you get a 1099-NEC from us.</p><p><strong>Kept private:</strong> your tax ID and bank details go to a secure folder only. They are never emailed and never stored in our CRM.</p></div>
 <p class="help">This page is the official IRS Form W-9 (Rev. March 2024), one line at a time. When you sign, we fill in the IRS form for you. <a href="https://www.irs.gov/forms-pubs/about-form-w-9" target="_blank" rel="noopener noreferrer">IRS Form W-9 and its instructions (irs.gov)</a></p>
+<div class="note" id="prefilled" hidden><p><strong>We filled in what we have on file.</strong> Please check each line and change anything that is not right. Your tax ID and bank numbers are never filled in: you type those yourself.</p></div>
 
 <section id="s1"><h2><span class="num">1</span>Who we pay</h2>
 <div class="grid">
@@ -127,6 +128,10 @@ footer{max-width:840px;margin:0 auto;padding:0 16px 28px;font-size:13.5px;color:
 <div class="f" data-f="city"><label for="city">City <span class="req">(required)</span></label><input id="city" maxlength="60" autocomplete="address-level2"></div>
 <div class="f" data-f="state"><label for="state">State <span class="req">(required)</span></label><select id="state" autocomplete="address-level1"><option value="">Pick</option></select></div>
 <div class="f" data-f="zip"><label for="zip">ZIP <span class="req">(required)</span></label><input id="zip" maxlength="10" inputmode="numeric" autocomplete="postal-code"></div>
+</div>
+<div class="grid">
+<div class="f" data-f="email"><label for="email">Email for payout notices</label><input id="email" type="email" maxlength="200" autocomplete="email"></div>
+<div class="f" data-f="phone"><label for="phone">Phone</label><input id="phone" type="tel" maxlength="20" inputmode="tel" autocomplete="tel"></div>
 </div></section>
 
 <section id="s4"><h2><span class="num">4</span>Taxpayer identification number</h2>
@@ -208,7 +213,7 @@ const ssnOk=s=>/^\d{9}$/.test(s)&&!/^(000|666|9\d\d)/.test(s)&&s.slice(3,5)!=="0
 const einOk=s=>/^\d{9}$/.test(s)&&!/^(00|07|08|09|17|18|19|28|29|49|69|70|78|79|89|96|97)/.test(s);
 function collect(){return{w9:{name:val("name"),business:val("business"),taxClass:radio("taxClass"),llcCode:val("llcCode"),otherText:val("otherText"),foreignOwners:$("#foreignOwners").checked,
  exemptPayee:val("exemptPayee"),fatca:val("fatca"),address:val("address"),city:val("city"),state:val("state"),zip:digits(val("zip")),tinType:radio("tinType"),tin:digits(val("tin")),
- backupNotified:$("#backupNotified").checked,certify:$("#certify").checked,esign:$("#esign").checked,signature:val("signature"),title:val("title")},
+ backupNotified:$("#backupNotified").checked,certify:$("#certify").checked,esign:$("#esign").checked,signature:val("signature"),title:val("title"),email:val("email"),phone:digits(val("phone"))},
  bank:{holder:val("holder"),bankName:val("bankName"),routing:digits(val("routing")),account:digits(val("account")),confirm:digits(val("confirm")),type:radio("acctType")}}}
 const MAXB=15*1024*1024;
 function validate(){document.querySelectorAll(".err").forEach(e=>e.remove());document.querySelectorAll(".invalid").forEach(e=>e.classList.remove("invalid"));
@@ -219,6 +224,8 @@ function validate(){document.querySelectorAll(".err").forEach(e=>e.remove());doc
  if(w.taxClass==="other"&&!w.otherText)e.otherText="Say what kind of entity it is.";
  if(!w.address)e.address="Enter your mailing address.";if(!w.city)e.city="Enter the city.";if(!w.state)e.state="Pick the state.";
  if(!(w.zip.length===5||w.zip.length===9))e.zip="Enter a 5 or 9 digit ZIP code.";
+ if(w.email&&!/^[^\s@]{1,64}@[^\s@]{1,190}\.[a-z]{2,}$/i.test(w.email))e.email="Check the email address, or leave it empty.";
+ if(w.phone&&!(w.phone.length===10||(w.phone.length===11&&w.phone[0]==="1")))e.phone="Enter a 10 digit phone number, or leave it empty.";
  if(!w.tinType)e.tinType="Pick Social Security number or EIN.";
  else if(w.tinType==="ssn"&&NEEDS_EIN.has(w.taxClass))e.tinType="This tax classification gives its Employer Identification Number (EIN).";
  else if(w.tinType==="ssn"&&!ssnOk(w.tin))e.tin="Enter all 9 digits of the Social Security number.";
@@ -260,7 +267,15 @@ $("#fill").addEventListener("click",()=>{const s={name:"Pat Sample",business:"Sa
  for(const k in s)$("#"+k).value=s[k];$("#state").value="TX";document.querySelector('input[name="taxClass"][value="llc"]').checked=true;$("#llcCode").value="S";
  document.querySelector('input[name="tinType"][value="ein"]').checked=true;document.querySelector('input[name="acctType"][value="checking"]').checked=true;$("#certify").checked=true;$("#esign").checked=true;sync()});
 if(location.protocol==="http:"&&!/^(localhost|127\.0\.0\.1)$/.test(location.hostname))location.replace("https://"+location.host+location.pathname+location.search);
-(async()=>{getChallenge().catch(()=>{});let good=false;if(LINK){try{const r=await fetch(API+"/api/w9/check?t="+encodeURIComponent(LINK),{cache:"no-store"});good=r.ok&&(await r.json()).ok}catch(e){good=true}}
+// What Atlas One already has on file (never a tax ID or bank number). Only empty boxes are filled; the partner can change any of them.
+const PRE=["name","business","address","city","zip","email","holder"];
+function prefill(p){if(!p||typeof p!=="object")return;let n=0;
+ for(const k of PRE)if(typeof p[k]==="string"&&p[k]&&!val(k)){$("#"+k).value=k==="zip"&&p[k].length===9?p[k].slice(0,5)+"-"+p[k].slice(5):p[k];n++}
+ if(typeof p.state==="string"&&!val("state")&&[...$("#state").options].some(o=>o.value===p.state)){$("#state").value=p.state;n++}
+ if(typeof p.phone==="string"&&/^\d{10}$/.test(p.phone)&&!val("phone")){$("#phone").value="("+p.phone.slice(0,3)+") "+p.phone.slice(3,6)+"-"+p.phone.slice(6);n++}
+ if(typeof p.taxClass==="string"&&!radio("taxClass")){const r=document.querySelector('input[name="taxClass"][value="'+p.taxClass.replace(/[^a-z_]/g,"")+'"]');if(r){r.checked=true;n++}}
+ if(n){$("#prefilled").hidden=false;sync()}}
+(async()=>{getChallenge().catch(()=>{});let good=false;if(LINK){try{const r=await fetch(API+"/api/w9/check?t="+encodeURIComponent(LINK),{cache:"no-store"});const j=r.ok?await r.json():{};good=!!j.ok;if(good)prefill(j.prefill)}catch(e){good=true}}
  if(!good){$("#form").hidden=true;$("#badlink").hidden=false}})();
 sync();
 </script>
