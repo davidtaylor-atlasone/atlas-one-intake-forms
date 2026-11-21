@@ -176,6 +176,19 @@ input::placeholder{color:var(--navy-50)}
 .hq{padding:14px 0;border-top:1px solid var(--navy-12)}
 .hq:first-child{border-top:0}
 .hq p{margin:0 0 10px;font-weight:600}
+.hq .hq-t{font-weight:700;margin:0 0 4px}
+.hq .hq-lead{font-weight:600;margin:0 0 6px}
+.hq ul{margin:0 0 8px;padding-left:22px;font-size:15px}
+.hq ul li{margin:2px 0}
+.hq .hq-note{font-size:14px;font-weight:400;color:var(--navy-70);margin:0 0 10px}
+.hq-rule{background:var(--mist);border-radius:12px;padding:12px 14px;font-size:15px;margin:0 0 18px}
+.opt-plan{border:1.5px solid var(--navy-12);border-radius:var(--radius);background:#fff;padding:16px 18px;margin:0 0 18px}
+.opt-plan .lbl{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--navy-70)}
+.opt-plan h3{font-size:20px;margin:4px 0 8px}
+.opt-plan .status{display:inline-block;font-size:13px;font-weight:700;padding:4px 10px;border-radius:999px;background:var(--peri-15);border:1px solid var(--peri);margin:0 0 10px}
+.opt-plan ul{margin:6px 0 0;padding-left:20px}
+.btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+@media (max-width:640px){ .btn-row{flex-direction:column} .btn-row .btn{width:100%} }
 .hq .choices{grid-template-columns:repeat(2,minmax(0,160px))}
 .hq .choice{padding:10px 14px}
 .plan-card{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;background:var(--mist);border-radius:var(--radius);padding:14px 18px;margin:0 0 18px}
@@ -279,7 +292,7 @@ input::placeholder{color:var(--navy-50)}
   
   <div id="assistBar" class="assist-bar" hidden><b>Producer assisted.</b> Fill in the business details with the owner. Social Security numbers, bank numbers and state logins are left for the owner, who finishes privately from the link we email them.</div>
   <div class="plan-card" id="planCard" aria-live="polite">
-    <div><span class="lbl">Your HealtheMe plan</span><b id="planName">Not chosen yet</b><span class="small" id="planMeta"></span></div>
+    <div><span class="lbl" id="planLbl">Your HealtheMe plan</span><b id="planName">Not chosen yet</b><span class="small" id="planMeta"></span><span class="small" id="premiumLine" style="display:block;margin-top:4px"></span></div>
     <a id="changePlan" href="#">Change plan</a>
   </div>
   <div class="notice" id="noPlan" hidden role="status"><h3>Choose your plan first</h3><p>We did not receive a plan from the HealtheMe plans page. Choose your plan there with your broker and you will come right back here. If your broker is still choosing with you, you can keep going and they add it later.</p><p><a class="btn ghost" id="choosePlan" href="#">Choose my HealtheMe plan</a></p></div>
@@ -289,59 +302,78 @@ input::placeholder{color:var(--navy-50)}
   <form id="f" novalidate autocomplete="on">
 
   
+  <section class="step" data-step="start" data-title="Let's start">
+    <h1>Let's start with you</h1>
+    <p class="intro">A few basics first. If you got a quote on the HealtheMe site, we already filled in what you typed there.</p>
+    <p class="save-note">Your answers save on this device as you go, so you can finish later. Social Security numbers, bank numbers and health answers are never saved on the device.</p>
+    <div class="row">
+      <div class="c8"><label class="f" for="leadState">What state do you live and work in?</label><select id="leadState" name="lead.state" data-req data-states><option value="">Choose a state</option></select><div class="errmsg">Choose a state.</div></div>
+    </div>
+    <div class="notice soft" id="startOutside" hidden role="status"><h3 id="startOutsideTitle"></h3><p>You can still join Atlas One for your business setup and payroll, with an outside health plan option. Keep going and we will show you how it works.</p></div>
+    <div class="row">
+      <div class="c6"><label class="f" for="leadFirst">First name</label><input type="text" id="leadFirst" name="lead.firstName" autocomplete="given-name" data-req><div class="errmsg">Enter your first name.</div></div>
+      <div class="c6"><label class="f" for="leadLast">Last name</label><input type="text" id="leadLast" name="lead.lastName" autocomplete="family-name" data-req><div class="errmsg">Enter your last name.</div></div>
+    </div>
+    <div class="row">
+      <div class="c6"><label class="f" for="leadEmail">Email</label><input type="email" id="leadEmail" name="lead.email" autocomplete="email" data-req data-v="email"><div class="errmsg">Enter a valid email address.</div></div>
+      <div class="c6"><label class="f" for="leadPhone">Mobile phone</label><input type="tel" id="leadPhone" name="lead.phone" autocomplete="tel" inputmode="tel" placeholder="(555) 555-5555" data-req data-v="phone"><div class="errmsg">Enter a 10 digit US phone number.</div></div>
+    </div>
+  </section>
+
+  
   <section class="step" data-step="health" data-title="Health questions">
-    <h1>A few health questions</h1>
-    <p class="intro">Yes or no only, for you and everyone on your plan. Your answers stay private.</p>
-    <div class="notice soft" id="hqPlaceholder" hidden><h3>Placeholder questions</h3><p>Micah to supply the approved HealtheMe questionnaire. These questions are examples for testing only.</p></div>
-    
+    <h1>Health questions</h1>
+    <p class="intro" id="hqIntro"></p>
+    <p class="hq-rule"><b id="hqRule"></b></p>
+    <div class="notice soft" id="hqPlaceholder" hidden><h3>Placeholder questions</h3><p>For testing only.</p></div>
     <div class="notice soft" id="assistHealth" hidden><h3>Producer: hand the screen to the owner</h3><p>The owner answers these privately. You do not need to see the answers.</p></div>
     <div class="notice" id="privacyNotice">
       <h3>Your privacy</h3>
-      <p>Your answers are protected health information under federal health privacy law. They go only to the HealtheMe plan administrator, in its own secure system, for your enrollment. They are not saved on this device, and Atlas One and your producer never see them.</p>
+      <p>Your answers are protected health information. They are used only to see whether the HealtheMe plans fit. If every answer is No, they are not kept. If any answer is Yes, they are stored encrypted in Atlas One's secure system for the staff who set up your coverage, and are never put in email or shared with your producer. Either way, you can still get coverage and payroll through Atlas One.</p>
     </div>
     <fieldset>
-      <legend>Answer for yourself and everyone you plan to cover</legend>
+      <legend class="sr-only">Health questions</legend>
       <div id="hqList"></div>
     </fieldset>
     <fieldset data-group="healthAuth" data-req>
       <legend>Authorization</legend>
-      <label class="choice box"><input type="checkbox" name="consents.healthAuthorization" value="yes" data-phi><span class="mark"></span><span><b>I authorize the release of these answers to the HealtheMe plan administrator for my enrollment, and I answer for everyone I plan to cover with their permission.</b><span class="d">This lasts until your enrollment is decided. You can take it back in writing at any time.</span></span></label>
+      <label class="choice box"><input type="checkbox" name="consents.healthAuthorization" value="yes" data-phi><span class="mark"></span><span><b>I authorize Atlas One to use these answers to decide which health plan fits me and my family, and to tell the HealtheMe team only whether the HealtheMe plans fit (never my answers). I answer for everyone I plan to cover, with their permission.</b><span class="d">This lasts until your coverage is decided. You can take it back in writing at any time.</span></span></label>
       <div class="errmsg">Check the box to continue.</div>
     </fieldset>
   </section>
 
   
-  <section class="step" data-step="hqstop" data-title="David will call you">
-    <h1>Thank you. David will call you.</h1>
-    <p class="intro">Based on your answers, David will finish your enrollment with you personally on a short call. There is nothing more to fill in here.</p>
-    <fieldset>
-      <legend>How can David reach you?</legend>
-      <div class="row">
-        <div class="c6"><label class="f" for="sFirst">First name</label><input type="text" id="sFirst" name="stop.firstName" autocomplete="given-name" data-req><div class="errmsg">Enter your first name.</div></div>
-        <div class="c6"><label class="f" for="sLast">Last name</label><input type="text" id="sLast" name="stop.lastName" autocomplete="family-name" data-req><div class="errmsg">Enter your last name.</div></div>
-      </div>
-      <div class="row">
-        <div class="c6"><label class="f" for="sPhone">Best phone</label><input type="tel" id="sPhone" name="stop.phone" autocomplete="tel" inputmode="tel" placeholder="(555) 555-5555" data-req data-v="phone"><div class="errmsg">Enter a 10 digit US phone number.</div></div>
-        <div class="c6"><label class="f" for="sEmail">Email</label><input type="email" id="sEmail" name="stop.email" autocomplete="email" data-req data-v="email"><div class="errmsg">Enter a valid email address.</div></div>
-      </div>
-    </fieldset>
-    <p class="hint">Your health answers are not shared with Atlas One. David only learns that he should call you.</p>
-    <p><button type="button" class="btn" id="stopSend">Ask David to call me</button></p>
+  <section class="step" data-step="hqstop" data-title="Your options">
+    <h1>Thank you. Here is your next step.</h1>
+    <p class="intro">Based on your answers, you are not eligible for the HealtheMe plans. That is not the end of the road: you can still get health coverage and set up your business and payroll with Atlas One.</p>
+    <div class="opt-plan" data-outside-card></div>
+    <p class="hint">Your health answers stay private. We only let the HealtheMe team know the HealtheMe plans are not a fit.</p>
+    <div class="btn-row">
+      <button type="button" class="btn" id="stopContinue">Continue with an outside plan</button>
+      <button type="button" class="btn ghost" id="stopSend">Have David call me first</button>
+    </div>
   </section>
   <section class="step" data-step="hqstopdone" data-title="Sent">
     <h1>Thank you</h1>
-    <p class="intro">David will call you at the number you gave. Questions before then? Call <a data-tel href="tel:+13802255217">380-CALL-A1S (380-225-5217)</a>.</p>
+    <p class="intro">David will call you at the number you gave to walk through your outside plan option and your setup. Questions before then? Call <a data-tel href="tel:+13802255217">380-CALL-A1S (380-225-5217)</a>.</p>
     <div id="sandboxStop" hidden style="margin-top:24px">
-      <div class="sandbox"><b>Sandbox.</b> Nothing was sent. Download what GHL would receive: the stop flag, never the answers.</div>
-      <button type="button" class="btn ghost" id="dlGhlStop">Download GHL payload (JSON)</button>
+      <div class="sandbox"><b>Sandbox.</b> Nothing was sent. Download what the secure intake would receive (answers go only to the encrypted store), or what GHL would get (the flag only).</div>
+      <div class="btn-row"><button type="button" class="btn ghost" id="dlGhlStop">Download GHL payload (JSON)</button></div>
     </div>
+  </section>
+
+  
+  <section class="step" data-step="outside" data-title="Your health plan">
+    <h1 id="outsideTitle">Your health plan option</h1>
+    <p class="intro" id="outsideIntro"></p>
+    <div class="opt-plan" data-outside-card></div>
+    <p class="intro" style="margin-bottom:0">Next, the details we need to set up your business and payroll. It takes about 10 minutes.</p>
   </section>
 
   
   <section class="step" data-step="entity" data-title="Your business entity">
     <h1>Do you already have a business entity?</h1>
     <p class="intro">A business entity (like an LLC or a corporation) is required to join the plan. If you do not have one yet, we can set it up for you.</p>
-    <p class="save-note" id="saveNote">Your answers save on this device as you go, so you can finish later. Social Security numbers, bank numbers and logins are never saved on the device.</p>
     <fieldset data-group="entityStatus" data-req>
       <legend class="sr-only">Business entity</legend>
       <div class="choices">
@@ -411,7 +443,7 @@ input::placeholder{color:var(--navy-50)}
         <div class="c4"><label class="f" for="bState">State</label><select id="bState" name="company.address.state" data-req data-states data-dc><option value="">Choose</option></select><div class="errmsg">Choose a state.</div></div>
         <div class="c3"><label class="f" for="bZip">ZIP code</label><input type="text" id="bZip" name="company.address.zip" inputmode="numeric" autocomplete="postal-code" data-req data-v="zip"><div class="errmsg">Enter a 5 digit ZIP.</div></div>
       </div>
-      <div class="notice" id="ineligibleState" hidden role="alert"><h3 id="inelStateTitle"></h3><p>We can let you know as soon as it opens in your state, or build another option with you on a short call.</p><p><a class="btn ghost" data-book href="#">Book a call</a></p></div>
+      <div class="notice soft" id="ineligibleState" hidden role="status"><h3 id="inelStateTitle"></h3><p>No problem. You continue with Atlas One for your business and payroll, with an outside health plan option. David confirms the plan with you.</p></div>
     </fieldset>
     <fieldset data-group="mailSame" data-req>
       <legend>Is your main and mailing address the same?</legend>
@@ -808,7 +840,7 @@ input::placeholder{color:var(--navy-50)}
 
 <script>
 window.HP = {
-  version: '2026-10-24 sandbox r5 (Cornerstone style intake, same sitting or David review)',
+  version: '2026-11-21 r6 (state first, health questions, outside plan option)',
   program: {
     name: 'HealtheMe',
     issuer: 'U.S. Health Centers',
@@ -894,19 +926,41 @@ window.HP = {
   secure: { endpoint: 'https://portal.atlasonesolutions.com/api/health-intake' },
   uploads: { maxBytes: 10485760, types: ['image/jpeg','image/png','image/heic','image/heif','image/webp','application/pdf'] },
   questionnaire: {
-    enabled: false,
+    enabled: true,
     stopTag: 'hp-hq-stop',
-    status: 'placeholder',
-    version: 'placeholder-2026-10-23',
-    endpoint: '',
+    status: 'approved',
+    version: 'simple-2026-11-21',
+    intro: 'Answer for everyone applying: you, your spouse and your children. Unless a question says otherwise, it covers the past 5 years.',
+    rule: "Answer Yes if it's true for anyone. If you're not sure, answer Yes.",
     questions: [
-      {id:'hq1', t:'In the last 5 years, have you or anyone you plan to cover been diagnosed with or treated for cancer, heart disease or a stroke?'},
-      {id:'hq2', t:'Has anyone you plan to cover been diagnosed with diabetes, kidney disease or liver disease?'},
-      {id:'hq3', t:'In the last 12 months, has anyone you plan to cover stayed in a hospital overnight, or been told they need a surgery that has not happened yet?'},
-      {id:'hq4', t:'Is anyone you plan to cover pregnant now, or taking a specialty medication (for example an infusion or an injection given at a clinic)?'},
-      {id:'hq5', t:'Has anyone you plan to cover used tobacco or nicotine products in the last 12 months?'}
+      {id:'q1', t:'Pregnancy, fertility treatment and adoption.', lead:'Right now, is anyone applying:', items:['pregnant;','having fertility treatment to become pregnant, or scheduled to start it in the next 12 months (for example IVF, IUI or egg retrieval);','in the process of adopting a child, or expecting a child through a surrogate; or','a baby who was in a newborn intensive care unit (NICU) in the past 12 months?']},
+      {id:'q2', t:'Incapacitated or unable to work.', lead:'Right now, is anyone applying:', items:['in a hospital, rehab center, skilled nursing facility, nursing home or hospice;','unable to work, go to school or do normal daily activities because of a health problem;','getting, or waiting on a decision about, disability benefits (for example Social Security disability, or short-term or long-term disability); or','in need of help from another person with bathing, dressing, eating or getting around?']},
+      {id:'q3', t:'Hospital stays and the care that followed.', lead:'In the past 12 months, has anyone applying stayed in a hospital overnight for any treatment or procedure?', note:'Also answer Yes if anyone applying is still being treated or followed by a provider for something that put them in a hospital, no matter how long ago.'},
+      {id:'q4', t:'Planned surgery.', lead:"Does anyone applying have surgery scheduled, or has a provider recommended surgery that hasn't been done yet?", note:"Include surgery planned in a hospital, a surgery center or a provider's office. Do not count routine dental work."},
+      {id:'q5', t:'High-risk treatment or testing expected.', lead:'In the next 12 months, does anyone applying have any of these scheduled or recommended by a provider, or are they waiting on a decision about one?', items:['chemotherapy, radiation or immunotherapy;','dialysis;','an organ or bone marrow transplant, or an evaluation for one;','an IV infusion, or a medicine given by shot or pump that comes from a specialty pharmacy;','a hospital stay, inpatient rehab, or a stay in a skilled nursing facility;','home health care, or home oxygen started for the first time; or',"a biopsy, scan or other test whose results aren't back yet, or that was ordered to check a symptom or abnormal result?"]},
+      {id:'q6', t:'Cancer and tumors.', lead:'In the past 5 years, has anyone applying been diagnosed with or treated for:', items:['cancer of any kind, including leukemia, lymphoma, myeloma or melanoma;','a brain or spinal cord tumor; or','any tumor, lump, growth or polyp that a provider is watching, called pre-cancerous, or plans to remove?'], note:'Do not count basal cell or squamous cell skin cancer that was fully removed with no further treatment.'},
+      {id:'q7', t:'Heart disease.', lead:'In the past 5 years, has anyone applying been diagnosed with or treated for:', items:['a heart attack, chest pain from the heart (angina), or blocked heart arteries (coronary artery disease);','heart failure or a weak or enlarged heart muscle (cardiomyopathy);','a heart valve problem or a heart defect someone was born with;','an irregular heartbeat (such as atrial fibrillation) treated with a blood thinner, an ablation, a pacemaker or a defibrillator; or','heart bypass surgery, a stent, an angioplasty or any other heart procedure?']},
+      {id:'q8', t:'Stroke and blood vessels.', lead:'In the past 5 years, has anyone applying been diagnosed with or treated for:', items:['a stroke or a TIA (mini-stroke);','an aneurysm of the brain, chest or belly (aorta);','peripheral artery disease (poor blood flow to the legs or arms) or a blocked neck (carotid) artery; or','a blood clot in a vein or a lung (deep vein thrombosis or pulmonary embolism)?']},
+      {id:'q9', t:'High blood pressure.', lead:'In the past 5 years, has anyone applying been diagnosed with or treated for high blood pressure (hypertension), including taking any medicine for it?'},
+      {id:'q10', t:'Diabetes.', lead:'In the past 5 years, has anyone applying been diagnosed with or treated for Type 1 or Type 2 diabetes, or used insulin, an insulin pump or a continuous glucose monitor?', note:'Do not count diabetes that happened only during a pregnancy and went away after the birth.'},
+      {id:'q11', t:'Endocrine and hormone disorders.', lead:'In the past 5 years, has anyone applying been diagnosed with or treated for:', items:["a thyroid disorder (overactive, underactive, thyroid nodules or Graves' disease);","an adrenal or pituitary disorder, such as Addison's disease or Cushing's syndrome;",'a parathyroid disorder; or','any other hormone or gland disorder, including growth hormone treatment?']},
+      {id:'q12', t:'Autoimmune conditions.', lead:'In the past 5 years, has anyone applying been diagnosed with or treated for:', items:['lupus, rheumatoid arthritis, psoriatic arthritis or ankylosing spondylitis;',"Crohn's disease or ulcerative colitis;","scleroderma, Sj\u00f6gren's syndrome, myositis, vasculitis or sarcoidosis;",'psoriasis or eczema treated with a shot, an infusion or a biologic medicine; or','any other autoimmune or connective tissue disease?']},
+      {id:'q13', t:'Blood disorders.', lead:'In the past 5 years, has anyone applying been diagnosed with or treated for:', items:['hemophilia, von Willebrand disease, or another bleeding or clotting disorder;','sickle cell disease or thalassemia (do not count sickle cell trait or thalassemia trait);','aplastic anemia, myelodysplastic syndrome, or a low platelet disorder (such as ITP); or','any condition that needed blood transfusions or regular infusions?']},
+      {id:'q14', t:'HIV, immune deficiency and chronic hepatitis.', lead:'In the past 5 years, has anyone applying been diagnosed with or treated for:', items:['HIV or AIDS;','an immune deficiency that needs regular treatment (for example immune globulin, IVIG); or','chronic hepatitis B or hepatitis C?']},
+      {id:'q15', t:'Organ failure and transplant.', lead:'In the past 5 years, has anyone applying been diagnosed with or treated for:', items:['chronic kidney disease or kidney failure;','cirrhosis, liver failure or other chronic liver disease; or','failure of any other organ (heart, lung or pancreas)?'], note:'Also answer Yes if anyone applying has ever had an organ or bone marrow transplant, or is on a transplant waiting list or being evaluated for one.'},
+      {id:'q16', t:'Organ support treatment.', lead:'In the past 5 years, has anyone applying had or needed:', items:['dialysis;','a ventilator, a breathing machine other than CPAP, or oxygen at home;','a heart pump (LVAD); or','a feeding tube or IV nutrition (TPN)?']},
+      {id:'q17', t:'Lungs and breathing.', lead:'In the past 5 years, has anyone applying been diagnosed with or treated for:', items:['COPD, emphysema or chronic bronchitis;','cystic fibrosis;','scarring of the lungs (pulmonary fibrosis) or high blood pressure in the lungs (pulmonary hypertension); or','asthma that led to a hospital stay or emergency room visit, or that is treated with a shot or biologic medicine?']},
+      {id:'q18', t:'Back, bones, joints and muscles.', lead:'In the past 5 years, has anyone applying been diagnosed with or treated for:', items:['a back or neck condition, such as a herniated or bulging disc, spinal stenosis, degenerative disc disease or sciatica;','arthritis or another condition in the hip, knee, shoulder or another major joint;','a muscle or connective tissue disorder;','surgery on the back, neck or a major joint, or a provider recommending one, including a joint replacement; or','use of an artificial limb, a power wheelchair or a mobility scooter?'], note:'Do not count a sprain, strain or broken bone that fully healed with no ongoing treatment.'},
+      {id:'q19', t:'Brain and nerves.', lead:'In the past 5 years, has anyone applying been diagnosed with or treated for:', items:['multiple sclerosis (MS), ALS (Lou Gehrig\'s disease) or myasthenia gravis;',"Parkinson's disease, Alzheimer's disease or dementia;",'seizures or epilepsy;','muscular dystrophy, spinal muscular atrophy (SMA) or cerebral palsy;','paralysis of any kind (quadriplegia, paraplegia or hemiplegia), a spinal cord injury, or a brain injury that needs ongoing care;','nerve damage (neuropathy) that needs ongoing treatment; or','migraines treated with a shot, an infusion or Botox?']},
+      {id:'q20', t:'Mental health.', lead:'In the past 5 years, has anyone applying been diagnosed with or treated for a mental health condition, including with medicine or counseling? For example:', items:['depression, anxiety or panic disorder;','bipolar disorder, schizophrenia or another psychotic disorder;','PTSD, OCD, an eating disorder or ADHD; or','any overnight stay in a hospital or a live-in program for a mental health condition?']},
+      {id:'q21', t:'Alcohol and drug use.', lead:'In the past 5 years, has anyone applying:', items:['been treated for alcohol or drug use, including detox, rehab, or an inpatient or outpatient program;','taken medicine for alcohol or opioid use, such as methadone, buprenorphine (Suboxone) or naltrexone (Vivitrol); or','been advised by a provider to get treatment for alcohol or drug use?']},
+      {id:'q22', t:'Surgery history.', lead:'In the past 5 years, has anyone applying had surgery? Include surgery in a hospital or a surgery center.', note:"Do not count minor procedures done in a provider's office, routine dental work, or an uncomplicated vaginal birth."},
+      {id:'q23', t:'Conditions present from birth.', lead:'Has anyone applying been born with a condition that still needs regular specialist care? For example:', items:['a heart defect, spina bifida or a cleft palate;','Down syndrome or another chromosomal condition; or','a growth or developmental condition that needs ongoing therapy or treatment?'], note:'Answer about conditions a person has. Do not include family medical history or the results of genetic tests.'},
+      {id:'q24', t:'Specialty and weight-loss medicines.', lead:'Right now, or at any time in the past 12 months, has anyone applying taken or been prescribed:', items:['a medicine given by shot, IV infusion or pump (do not count vaccines, allergy shots, insulin or birth control);','a medicine that comes from a specialty pharmacy; or','a GLP-1 medicine, such as Ozempic, Wegovy, Mounjaro or Zepbound?']}
     ]
   },
+  premium: { upfrontMonths: 1,
+    line: "One month's premium is collected up front, so your first premium payment is two monthly premiums." },
   submit: { mode: 'live' },
   testNumbers: false,
   phone: { label: '380-CALL-A1S (380-225-5217)', tel: '+13802255217' },
@@ -914,13 +968,14 @@ window.HP = {
   programStart: '2027-01-01',
   monthlyCutoffDay: 15,
   storageKey: 'a1hp-progress-v5',
-  excludedStates: ['CA','CO','HI','MN','NH','NJ','NY','OR','VT','WA'],
+  excludedStates: ['CA','CO'],
   noIncomeTaxStates: ['AK','FL','NV','SD','TN','TX','WY','NH','WA'],
   w4: { childCredit: 2200, otherDependent: 500, incomeLimitSingle: 200000, incomeLimitJoint: 400000 }
 };
 </script>
 <script>
 window.HP_TERMS = {"atlas-one": {"title": "HEALTHEME SERVICE SCHEDULE", "version": "2026-10-24.56c91d1ef57a", "sha256": "56c91d1ef57abbda3924b0ec36978600148fc3222f779efc9d3f206a9d10019e", "text": "HEALTHEME SERVICE SCHEDULE\nThis Schedule is part of the Master Client Services Agreement below, between Atlas One Solutions LLC and the Client named on the signature page. It covers the HealtheMe program.\n1.  Services\nAtlas One provides the services listed under \"Services you chose\" at the top of this agreement. The standard HealtheMe services are enrollment in the HealtheMe health plan the Client chose, with the plan, network and coverage tier listed, and payroll setup and support on the Client's payroll platform. Optional services, such as bookkeeping, tax, business formation, HR support or another service, apply only when they are listed.\n2.  Payroll platform\nPayroll, payroll tax filing and, for a PEO, co employment are provided by the payroll platform under its own agreement, which the Client signs separately. Atlas One is not a party to that agreement and does not change its terms.\n3.  Fees\nOne time fees, such as business formation and setup or payroll tax account setup, are listed with the service they belong to. Health plan premiums follow the Client's HealtheMe quote. Atlas One's payroll service fee is quoted for the Client's company and confirmed in writing before it is charged.\n4.  Start date\nSetups received by the 15th of a month start on the 1st of the next month. Setups received after the 15th start on the 1st of the month after that. No coverage starts before January 1, 2027.\n5.  Client information\nThe Client confirms that the information given in the HealtheMe onboarding form is true and complete, and will tell Atlas One about any change.\n6.  Sensitive information\nSocial Security numbers, bank numbers and state tax portal logins are kept in a restricted folder that only Atlas One's setup team can open. They are shared only with the payroll platform, and only to set up and run the Client's payroll.\n7.  Ending this Schedule\nSection 3 of the Master Client Services Agreement applies. Ending this Schedule does not end the platform agreement; the Client ends that under its own terms.\n\nMASTER CLIENT SERVICES AGREEMENT\nThis Master Client Services Agreement (this Agreement) is entered into as of ____________________ between Atlas One Solutions LLC, a Utah limited liability company (Atlas One), and ____________________ (Client). This Agreement, together with every Schedule the Client signs, is the whole agreement between the parties for the services described.\n1.  Services\nAtlas One provides the services described in each signed Schedule. A Schedule sets the scope, the deliverables, and any terms specific to that service, and is incorporated into this Agreement by reference. Adding a new service means signing a new Schedule, not renegotiating this Agreement.\n2.  Fees and billing\nFees are set in each Schedule. Monthly fees are billed in advance and charged automatically to the payment method on file, or invoiced with payment due within fifteen days of the invoice date if the Client has not set up automatic payment. One time and setup fees are due at signing unless the Schedule says otherwise. Every price in a Schedule is confirmed at signing and does not change mid term without written notice. ACH is preferred and has no fee. Credit card payments carry a 3.5% processing fee. Invoices not paid within ten days of the due date add a late fee of 1.5% per month on the overdue balance.\n3.  Term and termination\nThis Agreement begins on the date above and continues month to month unless a Schedule states a different term. Either party may end a service by giving thirty days written notice; ending one service does not end the others. Atlas One may suspend or end a service immediately if a payment is more than thirty days past due. On termination, Atlas One delivers or returns the Client's own data and materials within a reasonable time.\n4.  Confidentiality\nEach party will keep the other's confidential business information private and use it only to perform this Agreement, except information that is already public, was already known, or must be disclosed by law. This obligation survives the end of this Agreement.\n5.  Data access\nWhere a service requires access to the Client's accounts, software, or records, the Client grants that access and keeps it active for as long as the service runs. Atlas One accesses only what a service requires, and the Client's data stays the Client's property at all times.\n6.  Vendor neutral statement\nAtlas One is vendor neutral. Where a service involves placing coverage, software, or a service with a third party, Atlas One gathers options, presents them side by side, and the Client chooses; Atlas One does not steer the Client toward one vendor over another for its own benefit.\n7.  Independent contractor\nAtlas One provides these services as an independent contractor, not as the Client's employee, partner, or joint venturer. Nothing in this Agreement creates an employment relationship between Atlas One and the Client's workforce, except where a separate, clearly labeled co-employment agreement says otherwise.\n8.  Not legal, tax, or insurance advice\nAtlas One is not a law firm, a CPA firm, or an insurance carrier. Guidance provided is practical and operational, not legal, tax, or coverage advice; the Client should have its own attorney, CPA, or licensed agent review any document, filing, or coverage decision that carries legal or financial weight.\n9.  Limitation of liability\nAtlas One's total liability arising from this Agreement, for any service, is limited to the fees the Client paid Atlas One for that service in the three months before the event giving rise to the claim. Neither party is liable to the other for indirect, incidental, or consequential damages. Nothing in this Agreement limits liability where the law does not allow it to be limited.\n10.  Hold harmless and indemnification\nThe Client will hold Atlas One harmless from, and indemnify Atlas One against, claims arising from the Client's own decisions, the Client's use of a deliverable without having it reviewed as recommended, or information the Client provided that Atlas One reasonably relied on. This clause does not cover Atlas One's own gross negligence or willful misconduct.\n11.  Governing law\nThis Agreement is governed by the laws of the State of Utah, without regard to conflict of law rules. Any dispute is resolved in the state or federal courts located in Utah.\n12.  General\nThis Agreement, with its Schedules, is the entire agreement between the parties on this subject and replaces any earlier discussion or proposal. A change to this Agreement must be in writing and signed by both parties. If a court finds one part of this Agreement unenforceable, the rest stays in effect.\n13.  AI assistants\nAtlas One uses AI assistants, supervised by our team, to help with scheduling, documents and follow-up. Some messages and calls may be handled with their help. Atlas One stays responsible for the services either way, and clause 4 (Confidentiality) covers any information an AI assistant handles.\n"}, "cornerstone-peo": {"title": "CORNERSTONE PEO CLIENT SERVICE AGREEMENT", "version": "2026-10-24.5d9320c36aef", "sha256": "5d9320c36aeff88e387854d34504f45b150d7f60266e2bed7792f55fcd9d6d5d", "text": "CORNERSTONE PEO CLIENT SERVICE AGREEMENT\nCornerstone supplies the text of this agreement.\nPLACEHOLDER. Until Cornerstone PEO supplies its Client Service Agreement text and approves it being signed through the Atlas One onboarding tool, this screen shows this placeholder and no real agreement is formed. The final text comes from Cornerstone PEO, word for word, with its Exhibit A and any addendum.\nWhat Atlas One fills in: the company information above and the rate sheet. Atlas One never changes Cornerstone PEO's terms.\n"}, "guaranty-cornerstone": {"title": "PERSONAL GUARANTY (CORNERSTONE PEO)", "version": "2026-10-24.eb8c53dd8b33", "sha256": "eb8c53dd8b3377ed1bfcc1c584fb69b8351915f769c5df78f6997d3b9bd5fe95", "text": "PERSONAL GUARANTY (CORNERSTONE PEO)\nCornerstone supplies the text of this guaranty (Exhibit A of the Cornerstone PEO proposal terms).\nWho signs: the business owner who is signing this onboarding (Owner 1) only. A spouse or any other owner never signs it.\nPLACEHOLDER. Until Cornerstone PEO supplies the guaranty text and approves it being signed through the Atlas One onboarding tool, no guaranty is formed by this screen.\n"}, "guaranty-vero": {"title": "PERSONAL GUARANTY (VERO HCM PEO)", "version": "2026-10-24.091c634c7a31", "sha256": "091c634c7a31dda70845c40b7cf3ee509af87c0594536f155c1c1236ec7213e9", "text": "PERSONAL GUARANTY (VERO HCM PEO)\nThis guaranty is the personal guaranty required by section 10 of the VeroHCM Client Service Agreement (PEO), in the form of its Exhibit A (\"Payment Method and Financial Guaranty\"), published at https://www.verohcm.com/terms-and-conditions-peo. That published text is the guaranty; it is part of this signature as if written here.\nIn plain words: the person signing personally promises that the business will meet its obligations to Vero.\nWho signs: the business owner who is signing this onboarding (Owner 1) only. A spouse or any other owner never signs it.\n"}, "vero-aso": {"title": "VERO HCM ASO TERMS AND CONDITIONS", "version": "2026-10-24.4e09f58da5a8", "sha256": "4e09f58da5a84d3b95e0d884fd0fbea2a57a9ba37c5d380e9807246a23513571", "text": "VERO HCM ASO TERMS AND CONDITIONS\nThis agreement is made up of the company information and the rate sheet shown above, and the VeroHCM terms and conditions published by Vero at https://www.verohcm.com/terms-and-conditions. Those published terms are part of this agreement as if written here. Please open the link and read them in full. If anything here differs from the published terms, the published terms control.\nKey points, in plain words (a summary only, not the terms):\n1.  Payroll data is due 2 banking days before the check date.\n2.  A minimum of $100 a month applies in any month no payroll runs.\n3.  Returned (NSF) payments carry fees.\n4.  Either side ends the service with 30 days notice; a $120 audit fee applies at termination.\n5.  The terms are governed by Utah law.\n6.  Direct deposit needs an ACH authorization. If Vero signs payroll checks for the business, an Authorized Agent signature form is also signed.\nAtlas One fills in the company information and the rate sheet. Atlas One never changes Vero's terms.\n"}, "vero-peo": {"title": "VERO HCM CLIENT SERVICE AGREEMENT (PEO)", "version": "2026-10-24.7485b27b5e5b", "sha256": "7485b27b5e5bd94a4df703e44b9acfda4450189b918338a1203c447299040205", "text": "VERO HCM CLIENT SERVICE AGREEMENT (PEO)\nThis agreement is made up of the company information and the Rate Sheet (Schedule II) shown above, and the VeroHCM Client Service Agreement (PEO) Terms of Service published by Vero at https://www.verohcm.com/terms-and-conditions-peo (last updated June 30, 2026). Those published terms are part of this agreement as if written here. Please open the link and read them in full. If anything here differs from the published terms, the published terms control.\nKey points, in plain words (a summary only, not the terms):\n1.  Vero covers only the employees in the job positions on the Rate Sheet (Schedule II).\n2.  The business owner who signs (Owner 1) signs a personal guaranty (section 10 and Exhibit A).\n3.  The client keeps business insurance of at least $1,000,000 liability, with Vero listed as an additional insured.\n4.  Payments to Vero are made by check, wire transfer, ACH or certified funds, as set in Exhibit A, before payroll is issued.\n5.  The term is one year and renews each year unless ended under the published terms.\nAtlas One fills in the company information and the rate sheet. Atlas One never changes Vero's terms.\n"}};
+window.HP_OUTSIDE = {"chosen": "", "pending": {"title": "An outside health plan option", "status": "Plan to be chosen", "summary": "The HealtheMe plans are not the right fit here, but you still have good coverage options. Atlas One is choosing the outside plan we offer, and David confirms the plan and its price with you before anything starts.", "premiumSetup": "How the premium is paid depends on the plan. We confirm it with you before anything is charged. Your business and payroll setup keep moving in the meantime."}, "options": {"redirect": {"clientName": "", "title": "Group health plan through your payroll", "summary": "", "premiumSetup": "The business pays the premium through your monthly payroll.", "upfrontMonths": null, "prices": []}, "marketplace": {"clientName": "", "title": "Marketplace health plan", "summary": "", "premiumSetup": "You enroll in your own name and pay the plan each month. As an S-Corp owner, the business can reimburse the premium and we record it on your W-2.", "upfrontMonths": null, "prices": []}}};
 </script>
 <script>
 (function(){
@@ -939,12 +994,24 @@ window.HP_TERMS = {"atlas-one": {"title": "HEALTHEME SERVICE SCHEDULE", "version
   var SANDBOX = C.submit.mode !== 'live';
   var P = C.program || {};
   var Q = C.questionnaire || {questions: []};
-  var HQ = !RESUME && (SANDBOX ? (!!Q.enabled || q.get('hq') === '1') : (!!Q.enabled && Q.status === 'approved' && /^https:\/\//.test(Q.endpoint || '')));
+  /* 2026-11-21 (David): state first; California and Colorado, and anyone with a "yes" on the health questions, continue
+     on the PEO path with an outside plan option (site/src/outside-plan.json). PATH: healtheme | outside_state | outside_health. */
+  var HQ = !RESUME && (SANDBOX ? (!!Q.enabled || q.get('hq') === '1') : (!!Q.enabled && Q.status === 'approved'));
+  var OUT = window.HP_OUTSIDE || {chosen: '', pending: {}, options: {}};
+  var EXCL = C.excludedStates || [];
+  var PATH = 'healtheme', FLAGGED = false;
   var MAIN = ['entity','business','owners','taxwh','payroll','services','uploads','personal','review'];
-  var STEPS = RESUME ? ['services','uploads','personal','review'] : (HQ ? ['health'] : []).concat(MAIN);
+  function buildSteps(){
+    if (RESUME) return ['services','uploads','personal','review'];
+    var s = ['start'];
+    if (PATH === 'healtheme' && HQ) s.push('health');
+    if (PATH !== 'healtheme') s.push('outside');
+    return s.concat(MAIN);
+  }
+  var STEPS = buildSteps();
   var idx = 0;
   var STORE = C.storageKey || 'a1hp-progress-v5';
-  var hqSent = false, startedSent = false;
+  var flagSent = false, startedSent = false;
   var FILES = {};            // uploads, memory only
   var READ = {};             // terms opened and scrolled, memory only
   var SIGNED_META = {};      // per agreement: openedAt, scrolledAt
@@ -1071,23 +1138,65 @@ window.HP_TERMS = {"atlas-one": {"title": "HEALTHEME SERVICE SCHEDULE", "version
 
   /* plan card, read only */
   ['#changePlan','#choosePlan'].forEach(function(id){ var a = $(id); a.href = C.planSite.plansUrl; a.target = '_top'; a.rel = 'noopener'; });
-  if (PLAN.given) {
-    $('#planName').textContent = PLAN.name;
-    $('#planMeta').textContent = [PLAN.networkLabel, PLAN.tierLabel, PLAN.rate ? money(PLAN.rate) + ' a month' : ''].filter(Boolean).join(', ');
-  } else if (!RESUME) { $('#noPlan').hidden = false; $('#changePlan').textContent = 'Choose a plan'; }
+  if (!PLAN.given && !RESUME) $('#changePlan').textContent = 'Choose a plan';
   if (RESUME) $('#planCard').hidden = !PLAN.given;
 
   /* health questions (only when the switch is on) */
   if (HQ) {
     $('#hqPlaceholder').hidden = Q.status !== 'placeholder';
+    $('#hqIntro').textContent = Q.intro || '';
+    $('#hqRule').textContent = Q.rule || '';
     Q.questions.forEach(function(qq, i){
-      $('#hqList').insertAdjacentHTML('beforeend', '<div class="hq" data-group="' + qq.id + '" data-req><p id="' + qq.id + 'T">' + (i + 1) + '. ' + qq.t + '</p><div class="choices" role="radiogroup" aria-labelledby="' + qq.id + 'T">' +
+      var body = '<p class="hq-t" id="' + qq.id + 'T">' + (i + 1) + '. ' + esc(qq.t) + '</p>' + (qq.lead ? '<p class="hq-lead">' + esc(qq.lead) + '</p>' : '') +
+        (qq.items && qq.items.length ? '<ul>' + qq.items.map(function(x){ return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>' : '') + (qq.note ? '<p class="hq-note">' + esc(qq.note) + '</p>' : '');
+      $('#hqList').insertAdjacentHTML('beforeend', '<div class="hq" data-group="' + qq.id + '" data-req>' + body + '<div class="choices" role="radiogroup" aria-labelledby="' + qq.id + 'T">' +
         '<label class="choice"><input type="radio" name="phi.' + qq.id + '" value="no" data-phi><span class="mark"></span><span><b>No</b></span></label>' +
         '<label class="choice"><input type="radio" name="phi.' + qq.id + '" value="yes" data-phi><span class="mark"></span><span><b>Yes</b></span></label>' +
         '</div><div class="errmsg">Choose yes or no.</div></div>');
     });
   } else {
     ['health','hqstop','hqstopdone'].forEach(function(k){ var s = $('.step[data-step="' + k + '"]'); if (s) s.parentNode.removeChild(s); });
+  }
+
+  /* ---------- the outside plan option: the chosen plan from outside-plan.json, or "Plan to be chosen" ---------- */
+  function outsideInfo(){
+    var pend = OUT.pending || {}, ch = OUT.chosen && OUT.options ? OUT.options[OUT.chosen] : null;
+    if (!ch) return {chosen: '', title: pend.title || 'An outside health plan option', status: pend.status || 'Plan to be chosen', summary: pend.summary || '', premiumSetup: pend.premiumSetup || '', prices: [], upfrontMonths: null};
+    return {chosen: OUT.chosen, title: ch.clientName || ch.title || 'Your health plan', status: 'Your plan', summary: ch.summary || '', premiumSetup: ch.premiumSetup || '', prices: ch.prices || [], upfrontMonths: ch.upfrontMonths};
+  }
+  function renderOutside(){
+    var o = outsideInfo();
+    var html = '<span class="lbl">Outside plan option</span><h3>' + esc(o.title) + '</h3><span class="status">' + esc(o.status) + '</span>' +
+      (o.summary ? '<p>' + esc(o.summary) + '</p>' : '') + (o.premiumSetup ? '<p style="margin-bottom:0"><b>How the premium works.</b> ' + esc(o.premiumSetup) + '</p>' : '') +
+      (o.prices.length ? '<ul>' + o.prices.map(function(p){ return '<li>' + esc(p.label) + ': <b>' + money(p.monthly) + '</b> a month</li>'; }).join('') + '</ul>' : '') +
+      (o.upfrontMonths ? '<p class="hint">' + esc(C.premium.line) + '</p>' : '');
+    $$('[data-outside-card]').forEach(function(c){ c.innerHTML = html; });
+    var st = STATES[raw('lead.state')] || 'your state';
+    $('#outsideTitle').textContent = PATH === 'outside_state' ? 'Your health plan in ' + st : 'Your health plan option';
+    $('#outsideIntro').textContent = PATH === 'outside_state' ? 'The HealtheMe plans are not offered in ' + st + '. You can still join Atlas One for your business setup and payroll, with an outside health plan option.'
+      : 'Based on your health answers, the HealtheMe plans are not the right fit. You can still get health coverage and set up your business and payroll with Atlas One.';
+  }
+  function premiumText(){
+    if (PATH !== 'healtheme') return '';
+    return C.premium.line + (PLAN.rate ? ' First premium payment: ' + money(PLAN.rate * (1 + (C.premium.upfrontMonths || 1))) + '.' : '');
+  }
+  function renderPlanCard(){
+    var out = PATH !== 'healtheme';
+    $('#planLbl').textContent = out ? 'Your health plan' : 'Your HealtheMe plan';
+    if (out) { var o = outsideInfo(); $('#planName').textContent = o.title; $('#planMeta').textContent = o.status; $('#changePlan').hidden = true; $('#noPlan').hidden = true; }
+    else {
+      $('#changePlan').hidden = false;
+      if (PLAN.given) { $('#planName').textContent = PLAN.name; $('#planMeta').textContent = [PLAN.networkLabel, PLAN.tierLabel, PLAN.rate ? money(PLAN.rate) + ' a month' : ''].filter(Boolean).join(', '); }
+      else if (!RESUME) { $('#planName').textContent = 'Not chosen yet'; $('#planMeta').textContent = ''; $('#noPlan').hidden = false; }
+    }
+    $('#premiumLine').textContent = out || !PLAN.given ? '' : premiumText();
+  }
+  function setPath(p){
+    if (PATH === p) return;
+    var cur = STEPS[idx];
+    PATH = p; STEPS = buildSteps();
+    var i = STEPS.indexOf(cur); idx = i >= 0 ? i : 0;
+    renderOutside(); renderPlanCard();
   }
 
   /* resume (the owner's private link after a producer handoff): the producer's answers are already with Atlas One */
@@ -1210,12 +1319,13 @@ window.HP_TERMS = {"atlas-one": {"title": "HEALTHEME SERVICE SCHEDULE", "version
     var es = raw('company.entityStatus'); if (es === 'form_for_me' || es === 'self') r.push('formation');
     if (raw('company.entityType') === 'sole_prop') r.push('sole_prop');
     if (nonSpouseOwners()) r.push('other_owners');
-    if (!PLAN.given) r.push('plan_missing'); else if (!PLAN.recognized) r.push('plan_check');
+    if (PATH !== 'healtheme') r.push('outside_plan');
+    else if (!PLAN.given) r.push('plan_missing'); else if (!PLAN.recognized) r.push('plan_check');
     if (raw('payroll.payCycle') === 'Other' || raw('directDeposit.mode') === 'other') r.push('other_answers');
     if (!SANDBOX && !C.pricing.standardPlatformFee) r.push('fee_not_set');
     return {flow: r.length ? 'david_review' : 'same_sitting', reasons: r};
   }
-  var REASON_TEXT = {no_platform:'your payroll platform is chosen by David', extra_services:'you asked for extra services', formation:'your business entity is being set up', sole_prop:'a sole proprietorship needs an entity first', other_owners:'the business has other owners', plan_missing:'no plan came with your link', plan_check:'your plan needs a quick check', other_answers:'you chose "Other" for pay', fee_not_set:'your price is set by David', set_before_handoff:'David reviews your setup'};
+  var REASON_TEXT = {no_platform:'your payroll platform is chosen by David', extra_services:'you asked for extra services', formation:'your business entity is being set up', sole_prop:'a sole proprietorship needs an entity first', other_owners:'the business has other owners', plan_missing:'no plan came with your link', plan_check:'your plan needs a quick check', other_answers:'you chose "Other" for pay', fee_not_set:'your price is set by David', set_before_handoff:'David reviews your setup', outside_plan:'David confirms your outside health plan option'};
   function agreementsNow(fi){
     var list = [{id: C.atlasOne.agreement.id, n: C.atlasOne.agreement.n, terms: 'atlas-one', kind: 'a1'}];
     if (fi.flow === 'same_sitting' && PLAT) {
@@ -1281,11 +1391,14 @@ window.HP_TERMS = {"atlas-one": {"title": "HEALTHEME SERVICE SCHEDULE", "version
   }
   function rateBlock(){
     var fee = C.pricing.standardPlatformFee;
-    return '<h4>Rate sheet</h4><div class="ro"><dl><dt>Covered position</dt><dd>Owner (1 employee)</dd><dt>Platform fee</dt><dd>' + (fee ? esc(fee) : (SANDBOX ? 'Standard HealtheMe fee, set by David before go live (sandbox placeholder)' : 'Set by Atlas One')) + '</dd><dt>Health plan</dt><dd>' + esc([PLAN.name, PLAN.networkLabel, PLAN.tierLabel].filter(Boolean).join(', ') || 'From your HealtheMe quote') + '</dd></dl></div>';
+    return '<h4>Rate sheet</h4><div class="ro"><dl><dt>Covered position</dt><dd>Owner (1 employee)</dd><dt>Platform fee</dt><dd>' + (fee ? esc(fee) : (SANDBOX ? 'Standard HealtheMe fee, set by David before go live (sandbox placeholder)' : 'Set by Atlas One')) + '</dd><dt>Health plan</dt><dd>' + esc(PATH === 'healtheme' ? ([PLAN.name, PLAN.networkLabel, PLAN.tierLabel].filter(Boolean).join(', ') || 'From your HealtheMe quote') : 'Outside plan option (' + (outsideInfo().chosen ? outsideInfo().title : 'plan to be chosen') + ')') + '</dd></dl></div>';
   }
   function servicesBlock(){ return '<h4>Services you chose</h4><ul class="svc-list">' + serviceLines().map(function(s){ return '<li><span>' + esc(s) + '</span></li>'; }).join('') + '</ul>'; }
   function serviceLines(){
-    var out = ['HealtheMe health plan: ' + ([PLAN.name, PLAN.networkLabel, PLAN.tierLabel].filter(Boolean).join(', ') || 'chosen with your broker'), 'Payroll: you as the owner on payroll, ' + (payCycleLabel() || 'pay cycle to confirm') + '. ' + C.prices.payroll.price + '.'];
+    var o = outsideInfo();
+    var first = PATH === 'healtheme' ? 'HealtheMe health plan: ' + ([PLAN.name, PLAN.networkLabel, PLAN.tierLabel].filter(Boolean).join(', ') || 'chosen with your broker') + '. ' + C.premium.line
+      : 'Health plan: outside plan option (' + (o.chosen ? o.title : 'plan to be chosen') + '). ' + (o.premiumSetup || '');
+    var out = [first.trim(), 'Payroll: you as the owner on payroll, ' + (payCycleLabel() || 'pay cycle to confirm') + '. ' + C.prices.payroll.price + '.'];
     if (raw('company.entityStatus') === 'form_for_me') { out.push(C.prices.formation_setup.label + ': ' + C.prices.formation_setup.price); if (ownerCount() > 2) out.push(C.prices.formation_extra_owner.label + ': ' + C.prices.formation_extra_owner.price + ' (' + (ownerCount() - 2) + ' more)'); }
     if (/no|maybe/.test(raw('company.stateWithholding.status'))) out.push(C.prices.withholding.label + ': ' + C.prices.withholding.price);
     if (/no|maybe/.test(raw('company.stateUnemployment.status'))) out.push(C.prices.unemployment.label + ': ' + C.prices.unemployment.price);
@@ -1339,6 +1452,8 @@ window.HP_TERMS = {"atlas-one": {"title": "HEALTHEME SERVICE SCHEDULE", "version
     return basis === 'per_year' ? {annual: g, perCheck: Math.round(g / per * 100) / 100, per: per} : {perCheck: g, annual: Math.round(g * per * 100) / 100, per: per};
   }
   function refresh(){
+    var ls = raw('lead.state'), lx = !!ls && EXCL.indexOf(ls) >= 0;
+    $('#startOutside').hidden = !lx; if (lx) $('#startOutsideTitle').textContent = 'The HealtheMe plans are not offered in ' + STATES[ls];
     var es = raw('company.entityStatus');
     $('#formBlock').hidden = es !== 'form_for_me';
     $('#selfBlock').hidden = es !== 'self';
@@ -1386,10 +1501,11 @@ window.HP_TERMS = {"atlas-one": {"title": "HEALTHEME SERVICE SCHEDULE", "version
   function blockers(stepName){
     var b = [];
     if (stepName === 'business') {
+      // 2026-11-21: a California or Colorado business address moves the owner to the outside plan option, never a stop.
       var st = raw('company.address.state'), box = $('#ineligibleState');
-      var bad = st && C.excludedStates.indexOf(st) >= 0;
-      box.hidden = !bad; if (bad) $('#inelStateTitle').textContent = 'Not available in ' + STATES[st] + ' yet';
-      if (bad) b.push(box);
+      var excl = st && EXCL.indexOf(st) >= 0;
+      box.hidden = !excl; if (excl) $('#inelStateTitle').textContent = 'The HealtheMe plans are not offered in ' + STATES[st];
+      if (excl && PATH === 'healtheme') setPath('outside_state');
       if (!REG.length) { $('#regStates').classList.add('err'); b.push($('#regStates')); }
     }
     if (stepName === 'owners') {
@@ -1441,19 +1557,11 @@ window.HP_TERMS = {"atlas-one": {"title": "HEALTHEME SERVICE SCHEDULE", "version
   form.addEventListener('change', function(e){ var w = e.target.closest('.err'); if (w && e.target.type !== 'file') w.classList.remove('err'); save(); refresh(); });
   form.addEventListener('click', function(e){ var g = e.target.closest('[data-goto]'); if (g) { e.preventDefault(); var i = STEPS.indexOf(g.getAttribute('data-goto')); if (i >= 0) show(i); } });
 
-  /* ---------- health answers: read only here, posted only to Micah's endpoint, never stored ---------- */
+  /* ---------- health answers: read only here, never stored on the device. Sent ONCE, only on a "yes", to the secure
+     intake inside the hq_stop flag (the portal keeps them encrypted and strips them before GHL). All "no": never sent. ---------- */
   function phiVal(id){ var c = $('input[name="phi.' + id + '"]:checked'); return c ? c.value : ''; }
   function anyYes(){ return Q.questions.some(function(qq){ return phiVal(qq.id) === 'yes'; }); }
-  function sendHealth(member){
-    if (!HQ || hqSent || SANDBOX || !Q.endpoint) return Promise.resolve();
-    var answers = {}; Q.questions.forEach(function(qq){ answers[qq.id] = phiVal(qq.id); });
-    var body = {schema:'atlas-one.healthy-me.questionnaire.v2', version:Q.version, submittedAt:nowIso(),
-      member: member || {firstName:raw('owners.0.firstName'), lastName:raw('owners.0.lastName'), dob:raw('owners.0.dob'), email:raw('owners.0.email'), homeState:workState()},
-      plan:{id:PLAN.id, network:PLAN.network, tier:PLAN.tier}, producer: raw('source.producer') || '', peo: PEO_KEY,
-      authorization: !!($('input[name="consents.healthAuthorization"]') || {}).checked, answers: answers};
-    return fetch(Q.endpoint, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body)})
-      .then(function(res){ if (!res.ok) throw new Error('HTTP ' + res.status); hqSent = true; });
-  }
+  function phiAnswers(){ var a = {}; Q.questions.forEach(function(qq){ a[qq.id] = phiVal(qq.id); }); return {version: Q.version, answers: a}; }
 
   /* ---------- navigation ---------- */
   function current(){ return $('.step[data-step="' + STEPS[idx] + '"]'); }
@@ -1470,6 +1578,7 @@ window.HP_TERMS = {"atlas-one": {"title": "HEALTHEME SERVICE SCHEDULE", "version
     $$('.step').forEach(function(s){ s.classList.remove('active'); });
     var step = current(); step.classList.add('active');
     applyDefaults(STEPS[idx]);
+    renderOutside(); renderPlanCard();
     if (STEPS[idx] === 'review') buildReview();
     $('#progress').style.gridTemplateColumns = 'repeat(' + STEPS.length + ',1fr)';
     $('#progress').innerHTML = STEPS.map(function(_, k){ return '<span class="' + (k < idx ? 'done' : k === idx ? 'now' : '') + '"></span>'; }).join('');
@@ -1484,19 +1593,26 @@ window.HP_TERMS = {"atlas-one": {"title": "HEALTHEME SERVICE SCHEDULE", "version
   $('#next').addEventListener('click', function(){
     var step = current();
     if (!validateStep(step)) return;
+    if (STEPS[idx] === 'start') { leaveStart(); return; }
     if (STEPS[idx] === 'health' && anyYes()) { showStop(); return; }
     if (STEPS[idx] === 'owners' && !startedSent) {
       var nb = $('#next'); nb.disabled = true; nb.textContent = 'Saving';
-      sendHealth().then(function(){ startedSent = true; return send('started').catch(function(){}); }).then(function(){ nb.disabled = false; show(idx + 1); }).catch(function(){
-        nb.disabled = false; nb.textContent = 'Continue';
-        alert('We could not send your health answers securely. Please try again, or call 380-CALL-A1S (380-225-5217).');
-      });
+      startedSent = true;
+      send('started').catch(function(){}).then(function(){ nb.disabled = false; show(idx + 1); });
       return;
     }
     if (STEPS[idx] === 'review') { finish('complete'); return; }
     show(idx + 1);
   });
   $('#back').addEventListener('click', function(){ show(idx - 1); });
+  /* Leaving the start step: copy the basics into Owner 1 and the tax state (only where empty), then pick the path. */
+  function leaveStart(){
+    [['lead.firstName','#o1First'],['lead.lastName','#o1Last'],['lead.email','#o1Email'],['lead.phone','#o1Phone']].forEach(function(p){ var t = $(p[1]); if (t && !t.value) t.value = raw(p[0]); });
+    if (!raw('company.taxFilingState')) $('#taxState').value = raw('lead.state');
+    var st = raw('lead.state');
+    setPath(FLAGGED ? 'outside_health' : (EXCL.indexOf(st) >= 0 ? 'outside_state' : 'healtheme'));
+    show(STEPS.indexOf('start') + 1);
+  }
 
   /* ---------- questionnaire stop ---------- */
   function only(stepName){
@@ -1507,34 +1623,46 @@ window.HP_TERMS = {"atlas-one": {"title": "HEALTHEME SERVICE SCHEDULE", "version
   }
   function showStop(){
     only('hqstop'); $('#stepname').textContent = '';
+    $('#planCard').hidden = true; $('#noPlan').hidden = true;   // the HealtheMe plan is not theirs, so it is not shown above the options
     var h = $('.step[data-step="hqstop"] h1'); h.setAttribute('tabindex', '-1'); h.focus({preventScroll:true});
   }
   function stopPayload(){
-    var tags = [PE ? PE.tag : C.unassigned.tag, Q.stopTag || 'hp-hq-stop'];
+    var tags = [PE ? PE.tag : C.unassigned.tag, Q.stopTag || 'hp-hq-stop', 'hp-not-eligible'];
     return {schema: 'atlas-one.health-program.v3', submissionId: SID, submittedAt: nowIso(), event: 'hq_stop',
-      source: {producer: clean(q.get('producer'), 40), ref: clean(q.get('ref')), from: 'healtheme_plans_site', assisted: ASSIST, page: location.pathname, formVersion: C.version},
-      routing: {assignTo: 'David', action: 'call', tags: tags, flow: 'david_review', stage: 'David to call (health questions)'},
+      source: {producer: raw('source.producer') || clean(q.get('producer'), 40), ref: clean(q.get('ref')), from: 'healtheme_plans_site', assisted: ASSIST, page: location.pathname, formVersion: C.version},
+      routing: {assignTo: 'David', action: 'review', tags: tags, flow: 'david_review', stage: 'David to call (health questions)'},
       peo: {key: PEO_KEY || 'unassigned', name: PE ? PE.name : '', assigned: !!PE},
       platform: {key: PLAT_KEY || 'unassigned', name: PLAT ? PLAT.name : ''},
-      owner: {firstName: raw('stop.firstName'), lastName: raw('stop.lastName'), email: raw('stop.email'), phone: digits(raw('stop.phone'))},
+      owner: {firstName: raw('lead.firstName'), lastName: raw('lead.lastName'), email: raw('lead.email'), phone: digits(raw('lead.phone'))},
       plan: {given: PLAN.given, recognized: PLAN.recognized, planId: PLAN.id, planName: PLAN.name, network: PLAN.network, tier: PLAN.tier},
-      health: {questionnaire: 'stopped', stop: true, questionnaireVersion: Q.version, answersIncluded: false, answersSentTo: (hqSent ? 'plan_administrator' : 'not_sent')},
+      health: {questionnaire: 'stopped', stop: true, path: 'outside_health', state: raw('lead.state'), questionnaireVersion: Q.version, answersIncluded: false, answersTo: 'secure_store_only'},
       sensitiveWithheld: true};
   }
-  var stopBtn = $('#stopSend');
+  /* One flag per person: the answers ride along to the secure intake only, never in the GHL copy kept here. */
+  function sendFlag(){
+    if (flagSent) return Promise.resolve({});
+    var b = stopPayload(); lastGhl = b;
+    var withPhi = JSON.parse(JSON.stringify(b)); withPhi.phi = phiAnswers(); lastSecure = SANDBOX ? {note: 'Sandbox: the secure intake gets this flag plus the answers object (phi), which it encrypts and strips before GHL.', flag: b, phiKeys: Object.keys(withPhi.phi.answers)} : null;
+    return postJson(withPhi).then(function(res){ flagSent = true; FLAGGED = true; return res || {}; });
+  }
+  var stopBtn = $('#stopSend'), contBtn = $('#stopContinue');
+  function stopFail(btn, label){ btn.disabled = false; btn.textContent = label; alert('We could not send this. Please try again, or call 380-CALL-A1S (380-225-5217) and David will help you.'); }
   if (stopBtn) stopBtn.addEventListener('click', function(){
-    if (!validateStep($('.step[data-step="hqstop"]'))) return;
     stopBtn.disabled = true; stopBtn.textContent = 'Sending';
-    sendHealth({firstName: raw('stop.firstName'), lastName: raw('stop.lastName'), email: raw('stop.email'), phone: digits(raw('stop.phone'))})
-      .then(function(){ var b = stopPayload(); lastGhl = b; return postJson(b); })
-      .then(function(res){
-        clearStore();
-        only('hqstopdone'); $('#stepname').textContent = '';
-        if (res && res.preview) $('#sandboxStop').hidden = false;
-      }).catch(function(){
-        stopBtn.disabled = false; stopBtn.textContent = 'Ask David to call me';
-        alert('We could not send this. Please call 380-CALL-A1S (380-225-5217) and David will help you.');
-      });
+    sendFlag().then(function(res){
+      clearStore();
+      only('hqstopdone'); $('#stepname').textContent = '';
+      if (res && res.preview) $('#sandboxStop').hidden = false;
+    }).catch(function(){ stopFail(stopBtn, 'Have David call me first'); });
+  });
+  if (contBtn) contBtn.addEventListener('click', function(){
+    contBtn.disabled = true; contBtn.textContent = 'One moment';
+    sendFlag().then(function(){
+      $$('input[data-phi]').forEach(function(i){ i.checked = false; });   // answers are not kept on the page either
+      FLAGGED = true; PATH = ''; setPath('outside_health');
+      $('#navbar').hidden = false; $('#planCard').hidden = false; contBtn.disabled = false; contBtn.textContent = 'Continue with an outside plan';
+      show(STEPS.indexOf('outside'));
+    }).catch(function(){ stopFail(contBtn, 'Continue with an outside plan'); });
   });
   $('#handoffBtn').addEventListener('click', function(){
     var step = current();
@@ -1551,7 +1679,8 @@ window.HP_TERMS = {"atlas-one": {"title": "HEALTHEME SERVICE SCHEDULE", "version
   function buildReview(){
     var d = collect(true), fi = flowInfo(), sections = [];
     var stL = {yes:'Set up', no:'Not set up, open one for me', maybe:'Maybe, please check'};
-    sections.push(['Your HealtheMe plan', null, [['Plan', d.plan.planName || 'Not chosen yet'], ['Network', d.plan.networkLabel], ['Covered', d.plan.tierLabel], ['Monthly rate', d.plan.monthlyRate ? money(d.plan.monthlyRate) : 'On your HealtheMe quote'], ['Expected start', longDate(d.plan.effectiveDate)], ['Platform', d.platform.name || 'Chosen by David']]]);
+    if (PATH === 'healtheme') sections.push(['Your HealtheMe plan', null, [['Plan', d.plan.planName || 'Not chosen yet'], ['Network', d.plan.networkLabel], ['Covered', d.plan.tierLabel], ['Monthly rate', d.plan.monthlyRate ? money(d.plan.monthlyRate) : 'On your HealtheMe quote'], ['First premium payment', (d.plan.monthlyRate ? money(d.plan.monthlyRate * (1 + (C.premium.upfrontMonths || 1))) + '. ' : '') + C.premium.line], ['Expected start', longDate(d.plan.effectiveDate)], ['Platform', d.platform.name || 'Chosen by David']]]);
+    else { var oi = outsideInfo(); sections.push(['Your health plan', null, [['Plan', 'Outside plan option: ' + (oi.chosen ? oi.title : 'plan to be chosen')], ['Premium', oi.premiumSetup], ['Why', PATH === 'outside_state' ? 'The HealtheMe plans are not offered in ' + (STATES[raw('lead.state')] || 'your state') : 'Not eligible for the HealtheMe plans'], ['Expected start', longDate(d.plan.effectiveDate)], ['Platform', d.platform.name || 'Chosen by David']]]); }
     if (!RESUME) {
       sections.push(['Entity', 'entity', [['Entity', {yes:'Yes, I have one', form_for_me:'Atlas One sets it up', self:'I will set it up myself'}[d.company.entityStatus]], ['Tax filing state', STATES[d.company.taxFilingState]]]]);
       sections.push(['Business', 'business', [['Name', d.company.legalName + (d.company.dba ? ' (DBA ' + d.company.dba + ')' : '')], ['FEIN', d.company.ein ? mask(d.company.ein) : 'Not yet'], ['Type', label('#entityType')], ['Registered in', d.company.registeredStates.map(function(k){ return STATES[k]; }).join(', ')], ['Address', fmtAddr(d.company.address)], ['Mailing', d.company.mailingSame === 'yes' ? 'Same' : fmtAddr(d.company.mailingAddress)]]]);
@@ -1563,7 +1692,7 @@ window.HP_TERMS = {"atlas-one": {"title": "HEALTHEME SERVICE SCHEDULE", "version
     sections.push(['ID, voided checks and bank', 'uploads', [['Photo ID', FILES.photoId ? 'Added' : 'Missing'], ['Business account', (d.company.bank.name || '') + ' ' + mask(d.company.bank.account) + (FILES.checkBusiness ? ', voided check added' : '')], ['Personal account', d.directDeposit.mode === 'deposit' ? (d.directDeposit.accounts[0].bankName + ' ' + mask(d.directDeposit.accounts[0].account) + (FILES.checkPersonal ? ', voided check added' : '')) : 'No direct deposit']]]);
     var fsL = {single:'Single or Married filing separately', mfj:'Married filing jointly or Qualifying surviving spouse', hoh:'Head of household'}[d.w4.filingStatus];
     sections.push(['W-4 and I-9', 'personal', [['SSN', mask(d.owner.ssn)], ['Home address', fmtAddr(d.owner.homeAddress)], ['Filing status', fsL], ['Two jobs box', d.w4.multipleJobs ? 'Checked' : 'No'], ['Step 3 total', money0(d.w4.step3Total)], ['Extra withholding (4c)', money(d.w4.extraWithholding)], ['State', d.stateW4.noIncomeTax ? 'No state income tax' : label('#stFiling')], ['I-9 status', {citizen:'U.S. citizen', national:'Noncitizen national', lpr:'Lawful permanent resident', alien:'Noncitizen authorized to work'}[d.i9.status] || ''], ['Signed', [d.w4.signedName ? 'W-4' : '', d.i9.signedName ? 'I-9 Section 1' : ''].filter(Boolean).join(' and ')]]]);
-    if (HQ) sections.splice(1, 0, ['Health questions', null, [['Your answers', SANDBOX ? 'Answered. Sandbox: not stored or sent' : 'Sent only to the HealtheMe plan administrator']]]);
+    if (HQ && (PATH === 'healtheme' || FLAGGED)) sections.splice(1, 0, ['Health questions', null, [['Your answers', FLAGGED ? 'Kept private in our secure system. Outside plan option' : 'All No. Not kept anywhere']]]);
     $('#reviewBox').innerHTML = sections.map(function(s){
       var btn = s[1] ? '<button type="button" data-goto="' + s[1] + '">Edit</button>' : (s[0] === 'Your HealtheMe plan' ? '<a href="' + esc(C.planSite.plansUrl) + '" target="_top" rel="noopener" data-plan-link>Change plan</a>' : '');
       return '<div class="card"><h3>' + s[0] + ' ' + btn + '</h3><dl>' + s[2].map(function(r){ return '<dt>' + esc(r[0]) + '</dt><dd>' + esc(r[1] || 'Not given') + '</dd>'; }).join('') + '</dl></div>';
@@ -1587,7 +1716,8 @@ window.HP_TERMS = {"atlas-one": {"title": "HEALTHEME SERVICE SCHEDULE", "version
     var tags = [PE ? PE.tag : C.unassigned.tag];
     if (PLAT) tags.push(PLAT.tag);
     tags.push(fi.flow === 'same_sitting' ? 'hp-flow-same-sitting' : 'hp-flow-david-review');
-    if (!PLAN.given) tags.push('hp-plan-missing'); else if (!PLAN.recognized) tags.push('hp-plan-check');
+    if (PATH !== 'healtheme') tags.push('hp-outside-plan');
+    else if (!PLAN.given) tags.push('hp-plan-missing'); else if (!PLAN.recognized) tags.push('hp-plan-check');
     if (es !== 'yes' && es) tags.push('hp-formation');
     if (opt.length) tags.push('hp-extra-services');
     var signed = agreementsNow(fi).filter(function(a){ return raw('agree.' + a.id) === true && raw('sig.' + a.id); }).map(function(a){
@@ -1604,7 +1734,8 @@ window.HP_TERMS = {"atlas-one": {"title": "HEALTHEME SERVICE SCHEDULE", "version
       peo: {key: PEO_KEY || 'unassigned', name: PE ? PE.name : '', assigned: !!PE, line: PE ? PE.line : P.neutralLine},
       platform: {key: PLAT_KEY || 'unassigned', name: PLAT ? PLAT.name : '', kind: PLAT ? PLAT.kind : '', fromLink: !!PLAT},
       plan: {source: 'link', given: PLAN.given, recognized: PLAN.recognized, planId: PLAN.id, planRaw: PLAN.raw, planName: PLAN.name, network: PLAN.network, networkLabel: PLAN.networkLabel, tier: PLAN.tier, tierLabel: PLAN.tierLabel, hsa: PLAN.hsa, monthlyRate: PLAN.rate, effectiveDate: start, setupChoice: setup},
-      health: {questionnaire: HQ ? 'answered' : 'not_asked', questionnaireVersion: HQ ? Q.version : '', authorization: HQ && !!($('input[name="consents.healthAuthorization"]') || {}).checked, answersIncluded: false, answersSentTo: (HQ && hqSent) ? 'plan_administrator' : 'not_sent'},
+      health: {questionnaire: FLAGGED ? 'stopped' : (HQ && PATH === 'healtheme' ? 'answered' : 'not_asked'), questionnaireVersion: HQ ? Q.version : '', path: PATH, state: raw('lead.state'), flagged: FLAGGED, answersIncluded: false, answersTo: FLAGGED ? 'secure_store_only' : 'not_kept'},
+      outsidePlan: PATH === 'healtheme' ? null : {status: OUT.chosen ? 'chosen' : 'to_be_chosen', option: OUT.chosen || ''},
       company: {
         entityStatus: es, hasEntity: es === 'yes' ? 'yes' : 'no', taxFilingState: raw('company.taxFilingState'),
         formation: es === 'form_for_me' ? {scorp: raw('company.formation.scorp'), state: raw('company.taxFilingState'), type: raw('company.entityType'), by: 'atlas_one'} : (es === 'self' ? {by: 'owner', state: raw('company.taxFilingState'), type: raw('company.entityType')} : null),
@@ -1692,12 +1823,15 @@ window.HP_TERMS = {"atlas-one": {"title": "HEALTHEME SERVICE SCHEDULE", "version
       } else if (fi.flow === 'same_sitting') {
         $('#doneTitle').textContent = 'You are all set';
         $('#doneIntro').textContent = 'Your agreements are signed and our setup team has everything. Here is what happens next.';
-        items = ['<b>Signed.</b> Your Atlas One and ' + esc(PLAT.name) + ' agreements' + (PLAT.guaranty ? ' and the personal guaranty' : '') + '. Copies come by email.', '<b>A few more forms by email.</b> The short setup forms for your platform, signed from your phone.', '<b>Your HealtheMe plan.</b> Enrolled on the plan you chose, starting ' + esc(longDate(startDate())) + '.', '<b>Welcome email.</b> Your payroll portal login. Pay stubs and your W-2 live there.'];
+        items = ['<b>Signed.</b> Your Atlas One and ' + esc(PLAT.name) + ' agreements' + (PLAT.guaranty ? ' and the personal guaranty' : '') + '. Copies come by email.', '<b>A few more forms by email.</b> The short setup forms for your platform, signed from your phone.', '<b>Your HealtheMe plan.</b> Enrolled on the plan you chose, starting ' + esc(longDate(startDate())) + '. ' + esc(C.premium.line), '<b>Welcome email.</b> Your payroll portal login. Pay stubs and your W-2 live there.'];
       } else {
         $('#doneTitle').textContent = 'Thank you. Watch for an email from Atlas One shortly.';
         $('#doneIntro').textContent = 'Your Atlas One agreement is signed. David reviews your setup, chooses your payroll platform and price, and sends your platform agreement by email.';
-        items = ['<b>Received.</b> Your details went straight to our secure setup folder.', '<b>Watch your email.</b> Your platform agreement comes from Atlas One shortly. Sign it from your phone.', '<b>Your HealtheMe plan.</b> Enrolled on the plan you chose. Setups received by the ' + ordinal(C.monthlyCutoffDay) + ' start the next month.', '<b>Welcome email.</b> Your payroll portal login.'];
+        items = ['<b>Received.</b> Your details went straight to our secure setup folder.', '<b>Watch your email.</b> Your platform agreement comes from Atlas One shortly. Sign it from your phone.',
+          PATH === 'healtheme' ? '<b>Your HealtheMe plan.</b> Enrolled on the plan you chose. Setups received by the ' + ordinal(C.monthlyCutoffDay) + ' start the next month. ' + esc(C.premium.line)
+            : '<b>Your health plan.</b> David confirms your outside plan option and its price with you before anything starts.', '<b>Welcome email.</b> Your payroll portal login.'];
       }
+      if (event !== 'handoff' && raw('company.entityStatus') === 'form_for_me') items.splice(1, 0, '<b>Your company.</b> We start forming your company and S-Corp election, and email you if we need anything.');
       $('#doneList').innerHTML = items.map(function(x){ return '<li>' + x + '</li>'; }).join('');
       if (res && res.receiptId) { $('#receiptLine').hidden = false; $('#receiptLine').textContent = 'Your receipt number: ' + res.receiptId; }
       if (res && res.preview) $('#sandboxOut').hidden = false;
@@ -1727,7 +1861,7 @@ window.HP_TERMS = {"atlas-one": {"title": "HEALTHEME SERVICE SCHEDULE", "version
         else if (el.type === 'checkbox') o['#' + (el.id || '') + el.name] = el.checked;
         else o['=' + el.name] = el.value;
       });
-      o._idx = idx; o._sid = SID; o._v = C.version;
+      o._idx = idx; o._sid = SID; o._v = C.version; o._path = PATH; o._flag = FLAGGED;
       localStorage.setItem(STORE, JSON.stringify(o));
     } catch(e){}
   }
@@ -1736,6 +1870,8 @@ window.HP_TERMS = {"atlas-one": {"title": "HEALTHEME SERVICE SCHEDULE", "version
     try {
       var o = JSON.parse(localStorage.getItem(STORE) || 'null'); if (!o) return 0;
       if (o._sid) SID = o._sid;
+      if (o._flag) { FLAGGED = true; flagSent = true; }
+      if (o._path) { PATH = o._path; STEPS = buildSteps(); }
       $$('input[name],select[name],textarea[name]', form).forEach(function(el){
         if (skip(el)) return;
         if (el.type === 'radio') { if (o[el.name] === el.value) el.checked = true; }
@@ -1747,6 +1883,7 @@ window.HP_TERMS = {"atlas-one": {"title": "HEALTHEME SERVICE SCHEDULE", "version
       // health answers, files, signatures and sensitive numbers are never kept: go back to the first step that needs them
       if (hi >= 0 && at > hi) return hi;
       var ui = STEPS.indexOf('owners'); if (at > ui && ui >= 0) return ui;
+      if (STEPS[at] === 'hqstop' || at < 0) return 0;
       return at;
     } catch(e){ return 0; }
   }
@@ -1756,6 +1893,24 @@ window.HP_TERMS = {"atlas-one": {"title": "HEALTHEME SERVICE SCHEDULE", "version
   window.addEventListener('resize', postHeight);
 
   if (q.get('producer')) $('#producer').value = clean(q.get('producer'), 40);
+  /* ---------- prefill from the HealtheMe quote (2026-11-21): link fields, or ?q=<token> read once from the portal.
+     Only empty fields are filled, so nothing the owner already typed is overwritten. ---------- */
+  function setIfEmpty(sel, v){ var e = $(sel); if (!e || v == null || v === '') return; v = clean(v, 160); if (e.tagName === 'SELECT') { if (!e.value && $$('option', e).some(function(o){ return o.value === v; })) e.value = v; } else if (!e.value) e.value = v; }
+  function applyPrefill(d){
+    if (!d) return;
+    setIfEmpty('#leadFirst', d.firstName || d.fn); setIfEmpty('#leadLast', d.lastName || d.ln); setIfEmpty('#leadEmail', d.email);
+    var ph = digits(d.phone); if (ph.length === 11 && ph[0] === '1') ph = ph.slice(1); if (ph.length === 10) setIfEmpty('#leadPhone', '(' + ph.slice(0,3) + ') ' + ph.slice(3,6) + '-' + ph.slice(6));
+    setIfEmpty('#leadState', String(d.state || '').toUpperCase()); setIfEmpty('#taxState', String(d.state || '').toUpperCase());
+    setIfEmpty('#bZip', d.zip); setIfEmpty('#o1Dob', d.dob); setIfEmpty('#legalName', d.businessName || d.biz); setIfEmpty('#industry', d.industry);
+    if (d.w2Employees || d.w2) setIfEmpty('#w2', String(+(d.w2Employees || d.w2) + 1));   // the quote counts W-2s other than the owner
+    var su = norm(d.businessSetup || d.setup);
+    var m = {sole: ['', 'sole_prop'], soleproprietor: ['', 'sole_prop'], llc: ['yes', 'llc'], singlememberllc: ['yes', 'llc'], smllc: ['yes', 'llc'], scorp: ['yes', 'scorp'], scorpimtheonlyowner: ['yes', 'scorp'], multi: ['yes', ''], multiownerbusiness: ['yes', '']}[su];
+    if (m) { if (m[0] && !raw('company.entityStatus')) { var r = $('input[name="company.entityStatus"][value="' + m[0] + '"]'); if (r) r.checked = true; } if (m[1]) setIfEmpty('#entityType', m[1]); if (su.indexOf('multi') === 0 && $('#ownerCount').value === '1') $('#ownerCount').value = '2'; }
+    if (d.producer) setIfEmpty('#producer', d.producer);
+    refresh();
+  }
+  var linkPrefill = {}; ['fn','ln','email','phone','state','zip','dob','biz','industry','w2','setup'].forEach(function(k){ if (q.get(k)) linkPrefill[k] = q.get(k); });
+  var quoteToken = /^[a-f0-9]{32}$/.test(q.get('q') || '') ? q.get('q') : '';
   // 2026-10-27 (David): a way to close the page at the end. A browser only lets a page close a tab that a script
   // opened, so when it refuses, say so instead of doing nothing.
   $('#closeWin').addEventListener('click', function(){
@@ -1763,6 +1918,11 @@ window.HP_TERMS = {"atlas-one": {"title": "HEALTHEME SERVICE SCHEDULE", "version
     setTimeout(function(){ $('#closeHint').hidden = false; }, 300);
   });
   var at = restore();
+  applyPrefill(linkPrefill);
+  if (quoteToken && C.secure.endpoint && !SANDBOX) {
+    fetch(C.secure.endpoint.replace(/health-intake\/?$/, 'health-quote/') + quoteToken).then(function(r){ return r.ok ? r.json() : null; })
+      .then(function(j){ if (j && j.data) applyPrefill(j.data); }).catch(function(){});
+  }
   refresh();
   show(at);
 })();
