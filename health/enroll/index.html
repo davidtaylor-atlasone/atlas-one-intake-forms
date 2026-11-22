@@ -271,6 +271,13 @@ input::placeholder{color:var(--navy-50)}
 .ro dd{margin:0;font-weight:600;overflow-wrap:anywhere}
 .receipt{font-weight:700}
 @media (max-width:640px){ .ro dl{grid-template-columns:1fr} .owner{padding:14px 12px 2px} }
+/* 2026-11-21: English or Spanish */
+.lang-row{display:flex;justify-content:flex-end;margin:0 0 14px}
+.lang-switch{display:inline-flex;border:1.5px solid var(--navy-12);border-radius:999px;overflow:hidden}
+.lang-switch button{min-height:36px;padding:6px 12px;border:0;background:#fff;color:var(--navy);font:700 13px 'DM Sans',sans-serif;cursor:pointer}
+.lang-switch button[aria-pressed="true"]{background:var(--navy);color:var(--paper)}
+.es-only{display:none}
+html[lang="es"] .es-only{display:block}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 </style>
 </head>
@@ -287,6 +294,7 @@ input::placeholder{color:var(--navy-50)}
 </header>
 
 <main class="shell">
+  <div class="lang-row"><div class="lang-switch" role="group" aria-label="Language / Idioma" data-notranslate><button type="button" data-lang="en" aria-pressed="true">English</button><button type="button" data-lang="es" aria-pressed="false" lang="es">Español</button></div></div>
   <div id="sandbox" class="sandbox" hidden><b>Sandbox.</b> Nothing on this page is sent anywhere. Use test data only.</div>
   <p class="svc-line"><span class="powered" data-powered style="display:block">HealtheMe</span><span data-svc>Enrollment and payroll services by Atlas One</span></p>
   
@@ -345,23 +353,13 @@ input::placeholder{color:var(--navy-50)}
   
   <section class="step" data-step="hqstop" data-title="Your options">
     <h1>Thank you. Here is your next step.</h1>
-    <p class="intro">Based on your answers, you are not eligible for the HealtheMe plans. That is not the end of the road: you can still get health coverage and set up your business and payroll with Atlas One.</p>
+    <p class="intro">Based on your answers, you are not eligible for the HealtheMe plans. That is not the end of the road: you can still get health coverage and set up your business and payroll with Atlas One. Please finish the rest of the form so we have everything we need.</p>
     <div class="opt-plan" data-outside-card></div>
     <p class="hint">Your health answers stay private. We only let the HealtheMe team know the HealtheMe plans are not a fit.</p>
     <div class="btn-row">
       <button type="button" class="btn" id="stopContinue">Continue with an outside plan</button>
-      <button type="button" class="btn ghost" id="stopSend">Have David call me first</button>
     </div>
   </section>
-  <section class="step" data-step="hqstopdone" data-title="Sent">
-    <h1>Thank you</h1>
-    <p class="intro">David will call you at the number you gave to walk through your outside plan option and your setup. Questions before then? Call <a data-tel href="tel:+13802255217">380-CALL-A1S (380-225-5217)</a>.</p>
-    <div id="sandboxStop" hidden style="margin-top:24px">
-      <div class="sandbox"><b>Sandbox.</b> Nothing was sent. Download what the secure intake would receive (answers go only to the encrypted store), or what GHL would get (the flag only).</div>
-      <div class="btn-row"><button type="button" class="btn ghost" id="dlGhlStop">Download GHL payload (JSON)</button></div>
-    </div>
-  </section>
-
   
   <section class="step" data-step="outside" data-title="Your health plan">
     <h1 id="outsideTitle">Your health plan option</h1>
@@ -581,6 +579,7 @@ input::placeholder{color:var(--navy-50)}
       </div>
     </fieldset>
     <div class="flowbox" id="flowBox" role="status" aria-live="polite"></div>
+    <p class="notice soft es-only" data-notranslate lang="es">Los acuerdos se muestran en inglés, que es el texto que usted firma. Si tiene preguntas sobre algún término, llame al 380-CALL-A1S y se lo explicamos en español.</p>
     
     <div id="agreeCards"></div>
     <div id="packetWrap">
@@ -651,6 +650,7 @@ input::placeholder{color:var(--navy-50)}
     <h1>Your W-4 and I-9</h1>
     <p class="intro">The forms every employee fills in, with you as the owner on payroll. We already have most of it from your answers.</p>
     <div class="ro" id="prefillBox"></div>
+    <p class="notice soft es-only" data-notranslate lang="es">El W-4 y el I-9 oficiales están en inglés. Esta página le muestra cada pregunta en español para ayudarle; sus respuestas llenan los formularios oficiales.</p>
     <div id="resumeBlock" hidden>
       <fieldset>
         <legend>About you</legend>
@@ -978,6 +978,775 @@ window.HP_TERMS = {"atlas-one": {"title": "HEALTHEME SERVICE SCHEDULE", "version
 window.HP_OUTSIDE = {"chosen": "", "pending": {"title": "An outside health plan option", "status": "Plan to be chosen", "summary": "The HealtheMe plans are not the right fit here, but you still have good coverage options. Atlas One is choosing the outside plan we offer, and David confirms the plan and its price with you before anything starts.", "premiumSetup": "How the premium is paid depends on the plan. We confirm it with you before anything is charged. Your business and payroll setup keep moving in the meantime."}, "options": {"redirect": {"clientName": "", "title": "Group health plan through your payroll", "summary": "", "premiumSetup": "The business pays the premium through your monthly payroll.", "upfrontMonths": null, "prices": []}, "marketplace": {"clientName": "", "title": "Marketplace health plan", "summary": "", "premiumSetup": "You enroll in your own name and pay the plan each month. As an S-Corp owner, the business can reimburse the premium and we record it on your W-2.", "upfrontMonths": null, "prices": []}}};
 </script>
 <script>
+/* HealtheMe onboarding in Spanish (David 2026-11-21). One table: English text as the page shows it, then Spanish.
+   The page swaps text in place when the owner picks Español; choice answers keep their English values, so a "Sí" is
+   the same "yes" to the portal and raises the flag the same way. Agreement terms stay in English (the signed text is the
+   English text); a note in Spanish says so. Everything Atlas One staff, partners, GHL and the Prism sheets receive is
+   English: the portal translates the few typed answers. To add or fix a line, edit it here and rebuild. */
+window.HP_ES = {
+  pairs: [
+    // header, plan card, start
+    ['Enrollment and payroll by', 'Inscripción y nómina por'],
+    ['Enrollment and payroll services by Atlas One', 'Servicios de inscripción y nómina de Atlas One'],
+    ['Your HealtheMe plan', 'Su plan HealtheMe'],
+    ['Your HealtheMe plan.', 'Su plan HealtheMe.'],
+    ['Your health plan', 'Su plan de salud'],
+    ['Your health plan.', 'Su plan de salud.'],
+    ['Not chosen yet', 'Aún no elegido'],
+    ['Change plan', 'Cambiar plan'],
+    ['Choose a plan', 'Elegir un plan'],
+    ['Choose your plan first', 'Primero elija su plan'],
+    ['We did not receive a plan from the HealtheMe plans page. Choose your plan there with your broker and you will come right back here. If your broker is still choosing with you, you can keep going and they add it later.', 'No recibimos un plan desde la página de planes de HealtheMe. Elija su plan allí con su agente y volverá aquí enseguida. Si su agente todavía lo está eligiendo con usted, puede continuar y lo agregarán después.'],
+    ['Choose my HealtheMe plan', 'Elegir mi plan HealtheMe'],
+    ["Let's start with you", 'Empecemos con usted'],
+    ["Let's start", 'Empecemos'],
+    ['A few basics first. If you got a quote on the HealtheMe site, we already filled in what you typed there.', 'Primero, unos datos básicos. Si pidió una cotización en el sitio de HealtheMe, ya llenamos lo que escribió allí.'],
+    ['Your answers save on this device as you go, so you can finish later. Social Security numbers, bank numbers and health answers are never saved on the device.', 'Sus respuestas se guardan en este dispositivo mientras avanza, para que pueda terminar después. Los números de Seguro Social, los números bancarios y las respuestas de salud nunca se guardan en el dispositivo.'],
+    ['What state do you live and work in?', '¿En qué estado vive y trabaja?'],
+    ['Choose a state', 'Elija un estado'],
+    ['Choose a state.', 'Elija un estado.'],
+    ['You can still join Atlas One for your business setup and payroll, with an outside health plan option. Keep going and we will show you how it works.', 'Aún puede unirse a Atlas One para la configuración de su negocio y su nómina, con una opción de plan de salud externo. Continúe y le mostraremos cómo funciona.'],
+    ['First name', 'Nombre'],
+    ['Last name', 'Apellido'],
+    ['Email', 'Correo electrónico'],
+    ['Mobile phone', 'Teléfono celular'],
+    ['Phone', 'Teléfono'],
+    ['Enter your first name.', 'Escriba su nombre.'],
+    ['Enter your last name.', 'Escriba su apellido.'],
+    ['Enter a valid email address.', 'Escriba un correo electrónico válido.'],
+    ['Enter a 10 digit US phone number.', 'Escriba un número de teléfono de EE. UU. de 10 dígitos.'],
+    ['Enter a 10 digit phone number or leave it blank.', 'Escriba un número de teléfono de 10 dígitos o déjelo en blanco.'],
+
+    // health questions
+    ['Health questions', 'Preguntas de salud'],
+    ['Answer for everyone applying: you, your spouse and your children. Unless a question says otherwise, it covers the past 5 years.', 'Responda por todas las personas que solicitan: usted, su cónyuge y sus hijos. Salvo que una pregunta diga otra cosa, cubre los últimos 5 años.'],
+    ["Answer Yes if it's true for anyone. If you're not sure, answer Yes.", 'Responda Sí si es cierto para cualquiera. Si no está seguro, responda Sí.'],
+    ['Your privacy', 'Su privacidad'],
+    ["Your answers are protected health information. They are used only to see whether the HealtheMe plans fit. If every answer is No, they are not kept. If any answer is Yes, they are stored encrypted in Atlas One's secure system for the staff who set up your coverage, and are never put in email or shared with your producer. Either way, you can still get coverage and payroll through Atlas One.", 'Sus respuestas son información de salud protegida. Se usan solo para ver si los planes HealtheMe le corresponden. Si todas las respuestas son No, no se guardan. Si alguna respuesta es Sí, se guardan cifradas en el sistema seguro de Atlas One para el personal que configura su cobertura, y nunca se ponen en un correo electrónico ni se comparten con su agente. En cualquier caso, aún puede obtener cobertura y nómina con Atlas One.'],
+    ['Producer: hand the screen to the owner', 'Agente: entregue la pantalla al dueño'],
+    ['The owner answers these privately. You do not need to see the answers.', 'El dueño responde en privado. Usted no necesita ver las respuestas.'],
+    ['Authorization', 'Autorización'],
+    ['I authorize Atlas One to use these answers to decide which health plan fits me and my family, and to tell the HealtheMe team only whether the HealtheMe plans fit (never my answers). I answer for everyone I plan to cover, with their permission.', 'Autorizo a Atlas One a usar estas respuestas para decidir qué plan de salud nos corresponde a mí y a mi familia, y a informar al equipo de HealtheMe solo si los planes HealtheMe corresponden (nunca mis respuestas). Respondo por todas las personas que pienso cubrir, con su permiso.'],
+    ['This lasts until your coverage is decided. You can take it back in writing at any time.', 'Esto dura hasta que se decida su cobertura. Puede retirarla por escrito en cualquier momento.'],
+    ['Check the box to continue.', 'Marque la casilla para continuar.'],
+    ['Choose yes or no.', 'Elija sí o no.'],
+    ['Yes', 'Sí'],
+    ['No', 'No'],
+    ['Placeholder questions', 'Preguntas de ejemplo'],
+    ['For testing only.', 'Solo para pruebas.'],
+    ['1. Pregnancy, fertility treatment and adoption.', '1. Embarazo, tratamiento de fertilidad y adopción.'],
+    ['Right now, is anyone applying:', 'En este momento, ¿alguna de las personas que solicitan:'],
+    ['pregnant;', 'está embarazada;'],
+    ['having fertility treatment to become pregnant, or scheduled to start it in the next 12 months (for example IVF, IUI or egg retrieval);', 'recibe tratamiento de fertilidad para quedar embarazada, o tiene programado empezarlo en los próximos 12 meses (por ejemplo FIV, IIU o extracción de óvulos);'],
+    ['in the process of adopting a child, or expecting a child through a surrogate; or', 'está en proceso de adoptar a un niño, o espera un hijo por medio de una madre sustituta; o'],
+    ['a baby who was in a newborn intensive care unit (NICU) in the past 12 months?', 'es un bebé que estuvo en una unidad de cuidados intensivos neonatales (UCIN) en los últimos 12 meses?'],
+    ['2. Incapacitated or unable to work.', '2. Incapacitado o sin poder trabajar.'],
+    ['in a hospital, rehab center, skilled nursing facility, nursing home or hospice;', 'está en un hospital, centro de rehabilitación, centro de enfermería especializada, hogar de ancianos o cuidados paliativos;'],
+    ['unable to work, go to school or do normal daily activities because of a health problem;', 'no puede trabajar, ir a la escuela ni hacer sus actividades diarias normales por un problema de salud;'],
+    ['getting, or waiting on a decision about, disability benefits (for example Social Security disability, or short-term or long-term disability); or', 'recibe beneficios por discapacidad, o espera una decisión sobre ellos (por ejemplo discapacidad del Seguro Social, o discapacidad a corto o largo plazo); o'],
+    ['in need of help from another person with bathing, dressing, eating or getting around?', 'necesita ayuda de otra persona para bañarse, vestirse, comer o desplazarse?'],
+    ['3. Hospital stays and the care that followed.', '3. Hospitalizaciones y la atención posterior.'],
+    ['In the past 12 months, has anyone applying stayed in a hospital overnight for any treatment or procedure?', 'En los últimos 12 meses, ¿alguna de las personas que solicitan pasó la noche en un hospital por algún tratamiento o procedimiento?'],
+    ['Also answer Yes if anyone applying is still being treated or followed by a provider for something that put them in a hospital, no matter how long ago.', 'Responda Sí también si alguna de las personas que solicitan todavía recibe tratamiento o seguimiento de un proveedor por algo que la llevó al hospital, sin importar hace cuánto.'],
+    ['4. Planned surgery.', '4. Cirugía planificada.'],
+    ["Does anyone applying have surgery scheduled, or has a provider recommended surgery that hasn't been done yet?", '¿Alguna de las personas que solicitan tiene una cirugía programada, o un proveedor le recomendó una cirugía que aún no se ha hecho?'],
+    ["Include surgery planned in a hospital, a surgery center or a provider's office. Do not count routine dental work.", 'Incluya cirugías planificadas en un hospital, un centro de cirugía o el consultorio de un proveedor. No cuente el trabajo dental de rutina.'],
+    ['5. High-risk treatment or testing expected.', '5. Tratamiento o pruebas de alto riesgo previstos.'],
+    ['In the next 12 months, does anyone applying have any of these scheduled or recommended by a provider, or are they waiting on a decision about one?', 'En los próximos 12 meses, ¿alguna de las personas que solicitan tiene alguno de estos programado o recomendado por un proveedor, o espera una decisión sobre alguno?'],
+    ['chemotherapy, radiation or immunotherapy;', 'quimioterapia, radiación o inmunoterapia;'],
+    ['dialysis;', 'diálisis;'],
+    ['an organ or bone marrow transplant, or an evaluation for one;', 'un trasplante de órgano o de médula ósea, o una evaluación para uno;'],
+    ['an IV infusion, or a medicine given by shot or pump that comes from a specialty pharmacy;', 'una infusión intravenosa, o un medicamento por inyección o bomba que viene de una farmacia especializada;'],
+    ['a hospital stay, inpatient rehab, or a stay in a skilled nursing facility;', 'una hospitalización, rehabilitación con internación, o una estancia en un centro de enfermería especializada;'],
+    ['home health care, or home oxygen started for the first time; or', 'atención médica en el hogar, u oxígeno en casa por primera vez; o'],
+    ["a biopsy, scan or other test whose results aren't back yet, or that was ordered to check a symptom or abnormal result?", 'una biopsia, un estudio de imagen u otra prueba cuyos resultados aún no llegan, o que se ordenó para revisar un síntoma o un resultado anormal?'],
+    ['6. Cancer and tumors.', '6. Cáncer y tumores.'],
+    ['In the past 5 years, has anyone applying been diagnosed with or treated for:', 'En los últimos 5 años, ¿alguna de las personas que solicitan fue diagnosticada o tratada por:'],
+    ['cancer of any kind, including leukemia, lymphoma, myeloma or melanoma;', 'cáncer de cualquier tipo, incluidos leucemia, linfoma, mieloma o melanoma;'],
+    ['a brain or spinal cord tumor; or', 'un tumor cerebral o de la médula espinal; o'],
+    ['any tumor, lump, growth or polyp that a provider is watching, called pre-cancerous, or plans to remove?', 'cualquier tumor, bulto, crecimiento o pólipo que un proveedor está vigilando, llamó precanceroso o piensa extirpar?'],
+    ['Do not count basal cell or squamous cell skin cancer that was fully removed with no further treatment.', 'No cuente el cáncer de piel de células basales o escamosas que se extirpó por completo sin más tratamiento.'],
+    ['7. Heart disease.', '7. Enfermedades del corazón.'],
+    ['a heart attack, chest pain from the heart (angina), or blocked heart arteries (coronary artery disease);', 'un ataque al corazón, dolor de pecho de origen cardíaco (angina), o arterias del corazón bloqueadas (enfermedad coronaria);'],
+    ['heart failure or a weak or enlarged heart muscle (cardiomyopathy);', 'insuficiencia cardíaca o un músculo del corazón débil o agrandado (miocardiopatía);'],
+    ['a heart valve problem or a heart defect someone was born with;', 'un problema de válvula del corazón o un defecto del corazón de nacimiento;'],
+    ['an irregular heartbeat (such as atrial fibrillation) treated with a blood thinner, an ablation, a pacemaker or a defibrillator; or', 'un ritmo cardíaco irregular (como fibrilación auricular) tratado con un anticoagulante, una ablación, un marcapasos o un desfibrilador; o'],
+    ['heart bypass surgery, a stent, an angioplasty or any other heart procedure?', 'cirugía de bypass cardíaco, un stent, una angioplastia o cualquier otro procedimiento del corazón?'],
+    ['8. Stroke and blood vessels.', '8. Derrame cerebral y vasos sanguíneos.'],
+    ['a stroke or a TIA (mini-stroke);', 'un derrame cerebral o un AIT (mini derrame);'],
+    ['an aneurysm of the brain, chest or belly (aorta);', 'un aneurisma del cerebro, del pecho o del abdomen (aorta);'],
+    ['peripheral artery disease (poor blood flow to the legs or arms) or a blocked neck (carotid) artery; or', 'enfermedad arterial periférica (mala circulación en piernas o brazos) o una arteria del cuello (carótida) bloqueada; o'],
+    ['a blood clot in a vein or a lung (deep vein thrombosis or pulmonary embolism)?', 'un coágulo de sangre en una vena o en un pulmón (trombosis venosa profunda o embolia pulmonar)?'],
+    ['9. High blood pressure.', '9. Presión arterial alta.'],
+    ['In the past 5 years, has anyone applying been diagnosed with or treated for high blood pressure (hypertension), including taking any medicine for it?', 'En los últimos 5 años, ¿alguna de las personas que solicitan fue diagnosticada o tratada por presión arterial alta (hipertensión), incluido tomar algún medicamento para ello?'],
+    ['10. Diabetes.', '10. Diabetes.'],
+    ['In the past 5 years, has anyone applying been diagnosed with or treated for Type 1 or Type 2 diabetes, or used insulin, an insulin pump or a continuous glucose monitor?', 'En los últimos 5 años, ¿alguna de las personas que solicitan fue diagnosticada o tratada por diabetes tipo 1 o tipo 2, o usó insulina, una bomba de insulina o un monitor continuo de glucosa?'],
+    ['Do not count diabetes that happened only during a pregnancy and went away after the birth.', 'No cuente la diabetes que ocurrió solo durante un embarazo y desapareció después del parto.'],
+    ['11. Endocrine and hormone disorders.', '11. Trastornos endocrinos y hormonales.'],
+    ["a thyroid disorder (overactive, underactive, thyroid nodules or Graves' disease);", 'un trastorno de la tiroides (hiperactiva, hipoactiva, nódulos tiroideos o enfermedad de Graves);'],
+    ["an adrenal or pituitary disorder, such as Addison's disease or Cushing's syndrome;", 'un trastorno suprarrenal o de la hipófisis, como la enfermedad de Addison o el síndrome de Cushing;'],
+    ['a parathyroid disorder; or', 'un trastorno de las paratiroides; o'],
+    ['any other hormone or gland disorder, including growth hormone treatment?', 'cualquier otro trastorno hormonal o de glándulas, incluido el tratamiento con hormona de crecimiento?'],
+    ['12. Autoimmune conditions.', '12. Enfermedades autoinmunes.'],
+    ['lupus, rheumatoid arthritis, psoriatic arthritis or ankylosing spondylitis;', 'lupus, artritis reumatoide, artritis psoriásica o espondilitis anquilosante;'],
+    ["Crohn's disease or ulcerative colitis;", 'enfermedad de Crohn o colitis ulcerosa;'],
+    ["scleroderma, Sjögren's syndrome, myositis, vasculitis or sarcoidosis;", 'esclerodermia, síndrome de Sjögren, miositis, vasculitis o sarcoidosis;'],
+    ['psoriasis or eczema treated with a shot, an infusion or a biologic medicine; or', 'psoriasis o eccema tratados con una inyección, una infusión o un medicamento biológico; o'],
+    ['any other autoimmune or connective tissue disease?', 'cualquier otra enfermedad autoinmune o del tejido conectivo?'],
+    ['13. Blood disorders.', '13. Trastornos de la sangre.'],
+    ['hemophilia, von Willebrand disease, or another bleeding or clotting disorder;', 'hemofilia, enfermedad de von Willebrand u otro trastorno de sangrado o de coagulación;'],
+    ['sickle cell disease or thalassemia (do not count sickle cell trait or thalassemia trait);', 'anemia de células falciformes o talasemia (no cuente el rasgo de células falciformes ni el rasgo de talasemia);'],
+    ['aplastic anemia, myelodysplastic syndrome, or a low platelet disorder (such as ITP); or', 'anemia aplásica, síndrome mielodisplásico o un trastorno de plaquetas bajas (como la PTI); o'],
+    ['any condition that needed blood transfusions or regular infusions?', 'cualquier condición que requirió transfusiones de sangre o infusiones regulares?'],
+    ['14. HIV, immune deficiency and chronic hepatitis.', '14. VIH, inmunodeficiencia y hepatitis crónica.'],
+    ['HIV or AIDS;', 'VIH o SIDA;'],
+    ['an immune deficiency that needs regular treatment (for example immune globulin, IVIG); or', 'una inmunodeficiencia que necesita tratamiento regular (por ejemplo inmunoglobulina, IGIV); o'],
+    ['chronic hepatitis B or hepatitis C?', 'hepatitis B o hepatitis C crónica?'],
+    ['15. Organ failure and transplant.', '15. Falla de órganos y trasplantes.'],
+    ['chronic kidney disease or kidney failure;', 'enfermedad renal crónica o insuficiencia renal;'],
+    ['cirrhosis, liver failure or other chronic liver disease; or', 'cirrosis, insuficiencia hepática u otra enfermedad crónica del hígado; o'],
+    ['failure of any other organ (heart, lung or pancreas)?', 'falla de cualquier otro órgano (corazón, pulmón o páncreas)?'],
+    ['Also answer Yes if anyone applying has ever had an organ or bone marrow transplant, or is on a transplant waiting list or being evaluated for one.', 'Responda Sí también si alguna de las personas que solicitan alguna vez tuvo un trasplante de órgano o de médula ósea, o está en una lista de espera de trasplante o en evaluación para uno.'],
+    ['16. Organ support treatment.', '16. Tratamiento de soporte de órganos.'],
+    ['In the past 5 years, has anyone applying had or needed:', 'En los últimos 5 años, ¿alguna de las personas que solicitan tuvo o necesitó:'],
+    ['a ventilator, a breathing machine other than CPAP, or oxygen at home;', 'un respirador, una máquina para respirar que no sea CPAP, u oxígeno en casa;'],
+    ['a heart pump (LVAD); or', 'una bomba cardíaca (DAVI); o'],
+    ['a feeding tube or IV nutrition (TPN)?', 'una sonda de alimentación o nutrición intravenosa (NPT)?'],
+    ['17. Lungs and breathing.', '17. Pulmones y respiración.'],
+    ['COPD, emphysema or chronic bronchitis;', 'EPOC, enfisema o bronquitis crónica;'],
+    ['cystic fibrosis;', 'fibrosis quística;'],
+    ['scarring of the lungs (pulmonary fibrosis) or high blood pressure in the lungs (pulmonary hypertension); or', 'cicatrices en los pulmones (fibrosis pulmonar) o presión alta en los pulmones (hipertensión pulmonar); o'],
+    ['asthma that led to a hospital stay or emergency room visit, or that is treated with a shot or biologic medicine?', 'asma que causó una hospitalización o una visita a la sala de emergencias, o que se trata con una inyección o un medicamento biológico?'],
+    ['18. Back, bones, joints and muscles.', '18. Espalda, huesos, articulaciones y músculos.'],
+    ['a back or neck condition, such as a herniated or bulging disc, spinal stenosis, degenerative disc disease or sciatica;', 'un problema de espalda o cuello, como una hernia de disco o disco abultado, estenosis espinal, enfermedad degenerativa del disco o ciática;'],
+    ['arthritis or another condition in the hip, knee, shoulder or another major joint;', 'artritis u otro problema en la cadera, la rodilla, el hombro u otra articulación grande;'],
+    ['a muscle or connective tissue disorder;', 'un trastorno muscular o del tejido conectivo;'],
+    ['surgery on the back, neck or a major joint, or a provider recommending one, including a joint replacement; or', 'cirugía de espalda, cuello o de una articulación grande, o que un proveedor la recomiende, incluido un reemplazo de articulación; o'],
+    ['use of an artificial limb, a power wheelchair or a mobility scooter?', 'uso de una prótesis de extremidad, una silla de ruedas eléctrica o un scooter de movilidad?'],
+    ['Do not count a sprain, strain or broken bone that fully healed with no ongoing treatment.', 'No cuente un esguince, una distensión o un hueso roto que sanó por completo sin tratamiento continuo.'],
+    ['19. Brain and nerves.', '19. Cerebro y nervios.'],
+    ["multiple sclerosis (MS), ALS (Lou Gehrig's disease) or myasthenia gravis;", 'esclerosis múltiple (EM), ELA (enfermedad de Lou Gehrig) o miastenia gravis;'],
+    ["Parkinson's disease, Alzheimer's disease or dementia;", 'enfermedad de Parkinson, enfermedad de Alzheimer o demencia;'],
+    ['seizures or epilepsy;', 'convulsiones o epilepsia;'],
+    ['muscular dystrophy, spinal muscular atrophy (SMA) or cerebral palsy;', 'distrofia muscular, atrofia muscular espinal (AME) o parálisis cerebral;'],
+    ['paralysis of any kind (quadriplegia, paraplegia or hemiplegia), a spinal cord injury, or a brain injury that needs ongoing care;', 'parálisis de cualquier tipo (cuadriplejia, paraplejia o hemiplejia), una lesión de la médula espinal o una lesión cerebral que necesita atención continua;'],
+    ['nerve damage (neuropathy) that needs ongoing treatment; or', 'daño en los nervios (neuropatía) que necesita tratamiento continuo; o'],
+    ['migraines treated with a shot, an infusion or Botox?', 'migrañas tratadas con una inyección, una infusión o Botox?'],
+    ['20. Mental health.', '20. Salud mental.'],
+    ['In the past 5 years, has anyone applying been diagnosed with or treated for a mental health condition, including with medicine or counseling? For example:', 'En los últimos 5 años, ¿alguna de las personas que solicitan fue diagnosticada o tratada por una condición de salud mental, incluso con medicamentos o terapia? Por ejemplo:'],
+    ['depression, anxiety or panic disorder;', 'depresión, ansiedad o trastorno de pánico;'],
+    ['bipolar disorder, schizophrenia or another psychotic disorder;', 'trastorno bipolar, esquizofrenia u otro trastorno psicótico;'],
+    ['PTSD, OCD, an eating disorder or ADHD; or', 'TEPT, TOC, un trastorno alimenticio o TDAH; o'],
+    ['any overnight stay in a hospital or a live-in program for a mental health condition?', 'cualquier estancia de una noche en un hospital o en un programa residencial por una condición de salud mental?'],
+    ['21. Alcohol and drug use.', '21. Consumo de alcohol y drogas.'],
+    ['In the past 5 years, has anyone applying:', 'En los últimos 5 años, ¿alguna de las personas que solicitan:'],
+    ['been treated for alcohol or drug use, including detox, rehab, or an inpatient or outpatient program;', 'recibió tratamiento por consumo de alcohol o drogas, incluida desintoxicación, rehabilitación, o un programa con internación o ambulatorio;'],
+    ['taken medicine for alcohol or opioid use, such as methadone, buprenorphine (Suboxone) or naltrexone (Vivitrol); or', 'tomó medicamentos para el consumo de alcohol u opioides, como metadona, buprenorfina (Suboxone) o naltrexona (Vivitrol); o'],
+    ['been advised by a provider to get treatment for alcohol or drug use?', 'recibió la recomendación de un proveedor de buscar tratamiento por consumo de alcohol o drogas?'],
+    ['22. Surgery history.', '22. Historial de cirugías.'],
+    ['In the past 5 years, has anyone applying had surgery? Include surgery in a hospital or a surgery center.', 'En los últimos 5 años, ¿alguna de las personas que solicitan tuvo una cirugía? Incluya cirugías en un hospital o un centro de cirugía.'],
+    ["Do not count minor procedures done in a provider's office, routine dental work, or an uncomplicated vaginal birth.", 'No cuente procedimientos menores hechos en el consultorio de un proveedor, trabajo dental de rutina ni un parto vaginal sin complicaciones.'],
+    ['23. Conditions present from birth.', '23. Condiciones de nacimiento.'],
+    ['Has anyone applying been born with a condition that still needs regular specialist care? For example:', '¿Alguna de las personas que solicitan nació con una condición que todavía necesita atención regular de un especialista? Por ejemplo:'],
+    ['a heart defect, spina bifida or a cleft palate;', 'un defecto del corazón, espina bífida o paladar hendido;'],
+    ['Down syndrome or another chromosomal condition; or', 'síndrome de Down u otra condición cromosómica; o'],
+    ['a growth or developmental condition that needs ongoing therapy or treatment?', 'una condición de crecimiento o de desarrollo que necesita terapia o tratamiento continuo?'],
+    ['Answer about conditions a person has. Do not include family medical history or the results of genetic tests.', 'Responda sobre condiciones que la persona tiene. No incluya antecedentes médicos familiares ni resultados de pruebas genéticas.'],
+    ['24. Specialty and weight-loss medicines.', '24. Medicamentos especializados y para bajar de peso.'],
+    ['Right now, or at any time in the past 12 months, has anyone applying taken or been prescribed:', 'En este momento, o en cualquier momento de los últimos 12 meses, ¿alguna de las personas que solicitan tomó o le recetaron:'],
+    ['a medicine given by shot, IV infusion or pump (do not count vaccines, allergy shots, insulin or birth control);', 'un medicamento por inyección, infusión intravenosa o bomba (no cuente vacunas, inyecciones para alergias, insulina ni anticonceptivos);'],
+    ['a medicine that comes from a specialty pharmacy; or', 'un medicamento que viene de una farmacia especializada; o'],
+    ['a GLP-1 medicine, such as Ozempic, Wegovy, Mounjaro or Zepbound?', 'un medicamento GLP-1, como Ozempic, Wegovy, Mounjaro o Zepbound?'],
+
+    // not eligible, outside plan
+    ['Your options', 'Sus opciones'],
+    ['Thank you. Here is your next step.', 'Gracias. Este es su siguiente paso.'],
+    ['Based on your answers, you are not eligible for the HealtheMe plans. That is not the end of the road: you can still get health coverage and set up your business and payroll with Atlas One. Please finish the rest of the form so we have everything we need.', 'Según sus respuestas, usted no califica para los planes HealtheMe. Eso no es el final del camino: aún puede obtener cobertura de salud y configurar su negocio y su nómina con Atlas One. Por favor termine el resto del formulario para que tengamos todo lo que necesitamos.'],
+    ['Your health answers stay private. We only let the HealtheMe team know the HealtheMe plans are not a fit.', 'Sus respuestas de salud son privadas. Solo le avisamos al equipo de HealtheMe que los planes HealtheMe no le corresponden.'],
+    ['Continue with an outside plan', 'Continuar con un plan externo'],
+    ['One moment', 'Un momento'],
+    ['Outside plan option', 'Opción de plan externo'],
+    ['An outside health plan option', 'Una opción de plan de salud externo'],
+    ['Plan to be chosen', 'Plan por elegir'],
+    ['Your plan', 'Su plan'],
+    ['How the premium works.', 'Cómo funciona la prima.'],
+    ['The HealtheMe plans are not the right fit here, but you still have good coverage options. Atlas One is choosing the outside plan we offer, and David confirms the plan and its price with you before anything starts.', 'Los planes HealtheMe no son la opción adecuada en este caso, pero aún tiene buenas opciones de cobertura. Atlas One está eligiendo el plan externo que ofrecemos, y David confirma el plan y su precio con usted antes de que empiece cualquier cosa.'],
+    ['How the premium is paid depends on the plan. We confirm it with you before anything is charged. Your business and payroll setup keep moving in the meantime.', 'La forma de pagar la prima depende del plan. Lo confirmamos con usted antes de cobrar cualquier cosa. Mientras tanto, la configuración de su negocio y su nómina sigue avanzando.'],
+    ['Your health plan option', 'Su opción de plan de salud'],
+    ['Based on your health answers, the HealtheMe plans are not the right fit. You can still get health coverage and set up your business and payroll with Atlas One.', 'Según sus respuestas de salud, los planes HealtheMe no son la opción adecuada. Aún puede obtener cobertura de salud y configurar su negocio y su nómina con Atlas One.'],
+    ['Next, the details we need to set up your business and payroll. It takes about 10 minutes.', 'Ahora, los datos que necesitamos para configurar su negocio y su nómina. Toma unos 10 minutos.'],
+    ['No problem. You continue with Atlas One for your business and payroll, with an outside health plan option. David confirms the plan with you.', 'No hay problema. Usted continúa con Atlas One para su negocio y su nómina, con una opción de plan de salud externo. David confirma el plan con usted.'],
+    ["One month's premium is collected up front, so your first premium payment is two monthly premiums.", 'Se cobra un mes de prima por adelantado, así que su primer pago de prima es de dos primas mensuales.'],
+
+    // entity
+    ['Your business entity', 'Su entidad comercial'],
+    ['Do you already have a business entity?', '¿Ya tiene una entidad comercial?'],
+    ['A business entity (like an LLC or a corporation) is required to join the plan. If you do not have one yet, we can set it up for you.', 'Se necesita una entidad comercial (como una LLC o una corporación) para unirse al plan. Si todavía no tiene una, podemos crearla por usted.'],
+    ['Business entity', 'Entidad comercial'],
+    ['I have an LLC or a corporation', 'Tengo una LLC o una corporación'],
+    ['No, please set one up for me', 'No, por favor créenla por mí'],
+    ['Atlas One forms it and gets your EIN', 'Atlas One la forma y obtiene su EIN'],
+    ['No, I will set it up myself', 'No, yo la voy a crear'],
+    ['Keep going now and add your EIN when you have it', 'Continúe ahora y agregue su EIN cuando lo tenga'],
+    ['Choose one.', 'Elija una opción.'],
+    ['What it costs', 'Lo que cuesta'],
+    ['Do you want an S corporation election?', '¿Quiere la elección de corporación S?'],
+    ['It can lower self-employment tax for owners with steady profit. Not sure? We check the numbers with you first.', 'Puede bajar el impuesto de trabajo por cuenta propia para dueños con ganancias estables. ¿No está seguro? Primero revisamos los números con usted.'],
+    ['Not sure', 'No estoy seguro'],
+    ['Set it up, then add your EIN', 'Créela y luego agregue su EIN'],
+    ['Form your LLC or corporation in your state and get an EIN from the IRS. You can finish this form now and leave the EIN blank. We check in with you before setup, because the plan cannot start without the entity.', 'Forme su LLC o corporación en su estado y obtenga un EIN del IRS. Puede terminar este formulario ahora y dejar el EIN en blanco. Nos comunicamos con usted antes de la configuración, porque el plan no puede empezar sin la entidad.'],
+    ['What state do you file your taxes in?', '¿En qué estado declara sus impuestos?'],
+    ['So the business is set up in the right state.', 'Para que el negocio se configure en el estado correcto.'],
+    ['For an LLC you already have: S corporation election, 1 to 2 owners, $195 one time. Shown on your agreement before you sign.', 'Para una LLC que ya tiene: elección de corporación S, 1 a 2 dueños, $195 una sola vez. Se muestra en su acuerdo antes de firmar.'],
+    ['Business formation and setup, 1 to 2 owners (state formation documents, EIN, S corporation election when it applies):', 'Formación y configuración del negocio, 1 a 2 dueños (documentos de formación del estado, EIN, elección de corporación S cuando aplique):'],
+    ['Business formation and setup, 1 to 2 owners (state formation documents, EIN, S corporation election when it applies)', 'Formación y configuración del negocio, 1 a 2 dueños (documentos de formación del estado, EIN, elección de corporación S cuando aplique)'],
+    ['$510 one time, plus state filing fees at cost', '$510 una sola vez, más las tarifas de registro del estado al costo'],
+    ['Business formation, each additional owner:', 'Formación del negocio, cada dueño adicional:'],
+    ['Business formation, each additional owner', 'Formación del negocio, cada dueño adicional'],
+    ['$35 per owner, one time', '$35 por dueño, una sola vez'],
+    ['State filing fees, registered agent and government fees:', 'Tarifas de registro del estado, agente registrado y tarifas del gobierno:'],
+    ['At cost, passed through on the invoice', 'Al costo, incluidas en la factura'],
+    ['Payroll tax account setup, state withholding account:', 'Apertura de cuenta de impuestos de nómina, cuenta de retención estatal:'],
+    ['Payroll tax account setup, state withholding account', 'Apertura de cuenta de impuestos de nómina, cuenta de retención estatal'],
+    ['Payroll tax account setup, state unemployment account:', 'Apertura de cuenta de impuestos de nómina, cuenta de desempleo estatal:'],
+    ['Payroll tax account setup, state unemployment account', 'Apertura de cuenta de impuestos de nómina, cuenta de desempleo estatal'],
+    ['$250 per account, one time', '$250 por cuenta, una sola vez'],
+    ['We open it for you', 'La abrimos por usted'],
+
+    // business
+    ['Business information', 'Información del negocio'],
+    ['The same details your payroll platform asks for. Fill this in once.', 'Los mismos datos que pide su plataforma de nómina. Llénelos una sola vez.'],
+    ['Your business', 'Su negocio'],
+    ['Business name', 'Nombre del negocio'],
+    ['Business name you want', 'Nombre que quiere para el negocio'],
+    ['Enter the business name.', 'Escriba el nombre del negocio.'],
+    ['DBA', 'Nombre comercial (DBA)'],
+    ['(if any)', '(si tiene)'],
+    ['FEIN (tax ID number)', 'FEIN (número de identificación fiscal)'],
+    ['(optional while forming)', '(opcional mientras se forma)'],
+    ['Business type', 'Tipo de negocio'],
+    ['Business type you want', 'Tipo de negocio que quiere'],
+    ['Choose', 'Elija'],
+    ['LLC (Limited Liability Company)', 'LLC (compañía de responsabilidad limitada)'],
+    ['LLC taxed as an S corporation', 'LLC que tributa como corporación S'],
+    ['Sole proprietorship', 'Empresa individual'],
+    ['Corporation (C corp)', 'Corporación (C corp)'],
+    ['S corporation (S-Corp)', 'Corporación S (S-Corp)'],
+    ['Nonprofit corporation', 'Corporación sin fines de lucro'],
+    ['Choose a business type.', 'Elija un tipo de negocio.'],
+    ['A sole proprietorship is not a business entity, and the plan needs one. We can set up an LLC for you. David reviews your setup before anything is sent.', 'Una empresa individual no es una entidad comercial, y el plan necesita una. Podemos crear una LLC por usted. David revisa su configuración antes de enviar cualquier cosa.'],
+    ['What does the business do?', '¿A qué se dedica el negocio?'],
+    ['@placeholder:For example: independent insurance agent, home health nurse, IT consultant', '@placeholder:Por ejemplo: agente de seguros independiente, enfermera de salud en el hogar, consultor de informática'],
+    ['A few words. It sets your workers compensation class.', 'Unas pocas palabras. Define su clase de compensación laboral.'],
+    ['Tell us what you do.', 'Díganos a qué se dedica.'],
+    ['States the business is set up and registered in', 'Estados donde el negocio está constituido y registrado'],
+    ['@placeholder:Type to search, for example Texas', '@placeholder:Escriba para buscar, por ejemplo Texas'],
+    ['@aria-label:States', '@aria-label:Estados'],
+    ['Choose every state. Most owners have one.', 'Elija todos los estados. La mayoría de los dueños tiene uno.'],
+    ['Choose at least one state.', 'Elija al menos un estado.'],
+    ['No state matches', 'Ningún estado coincide'],
+    ['Full business address', 'Dirección completa del negocio'],
+    ['Where the business operates. A home address is fine.', 'Donde opera el negocio. Puede ser la dirección de su casa.'],
+    ['Street address', 'Dirección'],
+    ['Street address line 2', 'Dirección, línea 2'],
+    ['(optional)', '(opcional)'],
+    ['City', 'Ciudad'],
+    ['State', 'Estado'],
+    ['ZIP code', 'Código postal'],
+    ['Enter a street address.', 'Escriba una dirección.'],
+    ['Enter a city.', 'Escriba una ciudad.'],
+    ['Enter a 5 digit ZIP.', 'Escriba un código postal de 5 dígitos.'],
+    ['Is your main and mailing address the same?', '¿Su dirección principal y su dirección postal son la misma?'],
+    ['Mailing address', 'Dirección postal'],
+    ['Book a call', 'Agendar una llamada'],
+
+    // owners
+    ['Owner information', 'Información de los dueños'],
+    ['Owner 1 is you, the person filling in this form. We use your answers for your W-4 and I-9 too, so you never type them twice.', 'El dueño 1 es usted, la persona que llena este formulario. Usamos sus respuestas también para su W-4 e I-9, así nunca las escribe dos veces.'],
+    ['Number of business owners', 'Número de dueños del negocio'],
+    ['1 (just me)', '1 (solo yo)'],
+    ['Choose the number of owners.', 'Elija el número de dueños.'],
+    ['Social Security numbers go only to a secure folder our setup team opens. They never go to our sales system and are never saved on this device.', 'Los números de Seguro Social van solo a una carpeta segura que abre nuestro equipo de configuración. Nunca van a nuestro sistema de ventas y nunca se guardan en este dispositivo.'],
+    ['Owner 1: you', 'Dueño 1: usted'],
+    ['Middle initial', 'Inicial del segundo nombre'],
+    ['Enter a first name.', 'Escriba un nombre.'],
+    ['Enter a last name.', 'Escriba un apellido.'],
+    ['% ownership', '% de propiedad'],
+    ['Enter a percent from 1 to 100.', 'Escriba un porcentaje del 1 al 100.'],
+    ['Date of birth', 'Fecha de nacimiento'],
+    ['Enter your date of birth. The program covers ages 18 to 65.', 'Escriba su fecha de nacimiento. El programa cubre edades de 18 a 65 años.'],
+    ['Enter a date of birth.', 'Escriba una fecha de nacimiento.'],
+    ['Enter your date of birth.', 'Escriba su fecha de nacimiento.'],
+    ['Social Security number', 'Número de Seguro Social'],
+    ['Enter a valid 9 digit Social Security number.', 'Escriba un número de Seguro Social válido de 9 dígitos.'],
+    ['Number of W-2 employees', 'Número de empleados W-2'],
+    ['(count yourself, and your spouse if they are on payroll)', '(cuéntese usted, y a su cónyuge si está en la nómina)'],
+    ['Enter a number. Enter 1 if it is just you, or 2 for you and your spouse.', 'Escriba un número. Escriba 1 si es solo usted, o 2 si son usted y su cónyuge.'],
+    ['Your business fits a group plan', 'Su negocio corresponde a un plan grupal'],
+    ['This program is built for owners on payroll: you, and your spouse if they work in the business. With other employees, a group plan usually costs less per person. Book a call and we will build it with you.', 'Este programa es para dueños en la nómina: usted, y su cónyuge si trabaja en el negocio. Con otros empleados, un plan grupal suele costar menos por persona. Agende una llamada y lo armamos con usted.'],
+    ['Ages 18 to 65', 'Edades de 18 a 65 años'],
+    ['The program covers owners from 18 to 65 on the start date. Book a call and we will find the right fit.', 'El programa cubre a dueños de 18 a 65 años en la fecha de inicio. Agende una llamada y encontraremos la opción adecuada.'],
+    ['Producer code', 'Código de agente'],
+    ['(if you have one)', '(si tiene uno)'],
+
+    // tax withholding
+    ['Tax withholding', 'Retención de impuestos'],
+    ['Tax withholding information', 'Información de retención de impuestos'],
+    ['Your state payroll tax accounts in', 'Sus cuentas estatales de impuestos de nómina en'],
+    ['your state', 'su estado'],
+    ['. If you have never run payroll, choose "No" and we open them for you.', '. Si nunca ha corrido una nómina, elija "No" y las abrimos por usted.'],
+    ['Usernames and passwords are stored encrypted, for our setup team only. They never go to our sales system and are never saved on this device.', 'Los usuarios y contraseñas se guardan cifrados, solo para nuestro equipo de configuración. Nunca van a nuestro sistema de ventas y nunca se guardan en este dispositivo.'],
+    ['Do you have your state withholding number set up?', '¿Ya tiene su número de retención estatal?'],
+    ['Do you have your state unemployment number set up?', '¿Ya tiene su número de desempleo estatal?'],
+    ['Maybe', 'Tal vez'],
+    ['State withholding ID number', 'Número de identificación de retención estatal'],
+    ['State unemployment ID number', 'Número de identificación de desempleo estatal'],
+    ['Enter the ID number.', 'Escriba el número de identificación.'],
+    ['Username', 'Usuario'],
+    ['Password', 'Contraseña'],
+
+    // payroll
+    ['Payroll', 'Nómina'],
+    ['Payroll information', 'Información de nómina'],
+    ['How you want to be paid as the owner on payroll.', 'Cómo quiere que le paguen como dueño en la nómina.'],
+    ['How often do you want to be paid? (pay cycle)', '¿Con qué frecuencia quiere que le paguen? (ciclo de pago)'],
+    ['Weekly', 'Semanal'],
+    ['Every two weeks (bi weekly)', 'Cada dos semanas (quincenal)'],
+    ['Twice a month (semi monthly)', 'Dos veces al mes'],
+    ['Monthly', 'Mensual'],
+    ['monthly', 'mensual'],
+    ['Quarterly', 'Trimestral'],
+    ['Twice a year (semi annual)', 'Dos veces al año (semestral)'],
+    ['Once a year (annual)', 'Una vez al año (anual)'],
+    ['Other', 'Otro'],
+    ['Once a year is common when payroll only records your health premium.', 'Una vez al año es común cuando la nómina solo registra su prima de salud.'],
+    ['Choose how often.', 'Elija la frecuencia.'],
+    ['Tell us the pay cycle you want', 'Díganos el ciclo de pago que quiere'],
+    ['Tell us the pay cycle.', 'Díganos el ciclo de pago.'],
+    ['What would you like to run as your gross wages?', '¿Qué salario bruto quiere registrar?'],
+    ['Gross wages', 'Salario bruto'],
+    ['($)', '($)'],
+    ['Enter an amount. Enter 0 if payroll only records your premium.', 'Escriba una cantidad. Escriba 0 si la nómina solo registra su prima.'],
+    ['That amount is', 'Esa cantidad es'],
+    ['For each paycheck', 'Por cada cheque de pago'],
+    ['For the whole year', 'Por todo el año'],
+    ['That is', 'Eso es'],
+    ['Choose a pay cycle', 'Elija un ciclo de pago'],
+    ['S corporation owners need a reasonable salary for the work they do. Leave your best guess and we confirm it with you before your first payroll.', 'Los dueños de una corporación S necesitan un salario razonable por el trabajo que hacen. Deje su mejor estimado y lo confirmamos con usted antes de su primera nómina.'],
+    ['Extra withholding', 'Retención adicional'],
+    ['Want more tax taken out of each paycheck? Enter the extra amount. Leave 0 if not.', '¿Quiere que le retengan más impuestos de cada cheque? Escriba la cantidad adicional. Deje 0 si no.'],
+    ['Extra federal withholding', 'Retención federal adicional'],
+    ['Extra state withholding', 'Retención estatal adicional'],
+    ['($ each pay period)', '($ por periodo de pago)'],
+    ['Enter 0 or more.', 'Escriba 0 o más.'],
+    ['What happens to the rest of your pay?', '¿Qué pasa con el resto de su pago?'],
+    ['Direct deposit the remaining amount into my personal account', 'Depositar el resto directamente en mi cuenta personal'],
+    ['Record only, as a net zero check', 'Solo registrar, como cheque neto cero'],
+    ['No money is deposited.', 'No se deposita dinero.'],
+    ['What is a net zero check?', '¿Qué es un cheque neto cero?'],
+    ["We record a payroll so there is a paper trail. It is part of the money you already paid yourself this year as an owner's draw (also called a member's draw or distribution). No money moves to you on a net zero check.", 'Registramos una nómina para que quede constancia. Es parte del dinero que ya se pagó este año como retiro del dueño (también llamado retiro del socio o distribución). Con un cheque neto cero no se le transfiere dinero.'],
+    ['Tell us what you would like', 'Díganos qué le gustaría'],
+    ['Tell us what you would like.', 'Díganos qué le gustaría.'],
+    ['Questions or concerns we can answer for you', 'Preguntas o inquietudes que podemos responderle'],
+
+    // services and agreements
+    ['Services and agreements', 'Servicios y acuerdos'],
+    ['Your services and agreements', 'Sus servicios y acuerdos'],
+    ['Here is what Atlas One sets up for you. Add anything else you would like.', 'Esto es lo que Atlas One configura para usted. Agregue cualquier otra cosa que quiera.'],
+    ['Your services', 'Sus servicios'],
+    ['Would you like anything else?', '¿Quiere algo más?'],
+    ['Bookkeeping', 'Contabilidad'],
+    ['Monthly books, reconciled. Quoted for your company.', 'Libros mensuales, conciliados. Cotizado para su empresa.'],
+    ['Tax preparation and planning', 'Preparación y planificación de impuestos'],
+    ['Your business and personal returns, and planning through the year.', 'Sus declaraciones del negocio y personales, y planificación durante el año.'],
+    ['HR support', 'Apoyo de recursos humanos'],
+    ['Policies, handbook and answers when you need them.', 'Políticas, manual y respuestas cuando las necesite.'],
+    ['Something else', 'Otra cosa'],
+    ['Tell us what you need.', 'Díganos qué necesita.'],
+    ['What else do you need?', '¿Qué más necesita?'],
+    ['Sign now, in one sitting.', 'Firme ahora, en una sola sesión.'],
+    ['Sign your Atlas One agreement now.', 'Firme ahora su acuerdo con Atlas One.'],
+    ['Read the terms', 'Leer los términos'],
+    ['Not opened yet. Open and scroll to the end to unlock signing.', 'Aún no se abre. Ábralo y desplácese hasta el final para poder firmar.'],
+    ['Read to the end. You can sign now.', 'Leído hasta el final. Ya puede firmar.'],
+    ['Open the terms, read to the end, then check the box.', 'Abra los términos, léalos hasta el final y luego marque la casilla.'],
+    ['AI assistants', 'Asistentes de IA'],
+    ['I understand that Atlas One uses AI assistants, supervised by its team, to help with scheduling, documents and follow-up, and that some messages and calls may be handled with their help.', 'Entiendo que Atlas One usa asistentes de inteligencia artificial, supervisados por su equipo, para ayudar con citas, documentos y seguimiento, y que algunos mensajes y llamadas pueden atenderse con su ayuda.'],
+    ['Check this box to go on.', 'Marque esta casilla para continuar.'],
+    ['Type your full legal name to sign', 'Escriba su nombre legal completo para firmar'],
+    ['Type your name as entered for Owner 1.', 'Escriba su nombre como lo escribió para el dueño 1.'],
+    ['Atlas One client service agreement', 'Acuerdo de servicios al cliente de Atlas One'],
+    ['Cornerstone PEO client service agreement', 'Acuerdo de servicios al cliente de Cornerstone PEO'],
+    ['Personal guaranty (Cornerstone PEO)', 'Garantía personal (Cornerstone PEO)'],
+    ['Vero HCM client service agreement (PEO)', 'Acuerdo de servicios al cliente de Vero HCM (PEO)'],
+    ['Vero HCM ASO terms and conditions', 'Términos y condiciones ASO de Vero HCM'],
+    ['Also coming by email for e-signature', 'También le llegará por correo electrónico para firma electrónica'],
+    ['Business owner', 'Dueño del negocio'],
+    ['Workers compensation owner election (include or exclude)', 'Elección del dueño sobre compensación laboral (incluirse o excluirse)'],
+    ['You choose whether you, as the owner, are covered by workers compensation or excluded, under your state rules.', 'Usted elige si, como dueño, queda cubierto por la compensación laboral o excluido, según las reglas de su estado.'],
+    ['Co-employment notice', 'Aviso de co-empleo'],
+    ['A short notice explaining who does what. Read and acknowledge.', 'Un aviso breve que explica quién hace qué. Léalo y confirme.'],
+    ['Workers compensation no loss letter', 'Carta de no pérdidas de compensación laboral'],
+    ['Only for a new business that never had workers compensation coverage.', 'Solo para un negocio nuevo que nunca tuvo cobertura de compensación laboral.'],
+    ['Form 2553 (S-Corp election)', 'Formulario 2553 (elección S-Corp)'],
+    ['Only if you want the S corporation election.', 'Solo si quiere la elección de corporación S.'],
+    ['Your payroll platform agreement', 'El acuerdo de su plataforma de nómina'],
+    ['Comes by email once David chooses your platform and price.', 'Le llega por correo electrónico cuando David elija su plataforma y precio.'],
+    ['Consent to sign electronically', 'Consentimiento para firmar electrónicamente'],
+    ['I agree to receive and sign my agreements and tax forms electronically', 'Acepto recibir y firmar mis acuerdos y formularios de impuestos electrónicamente'],
+    ['You can ask for paper copies at any time by calling 380-CALL-A1S.', 'Puede pedir copias en papel en cualquier momento llamando al 380-CALL-A1S.'],
+    ['Please agree to e-signature to continue.', 'Por favor acepte la firma electrónica para continuar.'],
+    ['Filling this in for a client?', '¿Está llenando esto por un cliente?'],
+    ['Stop here. We email the owner a private link to add their Social Security numbers, sign, upload the ID and voided checks, and finish the W-4 and I-9. None of that passes through you.', 'Deténgase aquí. Le enviamos al dueño un enlace privado para agregar sus números de Seguro Social, firmar, subir la identificación y los cheques anulados, y terminar el W-4 y el I-9. Nada de eso pasa por usted.'],
+    ['Send the rest to the owner', 'Enviar el resto al dueño'],
+    ['Producer assisted.', 'Con ayuda del agente.'],
+    ['Fill in the business details with the owner. Social Security numbers, bank numbers and state logins are left for the owner, who finishes privately from the link we email them.', 'Llene los datos del negocio con el dueño. Los números de Seguro Social, los números bancarios y los accesos estatales quedan para el dueño, quien termina en privado desde el enlace que le enviamos.'],
+    // terms panel
+    ['Terms', 'Términos'],
+    ['Close', 'Cerrar'],
+    ['Done reading', 'Terminé de leer'],
+    ['Scroll to the end to unlock "I agree".', 'Desplácese hasta el final para habilitar "Acepto".'],
+    ['You already read these terms.', 'Ya leyó estos términos.'],
+    ['You reached the end. "I agree" is unlocked.', 'Llegó al final. "Acepto" está habilitado.'],
+    ['Company information', 'Información de la empresa'],
+    ['Rate sheet', 'Hoja de tarifas'],
+    ['Services you chose', 'Servicios que eligió'],
+    ['Full terms', 'Términos completos'],
+    ['Open the full published terms', 'Abrir los términos publicados completos'],
+    ['Covered position', 'Puesto cubierto'],
+    ['Owner (1 employee)', 'Dueño (1 empleado)'],
+    ['Platform fee', 'Tarifa de la plataforma'],
+    ['Set by Atlas One', 'Fijada por Atlas One'],
+    ['Health plan', 'Plan de salud'],
+    ['From your HealtheMe quote', 'De su cotización de HealtheMe'],
+    ['Guarantor', 'Garante'],
+    ['For', 'Para'],
+    ['Owner and signer', 'Dueño y firmante'],
+    ['Start date', 'Fecha de inicio'],
+    ['Registered in', 'Registrado en'],
+    ['Not given', 'No indicado'],
+
+    // uploads and bank
+    ['ID, voided checks and bank', 'Identificación, cheques anulados y banco'],
+    ['Photo ID, voided checks and bank', 'Identificación con foto, cheques anulados y banco'],
+    ['Your files and bank numbers go only to the secure folder our setup team opens. Photos or PDFs, up to 10 MB each.', 'Sus archivos y números bancarios van solo a la carpeta segura que abre nuestro equipo de configuración. Fotos o PDF, de hasta 10 MB cada uno.'],
+    ['Your photo ID (driver license or passport)', 'Su identificación con foto (licencia de conducir o pasaporte)'],
+    ['Would you like to upload a photo of your ID or take a picture of it now?', '¿Quiere subir una foto de su identificación o tomarle una foto ahora?'],
+    ['Upload', 'Subir'],
+    ['A photo or PDF you already have', 'Una foto o PDF que ya tiene'],
+    ['Take photo', 'Tomar foto'],
+    ['Use your phone camera', 'Use la cámara de su teléfono'],
+    ['Upload your ID', 'Suba su identificación'],
+    ['Add a photo or PDF of your ID, up to 10 MB.', 'Agregue una foto o PDF de su identificación, de hasta 10 MB.'],
+    ['Take a photo of your ID', 'Tómele una foto a su identificación'],
+    ['Take a photo of your ID.', 'Tómele una foto a su identificación.'],
+    ['Business bank account', 'Cuenta bancaria del negocio'],
+    ['The account payroll and taxes are drafted from when we process payroll.', 'La cuenta de la que se debitan la nómina y los impuestos cuando procesamos la nómina.'],
+    ['Voided check for the business account', 'Cheque anulado de la cuenta del negocio'],
+    ['Add a voided check for the business account, up to 10 MB.', 'Agregue un cheque anulado de la cuenta del negocio, de hasta 10 MB.'],
+    ['Bank name', 'Nombre del banco'],
+    ['Enter the bank name.', 'Escriba el nombre del banco.'],
+    ['Account type', 'Tipo de cuenta'],
+    ['Checking', 'Cheques'],
+    ['Savings', 'Ahorros'],
+    ['Choose an account type.', 'Elija un tipo de cuenta.'],
+    ['Business routing number', 'Número de ruta del negocio'],
+    ['Business account number', 'Número de cuenta del negocio'],
+    ['Confirm account number', 'Confirme el número de cuenta'],
+    ['Enter a valid 9 digit routing number.', 'Escriba un número de ruta válido de 9 dígitos.'],
+    ['Enter the account number (4 to 17 digits).', 'Escriba el número de cuenta (de 4 a 17 dígitos).'],
+    ['The account numbers do not match.', 'Los números de cuenta no coinciden.'],
+    ['Personal account for direct deposit', 'Cuenta personal para depósito directo'],
+    ['Where the rest of your paycheck goes.', 'Adonde va el resto de su pago.'],
+    ['Voided check for the personal account', 'Cheque anulado de la cuenta personal'],
+    ['Add a voided check for the personal account, up to 10 MB.', 'Agregue un cheque anulado de la cuenta personal, de hasta 10 MB.'],
+    ['Routing number', 'Número de ruta'],
+    ['Account number', 'Número de cuenta'],
+    ['I authorize direct deposit of my pay to this account, and corrections of any deposit made in error.', 'Autorizo el depósito directo de mi pago en esta cuenta, y la corrección de cualquier depósito hecho por error.'],
+    ['This stays in effect until I change it in writing or in my payroll portal.', 'Esto sigue vigente hasta que lo cambie por escrito o en mi portal de nómina.'],
+    ['Check the box to authorize direct deposit.', 'Marque la casilla para autorizar el depósito directo.'],
+    ['Proof of ownership', 'Comprobante de propiedad'],
+    ['(optional now)', '(opcional por ahora)'],
+    ['Operating agreement, articles or a cap table', 'Acuerdo operativo, acta constitutiva o tabla de propiedad'],
+    ['Photos or PDFs only, up to 10 MB.', 'Solo fotos o PDF, de hasta 10 MB.'],
+
+    // W-4 and I-9
+    ['W-4 and I-9', 'W-4 e I-9'],
+    ['Your W-4 and I-9', 'Su W-4 e I-9'],
+    ['The forms every employee fills in, with you as the owner on payroll. We already have most of it from your answers.', 'Los formularios que llena todo empleado, con usted como dueño en la nómina. Ya tenemos casi todo de sus respuestas.'],
+    ['From your owner answers', 'De sus respuestas como dueño'],
+    ['Your W-4 and I-9 use the details below.', 'Su W-4 e I-9 usan los datos de abajo.'],
+    ['Edit', 'Editar'],
+    ['Name', 'Nombre'],
+    ['About you', 'Sobre usted'],
+    ['Social Security numbers', 'Números de Seguro Social'],
+    ['These go only to the secure folder our setup team opens. Never saved on this device.', 'Estos van solo a la carpeta segura que abre nuestro equipo de configuración. Nunca se guardan en este dispositivo.'],
+    ['Is your home address the same as the business address?', '¿La dirección de su casa es la misma que la del negocio?'],
+    ['Home address', 'Dirección de su casa'],
+    ['Apt or unit', 'Apartamento o unidad'],
+    ['Enter your home address.', 'Escriba la dirección de su casa.'],
+    ['Step 1(c): Filing status', 'Paso 1(c): Estado civil para la declaración'],
+    ['Single or Married filing separately', 'Soltero o casado que declara por separado'],
+    ['Married filing jointly or Qualifying surviving spouse', 'Casado que declara en conjunto o cónyuge sobreviviente que califica'],
+    ['Head of household', 'Cabeza de familia'],
+    ['Only if you are unmarried and pay more than half the costs of keeping up a home for yourself and a qualifying individual', 'Solo si no está casado y paga más de la mitad de los costos de mantener un hogar para usted y una persona que califica'],
+    ['Choose a filing status.', 'Elija un estado civil para la declaración.'],
+    ['Step 2: Multiple jobs or spouse works', 'Paso 2: Varios trabajos o su cónyuge trabaja'],
+    ['Check if there are only two jobs total', 'Marque si hay solo dos trabajos en total'],
+    ['Box 2(c): you hold more than one job at a time, or you are married filing jointly and your spouse also works, and the other job pays about the same. Otherwise use the IRS estimator and add the extra amount in the payroll step.', 'Casilla 2(c): tiene más de un trabajo a la vez, o está casado, declara en conjunto y su cónyuge también trabaja, y el otro trabajo paga más o menos lo mismo. Si no, use el estimador del IRS y agregue la cantidad adicional en el paso de nómina.'],
+    ['Step 3: Dependents and other credits', 'Paso 3: Dependientes y otros créditos'],
+    ['Only if your total income will be', 'Solo si su ingreso total será de'],
+    ['or less (', 'o menos ('],
+    ['or less if married filing jointly).', 'o menos si es casado que declara en conjunto).'],
+    ['Qualifying children under 17', 'Hijos que califican menores de 17 años'],
+    ['Other dependents', 'Otros dependientes'],
+    ['Other credits', 'Otros créditos'],
+    ['Times', 'Por'],
+    ['each', 'cada uno'],
+    ['Step 3 total', 'Total del paso 3'],
+    ['Step 4: Other adjustments', 'Paso 4: Otros ajustes'],
+    ['4(a) Other income, not from jobs', '4(a) Otros ingresos, que no son de trabajos'],
+    ['($ a year)', '($ al año)'],
+    ['4(b) Deductions', '4(b) Deducciones'],
+    ['($ a year, from the worksheet)', '($ al año, de la hoja de cálculo)'],
+    ['4(c) Extra withholding', '4(c) Retención adicional'],
+    ['(each pay period)', '(por periodo de pago)'],
+    ['Claim exemption from withholding', 'Reclamar exención de retención'],
+    ['Only if you had no federal income tax liability last year and expect none this year. An exemption must be renewed each year by February 15.', 'Solo si no tuvo obligación de impuesto federal sobre el ingreso el año pasado y no espera tenerla este año. La exención se debe renovar cada año antes del 15 de febrero.'],
+    ['State withholding:', 'Retención estatal:'],
+    ['Your state has no state income tax on wages, so there is no state withholding form.', 'Su estado no cobra impuesto estatal sobre salarios, así que no hay formulario de retención estatal.'],
+    ['State filing status', 'Estado civil para la declaración estatal'],
+    ['Same as federal', 'Igual que el federal'],
+    ['Single', 'Soltero'],
+    ['Married', 'Casado'],
+    ['Married, withhold at single rate', 'Casado, retener con la tasa de soltero'],
+    ['Allowances or exemptions claimed', 'Deducciones o exenciones reclamadas'],
+    ['Sign your W-4 (Step 5)', 'Firme su W-4 (paso 5)'],
+    ['Under penalties of perjury, I declare that this certificate, to the best of my knowledge and belief, is true, correct, and complete.', 'Bajo pena de perjurio, declaro que este certificado, a mi leal saber y entender, es verdadero, correcto y completo.'],
+    ['Check the box to sign.', 'Marque la casilla para firmar.'],
+    ['Type your full legal name', 'Escriba su nombre legal completo'],
+    ['Form I-9, Section 1', 'Formulario I-9, Sección 1'],
+    ['Other last names used', 'Otros apellidos usados'],
+    ['I attest, under penalty of perjury, that I am (check one)', 'Certifico, bajo pena de perjurio, que soy (marque uno)'],
+    ['A citizen of the United States', 'Ciudadano de los Estados Unidos'],
+    ['A noncitizen national of the United States', 'Nacional no ciudadano de los Estados Unidos'],
+    ['A lawful permanent resident', 'Residente permanente legal'],
+    ['A noncitizen (other than above) authorized to work', 'No ciudadano (distinto de los anteriores) autorizado para trabajar'],
+    ['USCIS number or A-Number', 'Número de USCIS o número A'],
+    ['Enter your USCIS number or A-Number.', 'Escriba su número de USCIS o número A.'],
+    ['Work authorization expires', 'La autorización de trabajo vence'],
+    ['(leave blank if it does not)', '(déjelo en blanco si no vence)'],
+    ['Which number will you give?', '¿Qué número va a dar?'],
+    ['Form I-94 admission number', 'Número de admisión del Formulario I-94'],
+    ['Foreign passport number and country', 'Número de pasaporte extranjero y país'],
+    ['Number', 'Número'],
+    ['Enter the number.', 'Escriba el número.'],
+    ['Country of issuance', 'País de emisión'],
+    ['Enter the country.', 'Escriba el país.'],
+    ['Someone helped me fill in this form (a preparer or translator)', 'Alguien me ayudó a llenar este formulario (un preparador o traductor)'],
+    ['Our setup team sends you the short preparer form (Supplement A).', 'Nuestro equipo de configuración le envía el formulario corto del preparador (Suplemento A).'],
+    ['Section 2 is done by your employer.', 'La Sección 2 la completa su empleador.'],
+    ["Your employer or PEO completes Section 2 by looking at your ID document in person, or by the government's remote option if it uses E-Verify. The photo of your ID helps, but it does not replace that review.", 'Su empleador o PEO completa la Sección 2 revisando su documento de identidad en persona, o con la opción remota del gobierno si usa E-Verify. La foto de su identificación ayuda, pero no reemplaza esa revisión.'],
+    ['Sign Section 1', 'Firme la Sección 1'],
+    ['I am aware that federal law provides for imprisonment and/or fines for false statements, or the use of false documents, in connection with the completion of this form. I attest, under penalty of perjury, that this information, including my selection of the box attesting to my citizenship or immigration status, is true and correct.', 'Estoy consciente de que la ley federal establece prisión y/o multas por declaraciones falsas, o por el uso de documentos falsos, en relación con el llenado de este formulario. Certifico, bajo pena de perjurio, que esta información, incluida la casilla que marqué sobre mi ciudadanía o situación migratoria, es verdadera y correcta.'],
+    ['Emergency contact', 'Contacto de emergencia'],
+    ['Relationship', 'Parentesco'],
+
+    // review
+    ['Review and send', 'Revisar y enviar'],
+    ['Check everything once. Sensitive numbers are masked here.', 'Revise todo una vez. Los números sensibles aparecen ocultos aquí.'],
+    ['Plan', 'Plan'],
+    ['Network', 'Red'],
+    ['National PPO', 'PPO nacional'],
+    ['Open Network', 'Red abierta'],
+    ['Covered', 'Cubiertos'],
+    ['Just me', 'Solo yo'],
+    ['Me and my spouse', 'Yo y mi cónyuge'],
+    ['Me and my children', 'Yo y mis hijos'],
+    ['My family', 'Mi familia'],
+    ['Monthly rate', 'Tarifa mensual'],
+    ['On your HealtheMe quote', 'En su cotización de HealtheMe'],
+    ['First premium payment', 'Primer pago de prima'],
+    ['Expected start', 'Inicio previsto'],
+    ['Platform', 'Plataforma'],
+    ['Chosen by David', 'La elige David'],
+    ['Premium', 'Prima'],
+    ['Why', 'Motivo'],
+    ['Not eligible for the HealtheMe plans', 'No califica para los planes HealtheMe'],
+    ['Outside plan option: plan to be chosen', 'Opción de plan externo: plan por elegir'],
+    ['Your answers', 'Sus respuestas'],
+    ['All No. Not kept anywhere', 'Todas No. No se guardan en ningún lugar'],
+    ['Kept private in our secure system. Outside plan option', 'Se guardan en privado en nuestro sistema seguro. Opción de plan externo'],
+    ['Entity', 'Entidad'],
+    ['Yes, I have one', 'Sí, tengo una'],
+    ['Atlas One sets it up', 'Atlas One la crea'],
+    ['I will set it up myself', 'Yo la voy a crear'],
+    ['Tax filing state', 'Estado donde declara impuestos'],
+    ['Business', 'Negocio'],
+    ['Not yet', 'Todavía no'],
+    ['Type', 'Tipo'],
+    ['Address', 'Dirección'],
+    ['Mailing', 'Dirección postal'],
+    ['Same', 'La misma'],
+    ['Owners', 'Dueños'],
+    ['W-2 employees', 'Empleados W-2'],
+    ['State withholding', 'Retención estatal'],
+    ['State unemployment', 'Desempleo estatal'],
+    ['Set up', 'Abierta'],
+    ['Not set up, open one for me', 'No está abierta, ábranla por mí'],
+    ['Maybe, please check', 'Tal vez, por favor revisen'],
+    ['Pay cycle', 'Ciclo de pago'],
+    ['Rest of pay', 'Resto del pago'],
+    ['Direct deposit', 'Depósito directo'],
+    ['Record only (net zero check)', 'Solo registro (cheque neto cero)'],
+    ['Services', 'Servicios'],
+    ['Flow', 'Proceso'],
+    ['Signed now, in one sitting', 'Firmado ahora, en una sola sesión'],
+    ['Atlas One agreement now; platform agreement by email after David reviews', 'Acuerdo con Atlas One ahora; acuerdo de la plataforma por correo electrónico después de que David revise'],
+    ['Signed', 'Firmado'],
+    ['Photo ID', 'Identificación con foto'],
+    ['Added', 'Agregada'],
+    ['Missing', 'Falta'],
+    ['Business account', 'Cuenta del negocio'],
+    ['Personal account', 'Cuenta personal'],
+    ['No direct deposit', 'Sin depósito directo'],
+    ['SSN', 'Seguro Social'],
+    ['Filing status', 'Estado civil'],
+    ['Two jobs box', 'Casilla de dos trabajos'],
+    ['Checked', 'Marcada'],
+    ['Extra withholding (4c)', 'Retención adicional (4c)'],
+    ['No state income tax', 'Sin impuesto estatal sobre el ingreso'],
+    ['I-9 status', 'Estado en el I-9'],
+    ['U.S. citizen', 'Ciudadano de EE. UU.'],
+    ['Noncitizen national', 'Nacional no ciudadano'],
+    ['Lawful permanent resident', 'Residente permanente legal'],
+    ['Noncitizen authorized to work', 'No ciudadano autorizado para trabajar'],
+    ['W-4 and I-9 Section 1', 'W-4 e I-9 Sección 1'],
+    ['The information above is true and complete', 'La información de arriba es verdadera y completa'],
+    ['Atlas One may use it to set up my business, payroll, tax accounts and health plan enrollment.', 'Atlas One puede usarla para configurar mi negocio, mi nómina, mis cuentas de impuestos y mi inscripción en el plan de salud.'],
+    ['Please confirm to send.', 'Por favor confirme para enviar.'],
+
+    // done
+    ['Sent', 'Enviado'],
+    ['You are all set', 'Todo listo'],
+    ['Our setup team has your details. Here is what happens next.', 'Nuestro equipo de configuración tiene sus datos. Esto es lo que sigue.'],
+    ['Your agreements are signed and our setup team has everything. Here is what happens next.', 'Sus acuerdos están firmados y nuestro equipo de configuración tiene todo. Esto es lo que sigue.'],
+    ['Thank you. Watch for an email from Atlas One shortly.', 'Gracias. Pronto recibirá un correo electrónico de Atlas One.'],
+    ['Your Atlas One agreement is signed. David reviews your setup, chooses your payroll platform and price, and sends your platform agreement by email.', 'Su acuerdo con Atlas One está firmado. David revisa su configuración, elige su plataforma de nómina y su precio, y le envía el acuerdo de la plataforma por correo electrónico.'],
+    ['Sent to the owner', 'Enviado al dueño'],
+    ['We email the owner a private link to add their Social Security numbers, sign, upload the ID and voided checks, and finish the W-4 and I-9. You can close this page.', 'Le enviamos al dueño un enlace privado para agregar sus números de Seguro Social, firmar, subir la identificación y los cheques anulados, y terminar el W-4 y el I-9. Puede cerrar esta página.'],
+    ['Signed.', 'Firmado.'],
+    ['A few more forms by email.', 'Unos formularios más por correo electrónico.'],
+    ['The short setup forms for your platform, signed from your phone.', 'Los formularios cortos de configuración de su plataforma, firmados desde su teléfono.'],
+    ['Welcome email.', 'Correo de bienvenida.'],
+    ['Your payroll portal login. Pay stubs and your W-2 live there.', 'Su acceso al portal de nómina. Allí están sus talones de pago y su W-2.'],
+    ['Your payroll portal login.', 'Su acceso al portal de nómina.'],
+    ['Received.', 'Recibido.'],
+    ['Your details went straight to our secure setup folder.', 'Sus datos llegaron directo a nuestra carpeta segura de configuración.'],
+    ['Watch your email.', 'Revise su correo electrónico.'],
+    ['Your platform agreement comes from Atlas One shortly. Sign it from your phone.', 'El acuerdo de su plataforma le llegará pronto de Atlas One. Fírmelo desde su teléfono.'],
+    ['David confirms your outside plan option and its price with you before anything starts.', 'David confirma con usted su opción de plan externo y su precio antes de que empiece cualquier cosa.'],
+    ['Your company.', 'Su empresa.'],
+    ['We start forming your company and S-Corp election, and email you if we need anything.', 'Empezamos a formar su empresa y la elección S-Corp, y le escribimos si necesitamos algo.'],
+    ['Questions? Call', '¿Preguntas? Llame al'],
+    ['Close this window', 'Cerrar esta ventana'],
+    ['You are all done. You can close this tab now.', 'Terminó. Ya puede cerrar esta pestaña.'],
+
+    // nav, footer, misc
+    ['Back', 'Atrás'],
+    ['Continue', 'Continuar'],
+    ['Saving', 'Guardando'],
+    ['Sending', 'Enviando'],
+    ['Send to Atlas One', 'Enviar a Atlas One'],
+    ['One Call Solves Everything.', 'Una llamada lo resuelve todo.'],
+    ['Your information is used only to set up your business, payroll and health plan enrollment. Plan rates and availability are subject to eligibility and location.', 'Su información se usa solo para configurar su negocio, su nómina y su inscripción en el plan de salud. Las tarifas y la disponibilidad del plan dependen de la elegibilidad y la ubicación.'],
+    ['@aria-label:HealtheMe onboarding home', '@aria-label:Inicio de la inscripción de HealtheMe'],
+    ['Owner 1', 'Dueño 1'],
+    ['Owner 2', 'Dueño 2'],
+    ['Owner 3', 'Dueño 3'],
+    ['Owner 4', 'Dueño 4'],
+    ['Is Owner 2 your spouse?', '¿El dueño 2 es su cónyuge?'],
+    ['Is Owner 3 your spouse?', '¿El dueño 3 es su cónyuge?'],
+    ['Is Owner 4 your spouse?', '¿El dueño 4 es su cónyuge?'],
+    ['North Carolina', 'Carolina del Norte'],
+    ['South Carolina', 'Carolina del Sur'],
+    ['North Dakota', 'Dakota del Norte'],
+    ['South Dakota', 'Dakota del Sur'],
+    ['New Mexico', 'Nuevo México'],
+    ['New York', 'Nueva York'],
+    ['New Jersey', 'Nueva Jersey'],
+    ['New Hampshire', 'Nuevo Hampshire'],
+    ['Pennsylvania', 'Pensilvania'],
+    ['Louisiana', 'Luisiana'],
+    ['Hawaii', 'Hawái'],
+    ['Michigan', 'Míchigan'],
+    ['Oregon', 'Oregón'],
+    ['West Virginia', 'Virginia Occidental'],
+    ['District of Columbia', 'Distrito de Columbia'],
+    ['Mississippi', 'Misisipi'],
+    ['Missouri', 'Misuri'],
+    ['Tennessee', 'Tennessee']
+  ],
+  /* Text with names, dates, states or amounts in it. Each group marked {t} is translated again through the table. */
+  patterns: [
+    ['^Step (\\d+) of (\\d+): (.+)$', 'Paso $1 de $2: {t3}'],
+    ['^HealtheMe, powered by (.+)$', 'HealtheMe, con el respaldo de $1'],
+    ['^The HealtheMe plans are not offered in (.+?)\\. You can still join Atlas One for your business setup and payroll, with an outside health plan option\\.$', 'Los planes HealtheMe no se ofrecen en {t1}. Aún puede unirse a Atlas One para la configuración de su negocio y su nómina, con una opción de plan de salud externo.'],
+    ['^The HealtheMe plans are not offered in (.+)$', 'Los planes HealtheMe no se ofrecen en {t1}'],
+    ['^Your health plan in (.+)$', 'Su plan de salud en {t1}'],
+    ['^Signed by Owner 1: (.+?)\\. Only the business owner signs it, never a spouse or another owner\\.$', 'Lo firma el dueño 1: $1. Solo lo firma el dueño del negocio, nunca un cónyuge ni otro dueño.'],
+    ['^Signed by Owner 1: (.+)$', 'Lo firma el dueño 1: $1'],
+    ['^I agree to the (.+)$', 'Acepto el {t1}'],
+    ['^@aria-label:Remove (.+)$', '@aria-label:Quitar {t1}'],
+    ['^Terms version (\\S+?)(\\. SHA-256 .+)?$', 'Versión de los términos $1$2'],
+    ['^Ownership adds up to ([\\d.]+)%\\. It needs to add up to 100%\\.$', 'La propiedad suma $1%. Debe sumar 100%.'],
+    ['^(\\$[\\d,.]+) each paycheck, (\\$[\\d,.]+) a year$', '$1 por cheque, $2 al año'],
+    ['^(\\$[\\d,.]+) a year$', '$1 al año'],
+    ['^(\\$[\\d,.]+) each paycheck$', '$1 por cheque'],
+    ['^(\\$[\\d,.]+) federal, (\\$[\\d,.]+) state, each pay period$', '$1 federal, $2 estatal, por periodo de pago'],
+    ['^(\\$[\\d,.]+), from your payroll answers$', '$1, de sus respuestas de nómina'],
+    ['^Extra state withholding: (\\$[\\d,.]+) each pay period, from your payroll answers\\.$', 'Retención estatal adicional: $1 por periodo de pago, de sus respuestas de nómina.'],
+    ['^(.+?), (\\$[\\d,.]+) a month$', '{t1}, $2 al mes'],
+    ["^One month's premium is collected up front, so your first premium payment is two monthly premiums\\. First premium payment: (\\$[\\d,.]+)\\.$", 'Se cobra un mes de prima por adelantado, así que su primer pago de prima es de dos primas mensuales. Primer pago de prima: $1.'],
+    ["^(\\$[\\d,.]+)\\. One month's premium is collected up front, so your first premium payment is two monthly premiums\\.$", '$1. Se cobra un mes de prima por adelantado, así que su primer pago de prima es de dos primas mensuales.'],
+    ["^Enrolled on the plan you chose, starting (.+?)\\. (.+)$", 'Inscrito en el plan que eligió, a partir del {t1}. {t2}'],
+    ["^Enrolled on the plan you chose\\. Setups received by the (\\d+)(st|nd|rd|th) start the next month\\. (.+)$", 'Inscrito en el plan que eligió. Las configuraciones recibidas a más tardar el día $1 empiezan el mes siguiente. {t3}'],
+    ['^HealtheMe health plan: (.+?)\\. (One month.+)$', 'Plan de salud HealtheMe: {t1}. {t2}'],
+    ['^HealtheMe health plan: chosen with your broker\\.? ?(.*)$', 'Plan de salud HealtheMe: elegido con su agente. {t1}'],
+    ['^Health plan: outside plan option \\(plan to be chosen\\)\\. (.+)$', 'Plan de salud: opción de plan externo (plan por elegir). {t1}'],
+    ['^Payroll: you as the owner on payroll, (.+?)\\. Quoted for your company \\(headcount, pay cycle, PTO tracking and more\\)\\.$', 'Nómina: usted como dueño en la nómina, {t1}. Cotizado para su empresa (número de empleados, ciclo de pago, control de días libres y más).'],
+    ['^pay cycle to confirm$', 'ciclo de pago por confirmar'],
+    ['^Quoted for your company \\(headcount, pay cycle, PTO tracking and more\\)$', 'Cotizado para su empresa (número de empleados, ciclo de pago, control de días libres y más)'],
+    ['^(.+?)\\. Quoted for your company\\.$', '{t1}. Cotizado para su empresa.'],
+    ['^David reviews your setup \\((.+)\\) and chooses your payroll platform and price\\. Your platform agreement then comes by email\\.$', 'David revisa su configuración ({t1}) y elige su plataforma de nómina y su precio. Luego le llega por correo electrónico el acuerdo de la plataforma.'],
+    ['^your payroll platform is chosen by David$', 'David elige su plataforma de nómina'],
+    ['^you asked for extra services$', 'pidió servicios adicionales'],
+    ['^your business entity is being set up$', 'se está creando su entidad comercial'],
+    ['^a sole proprietorship needs an entity first$', 'una empresa individual primero necesita una entidad'],
+    ['^the business has other owners$', 'el negocio tiene otros dueños'],
+    ['^no plan came with your link$', 'no llegó un plan con su enlace'],
+    ['^your plan needs a quick check$', 'su plan necesita una revisión rápida'],
+    ['^you chose "Other" for pay$', 'eligió "Otro" para el pago'],
+    ['^your price is set by David$', 'David fija su precio'],
+    ['^David confirms your outside health plan option$', 'David confirma su opción de plan de salud externo'],
+    ['^Your Atlas One agreement and your (.+?) agreement are ready\\. Open each one, read it to the end, then check "I agree" and type your name\\.(?: (.+?) also needs a personal guaranty, signed by you as the business owner only\\.)?$', 'Su acuerdo con Atlas One y su acuerdo con $1 están listos. Abra cada uno, léalo hasta el final, marque "Acepto" y escriba su nombre.{gs2}'],
+    ['^Your Atlas One and (.+?) agreements( and the personal guaranty)?\\. Copies come by email\\.$', 'Sus acuerdos con Atlas One y con $1{gp2}. Las copias le llegan por correo electrónico.'],
+    ['^(.+), Owner 1$', '$1, dueño 1'],
+    ['^(.+), (\\d+(?:\\.\\d+)?)%((?:, SSN •+ \\d{4})?)(, spouse)?$', '$1, $2%{ssn3}{sp4}'],
+    ['^(.+?) (•+ \\d{4}), voided check added$', '$1 $2, cheque anulado agregado'],
+    ['^(January|February|March|April|May|June|July|August|September|October|November|December) (\\d{1,2}), (\\d{4})$', '{date}'],
+    ['^Your receipt number: (.+)$', 'Su número de recibo: $1'],
+    ['^(.+): (\\$.+)$', '{t1}: {t2}']
+  ],
+  months: {January:'enero', February:'febrero', March:'marzo', April:'abril', May:'mayo', June:'junio', July:'julio', August:'agosto', September:'septiembre', October:'octubre', November:'noviembre', December:'diciembre'},
+  alerts: [
+    ['We could not send this. Please try again, or call 380-CALL-A1S (380-225-5217) and David will help you.', 'No pudimos enviar esto. Inténtelo de nuevo, o llame al 380-CALL-A1S (380-225-5217) y David le ayudará.'],
+    ['We could not send your form. Please try again, or call 380-CALL-A1S (380-225-5217).', 'No pudimos enviar su formulario. Inténtelo de nuevo, o llame al 380-CALL-A1S (380-225-5217).']
+  ]
+};
+
+</script>
+<script>
 (function(){
   'use strict';
   /* HealtheMe onboarding r5 (2026-10-24). Section order: Entity, Business, Owners, Tax withholding, Payroll,
@@ -1078,6 +1847,84 @@ window.HP_OUTSIDE = {"chosen": "", "pending": {"title": "An outside health plan 
   function fmtAddr(a){ return a && a.line1 ? [a.line1, a.line2, a.city, (a.state || '') + ' ' + (a.zip || '')].filter(Boolean).join(', ') : ''; }
   function nowIso(){ return new Date().toISOString(); }
 
+  /* ---------- English or Spanish (David 2026-11-21). The page is built in English; in Spanish every text node and
+     placeholder is swapped from the one table in i18n-es.js, as it is drawn. Choice values never change, so a "Sí" is
+     the same "yes" for the portal. Agreement terms stay in English. The record says lang: 'es' and gets language-es. */
+  var ES = window.HP_ES || {pairs: [], patterns: [], months: {}, alerts: []};
+  var LANG = 'en', DICT = {}, PATS = [], SEEN = new WeakMap();
+  ES.pairs.forEach(function(p){ DICT[p[0]] = p[1]; });
+  PATS = ES.patterns.map(function(p){ return [new RegExp(p[0]), p[1]]; });
+  function trText(raw0, depth){
+    var key = String(raw0).replace(/\s+/g, ' ').trim();
+    if (!key || (depth || 0) > 4) return raw0;
+    var lead = String(raw0).match(/^\s*/)[0], tail = String(raw0).match(/\s*$/)[0];
+    var wrap = function(x){ return lead + x + tail; };
+    if (Object.prototype.hasOwnProperty.call(DICT, key)) return wrap(DICT[key]);
+    var parts, done;
+    // Lines joined with "; " (the services list) are split first, so no pattern runs across two lines.
+    if (key.indexOf('; ') > 0) { parts = key.split('; '); done = parts.map(function(x){ return trText(x, (depth || 0) + 1); }); return wrap(done.join('; ')); }
+    for (var i = 0; i < PATS.length; i++) {
+      var m = PATS[i][0].exec(key); if (!m) continue;
+      // $N first (the matched text as is), then {tN} (translated again): a translated part may hold a "$" amount.
+      var out = PATS[i][1].replace(/\$(\d)/g, function(_, n){ return (m[n] || '').replace(/\{/g, '\u0000'); })
+        .replace(/\{t(\d)\}/g, function(_, n){ return m[n] ? trText(m[n], (depth || 0) + 1).replace(/\$/g, '\u0001') : ''; })
+        .replace(/\{gs(\d)\}/g, function(_, n){ return m[n] ? ' ' + m[n] + ' también necesita una garantía personal, firmada solo por usted como dueño del negocio.' : ''; })
+        .replace(/\{gp(\d)\}/g, function(_, n){ return m[n] ? ' y la garantía personal' : ''; })
+        .replace(/\{ssn(\d)\}/g, function(_, n){ return m[n] ? m[n].replace(', SSN', ', Seguro Social') : ''; })
+        .replace(/\{sp(\d)\}/g, function(_, n){ return m[n] ? ', cónyuge' : ''; })
+        .replace(/\{date\}/g, function(){ return m[2] + ' de ' + (ES.months[m[1]] || m[1]) + ' de ' + m[3]; })
+        .replace(/\u0000/g, '{').replace(/\u0001/g, '$');
+      return wrap(out.trim());
+    }
+    if (key.indexOf(', ') > 0) { parts = key.split(', '); done = parts.map(function(x){ return trText(x, (depth || 0) + 1); });
+      if (done.every(function(x, j){ return x !== parts[j]; })) return wrap(done.join(', ')); }
+    return raw0;
+  }
+  function skipNode(el){ return !el || /^(SCRIPT|STYLE|TEXTAREA)$/.test(el.tagName) || !!el.closest('svg,.terms,.tv,[data-notranslate],.dev-only,#sandbox,.sandbox,#sandboxOut'); }
+  function swapNode(n){
+    var st = SEEN.get(n), v = n.nodeValue;
+    if (LANG === 'es') {
+      if (st && v === st.es) return;
+      var es = trText(v);
+      if (es !== v) { SEEN.set(n, {en: v, es: es}); n.nodeValue = es; }
+    } else if (st && v === st.es) { n.nodeValue = st.en; }
+  }
+  function swapAttrs(el){
+    ['placeholder', 'aria-label'].forEach(function(a){
+      if (!el.hasAttribute || !el.hasAttribute(a)) return;
+      var k = 'data-en-' + a, cur = el.getAttribute(a);
+      if (LANG === 'es') { var en = el.getAttribute(k) || cur; var t = trText('@' + a + ':' + en); if (t !== '@' + a + ':' + en) { el.setAttribute(k, en); el.setAttribute(a, t.replace('@' + a + ':', '')); } }
+      else if (el.hasAttribute(k)) { el.setAttribute(a, el.getAttribute(k)); }
+    });
+  }
+  function swapTree(root){
+    if (!root) return;
+    if (root.nodeType === 3) { if (!skipNode(root.parentElement)) swapNode(root); return; }
+    if (root.nodeType !== 1 || skipNode(root)) return;
+    var w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {acceptNode: function(n){ return skipNode(n.parentElement) || !n.nodeValue.trim() ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT; }});
+    var list = [], n; while ((n = w.nextNode())) list.push(n);
+    list.forEach(swapNode);
+    swapAttrs(root); $$('[placeholder],[aria-label]', root).forEach(swapAttrs);
+  }
+  new MutationObserver(function(muts){
+    if (LANG !== 'es') return;
+    muts.forEach(function(m){
+      if (m.type === 'characterData') { if (!skipNode(m.target.parentElement)) swapNode(m.target); }
+      else m.addedNodes.forEach(swapTree);
+    });
+  }).observe(document.body, {childList: true, subtree: true, characterData: true});
+  var nativeAlert = window.alert.bind(window);
+  window.alert = function(msg){ var hit = LANG === 'es' && ES.alerts.filter(function(a){ return a[0] === msg; })[0]; nativeAlert(hit ? hit[1] : msg); };
+  function setLang(l){
+    LANG = l === 'es' ? 'es' : 'en';
+    document.documentElement.lang = LANG;
+    document.title = LANG === 'es' ? 'Inscripción HealtheMe | Atlas One' : 'HealtheMe onboarding | Atlas One';
+    $$('.lang-switch button').forEach(function(b){ b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === LANG)); });
+    try { localStorage.setItem('a1hp-lang', LANG); } catch(e){}
+    swapTree(document.body);
+  }
+  $$('.lang-switch button').forEach(function(b){ b.addEventListener('click', function(){ setLang(b.getAttribute('data-lang')); save(); }); });
+
   /* ---------- setup ---------- */
   if (EMBED) document.documentElement.classList.add('embed');
   if (SANDBOX) { $('#sandbox').hidden = false; document.documentElement.classList.add('sandbox-mode'); }
@@ -1155,7 +2002,7 @@ window.HP_OUTSIDE = {"chosen": "", "pending": {"title": "An outside health plan 
         '</div><div class="errmsg">Choose yes or no.</div></div>');
     });
   } else {
-    ['health','hqstop','hqstopdone'].forEach(function(k){ var s = $('.step[data-step="' + k + '"]'); if (s) s.parentNode.removeChild(s); });
+    ['health','hqstop'].forEach(function(k){ var s = $('.step[data-step="' + k + '"]'); if (s) s.parentNode.removeChild(s); });
   }
 
   /* ---------- the outside plan option: the chosen plan from outside-plan.json, or "Plan to be chosen" ---------- */
@@ -1628,7 +2475,8 @@ window.HP_OUTSIDE = {"chosen": "", "pending": {"title": "An outside health plan 
   }
   function stopPayload(){
     var tags = [PE ? PE.tag : C.unassigned.tag, Q.stopTag || 'hp-hq-stop', 'hp-not-eligible'];
-    return {schema: 'atlas-one.health-program.v3', submissionId: SID, submittedAt: nowIso(), event: 'hq_stop',
+    if (LANG === 'es') tags.push('language-es');
+    return {schema: 'atlas-one.health-program.v3', submissionId: SID, submittedAt: nowIso(), event: 'hq_stop', lang: LANG,
       source: {producer: raw('source.producer') || clean(q.get('producer'), 40), ref: clean(q.get('ref')), from: 'healtheme_plans_site', assisted: ASSIST, page: location.pathname, formVersion: C.version},
       routing: {assignTo: 'David', action: 'review', tags: tags, flow: 'david_review', stage: 'David to call (health questions)'},
       peo: {key: PEO_KEY || 'unassigned', name: PE ? PE.name : '', assigned: !!PE},
@@ -1645,16 +2493,8 @@ window.HP_OUTSIDE = {"chosen": "", "pending": {"title": "An outside health plan 
     var withPhi = JSON.parse(JSON.stringify(b)); withPhi.phi = phiAnswers(); lastSecure = SANDBOX ? {note: 'Sandbox: the secure intake gets this flag plus the answers object (phi), which it encrypts and strips before GHL.', flag: b, phiKeys: Object.keys(withPhi.phi.answers)} : null;
     return postJson(withPhi).then(function(res){ flagSent = true; FLAGGED = true; return res || {}; });
   }
-  var stopBtn = $('#stopSend'), contBtn = $('#stopContinue');
+  var contBtn = $('#stopContinue');
   function stopFail(btn, label){ btn.disabled = false; btn.textContent = label; alert('We could not send this. Please try again, or call 380-CALL-A1S (380-225-5217) and David will help you.'); }
-  if (stopBtn) stopBtn.addEventListener('click', function(){
-    stopBtn.disabled = true; stopBtn.textContent = 'Sending';
-    sendFlag().then(function(res){
-      clearStore();
-      only('hqstopdone'); $('#stepname').textContent = '';
-      if (res && res.preview) $('#sandboxStop').hidden = false;
-    }).catch(function(){ stopFail(stopBtn, 'Have David call me first'); });
-  });
   if (contBtn) contBtn.addEventListener('click', function(){
     contBtn.disabled = true; contBtn.textContent = 'One moment';
     sendFlag().then(function(){
@@ -1716,6 +2556,7 @@ window.HP_OUTSIDE = {"chosen": "", "pending": {"title": "An outside health plan 
     var tags = [PE ? PE.tag : C.unassigned.tag];
     if (PLAT) tags.push(PLAT.tag);
     tags.push(fi.flow === 'same_sitting' ? 'hp-flow-same-sitting' : 'hp-flow-david-review');
+    if (LANG === 'es') tags.push('language-es');
     if (PATH !== 'healtheme') tags.push('hp-outside-plan');
     else if (!PLAN.given) tags.push('hp-plan-missing'); else if (!PLAN.recognized) tags.push('hp-plan-check');
     if (es !== 'yes' && es) tags.push('hp-formation');
@@ -1728,7 +2569,7 @@ window.HP_OUTSIDE = {"chosen": "", "pending": {"title": "An outside health plan 
     });
     var meta = function(k){ var f = FILES[k]; return f ? {present: true, name: f.name, type: f.type, size: f.size} : null; };
     return {
-      schema: 'atlas-one.health-program.secure.v2', submissionId: SID, submittedAt: nowIso(),
+      schema: 'atlas-one.health-program.secure.v2', submissionId: SID, submittedAt: nowIso(), lang: LANG,
       source: {producer: raw('source.producer') || clean(q.get('producer'), 40), ref: clean(q.get('ref')), utm_source: clean(q.get('utm_source')), utm_campaign: clean(q.get('utm_campaign')), from: 'healtheme_plans_site', assisted: ASSIST, resume: RESUME, contactId: clean(q.get('cid')), page: location.pathname, formVersion: C.version},
       routing: {assignTo: 'David', tags: tags, flow: fi.flow, reasons: fi.reasons, stage: fi.flow === 'same_sitting' ? 'Agreements signed: payroll setup' : 'Needs David: choose platform and price'},
       peo: {key: PEO_KEY || 'unassigned', name: PE ? PE.name : '', assigned: !!PE, line: PE ? PE.line : P.neutralLine},
@@ -1847,7 +2688,6 @@ window.HP_OUTSIDE = {"chosen": "", "pending": {"title": "An outside health plan 
   }
   $('#dlGhl').addEventListener('click', function(){ dl(lastGhl, 'health-program-ghl-payload-test.json'); });
   $('#dlSecure').addEventListener('click', function(){ dl(lastSecure, 'health-program-secure-record-test.json'); });
-  var dgs = $('#dlGhlStop'); if (dgs) dgs.addEventListener('click', function(){ dl(lastGhl, 'health-program-ghl-payload-stop-test.json'); });
 
   /* ---------- save and resume on this device: non sensitive fields only, never SSN, bank, logins, signatures or health answers ---------- */
   function skip(el){ return el.hasAttribute('data-sensitive') || el.hasAttribute('data-phi') || el.hasAttribute('data-nosave') || el.type === 'file' || el.type === 'password' || el.hasAttribute('data-mirror'); }
@@ -1918,6 +2758,8 @@ window.HP_OUTSIDE = {"chosen": "", "pending": {"title": "An outside health plan 
     setTimeout(function(){ $('#closeHint').hidden = false; }, 300);
   });
   var at = restore();
+  var savedLang = ''; try { savedLang = localStorage.getItem('a1hp-lang') || ''; } catch(e){}
+  setLang(/^es/i.test(q.get('lang') || '') ? 'es' : (/^en/i.test(q.get('lang') || '') ? 'en' : savedLang));
   applyPrefill(linkPrefill);
   if (quoteToken && C.secure.endpoint && !SANDBOX) {
     fetch(C.secure.endpoint.replace(/health-intake\/?$/, 'health-quote/') + quoteToken).then(function(r){ return r.ok ? r.json() : null; })
