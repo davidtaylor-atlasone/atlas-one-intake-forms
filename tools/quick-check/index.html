@@ -788,4 +788,11 @@ if(D.readyState==='loading')D.addEventListener('DOMContentLoaded',start);else st
 })();
 </script>
 <!-- a1-screenshare:end -->
+<script id="a1-prefill">
+/* David 2026-11-23: the thank you page after the intake opens this check with the owner's name, email, company and phone filled in,
+   so they type nothing twice. The answers ride after the # (never sent to a web server); only empty boxes are filled. */
+(function(){var o=(function(){try{var h=new URLSearchParams(location.hash.slice(1)).get("p");if(!h)return null;var b=atob(h.replace(/-/g,"+").replace(/_/g,"/"));var o=JSON.parse(new TextDecoder().decode(Uint8Array.from(b,function(c){return c.charCodeAt(0)})));history.replaceState(null,"",location.pathname+location.search);return o&&typeof o==="object"?o:null}catch(e){return null}})();if(!o)return;var m={name:"f_name",email:"f_email",company:"f_company",phone:"f_phone"};
+ Object.keys(m).forEach(function(k){var el=document.getElementById(m[k]),v=String(o[k]||"").slice(0,200);if(el&&v&&!el.value){el.value=v;el.dispatchEvent(new Event("input",{bubbles:true}));el.dispatchEvent(new Event("change",{bubbles:true}))}});
+})();
+</script>
 </body></html>
