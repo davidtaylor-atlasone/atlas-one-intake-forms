@@ -289,6 +289,14 @@ input::placeholder{color:var(--navy-50)}
 .extra a{font-size:14px}
 .ex-total{display:flex;justify-content:space-between;align-items:center;background:var(--mist);border-radius:10px;padding:12px 14px;font-weight:700;margin-top:10px}
 .law{border-left:4px solid var(--hm-green);background:#fff;box-shadow:var(--shadow);border-radius:var(--radius);padding:14px 16px;margin:14px 0}
+/* 2026-11-23: the done page's services, videos and referral line (Atlas One branding) */
+.after{margin-top:28px;padding-top:22px;border-top:1px solid var(--navy-12)}
+.vids{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:6px 0 18px}
+.vids figure{margin:0}
+.vids video{width:100%;border-radius:12px;background:var(--navy);display:block;aspect-ratio:16/9}
+.vids figcaption{font-size:14px;font-weight:700;margin-top:6px}
+.vids figcaption span{font-weight:400;color:var(--navy-70)}
+.refer{border-left:4px solid var(--peri);background:#fff;box-shadow:var(--shadow);border-radius:var(--radius);padding:14px 16px}
 /* 2026-11-21: English or Spanish */
 .lang-row{display:flex;justify-content:flex-end;margin:0 0 14px}
 .lang-switch{display:inline-flex;border:1.5px solid var(--navy-12);border-radius:999px;overflow:hidden}
@@ -629,6 +637,14 @@ html[lang="es"] .es-only{display:block}
     <p class="intro">Here is what Atlas One sets up for you. Add anything else you would like.</p>
     <h3 class="doc-h">Your services</h3>
     <ul class="svc-list" id="svcStd"></ul>
+    <fieldset data-group="wantBooks">
+      <legend>Want us to keep your books too? <span class="opt small muted" style="font-weight:400">(optional)</span></legend>
+      <p class="fs-note">Atlas One Bookkeeping: your books done every month and reconciled, so taxes and your S-Corp stay simple. Quoted for your company.</p>
+      <div class="choices two">
+        <label class="choice"><input type="radio" name="services.optional.bookkeeping" value="yes"><span class="mark"></span><span><b>Yes, keep my books too</b></span></label>
+        <label class="choice"><input type="radio" name="services.optional.bookkeeping" value="no"><span class="mark"></span><span><b>No, thank you</b></span></label>
+      </div>
+    </fieldset>
     <fieldset>
       <legend>Would you like anything else? <span class="opt small muted" style="font-weight:400">(optional)</span></legend>
       <div class="choices" id="svcOpt"></div>
@@ -869,6 +885,14 @@ html[lang="es"] .es-only{display:block}
       <div class="sandbox"><b>Sandbox.</b> Nothing was sent. Download what GHL would receive (no SSN, bank numbers or logins), or the full secure record (test data) that the secure intake would store.</div>
       <div style="display:flex;gap:10px;flex-wrap:wrap"><button type="button" class="btn ghost" id="dlGhl">Download GHL payload (JSON)</button><button type="button" class="btn ghost" id="dlSecure">Download secure record (JSON)</button></div>
     </div>
+    
+    <div class="after" id="afterBox">
+      <h2 class="doc-h" style="font-size:22px">Everything Atlas One does for you</h2>
+      <p>Payroll and HR, bookkeeping, business insurance, benefits, and the tools that keep a small business running. One call, one team.</p>
+      <p><a class="btn" id="servicesLink" href="#" target="_blank" rel="noopener">See all Atlas One services</a></p>
+      <div class="vids" id="afterVideos"></div>
+      <div class="refer"><b>Know a business that could use us?</b> Refer them for any of our services and earn a referral reward through the Atlas One partner program. Every referral is tracked from the first introduction to the payout. Call <a data-tel href="tel:+13802255217">380-CALL-A1S</a> to refer someone.</div>
+    </div>
     <p style="margin-top:24px">Questions? Call <a data-tel href="tel:+13802255217">380-CALL-A1S (380-225-5217)</a>.</p>
     <p style="margin-top:20px"><button type="button" class="btn ghost" id="closeWin">Close this window</button> <span class="small muted" id="closeHint" hidden>You are all done. You can close this tab now.</span></p>
   </section>
@@ -959,12 +983,21 @@ window.HP = {
     ]
   },
   veroBasicTermsUrl: 'https://www.verohcm.com/verosmarter/terms',
+  after: {
+    servicesUrl: 'https://atlasonesolutions.com/solutions/',
+    videoBase: 'https://atlasoneassistantstore.blob.core.windows.net/videos/',
+    videos: [
+      {slug: 'whole-picture-90', title: 'Atlas One, the whole picture in 90 seconds', length: '1:35'},
+      {slug: 'bookkeeping', title: 'Atlas One bookkeeping', length: '1:20'}
+    ]
+  },
   atlasOne: { agreement: { id: 'a1csa', n: 'Atlas One client service agreement', terms: 'atlas-one' },
     aiTick: 'I understand that Atlas One uses AI assistants, supervised by its team, to help with scheduling, documents and follow-up, and that some messages and calls may be handled with their help.' },
   services: {
     standard: ['health', 'payroll'],
     optional: [
-      {id:'bookkeeping', n:'Bookkeeping', d:'Monthly books, reconciled. Quoted for your company.'},
+      {id:'bookkeeping', n:'Atlas One Bookkeeping', d:'Monthly books, reconciled. Quoted for your company.'},
+      {id:'formation', n:'Set up another business or entity', d:'Company formation for another business, or any entity beyond your S-Corp. Quoted for you.'},
       {id:'tax', n:'Tax preparation and planning', d:'Your business and personal returns, and planning through the year.'},
       {id:'hr', n:'HR support', d:'Policies, handbook and answers when you need them.'},
       {id:'other', n:'Something else', d:'Tell us what you need.'}
@@ -1859,6 +1892,21 @@ window.HP_ES = {
     ["Help choosing and enrolling in Medicare", "Ayuda para elegir e inscribirse en Medicare"],
     ["Chosen", "Elegidos"],
     ["None", "Ninguno"],
+    ["Want us to keep your books too?", "¿Quiere que también llevemos su contabilidad?"],
+    ["Atlas One Bookkeeping: your books done every month and reconciled, so taxes and your S-Corp stay simple. Quoted for your company.", "Contabilidad de Atlas One: sus libros al día cada mes y conciliados, para que los impuestos y su S-Corp sigan siendo sencillos. Cotizado para su empresa."],
+    ["Yes, keep my books too", "Sí, lleven también mi contabilidad"],
+    ["Atlas One Bookkeeping", "Contabilidad de Atlas One"],
+    ["Set up another business or entity", "Crear otro negocio o entidad"],
+    ["Company formation for another business, or any entity beyond your S-Corp. Quoted for you.", "Formación de empresa para otro negocio, o cualquier entidad además de su S-Corp. Cotizado para usted."],
+    ["Everything Atlas One does for you", "Todo lo que Atlas One hace por usted"],
+    ["Payroll and HR, bookkeeping, business insurance, benefits, and the tools that keep a small business running. One call, one team.", "Nómina y recursos humanos, contabilidad, seguros para negocios, beneficios, y las herramientas que mantienen funcionando a un pequeño negocio. Una llamada, un equipo."],
+    ["See all Atlas One services", "Ver todos los servicios de Atlas One"],
+    ["Atlas One, the whole picture in 90 seconds", "Atlas One, el panorama completo en 90 segundos (en inglés)"],
+    ["Atlas One bookkeeping", "Contabilidad de Atlas One (en inglés)"],
+    ["about 1.5 minutes", "aprox. 1.5 minutos"],
+    ["Know a business that could use us?", "¿Conoce un negocio al que podamos ayudar?"],
+    ["Refer them for any of our services and earn a referral reward through the Atlas One partner program. Every referral is tracked from the first introduction to the payout. Call", "Recomiéndelo para cualquiera de nuestros servicios y gane una recompensa por referido con el programa de socios de Atlas One. Cada referido se registra desde la primera presentación hasta el pago. Llame al"],
+    ["to refer someone.", "para recomendar a alguien."],
     ['Tennessee', 'Tennessee']
   ],
   /* Text with names, dates, states or amounts in it. Each group marked {t} is translated again through the table. */
@@ -2182,7 +2230,7 @@ window.HP_ES = {
   }
 
   /* optional services */
-  $('#svcOpt').innerHTML = C.services.optional.map(function(s){
+  $('#svcOpt').innerHTML = C.services.optional.filter(function(s){ return s.id !== 'bookkeeping'; }).map(function(s){
     return '<label class="choice box"><input type="checkbox" id="svc' + s.id.charAt(0).toUpperCase() + s.id.slice(1) + '" name="services.optional.' + s.id + '" value="yes"><span class="mark"></span><span><b>' + esc(s.n) + '</b><span class="d">' + esc(s.d) + '</span></span></label>';
   }).join('');
 
@@ -2425,7 +2473,7 @@ window.HP_ES = {
 
   /* ---------- the flow: same sitting (default when possible) or David review ---------- */
   function ownerCount(){ return Math.max(1, Math.min(4, +($('#ownerCount').value || 1))); }
-  function optionalServices(){ return C.services.optional.filter(function(s){ return !!raw('services.optional.' + s.id); }).map(function(s){ return s.id; }); }
+  function optionalServices(){ return C.services.optional.filter(function(s){ var v = raw('services.optional.' + s.id); return v === true || v === 'yes'; }).map(function(s){ return s.id; }); }
   function nonSpouseOwners(){ var n = 0; for (var i = 1; i < ownerCount(); i++) if (raw('owners.' + i + '.spouse') === 'no') n++; return n; }
   function flowInfo(){
     if (RESUME && R.flow) return {flow: R.flow === 'same' ? 'same_sitting' : 'david_review', reasons: R.flow === 'same' ? [] : ['set_before_handoff']};
@@ -2525,7 +2573,7 @@ window.HP_ES = {
     xp.free.forEach(function(x){ out.push(x.name); });
     if (/no|maybe/.test(raw('company.stateWithholding.status'))) out.push(C.prices.withholding.label + ': ' + C.prices.withholding.price);
     if (/no|maybe/.test(raw('company.stateUnemployment.status'))) out.push(C.prices.unemployment.label + ': ' + C.prices.unemployment.price);
-    C.services.optional.forEach(function(s){ if (raw('services.optional.' + s.id)) out.push(s.n + (s.id === 'other' && raw('services.otherText') ? ': ' + raw('services.otherText') : '') + '. Quoted for your company.'); });
+    C.services.optional.forEach(function(s){ var v = raw('services.optional.' + s.id); if (v === true || v === 'yes') out.push(s.n + (s.id === 'other' && raw('services.otherText') ? ': ' + raw('services.otherText') : '') + '. Quoted for your company.'); });
     return out;
   }
   function payCycleLabel(){ var s = $('#payCycle'); return s.value ? (s.value === 'Other' ? raw('payroll.payCycleOther') : s.selectedOptions[0].text.toLowerCase()) : ''; }
@@ -3048,6 +3096,14 @@ window.HP_ES = {
   var quoteToken = /^[a-f0-9]{32}$/.test(q.get('q') || '') ? q.get('q') : '';
   // 2026-10-27 (David): a way to close the page at the end. A browser only lets a page close a tab that a script
   // opened, so when it refuses, say so instead of doing nothing.
+  (function(){
+    var A = C.after || {}; if (!A.servicesUrl) { $('#afterBox').hidden = true; return; }
+    $('#servicesLink').href = A.servicesUrl;
+    $('#afterVideos').innerHTML = (A.videos || []).map(function(v){
+      var b = A.videoBase + v.slug + '-ava';
+      return '<figure><video controls preload="none" playsinline poster="' + esc(b + '.jpg') + '"><source src="' + esc(b + '.mp4') + '" type="video/mp4"></video><figcaption>' + esc(v.title) + ' <span>' + esc(v.length) + '</span></figcaption></figure>';
+    }).join('');
+  })();
   $('#closeWin').addEventListener('click', function(){
     try { window.close(); } catch (e) {}
     setTimeout(function(){ $('#closeHint').hidden = false; }, 300);

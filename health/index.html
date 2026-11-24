@@ -404,12 +404,21 @@ window.HP = {
     ]
   },
   veroBasicTermsUrl: 'https://www.verohcm.com/verosmarter/terms',
+  after: {
+    servicesUrl: 'https://atlasonesolutions.com/solutions/',
+    videoBase: 'https://atlasoneassistantstore.blob.core.windows.net/videos/',
+    videos: [
+      {slug: 'whole-picture-90', title: 'Atlas One, the whole picture in 90 seconds', length: '1:35'},
+      {slug: 'bookkeeping', title: 'Atlas One bookkeeping', length: '1:20'}
+    ]
+  },
   atlasOne: { agreement: { id: 'a1csa', n: 'Atlas One client service agreement', terms: 'atlas-one' },
     aiTick: 'I understand that Atlas One uses AI assistants, supervised by its team, to help with scheduling, documents and follow-up, and that some messages and calls may be handled with their help.' },
   services: {
     standard: ['health', 'payroll'],
     optional: [
-      {id:'bookkeeping', n:'Bookkeeping', d:'Monthly books, reconciled. Quoted for your company.'},
+      {id:'bookkeeping', n:'Atlas One Bookkeeping', d:'Monthly books, reconciled. Quoted for your company.'},
+      {id:'formation', n:'Set up another business or entity', d:'Company formation for another business, or any entity beyond your S-Corp. Quoted for you.'},
       {id:'tax', n:'Tax preparation and planning', d:'Your business and personal returns, and planning through the year.'},
       {id:'hr', n:'HR support', d:'Policies, handbook and answers when you need them.'},
       {id:'other', n:'Something else', d:'Tell us what you need.'}
