@@ -587,9 +587,9 @@ html[lang="es"] .es-only{display:block}
   
   <section class="step" data-step="payroll" data-title="Payroll">
     <h1>Payroll information</h1>
-    <p class="intro">This plan runs payroll every month, on the 1st, for everyone.</p>
+    <p class="intro">This plan runs payroll every month, on the 15th, for everyone.</p>
     <div class="row">
-      <div class="c6"><label class="f" for="payCycle">Pay cycle</label><select id="payCycle" name="payroll.payCycle" data-req><option value="Monthly" selected>Monthly, on the 1st</option></select><div class="hint">Monthly payroll is how your health premium is paid. It is the same for every owner on the plan.</div><div class="errmsg">Choose how often.</div></div>
+      <div class="c6"><label class="f" for="payCycle">Pay cycle</label><select id="payCycle" name="payroll.payCycle" data-req><option value="Monthly" selected>Monthly, on the 15th</option></select><div class="hint">Monthly payroll is how your health premium is paid. It is the same for every owner on the plan.</div><div class="errmsg">Choose how often.</div></div>
     </div>
     <div class="law">
       <b>Your owner pay, the simple way.</b>
@@ -922,7 +922,7 @@ html[lang="es"] .es-only{display:block}
 
 <script>
 window.HP = {
-  version: '2026-11-23 r7 (S-Corp only, monthly payroll, Redirect Cobalt plans, extras, HealtheMe brand)',
+  version: '2026-11-24 r8 (S-Corp only, monthly payroll on the 15th, Redirect Cobalt plans, extras, HealtheMe brand)',
   program: {
     name: 'HealtheMe',
     issuer: 'US HealthCenter',
@@ -1058,6 +1058,7 @@ window.HP = {
   bookingUrl: 'https://api.leadconnectorhq.com/widget/groups/book-david',
   programStart: '2027-01-01',
   monthlyCutoffDay: 15,
+  payrollDay: 15,
   storageKey: 'a1hp-progress-v5',
   excludedStates: ['CA','CO'],
   noIncomeTaxStates: ['AK','FL','NV','SD','TN','TX','WY','NH','WA'],
@@ -1733,6 +1734,8 @@ window.HP_ES = {
     ['Your payroll portal login. Pay stubs and your W-2 live there.', 'Su acceso al portal de nómina. Allí están sus talones de pago y su W-2.'],
     ['Your payroll portal login.', 'Su acceso al portal de nómina.'],
     ['Received.', 'Recibido.'],
+    ['Payroll.', 'Nómina.'],
+    ['Monthly, on the 15th, starting the month your plan starts. When the 15th is a weekend or bank holiday, payroll runs the business day before.', 'Mensual, el día 15, a partir del mes en que empieza su plan. Cuando el día 15 cae en fin de semana o día feriado bancario, la nómina corre el día hábil anterior.'],
     ['Your details went straight to our secure setup folder.', 'Sus datos llegaron directo a nuestra carpeta segura de configuración.'],
     ['Watch your email.', 'Revise su correo electrónico.'],
     ['Your platform agreement comes from Atlas One shortly. Sign it from your phone.', 'El acuerdo de su plataforma le llegará pronto de Atlas One. Fírmelo desde su teléfono.'],
@@ -1814,9 +1817,9 @@ window.HP_ES = {
     ["My CPA or attorney sets up my S-Corp", "Mi contador público o abogado crea mi S-Corp"],
     ["Your S-Corp.", "Su S-Corp."],
     ["We file the S-Corp election for your LLC, and email you if we need anything.", "Presentamos la elección S-Corp para su LLC, y le escribimos si necesitamos algo."],
-    ["This plan runs payroll every month, on the 1st, for everyone.", "Este plan corre la nómina cada mes, el día 1, para todos."],
-    ["Monthly, on the 1st", "Mensual, el día 1"],
-    ["monthly, on the 1st", "mensual, el día 1"],
+    ["This plan runs payroll every month, on the 15th, for everyone.", "Este plan corre la nómina cada mes, el día 15, para todos."],
+    ["Monthly, on the 15th", "Mensual, el día 15"],
+    ["monthly, on the 15th", "mensual, el día 15"],
     ["Monthly payroll is how your health premium is paid. It is the same for every owner on the plan.", "La nómina mensual es la forma de pagar su prima de salud. Es igual para todos los dueños del plan."],
     ["Your owner pay, the simple way.", "Su pago como dueño, de la forma sencilla."],
     ["By law, every S-Corp must run W-2 payroll for the owner at least once a year to stay compliant. We can do that as a net zero check: a paper trail that records part of what you already took as an owner's draw (also called a member's draw or distribution) as your wages. No paycheck is deposited. The payroll taxes on those wages are drafted from your business account and filed for you.", "Por ley, toda S-Corp debe correr una nómina W-2 para el dueño al menos una vez al año para cumplir con las reglas. Podemos hacerlo con un cheque neto cero: un registro que anota como salario parte de lo que usted ya retiró como dueño (también llamado retiro del socio o distribución). No se deposita ningún cheque. Los impuestos de nómina sobre ese salario se debitan de la cuenta de su negocio y se declaran por usted."],
@@ -3014,6 +3017,8 @@ window.HP_ES = {
       if (event !== 'handoff' && raw('company.entityStatus') === 'form_for_me') items.splice(1, 0, '<b>Your company.</b> We start forming your company and S-Corp election, and email you if we need anything.');
       if (event !== 'handoff' && raw('company.entityStatus') === 'convert') items.splice(1, 0, '<b>Your S-Corp.</b> We file the S-Corp election for your LLC, and email you if we need anything.');
       if (event !== 'handoff' && PATH !== 'healtheme' && medChoice()) items = items.map(function(x){ return x.indexOf('<b>Your health plan.</b>') === 0 ? '<b>Your health plan.</b> ' + esc(medChoice().name) + ' (Redirect Health). David confirms your enrollment and start date with you.' : x; });
+      // David 2026-11-24: payroll runs monthly on the 15th (was the 1st).
+      if (event !== 'handoff') items.push('<b>Payroll.</b> Monthly, on the ' + ordinal(C.payrollDay || 15) + ', starting the month your plan starts. When the ' + ordinal(C.payrollDay || 15) + ' is a weekend or bank holiday, payroll runs the business day before.');
       $('#doneList').innerHTML = items.map(function(x){ return '<li>' + x + '</li>'; }).join('');
       if (res && res.receiptId) { $('#receiptLine').hidden = false; $('#receiptLine').textContent = 'Your receipt number: ' + res.receiptId; }
       if (res && res.preview) $('#sandboxOut').hidden = false;

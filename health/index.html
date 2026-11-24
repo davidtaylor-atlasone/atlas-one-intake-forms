@@ -250,13 +250,13 @@ details p{margin:10px 0 0;color:var(--navy-70)}
   <div class="wrap">
     <span class="eyebrow">Three ways to run it</span>
     <h2>Every option runs payroll monthly</h2>
-    <p class="muted" style="max-width:44em">The plan requires monthly payroll for everyone: it runs on the 1st of each month and pays your health premium as an employer benefit. You choose how your owner pay is handled. Your exact cost is quoted for your business and shown on your agreement before you sign. One month's premium is collected up front, so your first premium payment is two monthly premiums.</p>
+    <p class="muted" style="max-width:44em">The plan requires monthly payroll for everyone: it runs on the 15th of each month and pays your health premium as an employer benefit. You choose how your owner pay is handled. Your exact cost is quoted for your business and shown on your agreement before you sign. One month's premium is collected up front, so your first premium payment is two monthly premiums.</p>
     <div class="grid3 scen" style="margin-top:22px">
       <div class="card">
         <span class="pill tint" style="align-self:flex-start;margin-bottom:12px">Simplest</span>
         <h3>Monthly premium, net zero pay</h3>
         <div class="who">For owners who want the coverage and the least moving parts</div>
-        <ul><li>Monthly payroll on the 1st pays your health premium</li><li>Your owner pay is recorded on a net zero check, no deposit</li><li>We file the quarterly and year end forms</li></ul>
+        <ul><li>Monthly payroll on the 15th pays your health premium</li><li>Your owner pay is recorded on a net zero check, no deposit</li><li>We file the quarterly and year end forms</li></ul>
         <div class="foot">Lowest running cost. Quoted for your business.</div>
       </div>
       <div class="card">
@@ -302,7 +302,7 @@ details p{margin:10px 0 0;color:var(--navy-70)}
     <details><summary>Where do I choose my plan?</summary><p>On the HealtheMe plans page, with your broker. Your plan comes with you into this onboarding, so you are never asked for it twice. Want a different plan? Use "Change plan" and you come right back.</p></details>
     <details><summary>Why does a health plan need payroll?</summary><p>This is an employer sponsored plan. Running you through a professional payroll platform makes you an eligible employee of your own business, so the plan and the tax treatment of your premium work the way they should. We set it all up and run it.</p></details>
     <details><summary>Do I have to change my business?</summary><p>Only if it is not an S-Corp yet. Only S-Corps can be on this plan. If you already have one, you skip the setup step. If you have an LLC, we file the S-Corp election for it. If you are a sole proprietor or have no business yet, we set one up for you, done correctly so you qualify. Your own CPA or attorney can do it instead if you prefer; ours usually costs less, and you have one point of contact for everything.</p></details>
-    <details><summary>How often does payroll run?</summary><p>Every month, on the 1st, for everyone on the plan. Monthly payroll is how your health premium is paid. Your owner pay can be a monthly paycheck, or recorded on a net zero check, which also keeps your S-Corp compliant with the once a year W-2 payroll rule.</p></details>
+    <details><summary>How often does payroll run?</summary><p>Every month, on the 15th, for everyone on the plan. Monthly payroll is how your health premium is paid. Your owner pay can be a monthly paycheck, or recorded on a net zero check, which also keeps your S-Corp compliant with the once a year W-2 payroll rule.</p></details>
     <details><summary>What if I answer yes to a health question?</summary><p>You still get health coverage. The HealtheMe plans will not be available to you, so you choose one of the Redirect Health medical plans instead, offered through our PEO partner's master plan, and you finish the rest of the onboarding the same way.</p></details>
     <details><summary>Can I add dental, vision or other benefits?</summary><p>Yes, everyone can. Dental, vision, accident, critical illness, hospital indemnity, disability, life, identity protection and a pet plan are optional, and Medicare help is available at no extra cost. Pick any of them on the form; each is paid monthly through your payroll.</p></details>
     <details><summary>How many agreements do I sign?</summary><p>Your client service agreement with Atlas One, and your agreement with your payroll platform. Most owners read and sign both right on the page, in one sitting. If you add extra services, or we need to set up your business first, you sign the Atlas One agreement on the page and your platform agreement comes by email after David reviews your setup.</p></details>
@@ -343,7 +343,7 @@ details p{margin:10px 0 0;color:var(--navy-70)}
 
 <script>
 window.HP = {
-  version: '2026-11-23 r7 (S-Corp only, monthly payroll, Redirect Cobalt plans, extras, HealtheMe brand)',
+  version: '2026-11-24 r8 (S-Corp only, monthly payroll on the 15th, Redirect Cobalt plans, extras, HealtheMe brand)',
   program: {
     name: 'HealtheMe',
     issuer: 'US HealthCenter',
@@ -479,6 +479,7 @@ window.HP = {
   bookingUrl: 'https://api.leadconnectorhq.com/widget/groups/book-david',
   programStart: '2027-01-01',
   monthlyCutoffDay: 15,
+  payrollDay: 15,
   storageKey: 'a1hp-progress-v5',
   excludedStates: ['CA','CO'],
   noIncomeTaxStates: ['AK','FL','NV','SD','TN','TX','WY','NH','WA'],
